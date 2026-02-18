@@ -232,6 +232,74 @@ export const translations: Record<Locale, NestedRecord> = {
       emailLabel: "Email:",
       websiteLabel: "Website:",
     },
+    termsPage: {
+      label: "Legal",
+      title: "Terms of Service",
+      lastUpdated: "Last updated: February 18, 2026",
+      intro:
+        "These Terms of Service (\"Terms\") govern your access to and use of the Sweezy mobile application (the \"App\"). By using the App, you agree to these Terms.",
+      s1Title: "1. Who we are",
+      s1Text:
+        "Sweezy provides guidance, checklists, and curated links to help newcomers navigate life in Switzerland.",
+      s2Title: "2. Eligibility",
+      s2Text:
+        "You must be at least 13 years old to use the App. If you use the App on behalf of an organization, you represent that you have authority to bind that organization to these Terms.",
+      s3Title: "3. Accounts and security",
+      s3Text:
+        "You are responsible for maintaining the confidentiality of your account credentials and for all activity under your account.",
+      s4Title: "4. Acceptable use",
+      s4Intro: "You agree not to:",
+      s4Item1: "Use the App for unlawful, harmful, or abusive purposes",
+      s4Item2: "Attempt to access or interfere with our systems or other users",
+      s4Item3: "Copy, scrape, or resell the App or its content without permission",
+      s5Title: "5. Content and links",
+      s5Text:
+        "The App may include links to third-party resources (e.g., official portals). We are not responsible for third-party content or services.",
+      s6Title: "6. Subscriptions and purchases",
+      s6Text:
+        "If the App offers paid features, purchases are handled by the App Store and are subject to their terms. Fees are non-refundable except as required by law or App Store policies.",
+      s7Title: "7. Disclaimer",
+      s7Text:
+        "The App is provided on an \"as is\" and \"as available\" basis. We do not warrant that the App will be uninterrupted, error-free, or that any guidance will fit your specific situation.",
+      s8Title: "8. Limitation of liability",
+      s8Text:
+        "To the maximum extent permitted by law, Sweezy will not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the App.",
+      s9Title: "9. Changes to the App or Terms",
+      s9Text:
+        "We may update the App and these Terms from time to time. Continued use after changes means you accept the updated Terms.",
+      s10Title: "10. Contact",
+      s10Text: "Questions about these Terms? Contact us at",
+      email: "support@sweezy.app",
+    },
+    cookiesPage: {
+      label: "Legal",
+      title: "Cookie Policy",
+      lastUpdated: "Last updated: February 18, 2026",
+      intro:
+        "This Cookie Policy explains how Sweezy uses cookies and similar technologies on our website and related services.",
+      s1Title: "1. What are cookies?",
+      s1Text:
+        "Cookies are small text files stored on your device. They help websites function and can improve your experience.",
+      s2Title: "2. How we use cookies",
+      s2Intro: "We may use cookies to:",
+      s2Item1: "Enable essential site functionality",
+      s2Item2: "Remember preferences (e.g., language selection)",
+      s2Item3: "Measure performance and improve the site",
+      s3Title: "3. Types of cookies",
+      s3Item1Label: "Essential:",
+      s3Item1Text: "Required for basic functionality.",
+      s3Item2Label: "Preferences:",
+      s3Item2Text: "Remember settings like locale.",
+      s3Item3Label: "Analytics:",
+      s3Item3Text:
+        "Help us understand how visitors use the site (typically in aggregated form).",
+      s4Title: "4. Managing cookies",
+      s4Text:
+        "You can control cookies through your browser settings. Disabling some cookies may affect site functionality.",
+      s5Title: "5. Contact",
+      s5Text: "Questions about cookies? Contact us at",
+      email: "support@sweezy.app",
+    },
     supportPage: {
       label: "Help Center",
       title: "Support",
@@ -487,6 +555,76 @@ export const translations: Record<Locale, NestedRecord> = {
       s11Intro: "Якщо у вас є питання або зауваження щодо цієї Політики конфіденційності або наших практик роботи з даними, зв'яжіться з нами:",
       emailLabel: "Email:",
       websiteLabel: "Веб-сайт:",
+    },
+    termsPage: {
+      label: "Юридичне",
+      title: "Умови використання",
+      lastUpdated: "Останнє оновлення: 18 лютого 2026",
+      intro:
+        "Ці Умови використання (\"Умови\") регулюють доступ та використання мобільного застосунку Sweezy (\"Застосунок\"). Користуючись Застосунком, ви погоджуєтесь із цими Умовами.",
+      s1Title: "1. Хто ми",
+      s1Text:
+        "Sweezy надає поради, чек-листи та добірки посилань, щоб допомогти новоприбулим зорієнтуватися в житті у Швейцарії.",
+      s2Title: "2. Вимоги до користувача",
+      s2Text:
+        "Вам має бути щонайменше 13 років, щоб користуватися Застосунком. Якщо ви використовуєте Застосунок від імені організації, ви підтверджуєте, що маєте повноваження погоджуватись із цими Умовами від її імені.",
+      s3Title: "3. Облікові записи та безпека",
+      s3Text:
+        "Ви відповідаєте за збереження конфіденційності облікових даних і за всі дії у вашому акаунті.",
+      s4Title: "4. Прийнятне використання",
+      s4Intro: "Ви погоджуєтесь не:",
+      s4Item1: "Використовувати Застосунок у незаконних або шкідливих цілях",
+      s4Item2:
+        "Намагатися отримати несанкціонований доступ або втручатися в роботу систем чи інших користувачів",
+      s4Item3:
+        "Копіювати, збирати (скрейпити) або перепродавати контент без дозволу",
+      s5Title: "5. Контент і посилання",
+      s5Text:
+        "Застосунок може містити посилання на сторонні ресурси (наприклад, офіційні портали). Ми не відповідаємо за контент чи послуги третіх сторін.",
+      s6Title: "6. Підписки та покупки",
+      s6Text:
+        "Якщо доступні платні функції, покупки обробляються через App Store та регулюються його правилами. Оплати не повертаються, окрім випадків, передбачених законом або політиками App Store.",
+      s7Title: "7. Відмова від гарантій",
+      s7Text:
+        "Застосунок надається \"як є\" та \"за наявності\". Ми не гарантуємо безперервну роботу без помилок або відповідність порад вашій конкретній ситуації.",
+      s8Title: "8. Обмеження відповідальності",
+      s8Text:
+        "У межах, дозволених законом, Sweezy не несе відповідальності за непрямі, випадкові, спеціальні чи наслідкові збитки, що виникають у зв’язку з використанням Застосунку.",
+      s9Title: "9. Зміни Застосунку або Умов",
+      s9Text:
+        "Ми можемо час від часу оновлювати Застосунок і ці Умови. Подальше використання означає прийняття оновлених Умов.",
+      s10Title: "10. Контакти",
+      s10Text: "Питання щодо Умов? Напишіть нам на",
+      email: "support@sweezy.app",
+    },
+    cookiesPage: {
+      label: "Юридичне",
+      title: "Політика cookies",
+      lastUpdated: "Останнє оновлення: 18 лютого 2026",
+      intro:
+        "Ця Політика cookies пояснює, як Sweezy використовує cookies та подібні технології на нашому вебсайті та пов’язаних сервісах.",
+      s1Title: "1. Що таке cookies?",
+      s1Text:
+        "Cookies — це невеликі текстові файли, що зберігаються на вашому пристрої. Вони допомагають сайту працювати та можуть покращувати досвід.",
+      s2Title: "2. Як ми використовуємо cookies",
+      s2Intro: "Ми можемо використовувати cookies, щоб:",
+      s2Item1: "Забезпечувати базову роботу сайту",
+      s2Item2: "Запам’ятовувати налаштування (наприклад, мову)",
+      s2Item3: "Оцінювати продуктивність і покращувати сайт",
+      s3Title: "3. Типи cookies",
+      s3Item1Label: "Необхідні:",
+      s3Item1Text: "Потрібні для базового функціонування.",
+      s3Item2Label: "Налаштування:",
+      s3Item2Text: "Запам’ятовують параметри, як-от локаль.",
+      s3Item3Label: "Аналітика:",
+      s3Item3Text:
+        "Допомагає нам розуміти, як відвідувачі користуються сайтом (зазвичай у зведеному вигляді).",
+      s4Title: "4. Керування cookies",
+      s4Text:
+        "Ви можете керувати cookies у налаштуваннях браузера. Вимкнення деяких cookies може вплинути на роботу сайту.",
+      s5Title: "5. Контакти",
+      s5Text: "Питання щодо cookies? Напишіть нам на",
+      email: "support@sweezy.app",
     },
     supportPage: {
       label: "Центр допомоги",
@@ -744,6 +882,76 @@ export const translations: Record<Locale, NestedRecord> = {
       s11Intro: "Wenn Sie Fragen oder Bedenken zu dieser Datenschutzrichtlinie oder unseren Datenpraktiken haben, kontaktieren Sie uns bitte:",
       emailLabel: "E-Mail:",
       websiteLabel: "Website:",
+    },
+    termsPage: {
+      label: "Rechtliches",
+      title: "Nutzungsbedingungen",
+      lastUpdated: "Zuletzt aktualisiert: 18. Februar 2026",
+      intro:
+        "Diese Nutzungsbedingungen (\"Bedingungen\") regeln Ihren Zugriff auf und die Nutzung der mobilen Anwendung Sweezy (die \"App\"). Durch die Nutzung der App stimmen Sie diesen Bedingungen zu.",
+      s1Title: "1. Wer wir sind",
+      s1Text:
+        "Sweezy bietet Anleitungen, Checklisten und kuratierte Links, um Neuankömmlingen das Leben in der Schweiz zu erleichtern.",
+      s2Title: "2. Teilnahmeberechtigung",
+      s2Text:
+        "Sie müssen mindestens 13 Jahre alt sein, um die App zu nutzen. Wenn Sie die App im Namen einer Organisation nutzen, bestätigen Sie, dass Sie befugt sind, diese Organisation an diese Bedingungen zu binden.",
+      s3Title: "3. Konten und Sicherheit",
+      s3Text:
+        "Sie sind verantwortlich für die Vertraulichkeit Ihrer Zugangsdaten und für alle Aktivitäten unter Ihrem Konto.",
+      s4Title: "4. Zulässige Nutzung",
+      s4Intro: "Sie stimmen zu, Folgendes zu unterlassen:",
+      s4Item1: "Die App für rechtswidrige oder missbräuchliche Zwecke zu nutzen",
+      s4Item2:
+        "Zu versuchen, auf unsere Systeme oder andere Nutzer zuzugreifen oder diese zu stören",
+      s4Item3:
+        "Die App oder Inhalte ohne Erlaubnis zu kopieren, zu scrapen oder weiterzuverkaufen",
+      s5Title: "5. Inhalte und Links",
+      s5Text:
+        "Die App kann Links zu Drittressourcen enthalten (z.B. offizielle Portale). Für Inhalte oder Dienste Dritter übernehmen wir keine Verantwortung.",
+      s6Title: "6. Abonnements und Käufe",
+      s6Text:
+        "Falls die App kostenpflichtige Funktionen anbietet, werden Käufe über den App Store abgewickelt und unterliegen dessen Bedingungen. Gebühren sind nicht erstattungsfähig, außer wenn gesetzlich oder durch App-Store-Richtlinien vorgeschrieben.",
+      s7Title: "7. Haftungsausschluss",
+      s7Text:
+        "Die App wird \"wie besehen\" und \"wie verfügbar\" bereitgestellt. Wir garantieren keine unterbrechungsfreie oder fehlerfreie Nutzung und keine Eignung der Inhalte für Ihre individuelle Situation.",
+      s8Title: "8. Haftungsbeschränkung",
+      s8Text:
+        "Soweit gesetzlich zulässig, haftet Sweezy nicht für indirekte, zufällige, besondere, Folge- oder Strafschäden im Zusammenhang mit Ihrer Nutzung der App.",
+      s9Title: "9. Änderungen der App oder Bedingungen",
+      s9Text:
+        "Wir können die App und diese Bedingungen gelegentlich aktualisieren. Die weitere Nutzung bedeutet, dass Sie die aktualisierten Bedingungen akzeptieren.",
+      s10Title: "10. Kontakt",
+      s10Text: "Fragen zu diesen Bedingungen? Kontaktieren Sie uns unter",
+      email: "support@sweezy.app",
+    },
+    cookiesPage: {
+      label: "Rechtliches",
+      title: "Cookie-Richtlinie",
+      lastUpdated: "Zuletzt aktualisiert: 18. Februar 2026",
+      intro:
+        "Diese Cookie-Richtlinie erklärt, wie Sweezy Cookies und ähnliche Technologien auf unserer Website und verbundenen Diensten verwendet.",
+      s1Title: "1. Was sind Cookies?",
+      s1Text:
+        "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden. Sie helfen Websites zu funktionieren und können Ihr Erlebnis verbessern.",
+      s2Title: "2. Wie wir Cookies verwenden",
+      s2Intro: "Wir können Cookies verwenden, um:",
+      s2Item1: "Wesentliche Funktionen bereitzustellen",
+      s2Item2: "Einstellungen zu speichern (z.B. Sprache)",
+      s2Item3: "Leistung zu messen und die Website zu verbessern",
+      s3Title: "3. Cookie-Arten",
+      s3Item1Label: "Notwendig:",
+      s3Item1Text: "Erforderlich für grundlegende Funktionen.",
+      s3Item2Label: "Präferenzen:",
+      s3Item2Text: "Merken sich Einstellungen wie die Locale.",
+      s3Item3Label: "Analytik:",
+      s3Item3Text:
+        "Hilft uns zu verstehen, wie Besucher die Website nutzen (meist aggregiert).",
+      s4Title: "4. Cookies verwalten",
+      s4Text:
+        "Sie können Cookies in den Einstellungen Ihres Browsers verwalten. Das Deaktivieren einiger Cookies kann die Funktionalität beeinträchtigen.",
+      s5Title: "5. Kontakt",
+      s5Text: "Fragen zu Cookies? Kontaktieren Sie uns unter",
+      email: "support@sweezy.app",
     },
     supportPage: {
       label: "Hilfezentrum",
