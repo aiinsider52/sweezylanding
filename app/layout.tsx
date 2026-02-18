@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { LocaleProvider } from "../lib/locale-context";
+import { SiteFooter } from "./components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -52,7 +53,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <body className="min-h-screen overflow-x-hidden">
-        <LocaleProvider>{children}</LocaleProvider>
+        <LocaleProvider>
+          {children}
+          <SiteFooter />
+        </LocaleProvider>
       </body>
     </html>
   );

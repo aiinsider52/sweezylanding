@@ -275,29 +275,6 @@ export default function Support() {
           </div>
         </motion.section>
       </div>
-
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/[0.04]">
-        <div className="mx-auto max-w-4xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/20">
-            &copy; {new Date().getFullYear()} Sweezy. {t("footer.copyright")}
-          </p>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/privacy"
-              className="text-sm text-white/30 hover:text-white/60 transition-colors duration-300"
-            >
-              {t("footer.privacy")}
-            </Link>
-            <Link
-              href="/"
-              className="text-sm text-white/30 hover:text-white/60 transition-colors duration-300"
-            >
-              {t("common.home")}
-            </Link>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
