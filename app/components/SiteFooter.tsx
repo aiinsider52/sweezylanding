@@ -54,7 +54,7 @@ export function SiteFooter() {
       links: [
         { label: t("footer.support"), href: "/support" },
         { label: t("footer.faqLink"), href: "/#faq" },
-        { label: t("footer.contact"), href: "mailto:support@sweezy.app" },
+        { label: t("footer.contact"), href: "mailto:support@sweezy.world" },
         { label: t("footer.blog"), href: "#" },
       ],
     },

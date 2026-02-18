@@ -209,10 +209,10 @@ export default function PrivacyPolicy() {
             <p className="mt-4">
               {t("privacyPage.s6Outro")}{" "}
               <a
-                href="mailto:privacy@sweezy.app"
+                href="mailto:support@sweezy.world"
                 className="text-neon-purple hover:text-neon-blue transition-colors underline underline-offset-4"
               >
-                privacy@sweezy.app
+                support@sweezy.world
               </a>
               .
             </p>
@@ -260,20 +260,22 @@ export default function PrivacyPolicy() {
               <p>
                 <strong className="text-white/80">{t("privacyPage.emailLabel")}</strong>{" "}
                 <a
-                  href="mailto:privacy@sweezy.app"
+                  href="mailto:support@sweezy.world"
                   className="text-neon-purple hover:text-neon-blue transition-colors underline underline-offset-4"
                 >
-                  privacy@sweezy.app
+                  support@sweezy.world
                 </a>
               </p>
               <p>
                 <strong className="text-white/80">{t("privacyPage.websiteLabel")}</strong>{" "}
-                <Link
-                  href="/"
+                <a
+                  href="https://sweezy.world"
                   className="text-neon-purple hover:text-neon-blue transition-colors underline underline-offset-4"
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  sweezy.app
-                </Link>
+                  sweezy.world
+                </a>
               </p>
             </div>
           </motion.section>

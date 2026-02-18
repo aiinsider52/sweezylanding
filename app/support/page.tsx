@@ -180,10 +180,10 @@ export default function Support() {
                 {t("supportPage.emailDesc")}
               </p>
               <a
-                href="mailto:support@sweezy.app"
+                href="mailto:support@sweezy.world"
                 className="inline-flex items-center gap-2 text-neon-purple hover:text-neon-blue transition-colors font-medium text-[15px]"
               >
-                support@sweezy.app
+                support@sweezy.world
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                   <path
                     d="M6 12l4-4-4-4"
@@ -267,7 +267,7 @@ export default function Support() {
               {t("supportPage.stillNeedHelpDesc")}
             </p>
             <a
-              href="mailto:support@sweezy.app"
+              href="mailto:support@sweezy.world"
               className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-dark-900 font-semibold text-sm transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/10"
             >
               {t("supportPage.contactSupport")}
