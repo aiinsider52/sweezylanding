@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { APP_STORE_URL } from "../lib/links";
@@ -617,24 +617,363 @@ function FeaturesSection() {
   );
 }
 
+/* ── Interactive Phone Screens ───────────────────────────────────────── */
+
+function HomeScreen() {
+  return (
+    <div className="w-full h-full bg-[#0f1f14] flex flex-col overflow-hidden text-white">
+      {/* Status bar */}
+      <div className="flex items-center justify-between px-5 pt-2 pb-1 text-[10px] text-white/60">
+        <span>13:42</span>
+        <div className="flex items-center gap-1">
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor" opacity="0.6"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="3" height="8" rx="0.5" opacity="0.3"/></svg>
+          <svg width="14" height="10" viewBox="0 0 24 18" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 8.5C5.5 3.5 18.5 3.5 23 8.5M5 12.5C8.5 9 15.5 9 19 12.5M9 16l3 3 3-3" opacity="0.6"/></svg>
+          <div className="w-5 h-3 rounded-sm border border-white/40 relative"><div className="absolute inset-[1px] right-[3px] rounded-sm bg-accent-green/80" /></div>
+        </div>
+      </div>
+      {/* Hero card */}
+      <div className="mx-3 mt-1 rounded-2xl bg-gradient-to-br from-accent-green via-[#1a8c3a] to-accent-emerald p-4 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-20 h-20 rounded-full bg-white/[0.06] -translate-y-4 translate-x-4" />
+        <div className="absolute bottom-0 right-4 w-12 h-12 rounded-full bg-white/[0.04]" />
+        <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-white/10 flex items-center justify-center">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        </div>
+        <p className="text-white font-bold text-base leading-tight">Привіт!</p>
+        <p className="text-white/70 text-[10px] mt-0.5">Четвер, 19 Березня</p>
+        <p className="text-white/60 text-[9px] mt-2 leading-relaxed">Ваш повний гід для успішного<br />життя в Швейцарії</p>
+      </div>
+      {/* Quick actions */}
+      <div className="px-3 mt-3">
+        <p className="text-white font-bold text-xs mb-2">Швидкі дії</p>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { label: "CV Builder", color: "bg-[#6B3FA0]", icon: "📄" },
+            { label: "Шаблони", color: "bg-[#9B2335]", icon: "📋" },
+            { label: "Карта", color: "bg-[#B55A0A]", icon: "🗺️" },
+            { label: "Довідник", color: "bg-[#1A5E8A]", icon: "📖" },
+          ].map((item) => (
+            <div key={item.label} className={`${item.color} rounded-xl p-2.5 flex items-center gap-2`}>
+              <span className="text-sm">{item.icon}</span>
+              <span className="text-white text-[10px] font-semibold">{item.label}</span>
+              <span className="ml-auto text-white/40 text-[10px]">→</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Recommended */}
+      <div className="px-3 mt-3">
+        <p className="text-white font-bold text-xs mb-2">Рекомендований контент</p>
+        <div className="rounded-xl bg-white/[0.05] border border-white/[0.06] p-2.5 flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-accent-green/20 flex items-center justify-center flex-shrink-0">
+            <span className="text-sm">🛡️</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-white text-[9px] font-medium leading-tight truncate">Медичне страхування</p>
+            <p className="text-white/40 text-[8px] mt-0.5 truncate">Franchise, HMO/Telmed...</p>
+          </div>
+          <span className="text-[8px] text-accent-green font-bold bg-accent-green/10 px-1.5 py-0.5 rounded-full flex-shrink-0">New</span>
+        </div>
+      </div>
+      {/* Tab bar */}
+      <div className="mt-auto border-t border-white/[0.06] flex items-center justify-around px-2 py-2">
+        {["🏠 Головна","📖 Довідник","🗺️ Карта","🛒 Маркет","⚙️ Налашт."].map((tab, i) => (
+          <div key={tab} className={`flex flex-col items-center gap-0.5 ${i === 0 ? "text-accent-green" : "text-white/30"}`}>
+            <span className="text-[10px]">{tab.split(" ")[0]}</span>
+            <span className="text-[6px] font-medium">{tab.split(" ")[1]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function GuidesScreen() {
+  return (
+    <div className="w-full h-full bg-[#0f1f14] flex flex-col overflow-hidden text-white">
+      <div className="flex items-center justify-between px-5 pt-2 pb-1 text-[10px] text-white/60">
+        <span>13:42</span>
+        <div className="flex items-center gap-1">
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor" opacity="0.6"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/></svg>
+          <div className="w-5 h-3 rounded-sm border border-white/40 relative"><div className="absolute inset-[1px] right-[3px] rounded-sm bg-accent-green/80" /></div>
+        </div>
+      </div>
+      <div className="px-4 pt-2 pb-3">
+        <p className="text-white font-bold text-lg mb-3">Довідник</p>
+        <div className="flex items-center gap-2 rounded-xl bg-white/[0.06] border border-white/[0.06] px-3 py-2">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/30"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span className="text-[10px] text-white/25">Пошук інформації...</span>
+        </div>
+        <div className="flex gap-3 mt-3 border-b border-white/[0.06] pb-2">
+          <div className="flex items-center gap-1 border-b-2 border-accent-green pb-1">
+            <span className="text-[10px]">📖</span>
+            <span className="text-[10px] text-accent-green font-semibold">Гайди</span>
+            <span className="text-[8px]">❄️</span>
+          </div>
+          <div className="flex items-center gap-1 text-white/30">
+            <span className="text-[10px]">☑️</span>
+            <span className="text-[10px]">Чек-листи</span>
+          </div>
+        </div>
+        <div className="flex gap-1.5 mt-2 overflow-hidden">
+          {["Всі","📄 Документи","🏠 Житло","🛡️ Стра..."].map((cat, i) => (
+            <span key={cat} className={`text-[8px] px-2 py-0.5 rounded-full whitespace-nowrap font-medium ${i === 0 ? "bg-accent-green text-dark-950" : "bg-white/[0.06] text-white/50"}`}>{cat}</span>
+          ))}
+        </div>
+      </div>
+      <div className="px-4 space-y-2 flex-1">
+        <div className="rounded-xl bg-[#8B2FC9] p-3 relative">
+          <span className="text-[7px] text-white/80 bg-white/20 px-1.5 py-0.5 rounded-full">Рекомендовано</span>
+          <p className="text-white text-[10px] font-bold mt-1 leading-tight">Медичне страхування: вибір полісу без паніки</p>
+          <p className="text-white/60 text-[8px] mt-1">Franchise, HMO/Telmed, субсидії та типові помилки</p>
+          <div className="flex items-center gap-2 mt-1.5">
+            <span className="text-[7px] text-white/50">⏱ 8 хв</span>
+            <span className="text-[7px] text-white/50">📁 Страхування</span>
+          </div>
+        </div>
+        {[
+          { title: "Медичне страхування", emoji: "🛡️", color: "#6B3FA0" },
+          { title: "Як отримати медичне страхування", emoji: "💊", color: "#6B3FA0" },
+        ].map((item) => (
+          <div key={item.title} className="rounded-xl bg-white/[0.04] border border-white/[0.05] p-2.5 flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ background: item.color }}>
+              <span className="text-sm">{item.emoji}</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-[9px] font-semibold leading-tight truncate">{item.title}</p>
+              <p className="text-white/40 text-[7px] mt-0.5">Обов'язкове базове страхування...</p>
+              <span className="text-[6px] text-accent-green font-bold bg-accent-green/10 px-1 py-0.5 rounded-full">New</span>
+            </div>
+            <span className="text-white/20 text-xs">›</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto border-t border-white/[0.06] flex items-center justify-around px-2 py-2">
+        {["🏠","📖","🗺️","🛒","⚙️"].map((tab, i) => (
+          <div key={tab} className={`flex flex-col items-center ${i === 1 ? "text-accent-green" : "text-white/30"}`}>
+            <span className="text-[12px]">{tab}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MapScreen() {
+  return (
+    <div className="w-full h-full bg-[#0f1f14] flex flex-col overflow-hidden text-white">
+      <div className="flex items-center justify-between px-5 pt-2 pb-1 text-[10px] text-white/60">
+        <span>13:42</span>
+        <div className="w-5 h-3 rounded-sm border border-white/40 relative"><div className="absolute inset-[1px] right-[3px] rounded-sm bg-accent-green/80" /></div>
+      </div>
+      <div className="px-4 pt-2">
+        <p className="text-white font-bold text-base mb-2">Карта сервісів</p>
+        <div className="flex gap-1.5 mb-2 overflow-hidden">
+          {["📍 Поруч (10 км)","🇨🇭 Вся Швейцарія","✨ Всі"].map((f, i) => (
+            <span key={f} className={`text-[7px] px-2 py-0.5 rounded-full whitespace-nowrap ${i === 2 ? "bg-accent-green text-dark-950 font-bold" : "bg-white/[0.06] text-white/40"}`}>{f}</span>
+          ))}
+        </div>
+      </div>
+      {/* Stylized map */}
+      <div className="mx-4 rounded-2xl overflow-hidden relative" style={{ height: 110 }}>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #1a3a1a 0%, #0d2a0d 40%, #152e15 100%)" }}>
+          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2322C55E' fill-opacity='0.15'%3E%3Crect x='0' y='9' width='20' height='1'/%3E%3Crect x='9' y='0' width='1' height='20'/%3E%3C/g%3E%3C/svg%3E\")" }} />
+          {[
+            { x: 30, y: 35, color: "#F59E0B", size: 16 },
+            { x: 55, y: 55, color: "#22C55E", size: 22 },
+            { x: 75, y: 30, color: "#3B82F6", size: 14 },
+            { x: 45, y: 75, color: "#EF4444", size: 16 },
+            { x: 20, y: 65, color: "#8B5CF6", size: 12 },
+            { x: 85, y: 65, color: "#F59E0B", size: 14 },
+          ].map((dot, i) => (
+            <div key={i} className="absolute rounded-full flex items-center justify-center text-white font-bold"
+              style={{ left: `${dot.x}%`, top: `${dot.y}%`, width: dot.size, height: dot.size, background: dot.color, fontSize: 7, transform: "translate(-50%,-50%)" }}>
+              {i === 1 ? "🏛" : ""}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="px-4 mt-3 flex-1 overflow-hidden">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-white text-xs font-semibold">Поруч з вами</p>
+          <span className="text-[8px] text-white/40 bg-white/[0.06] px-1.5 py-0.5 rounded-full">ⓘ 79</span>
+        </div>
+        {[
+          { name: "Migrationsamt Zürich", type: "Державні установи", color: "#3B82F6", open: true },
+          { name: "Universitätsspital Zürich", type: "Медицина", color: "#EF4444", open: true },
+          { name: "Gemeinde Zürich", type: "Державні установи", color: "#3B82F6", open: true },
+        ].map((place) => (
+          <div key={place.name} className="rounded-xl bg-white/[0.04] border border-white/[0.05] p-2 flex items-center gap-2 mb-1.5">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: place.color + "22" }}>
+              <span className="text-sm">🏛</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-[9px] font-medium truncate">{place.name}</p>
+              <p className="text-white/40 text-[7px]">{place.type}</p>
+              <p className="text-accent-green text-[7px] font-medium">● Відчинено</p>
+            </div>
+            <div className="w-5 h-5 rounded-full bg-accent-teal/20 flex items-center justify-center">
+              <span className="text-[8px]">↗</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto border-t border-white/[0.06] flex items-center justify-around px-2 py-2">
+        {["🏠","📖","🗺️","🛒","⚙️"].map((tab, i) => (
+          <div key={tab} className={i === 2 ? "text-accent-green" : "text-white/30"}>
+            <span className="text-[12px]">{tab}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MarketScreen() {
+  return (
+    <div className="w-full h-full bg-[#0f1f14] flex flex-col overflow-hidden text-white">
+      <div className="flex items-center justify-between px-5 pt-2 pb-1 text-[10px] text-white/60">
+        <span>13:42</span>
+        <div className="w-5 h-3 rounded-sm border border-white/40 relative"><div className="absolute inset-[1px] right-[3px] rounded-sm bg-accent-green/80" /></div>
+      </div>
+      <div className="px-4 pt-2">
+        <p className="text-white font-bold text-base mb-1">Маркетплейс</p>
+        <p className="text-white/40 text-[9px] mb-3">Перевірені партнери для експатів</p>
+        <div className="flex gap-1.5 mb-3">
+          {["Всі","🛡️ Страхування","💼 Праця","🏠 Житло"].map((cat, i) => (
+            <span key={cat} className={`text-[7px] px-2 py-0.5 rounded-full whitespace-nowrap ${i === 0 ? "bg-accent-green text-dark-950 font-bold" : "bg-white/[0.06] text-white/40"}`}>{cat}</span>
+          ))}
+        </div>
+      </div>
+      <div className="px-4 space-y-2 flex-1 overflow-hidden">
+        {[
+          { name: "Swiss Insurance Pro", rating: "4.9", reviews: "128", tag: "Страхування", color: "#6B3FA0", emoji: "🛡️", badge: "Топ" },
+          { name: "Expat Tax Consultants", rating: "4.8", reviews: "94", tag: "Податки", color: "#1A5E8A", emoji: "📊", badge: "Новий" },
+          { name: "Zürich Relocation Help", rating: "5.0", reviews: "57", tag: "Переїзд", color: "#B55A0A", emoji: "📦", badge: null },
+        ].map((item) => (
+          <div key={item.name} className="rounded-xl bg-white/[0.04] border border-white/[0.05] p-3">
+            <div className="flex items-start gap-2.5">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: item.color + "33" }}>
+                <span className="text-base">{item.emoji}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <p className="text-white text-[9px] font-semibold truncate">{item.name}</p>
+                  {item.badge && <span className="text-[6px] bg-accent-green/20 text-accent-green px-1 py-0.5 rounded-full">{item.badge}</span>}
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-amber-400 text-[8px]">★</span>
+                  <span className="text-white/70 text-[8px]">{item.rating}</span>
+                  <span className="text-white/30 text-[8px]">({item.reviews})</span>
+                  <span className="text-white/20 text-[8px]">·</span>
+                  <span className="text-white/40 text-[7px]">{item.tag}</span>
+                </div>
+              </div>
+              <button className="text-[8px] bg-accent-green text-dark-950 font-bold px-2 py-1 rounded-lg">→</button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto border-t border-white/[0.06] flex items-center justify-around px-2 py-2">
+        {["🏠","📖","🗺️","🛒","⚙️"].map((tab, i) => (
+          <div key={tab} className={i === 3 ? "text-accent-green" : "text-white/30"}>
+            <span className="text-[12px]">{tab}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CVBuilderScreen() {
+  return (
+    <div className="w-full h-full bg-[#0f1f14] flex flex-col overflow-hidden text-white">
+      <div className="flex items-center justify-between px-5 pt-2 pb-1 text-[10px] text-white/60">
+        <span>13:42</span>
+        <div className="w-5 h-3 rounded-sm border border-white/40 relative"><div className="absolute inset-[1px] right-[3px] rounded-sm bg-accent-green/80" /></div>
+      </div>
+      <div className="px-4 pt-2">
+        <p className="text-white font-bold text-base">CV Builder</p>
+        <p className="text-white/40 text-[9px] mt-0.5 mb-3">Швейцарський формат</p>
+        <div className="flex items-center gap-2 mb-3">
+          <div className="flex-1 bg-white/[0.06] rounded-full h-1.5 overflow-hidden">
+            <div className="h-full rounded-full bg-gradient-to-r from-accent-green to-accent-emerald" style={{ width: "65%" }} />
+          </div>
+          <span className="text-[9px] text-accent-green font-bold">65%</span>
+        </div>
+      </div>
+      <div className="px-4 space-y-2 flex-1 overflow-hidden">
+        <div className="rounded-xl bg-white/[0.04] border border-accent-green/20 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-green/30 to-accent-emerald/20 flex items-center justify-center">
+              <span className="text-base">👤</span>
+            </div>
+            <div>
+              <p className="text-white text-[10px] font-semibold">Марія Коваленко</p>
+              <p className="text-accent-green text-[8px]">UX Designer</p>
+            </div>
+            <div className="ml-auto w-5 h-5 rounded-full bg-accent-green flex items-center justify-center">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#0f1f14" strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+        </div>
+        {[
+          { section: "Досвід роботи", items: ["Senior UX Designer · 2022–наш.", "Product Designer · 2019–2022"], done: true },
+          { section: "Освіта", items: ["КНУ · Бакалавр Design · 2019"], done: true },
+          { section: "Навички", items: ["Figma  •  React  •  Prototyping"], done: false },
+        ].map((block) => (
+          <div key={block.section} className="rounded-xl bg-white/[0.04] border border-white/[0.05] p-2.5">
+            <div className="flex items-center justify-between mb-1.5">
+              <p className="text-white text-[9px] font-semibold">{block.section}</p>
+              <div className={`w-4 h-4 rounded-full flex items-center justify-center ${block.done ? "bg-accent-green" : "bg-white/10 border border-white/20"}`}>
+                {block.done && <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#0f1f14" strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>}
+              </div>
+            </div>
+            {block.items.map((it) => (
+              <p key={it} className="text-white/40 text-[7px] leading-relaxed">{it}</p>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="px-4 pb-3 mt-2">
+        <button className="w-full rounded-xl bg-gradient-to-r from-accent-green to-accent-emerald py-2 text-[9px] font-bold text-dark-950">
+          Завантажити PDF →
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /* ── App Showcase Section ────────────────────────────────────────────── */
 
 function AppShowcaseSection() {
   const { t } = useLocale();
+  const [activeTab, setActiveTab] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const screens = [
-    { src: "/screenshots/home.png", label: t("appShowcase.screen1Label"), rotation: "rotateY(12deg) rotateX(2deg)" },
-    { src: "/screenshots/guides.png", label: t("appShowcase.screen2Label"), rotation: "rotateY(0deg) rotateX(0deg)" },
-    { src: "/screenshots/map.png", label: t("appShowcase.screen3Label"), rotation: "rotateY(-12deg) rotateX(2deg)" },
+  const tabs = [
+    { id: 0, label: t("appShowcase.screen1Label"), icon: "🏠", color: "#22C55E", desc: "Привітальний екран з швидкими діями, CV Builder, Картою та Довідником." },
+    { id: 1, label: t("appShowcase.screen2Label"), icon: "📖", color: "#8B5CF6", desc: "Бібліотека гайдів та чек-листів з пошуком і категоріями." },
+    { id: 2, label: t("appShowcase.screen3Label"), icon: "🗺️", color: "#14B8A6", desc: "Інтерактивна карта з держустановами, лікарнями та банками поруч." },
+    { id: 3, label: "Marketplace", icon: "🛒", color: "#F59E0B", desc: "Перевірені постачальники послуг — від страхування до переїзду." },
+    { id: 4, label: "CV Builder", icon: "📄", color: "#10B981", desc: "Конструктор CV у швейцарському форматі з прогресом і PDF-експортом." },
   ];
+
+  const screens = [HomeScreen, GuidesScreen, MapScreen, MarketScreen, CVBuilderScreen];
+  const ActiveScreen = screens[activeTab];
+
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % tabs.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isHovered, tabs.length]);
 
   return (
     <section id="screenshots" className="relative py-32 sm:py-40 overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-        <div className="h-[600px] w-[600px] rounded-full bg-accent-green/[0.08] blur-[150px]" />
+        <div className="h-[700px] w-[700px] rounded-full bg-accent-green/[0.06] blur-[160px]" />
       </div>
-      <div className="absolute top-1/4 left-1/4 h-[300px] w-[300px] rounded-full bg-accent-emerald/[0.06] blur-[100px] animate-blob" aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-1/4 h-[250px] w-[250px] rounded-full bg-accent-spring/[0.05] blur-[80px] animate-blob animation-delay-4000" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
@@ -642,72 +981,183 @@ function AppShowcaseSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-20 sm:mb-28"
+          className="text-center mb-16 sm:mb-24"
         >
           <SectionBadge>{t("appShowcase.badge")}</SectionBadge>
-          <motion.h2
-            variants={fadeUp}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight"
-          >
+          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-extrabold tracking-tight">
             {t("appShowcase.title1")}
             <br />
             <span className="text-gradient">{t("appShowcase.title2")}</span>
           </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            custom={1}
-            className="mt-5 text-lg text-white/40 max-w-xl mx-auto"
-          >
+          <motion.p variants={fadeUp} custom={1} className="mt-5 text-lg text-white/40 max-w-xl mx-auto">
             {t("appShowcase.subtitle")}
           </motion.p>
         </motion.div>
 
-        <div className="relative" style={{ perspective: "2000px" }}>
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          {/* Left: tabs + description */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={staggerContainer}
-            className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-6 lg:gap-10"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, ease: [0.25, 0.4, 0.25, 1] }}
+            className="flex flex-col gap-3"
           >
-            {screens.map((screen, i) => {
-              const isCenter = i === 1;
-              return (
-                <motion.div
-                  key={screen.src}
-                  variants={{
-                    hidden: { opacity: 0, y: 80, scale: 0.85 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      scale: 1,
-                      transition: { duration: 0.9, delay: i * 0.15, ease: [0.25, 0.4, 0.25, 1] },
-                    },
-                  }}
-                  whileHover={{ scale: 1.04, y: -12, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                  className={`flex flex-col items-center gap-6 ${isCenter ? "md:-mt-10 md:z-20" : "md:z-10"}`}
-                  style={{
-                    transformStyle: "preserve-3d",
-                    transform: typeof window !== "undefined" && window.innerWidth >= 768 ? screen.rotation : "none",
-                  }}
-                >
-                  <div className="relative">
-                    {isCenter && (
-                      <div className="absolute -inset-12 rounded-[5rem] bg-accent-green/[0.06] blur-[80px]" />
-                    )}
-                    <PhoneMockup
-                      src={screen.src}
-                      alt={screen.label}
-                      size={isCenter ? "lg" : "md"}
-                      glow={isCenter}
-                    />
+            {tabs.map((tab) => (
+              <motion.button
+                key={tab.id}
+                onClick={() => { setActiveTab(tab.id); setIsHovered(true); }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                whileHover={{ x: 4 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className={`relative w-full text-left rounded-2xl px-5 py-4 transition-all duration-300 border overflow-hidden ${
+                  activeTab === tab.id
+                    ? "border-accent-green/30 bg-accent-green/[0.05]"
+                    : "border-white/[0.05] bg-white/[0.02] hover:bg-white/[0.04]"
+                }`}
+              >
+                {activeTab === tab.id && (
+                  <motion.div
+                    layoutId="tabHighlight"
+                    className="absolute inset-0 rounded-2xl"
+                    style={{ background: `linear-gradient(120deg, ${tab.color}08, transparent)` }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <div className="relative flex items-center gap-4">
+                  <div
+                    className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl text-lg transition-all duration-300"
+                    style={{ background: activeTab === tab.id ? `${tab.color}22` : "rgba(255,255,255,0.04)" }}
+                  >
+                    {tab.icon}
                   </div>
-                  <span className={`text-sm font-medium ${isCenter ? "text-accent-green/70" : "text-white/35"}`}>
-                    {screen.label}
-                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className={`text-sm font-semibold transition-colors duration-300 ${activeTab === tab.id ? "text-white" : "text-white/50"}`}>
+                      {tab.label}
+                    </p>
+                    <AnimatePresence mode="wait">
+                      {activeTab === tab.id && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="text-[13px] text-white/40 leading-relaxed mt-1"
+                        >
+                          {tab.desc}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <div
+                    className="w-2 h-2 rounded-full flex-shrink-0 transition-all duration-300"
+                    style={{ background: activeTab === tab.id ? tab.color : "rgba(255,255,255,0.08)" }}
+                  />
+                </div>
+                {activeTab === tab.id && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-[2px] rounded-full"
+                    style={{ background: `linear-gradient(90deg, ${tab.color}, transparent)` }}
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 3, ease: "linear" }}
+                    key={`${activeTab}-progress`}
+                  />
+                )}
+              </motion.button>
+            ))}
+          </motion.div>
+
+          {/* Right: Phone */}
+          <motion.div
+            initial={{ opacity: 0, y: 60, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
+            className="flex justify-center lg:justify-end"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="relative" style={{ perspective: "1200px" }}>
+              {/* Ambient glow */}
+              <motion.div
+                className="absolute -inset-16 rounded-full blur-[80px]"
+                animate={{ background: [
+                  `radial-gradient(circle, ${tabs[activeTab].color}18 0%, transparent 70%)`,
+                  `radial-gradient(circle, ${tabs[activeTab].color}25 0%, transparent 70%)`,
+                  `radial-gradient(circle, ${tabs[activeTab].color}18 0%, transparent 70%)`,
+                ]}}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <motion.div
+                  whileHover={{ rotateY: -4, rotateX: 2, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  {/* Phone frame */}
+                  <div
+                    className="relative rounded-[3.2rem] overflow-visible"
+                    style={{
+                      background: "linear-gradient(145deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.10) 100%)",
+                      padding: "6px",
+                      width: 280,
+                    }}
+                  >
+                    {/* Metal highlight */}
+                    <div className="absolute inset-0 rounded-[3.2rem] pointer-events-none"
+                      style={{ background: "linear-gradient(145deg, rgba(255,255,255,0.18) 0%, transparent 35%, transparent 65%, rgba(255,255,255,0.08) 100%)" }}
+                    />
+                    {/* Buttons */}
+                    <div className="absolute -left-[3px] top-[120px] w-[3px] h-[26px] rounded-l-sm" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06))" }} />
+                    <div className="absolute -left-[3px] top-[158px] w-[3px] h-[44px] rounded-l-sm" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06))" }} />
+                    <div className="absolute -left-[3px] top-[212px] w-[3px] h-[44px] rounded-l-sm" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06))" }} />
+                    <div className="absolute -right-[3px] top-[170px] w-[3px] h-[60px] rounded-r-sm" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06))" }} />
+
+                    {/* Screen */}
+                    <div className="rounded-[2.8rem] overflow-hidden bg-dark-950 relative" style={{ height: 570 }}>
+                      {/* Dynamic island */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30">
+                        <div className="h-[26px] w-[90px] rounded-b-[16px] bg-dark-950 flex items-center justify-center gap-2 pt-1">
+                          <div className="w-[8px] h-[8px] rounded-full bg-white/[0.07]" />
+                        </div>
+                      </div>
+
+                      {/* Screen content with animated transitions */}
+                      <div className="w-full h-full relative overflow-hidden">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+                            transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
+                            className="absolute inset-0"
+                          >
+                            <ActiveScreen />
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+
+                      {/* Screen glass glare */}
+                      <div className="absolute inset-0 pointer-events-none rounded-[2.8rem]"
+                        style={{ background: "linear-gradient(125deg, rgba(255,255,255,0.07) 0%, transparent 40%, transparent 70%, rgba(255,255,255,0.03) 100%)" }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Phone shadow */}
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[55%] h-[16px] rounded-[50%] blur-xl"
+                    style={{ background: `${tabs[activeTab].color}30` }}
+                  />
                 </motion.div>
-              );
-            })}
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
