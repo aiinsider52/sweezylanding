@@ -358,30 +358,199 @@ function Navbar() {
   );
 }
 
+/* ── Hero 3D Phone UI ─────────────────────────────────────────────────── */
+
+function Hero3DPhoneUI() {
+  return (
+    <div className="w-full h-full bg-gradient-to-b from-[#0a1a0f] to-[#081208] flex flex-col overflow-hidden text-white relative">
+      {/* Ambient light effect inside phone */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full bg-accent-green/10 blur-[60px]" />
+      
+      {/* Status bar */}
+      <div className="flex items-center justify-between px-6 pt-3 pb-1 text-[11px] text-white/50 relative z-10">
+        <span className="font-medium">9:41</span>
+        <div className="flex items-center gap-1.5">
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor" className="opacity-60">
+            <path d="M1 4a1 1 0 011-1h1a1 1 0 011 1v6a1 1 0 01-1 1H2a1 1 0 01-1-1V4zM6 2.5a1 1 0 011-1h1a1 1 0 011 1v7.5a1 1 0 01-1 1H7a1 1 0 01-1-1V2.5zM12 1a1 1 0 00-1 1v8a1 1 0 001 1h1a1 1 0 001-1V2a1 1 0 00-1-1h-1z"/>
+          </svg>
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="currentColor" className="opacity-60">
+            <path d="M7.5 2C4.5 2 1.9 3.4.3 5.5c-.2.3-.2.7 0 1 1.6 2.1 4.2 3.5 7.2 3.5s5.6-1.4 7.2-3.5c.2-.3.2-.7 0-1C13.1 3.4 10.5 2 7.5 2z"/>
+          </svg>
+          <div className="w-6 h-3 rounded-[4px] border border-white/30 relative ml-0.5">
+            <div className="absolute top-[2px] left-[2px] bottom-[2px] right-[4px] rounded-sm bg-accent-green" />
+            <div className="absolute -right-[3px] top-1/2 -translate-y-1/2 w-[2px] h-1.5 rounded-r-full bg-white/30" />
+          </div>
+        </div>
+      </div>
+
+      {/* Hero card */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className="mx-4 mt-2 rounded-[20px] p-5 relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #22C55E 0%, #16A34A 50%, #15803D 100%)" }}
+      >
+        <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/10 -translate-y-8 translate-x-8" />
+        <div className="absolute bottom-0 left-1/3 w-20 h-20 rounded-full bg-white/5" />
+        <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/15 flex items-center justify-center backdrop-blur-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </div>
+        <p className="text-white font-bold text-xl relative z-10">Привіт!</p>
+        <p className="text-white/80 text-sm mt-0.5 relative z-10">Четвер, 19 Березня</p>
+        <p className="text-white/60 text-xs mt-3 leading-relaxed relative z-10 max-w-[180px]">Ваш повний гід для успішного життя в Швейцарії</p>
+      </motion.div>
+
+      {/* Quick Actions */}
+      <div className="px-4 mt-5">
+        <p className="text-white font-bold text-sm mb-3">Швидкі дії</p>
+        <div className="grid grid-cols-2 gap-2.5">
+          {[
+            { label: "CV Builder", color: "#7C3AED", icon: "📄", delay: 0.6 },
+            { label: "Шаблони", color: "#DC2626", icon: "📋", delay: 0.7 },
+            { label: "Карта", color: "#D97706", icon: "🗺️", delay: 0.8 },
+            { label: "Довідник", color: "#2563EB", icon: "📖", delay: 0.9 },
+          ].map((item) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: item.delay, duration: 0.4 }}
+              className="rounded-2xl p-3 flex items-center gap-2.5 cursor-pointer transition-transform hover:scale-[1.02]"
+              style={{ background: item.color }}
+            >
+              <span className="text-lg">{item.icon}</span>
+              <span className="text-white text-[11px] font-semibold flex-1">{item.label}</span>
+              <span className="text-white/50 text-xs">→</span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Recommended section */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="px-4 mt-5"
+      >
+        <p className="text-white font-bold text-sm mb-3">Рекомендовано</p>
+        <div className="rounded-2xl bg-white/[0.06] border border-white/[0.08] p-3.5 flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500/30 to-purple-600/20 flex items-center justify-center flex-shrink-0">
+            <span className="text-xl">🛡️</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-white text-[11px] font-semibold leading-tight truncate">Медичне страхування</p>
+            <p className="text-white/40 text-[9px] mt-0.5">Franchise, HMO/Telmed...</p>
+          </div>
+          <span className="text-[9px] text-accent-green font-bold bg-accent-green/15 px-2 py-1 rounded-full flex-shrink-0 border border-accent-green/20">New</span>
+        </div>
+      </motion.div>
+
+      {/* Tab bar */}
+      <div className="mt-auto border-t border-white/[0.06] flex items-center justify-around px-3 py-3 bg-[#0a1a0f]/80 backdrop-blur-xl">
+        {[
+          { icon: "🏠", label: "Головна", active: true },
+          { icon: "📖", label: "Довідник", active: false },
+          { icon: "🗺️", label: "Карта", active: false },
+          { icon: "🛒", label: "Маркет", active: false },
+          { icon: "⚙️", label: "Налашт.", active: false },
+        ].map((tab) => (
+          <div key={tab.label} className={`flex flex-col items-center gap-0.5 ${tab.active ? "text-accent-green" : "text-white/30"}`}>
+            <span className="text-[14px]">{tab.icon}</span>
+            <span className="text-[8px] font-medium">{tab.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Floating Elements ────────────────────────────────────────────────── */
+
+function FloatingElement({ 
+  children, 
+  className = "", 
+  delay = 0,
+  duration = 4,
+  y = 15 
+}: { 
+  children: React.ReactNode; 
+  className?: string; 
+  delay?: number;
+  duration?: number;
+  y?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ 
+        opacity: 1, 
+        scale: 1,
+        y: [0, -y, 0],
+      }}
+      transition={{ 
+        opacity: { delay, duration: 0.6 },
+        scale: { delay, duration: 0.6 },
+        y: { delay: delay + 0.5, duration, repeat: Infinity, ease: "easeInOut" }
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 /* ── Hero Section ────────────────────────────────────────────────────── */
 
 function HeroSection() {
   const { t } = useLocale();
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-      <GradientBlob className="w-[600px] h-[600px] -top-40 -left-40 animate-blob" colors="from-accent-green/20 via-accent-emerald/10 to-transparent" />
-      <GradientBlob className="w-[500px] h-[500px] top-20 right-0 animate-blob animation-delay-2000" colors="from-accent-spring/15 via-accent-teal/10 to-transparent" />
-      <GradientBlob className="w-[400px] h-[400px] bottom-0 left-1/3 animate-blob animation-delay-4000" colors="from-accent-emerald/20 via-accent-mint/10 to-transparent" />
-
-      <div className="absolute inset-0 bg-dark-900/60" aria-hidden="true" />
-      <div
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-        aria-hidden="true"
-      />
+    <section className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
+      {/* Dramatic background */}
+      <div className="absolute inset-0" aria-hidden="true">
+        {/* Main glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full bg-accent-green/[0.03] blur-[150px]" />
+        
+        {/* Accent blobs */}
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-green/20 blur-[120px]"
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-accent-emerald/15 blur-[100px]"
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.15, 0.08] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-accent-teal/10 blur-[80px]"
+        />
+        
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(34,197,94,0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(34,197,94,0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+          }}
+        />
+        
+        {/* Radial fade */}
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-900/0 via-dark-900/50 to-dark-900" />
+      </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left content */}
           <motion.div
             initial="hidden"
             animate="visible"
@@ -393,7 +562,7 @@ function HeroSection() {
             <motion.h1
               variants={fadeUp}
               custom={0}
-              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08]"
+              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05]"
             >
               {t("hero.title1")}
               <br />
@@ -403,7 +572,7 @@ function HeroSection() {
             <motion.p
               variants={fadeUp}
               custom={1}
-              className="mt-6 text-lg sm:text-xl text-white/45 leading-relaxed max-w-lg"
+              className="mt-6 text-lg sm:text-xl text-white/40 leading-relaxed max-w-xl"
             >
               {t("hero.subtitle")}
             </motion.p>
@@ -413,80 +582,158 @@ function HeroSection() {
                 href={APP_STORE_URL}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-7 py-4 text-dark-900 font-semibold text-[15px] transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-7 py-4 text-dark-900 font-semibold text-[15px] transition-all duration-300 hover:scale-[1.02] hover:shadow-glow active:scale-[0.98]"
               >
                 <AppleLogo />
                 <div className="flex flex-col items-start leading-tight">
-                  <span className="text-[11px] font-normal opacity-60">
-                    {t("hero.downloadOn")}
-                  </span>
+                  <span className="text-[11px] font-normal opacity-60">{t("hero.downloadOn")}</span>
                   <span>{t("hero.appStore")}</span>
                 </div>
-                <div className="absolute -inset-1 rounded-2xl bg-accent-green/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </a>
               <a
                 href="#features"
-                className="inline-flex items-center gap-2 rounded-2xl glass-green border border-accent-green/10 px-7 py-4 text-[15px] font-semibold text-white hover:border-accent-green/25 transition-all duration-300"
+                className="group inline-flex items-center gap-2 rounded-2xl glass border border-white/10 px-7 py-4 text-[15px] font-semibold text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
               >
                 {t("hero.learnMore")}
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  className="transition-transform duration-300 group-hover:translate-x-0.5"
-                >
-                  <path
-                    d="M6 12l4-4-4-4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
+                  <path d="M6 12l4-4-4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
             </motion.div>
 
-            <motion.p variants={fadeUp} custom={3} className="mt-6 text-xs text-white/25">
+            <motion.p variants={fadeUp} custom={3} className="mt-8 text-xs text-white/20">
               {t("hero.madeBy")}
             </motion.p>
           </motion.div>
 
+          {/* Right: 3D Phone */}
           <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 10 }}
-            animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+            initial={{ opacity: 0, y: 80, rotateX: 15, rotateY: -10 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
+            transition={{ duration: 1.4, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
             className="relative flex items-center justify-center lg:justify-end"
-            style={{ perspective: "1600px" }}
+            style={{ perspective: "2000px" }}
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-[500px] w-[400px] rounded-full bg-accent-green/20 blur-[120px] animate-pulse-glow" />
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center translate-x-10 -translate-y-10">
-              <div className="h-[300px] w-[300px] rounded-full bg-accent-emerald/15 blur-[100px] animate-pulse-glow animation-delay-2000" />
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center -translate-x-16 translate-y-16">
-              <div className="h-[200px] w-[200px] rounded-full bg-accent-spring/10 blur-[80px] animate-pulse-glow animation-delay-4000" />
+            {/* Floating elements */}
+            <FloatingElement className="absolute -top-4 -left-8 lg:left-0 z-30" delay={1.2} duration={5} y={12}>
+              <div className="rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-xl border border-purple-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center">
+                  <span className="text-lg">📋</span>
+                </div>
+                <div>
+                  <p className="text-white text-xs font-semibold">Чеклісти</p>
+                  <p className="text-white/40 text-[10px]">12 завдань</p>
+                </div>
+              </div>
+            </FloatingElement>
+
+            <FloatingElement className="absolute -bottom-2 -left-4 lg:left-8 z-30" delay={1.5} duration={6} y={10}>
+              <div className="rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 backdrop-blur-xl border border-orange-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-orange-500/30 flex items-center justify-center">
+                  <span className="text-lg">🗺️</span>
+                </div>
+                <div>
+                  <p className="text-white text-xs font-semibold">79 сервісів</p>
+                  <p className="text-white/40 text-[10px]">поруч з вами</p>
+                </div>
+              </div>
+            </FloatingElement>
+
+            <FloatingElement className="absolute top-1/4 -right-4 lg:right-0 z-30" delay={1.8} duration={5.5} y={14}>
+              <div className="rounded-2xl bg-gradient-to-br from-accent-green/20 to-accent-emerald/10 backdrop-blur-xl border border-accent-green/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-accent-green/30 flex items-center justify-center">
+                  <span className="text-lg">✓</span>
+                </div>
+                <div>
+                  <p className="text-white text-xs font-semibold">50+ гайдів</p>
+                  <p className="text-white/40 text-[10px]">крок за кроком</p>
+                </div>
+              </div>
+            </FloatingElement>
+
+            {/* Orbital rings */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="absolute w-[450px] h-[450px] rounded-full border border-accent-green/[0.06]"
+              />
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+                className="absolute w-[550px] h-[550px] rounded-full border border-accent-green/[0.04]"
+                style={{ borderStyle: "dashed" }}
+              />
             </div>
 
+            {/* Glows */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div 
+                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="h-[500px] w-[350px] rounded-full bg-accent-green/20 blur-[100px]" 
+              />
+            </div>
+
+            {/* Phone container with 3D transforms */}
             <motion.div
-              className="relative z-10"
-              animate={{ y: [0, -16, 0] }}
+              className="relative z-20"
+              animate={{ y: [0, -12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
               <motion.div
-                whileHover={{ rotateY: -5, rotateX: 2, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                style={{ transformStyle: "preserve-3d", perspective: "1200px" }}
+                whileHover={{ rotateY: -8, rotateX: 4, scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 150, damping: 20 }}
+                style={{ transformStyle: "preserve-3d" }}
+                className="relative"
               >
-                <PhoneMockup
-                  src="/screenshots/home.png"
-                  alt="Sweezy app home screen"
-                  size="lg"
-                />
-              </motion.div>
+                {/* Phone frame */}
+                <div
+                  className="relative rounded-[3.5rem] overflow-visible"
+                  style={{
+                    background: "linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.08) 100%)",
+                    padding: "7px",
+                    width: 290,
+                    boxShadow: "0 50px 100px -20px rgba(34,197,94,0.25), 0 30px 60px -15px rgba(0,0,0,0.5)",
+                  }}
+                >
+                  {/* Titanium frame shine */}
+                  <div className="absolute inset-0 rounded-[3.5rem] pointer-events-none overflow-hidden">
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.1) 100%)" }} />
+                  </div>
 
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[60%] h-[20px] rounded-[50%] bg-accent-green/10 blur-xl" />
+                  {/* Side buttons */}
+                  <div className="absolute -left-[3px] top-[100px] w-[4px] h-[30px] rounded-l" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
+                  <div className="absolute -left-[3px] top-[145px] w-[4px] h-[55px] rounded-l" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
+                  <div className="absolute -left-[3px] top-[210px] w-[4px] h-[55px] rounded-l" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
+                  <div className="absolute -right-[3px] top-[160px] w-[4px] h-[70px] rounded-r" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
+
+                  {/* Screen */}
+                  <div className="rounded-[3rem] overflow-hidden bg-dark-950 relative" style={{ height: 610 }}>
+                    {/* Dynamic Island */}
+                    <div className="absolute top-2 left-1/2 -translate-x-1/2 z-40">
+                      <motion.div 
+                        initial={{ width: 100 }}
+                        animate={{ width: [100, 110, 100] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        className="h-[32px] rounded-[20px] bg-black flex items-center justify-center px-4 gap-3"
+                      >
+                        <div className="w-3 h-3 rounded-full bg-white/[0.08]" />
+                        <div className="w-2 h-2 rounded-full bg-accent-green/40 animate-pulse" />
+                      </motion.div>
+                    </div>
+
+                    {/* Screen content */}
+                    <Hero3DPhoneUI />
+
+                    {/* Screen glare */}
+                    <div className="absolute inset-0 pointer-events-none rounded-[3rem]" style={{ background: "linear-gradient(115deg, rgba(255,255,255,0.08) 0%, transparent 35%, transparent 75%, rgba(255,255,255,0.02) 100%)" }} />
+                  </div>
+                </div>
+
+                {/* Reflection/shadow under phone */}
+                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[70%] h-[30px] rounded-[50%] bg-accent-green/15 blur-2xl" />
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
