@@ -72,7 +72,7 @@ export function SiteFooter() {
   return (
     <footer className="relative">
       {/* Top gradient accent */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-neon-purple/30 to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent-green/30 to-transparent" />
 
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-8">
         {/* Main grid */}
@@ -80,7 +80,7 @@ export function SiteFooter() {
           {/* Brand column */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-neon-purple to-neon-blue">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green to-accent-emerald shadow-lg shadow-accent-green/25">
                 <span className="text-sm font-bold text-white">S</span>
               </div>
               <span className="text-xl font-bold tracking-tight">Sweezy</span>
@@ -185,9 +185,9 @@ export function SiteFooter() {
                 <input
                   type="email"
                   placeholder={t("footer.emailPlaceholder")}
-                  className="flex-1 rounded-xl bg-white/[0.05] border border-white/[0.08] px-4 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-neon-purple/40 transition-colors duration-300"
+                  className="flex-1 rounded-xl bg-white/[0.05] border border-white/[0.08] px-4 py-2.5 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-accent-green/40 transition-colors duration-300"
                 />
-                <button className="rounded-xl bg-gradient-to-r from-neon-purple to-neon-blue px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity duration-300 whitespace-nowrap">
+                <button className="rounded-xl bg-gradient-to-r from-accent-green to-accent-emerald px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity duration-300 whitespace-nowrap">
                   {t("footer.subscribe")}
                 </button>
               </div>
