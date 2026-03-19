@@ -39,25 +39,28 @@ function FooterLink({
 }
 
 export function SiteFooter() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const localeHome = `/${locale}`;
+  const localeGuides = `/${locale}/guides`;
+  const localeBlog = `/${locale}/blog`;
 
   const columns = [
     {
       title: t("footer.product"),
       links: [
-        { label: t("footer.features"), href: "/#features" },
-        { label: t("footer.howItWorks"), href: "/#how-it-works" },
+        { label: t("footer.features"), href: `${localeHome}#features` },
+        { label: t("footer.howItWorks"), href: `${localeHome}#how-it-works` },
+        { label: "Guides", href: localeGuides },
         { label: t("footer.download"), href: APP_STORE_URL },
-        { label: t("footer.pricing"), href: "#" },
       ],
     },
     {
       title: t("footer.resources"),
       links: [
         { label: t("footer.support"), href: "/support" },
-        { label: t("footer.faqLink"), href: "/#faq" },
+        { label: t("footer.faqLink"), href: `${localeHome}#faq` },
         { label: t("footer.contact"), href: "mailto:support@sweezy.world" },
-        { label: t("footer.blog"), href: "#" },
+        { label: t("footer.blog"), href: localeBlog },
       ],
     },
     {
@@ -80,7 +83,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <Link href="/" className="flex items-center gap-2.5 mb-5">
+            <Link href={localeHome} className="flex items-center gap-2.5 mb-5">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
                 <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
               </div>

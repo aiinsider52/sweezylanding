@@ -256,13 +256,20 @@ function LanguageSwitcher({ className = "" }: { className?: string }) {
 /* ── Navbar ───────────────────────────────────────────────────────────── */
 
 function Navbar() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
+  const resourceLabels = {
+    en: { guides: "Guides", blog: "Blog" },
+    uk: { guides: "Гіди", blog: "Блог" },
+    de: { guides: "Guides", blog: "Blog" },
+  } as const;
 
   const navLinks = [
     { href: "#features", label: t("nav.features") },
     { href: "#how-it-works", label: t("nav.howItWorks") },
     { href: "#screenshots", label: t("nav.screenshots") },
+    { href: `/${locale}/guides`, label: resourceLabels[locale].guides },
+    { href: `/${locale}/blog`, label: resourceLabels[locale].blog },
     { href: "#faq", label: t("nav.faq") },
   ];
 
@@ -276,7 +283,7 @@ function Navbar() {
       <div className="mx-auto max-w-7xl px-6 py-4">
         <div className="rounded-2xl glass px-6 py-3">
           <div className="flex items-center justify-between">
-            <a href="/" className="flex items-center gap-2.5">
+            <a href={`/${locale}`} className="flex items-center gap-2.5">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
                 <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
               </div>
