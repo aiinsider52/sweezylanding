@@ -62,19 +62,79 @@ function PhoneMockup({
   src,
   alt,
   className = "",
+  size = "md",
+  glow = true,
 }: {
   src: string;
   alt: string;
   className?: string;
+  size?: "sm" | "md" | "lg";
+  glow?: boolean;
 }) {
+  const sizeClasses = {
+    sm: "w-[220px]",
+    md: "w-[260px]",
+    lg: "w-[300px]",
+  };
+
   return (
-    <div className={`relative w-[260px] rounded-[3rem] border-[6px] border-white/[0.08] bg-dark-800 shadow-phone-glow overflow-hidden ${className}`}>
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-7 w-28 rounded-b-2xl bg-dark-800 z-20" />
-      <img
-        src={src}
-        alt={alt}
-        className="w-full rounded-[2.4rem] relative z-10"
-        loading="lazy"
+    <div className={`relative ${sizeClasses[size]} ${className}`} style={{ perspective: "1200px" }}>
+      {glow && (
+        <div className="absolute -inset-8 rounded-[4rem] bg-accent-green/[0.07] blur-[60px] animate-pulse-glow" />
+      )}
+
+      <div
+        className="relative rounded-[3rem] overflow-hidden"
+        style={{
+          background: "linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.08) 100%)",
+          padding: "6px",
+        }}
+      >
+        <div className="absolute inset-0 rounded-[3rem] opacity-30"
+          style={{
+            background: "linear-gradient(145deg, rgba(255,255,255,0.2) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.1) 100%)",
+          }}
+        />
+
+        <div className="relative rounded-[2.6rem] overflow-hidden bg-dark-950">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center">
+            <div className="h-[28px] w-[100px] rounded-b-[18px] bg-dark-950 flex items-center justify-center gap-2">
+              <div className="w-[8px] h-[8px] rounded-full bg-white/[0.06] ring-1 ring-white/[0.04]" />
+            </div>
+          </div>
+
+          <img
+            src={src}
+            alt={alt}
+            className="w-full relative z-10"
+            loading="lazy"
+            draggable={false}
+          />
+
+          <div
+            className="absolute inset-0 z-20 pointer-events-none"
+            style={{
+              background: "linear-gradient(125deg, rgba(255,255,255,0.08) 0%, transparent 40%, transparent 70%, rgba(255,255,255,0.03) 100%)",
+            }}
+          />
+        </div>
+      </div>
+
+      <div
+        className="absolute -left-[1px] top-[120px] w-[3px] h-[28px] rounded-l-sm"
+        style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))" }}
+      />
+      <div
+        className="absolute -left-[1px] top-[170px] w-[3px] h-[50px] rounded-l-sm"
+        style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))" }}
+      />
+      <div
+        className="absolute -left-[1px] top-[230px] w-[3px] h-[50px] rounded-l-sm"
+        style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))" }}
+      />
+      <div
+        className="absolute -right-[1px] top-[180px] w-[3px] h-[65px] rounded-r-sm"
+        style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))" }}
       />
     </div>
   );
@@ -393,25 +453,41 @@ function HeroSection() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+            initial={{ opacity: 0, y: 60, scale: 0.9, rotateX: 10 }}
+            animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
             className="relative flex items-center justify-center lg:justify-end"
+            style={{ perspective: "1600px" }}
           >
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-80 w-80 rounded-full bg-accent-green/20 blur-[100px] animate-pulse-glow" />
+              <div className="h-[500px] w-[400px] rounded-full bg-accent-green/20 blur-[120px] animate-pulse-glow" />
             </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-60 w-60 rounded-full bg-accent-emerald/15 blur-[80px] animate-pulse-glow animation-delay-2000" />
+            <div className="absolute inset-0 flex items-center justify-center translate-x-10 -translate-y-10">
+              <div className="h-[300px] w-[300px] rounded-full bg-accent-emerald/15 blur-[100px] animate-pulse-glow animation-delay-2000" />
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center -translate-x-16 translate-y-16">
+              <div className="h-[200px] w-[200px] rounded-full bg-accent-spring/10 blur-[80px] animate-pulse-glow animation-delay-4000" />
             </div>
 
-            <div className="relative z-10 animate-float">
-              <PhoneMockup
-                src="/screenshots/home.png"
-                alt="Sweezy app home screen"
-                className="mx-auto w-[280px] sm:w-[300px] shadow-glow-lg"
-              />
-            </div>
+            <motion.div
+              className="relative z-10"
+              animate={{ y: [0, -16, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <motion.div
+                whileHover={{ rotateY: -5, rotateX: 2, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                style={{ transformStyle: "preserve-3d", perspective: "1200px" }}
+              >
+                <PhoneMockup
+                  src="/screenshots/home.png"
+                  alt="Sweezy app home screen"
+                  size="lg"
+                />
+              </motion.div>
+
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[60%] h-[20px] rounded-[50%] bg-accent-green/10 blur-xl" />
+            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -547,17 +623,18 @@ function AppShowcaseSection() {
   const { t } = useLocale();
 
   const screens = [
-    { src: "/screenshots/home.png", label: t("appShowcase.screen1Label") },
-    { src: "/screenshots/guides.png", label: t("appShowcase.screen2Label") },
-    { src: "/screenshots/map.png", label: t("appShowcase.screen3Label") },
+    { src: "/screenshots/home.png", label: t("appShowcase.screen1Label"), rotation: "rotateY(12deg) rotateX(2deg)" },
+    { src: "/screenshots/guides.png", label: t("appShowcase.screen2Label"), rotation: "rotateY(0deg) rotateX(0deg)" },
+    { src: "/screenshots/map.png", label: t("appShowcase.screen3Label"), rotation: "rotateY(-12deg) rotateX(2deg)" },
   ];
 
   return (
-    <section id="screenshots" className="relative py-32 overflow-hidden">
-      <GradientBlob
-        className="w-[700px] h-[700px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        colors="from-accent-green/15 via-accent-spring/10 to-transparent"
-      />
+    <section id="screenshots" className="relative py-32 sm:py-40 overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+        <div className="h-[600px] w-[600px] rounded-full bg-accent-green/[0.08] blur-[150px]" />
+      </div>
+      <div className="absolute top-1/4 left-1/4 h-[300px] w-[300px] rounded-full bg-accent-emerald/[0.06] blur-[100px] animate-blob" aria-hidden="true" />
+      <div className="absolute bottom-1/4 right-1/4 h-[250px] w-[250px] rounded-full bg-accent-spring/[0.05] blur-[80px] animate-blob animation-delay-4000" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
@@ -565,7 +642,7 @@ function AppShowcaseSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-20"
+          className="text-center mb-20 sm:mb-28"
         >
           <SectionBadge>{t("appShowcase.badge")}</SectionBadge>
           <motion.h2
@@ -585,32 +662,54 @@ function AppShowcaseSection() {
           </motion.p>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={staggerContainer}
-          className="flex flex-col md:flex-row items-end justify-center gap-8 md:gap-12"
-        >
-          {screens.map((screen, i) => {
-            const isCenter = i === 1;
-            return (
-              <motion.div
-                key={screen.src}
-                variants={scaleIn}
-                custom={i}
-                className={`flex flex-col items-center gap-5 ${isCenter ? "md:-mt-8" : ""}`}
-              >
-                <PhoneMockup
-                  src={screen.src}
-                  alt={screen.label}
-                  className={isCenter ? "w-[280px] shadow-glow-lg" : "w-[240px] opacity-90"}
-                />
-                <span className="text-sm text-white/40 font-medium">{screen.label}</span>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+        <div className="relative" style={{ perspective: "2000px" }}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={staggerContainer}
+            className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-6 lg:gap-10"
+          >
+            {screens.map((screen, i) => {
+              const isCenter = i === 1;
+              return (
+                <motion.div
+                  key={screen.src}
+                  variants={{
+                    hidden: { opacity: 0, y: 80, scale: 0.85 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      transition: { duration: 0.9, delay: i * 0.15, ease: [0.25, 0.4, 0.25, 1] },
+                    },
+                  }}
+                  whileHover={{ scale: 1.04, y: -12, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                  className={`flex flex-col items-center gap-6 ${isCenter ? "md:-mt-10 md:z-20" : "md:z-10"}`}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transform: typeof window !== "undefined" && window.innerWidth >= 768 ? screen.rotation : "none",
+                  }}
+                >
+                  <div className="relative">
+                    {isCenter && (
+                      <div className="absolute -inset-12 rounded-[5rem] bg-accent-green/[0.06] blur-[80px]" />
+                    )}
+                    <PhoneMockup
+                      src={screen.src}
+                      alt={screen.label}
+                      size={isCenter ? "lg" : "md"}
+                      glow={isCenter}
+                    />
+                  </div>
+                  <span className={`text-sm font-medium ${isCenter ? "text-accent-green/70" : "text-white/35"}`}>
+                    {screen.label}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
