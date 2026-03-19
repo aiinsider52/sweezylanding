@@ -226,16 +226,18 @@ function IconLanguage() {
 
 /* ── Language Switcher ────────────────────────────────────────────────── */
 
+const LOCALE_PATHS: Record<Locale, string> = { en: "/en", uk: "/uk", de: "/de" };
+
 function LanguageSwitcher({ className = "" }: { className?: string }) {
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
   const locales: Locale[] = ["en", "uk", "de"];
 
   return (
     <div className={`flex items-center rounded-xl bg-white/[0.04] border border-white/[0.06] p-0.5 ${className}`}>
       {locales.map((l) => (
-        <button
+        <a
           key={l}
-          onClick={() => setLocale(l)}
+          href={LOCALE_PATHS[l]}
           className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all duration-300 ${
             locale === l
               ? "bg-gradient-to-r from-accent-green to-accent-emerald text-white shadow-glow-sm"
@@ -243,7 +245,7 @@ function LanguageSwitcher({ className = "" }: { className?: string }) {
           }`}
         >
           {localeLabels[l]}
-        </button>
+        </a>
       ))}
     </div>
   );
@@ -272,11 +274,22 @@ function Navbar() {
       <div className="mx-auto max-w-7xl px-6 py-4">
         <div className="rounded-2xl glass px-6 py-3">
           <div className="flex items-center justify-between">
-            <a href="#" className="flex items-center gap-2.5">
+            <a href="/" className="flex items-center gap-2.5">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green to-accent-emerald">
                 <span className="text-sm font-bold text-white">S</span>
               </div>
-              <span className="text-lg font-bold tracking-tight">Sweezy</span>
+              <div className="flex flex-col leading-tight">
+                <span className="text-lg font-bold tracking-tight leading-none">Sweezy</span>
+                <a
+                  href="https://www.aiinsider.it.com"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-[9px] text-white/25 hover:text-accent-green/60 transition-colors duration-300 leading-none mt-0.5"
+                >
+                  by AI Insider
+                </a>
+              </div>
             </a>
 
             <div className="hidden lg:flex items-center gap-8">
@@ -398,41 +411,33 @@ function Hero3DPhoneUI() {
         <p className="text-white font-bold text-xl relative z-10">Привіт!</p>
         <p className="text-white/80 text-sm mt-0.5 relative z-10">Четвер, 19 Березня</p>
         <p className="text-white/60 text-xs mt-3 leading-relaxed relative z-10 max-w-[180px]">Ваш повний гід для успішного життя в Швейцарії</p>
-      </motion.div>
+      </div>
 
       {/* Quick Actions */}
       <div className="px-4 mt-5">
         <p className="text-white font-bold text-sm mb-3">Швидкі дії</p>
         <div className="grid grid-cols-2 gap-2.5">
           {[
-            { label: "CV Builder", color: "#7C3AED", icon: "📄", delay: 0.6 },
-            { label: "Шаблони", color: "#DC2626", icon: "📋", delay: 0.7 },
-            { label: "Карта", color: "#D97706", icon: "🗺️", delay: 0.8 },
-            { label: "Довідник", color: "#2563EB", icon: "📖", delay: 0.9 },
+            { label: "CV Builder", color: "#7C3AED", icon: "📄" },
+            { label: "Шаблони", color: "#DC2626", icon: "📋" },
+            { label: "Карта", color: "#D97706", icon: "🗺️" },
+            { label: "Довідник", color: "#2563EB", icon: "📖" },
           ].map((item) => (
-            <motion.div
+            <div
               key={item.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: item.delay, duration: 0.4 }}
-              className="rounded-2xl p-3 flex items-center gap-2.5 cursor-pointer transition-transform hover:scale-[1.02]"
+              className="rounded-2xl p-3 flex items-center gap-2.5"
               style={{ background: item.color }}
             >
               <span className="text-lg">{item.icon}</span>
               <span className="text-white text-[11px] font-semibold flex-1">{item.label}</span>
               <span className="text-white/50 text-xs">→</span>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Recommended section */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="px-4 mt-5"
-      >
+      <div className="px-4 mt-5">
         <p className="text-white font-bold text-sm mb-3">Рекомендовано</p>
         <div className="rounded-2xl bg-white/[0.06] border border-white/[0.08] p-3.5 flex items-center gap-3">
           <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500/30 to-purple-600/20 flex items-center justify-center flex-shrink-0">
@@ -444,7 +449,7 @@ function Hero3DPhoneUI() {
           </div>
           <span className="text-[9px] text-accent-green font-bold bg-accent-green/15 px-2 py-1 rounded-full flex-shrink-0 border border-accent-green/20">New</span>
         </div>
-      </motion.div>
+      </div>
 
       {/* Tab bar */}
       <div className="mt-auto border-t border-white/[0.06] flex items-center justify-around px-3 py-3 bg-[#0a1a0f]/80 backdrop-blur-xl">
@@ -583,8 +588,15 @@ function HeroSection() {
               </a>
             </motion.div>
 
-            <motion.p variants={fadeUp} custom={3} className="mt-8 text-xs text-white/20">
-              {t("hero.madeBy")}
+            <motion.p variants={fadeUp} custom={3} className="mt-8 text-xs text-white/25">
+              <a
+                href="https://www.aiinsider.it.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="hover:text-accent-green/60 transition-colors duration-300"
+              >
+                {t("hero.madeBy")}
+              </a>
             </motion.p>
           </motion.div>
 
@@ -1177,7 +1189,7 @@ function AppShowcaseSection() {
   return (
     <section id="screenshots" className="relative py-32 sm:py-40 overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-        <div className="h-[700px] w-[700px] rounded-full bg-accent-green/[0.06] blur-[160px]" />
+        <div className="h-[600px] w-[600px] rounded-full bg-accent-green/[0.05] blur-[80px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">

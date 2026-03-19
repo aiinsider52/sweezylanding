@@ -18,11 +18,18 @@ type LocaleContextType = {
 
 const LocaleContext = createContext<LocaleContextType | null>(null);
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+export function LocaleProvider({
+  children,
+  initialLocale,
+}: {
+  children: ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale ?? "en");
 
-  /* Read persisted locale on mount & detect browser language */
+  /* When locale is URL-driven, skip localStorage/browser detection */
   useEffect(() => {
+    if (initialLocale) return;
     const stored = localStorage.getItem("sweezy-locale") as Locale | null;
     if (stored && (["en", "uk", "de"] as Locale[]).includes(stored)) {
       setLocaleState(stored);
@@ -32,7 +39,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     const lang = navigator.language.toLowerCase();
     if (lang.startsWith("uk")) setLocaleState("uk");
     else if (lang.startsWith("de")) setLocaleState("de");
-  }, []);
+  }, [initialLocale]);
 
   /* Sync <html lang=""> attribute */
   useEffect(() => {

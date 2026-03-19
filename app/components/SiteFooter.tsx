@@ -85,9 +85,23 @@ export function SiteFooter() {
               </div>
               <span className="text-xl font-bold tracking-tight">Sweezy</span>
             </Link>
-            <p className="text-white/40 text-[15px] leading-relaxed max-w-xs mb-6">
+            <p className="text-white/40 text-[15px] leading-relaxed max-w-xs mb-4">
               {t("footer.tagline")}
             </p>
+            <a
+              href="https://www.aiinsider.it.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-2 mb-6 text-xs text-white/25 hover:text-accent-green/70 transition-colors duration-300 group"
+            >
+              <span className="h-4 w-4 rounded-md bg-gradient-to-br from-accent-green/60 to-accent-emerald/40 flex items-center justify-center">
+                <span className="text-[8px] font-bold text-white">AI</span>
+              </span>
+              A product by AI Insider
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" className="opacity-40 group-hover:opacity-70 transition-opacity">
+                <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
 
             {/* Social icons */}
             <div className="flex items-center gap-3">
@@ -200,7 +214,18 @@ export function SiteFooter() {
           <p className="text-sm text-white/20">
             &copy; {new Date().getFullYear()} Sweezy. {t("footer.copyright")}
           </p>
-          <p className="text-sm text-white/20">{t("footer.madeWith")}</p>
+          <div className="flex items-center gap-1.5 text-sm text-white/20">
+            <span>{t("footer.madeWith")}</span>
+            <span>·</span>
+            <a
+              href="https://www.aiinsider.it.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-accent-green/60 transition-colors duration-300"
+            >
+              AI Insider
+            </a>
+          </div>
         </div>
       </div>
     </footer>

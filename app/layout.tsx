@@ -18,7 +18,15 @@ export const metadata: Metadata = {
     "Schweiz",
     "Швейцарія",
   ],
-  authors: [{ name: "Sweezy" }],
+  authors: [{ name: "Sweezy by AI Insider" }],
+  alternates: {
+    canonical: "/",
+    languages: {
+      en: "/en",
+      uk: "/uk",
+      de: "/de",
+    },
+  },
   openGraph: {
     title: "Sweezy — Life in Switzerland. Simplified.",
     description:
