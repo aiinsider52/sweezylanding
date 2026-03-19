@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { cantons } from "../data/cantons";
 
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
@@ -57,9 +58,23 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
   const appDir = path.join(process.cwd(), "app");
   const pages: string[] = ["/", ...LOCALES.map((locale) => `/${locale}`)];
   const localizedBlogIndex = path.join(appDir, "[locale]", "blog", "page.tsx");
+  const localizedGuidesIndex = path.join(appDir, "[locale]", "guides", "page.tsx");
+  const localizedCantonGuide = path.join(appDir, "[locale]", "guides", "[canton]", "page.tsx");
 
   if (await pathExists(localizedBlogIndex)) {
     pages.push(...LOCALES.map((locale) => `/${locale}/blog`));
+  }
+
+  if (await pathExists(localizedGuidesIndex)) {
+    pages.push(...LOCALES.map((locale) => `/${locale}/guides`));
+  }
+
+  if (await pathExists(localizedCantonGuide)) {
+    pages.push(
+      ...LOCALES.flatMap((locale) =>
+        cantons.map((canton) => `/${locale}/guides/${canton.slug}`),
+      ),
+    );
   }
 
   for (const slug of STATIC_PAGES) {
@@ -79,12 +94,14 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
   return pages.map((page) => {
     const isHomepage = page === "/";
     const isLocaleHomepage = LOCALES.some((locale) => page === `/${locale}`);
+    const isGuideIndex = LOCALES.some((locale) => page === `/${locale}/guides`);
+    const isGuideDetail = /\/(en|uk|de)\/guides\/[^/]+$/.test(page);
 
     return {
       url: `${SITE_URL}${page}`,
       lastModified: new Date(),
       changeFrequency: isHomepage || isLocaleHomepage ? "daily" : "monthly",
-      priority: isHomepage ? 1 : isLocaleHomepage ? 1 : 0.5,
+      priority: isHomepage ? 1 : isLocaleHomepage ? 1 : isGuideDetail ? 0.7 : isGuideIndex ? 0.6 : 0.5,
     } satisfies SitemapEntry;
   });
 }
