@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react";
 import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
+import { APP_STORE_URL } from "../lib/links";
 
 /* ==========================================================================
    ANIMATION VARIANTS
@@ -271,7 +272,9 @@ function Navbar() {
             <div className="hidden lg:flex items-center gap-4">
               <LanguageSwitcher />
               <a
-                href="#download"
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noreferrer noopener"
                 className="inline-flex items-center gap-2 rounded-xl bg-white/[0.07] hover:bg-white/[0.12] border border-white/[0.06] px-5 py-2 text-sm font-medium transition-all duration-300"
               >
                 {t("nav.getApp")}
@@ -322,7 +325,9 @@ function Navbar() {
                     </a>
                   ))}
                   <a
-                    href="#download"
+                    href={APP_STORE_URL}
+                    target="_blank"
+                    rel="noreferrer noopener"
                     onClick={() => setIsOpen(false)}
                     className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-white/[0.07] hover:bg-white/[0.12] border border-white/[0.06] px-5 py-3 text-sm font-medium transition-all duration-300"
                   >
@@ -381,7 +386,9 @@ function HeroSection() {
 
             <motion.div variants={fadeUp} custom={2} className="mt-10 flex flex-wrap gap-4">
               <a
-                href="#download"
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noreferrer noopener"
                 className="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-7 py-4 text-dark-900 font-semibold text-[15px] transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <AppleLogo />
@@ -792,7 +799,9 @@ function CTASection() {
             </motion.p>
             <motion.div variants={fadeUp} custom={2} className="mt-10 flex flex-wrap justify-center gap-4">
               <a
-                href="#"
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noreferrer noopener"
                 className="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-7 py-4 text-dark-900 font-semibold text-[15px] transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <AppleLogo />

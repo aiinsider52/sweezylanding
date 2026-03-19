@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "../../lib/locale-context";
+import { APP_STORE_URL } from "../../lib/links";
 
 function FooterLink({
   href,
@@ -22,7 +23,7 @@ function FooterLink({
         href={href}
         className={className}
         target={isExternal ? "_blank" : undefined}
-        rel={isExternal ? "noreferrer" : undefined}
+        rel={isExternal ? "noreferrer noopener" : undefined}
       >
         {children}
       </a>
@@ -45,7 +46,7 @@ export function SiteFooter() {
       links: [
         { label: t("footer.features"), href: "/#features" },
         { label: t("footer.howItWorks"), href: "/#how-it-works" },
-        { label: t("footer.download"), href: "/#download" },
+        { label: t("footer.download"), href: APP_STORE_URL },
         { label: t("footer.pricing"), href: "#" },
       ],
     },
