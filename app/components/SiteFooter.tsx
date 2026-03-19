@@ -81,8 +81,8 @@ export function SiteFooter() {
           {/* Brand column */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green/10 to-accent-emerald/10 border border-white/[0.06]">
-                <BrandLogo variant="mark" className="h-6 w-6 object-contain" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
+                <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
               </div>
               <span className="text-xl font-bold tracking-tight">Sweezy</span>
             </Link>

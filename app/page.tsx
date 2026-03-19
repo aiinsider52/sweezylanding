@@ -276,7 +276,9 @@ function Navbar() {
         <div className="rounded-2xl glass px-6 py-3">
           <div className="flex items-center justify-between">
             <a href="/" className="flex items-center gap-2.5">
-              <BrandLogo variant="mark" className="h-8 w-8 rounded-lg object-contain bg-gradient-to-br from-accent-green/10 to-accent-emerald/10 p-1" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
+                <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
+              </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-lg font-bold tracking-tight leading-none">Sweezy</span>
                 <a
