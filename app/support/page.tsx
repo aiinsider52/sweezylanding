@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useLocale } from "../../lib/locale-context";
 import { localeLabels, type Locale } from "../../lib/i18n";
+import { BrandLogo } from "../components/BrandLogo";
 
 /* ---------- Animations ---------- */
 const fadeUp = {
@@ -91,8 +92,8 @@ export default function Support() {
       <nav className="relative z-20 border-b border-white/[0.04] backdrop-blur-md bg-dark-900/60">
         <div className="mx-auto max-w-4xl px-6 py-5 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-neon-purple to-neon-blue shadow-lg shadow-neon-purple/25 group-hover:shadow-neon-purple/40 transition-shadow duration-300">
-              <span className="text-sm font-bold text-white">S</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green/10 to-accent-emerald/10 border border-white/[0.06]">
+              <BrandLogo variant="mark" className="h-5 w-5 object-contain" />
             </div>
             <span className="text-lg font-bold tracking-tight">Sweezy</span>
           </Link>

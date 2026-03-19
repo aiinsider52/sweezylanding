@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale } from "../../lib/locale-context";
 import { APP_STORE_URL } from "../../lib/links";
+import { BrandLogo } from "./BrandLogo";
 
 function FooterLink({
   href,
@@ -80,8 +81,8 @@ export function SiteFooter() {
           {/* Brand column */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green to-accent-emerald shadow-lg shadow-accent-green/25">
-                <span className="text-sm font-bold text-white">S</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green/10 to-accent-emerald/10 border border-white/[0.06]">
+                <BrandLogo variant="mark" className="h-6 w-6 object-contain" />
               </div>
               <span className="text-xl font-bold tracking-tight">Sweezy</span>
             </Link>
