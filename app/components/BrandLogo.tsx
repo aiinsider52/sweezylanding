@@ -17,8 +17,15 @@ export function BrandLogo({
 
   const srcCandidates =
     variant === "mark"
-      ? ["/brand/sweezy-mark.svg", "/brand/sweezy-mark.png", "/brand/sweezy-logo.svg", "/brand/sweezy-logo.png"]
-      : ["/brand/sweezy-logo.svg", "/brand/sweezy-logo.png"];
+      ? [
+          "/brand/sweezy-mark.svg",
+          "/brand/sweezy-mark.png",
+          "/brand/sweezy-logo.svg",
+          "/brand/sweezy-logo.png",
+          "/brand/logo.svg",
+          "/brand/logo.png",
+        ]
+      : ["/brand/sweezy-logo.svg", "/brand/sweezy-logo.png", "/brand/logo.svg", "/brand/logo.png"];
 
   const src = srcCandidates[idx];
 
