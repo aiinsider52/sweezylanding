@@ -384,10 +384,7 @@ function Hero3DPhoneUI() {
       </div>
 
       {/* Hero card */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
+      <div
         className="mx-4 mt-2 rounded-[20px] p-5 relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #22C55E 0%, #16A34A 50%, #15803D 100%)" }}
       >
@@ -510,27 +507,12 @@ function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
-      {/* Dramatic background */}
+        {/* Dramatic background */}
       <div className="absolute inset-0" aria-hidden="true">
-        {/* Main glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full bg-accent-green/[0.03] blur-[150px]" />
-        
-        {/* Accent blobs */}
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-green/20 blur-[120px]"
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.15, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-accent-emerald/15 blur-[100px]"
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.15, 0.08] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-accent-teal/10 blur-[80px]"
-        />
+        {/* Accent blobs — static + CSS pulse (no Framer Motion loops) */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-green/15 blur-[100px] animate-blob" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-accent-emerald/10 blur-[80px] animate-blob animation-delay-2000" />
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-accent-teal/[0.08] blur-[70px] animate-blob animation-delay-4000" />
         
         {/* Grid pattern */}
         <div
@@ -616,8 +598,8 @@ function HeroSection() {
           >
             {/* Floating elements */}
             <FloatingElement className="absolute -top-4 -left-8 lg:left-0 z-30" delay={1.2} duration={5} y={12}>
-              <div className="rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-xl border border-purple-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center">
+              <div className="rounded-2xl bg-[#2a1a3a]/95 border border-purple-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center flex-shrink-0">
                   <span className="text-lg">📋</span>
                 </div>
                 <div>
@@ -628,8 +610,8 @@ function HeroSection() {
             </FloatingElement>
 
             <FloatingElement className="absolute -bottom-2 -left-4 lg:left-8 z-30" delay={1.5} duration={6} y={10}>
-              <div className="rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 backdrop-blur-xl border border-orange-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/30 flex items-center justify-center">
+              <div className="rounded-2xl bg-[#2a1a0a]/95 border border-orange-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-orange-500/30 flex items-center justify-center flex-shrink-0">
                   <span className="text-lg">🗺️</span>
                 </div>
                 <div>
@@ -640,8 +622,8 @@ function HeroSection() {
             </FloatingElement>
 
             <FloatingElement className="absolute top-1/4 -right-4 lg:right-0 z-30" delay={1.8} duration={5.5} y={14}>
-              <div className="rounded-2xl bg-gradient-to-br from-accent-green/20 to-accent-emerald/10 backdrop-blur-xl border border-accent-green/20 px-4 py-3 flex items-center gap-3 shadow-xl">
-                <div className="w-10 h-10 rounded-xl bg-accent-green/30 flex items-center justify-center">
+              <div className="rounded-2xl bg-[#0a2010]/95 border border-accent-green/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+                <div className="w-10 h-10 rounded-xl bg-accent-green/30 flex items-center justify-center flex-shrink-0">
                   <span className="text-lg">✓</span>
                 </div>
                 <div>
@@ -651,28 +633,9 @@ function HeroSection() {
               </div>
             </FloatingElement>
 
-            {/* Orbital rings */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                className="absolute w-[450px] h-[450px] rounded-full border border-accent-green/[0.06]"
-              />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-                className="absolute w-[550px] h-[550px] rounded-full border border-accent-green/[0.04]"
-                style={{ borderStyle: "dashed" }}
-              />
-            </div>
-
             {/* Glows */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div 
-                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="h-[500px] w-[350px] rounded-full bg-accent-green/20 blur-[100px]" 
-              />
+              <div className="h-[500px] w-[350px] rounded-full bg-accent-green/15 blur-[80px] animate-pulse-glow" />
             </div>
 
             {/* Phone container with 3D transforms */}
@@ -712,15 +675,10 @@ function HeroSection() {
                   <div className="rounded-[3rem] overflow-hidden bg-dark-950 relative" style={{ height: 610 }}>
                     {/* Dynamic Island */}
                     <div className="absolute top-2 left-1/2 -translate-x-1/2 z-40">
-                      <motion.div 
-                        initial={{ width: 100 }}
-                        animate={{ width: [100, 110, 100] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                        className="h-[32px] rounded-[20px] bg-black flex items-center justify-center px-4 gap-3"
-                      >
+                      <div className="h-[32px] w-[100px] rounded-[20px] bg-black flex items-center justify-center px-4 gap-3">
                         <div className="w-3 h-3 rounded-full bg-white/[0.08]" />
                         <div className="w-2 h-2 rounded-full bg-accent-green/40 animate-pulse" />
-                      </motion.div>
+                      </div>
                     </div>
 
                     {/* Screen content */}
@@ -1327,15 +1285,10 @@ function AppShowcaseSection() {
             onMouseLeave={() => setIsHovered(false)}
           >
             <div className="relative" style={{ perspective: "1200px" }}>
-              {/* Ambient glow */}
-              <motion.div
-                className="absolute -inset-16 rounded-full blur-[80px]"
-                animate={{ background: [
-                  `radial-gradient(circle, ${tabs[activeTab].color}18 0%, transparent 70%)`,
-                  `radial-gradient(circle, ${tabs[activeTab].color}25 0%, transparent 70%)`,
-                  `radial-gradient(circle, ${tabs[activeTab].color}18 0%, transparent 70%)`,
-                ]}}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              {/* Ambient glow — static, no background animation */}
+              <div
+                className="absolute -inset-16 rounded-full blur-[60px] transition-opacity duration-700"
+                style={{ background: `radial-gradient(circle, ${tabs[activeTab].color}20 0%, transparent 70%)` }}
               />
 
               <motion.div
