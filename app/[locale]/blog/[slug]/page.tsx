@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 import {
@@ -9,6 +8,8 @@ import {
   type PostFrontmatter,
 } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
+import { Breadcrumb } from "../../../components/blog/Breadcrumb";
+import { JsonLd } from "../../../components/seo/JsonLd";
 
 function formatDate(locale: Locale, value: string) {
   return new Date(value).toLocaleDateString(
@@ -21,10 +22,16 @@ function formatDate(locale: Locale, value: string) {
   );
 }
 
-const COPY: Record<Locale, { backToBlog: string }> = {
-  en: { backToBlog: "Back to blog" },
-  uk: { backToBlog: "Назад до блогу" },
-  de: { backToBlog: "Zuruck zum Blog" },
+const COPY: Record<Locale, { home: string; blog: string }> = {
+  en: { home: "Home", blog: "Blog" },
+  uk: { home: "Home", blog: "Blog" },
+  de: { home: "Home", blog: "Blog" },
+};
+
+const LANGUAGE_MAP: Record<Locale, string> = {
+  en: "en-US",
+  uk: "uk-UA",
+  de: "de-CH",
 };
 
 export async function generateStaticParams() {
@@ -115,18 +122,63 @@ export default async function BlogPostPage({
   });
 
   const locale = params.locale;
+  const canonicalUrl = `https://www.sweezy.world/${locale}/blog/${params.slug}`;
+  const breadcrumbItems = [
+    { label: COPY[locale].home, href: `/${locale}` },
+    { label: COPY[locale].blog, href: `/${locale}/blog` },
+    { label: post.frontmatter.title },
+  ];
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.frontmatter.title,
+    description: post.frontmatter.description,
+    datePublished: post.frontmatter.publishedAt,
+    dateModified: post.frontmatter.publishedAt,
+    author: {
+      "@type": "Person",
+      name: post.frontmatter.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Sweezy",
+      url: "https://www.sweezy.world",
+    },
+    inLanguage: LANGUAGE_MAP[locale],
+    url: canonicalUrl,
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: COPY[locale].home,
+        item: `https://www.sweezy.world/${locale}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: COPY[locale].blog,
+        item: `https://www.sweezy.world/${locale}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.frontmatter.title,
+        item: canonicalUrl,
+      },
+    ],
+  };
 
   return (
     <main className="min-h-screen bg-dark-900 text-white">
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <article className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-        <Link
-          href={`/${locale}/blog`}
-          className="mb-8 inline-flex text-sm text-white/45 transition-colors hover:text-white"
-        >
-          {COPY[locale].backToBlog}
-        </Link>
-
         <header className="mb-10 border-b border-white/10 pb-8">
+          <Breadcrumb items={breadcrumbItems} />
           <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-white/40">
             <time dateTime={post.frontmatter.publishedAt}>
               {formatDate(locale, post.frontmatter.publishedAt)}
