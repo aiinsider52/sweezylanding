@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { LocaleProvider } from "../lib/locale-context";
-import { getSiteUrlObject } from "../lib/site-url";
 import { SiteFooter } from "./components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: getSiteUrlObject(),
+  metadataBase: new URL("https://www.sweezy.world"),
   title: "Sweezy — Life in Switzerland. Simplified.",
   description:
     "Sweezy helps newcomers navigate life in Switzerland with step-by-step guides, smart checklists, and curated official resources. Available in English, Ukrainian, and German.",

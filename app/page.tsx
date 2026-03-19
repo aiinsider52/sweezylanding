@@ -6,6 +6,7 @@ import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { APP_STORE_URL } from "../lib/links";
 import { BrandLogo } from "./components/BrandLogo";
+import { JsonLd } from "./components/seo/JsonLd";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -1771,8 +1772,73 @@ function CTASection() {
 /* ── Page Composition ────────────────────────────────────────────────── */
 
 export default function Home() {
+  const { t, locale } = useLocale();
+
+  const localizedUrl =
+    locale === "en" ? "https://www.sweezy.world/en" : `https://www.sweezy.world/${locale}`;
+
+  const faqItems = [
+    { question: t("faq.q1"), answer: t("faq.a1") },
+    { question: t("faq.q2"), answer: t("faq.a2") },
+    { question: t("faq.q3"), answer: t("faq.a3") },
+    { question: t("faq.q4"), answer: t("faq.a4") },
+    { question: t("faq.q5"), answer: t("faq.a5") },
+    { question: t("faq.q6"), answer: t("faq.a6") },
+  ];
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name: "Sweezy",
+        operatingSystem: "iOS",
+        applicationCategory: "LifestyleApplication",
+        description:
+          "Step-by-step guides, checklists, service map and CV builder for expats in Switzerland",
+        url: "https://www.sweezy.world",
+        downloadUrl: APP_STORE_URL,
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: 4.9,
+          ratingCount: 120,
+        },
+        offers: {
+          "@type": "Offer",
+          price: 0,
+          priceCurrency: "CHF",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+      {
+        "@type": "Organization",
+        name: "Sweezy",
+        url: "https://www.sweezy.world",
+        sameAs: [APP_STORE_URL],
+      },
+      {
+        "@type": "WebPage",
+        url: localizedUrl,
+        inLanguage: locale,
+        name: t("hero.title1") + " " + t("hero.title2"),
+        description: t("hero.subtitle"),
+      },
+    ],
+  };
+
   return (
     <main>
+      <JsonLd data={structuredData} />
       <Navbar />
       <HeroSection />
       <StatsSection />
