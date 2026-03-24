@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { BASE_URL } from "../../lib/alternates";
+import { HomeSeoSections, buildHomeFaqSchema } from "../components/home/HomeSeoSections";
 import Home from "../page";
 
-const BASE_URL = "https://www.sweezy.world";
 const CANONICAL_URL = `${BASE_URL}/de`;
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
@@ -20,14 +21,6 @@ export const metadata: Metadata = {
     "Schweiz App",
     "Leben Schweiz",
   ],
-  alternates: {
-    canonical: CANONICAL_URL,
-    languages: {
-      en: `${BASE_URL}/en`,
-      uk: `${BASE_URL}/uk`,
-      de: `${BASE_URL}/de`,
-    },
-  },
   openGraph: {
     title: "Sweezy — Leben in der Schweiz. Vereinfacht.",
     description:
@@ -62,5 +55,18 @@ export const metadata: Metadata = {
 };
 
 export default function DePage() {
-  return <Home />;
+  const faqSchema = buildHomeFaqSchema("de");
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
+        }}
+      />
+      <Home />
+      <HomeSeoSections locale="de" />
+    </>
+  );
 }

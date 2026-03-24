@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { BASE_URL } from "../../lib/alternates";
+import { HomeSeoSections, buildHomeFaqSchema } from "../components/home/HomeSeoSections";
 import Home from "../page";
 
-const BASE_URL = "https://www.sweezy.world";
 const CANONICAL_URL = `${BASE_URL}/en`;
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
@@ -9,14 +10,6 @@ export const metadata: Metadata = {
   title: "Sweezy — Life in Switzerland. Simplified.",
   description:
     "Sweezy helps newcomers navigate life in Switzerland with step-by-step guides, smart checklists, and curated official resources. Available in English, Ukrainian, and German.",
-  alternates: {
-    canonical: CANONICAL_URL,
-    languages: {
-      en: `${BASE_URL}/en`,
-      uk: `${BASE_URL}/uk`,
-      de: `${BASE_URL}/de`,
-    },
-  },
   openGraph: {
     title: "Sweezy — Life in Switzerland. Simplified.",
     description:
@@ -47,5 +40,18 @@ export const metadata: Metadata = {
 };
 
 export default function EnPage() {
-  return <Home />;
+  const faqSchema = buildHomeFaqSchema("en");
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
+        }}
+      />
+      <Home />
+      <HomeSeoSections locale="en" />
+    </>
+  );
 }

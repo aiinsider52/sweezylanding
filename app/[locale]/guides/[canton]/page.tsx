@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "../../../components/blog/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
+import { buildLocaleAlternates, BASE_URL } from "../../../../lib/alternates";
 import { cantons, getCantonBySlug } from "../../../../data/cantons";
 import { isLocale } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
 import { APP_STORE_URL } from "../../../../lib/links";
 import Link from "next/link";
 
-const BASE_URL = "https://www.sweezy.world";
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 const COPY: Record<
@@ -186,9 +186,7 @@ export async function generateMetadata({
   return {
     title: copy.title(name),
     description: copy.description(name, canton.capital),
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: buildLocaleAlternates(locale, `/guides/${canton.slug}`),
     openGraph: {
       title: copy.title(name),
       description: copy.description(name, canton.capital),

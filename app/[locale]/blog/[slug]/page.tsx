@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
+import { buildLocaleAlternates, BASE_URL } from "../../../../lib/alternates";
 import {
   getAllBlogParams,
   getPostBySlug,
@@ -11,8 +12,6 @@ import type { Locale } from "../../../../lib/i18n";
 import Link from "next/link";
 import { Breadcrumb } from "../../../components/blog/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
-
-const BASE_URL = "https://www.sweezy.world";
 
 function formatDate(locale: Locale, value: string) {
   return new Date(value).toLocaleDateString(
@@ -50,6 +49,7 @@ export async function generateMetadata({
 
   const post = await getPostBySlug(params.locale, params.slug);
   if (!post) return {};
+  const pathWithoutLocale = `/blog/${params.slug}`;
   const canonicalUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}`;
   const ogImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/opengraph-image`;
   const twitterImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/twitter-image`;
@@ -59,9 +59,7 @@ export async function generateMetadata({
     description: post.frontmatter.description,
     keywords: post.frontmatter.keywords,
     authors: [{ name: post.frontmatter.author }],
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: buildLocaleAlternates(params.locale, pathWithoutLocale),
     openGraph: {
       title: post.frontmatter.title,
       description: post.frontmatter.description,

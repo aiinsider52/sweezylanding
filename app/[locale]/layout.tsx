@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { buildLocaleAlternates, BASE_URL } from "../../lib/alternates";
 import { LocaleProvider } from "../../lib/locale-context";
 import { isLocale } from "../../lib/blog";
 
-const BASE_URL = "https://www.sweezy.world";
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 const LOCALE_METADATA = {
@@ -40,15 +40,7 @@ export async function generateMetadata({
   return {
     title: current.title,
     description: current.description,
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        en: `${BASE_URL}/en`,
-        uk: `${BASE_URL}/uk`,
-        de: `${BASE_URL}/de`,
-        "x-default": `${BASE_URL}/en`,
-      },
-    },
+    alternates: buildLocaleAlternates(params.locale),
     openGraph: {
       title: current.title,
       description: current.description,

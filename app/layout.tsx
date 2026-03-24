@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { buildRootAlternates } from "../lib/alternates";
 import { LocaleProvider } from "../lib/locale-context";
 import { SiteFooter } from "./components/SiteFooter";
-import { JsonLd } from "./components/seo/JsonLd";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,14 +31,7 @@ export const metadata: Metadata = {
     "Швейцарія",
   ],
   authors: [{ name: "Sweezy by AI Insider" }],
-  alternates: {
-    canonical: "/",
-    languages: {
-      en: "/en",
-      uk: "/uk",
-      de: "/de",
-    },
-  },
+  alternates: buildRootAlternates(),
   openGraph: {
     title: "Sweezy — Life in Switzerland. Simplified.",
     description:
@@ -78,7 +71,7 @@ export const viewport: Viewport = {
   themeColor: "#0B0F19",
 };
 
-const websiteJsonLd = {
+const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Sweezy",
@@ -102,8 +95,15 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`antialiased ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c"),
+          }}
+        />
+      </head>
       <body className="min-h-screen overflow-x-hidden">
-        <JsonLd data={websiteJsonLd} />
         <LocaleProvider>
           {children}
           <SiteFooter year={currentYear} />

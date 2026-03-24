@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { cantons } from "../../../data/cantons";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 
-const BASE_URL = "https://www.sweezy.world";
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 const COPY: Record<
@@ -88,9 +88,7 @@ export async function generateMetadata({
   return {
     title: copy.title,
     description: copy.description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: buildLocaleAlternates(params.locale, "/guides"),
     openGraph: {
       title: copy.title,
       description: copy.description,

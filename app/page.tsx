@@ -1783,15 +1783,6 @@ export default function Home() {
   const localizedUrl =
     locale === "en" ? "https://www.sweezy.world/en" : `https://www.sweezy.world/${locale}`;
 
-  const faqItems = [
-    { question: t("faq.q1"), answer: t("faq.a1") },
-    { question: t("faq.q2"), answer: t("faq.a2") },
-    { question: t("faq.q3"), answer: t("faq.a3") },
-    { question: t("faq.q4"), answer: t("faq.a4") },
-    { question: t("faq.q5"), answer: t("faq.a5") },
-    { question: t("faq.q6"), answer: t("faq.a6") },
-  ];
-
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1814,17 +1805,6 @@ export default function Home() {
           price: 0,
           priceCurrency: "CHF",
         },
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: faqItems.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.answer,
-          },
-        })),
       },
       {
         "@type": "Organization",
