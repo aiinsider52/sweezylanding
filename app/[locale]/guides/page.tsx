@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Breadcrumb } from "../../components/Breadcrumb";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { cantons } from "../../../data/cantons";
 import { isLocale } from "../../../lib/blog";
@@ -14,6 +15,8 @@ const COPY: Record<
     title: string;
     description: string;
     backHome: string;
+    breadcrumbHome: string;
+    breadcrumbGuides: string;
     population: string;
     capital: string;
     languageRegion: string;
@@ -27,6 +30,8 @@ const COPY: Record<
     description:
       "Explore practical expat guides for all 26 Swiss cantons, from registration and permits to local services and settling in.",
     backHome: "Back to homepage",
+    breadcrumbHome: "Home",
+    breadcrumbGuides: "Guides",
     population: "Population",
     capital: "Capital",
     languageRegion: "Language region",
@@ -39,6 +44,8 @@ const COPY: Record<
     description:
       "Практичні гіди для всіх 26 кантонів Швейцарії: реєстрація, документи, місцеві сервіси та адаптація.",
     backHome: "Назад на головну",
+    breadcrumbHome: "Головна",
+    breadcrumbGuides: "Гіди",
     population: "Населення",
     capital: "Столиця",
     languageRegion: "Мовний регіон",
@@ -51,6 +58,8 @@ const COPY: Record<
     description:
       "Praktische Expat-Guides fur alle 26 Kantone der Schweiz: Anmeldung, Dokumente, lokale Services und Alltag.",
     backHome: "Zur Startseite",
+    breadcrumbHome: "Startseite",
+    breadcrumbGuides: "Guides",
     population: "Bevölkerung",
     capital: "Hauptort",
     languageRegion: "Sprachregion",
@@ -123,11 +132,16 @@ export default function GuidesIndexPage({
 
   const locale = params.locale;
   const copy = COPY[locale];
+  const breadcrumbItems = [
+    { name: copy.breadcrumbHome, url: `/${locale}` },
+    { name: copy.breadcrumbGuides, url: `${BASE_URL}/${locale}/guides` },
+  ];
 
   return (
     <main className="min-h-screen bg-dark-900 text-white">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24">
         <div className="mb-12">
+          <Breadcrumb items={breadcrumbItems} />
           <Link
             href={`/${locale}`}
             className="mb-6 inline-flex text-sm text-white/45 transition-colors hover:text-white"

@@ -1,8 +1,10 @@
 import { ImageResponse } from "next/og";
-import { getPostBySlug, isLocale } from "../../../../lib/blog";
+import { cantons, getCantonBySlug } from "../../../../data/cantons";
+import type { Locale } from "../../../../lib/i18n";
+import { isLocale } from "../../../../lib/blog";
 
 export const runtime = "nodejs";
-export const alt = "Sweezy Blog";
+export const alt = "Sweezy Guides";
 export const contentType = "image/png";
 export const size = {
   width: 1200,
@@ -15,14 +17,20 @@ const LOCALE_BADGES = {
   de: "DE",
 } as const;
 
+function getCantonName(locale: Locale, canton: (typeof cantons)[number]) {
+  if (locale === "uk") return canton.nameUk;
+  if (locale === "de") return canton.nameDe;
+  return canton.name;
+}
+
 export default async function OpenGraphImage({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: { locale: string; canton: string };
 }) {
   const locale = isLocale(params.locale) ? params.locale : "en";
-  const post = await getPostBySlug(locale, params.slug);
-  const title = post?.frontmatter.title ?? "Sweezy Blog";
+  const canton = getCantonBySlug(params.canton);
+  const title = canton ? getCantonName(locale, canton) : "Swiss Canton Guide";
   const badge = LOCALE_BADGES[locale];
 
   return new ImageResponse(
@@ -129,4 +137,3 @@ export default async function OpenGraphImage({
     size,
   );
 }
-

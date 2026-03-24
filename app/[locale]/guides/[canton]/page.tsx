@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Breadcrumb } from "../../../components/blog/Breadcrumb";
+import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import { buildLocaleAlternates, BASE_URL } from "../../../../lib/alternates";
 import { cantons, getCantonBySlug } from "../../../../data/cantons";
@@ -8,8 +8,6 @@ import { isLocale } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
 import { APP_STORE_URL } from "../../../../lib/links";
 import Link from "next/link";
-
-const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 const COPY: Record<
   Locale,
@@ -182,6 +180,7 @@ export async function generateMetadata({
   const copy = COPY[locale];
   const name = getCantonName(locale, canton);
   const canonicalUrl = `${BASE_URL}/${locale}/guides/${canton.slug}`;
+  const ogImageUrl = `${canonicalUrl}/opengraph-image`;
 
   return {
     title: copy.title(name),
@@ -194,7 +193,7 @@ export async function generateMetadata({
       siteName: "Sweezy",
       images: [
         {
-          url: DEFAULT_OG_IMAGE,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: copy.title(name),
@@ -207,7 +206,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: copy.title(name),
       description: copy.description(name, canton.capital),
-      images: [DEFAULT_OG_IMAGE],
+      images: [ogImageUrl],
     },
   };
 }
@@ -227,9 +226,9 @@ export default function CantonGuidePage({
   const name = getCantonName(locale, canton);
   const canonicalUrl = `${BASE_URL}/${locale}/guides/${canton.slug}`;
   const breadcrumbItems = [
-    { label: copy.home, href: `/${locale}` },
-    { label: copy.guides, href: `/${locale}/guides` },
-    { label: name },
+    { name: copy.home, url: `/${locale}` },
+    { name: copy.guides, url: `/${locale}/guides` },
+    { name, url: canonicalUrl },
   ];
   const placeJsonLd = {
     "@context": "https://schema.org",
@@ -263,35 +262,9 @@ export default function CantonGuidePage({
       },
     ],
   };
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: copy.home,
-        item: `https://www.sweezy.world/${locale}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: copy.guides,
-        item: `https://www.sweezy.world/${locale}/guides`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name,
-        item: canonicalUrl,
-      },
-    ],
-  };
-
   return (
     <main className="min-h-screen bg-dark-900 text-white">
       <JsonLd data={placeJsonLd} />
-      <JsonLd data={breadcrumbJsonLd} />
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
         <Breadcrumb items={breadcrumbItems} />
 
