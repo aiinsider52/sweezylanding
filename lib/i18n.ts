@@ -69,6 +69,49 @@ export const translations: Record<Locale, NestedRecord> = {
       screen2Label: "Guides & Checklists",
       screen3Label: "Service Map",
     },
+    whatsNew: {
+      badge: "What's new",
+      title1: "Fresh product updates.",
+      title2: "Built for real community life.",
+      subtitle:
+        "This release introduces one of the biggest Sweezy upgrades yet, with a full Events experience and a much more powerful Marketplace flow.",
+      releaseLabel: "Current release",
+      releaseValue: "Major update",
+      lead:
+        "Sweezy now does much more than guide you through Swiss bureaucracy. It helps people discover the right services, connect around local events, and manage their own listings and activity more directly inside the app.",
+      card1Title: "Full Events section",
+      card1Desc:
+        "Users can discover community events, publish their own meetups, manage submissions, and support safer moderation flows inside one dedicated product area.",
+      card2Title: "Marketplace creation flow",
+      card2Desc:
+        "Creating listings is now more structured, with stronger publishing steps, clearer editing, and better listing quality from the start.",
+      card3Title: "Personal cabinet & management",
+      card3Desc:
+        "Providers and users get better control over their own activity with improved listing management, editing tools, and a cleaner personal cabinet experience.",
+    },
+    eventsMarket: {
+      badge: "Events and Marketplace",
+      title1: "Connect locally.",
+      title2: "Act faster.",
+      subtitle:
+        "From trusted providers to real community moments, Sweezy is becoming the operating layer for everyday expat life in Switzerland.",
+      eventsTitle: "Events",
+      eventsDesc:
+        "The new Events area helps users discover what is happening around them, publish their own events, manage attendance-facing content, and keep community activity in one clean place.",
+      eventsPoint1: "Discover local meetups, workshops, and community gatherings",
+      eventsPoint2: "Publish and manage your own events with clearer creation flows",
+      eventsPoint3: "Moderation tools help keep the section useful and trustworthy",
+      eventsStat1: "Discover",
+      eventsStat2: "Publish",
+      marketTitle: "Marketplace",
+      marketDesc:
+        "Marketplace is now more mature and much easier to use. Providers can create better listings, edit and manage them faster, and keep everything inside a stronger personal cabinet flow.",
+      marketPoint1: "Better listing creation with more guided publishing steps",
+      marketPoint2: "Easier editing, management, and visibility control",
+      marketPoint3: "A stronger personal cabinet for providers and service owners",
+      marketStat1: "Manage",
+      marketStat2: "Grow",
+    },
     howItWorks: {
       badge: "How it works",
       title1: "Three steps to",
@@ -363,6 +406,49 @@ export const translations: Record<Locale, NestedRecord> = {
       screen2Label: "Гайди та чеклісти",
       screen3Label: "Карта сервісів",
     },
+    whatsNew: {
+      badge: "Що нового",
+      title1: "Свіжі оновлення продукту.",
+      title2: "Створено для реального життя спільноти.",
+      subtitle:
+        "Цей реліз приніс одне з найбільших оновлень Sweezy: повноцінний розділ Events і значно сильніший Marketplace.",
+      releaseLabel: "Поточний реліз",
+      releaseValue: "Велике оновлення",
+      lead:
+        "Тепер Sweezy не лише веде вас через бюрократію Швейцарії, а й допомагає знаходити потрібні сервіси, відкривати локальні події та керувати власною активністю прямо всередині додатку.",
+      card1Title: "Повноцінний розділ Events",
+      card1Desc:
+        "Користувачі можуть знаходити події спільноти, публікувати власні івенти, керувати ними та використовувати вбудовані сценарії модерації в окремому продуктовому розділі.",
+      card2Title: "Сильніший creation flow для Marketplace",
+      card2Desc:
+        "Створення оголошень стало більш структурованим: кращі кроки публікації, чистіше редагування і вищий рівень якості listing'ів від самого старту.",
+      card3Title: "Особистий кабінет і керування",
+      card3Desc:
+        "Провайдери й користувачі отримали кращий контроль над власними оголошеннями, редагуванням, статусами й особистим кабінетом.",
+    },
+    eventsMarket: {
+      badge: "Events і Marketplace",
+      title1: "Знаходьте своїх.",
+      title2: "Рухайтеся швидше.",
+      subtitle:
+        "Від перевірених сервісів до локальних подій — Sweezy стає практичним центром повсякденного життя експатів у Швейцарії.",
+      eventsTitle: "Events",
+      eventsDesc:
+        "Новий розділ Events допомагає бачити, що відбувається поруч, відкривати корисні зустрічі для спільноти, публікувати власні події та зручно керувати ними в одному місці.",
+      eventsPoint1: "Знаходьте локальні зустрічі, воркшопи та події спільноти",
+      eventsPoint2: "Публікуйте та ведіть власні івенти через зручні creation flows",
+      eventsPoint3: "Інструменти модерації допомагають тримати розділ корисним і безпечним",
+      eventsStat1: "Discover",
+      eventsStat2: "Publish",
+      marketTitle: "Marketplace",
+      marketDesc:
+        "Marketplace став значно зрілішим: провайдери можуть краще створювати оголошення, швидше редагувати їх, керувати ними та працювати через сильніший personal cabinet.",
+      marketPoint1: "Кращий сценарій створення listing'ів і публікації",
+      marketPoint2: "Швидше редагування, керування і контроль видимості",
+      marketPoint3: "Сильніший особистий кабінет для провайдерів і сервісних бізнесів",
+      marketStat1: "Manage",
+      marketStat2: "Grow",
+    },
     howItWorks: {
       badge: "Як це працює",
       title1: "Три кроки до",
@@ -656,6 +742,49 @@ export const translations: Record<Locale, NestedRecord> = {
       screen1Label: "Startseite & Schnellaktionen",
       screen2Label: "Anleitungen & Checklisten",
       screen3Label: "Servicekarte",
+    },
+    whatsNew: {
+      badge: "Was ist neu",
+      title1: "Frische Produktupdates.",
+      title2: "Für echtes Community-Leben gebaut.",
+      subtitle:
+        "Dieses Release bringt eines der größten Sweezy-Updates bisher: einen vollständigen Events-Bereich und einen deutlich stärkeren Marketplace.",
+      releaseLabel: "Aktuelles Release",
+      releaseValue: "Großes Update",
+      lead:
+        "Sweezy begleitet Nutzer jetzt nicht nur durch Schweizer Bürokratie, sondern hilft auch dabei, passende Services zu finden, lokale Events zu entdecken und eigene Aktivitäten direkt in der App zu verwalten.",
+      card1Title: "Vollständiger Events-Bereich",
+      card1Desc:
+        "Nutzer können Community-Events entdecken, eigene Treffen veröffentlichen, Einträge verwalten und auf bessere Moderationsabläufe in einem eigenen Bereich zugreifen.",
+      card2Title: "Stärkerer Creation Flow für Marketplace",
+      card2Desc:
+        "Listings lassen sich strukturierter erstellen, sauberer bearbeiten und von Anfang an qualitativ besser veröffentlichen.",
+      card3Title: "Persönlicher Bereich & Verwaltung",
+      card3Desc:
+        "Anbieter und Nutzer erhalten mehr Kontrolle über ihre Listings, Bearbeitungen, Sichtbarkeit und den gesamten persönlichen Bereich.",
+    },
+    eventsMarket: {
+      badge: "Events und Marketplace",
+      title1: "Lokal vernetzen.",
+      title2: "Schneller vorankommen.",
+      subtitle:
+        "Von vertrauenswürdigen Services bis zu echten Community-Momenten wird Sweezy zur praktischen Produkt-Schicht für den Expat-Alltag in der Schweiz.",
+      eventsTitle: "Events",
+      eventsDesc:
+        "Der neue Events-Bereich hilft dabei, lokale Treffen, Workshops und Community-Formate zu entdecken, eigene Events zu veröffentlichen und alles an einem Ort sauber zu verwalten.",
+      eventsPoint1: "Lokale Meetups, Workshops und Community-Events entdecken",
+      eventsPoint2: "Eigene Events mit klareren Veröffentlichungsflows erstellen und verwalten",
+      eventsPoint3: "Moderationstools halten den Bereich nützlich und vertrauenswürdig",
+      eventsStat1: "Discover",
+      eventsStat2: "Publish",
+      marketTitle: "Marketplace",
+      marketDesc:
+        "Marketplace ist deutlich reifer geworden: Anbieter können bessere Listings erstellen, schneller bearbeiten und über einen stärkeren persönlichen Bereich alles sauber steuern.",
+      marketPoint1: "Besserer Listing-Flow mit geführten Veröffentlichungsschritten",
+      marketPoint2: "Einfachere Bearbeitung, Verwaltung und Sichtbarkeitskontrolle",
+      marketPoint3: "Ein stärkerer persönlicher Bereich für Anbieter und Service-Owner",
+      marketStat1: "Manage",
+      marketStat2: "Grow",
     },
     howItWorks: {
       badge: "So funktioniert's",

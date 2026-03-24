@@ -1385,6 +1385,251 @@ function AppShowcaseSection() {
   );
 }
 
+/* ── What's New Section ───────────────────────────────────────────────── */
+
+function WhatsNewSection() {
+  const { t } = useLocale();
+
+  const cards = [
+    {
+      title: t("whatsNew.card1Title"),
+      description: t("whatsNew.card1Desc"),
+      icon: "🎉",
+      glow: "from-accent-green/20 via-accent-emerald/10 to-transparent",
+    },
+    {
+      title: t("whatsNew.card2Title"),
+      description: t("whatsNew.card2Desc"),
+      icon: "🛒",
+      glow: "from-amber-400/15 via-accent-green/10 to-transparent",
+    },
+    {
+      title: t("whatsNew.card3Title"),
+      description: t("whatsNew.card3Desc"),
+      icon: "⚙️",
+      glow: "from-teal-400/15 via-accent-emerald/10 to-transparent",
+    },
+  ];
+
+  return (
+    <section id="whats-new" className="relative py-28 sm:py-32 overflow-hidden">
+      <GradientBlob
+        className="w-[560px] h-[560px] top-10 left-0 -translate-x-1/3"
+        colors="from-accent-green/20 via-accent-emerald/10 to-transparent"
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end"
+        >
+          <div>
+            <SectionBadge>{t("whatsNew.badge")}</SectionBadge>
+            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+              {t("whatsNew.title1")}
+              <br />
+              <span className="text-gradient">{t("whatsNew.title2")}</span>
+            </motion.h2>
+            <motion.p
+              variants={fadeUp}
+              custom={1}
+              className="mt-5 max-w-2xl text-lg leading-8 text-white/45"
+            >
+              {t("whatsNew.subtitle")}
+            </motion.p>
+          </div>
+
+          <motion.div
+            variants={fadeUp}
+            custom={2}
+            className="rounded-3xl border border-accent-green/15 bg-white/[0.03] p-6 sm:p-7"
+          >
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex rounded-full border border-accent-green/20 bg-accent-green/10 px-3 py-1 text-xs font-semibold text-accent-green">
+                {t("whatsNew.releaseLabel")}
+              </span>
+              <span className="text-xs uppercase tracking-[0.2em] text-white/25">
+                {t("whatsNew.releaseValue")}
+              </span>
+            </div>
+            <p className="mt-5 text-base leading-8 text-white/60">{t("whatsNew.lead")}</p>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="mt-10 grid gap-6 lg:grid-cols-3"
+        >
+          {cards.map((card, i) => (
+            <motion.article
+              key={card.title}
+              variants={scaleIn}
+              custom={i}
+              whileHover={{ y: -6, transition: { duration: 0.28 } }}
+              className="group relative overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.03] p-7"
+            >
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${card.glow} opacity-70 transition-opacity duration-500 group-hover:opacity-100`}
+              />
+              <div className="relative z-10">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.05] text-2xl">
+                  {card.icon}
+                </div>
+                <h3 className="mt-6 text-2xl font-semibold tracking-tight">{card.title}</h3>
+                <p className="mt-4 text-[15px] leading-7 text-white/55">{card.description}</p>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Events / Marketplace Section ─────────────────────────────────────── */
+
+function EventsMarketSection() {
+  const { t } = useLocale();
+
+  const eventPoints = [
+    t("eventsMarket.eventsPoint1"),
+    t("eventsMarket.eventsPoint2"),
+    t("eventsMarket.eventsPoint3"),
+  ];
+
+  const marketPoints = [
+    t("eventsMarket.marketPoint1"),
+    t("eventsMarket.marketPoint2"),
+    t("eventsMarket.marketPoint3"),
+  ];
+
+  return (
+    <section className="relative py-28 sm:py-32 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.12),transparent_42%)]" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="text-center mb-16 sm:mb-20"
+        >
+          <SectionBadge>{t("eventsMarket.badge")}</SectionBadge>
+          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+            {t("eventsMarket.title1")}
+            <br />
+            <span className="text-gradient">{t("eventsMarket.title2")}</span>
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            custom={1}
+            className="mt-5 max-w-3xl mx-auto text-lg leading-8 text-white/40"
+          >
+            {t("eventsMarket.subtitle")}
+          </motion.p>
+        </motion.div>
+
+        <div className="grid gap-7 lg:grid-cols-2">
+          <motion.article
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
+            className="relative overflow-hidden rounded-[2rem] border border-accent-green/15 bg-[#111a15] p-7 sm:p-8"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.22),transparent_40%)]" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between gap-4">
+                <div className="inline-flex items-center gap-3">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-green/15 border border-accent-green/20 text-2xl">
+                    🎟️
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-accent-green/70">
+                      {t("eventsMarket.eventsStat1")}
+                    </p>
+                    <h3 className="mt-1 text-3xl font-bold tracking-tight">{t("eventsMarket.eventsTitle")}</h3>
+                  </div>
+                </div>
+                <span className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-semibold text-white/60">
+                  {t("eventsMarket.eventsStat2")}
+                </span>
+              </div>
+
+              <p className="mt-6 text-[15px] leading-8 text-white/60">
+                {t("eventsMarket.eventsDesc")}
+              </p>
+
+              <div className="mt-7 space-y-3">
+                {eventPoints.map((point) => (
+                  <div
+                    key={point}
+                    className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-3"
+                  >
+                    <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent-green" />
+                    <p className="text-sm leading-7 text-white/62">{point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.article>
+
+          <motion.article
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, delay: 0.08, ease: [0.25, 0.4, 0.25, 1] }}
+            className="relative overflow-hidden rounded-[2rem] border border-amber-400/15 bg-[#171511] p-7 sm:p-8"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(245,158,11,0.18),transparent_40%)]" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between gap-4">
+                <div className="inline-flex items-center gap-3">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-400/15 border border-amber-300/20 text-2xl">
+                    🛍️
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-amber-300/70">
+                      {t("eventsMarket.marketStat1")}
+                    </p>
+                    <h3 className="mt-1 text-3xl font-bold tracking-tight">{t("eventsMarket.marketTitle")}</h3>
+                  </div>
+                </div>
+                <span className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-semibold text-white/60">
+                  {t("eventsMarket.marketStat2")}
+                </span>
+              </div>
+
+              <p className="mt-6 text-[15px] leading-8 text-white/60">
+                {t("eventsMarket.marketDesc")}
+              </p>
+
+              <div className="mt-7 space-y-3">
+                {marketPoints.map((point) => (
+                  <div
+                    key={point}
+                    className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-3"
+                  >
+                    <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-amber-300" />
+                    <p className="text-sm leading-7 text-white/62">{point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.article>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── How It Works Section ────────────────────────────────────────────── */
 
 function HowItWorksSection() {
@@ -1832,6 +2077,10 @@ export default function Home() {
       <FeaturesSection />
       <GradientDivider />
       <AppShowcaseSection />
+      <GradientDivider />
+      <WhatsNewSection />
+      <GradientDivider />
+      <EventsMarketSection />
       <GradientDivider />
       <HowItWorksSection />
       <ComingSoonSection />
