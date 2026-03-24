@@ -34,6 +34,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
+          "var(--font-inter)",
           "Inter",
           "SF Pro Display",
           "-apple-system",

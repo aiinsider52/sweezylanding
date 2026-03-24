@@ -6,6 +6,7 @@ import { cantons, getCantonBySlug } from "../../../../data/cantons";
 import { isLocale } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
 import { APP_STORE_URL } from "../../../../lib/links";
+import Link from "next/link";
 
 const COPY: Record<
   Locale,
@@ -343,6 +344,22 @@ export default function CantonGuidePage({
               practical settlement sequence: understand the process, save the next step, and locate
               the nearby services you actually need in {name}.
             </p>
+          </section>
+
+          <section className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-5">
+            <p className="text-sm text-white/55">
+              {locale === "uk"
+                ? "Читайте більше порад у нашому блозі"
+                : locale === "de"
+                  ? "Lesen Sie weitere Tipps in unserem Blog"
+                  : "Read more tips on our blog"}
+            </p>
+            <Link
+              href={`/${locale}/blog`}
+              className="flex-shrink-0 text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
+            >
+              {locale === "uk" ? "Блог" : "Blog"} →
+            </Link>
           </section>
 
           <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.05] p-6">

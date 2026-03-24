@@ -8,6 +8,7 @@ import {
   type PostFrontmatter,
 } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
+import Link from "next/link";
 import { Breadcrumb } from "../../../components/blog/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 
@@ -193,6 +194,22 @@ export default async function BlogPostPage({
         </header>
 
         <div className="prose prose-invert max-w-none">{content}</div>
+
+        <nav className="mt-12 flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-5">
+          <p className="text-sm text-white/55">
+            {locale === "uk"
+              ? "Досліджуйте гіди по кантонах Швейцарії"
+              : locale === "de"
+                ? "Entdecken Sie unsere Kantons-Guides"
+                : "Explore our Swiss canton guides"}
+          </p>
+          <Link
+            href={`/${locale}/guides`}
+            className="flex-shrink-0 text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
+          >
+            {locale === "uk" ? "Гіди" : "Guides"} →
+          </Link>
+        </nav>
       </article>
     </main>
   );

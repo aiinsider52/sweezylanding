@@ -15,6 +15,8 @@ const COPY: Record<
     capital: string;
     languageRegion: string;
     openGuide: string;
+    readBlog: string;
+    readBlogDesc: string;
   }
 > = {
   en: {
@@ -26,6 +28,8 @@ const COPY: Record<
     capital: "Capital",
     languageRegion: "Language region",
     openGuide: "Open guide",
+    readBlog: "Read Our Blog",
+    readBlogDesc: "Get practical tips, insights, and step-by-step advice for expats in Switzerland.",
   },
   uk: {
     title: "Гіди по кантонах Швейцарії",
@@ -36,6 +40,8 @@ const COPY: Record<
     capital: "Столиця",
     languageRegion: "Мовний регіон",
     openGuide: "Відкрити гід",
+    readBlog: "Читайте наш блог",
+    readBlogDesc: "Практичні поради та покрокові інструкції для життя у Швейцарії.",
   },
   de: {
     title: "Schweizer Kantons-Guides",
@@ -46,6 +52,8 @@ const COPY: Record<
     capital: "Hauptort",
     languageRegion: "Sprachregion",
     openGuide: "Guide öffnen",
+    readBlog: "Lesen Sie unseren Blog",
+    readBlogDesc: "Praktische Tipps und Schritt-fur-Schritt-Anleitungen fur Expats in der Schweiz.",
   },
 };
 
@@ -136,6 +144,17 @@ export default function GuidesIndexPage({
               </Link>
             </article>
           ))}
+        </div>
+
+        <div className="mt-16 rounded-2xl border border-accent-green/20 bg-accent-green/[0.03] p-6">
+          <h2 className="text-xl font-semibold tracking-tight">{copy.readBlog}</h2>
+          <p className="mt-2 text-white/55 text-sm">{copy.readBlogDesc}</p>
+          <Link
+            href={`/${locale}/blog`}
+            className="mt-4 inline-flex text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
+          >
+            {copy.readBlog} →
+          </Link>
         </div>
       </div>
     </main>

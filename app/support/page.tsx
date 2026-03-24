@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useLocale } from "../../lib/locale-context";
 import { localeLabels, type Locale } from "../../lib/i18n";
 import { BrandLogo } from "../components/BrandLogo";
+import { JsonLd } from "../components/seo/JsonLd";
 
 /* ---------- Animations ---------- */
 const fadeUp = {
@@ -80,8 +81,22 @@ export default function Support() {
     { q: t("supportPage.faq8Q"), a: t("supportPage.faq8A") },
   ];
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
     <main className="min-h-screen bg-dark-900 text-white relative overflow-hidden">
+      <JsonLd data={faqJsonLd} />
       {/* Background glow */}
       <div
         aria-hidden="true"

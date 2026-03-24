@@ -12,6 +12,8 @@ const COPY: Record<
     empty: string;
     readMore: string;
     backHome: string;
+    exploreGuides: string;
+    exploreGuidesDesc: string;
   }
 > = {
   en: {
@@ -20,6 +22,8 @@ const COPY: Record<
     empty: "No posts published yet for this language.",
     readMore: "Read article",
     backHome: "Back to homepage",
+    exploreGuides: "Explore Canton Guides",
+    exploreGuidesDesc: "Looking for canton-specific information? Browse our detailed guides for all 26 Swiss cantons.",
   },
   uk: {
     title: "Блог Sweezy",
@@ -27,6 +31,8 @@ const COPY: Record<
     empty: "Для цієї мови ще немає опублікованих статей.",
     readMore: "Читати статтю",
     backHome: "Назад на головну",
+    exploreGuides: "Гіди по кантонах",
+    exploreGuidesDesc: "Шукаєте інформацію по конкретному кантону? Перегляньте наші детальні гіди для всіх 26 кантонів Швейцарії.",
   },
   de: {
     title: "Sweezy Blog",
@@ -34,6 +40,8 @@ const COPY: Record<
     empty: "Fur diese Sprache gibt es noch keine veroffentlichten Artikel.",
     readMore: "Artikel lesen",
     backHome: "Zur Startseite",
+    exploreGuides: "Kantons-Guides entdecken",
+    exploreGuidesDesc: "Suchen Sie kantonsspezifische Informationen? Durchstobern Sie unsere detaillierten Guides fur alle 26 Schweizer Kantone.",
   },
 };
 
@@ -120,6 +128,17 @@ export default async function BlogIndexPage({
               </article>
             ))
           )}
+        </div>
+
+        <div className="mt-16 rounded-2xl border border-accent-green/20 bg-accent-green/[0.03] p-6">
+          <h2 className="text-xl font-semibold tracking-tight">{copy.exploreGuides}</h2>
+          <p className="mt-2 text-white/55 text-sm">{copy.exploreGuidesDesc}</p>
+          <Link
+            href={`/${locale}/guides`}
+            className="mt-4 inline-flex text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
+          >
+            {copy.exploreGuides} →
+          </Link>
         </div>
       </div>
     </main>
