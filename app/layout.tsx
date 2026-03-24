@@ -12,6 +12,8 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const DEFAULT_OG_IMAGE = "/screenshots/home.png";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sweezy.world"),
   title: "Sweezy — Life in Switzerland. Simplified.",
@@ -40,7 +42,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sweezy — Life in Switzerland. Simplified.",
     description:
-      "Navigate life in Switzerland with step-by-step guides and structured checklists. EN / UA / DE.",
+      "Navigate life in Switzerland with step-by-step guides and structured checklists.",
+    url: "https://www.sweezy.world",
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Sweezy — Life in Switzerland. Simplified.",
+      },
+    ],
     type: "website",
     locale: "en_US",
     siteName: "Sweezy",
@@ -50,6 +61,7 @@ export const metadata: Metadata = {
     title: "Sweezy — Life in Switzerland. Simplified.",
     description:
       "Navigate life in Switzerland with step-by-step guides and structured checklists.",
+    images: [DEFAULT_OG_IMAGE],
   },
   robots: {
     index: true,

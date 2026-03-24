@@ -5,6 +5,9 @@ import { cantons } from "../../../data/cantons";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 
+const BASE_URL = "https://www.sweezy.world";
+const DEFAULT_OG_IMAGE = "/screenshots/home.png";
+
 const COPY: Record<
   Locale,
   {
@@ -80,12 +83,35 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   if (!isLocale(params.locale)) return {};
   const copy = COPY[params.locale];
+  const canonicalUrl = `${BASE_URL}/${params.locale}/guides`;
 
   return {
     title: copy.title,
     description: copy.description,
     alternates: {
-      canonical: `/${params.locale}/guides`,
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: copy.title,
+      description: copy.description,
+      url: canonicalUrl,
+      siteName: "Sweezy",
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: copy.title,
+        },
+      ],
+      locale: params.locale === "uk" ? "uk_UA" : params.locale === "de" ? "de_DE" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: copy.title,
+      description: copy.description,
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

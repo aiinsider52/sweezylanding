@@ -12,6 +12,8 @@ import Link from "next/link";
 import { Breadcrumb } from "../../../components/blog/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 
+const BASE_URL = "https://www.sweezy.world";
+
 function formatDate(locale: Locale, value: string) {
   return new Date(value).toLocaleDateString(
     locale === "uk" ? "uk-UA" : locale === "de" ? "de-DE" : "en-US",
@@ -48,6 +50,9 @@ export async function generateMetadata({
 
   const post = await getPostBySlug(params.locale, params.slug);
   if (!post) return {};
+  const canonicalUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}`;
+  const ogImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/opengraph-image`;
+  const twitterImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/twitter-image`;
 
   return {
     title: post.frontmatter.title,
@@ -55,7 +60,7 @@ export async function generateMetadata({
     keywords: post.frontmatter.keywords,
     authors: [{ name: post.frontmatter.author }],
     alternates: {
-      canonical: `/${params.locale}/blog/${params.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
       title: post.frontmatter.title,
@@ -63,10 +68,10 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.frontmatter.publishedAt,
       authors: [post.frontmatter.author],
-      url: `https://www.sweezy.world/${params.locale}/blog/${params.slug}`,
+      url: canonicalUrl,
       images: [
         {
-          url: `https://www.sweezy.world/${params.locale}/blog/${params.slug}/opengraph-image`,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: post.frontmatter.title,
@@ -77,9 +82,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.frontmatter.title,
       description: post.frontmatter.description,
-      images: [
-        `https://www.sweezy.world/${params.locale}/blog/${params.slug}/twitter-image`,
-      ],
+      images: [twitterImageUrl],
     },
   };
 }
@@ -123,7 +126,7 @@ export default async function BlogPostPage({
   });
 
   const locale = params.locale;
-  const canonicalUrl = `https://www.sweezy.world/${locale}/blog/${params.slug}`;
+  const canonicalUrl = `${BASE_URL}/${locale}/blog/${params.slug}`;
   const breadcrumbItems = [
     { label: COPY[locale].home, href: `/${locale}` },
     { label: COPY[locale].blog, href: `/${locale}/blog` },

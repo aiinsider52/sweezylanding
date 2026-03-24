@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Home from "../page";
 
+const BASE_URL = "https://www.sweezy.world";
+const CANONICAL_URL = `${BASE_URL}/uk`;
+const DEFAULT_OG_IMAGE = "/screenshots/home.png";
+
 export const metadata: Metadata = {
   title: "Sweezy — Життя у Швейцарії. Просто.",
   description:
@@ -17,17 +21,26 @@ export const metadata: Metadata = {
     "Швейцарія Україна",
   ],
   alternates: {
-    canonical: "/uk",
+    canonical: CANONICAL_URL,
     languages: {
-      en: "/en",
-      uk: "/uk",
-      de: "/de",
+      en: `${BASE_URL}/en`,
+      uk: `${BASE_URL}/uk`,
+      de: `${BASE_URL}/de`,
     },
   },
   openGraph: {
     title: "Sweezy — Життя у Швейцарії. Просто.",
     description:
       "Покрокові гайди та чеклісти для нового життя у Швейцарії. EN / UA / DE.",
+    url: CANONICAL_URL,
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Sweezy — Життя у Швейцарії. Просто.",
+      },
+    ],
     type: "website",
     locale: "uk_UA",
     siteName: "Sweezy",
@@ -37,6 +50,7 @@ export const metadata: Metadata = {
     title: "Sweezy — Життя у Швейцарії. Просто.",
     description:
       "Покрокові гайди та чеклісти для нового життя у Швейцарії.",
+    images: [DEFAULT_OG_IMAGE],
   },
   robots: {
     index: true,
