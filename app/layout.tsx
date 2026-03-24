@@ -86,13 +86,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <html lang="en" className={`antialiased ${inter.variable}`} suppressHydrationWarning>
       <body className="min-h-screen overflow-x-hidden">
         <JsonLd data={websiteJsonLd} />
         <LocaleProvider>
           {children}
-          <SiteFooter />
+          <SiteFooter year={currentYear} />
         </LocaleProvider>
       </body>
     </html>

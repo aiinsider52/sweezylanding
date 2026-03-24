@@ -283,23 +283,22 @@ function Navbar() {
       <div className="mx-auto max-w-7xl px-6 py-4">
         <div className="rounded-2xl glass px-6 py-3">
           <div className="flex items-center justify-between">
-            <a href={`/${locale}`} className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
-                <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
-              </div>
-              <div className="flex flex-col leading-tight">
+            <div className="flex items-center gap-3">
+              <a href={`/${locale}`} className="flex items-center gap-2.5">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
+                  <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
+                </div>
                 <span className="text-lg font-bold tracking-tight leading-none">Sweezy</span>
-                <a
-                  href="https://www.aiinsider.it.com"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  onClick={(e) => e.stopPropagation()}
-                  className="text-[9px] text-white/25 hover:text-accent-green/60 transition-colors duration-300 leading-none mt-0.5"
-                >
-                  by AI Insider
-                </a>
-              </div>
-            </a>
+              </a>
+              <a
+                href="https://www.aiinsider.it.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="hidden sm:inline-flex text-[10px] text-white/25 hover:text-accent-green/60 transition-colors duration-300"
+              >
+                by AI Insider
+              </a>
+            </div>
 
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (

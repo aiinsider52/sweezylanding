@@ -38,7 +38,7 @@ function FooterLink({
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ year }: { year: number }) {
   const { t, locale } = useLocale();
   const localeHome = `/${locale}`;
   const localeGuides = `/${locale}/guides`;
@@ -216,7 +216,7 @@ export function SiteFooter() {
         {/* Bottom bar */}
         <div className="border-t border-white/[0.04] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/20">
-            &copy; {new Date().getFullYear()} Sweezy. {t("footer.copyright")}
+            &copy; {year} Sweezy. {t("footer.copyright")}
           </p>
           <div className="flex items-center gap-1.5 text-sm text-white/20">
             <span>{t("footer.madeWith")}</span>
