@@ -222,13 +222,6 @@ export function buildHomeFaqSchema(locale: Locale) {
 
 const WHY_ICONS = ["🧩", "✅", "🌍"] as const;
 
-const FEATURE_ICONS = ["📋", "📍", "💼"] as const;
-const FEATURE_ACCENTS = [
-  "from-accent-green/25 to-accent-emerald/10",
-  "from-teal-400/20 to-accent-green/10",
-  "from-amber-400/18 to-accent-green/10",
-] as const;
-
 export function HomeSeoSections({ locale }: { locale: Locale }) {
   const copy = getHomeSeoCopy(locale);
 
@@ -269,97 +262,6 @@ export function HomeSeoSections({ locale }: { locale: Locale }) {
                   </div>
                   <h3 className="text-lg font-bold tracking-tight leading-snug">{item.title}</h3>
                   <p className="mt-3 text-[15px] leading-7 text-white/50">{item.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── divider ─── */}
-      <div className="mx-auto max-w-7xl px-6" aria-hidden="true">
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-accent-green/15 to-transparent" />
-      </div>
-
-      {/* ── What you can do ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden py-24 sm:py-28">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[480px] w-[480px] rounded-full bg-accent-green/[0.04] blur-[100px]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-accent-green/20 bg-accent-green/[0.07] px-5 py-2 text-sm font-medium text-accent-green/80 mb-6">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent-green animate-pulse" />
-                Features
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15]">
-                {copy.featuresTitle}
-              </h2>
-              <p className="mt-6 text-[15px] sm:text-base leading-8 text-white/50 max-w-xl">
-                {copy.featuresLead}
-              </p>
-            </div>
-
-            <div className="space-y-5">
-              {copy.featuresItems.map((item, i) => (
-                <article
-                  key={item.title}
-                  className="group relative overflow-hidden rounded-[1.75rem] border border-white/[0.06] bg-white/[0.025] p-6 sm:p-7 transition-all duration-300 hover:border-accent-green/15"
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${FEATURE_ACCENTS[i]} opacity-0 transition-opacity duration-500 group-hover:opacity-60`} />
-
-                  <div className="relative z-10 flex gap-5">
-                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl border border-white/[0.08] bg-gradient-to-br from-white/[0.06] to-white/[0.02] text-2xl">
-                      {FEATURE_ICONS[i]}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold tracking-tight leading-snug">{item.title}</h3>
-                      <p className="mt-2 text-[15px] leading-7 text-white/50">{item.text}</p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── divider ─── */}
-      <div className="mx-auto max-w-7xl px-6" aria-hidden="true">
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-accent-green/15 to-transparent" />
-      </div>
-
-      {/* ── FAQ ───────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden py-24 sm:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.06),transparent_45%)]" />
-
-        <div className="relative z-10 mx-auto max-w-4xl px-6">
-          <div className="text-center mb-14 sm:mb-16">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent-green/20 bg-accent-green/[0.07] px-5 py-2 text-sm font-medium text-accent-green/80 mb-6">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-green animate-pulse" />
-              FAQ
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15]">
-              {copy.faqTitle}
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {copy.faqItems.map((item, i) => (
-              <article
-                key={item.question}
-                className="group rounded-[1.5rem] border border-white/[0.06] bg-white/[0.025] transition-colors duration-300 hover:border-accent-green/15 hover:bg-white/[0.04]"
-              >
-                <div className="p-6 sm:p-7">
-                  <div className="flex items-start gap-4">
-                    <span className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green/20 to-accent-emerald/10 text-xs font-bold text-accent-green">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-bold tracking-tight leading-snug">{item.question}</h3>
-                      <p className="mt-3 text-[15px] leading-7 text-white/50">{item.answer}</p>
-                    </div>
-                  </div>
                 </div>
               </article>
             ))}
