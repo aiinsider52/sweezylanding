@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
-import { APP_STORE_URL } from "../lib/links";
+import { APP_STORE_URL, TELEGRAM_URL } from "../lib/links";
 import { BrandLogo } from "./components/BrandLogo";
 import { JsonLd } from "./components/seo/JsonLd";
 
@@ -1702,13 +1702,6 @@ function HowItWorksSection() {
 
 function ComingSoonSection() {
   const { t } = useLocale();
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) setSubmitted(true);
-  };
 
   return (
     <section className="relative py-32 overflow-hidden">
@@ -1744,38 +1737,34 @@ function ComingSoonSection() {
             {t("comingSoon.subtitle")}
           </motion.p>
 
-          <motion.form
+          <motion.div
             variants={fadeUp}
             custom={2}
-            onSubmit={handleSubmit}
-            className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            className="mt-10 flex flex-col items-center gap-4"
           >
-            {submitted ? (
-              <div className="flex-1 flex items-center justify-center gap-2 rounded-xl glass px-6 py-4 text-accent-green text-sm font-medium">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-                <span>Thank you!</span>
-              </div>
-            ) : (
-              <>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="email@example.com"
-                  required
-                  className="flex-1 rounded-xl bg-white/[0.04] border border-white/[0.08] px-5 py-3.5 text-sm text-white placeholder:text-white/25 outline-none focus:border-accent-green/40 transition-colors duration-300"
-                />
-                <button
-                  type="submit"
-                  className="rounded-xl bg-gradient-to-r from-accent-green to-accent-emerald px-6 py-3.5 text-sm font-semibold text-dark-950 hover:shadow-glow transition-shadow duration-300 whitespace-nowrap"
-                >
-                  {t("comingSoon.notify")}
-                </button>
-              </>
-            )}
-          </motion.form>
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-accent-green to-accent-emerald px-7 py-4 text-sm font-semibold text-dark-950 hover:shadow-glow transition-shadow duration-300 whitespace-nowrap"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21.4 4.6c.3-.9-.6-1.7-1.5-1.4L3.2 9.3c-1 .4-1 1.8.1 2.1l4.2 1.4 1.6 5c.3 1 1.6 1.2 2.2.4l2.4-3 4.7 3.5c.8.6 2 .2 2.2-.8l2.8-13.3ZM9 12.4l8.2-5.1-6.6 6.5-.3 3.3-1.3-4.7Z" />
+              </svg>
+              {t("comingSoon.notify")}
+            </a>
+            <p className="text-sm text-white/35">
+              Telegram:{" "}
+              <a
+                href={TELEGRAM_URL}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-accent-green/80 hover:text-accent-green transition-colors"
+              >
+                @sweezyxswiss
+              </a>
+            </p>
+          </motion.div>
         </motion.div>
       </div>
     </section>

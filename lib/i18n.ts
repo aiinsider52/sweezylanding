@@ -127,8 +127,8 @@ export const translations: Record<Locale, NestedRecord> = {
       badge: "Coming Soon",
       title1: "Job search",
       title2: "assistant.",
-      subtitle: "We're building an AI-powered job search helper to match you with opportunities in Switzerland. Stay tuned.",
-      notify: "Notify me",
+      subtitle: "We're building an AI-powered job search helper for Switzerland. Join our Telegram community to stay close to updates, launches, and early access news.",
+      notify: "Join Telegram",
     },
     testimonials: {
       badge: "What people say",
@@ -464,8 +464,8 @@ export const translations: Record<Locale, NestedRecord> = {
       badge: "Скоро",
       title1: "Помічник з пошуку",
       title2: "роботи.",
-      subtitle: "Ми створюємо AI-помічника для пошуку роботи, який підбере вам можливості у Швейцарії. Залишайтесь на зв'язку.",
-      notify: "Повідомити мене",
+      subtitle: "Ми створюємо AI-помічника для пошуку роботи у Швейцарії. Приєднуйтесь до нашої Telegram-спільноти, щоб першими бачити оновлення, релізи та ранній доступ.",
+      notify: "Перейти в Telegram",
     },
     testimonials: {
       badge: "Що кажуть люди",
@@ -801,8 +801,8 @@ export const translations: Record<Locale, NestedRecord> = {
       badge: "Demnächst",
       title1: "Jobsuche-",
       title2: "Assistent.",
-      subtitle: "Wir bauen einen KI-gestützten Jobsuche-Assistenten, der Sie mit Möglichkeiten in der Schweiz verbindet. Bleiben Sie dran.",
-      notify: "Benachrichtigen",
+      subtitle: "Wir entwickeln einen KI-gestützten Jobsuche-Assistenten für die Schweiz. Treten Sie unserer Telegram-Community bei, um Updates, Releases und Early Access zuerst zu sehen.",
+      notify: "Zu Telegram",
     },
     testimonials: {
       badge: "Was andere sagen",
