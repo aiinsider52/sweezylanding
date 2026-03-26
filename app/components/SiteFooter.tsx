@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "../../lib/locale-context";
-import { APP_STORE_URL } from "../../lib/links";
+import { APP_STORE_URL, INSTAGRAM_URL } from "../../lib/links";
 import { BrandLogo } from "./BrandLogo";
 
 function FooterLink({
@@ -126,8 +126,10 @@ export function SiteFooter({ year }: { year: number }) {
               </a>
               {/* Instagram */}
               <a
-                href="#"
+                href={INSTAGRAM_URL}
                 aria-label="Instagram"
+                target="_blank"
+                rel="noreferrer noopener"
                 className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 text-white/40 hover:text-white"
               >
                 <svg
