@@ -4,11 +4,13 @@ import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import { buildLocaleAlternates, BASE_URL } from "../../../../lib/alternates";
 import { cantons, getCantonBySlug } from "../../../../data/cantons";
+import { RICH_CANTONS, PRIORITY_CANTON_SLUGS, PRIORITY_CANTON_NAMES } from "../../../../data/canton-rich-content";
 import { isLocale } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
 import { APP_STORE_URL } from "../../../../lib/links";
 import Link from "next/link";
 
+/* ─── Generic copy (all 26 cantons, all 3 locales) ─── */
 const COPY: Record<
   Locale,
   {
@@ -182,13 +184,20 @@ export async function generateMetadata({
   const canonicalUrl = `${BASE_URL}/${locale}/guides/${canton.slug}`;
   const ogImageUrl = `${canonicalUrl}/opengraph-image`;
 
+  // Use keyword-rich meta for the 6 priority cantons (EN + UK)
+  const rich = RICH_CANTONS[canton.slug];
+  const richLocale = rich && (locale === "en" || locale === "uk") ? rich[locale] : null;
+
+  const metaTitle = richLocale ? richLocale.metaTitle : copy.title(name);
+  const metaDescription = richLocale ? richLocale.metaDescription : copy.description(name, canton.capital);
+
   return {
-    title: copy.title(name),
-    description: copy.description(name, canton.capital),
+    title: metaTitle,
+    description: metaDescription,
     alternates: buildLocaleAlternates(locale, `/guides/${canton.slug}`),
     openGraph: {
-      title: copy.title(name),
-      description: copy.description(name, canton.capital),
+      title: metaTitle,
+      description: metaDescription,
       url: canonicalUrl,
       siteName: "Sweezy",
       images: [
@@ -196,7 +205,7 @@ export async function generateMetadata({
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: copy.title(name),
+          alt: metaTitle,
         },
       ],
       locale: locale === "uk" ? "uk_UA" : locale === "de" ? "de_DE" : "en_US",
@@ -204,8 +213,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: copy.title(name),
-      description: copy.description(name, canton.capital),
+      title: metaTitle,
+      description: metaDescription,
       images: [ogImageUrl],
     },
   };
@@ -230,6 +239,12 @@ export default function CantonGuidePage({
     { name: copy.guides, url: `/${locale}/guides` },
     { name, url: canonicalUrl },
   ];
+
+  // Check for rich content (EN + UK only for the 6 priority cantons)
+  const richData = RICH_CANTONS[canton.slug];
+  const rich = richData && (locale === "en" || locale === "uk") ? richData[locale] : null;
+
+  /* ── Schema.org ──────────────────────────────────────────────────────────── */
   const placeJsonLd = {
     "@context": "https://schema.org",
     "@type": "Place",
@@ -240,168 +255,359 @@ export default function CantonGuidePage({
       addressRegion: canton.nameDe,
       addressCountry: "CH",
     },
-    containedInPlace: {
-      "@type": "Country",
-      name: "Switzerland",
-    },
+    containedInPlace: { "@type": "Country", name: "Switzerland" },
     additionalProperty: [
-      {
-        "@type": "PropertyValue",
-        name: "Capital",
-        value: canton.capital,
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Population",
-        value: canton.population,
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Language region",
-        value: getLanguageRegion(locale, canton),
-      },
+      { "@type": "PropertyValue", name: "Capital", value: canton.capital },
+      { "@type": "PropertyValue", name: "Population", value: canton.population },
+      { "@type": "PropertyValue", name: "Language region", value: getLanguageRegion(locale, canton) },
     ],
   };
-  return (
-    <main className="min-h-screen bg-dark-900 text-white">
-      <JsonLd data={placeJsonLd} />
-      <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
-        <Breadcrumb items={breadcrumbItems} />
 
-        <header className="mb-10 border-b border-white/10 pb-8">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            {copy.title(name).replace(" | Sweezy", "")}
-          </h1>
-          <p className="mt-4 max-w-3xl text-lg text-white/55">
-            {copy.description(name, canton.capital)}
+  const faqJsonLd = rich
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: rich.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      }
+    : null;
+
+  /* ── Shared header ───────────────────────────────────────────────────────── */
+  const header = (
+    <header className="mb-10 border-b border-white/10 pb-8">
+      <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+        {rich ? rich.h1 : copy.title(name).replace(" | Sweezy", "")}
+      </h1>
+      <p className="mt-4 max-w-3xl text-lg text-white/55">
+        {rich ? rich.intro : copy.description(name, canton.capital)}
+      </p>
+      <div className="mt-6 grid gap-3 sm:grid-cols-3 text-sm text-white/60">
+        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+          <p className="text-white/35">{copy.capital}</p>
+          <p className="mt-1 text-base font-medium text-white">{canton.capital}</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+          <p className="text-white/35">{copy.population}</p>
+          <p className="mt-1 text-base font-medium text-white">
+            {formatPopulation(locale, canton.population)}
           </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-3 text-sm text-white/60">
-            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-white/35">{copy.capital}</p>
-              <p className="mt-1 text-base font-medium text-white">{canton.capital}</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+          <p className="text-white/35">{copy.languageRegion}</p>
+          <p className="mt-1 text-base font-medium text-white">
+            {getLanguageRegion(locale, canton)}
+          </p>
+        </div>
+      </div>
+    </header>
+  );
+
+  /* ── Rich body ───────────────────────────────────────────────────────────── */
+  const richBody = rich && richData ? (
+    <div className="space-y-10">
+      {/* Registration */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionRegistration}</h2>
+        <p className="mt-4 leading-8 text-white/70">{rich.registrationLead}</p>
+        <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-white/70">
+          <p className="font-medium text-white/90">{rich.registrationOfficeName}</p>
+          <p className="mt-1">{rich.registrationOfficeAddress}</p>
+          <p className="mt-1 text-accent-green/80">{rich.registrationOfficeWebsite}</p>
+        </div>
+        <p className="mt-4 text-sm font-medium text-white/60">{rich.deadline}</p>
+        <p className="mt-3 text-sm font-medium text-white/80">{rich.requiredDocs}</p>
+        <ol className="mt-2 list-decimal space-y-1.5 pl-6 text-white/70 text-sm">
+          {rich.registrationDocs.map((doc) => (
+            <li key={doc}>{doc}</li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Permit */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionPermit}</h2>
+        <p className="mt-4 leading-8 text-white/70">{rich.permitLead}</p>
+        {rich.permitStatusSNote && (
+          <div className="mt-4 rounded-xl border border-accent-green/20 bg-accent-green/[0.04] p-4 text-sm text-white/70">
+            <span className="mr-2 font-semibold text-accent-green">Status S:</span>
+            {rich.permitStatusSNote}{" "}
+            {locale === "uk" && (
+              <Link
+                href="/uk/blog/status-s-shveytcariya-povnyy-gid"
+                className="text-accent-green underline-offset-2 hover:underline"
+              >
+                Повний гід по статусу S →
+              </Link>
+            )}
+          </div>
+        )}
+      </section>
+
+      {/* Health insurance */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionHealth}</h2>
+        <p className="mt-3 text-sm text-white/50">{rich.avgPremium}</p>
+        <p className="text-2xl font-bold text-accent-green">{rich.healthPremium}</p>
+        <p className="mt-4 leading-8 text-white/70">{rich.healthSubsidyInfo}</p>
+        <p className="mt-3 leading-7 text-white/60 text-sm">{rich.healthHospitalNote}</p>
+      </section>
+
+      {/* Language courses */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionCourses}</h2>
+        <ul className="mt-4 space-y-3">
+          {rich.courses.map((course) => (
+            <li
+              key={course.name}
+              className="rounded-xl border border-white/10 bg-white/[0.02] p-4"
+            >
+              <p className="font-medium text-white/90">{course.name}</p>
+              <p className="mt-1 text-sm text-white/60">{course.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Housing */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionHousing}</h2>
+        <p className="mt-3 text-sm text-white/50">{rich.avgRent}</p>
+        <p className="text-xl font-bold text-white">{rich.housingAvgRent}</p>
+        <p className="mt-4 leading-7 text-white/70">{rich.housingAidInfo}</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {rich.housingPortals.map((portal) => (
+            <span
+              key={portal}
+              className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/60"
+            >
+              {portal}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Contacts table */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionContacts}</h2>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-white/10 text-left text-white/40">
+                <th className="pb-2 pr-4 font-medium">{rich.colOffice}</th>
+                <th className="pb-2 pr-4 font-medium">{rich.colAddress}</th>
+                <th className="pb-2 pr-4 font-medium">{rich.colPhone}</th>
+                <th className="pb-2 font-medium">{rich.colWebsite}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {richData.contacts.map((c) => (
+                <tr key={c.office} className="border-b border-white/[0.05] align-top">
+                  <td className="py-3 pr-4 font-medium text-white/85">{c.office}</td>
+                  <td className="py-3 pr-4 text-white/60">{c.address}</td>
+                  <td className="py-3 pr-4 text-white/60 whitespace-nowrap">{c.phone}</td>
+                  <td className="py-3 text-accent-green/80 text-xs break-all">{c.website}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Blog cross-links */}
+      {rich.blogLinks.length > 0 && (
+        <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+          <h2 className="text-lg font-semibold">
+            {locale === "uk" ? "Читайте також" : "Further reading"}
+          </h2>
+          <ul className="mt-3 space-y-2">
+            {rich.blogLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-accent-green text-sm transition-colors hover:text-accent-emerald"
+                >
+                  {link.label} →
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* FAQ */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionFaq}</h2>
+        <div className="mt-4 space-y-4">
+          {rich.faq.map((item) => (
+            <div
+              key={item.q}
+              className="rounded-xl border border-white/10 bg-white/[0.02] p-5"
+            >
+              <p className="font-medium text-white/90">{item.q}</p>
+              <p className="mt-2 text-sm leading-7 text-white/60">{item.a}</p>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-white/35">{copy.population}</p>
-              <p className="mt-1 text-base font-medium text-white">
-                {formatPopulation(locale, canton.population)}
+          ))}
+        </div>
+      </section>
+
+      {/* Other priority cantons */}
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionOtherCantons}</h2>
+        <p className="mt-2 text-sm text-white/55">{rich.sectionOtherCantonsDesc}</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {PRIORITY_CANTON_SLUGS.filter((s) => s !== canton.slug).map((slug) => {
+            const label =
+              PRIORITY_CANTON_NAMES[slug][locale === "uk" ? "uk" : "en"];
+            return (
+              <Link
+                key={slug}
+                href={`/${locale}/guides/${slug}`}
+                className="rounded-full border border-accent-green/20 bg-accent-green/[0.04] px-4 py-1.5 text-sm text-accent-green transition-colors hover:bg-accent-green/[0.08]"
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Download CTA */}
+      <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.05] p-6">
+        <h2 className="text-2xl font-semibold tracking-tight">Sweezy</h2>
+        <p className="mt-3 text-white/65">{copy.ctaLead(name)}</p>
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="mt-5 inline-flex rounded-xl bg-accent-green px-5 py-3 text-sm font-semibold text-dark-950 transition-opacity hover:opacity-90"
+        >
+          {copy.download}
+        </a>
+      </section>
+    </div>
+  ) : null;
+
+  /* ── Generic body (all other cantons) ───────────────────────────────────── */
+  const genericBody = (
+    <div className="space-y-10">
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{copy.overview}</h2>
+        <p className="mt-4 leading-8 text-white/70">
+          {copy.overviewLead(
+            name,
+            canton.capital,
+            formatPopulation(locale, canton.population),
+            getLanguageRegion(locale, canton),
+          )}
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{copy.registration}</h2>
+        <p className="mt-4 leading-8 text-white/70">
+          {copy.registrationLead(name, canton.capital)}
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-6 text-white/70">
+          <li>{copy.reg1}</li>
+          <li>{copy.reg2}</li>
+          <li>{copy.reg3}</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{copy.services}</h2>
+        <p className="mt-4 leading-8 text-white/70">
+          {copy.servicesLead(name, canton.capital)}
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-6 text-white/70">
+          <li>{copy.srv1}</li>
+          <li>{copy.srv2}</li>
+          <li>{copy.srv3}</li>
+          <li>{copy.srv4}</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{copy.whySweezy}</h2>
+        <p className="mt-4 leading-8 text-white/70">{copy.sweezyLead(name)}</p>
+        <p className="mt-4 leading-8 text-white/70">
+          Instead of keeping notes in different apps, you can use Sweezy to move through the
+          practical settlement sequence: understand the process, save the next step, and locate
+          the nearby services you actually need in {name}.
+        </p>
+        {locale === "en" && canton.slug === "zurich" ? (
+          <div className="mt-6 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-5">
+            <h2 className="text-2xl font-semibold tracking-tight">Useful links for Zurich expats</h2>
+            <div className="mt-4 space-y-3 text-white/70">
+              <p>
+                Read the in-depth{" "}
+                <Link
+                  href="/en/blog/moving-to-zurich-guide"
+                  className="text-accent-green transition-colors hover:text-accent-emerald"
+                >
+                  Moving to Zurich Guide
+                </Link>{" "}
+                for district-by-district registration advice, housing tips, transport costs, and
+                first-week priorities.
               </p>
-            </div>
-            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-              <p className="text-white/35">{copy.languageRegion}</p>
-              <p className="mt-1 text-base font-medium text-white">
-                {getLanguageRegion(locale, canton)}
+              <p>
+                For the broader Swiss process, start with{" "}
+                <Link
+                  href="/en/blog/how-to-register-switzerland"
+                  className="text-accent-green transition-colors hover:text-accent-emerald"
+                >
+                  How to Register in Switzerland
+                </Link>
+                .
               </p>
             </div>
           </div>
-        </header>
+        ) : null}
+      </section>
 
-        <div className="space-y-10">
-          <section>
-            <h2 className="text-2xl font-semibold tracking-tight">{copy.overview}</h2>
-            <p className="mt-4 leading-8 text-white/70">
-              {copy.overviewLead(
-                name,
-                canton.capital,
-                formatPopulation(locale, canton.population),
-                getLanguageRegion(locale, canton),
-              )}
-            </p>
-          </section>
+      <section className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-5">
+        <p className="text-sm text-white/55">
+          {locale === "uk"
+            ? "Читайте більше порад у нашому блозі"
+            : locale === "de"
+              ? "Lesen Sie weitere Tipps in unserem Blog"
+              : "Read more tips on our blog"}
+        </p>
+        <Link
+          href={`/${locale}/blog`}
+          className="flex-shrink-0 text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
+        >
+          {locale === "uk" ? "Блог" : "Blog"} →
+        </Link>
+      </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold tracking-tight">{copy.registration}</h2>
-            <p className="mt-4 leading-8 text-white/70">
-              {copy.registrationLead(name, canton.capital)}
-            </p>
-            <ul className="mt-4 list-disc space-y-2 pl-6 text-white/70">
-              <li>{copy.reg1}</li>
-              <li>{copy.reg2}</li>
-              <li>{copy.reg3}</li>
-            </ul>
-          </section>
+      <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.05] p-6">
+        <h2 className="text-2xl font-semibold tracking-tight">Sweezy</h2>
+        <p className="mt-3 text-white/65">{copy.ctaLead(name)}</p>
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="mt-5 inline-flex rounded-xl bg-accent-green px-5 py-3 text-sm font-semibold text-dark-950 transition-opacity hover:opacity-90"
+        >
+          {copy.download}
+        </a>
+      </section>
+    </div>
+  );
 
-          <section>
-            <h2 className="text-2xl font-semibold tracking-tight">{copy.services}</h2>
-            <p className="mt-4 leading-8 text-white/70">
-              {copy.servicesLead(name, canton.capital)}
-            </p>
-            <ul className="mt-4 list-disc space-y-2 pl-6 text-white/70">
-              <li>{copy.srv1}</li>
-              <li>{copy.srv2}</li>
-              <li>{copy.srv3}</li>
-              <li>{copy.srv4}</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold tracking-tight">{copy.whySweezy}</h2>
-            <p className="mt-4 leading-8 text-white/70">{copy.sweezyLead(name)}</p>
-            <p className="mt-4 leading-8 text-white/70">
-              Instead of keeping notes in different apps, you can use Sweezy to move through the
-              practical settlement sequence: understand the process, save the next step, and locate
-              the nearby services you actually need in {name}.
-            </p>
-            {locale === "en" && canton.slug === "zurich" ? (
-              <div className="mt-6 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-5">
-                <h2 className="text-2xl font-semibold tracking-tight">Useful links for Zurich expats</h2>
-                <div className="mt-4 space-y-3 text-white/70">
-                  <p>
-                    Read the in-depth{" "}
-                    <Link
-                      href="/en/blog/moving-to-zurich-guide"
-                      className="text-accent-green transition-colors hover:text-accent-emerald"
-                    >
-                      Moving to Zurich Guide
-                    </Link>{" "}
-                    for district-by-district registration advice, housing tips, transport costs,
-                    and first-week priorities.
-                  </p>
-                  <p>
-                    For the broader Swiss process, start with{" "}
-                    <Link
-                      href="/en/blog/how-to-register-switzerland"
-                      className="text-accent-green transition-colors hover:text-accent-emerald"
-                    >
-                      How to Register in Switzerland
-                    </Link>
-                    .
-                  </p>
-                </div>
-              </div>
-            ) : null}
-          </section>
-
-          <section className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="text-sm text-white/55">
-              {locale === "uk"
-                ? "Читайте більше порад у нашому блозі"
-                : locale === "de"
-                  ? "Lesen Sie weitere Tipps in unserem Blog"
-                  : "Read more tips on our blog"}
-            </p>
-            <Link
-              href={`/${locale}/blog`}
-              className="flex-shrink-0 text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
-            >
-              {locale === "uk" ? "Блог" : "Blog"} →
-            </Link>
-          </section>
-
-          <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.05] p-6">
-            <h2 className="text-2xl font-semibold tracking-tight">Sweezy</h2>
-            <p className="mt-3 text-white/65">{copy.ctaLead(name)}</p>
-            <a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="mt-5 inline-flex rounded-xl bg-accent-green px-5 py-3 text-sm font-semibold text-dark-950 transition-opacity hover:opacity-90"
-            >
-              {copy.download}
-            </a>
-          </section>
-        </div>
+  return (
+    <main className="min-h-screen bg-dark-900 text-white">
+      <JsonLd data={placeJsonLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
+      <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
+        <Breadcrumb items={breadcrumbItems} />
+        {header}
+        {rich ? richBody : genericBody}
       </article>
     </main>
   );
 }
-
