@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { BASE_URL } from "../../lib/alternates";
-import { HomeSeoSections, buildHomeFaqSchema } from "../components/home/HomeSeoSections";
+import { HomeSeoSections } from "../components/home/HomeSeoSections";
+import { JsonLd } from "../components/seo/JsonLd";
+import { buildHomepageJsonLd } from "../../lib/homepage-jsonld";
 import Home from "../page";
 
 const CANONICAL_URL = `${BASE_URL}/uk`;
@@ -55,16 +57,11 @@ export const metadata: Metadata = {
 };
 
 export default function UkPage() {
-  const faqSchema = buildHomeFaqSchema("uk");
+  const homepageJsonLd = buildHomepageJsonLd("uk");
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
-        }}
-      />
+      <JsonLd data={homepageJsonLd} />
       <Home />
       <HomeSeoSections locale="uk" />
     </>

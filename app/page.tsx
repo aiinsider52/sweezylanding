@@ -6,7 +6,6 @@ import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { APP_STORE_URL, TELEGRAM_URL } from "../lib/links";
 import { BrandLogo } from "./components/BrandLogo";
-import { JsonLd } from "./components/seo/JsonLd";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -43,7 +42,7 @@ function GradientBlob({
   return (
     <div
       aria-hidden="true"
-      className={`absolute rounded-full bg-gradient-to-br ${colors} opacity-20 blur-3xl ${className ?? ""}`}
+      className={`pointer-events-none absolute rounded-full bg-gradient-to-br ${colors} opacity-20 blur-3xl ${className ?? ""}`}
     />
   );
 }
@@ -2012,53 +2011,10 @@ function CTASection() {
 /* ── Page Composition ────────────────────────────────────────────────── */
 
 export default function Home() {
-  const { t, locale } = useLocale();
-
-  const localizedUrl =
-    locale === "en" ? "https://www.sweezy.world/en" : `https://www.sweezy.world/${locale}`;
-
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        name: "Sweezy",
-        operatingSystem: "iOS",
-        applicationCategory: "LifestyleApplication",
-        description:
-          "Step-by-step guides, checklists, service map and CV builder for expats in Switzerland",
-        url: "https://www.sweezy.world",
-        downloadUrl: APP_STORE_URL,
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: 4.9,
-          ratingCount: 120,
-        },
-        offers: {
-          "@type": "Offer",
-          price: 0,
-          priceCurrency: "CHF",
-        },
-      },
-      {
-        "@type": "Organization",
-        name: "Sweezy",
-        url: "https://www.sweezy.world",
-        sameAs: [APP_STORE_URL],
-      },
-      {
-        "@type": "WebPage",
-        url: localizedUrl,
-        inLanguage: locale,
-        name: t("hero.title1") + " " + t("hero.title2"),
-        description: t("hero.subtitle"),
-      },
-    ],
-  };
+  const { t } = useLocale();
 
   return (
     <main>
-      <JsonLd data={structuredData} />
       <Navbar />
       <HeroSection />
       <StatsSection />

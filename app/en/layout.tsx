@@ -7,6 +7,7 @@ const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
+    metadataBase: new URL(BASE_URL),
     title: "Sweezy — Your Guide to Life in Switzerland",
     description:
       "Step-by-step guides, checklists, service map and CV builder for expats in Switzerland. Available in English, Ukrainian and German.",

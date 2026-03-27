@@ -1,7 +1,5 @@
-"use client";
-
 type JsonLdProps = {
-  data: Record<string, unknown>;
+  data: object;
 };
 
 export function JsonLd({ data }: JsonLdProps) {

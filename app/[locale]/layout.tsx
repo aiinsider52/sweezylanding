@@ -38,6 +38,7 @@ export async function generateMetadata({
   const current = LOCALE_METADATA[params.locale];
 
   return {
+    metadataBase: new URL(BASE_URL),
     title: current.title,
     description: current.description,
     alternates: buildLocaleAlternates(params.locale),
