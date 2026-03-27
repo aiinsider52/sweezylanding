@@ -133,16 +133,15 @@ export default async function BlogPostPage({
   ];
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.frontmatter.title,
     description: post.frontmatter.description,
     image: ogImageUrl,
     datePublished: post.frontmatter.publishedAt,
     dateModified: post.frontmatter.publishedAt,
     author: {
-      "@type": "Organization",
-      name: "Sweezy",
-      url: "https://www.sweezy.world",
+      "@type": "Person",
+      name: post.frontmatter.author,
     },
     publisher: {
       "@type": "Organization",

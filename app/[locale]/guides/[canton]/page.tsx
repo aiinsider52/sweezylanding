@@ -341,6 +341,34 @@ export default function CantonGuidePage({
               practical settlement sequence: understand the process, save the next step, and locate
               the nearby services you actually need in {name}.
             </p>
+            {locale === "en" && canton.slug === "zurich" ? (
+              <div className="mt-6 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-5">
+                <h2 className="text-2xl font-semibold tracking-tight">Useful links for Zurich expats</h2>
+                <div className="mt-4 space-y-3 text-white/70">
+                  <p>
+                    Read the in-depth{" "}
+                    <Link
+                      href="/en/blog/moving-to-zurich-guide"
+                      className="text-accent-green transition-colors hover:text-accent-emerald"
+                    >
+                      Moving to Zurich Guide
+                    </Link>{" "}
+                    for district-by-district registration advice, housing tips, transport costs,
+                    and first-week priorities.
+                  </p>
+                  <p>
+                    For the broader Swiss process, start with{" "}
+                    <Link
+                      href="/en/blog/how-to-register-switzerland"
+                      className="text-accent-green transition-colors hover:text-accent-emerald"
+                    >
+                      How to Register in Switzerland
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </div>
+            ) : null}
           </section>
 
           <section className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-5">
