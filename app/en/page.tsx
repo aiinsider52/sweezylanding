@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { BASE_URL } from "../../lib/alternates";
 import { HomeSeoSections } from "../components/home/HomeSeoSections";
-import { JsonLd } from "../components/seo/JsonLd";
-import { buildHomepageJsonLd } from "../../lib/homepage-jsonld";
 import Home from "../page";
 
 const CANONICAL_URL = `${BASE_URL}/en`;
@@ -42,11 +40,8 @@ export const metadata: Metadata = {
 };
 
 export default function EnPage() {
-  const homepageJsonLd = buildHomepageJsonLd("en");
-
   return (
     <>
-      <JsonLd data={homepageJsonLd} />
       <Home />
       <HomeSeoSections locale="en" />
     </>
