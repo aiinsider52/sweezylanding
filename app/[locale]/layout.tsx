@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../lib/alternates";
 import { LocaleProvider } from "../../lib/locale-context";
+import { ContentTopBar } from "../components/ContentTopBar";
 import { isLocale } from "../../lib/blog";
 
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
@@ -76,6 +77,11 @@ export default function LocaleBlogLayout({
 }) {
   if (!isLocale(params.locale)) notFound();
 
-  return <LocaleProvider initialLocale={params.locale}>{children}</LocaleProvider>;
+  return (
+    <LocaleProvider initialLocale={params.locale}>
+      <ContentTopBar />
+      {children}
+    </LocaleProvider>
+  );
 }
 

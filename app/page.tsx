@@ -6,6 +6,7 @@ import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { APP_STORE_URL, TELEGRAM_URL } from "../lib/links";
 import { BrandLogo } from "./components/BrandLogo";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -312,6 +313,7 @@ function Navbar() {
             </div>
 
             <div className="hidden lg:flex items-center gap-4">
+              <ThemeToggle />
               <LanguageSwitcher />
               <a
                 href={APP_STORE_URL}
@@ -324,6 +326,7 @@ function Navbar() {
             </div>
 
             <div className="flex lg:hidden items-center gap-3">
+              <ThemeToggle />
               <LanguageSwitcher />
               <button
                 onClick={() => setIsOpen(!isOpen)}

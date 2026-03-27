@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { buildRootAlternates } from "../lib/alternates";
 import { LocaleProvider } from "../lib/locale-context";
+import { ThemeProvider } from "../lib/theme-context";
 import { SiteFooter } from "./components/SiteFooter";
 import "./globals.css";
 
@@ -96,6 +97,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`antialiased ${inter.variable}`} suppressHydrationWarning>
       <head>
+        {/* Prevent flash of wrong theme: apply .dark class synchronously before paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('sweezy-theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -104,10 +111,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen overflow-x-hidden">
-        <LocaleProvider>
-          {children}
-          <SiteFooter year={currentYear} />
-        </LocaleProvider>
+        <ThemeProvider>
+          <LocaleProvider>
+            {children}
+            <SiteFooter year={currentYear} />
+          </LocaleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

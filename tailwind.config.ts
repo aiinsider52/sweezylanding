@@ -4,17 +4,22 @@ const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
+        /* Theme-aware surface colors driven by CSS custom properties.
+           In dark mode (.dark on <html>) these resolve to deep greens.
+           In light mode they resolve to clean whites / soft mints. */
         dark: {
-          950: "#040A06",
-          900: "#060D08",
-          800: "#0A1610",
-          700: "#0F1F17",
-          600: "#162B1F",
-          500: "#1E3A2A",
+          950: "var(--color-surface-950)",
+          900: "var(--color-surface-900)",
+          800: "var(--color-surface-800)",
+          700: "var(--color-surface-700)",
+          600: "var(--color-surface-600)",
+          500: "var(--color-surface-500)",
         },
         accent: {
           green: "#22C55E",

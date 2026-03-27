@@ -2,6 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Design tokens ─────────────────────────────────────────────────────────
+   Dark theme is the default (applied via .dark on <html>).
+   Light theme removes .dark — these :root variables kick in.
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Light theme surface scale (replaces bg-dark-*) */
+  --color-surface-950: #EEF7F1;
+  --color-surface-900: #F2F9F5;
+  --color-surface-800: #FFFFFF;
+  --color-surface-700: #F7FDF9;
+  --color-surface-600: #EDFAF3;
+  --color-surface-500: #E3F5EB;
+
+  /* Semantic light tokens */
+  --color-bg:        #F2F9F5;
+  --color-fg:        #0D1C12;
+  --color-fg-75:     rgba(13,28,18,0.75);
+  --color-fg-55:     rgba(13,28,18,0.55);
+  --color-fg-40:     rgba(13,28,18,0.40);
+  --color-fg-30:     rgba(13,28,18,0.30);
+  --color-fg-20:     rgba(13,28,18,0.20);
+  --color-border:    rgba(34,197,94,0.18);
+  --color-border-sm: rgba(34,197,94,0.10);
+  --color-glass-bg:  rgba(255,255,255,0.75);
+  --color-glass-border: rgba(34,197,94,0.20);
+  --shadow-card: 0 2px 16px rgba(34,197,94,0.08), 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-nav:  0 4px 24px rgba(34,197,94,0.10), 0 1px 8px rgba(0,0,0,0.08);
+}
+
+/* Dark theme */
+html.dark {
+  --color-surface-950: #040A06;
+  --color-surface-900: #060D08;
+  --color-surface-800: #0A1610;
+  --color-surface-700: #0F1F17;
+  --color-surface-600: #162B1F;
+  --color-surface-500: #1E3A2A;
+
+  --color-bg:        #060D08;
+  --color-fg:        #FFFFFF;
+  --color-fg-75:     rgba(255,255,255,0.75);
+  --color-fg-55:     rgba(255,255,255,0.55);
+  --color-fg-40:     rgba(255,255,255,0.40);
+  --color-fg-30:     rgba(255,255,255,0.30);
+  --color-fg-20:     rgba(255,255,255,0.20);
+  --color-border:    rgba(255,255,255,0.08);
+  --color-border-sm: rgba(255,255,255,0.04);
+  --color-glass-bg:  rgba(255,255,255,0.04);
+  --color-glass-border: rgba(255,255,255,0.08);
+  --shadow-card: none;
+  --shadow-nav:  none;
+}
+
+/* ── Base styles ─────────────────────────────────────────────────────────── */
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -10,19 +66,146 @@
   }
 
   body {
-    @apply bg-dark-900 text-white font-sans;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    @apply font-sans min-h-screen overflow-x-hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
-    @apply bg-accent-green/30 text-white;
+    @apply bg-accent-green/30;
+    color: var(--color-fg);
   }
 }
 
-@layer components {
+/* ── Light-mode text & border overrides ─────────────────────────────────────
+   Tailwind compiles `text-white` etc. as literal rgb(255 255 255) values.
+   In light mode we remap them to dark ink using CSS overrides so every
+   component that uses text-white stays readable without touching source.
+   ────────────────────────────────────────────────────────────────────────── */
+
+html:not(.dark) {
+  /* --- Text colors -------------------------------------------------------- */
+  .text-white    { color: var(--color-fg) !important; }
+
+  /* Opacity variants — map white opacity → dark ink opacity */
+  .text-white\/70,
+  .\!text-white\/70 { color: var(--color-fg-75) !important; }
+
+  .text-white\/65,
+  .text-white\/60,
+  .text-white\/55 { color: var(--color-fg-55) !important; }
+
+  .text-white\/50,
+  .text-white\/45,
+  .text-white\/40,
+  .\[--tw-text-opacity\:0\.4\] { color: var(--color-fg-40) !important; }
+
+  .text-white\/35,
+  .text-white\/30 { color: var(--color-fg-30) !important; }
+
+  .text-white\/25,
+  .text-white\/20,
+  .text-white\/15 { color: var(--color-fg-20) !important; }
+
+  /* --- Border colors ------------------------------------------------------ */
+  .border-white\/10,
+  .border-white\/\[0\.10\],
+  .border-white\/\[0\.08\] { border-color: var(--color-border) !important; }
+
+  .border-white\/\[0\.06\],
+  .border-white\/\[0\.05\],
+  .border-white\/\[0\.04\] { border-color: var(--color-border-sm) !important; }
+
+  /* --- Background transparent overlays ----------------------------------- */
+  .bg-white\/\[0\.04\],
+  .bg-white\/\[0\.025\],
+  .bg-white\/\[0\.03\],
+  .bg-white\/\[0\.02\] { background-color: rgba(34,197,94,0.04) !important; }
+
+  .bg-white\/\[0\.05\],
+  .bg-white\/\[0\.06\],
+  .bg-white\/\[0\.07\],
+  .bg-white\/\[0\.08\] { background-color: rgba(34,197,94,0.06) !important; }
+
+  /* glass utility */
   .glass {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.06];
+    background-color: var(--color-glass-bg) !important;
+    border-color: var(--color-glass-border) !important;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-nav);
   }
 
+  .glass-green {
+    background-color: rgba(34,197,94,0.06) !important;
+    border-color: rgba(34,197,94,0.15) !important;
+  }
+
+  /* --- Stroke/fill for SVG icons (social icons etc.) --------------------- */
+  .text-white\/40 svg,
+  .text-white\/50 svg { color: var(--color-fg-40) !important; }
+
+  /* --- Placeholder text -------------------------------------------------- */
+  input::placeholder { color: var(--color-fg-30) !important; }
+
+  /* --- Input fields ------------------------------------------------------- */
+  input[type="email"],
+  input[type="text"] {
+    background-color: rgba(34,197,94,0.04) !important;
+    border-color: rgba(34,197,94,0.15) !important;
+    color: var(--color-fg) !important;
+  }
+  input:focus {
+    border-color: rgba(34,197,94,0.35) !important;
+  }
+
+  /* --- h1, h2, h3 — ensure dark text for gradient headings -------------- */
+  h1, h2, h3, h4 {
+    color: var(--color-fg);
+  }
+
+  /* --- Cards / article / sections ---------------------------------------- */
+  article, .rounded-2xl, .rounded-xl {
+    /* inherit from parent — no forced bg, let --color-surface-* do the work */
+  }
+
+  /* --- Gradient text stays as-is (green gradient reads well on light) ---- */
+  .text-gradient,
+  .text-gradient-spring { /* keep as-is */ }
+}
+
+/* ── Light-mode navbar special glass ─────────────────────────────────────── */
+html:not(.dark) nav .glass {
+  background-color: rgba(255,255,255,0.88) !important;
+  border-color: rgba(34,197,94,0.18) !important;
+  box-shadow: 0 4px 32px rgba(34,197,94,0.10), 0 1px 8px rgba(0,0,0,0.06);
+}
+
+/* ── Light-mode body gradient glow blobs → soften ──────────────────────── */
+html:not(.dark) [aria-hidden="true"].blur-3xl {
+  opacity: 0.08 !important;
+}
+
+/* ── Mobile hamburger lines (light mode) ─────────────────────────────────── */
+html:not(.dark) .bg-white\/70 {
+  background-color: rgba(13,28,18,0.6) !important;
+}
+
+/* ── Transition on theme switch ─────────────────────────────────────────── */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+/* But NOT transitions on things where it would feel sluggish */
+a, button, [role="button"] {
+  transition-property: background-color, border-color, color, opacity, transform, box-shadow;
+  transition-duration: 0.2s;
+}
+
+/* ── Component classes ───────────────────────────────────────────────────── */
+
+@layer components {
   .glass-green {
     @apply bg-accent-green/[0.04] backdrop-blur-xl border border-accent-green/[0.08];
   }

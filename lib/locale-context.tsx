@@ -8,6 +8,7 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 import { translations, type Locale } from "./i18n";
 
 type LocaleContextType = {
@@ -18,6 +19,15 @@ type LocaleContextType = {
 
 const LocaleContext = createContext<LocaleContextType | null>(null);
 
+const VALID_LOCALES: Locale[] = ["en", "uk", "de"];
+
+function getLocaleFromPath(path: string): Locale | null {
+  if (path.startsWith("/uk")) return "uk";
+  if (path.startsWith("/de")) return "de";
+  if (path.startsWith("/en")) return "en";
+  return null;
+}
+
 export function LocaleProvider({
   children,
   initialLocale,
@@ -26,20 +36,35 @@ export function LocaleProvider({
   initialLocale?: Locale;
 }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale ?? "en");
+  const pathname = usePathname();
 
-  /* When locale is URL-driven, skip localStorage/browser detection */
+  /*
+   * For the outer (root) LocaleProvider that has no initialLocale:
+   * re-sync locale from the URL on every navigation so the footer
+   * always reflects the current page's language.
+   */
   useEffect(() => {
-    if (initialLocale) return;
+    if (initialLocale) return; // inner provider — locale comes from the route param
+
+    // Priority 1: derive from current URL path
+    const urlLocale = getLocaleFromPath(pathname ?? "");
+    if (urlLocale) {
+      setLocaleState(urlLocale);
+      return;
+    }
+
+    // Priority 2: localStorage preference (for non-locale pages like /support)
     const stored = localStorage.getItem("sweezy-locale") as Locale | null;
-    if (stored && (["en", "uk", "de"] as Locale[]).includes(stored)) {
+    if (stored && VALID_LOCALES.includes(stored)) {
       setLocaleState(stored);
       return;
     }
-    // Auto-detect browser language
+
+    // Priority 3: browser language auto-detect
     const lang = navigator.language.toLowerCase();
     if (lang.startsWith("uk")) setLocaleState("uk");
     else if (lang.startsWith("de")) setLocaleState("de");
-  }, [initialLocale]);
+  }, [initialLocale, pathname]); // re-run on every navigation
 
   /* Sync <html lang=""> attribute */
   useEffect(() => {
