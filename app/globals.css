@@ -231,6 +231,7 @@ a, button, [role="button"] {
     position: absolute;
     inset: -1px;
     border-radius: inherit;
+    pointer-events: none;
     padding: 1px;
     background: linear-gradient(135deg, #22C55E, #10B981, #14B8A6);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
