@@ -30,6 +30,53 @@
   --color-glass-border: rgba(34,197,94,0.20);
   --shadow-card: 0 2px 16px rgba(34,197,94,0.08), 0 1px 4px rgba(0,0,0,0.06);
   --shadow-nav:  0 4px 24px rgba(34,197,94,0.10), 0 1px 8px rgba(0,0,0,0.08);
+
+  /* Brand accents — single source of truth */
+  --color-brand:        #22C55E;
+  --color-brand-hover:  #10B981;
+  --color-brand-deep:   #14B8A6;
+
+  /* Typography scale (fluid, clamp between mobile and desktop) */
+  --text-display: clamp(2.75rem, 4.5vw + 1rem, 4.75rem);
+  --text-h1:      clamp(2.25rem, 3vw + 0.75rem, 3.5rem);
+  --text-h2:      clamp(1.75rem, 2vw + 0.75rem, 2.5rem);
+  --text-h3:      1.5rem;
+  --text-body-lg: 1.125rem;
+  --text-body:    1rem;
+  --text-small:   0.875rem;
+  --text-caption: 0.75rem;
+
+  /* Line-heights */
+  --lh-tight:     1.05;
+  --lh-snug:      1.25;
+  --lh-normal:    1.5;
+  --lh-relaxed:   1.7;
+
+  /* Radius scale */
+  --radius-sm:  0.5rem;   /* 8  — chips, small inputs */
+  --radius-md:  0.75rem;  /* 12 — buttons */
+  --radius-lg:  1rem;     /* 16 — cards */
+  --radius-xl:  1.5rem;   /* 24 — big cards */
+  --radius-2xl: 2rem;     /* 32 — hero surfaces */
+  --radius-pill: 9999px;
+
+  /* Spacing scale (4pt grid) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 6px 16px -6px rgba(34,197,94,0.18);
+  --shadow-lg: 0 20px 48px -16px rgba(34,197,94,0.28);
+  --shadow-glow: 0 0 60px -12px rgba(34,197,94,0.4);
 }
 
 /* Dark theme */
@@ -254,6 +301,16 @@ a, button, [role="button"] {
   }
 }
 
+@keyframes floatY {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, calc(var(--float-y, 15px) * -1), 0); }
+}
+
+.floating-el {
+  animation: floatY var(--float-d, 6s) ease-in-out infinite;
+  will-change: transform;
+}
+
 @layer utilities {
   .animation-delay-2000 {
     animation-delay: 2s;
@@ -263,5 +320,49 @@ a, button, [role="button"] {
   }
   .animation-delay-6000 {
     animation-delay: 6s;
+  }
+
+  /* Performance: isolate animated blobs onto their own composite layer
+     so repaints don't invalidate neighbor elements */
+  .animate-blob,
+  .animate-pulse-glow,
+  .animate-float {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Long below-fold sections: defer offscreen paint.
+     contain-intrinsic-size keeps layout stable while content is skipped. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
+  }
+}
+
+/* ── Accessibility / perf: honor reduced-motion globally ─────────────────
+   Kills all infinite background animations for users who prefer reduced
+   motion and for battery/perf-constrained devices. Keeps functional
+   transitions (hover color, opacity) short instead of instant. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.1s !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-blob,
+  .animate-pulse-glow,
+  .animate-float,
+  .animate-float-slow,
+  .animate-float-delayed,
+  .animate-gradient-shift,
+  .animate-shimmer,
+  .animate-spin-slow,
+  .floating-el {
+    animation: none !important;
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { APP_STORE_URL, TELEGRAM_URL } from "../lib/links";
@@ -43,7 +43,8 @@ function GradientBlob({
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute rounded-full bg-gradient-to-br ${colors} opacity-20 blur-3xl ${className ?? ""}`}
+      className={`pointer-events-none absolute rounded-full bg-gradient-to-br ${colors} opacity-20 blur-2xl ${className ?? ""}`}
+      style={{ transform: "translateZ(0)" }}
     />
   );
 }
@@ -482,33 +483,32 @@ function Hero3DPhoneUI() {
 
 /* ── Floating Elements ────────────────────────────────────────────────── */
 
-function FloatingElement({ 
-  children, 
-  className = "", 
+function FloatingElement({
+  children,
+  className = "",
   delay = 0,
   duration = 4,
-  y = 15 
-}: { 
-  children: React.ReactNode; 
-  className?: string; 
+  y = 15,
+}: {
+  children: React.ReactNode;
+  className?: string;
   delay?: number;
   duration?: number;
   y?: number;
 }) {
+  // Fade/scale-in on mount via Framer, but the continuous float is pure CSS
+  // keyframes so the browser compositor handles it (no JS timeline per item).
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ 
-        opacity: 1, 
-        scale: 1,
-        y: [0, -y, 0],
+      initial={{ opacity: 0, scale: 0.85 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+      className={`floating-el ${className}`}
+      style={{
+        ["--float-y" as string]: `${y}px`,
+        ["--float-d" as string]: `${duration}s`,
+        animationDelay: `${delay + 0.5}s`,
       }}
-      transition={{ 
-        opacity: { delay, duration: 0.6 },
-        scale: { delay, duration: 0.6 },
-        y: { delay: delay + 0.5, duration, repeat: Infinity, ease: "easeInOut" }
-      }}
-      className={className}
     >
       {children}
     </motion.div>
@@ -524,10 +524,9 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
         {/* Dramatic background */}
       <div className="absolute inset-0" aria-hidden="true">
-        {/* Accent blobs — static + CSS pulse (no Framer Motion loops) */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-green/15 blur-[100px] animate-blob" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-accent-emerald/10 blur-[80px] animate-blob animation-delay-2000" />
-        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-accent-teal/[0.08] blur-[70px] animate-blob animation-delay-4000" />
+        {/* Accent blobs — two layers with moderate blur, GPU-friendly */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-green/15 blur-[80px] animate-blob" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-accent-emerald/10 blur-[60px] animate-blob animation-delay-2000" />
         
         {/* Grid pattern */}
         <div
@@ -655,16 +654,15 @@ function HeroSection() {
               </div>
             </FloatingElement>
 
-            {/* Glows */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-[500px] w-[350px] rounded-full bg-accent-green/15 blur-[80px] animate-pulse-glow" />
+            {/* Single glow behind phone (reduced blur for perf) */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="h-[420px] w-[300px] rounded-full bg-accent-green/15 blur-[60px]" />
             </div>
 
-            {/* Phone container with 3D transforms */}
-            <motion.div
-              className="relative z-20"
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            {/* Phone container with 3D transforms — bob via CSS, hover via Framer */}
+            <div
+              className="relative z-20 floating-el"
+              style={{ ["--float-y" as string]: "12px", ["--float-d" as string]: "6s" }}
             >
               <motion.div
                 whileHover={{ rotateY: -8, rotateX: 4, scale: 1.03 }}
@@ -714,7 +712,7 @@ function HeroSection() {
                 {/* Reflection/shadow under phone */}
                 <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[70%] h-[30px] rounded-[50%] bg-accent-green/15 blur-2xl" />
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -1176,6 +1174,8 @@ function AppShowcaseSection() {
   const { t } = useLocale();
   const [activeTab, setActiveTab] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   const tabs = [
     { id: 0, label: t("appShowcase.screen1Label"), icon: "🏠", color: "#22C55E", desc: "Привітальний екран з швидкими діями, CV Builder, Картою та Довідником." },
@@ -1188,18 +1188,33 @@ function AppShowcaseSection() {
   const screens = [HomeScreen, GuidesScreen, MapScreen, MarketScreen, CVBuilderScreen];
   const ActiveScreen = screens[activeTab];
 
+  // Track visibility so the autoplay timer only runs when section is onscreen
   useEffect(() => {
-    if (isHovered) return;
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "200px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isHovered || !isVisible) return;
     const timer = setInterval(() => {
       setActiveTab((prev) => (prev + 1) % tabs.length);
     }, 3000);
     return () => clearInterval(timer);
-  }, [isHovered, tabs.length]);
+  }, [isHovered, isVisible, tabs.length]);
 
   return (
-    <section id="screenshots" className="relative py-32 sm:py-40 overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-        <div className="h-[600px] w-[600px] rounded-full bg-accent-green/[0.05] blur-[80px]" />
+    <section ref={sectionRef} id="screenshots" className="relative py-32 sm:py-40 overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+        <div className="h-[560px] w-[560px] rounded-full bg-accent-green/[0.05] blur-[60px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -1414,7 +1429,7 @@ function WhatsNewSection() {
   ];
 
   return (
-    <section id="whats-new" className="relative py-28 sm:py-32 overflow-hidden">
+    <section id="whats-new" className="relative py-28 sm:py-32 overflow-hidden cv-auto">
       <GradientBlob
         className="w-[560px] h-[560px] top-10 left-0 -translate-x-1/3"
         colors="from-accent-green/20 via-accent-emerald/10 to-transparent"
@@ -1512,7 +1527,7 @@ function EventsMarketSection() {
   ];
 
   return (
-    <section className="relative py-28 sm:py-32 overflow-hidden">
+    <section className="relative py-28 sm:py-32 overflow-hidden cv-auto">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.12),transparent_42%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
@@ -1644,7 +1659,7 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="relative py-32 overflow-hidden">
+    <section id="how-it-works" className="relative py-32 overflow-hidden cv-auto">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
@@ -1706,7 +1721,7 @@ function ComingSoonSection() {
   const { t } = useLocale();
 
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden cv-auto">
       <GradientBlob
         className="w-[500px] h-[500px] top-0 right-0"
         colors="from-accent-spring/15 via-accent-teal/10 to-transparent"
@@ -1785,7 +1800,7 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden cv-auto">
       <GradientBlob
         className="w-[500px] h-[500px] top-20 -right-20"
         colors="from-accent-emerald/15 via-accent-teal/10 to-transparent"
@@ -1870,7 +1885,7 @@ function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="relative py-32 overflow-hidden">
+    <section id="faq" className="relative py-32 overflow-hidden cv-auto">
       <div className="relative z-10 mx-auto max-w-3xl px-6">
         <motion.div
           initial="hidden"
@@ -1948,7 +1963,7 @@ function CTASection() {
   const { t } = useLocale();
 
   return (
-    <section id="download" className="relative py-32 overflow-hidden">
+    <section id="download" className="relative py-32 overflow-hidden cv-auto">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
