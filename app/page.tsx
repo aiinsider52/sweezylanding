@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useLocale } from "../lib/locale-context";
 import { localeLabels, type Locale } from "../lib/i18n";
 import { APP_STORE_URL, TELEGRAM_URL } from "../lib/links";
+import { LANDING_IMAGES } from "../lib/landing-images";
 import { BrandLogo } from "./components/BrandLogo";
 import { ThemeToggle } from "./components/ThemeToggle";
 
@@ -609,109 +611,57 @@ function HeroSection() {
             </motion.p>
           </motion.div>
 
-          {/* Right: 3D Phone */}
+          {/* Right: editorial hero visual */}
           <motion.div
-            initial={{ opacity: 0, y: 80, rotateX: 15, rotateY: -10 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
-            transition={{ duration: 1.4, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
+            initial={{ opacity: 0, y: 60, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.25, ease: [0.25, 0.4, 0.25, 1] }}
             className="relative flex items-center justify-center lg:justify-end"
-            style={{ perspective: "2000px" }}
           >
-            {/* Floating elements */}
-            <FloatingElement className="absolute -top-4 -left-8 lg:left-0 z-30" delay={1.2} duration={5} y={12}>
-              <div className="rounded-2xl bg-[#2a1a3a]/95 border border-purple-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+            <FloatingElement className="absolute -top-2 -left-6 lg:left-2 z-30 hidden sm:block" delay={1.2} duration={5} y={10}>
+              <div className="rounded-2xl bg-dark-900/90 border border-purple-500/20 px-4 py-3 flex items-center gap-3 shadow-xl backdrop-blur-md">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center flex-shrink-0">
                   <span className="text-lg">📋</span>
                 </div>
                 <div>
-                  <p className="text-white text-xs font-semibold">Чеклісти</p>
-                  <p className="text-white/40 text-[10px]">12 завдань</p>
+                  <p className="text-white text-xs font-semibold">50+ guides</p>
+                  <p className="text-white/40 text-[10px]">step by step</p>
                 </div>
               </div>
             </FloatingElement>
 
-            <FloatingElement className="absolute -bottom-2 -left-4 lg:left-8 z-30" delay={1.5} duration={6} y={10}>
-              <div className="rounded-2xl bg-[#2a1a0a]/95 border border-orange-500/20 px-4 py-3 flex items-center gap-3 shadow-xl">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-lg">🗺️</span>
-                </div>
-                <div>
-                  <p className="text-white text-xs font-semibold">79 сервісів</p>
-                  <p className="text-white/40 text-[10px]">поруч з вами</p>
-                </div>
-              </div>
-            </FloatingElement>
-
-            <FloatingElement className="absolute top-1/4 -right-4 lg:right-0 z-30" delay={1.8} duration={5.5} y={14}>
-              <div className="rounded-2xl bg-[#0a2010]/95 border border-accent-green/20 px-4 py-3 flex items-center gap-3 shadow-xl">
+            <FloatingElement className="absolute bottom-8 -left-2 lg:left-6 z-30 hidden sm:block" delay={1.5} duration={6} y={8}>
+              <div className="rounded-2xl bg-dark-900/90 border border-accent-green/20 px-4 py-3 flex items-center gap-3 shadow-xl backdrop-blur-md">
                 <div className="w-10 h-10 rounded-xl bg-accent-green/30 flex items-center justify-center flex-shrink-0">
                   <span className="text-lg">✓</span>
                 </div>
                 <div>
-                  <p className="text-white text-xs font-semibold">50+ гайдів</p>
-                  <p className="text-white/40 text-[10px]">крок за кроком</p>
+                  <p className="text-white text-xs font-semibold">26 cantons</p>
+                  <p className="text-white/40 text-[10px]">local guides</p>
                 </div>
               </div>
             </FloatingElement>
 
-            {/* Single glow behind phone (reduced blur for perf) */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="h-[420px] w-[300px] rounded-full bg-accent-green/15 blur-[60px]" />
+              <div className="h-[420px] w-[300px] rounded-full bg-accent-green/12 blur-[60px]" />
             </div>
 
-            {/* Phone container with 3D transforms — bob via CSS, hover via Framer */}
-            <div
-              className="relative z-20 floating-el"
-              style={{ ["--float-y" as string]: "12px", ["--float-d" as string]: "6s" }}
-            >
-              <motion.div
-                whileHover={{ rotateY: -8, rotateX: 4, scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 150, damping: 20 }}
-                style={{ transformStyle: "preserve-3d" }}
-                className="relative"
-              >
-                {/* Phone frame */}
-                <div
-                  className="relative rounded-[3.5rem] overflow-visible"
-                  style={{
-                    background: "linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.08) 100%)",
-                    padding: "7px",
-                    width: 290,
-                    boxShadow: "0 50px 100px -20px rgba(34,197,94,0.25), 0 30px 60px -15px rgba(0,0,0,0.5)",
-                  }}
-                >
-                  {/* Titanium frame shine */}
-                  <div className="absolute inset-0 rounded-[3.5rem] pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.1) 100%)" }} />
-                  </div>
-
-                  {/* Side buttons */}
-                  <div className="absolute -left-[3px] top-[100px] w-[4px] h-[30px] rounded-l" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
-                  <div className="absolute -left-[3px] top-[145px] w-[4px] h-[55px] rounded-l" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
-                  <div className="absolute -left-[3px] top-[210px] w-[4px] h-[55px] rounded-l" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
-                  <div className="absolute -right-[3px] top-[160px] w-[4px] h-[70px] rounded-r" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06))" }} />
-
-                  {/* Screen */}
-                  <div className="rounded-[3rem] overflow-hidden bg-dark-950 relative" style={{ height: 610 }}>
-                    {/* Dynamic Island */}
-                    <div className="absolute top-2 left-1/2 -translate-x-1/2 z-40">
-                      <div className="h-[32px] w-[100px] rounded-[20px] bg-black flex items-center justify-center px-4 gap-3">
-                        <div className="w-3 h-3 rounded-full bg-white/[0.08]" />
-                        <div className="w-2 h-2 rounded-full bg-accent-green/40 animate-pulse" />
-                      </div>
-                    </div>
-
-                    {/* Screen content */}
-                    <Hero3DPhoneUI />
-
-                    {/* Screen glare */}
-                    <div className="absolute inset-0 pointer-events-none rounded-[3rem]" style={{ background: "linear-gradient(115deg, rgba(255,255,255,0.08) 0%, transparent 35%, transparent 75%, rgba(255,255,255,0.02) 100%)" }} />
-                  </div>
+            <div className="relative z-20 w-full max-w-[420px]">
+              <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(34,197,94,0.25)]">
+                <Image
+                  src={LANDING_IMAGES.hero}
+                  alt="Expat using Sweezy in Zurich"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 420px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-dark-900/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-green/80 mb-1">Switzerland</p>
+                  <p className="text-lg font-bold text-white leading-snug">Your new life, simplified.</p>
                 </div>
-
-                {/* Reflection/shadow under phone */}
-                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[70%] h-[30px] rounded-[50%] bg-accent-green/15 blur-2xl" />
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -767,12 +717,12 @@ function FeaturesSection() {
   const { t } = useLocale();
 
   const features = [
-    { icon: <IconGuide />, title: t("features.f1Title"), description: t("features.f1Desc") },
-    { icon: <IconChecklist />, title: t("features.f2Title"), description: t("features.f2Desc") },
-    { icon: <IconMap />, title: t("features.f3Title"), description: t("features.f3Desc") },
-    { icon: <IconMarketplace />, title: t("features.f4Title"), description: t("features.f4Desc") },
-    { icon: <IconCV />, title: t("features.f5Title"), description: t("features.f5Desc") },
-    { icon: <IconLanguage />, title: t("features.f6Title"), description: t("features.f6Desc") },
+    { icon: <IconGuide />, image: LANDING_IMAGES.features.guides, title: t("features.f1Title"), description: t("features.f1Desc") },
+    { icon: <IconChecklist />, image: LANDING_IMAGES.features.checklists, title: t("features.f2Title"), description: t("features.f2Desc") },
+    { icon: <IconMap />, image: LANDING_IMAGES.features.map, title: t("features.f3Title"), description: t("features.f3Desc") },
+    { icon: <IconMarketplace />, image: LANDING_IMAGES.features.marketplace, title: t("features.f4Title"), description: t("features.f4Desc") },
+    { icon: <IconCV />, image: LANDING_IMAGES.features.cv, title: t("features.f5Title"), description: t("features.f5Desc") },
+    { icon: <IconLanguage />, image: LANDING_IMAGES.features.languages, title: t("features.f6Title"), description: t("features.f6Desc") },
   ];
 
   return (
@@ -821,18 +771,29 @@ function FeaturesSection() {
               variants={scaleIn}
               custom={i}
               whileHover={{ y: -8, transition: { duration: 0.35 } }}
-              className="group relative rounded-2xl glass glass-hover glow-border p-8 flex flex-col gap-5"
+              className="group relative rounded-2xl glass glass-hover glow-border overflow-hidden flex flex-col"
             >
-              <div className="absolute -top-6 -left-6 h-24 w-24 rounded-full bg-accent-green/10 blur-2xl group-hover:bg-accent-green/20 transition-all duration-700" />
-              <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-green/20 to-accent-emerald/20 border border-white/[0.06]">
-                {feature.icon}
+              <div className="relative h-44 w-full overflow-hidden">
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent" />
+                <div className="absolute bottom-4 left-5 flex h-11 w-11 items-center justify-center rounded-xl bg-dark-900/70 backdrop-blur-md border border-white/[0.08]">
+                  {feature.icon}
+                </div>
               </div>
-              <h3 className="relative z-10 text-xl font-semibold tracking-tight">
-                {feature.title}
-              </h3>
-              <p className="relative z-10 text-white/50 leading-relaxed text-[15px]">
-                {feature.description}
-              </p>
+              <div className="relative z-10 p-7 pt-5 flex flex-col gap-3 flex-1">
+                <h3 className="text-xl font-semibold tracking-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-white/50 leading-relaxed text-[15px]">
+                  {feature.description}
+                </p>
+              </div>
               <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </motion.div>
           ))}
@@ -1509,6 +1470,75 @@ function WhatsNewSection() {
   );
 }
 
+/* ── Swiss Cantons Gallery ───────────────────────────────────────────── */
+
+function CantonsSection() {
+  const { t, locale } = useLocale();
+  const cantonLabels = {
+    en: "Explore Switzerland",
+    uk: "Досліджуйте Швейцарію",
+    de: "Schweiz entdecken",
+  } as const;
+  const cantonSubtitle = {
+    en: "Local guides for every canton — from Zürich to Geneva.",
+    uk: "Локальні гайди для кожного кантону — від Цюриха до Женеви.",
+    de: "Lokale Guides für jeden Kanton — von Zürich bis Genf.",
+  } as const;
+
+  const cantons = Object.values(LANDING_IMAGES.cantons);
+
+  return (
+    <section className="relative py-24 sm:py-28 overflow-hidden cv-auto">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={staggerContainer}
+          className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+        >
+          <div>
+            <SectionBadge>{cantonLabels[locale]}</SectionBadge>
+            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              {cantonSubtitle[locale]}
+            </motion.h2>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={staggerContainer}
+          className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible"
+        >
+          {cantons.map((canton, i) => (
+            <motion.article
+              key={canton.name}
+              variants={scaleIn}
+              custom={i}
+              className="group relative flex-shrink-0 w-[280px] sm:w-auto snap-start aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.06]"
+            >
+              <Image
+                src={canton.src}
+                alt={canton.name}
+                fill
+                sizes="(max-width: 640px) 280px, 33vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-dark-900/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <p className="text-lg font-bold text-white">{canton.name}</p>
+                <p className="text-xs text-white/50 mt-0.5">{t("features.f1Title")}</p>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ── Events / Marketplace Section ─────────────────────────────────────── */
 
 function EventsMarketSection() {
@@ -1653,9 +1683,9 @@ function HowItWorksSection() {
   const { t } = useLocale();
 
   const steps = [
-    { number: "01", title: t("howItWorks.s1Title"), description: t("howItWorks.s1Desc") },
-    { number: "02", title: t("howItWorks.s2Title"), description: t("howItWorks.s2Desc") },
-    { number: "03", title: t("howItWorks.s3Title"), description: t("howItWorks.s3Desc") },
+    { number: "01", image: LANDING_IMAGES.steps.download, title: t("howItWorks.s1Title"), description: t("howItWorks.s1Desc") },
+    { number: "02", image: LANDING_IMAGES.steps.guides, title: t("howItWorks.s2Title"), description: t("howItWorks.s2Desc") },
+    { number: "03", image: LANDING_IMAGES.steps.settle, title: t("howItWorks.s3Title"), description: t("howItWorks.s3Desc") },
   ];
 
   return (
@@ -1698,10 +1728,20 @@ function HowItWorksSection() {
               key={step.number}
               variants={fadeUp}
               custom={i}
-              className="relative flex flex-col items-center text-center gap-4"
+              className="relative flex flex-col items-center text-center gap-5"
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl glass border border-white/[0.08]">
-                <span className="text-2xl font-bold text-gradient">{step.number}</span>
+              <div className="relative w-full max-w-[280px] aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.06] shadow-lg">
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  fill
+                  sizes="280px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/70 to-transparent" />
+                <div className="absolute top-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-dark-900/80 backdrop-blur-sm border border-accent-green/20">
+                  <span className="text-sm font-bold text-gradient">{step.number}</span>
+                </div>
               </div>
               <h3 className="text-lg font-semibold tracking-tight">{step.title}</h3>
               <p className="text-white/45 text-[15px] leading-relaxed max-w-xs">
@@ -1794,9 +1834,9 @@ function TestimonialsSection() {
   const { t } = useLocale();
 
   const testimonials = [
-    { quote: t("testimonials.t1Quote"), name: t("testimonials.t1Name"), role: t("testimonials.t1Role") },
-    { quote: t("testimonials.t2Quote"), name: t("testimonials.t2Name"), role: t("testimonials.t2Role") },
-    { quote: t("testimonials.t3Quote"), name: t("testimonials.t3Name"), role: t("testimonials.t3Role") },
+    { quote: t("testimonials.t1Quote"), name: t("testimonials.t1Name"), role: t("testimonials.t1Role"), avatar: LANDING_IMAGES.testimonials.olena },
+    { quote: t("testimonials.t2Quote"), name: t("testimonials.t2Name"), role: t("testimonials.t2Role"), avatar: LANDING_IMAGES.testimonials.marco },
+    { quote: t("testimonials.t3Quote"), name: t("testimonials.t3Name"), role: t("testimonials.t3Role"), avatar: LANDING_IMAGES.testimonials.sarah },
   ];
 
   return (
@@ -1852,8 +1892,14 @@ function TestimonialsSection() {
                 &ldquo;{item.quote}&rdquo;
               </p>
               <div className="flex items-center gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-accent-green/30 to-accent-emerald/30 border border-white/[0.08]">
-                  <span className="text-sm font-bold">{item.name[0]}</span>
+                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-white/[0.08]">
+                  <Image
+                    src={item.avatar}
+                    alt={item.name}
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-semibold">{item.name}</p>
@@ -1970,12 +2016,20 @@ function CTASection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="relative rounded-3xl overflow-hidden"
+          className="relative rounded-3xl overflow-hidden min-h-[420px]"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-accent-green/20 via-accent-emerald/10 to-dark-800" />
-          <div className="absolute inset-0 bg-dark-900/40" />
-          <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-accent-green/15 blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-60 h-60 rounded-full bg-accent-spring/10 blur-[80px]" />
+          <div className="absolute inset-0">
+            <Image
+              src={LANDING_IMAGES.cta}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover"
+              aria-hidden
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-dark-900/85 via-dark-900/70 to-accent-green/20" />
+          <div className="absolute inset-0 bg-dark-900/30" />
 
           <div className="relative z-10 px-8 sm:px-16 py-20 sm:py-24 text-center">
             <motion.h2
@@ -2042,6 +2096,8 @@ export default function Home() {
       <AppShowcaseSection />
       <GradientDivider />
       <WhatsNewSection />
+      <GradientDivider />
+      <CantonsSection />
       <GradientDivider />
       <EventsMarketSection />
       <GradientDivider />
