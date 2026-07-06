@@ -514,32 +514,35 @@ function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
-      <Image
-        src={LANDING_IMAGES.hero}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[center_30%]"
-        aria-hidden
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-950/70 via-dark-950/45 to-dark-950 mesh-hero" />
-      <div className="absolute inset-0 bg-gradient-to-r from-dark-950/80 via-dark-950/20 to-transparent" />
+    <>
+      <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
+        <Image
+          src={LANDING_IMAGES.hero}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_28%] photo-grade"
+          aria-hidden
+        />
+        <div className="absolute inset-0 photo-grade-overlay" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-950/55 via-transparent to-dark-950" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_100%,rgba(6,13,8,0.75),transparent_60%)]" />
 
-      <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none" aria-hidden>
-        <span className="hero-watermark text-[22vw] sm:text-[18vw] translate-y-8">SWITZERLAND</span>
-      </div>
+        <div className="absolute inset-0 flex items-end justify-center overflow-hidden pointer-events-none" aria-hidden>
+          <span className="hero-watermark text-[20vw] sm:text-[15vw] translate-y-[18%]">SWITZERLAND</span>
+        </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-8">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-end"
-        >
-          <div className="max-w-2xl">
-            <motion.div variants={fadeUp} className="mb-6">
+        <Navbar />
+
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-28 text-center">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="flex flex-col items-center max-w-3xl"
+          >
+            <motion.div variants={fadeUp} className="mb-7">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent-green animate-pulse" />
                 {t("hero.badge")}
@@ -549,18 +552,18 @@ function HeroSection() {
             <motion.h1
               variants={fadeUp}
               custom={1}
-              className="text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold tracking-[-0.03em] leading-[0.95]"
+              className="text-[clamp(3rem,8vw,6.5rem)] font-extrabold tracking-[-0.03em] leading-[0.96]"
             >
               {t("hero.title1")}
               <br />
               <span className="font-display italic font-normal text-gradient">{t("hero.title2")}</span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} custom={2} className="mt-6 text-lg sm:text-xl text-white/55 leading-relaxed max-w-lg font-light">
+            <motion.p variants={fadeUp} custom={2} className="mt-6 text-lg sm:text-xl text-white/60 leading-relaxed max-w-xl font-light">
               {t("hero.subtitle")}
             </motion.p>
 
-            <motion.div variants={fadeUp} custom={3} className="mt-10 flex flex-wrap items-center gap-4">
+            <motion.div variants={fadeUp} custom={3} className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className="pill-btn-primary gap-3">
                 <AppleLogo />
                 <span>{t("hero.appStore")}</span>
@@ -570,54 +573,40 @@ function HeroSection() {
                 <span aria-hidden>→</span>
               </a>
             </motion.div>
-          </div>
-
-          <motion.div
-            variants={fadeUp}
-            custom={2}
-            className="hidden lg:block relative"
-          >
-            <div className="relative ml-auto w-full max-w-[340px] aspect-[3/4] rounded-[2rem] overflow-hidden border border-white/15 shadow-[0_40px_100px_-30px_rgba(34,197,94,0.45)] rotate-2 hover:rotate-0 transition-transform duration-700">
-              <Image
-                src={LANDING_IMAGES.features.map}
-                alt="Sweezy app preview"
-                fill
-                sizes="340px"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-transparent to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5 nav-float px-4 py-3 flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-accent-green/20 flex items-center justify-center text-sm">✓</div>
-                <div>
-                  <p className="text-xs font-semibold">26 cantons covered</p>
-                  <p className="text-[10px] text-white/45">Local guides & checklists</p>
-                </div>
-              </div>
-            </div>
           </motion.div>
-        </motion.div>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1, duration: 0.8 }}
+          className="relative z-10 flex justify-center pb-10"
         >
-          {stats.map((stat) => (
-            <div key={stat.label} className="nav-float px-5 py-4 text-center sm:text-left">
-              <p className="text-2xl sm:text-3xl font-bold text-gradient tabular-nums">{stat.num}</p>
-              <p className="text-xs text-white/45 mt-1 font-medium">{stat.label}</p>
-            </div>
-          ))}
+          <a href="#stats" className="flex flex-col items-center gap-2 text-white/45 hover:text-white/80 transition-colors">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.25em]">Scroll</span>
+            <span className="floating-el h-8 w-px bg-white/40" style={{ ["--float-y" as string]: "6px", ["--float-d" as string]: "1.8s" }} />
+          </a>
         </motion.div>
-      </div>
+      </section>
 
-      <div className="relative z-10 flex justify-center pb-8">
-        <a href="#features" className="nav-float px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors">
-          Scroll ↓
-        </a>
-      </div>
-    </section>
+      <section id="stats" className="relative border-y border-white/[0.06] bg-dark-900/40">
+        <div className="mx-auto max-w-7xl px-6 grid grid-cols-2 sm:grid-cols-4 divide-x divide-white/[0.06]">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="px-4 sm:px-8 py-8 sm:py-10 text-center"
+            >
+              <p className="text-3xl sm:text-4xl font-bold text-gradient tabular-nums font-display">{stat.num}</p>
+              <p className="text-xs sm:text-sm text-white/40 mt-1.5 font-medium">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -692,8 +681,9 @@ function FeaturesSection() {
                   alt={feature.title}
                   fill
                   sizes={i === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 25vw"}
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 photo-grade"
                 />
+                <div className="absolute inset-0 photo-grade-overlay" aria-hidden />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/50 to-dark-950/10" />
               </div>
               <div className="relative z-10 p-6 sm:p-7">
@@ -1376,58 +1366,58 @@ function CantonsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
-          className="mb-16 grid gap-6 lg:grid-cols-[1fr_0.6fr] lg:items-end"
+          className="mb-16 flex flex-col items-end text-right ml-auto max-w-2xl"
         >
-          <div>
-            <motion.p variants={fadeUp} className="editorial-label mb-4">{cantonLabels[locale]}</motion.p>
-            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
-              {cantonSubtitle[locale].includes("—") ? (
-                <>
-                  {cantonSubtitle[locale].split("—")[0]}
-                  <span className="font-display italic font-normal text-gradient"> —{cantonSubtitle[locale].split("—")[1]}</span>
-                </>
-              ) : (
-                cantonSubtitle[locale]
-              )}
-            </motion.h2>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={staggerContainer}
-          className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 scrollbar-hide"
-        >
-          {cantons.map((canton, i) => (
-            <motion.article
-              key={canton.name}
-              variants={scaleIn}
-              custom={i}
-              className="group relative flex-shrink-0 w-[min(85vw,380px)] snap-start aspect-[3/4] rounded-[1.75rem] overflow-hidden border border-white/[0.08]"
-            >
-              <Image
-                src={canton.src}
-                alt={canton.name}
-                fill
-                sizes="380px"
-                className="object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/30 to-transparent" />
-              <div className="absolute inset-0 flex items-end overflow-hidden pointer-events-none" aria-hidden>
-                <span className="canton-watermark text-[4.5rem] sm:text-[5rem] -mb-4 ml-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-700">
-                  {canton.name.split(" ")[0].slice(0, 4)}
-                </span>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
-                <p className="text-2xl sm:text-3xl font-bold tracking-tight">{canton.name}</p>
-                <p className="text-sm text-white/45 mt-1">{t("features.f1Title")}</p>
-              </div>
-            </motion.article>
-          ))}
+          <motion.p variants={fadeUp} className="editorial-label mb-4">{cantonLabels[locale]}</motion.p>
+          <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+            {cantonSubtitle[locale].includes("—") ? (
+              <>
+                {cantonSubtitle[locale].split("—")[0]}
+                <span className="font-display italic font-normal text-gradient"> —{cantonSubtitle[locale].split("—")[1]}</span>
+              </>
+            ) : (
+              cantonSubtitle[locale]
+            )}
+          </motion.h2>
         </motion.div>
       </div>
+
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={staggerContainer}
+        className="full-bleed flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory pl-6 pr-6 sm:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] scrollbar-hide"
+      >
+        {cantons.map((canton, i) => (
+          <motion.article
+            key={canton.name}
+            variants={scaleIn}
+            custom={i}
+            className="group relative flex-shrink-0 w-[min(80vw,420px)] snap-start aspect-[3/4] rounded-[1.75rem] overflow-hidden border border-white/[0.08]"
+          >
+            <Image
+              src={canton.src}
+              alt={canton.name}
+              fill
+              sizes="420px"
+              className="object-cover transition-transform duration-1000 group-hover:scale-110 photo-grade"
+            />
+            <div className="absolute inset-0 photo-grade-overlay" aria-hidden />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/30 to-transparent" />
+            <div className="absolute inset-0 flex items-end overflow-hidden pointer-events-none" aria-hidden>
+              <span className="canton-watermark text-[4.5rem] sm:text-[5rem] -mb-4 ml-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-700">
+                {canton.name.split(" ")[0].slice(0, 4)}
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
+              <p className="text-2xl sm:text-3xl font-bold tracking-tight">{canton.name}</p>
+              <p className="text-sm text-white/45 mt-1">{t("features.f1Title")}</p>
+            </div>
+          </motion.article>
+        ))}
+        <div className="flex-shrink-0 w-6 sm:w-1" aria-hidden />
+      </motion.div>
     </section>
   );
 }
@@ -1569,7 +1559,8 @@ function HowItWorksSection() {
                 className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${i % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}
               >
                 <div className="relative aspect-[4/3] rounded-[1.75rem] overflow-hidden border border-white/[0.08] shadow-[0_30px_80px_-40px_rgba(34,197,94,0.4)]">
-                  <Image src={step.image} alt={step.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                  <Image src={step.image} alt={step.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover photo-grade" />
+                  <div className="absolute inset-0 photo-grade-overlay" aria-hidden />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-950/60 to-transparent" />
                   <span className="absolute top-5 left-5 nav-float px-4 py-2 text-sm font-bold text-gradient tabular-nums">{step.number}</span>
                 </div>
@@ -1811,8 +1802,9 @@ function CTASection() {
           className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden min-h-[480px] sm:min-h-[520px] flex items-center"
         >
           <div className="absolute inset-0">
-            <Image src={LANDING_IMAGES.cta} alt="" fill sizes="100vw" className="object-cover scale-105" aria-hidden />
+            <Image src={LANDING_IMAGES.cta} alt="" fill sizes="100vw" className="object-cover scale-105 photo-grade" aria-hidden />
           </div>
+          <div className="absolute inset-0 photo-grade-overlay" aria-hidden />
           <div className="absolute inset-0 bg-gradient-to-r from-dark-950/95 via-dark-950/70 to-dark-950/30" />
           <div className="absolute inset-0 mesh-hero opacity-60" />
 
@@ -1851,7 +1843,6 @@ export default function Home() {
 
   return (
     <main>
-      <Navbar />
       <HeroSection />
       <StatsSection />
       <FeaturesSection />
