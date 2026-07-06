@@ -278,107 +278,91 @@ function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -20, opacity: 0 }}
+      initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
-      className="fixed top-0 left-0 right-0 z-50"
+      transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
+      className="fixed top-5 left-0 right-0 z-50 px-4 sm:px-6"
     >
-      <div className="mx-auto max-w-7xl px-6 py-4">
-        <div className="rounded-2xl glass px-6 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <a href={`/${locale}`} className="flex items-center gap-2.5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
-                  <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
-                </div>
-                <span className="text-lg font-bold tracking-tight leading-none">Sweezy</span>
-              </a>
+      <div className="mx-auto max-w-6xl nav-float px-4 sm:px-6 py-2.5">
+        <div className="flex items-center justify-between gap-4">
+          <a href={`/${locale}`} className="flex items-center gap-2.5 shrink-0">
+            <BrandLogo variant="mark" className="h-8 w-8 object-cover rounded-lg" />
+            <span className="text-base font-bold tracking-tight">Sweezy</span>
+          </a>
+
+          <div className="hidden lg:flex items-center gap-7">
+            {navLinks.slice(0, 4).map((link) => (
               <a
-                href="https://www.aiinsider.it.com"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="hidden sm:inline-flex text-[10px] text-white/25 hover:text-accent-green/60 transition-colors duration-300"
+                key={link.href}
+                href={link.href}
+                className="text-[13px] font-medium text-white/55 hover:text-white transition-colors"
               >
-                by AI Insider
+                {link.label}
               </a>
-            </div>
-
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="hidden lg:flex items-center gap-4">
-              <ThemeToggle />
-              <LanguageSwitcher />
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 rounded-xl bg-accent-green/10 hover:bg-accent-green/20 border border-accent-green/20 px-5 py-2 text-sm font-medium text-accent-green transition-all duration-300"
-              >
-                {t("nav.getApp")}
-              </a>
-            </div>
-
-            <div className="flex lg:hidden items-center gap-3">
-              <ThemeToggle />
-              <LanguageSwitcher />
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] border border-white/[0.06]"
-                aria-label="Toggle menu"
-              >
-                <div className="flex flex-col gap-1.5">
-                  <span className={`block h-0.5 w-5 bg-white/70 rounded transition-all duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`} />
-                  <span className={`block h-0.5 w-5 bg-white/70 rounded transition-all duration-300 ${isOpen ? "opacity-0" : ""}`} />
-                  <span className={`block h-0.5 w-5 bg-white/70 rounded transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-                </div>
-              </button>
-            </div>
+            ))}
           </div>
 
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden lg:hidden"
-              >
-                <div className="pt-4 pb-2 flex flex-col gap-3 border-t border-white/[0.06] mt-3">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-sm text-white/60 hover:text-white transition-colors duration-300 py-2"
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                  <a
-                    href={APP_STORE_URL}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    onClick={() => setIsOpen(false)}
-                    className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-accent-green/10 hover:bg-accent-green/20 border border-accent-green/20 px-5 py-3 text-sm font-medium text-accent-green transition-all duration-300"
-                  >
-                    {t("nav.getApp")}
-                  </a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
+            <LanguageSwitcher />
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="pill-btn bg-dark-950 text-white text-sm px-5 py-2 border border-white/10 hover:bg-dark-800"
+            >
+              {t("nav.getApp")}
+            </a>
+          </div>
+
+          <div className="flex lg:hidden items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 border border-white/10"
+              aria-label="Toggle menu"
+            >
+              <div className="flex flex-col gap-1">
+                <span className={`block h-0.5 w-4 bg-white/80 rounded transition-all ${isOpen ? "rotate-45 translate-y-1.5" : ""}`} />
+                <span className={`block h-0.5 w-4 bg-white/80 rounded transition-all ${isOpen ? "opacity-0" : ""}`} />
+                <span className={`block h-0.5 w-4 bg-white/80 rounded transition-all ${isOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
+              </div>
+            </button>
+          </div>
         </div>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden lg:hidden"
+            >
+              <div className="pt-4 pb-1 flex flex-col gap-1 border-t border-white/10 mt-3">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-sm text-white/65 hover:text-white py-2.5 px-1"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <LanguageSwitcher className="mt-2 w-full justify-center" />
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="mt-3 pill-btn-primary w-full text-sm py-3"
+                >
+                  {t("nav.getApp")}
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
@@ -522,159 +506,6 @@ function FloatingElement({
 function HeroSection() {
   const { t } = useLocale();
 
-  return (
-    <section className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
-        {/* Dramatic background */}
-      <div className="absolute inset-0" aria-hidden="true">
-        {/* Accent blobs — two layers with moderate blur, GPU-friendly */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent-green/15 blur-[80px] animate-blob" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-accent-emerald/10 blur-[60px] animate-blob animation-delay-2000" />
-        
-        {/* Grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(34,197,94,0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(34,197,94,0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
-          }}
-        />
-        
-        {/* Radial fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-900/0 via-dark-900/50 to-dark-900" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left content */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="flex flex-col items-start"
-          >
-            <SectionBadge>{t("hero.badge")}</SectionBadge>
-
-            <motion.h1
-              variants={fadeUp}
-              custom={0}
-              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05]"
-            >
-              {t("hero.title1")}
-              <br />
-              <span className="text-gradient">{t("hero.title2")}</span>
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              custom={1}
-              className="mt-6 text-lg sm:text-xl text-white/40 leading-relaxed max-w-xl"
-            >
-              {t("hero.subtitle")}
-            </motion.p>
-
-            <motion.div variants={fadeUp} custom={2} className="mt-10 flex flex-wrap gap-4">
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-7 py-4 text-dark-900 font-semibold text-[15px] transition-all duration-300 hover:scale-[1.02] hover:shadow-glow active:scale-[0.98]"
-              >
-                <AppleLogo />
-                <div className="flex flex-col items-start leading-tight">
-                  <span className="text-[11px] font-normal opacity-60">{t("hero.downloadOn")}</span>
-                  <span>{t("hero.appStore")}</span>
-                </div>
-              </a>
-              <a
-                href="#features"
-                className="group inline-flex items-center gap-2 rounded-2xl glass border border-white/10 px-7 py-4 text-[15px] font-semibold text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300"
-              >
-                {t("hero.learnMore")}
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
-                  <path d="M6 12l4-4-4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </motion.div>
-
-            <motion.p variants={fadeUp} custom={3} className="mt-8 text-xs text-white/25">
-              <a
-                href="https://www.aiinsider.it.com"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="hover:text-accent-green/60 transition-colors duration-300"
-              >
-                {t("hero.madeBy")}
-              </a>
-            </motion.p>
-          </motion.div>
-
-          {/* Right: editorial hero visual */}
-          <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.25, ease: [0.25, 0.4, 0.25, 1] }}
-            className="relative flex items-center justify-center lg:justify-end"
-          >
-            <FloatingElement className="absolute -top-2 -left-6 lg:left-2 z-30 hidden sm:block" delay={1.2} duration={5} y={10}>
-              <div className="rounded-2xl bg-dark-900/90 border border-purple-500/20 px-4 py-3 flex items-center gap-3 shadow-xl backdrop-blur-md">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-lg">📋</span>
-                </div>
-                <div>
-                  <p className="text-white text-xs font-semibold">50+ guides</p>
-                  <p className="text-white/40 text-[10px]">step by step</p>
-                </div>
-              </div>
-            </FloatingElement>
-
-            <FloatingElement className="absolute bottom-8 -left-2 lg:left-6 z-30 hidden sm:block" delay={1.5} duration={6} y={8}>
-              <div className="rounded-2xl bg-dark-900/90 border border-accent-green/20 px-4 py-3 flex items-center gap-3 shadow-xl backdrop-blur-md">
-                <div className="w-10 h-10 rounded-xl bg-accent-green/30 flex items-center justify-center flex-shrink-0">
-                  <span className="text-lg">✓</span>
-                </div>
-                <div>
-                  <p className="text-white text-xs font-semibold">26 cantons</p>
-                  <p className="text-white/40 text-[10px]">local guides</p>
-                </div>
-              </div>
-            </FloatingElement>
-
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="h-[420px] w-[300px] rounded-full bg-accent-green/12 blur-[60px]" />
-            </div>
-
-            <div className="relative z-20 w-full max-w-[420px]">
-              <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/[0.08] shadow-[0_40px_80px_-20px_rgba(34,197,94,0.25)]">
-                <Image
-                  src={LANDING_IMAGES.hero}
-                  alt="Expat using Sweezy in Zurich"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 90vw, 420px"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-dark-900/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-green/80 mb-1">Switzerland</p>
-                  <p className="text-lg font-bold text-white leading-snug">Your new life, simplified.</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── Stats Section ───────────────────────────────────────────────────── */
-
-function StatsSection() {
-  const { t } = useLocale();
-
   const stats = [
     { num: t("stats.guidesNum"), label: t("stats.guides") },
     { num: t("stats.cantonsNum"), label: t("stats.cantons") },
@@ -683,32 +514,117 @@ function StatsSection() {
   ];
 
   return (
-    <section className="relative py-16 overflow-hidden">
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+    <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+      <Image
+        src={LANDING_IMAGES.hero}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[center_30%]"
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-950/70 via-dark-950/45 to-dark-950 mesh-hero" />
+      <div className="absolute inset-0 bg-gradient-to-r from-dark-950/80 via-dark-950/20 to-transparent" />
+
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none" aria-hidden>
+        <span className="hero-watermark text-[22vw] sm:text-[18vw] translate-y-8">SWITZERLAND</span>
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-8">
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          animate="visible"
           variants={staggerContainer}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-end"
         >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              variants={fadeUp}
-              custom={i}
-              className="flex flex-col items-center text-center gap-2 py-6"
-            >
-              <span className="text-4xl sm:text-5xl font-extrabold text-gradient">
-                {stat.num}
+          <div className="max-w-2xl">
+            <motion.div variants={fadeUp} className="mb-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur-md">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-green animate-pulse" />
+                {t("hero.badge")}
               </span>
-              <span className="text-sm text-white/40 font-medium">{stat.label}</span>
             </motion.div>
+
+            <motion.h1
+              variants={fadeUp}
+              custom={1}
+              className="text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold tracking-[-0.03em] leading-[0.95]"
+            >
+              {t("hero.title1")}
+              <br />
+              <span className="font-display italic font-normal text-gradient">{t("hero.title2")}</span>
+            </motion.h1>
+
+            <motion.p variants={fadeUp} custom={2} className="mt-6 text-lg sm:text-xl text-white/55 leading-relaxed max-w-lg font-light">
+              {t("hero.subtitle")}
+            </motion.p>
+
+            <motion.div variants={fadeUp} custom={3} className="mt-10 flex flex-wrap items-center gap-4">
+              <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className="pill-btn-primary gap-3">
+                <AppleLogo />
+                <span>{t("hero.appStore")}</span>
+              </a>
+              <a href="#features" className="pill-btn-ghost text-[15px]">
+                {t("hero.learnMore")}
+                <span aria-hidden>→</span>
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={fadeUp}
+            custom={2}
+            className="hidden lg:block relative"
+          >
+            <div className="relative ml-auto w-full max-w-[340px] aspect-[3/4] rounded-[2rem] overflow-hidden border border-white/15 shadow-[0_40px_100px_-30px_rgba(34,197,94,0.45)] rotate-2 hover:rotate-0 transition-transform duration-700">
+              <Image
+                src={LANDING_IMAGES.features.map}
+                alt="Sweezy app preview"
+                fill
+                sizes="340px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 nav-float px-4 py-3 flex items-center gap-3">
+                <div className="h-9 w-9 rounded-full bg-accent-green/20 flex items-center justify-center text-sm">✓</div>
+                <div>
+                  <p className="text-xs font-semibold">26 cantons covered</p>
+                  <p className="text-[10px] text-white/45">Local guides & checklists</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3"
+        >
+          {stats.map((stat) => (
+            <div key={stat.label} className="nav-float px-5 py-4 text-center sm:text-left">
+              <p className="text-2xl sm:text-3xl font-bold text-gradient tabular-nums">{stat.num}</p>
+              <p className="text-xs text-white/45 mt-1 font-medium">{stat.label}</p>
+            </div>
           ))}
         </motion.div>
       </div>
+
+      <div className="relative z-10 flex justify-center pb-8">
+        <a href="#features" className="nav-float px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors">
+          Scroll ↓
+        </a>
+      </div>
     </section>
   );
+}
+
+/* ── Stats Section (merged into hero) ────────────────────────────────── */
+
+function StatsSection() {
+  return null;
 }
 
 /* ── Features Section ────────────────────────────────────────────────── */
@@ -725,35 +641,33 @@ function FeaturesSection() {
     { icon: <IconLanguage />, image: LANDING_IMAGES.features.languages, title: t("features.f6Title"), description: t("features.f6Desc") },
   ];
 
-  return (
-    <section id="features" className="relative py-32 overflow-hidden">
-      <GradientBlob
-        className="w-[600px] h-[600px] top-0 left-1/2 -translate-x-1/2"
-        colors="from-accent-green/20 via-accent-emerald/10 to-transparent"
-      />
+  const bentoSpans = [
+    "md:col-span-2 md:row-span-2 min-h-[420px]",
+    "min-h-[200px]",
+    "min-h-[200px]",
+    "md:col-span-2 min-h-[220px]",
+    "min-h-[200px]",
+    "min-h-[200px]",
+  ];
 
+  return (
+    <section id="features" className="relative py-28 sm:py-36 overflow-hidden">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-20"
+          className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end mb-14"
         >
-          <SectionBadge>{t("features.badge")}</SectionBadge>
-          <motion.h2
-            variants={fadeUp}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight"
-          >
-            {t("features.title1")}
-            <br />
-            <span className="text-gradient">{t("features.title2")}</span>
-          </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            custom={1}
-            className="mt-5 text-lg text-white/40 max-w-xl mx-auto"
-          >
+          <div>
+            <motion.p variants={fadeUp} className="editorial-label mb-4">{t("features.badge")}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {t("features.title1")}{" "}
+              <span className="font-display italic font-normal text-gradient">{t("features.title2")}</span>
+            </motion.h2>
+          </div>
+          <motion.p variants={fadeUp} custom={2} className="text-lg text-white/45 leading-relaxed lg:pb-2">
             {t("features.subtitle")}
           </motion.p>
         </motion.div>
@@ -761,41 +675,37 @@ function FeaturesSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-[repeat(3,minmax(0,1fr))] gap-4"
         >
           {features.map((feature, i) => (
-            <motion.div
+            <motion.article
               key={feature.title}
               variants={scaleIn}
               custom={i}
-              whileHover={{ y: -8, transition: { duration: 0.35 } }}
-              className="group relative rounded-2xl glass glass-hover glow-border overflow-hidden flex flex-col"
+              className={`group bento-card flex flex-col justify-end ${bentoSpans[i]}`}
             >
-              <div className="relative h-44 w-full overflow-hidden">
+              <div className="absolute inset-0">
                 <Image
                   src={feature.image}
                   alt={feature.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes={i === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 25vw"}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent" />
-                <div className="absolute bottom-4 left-5 flex h-11 w-11 items-center justify-center rounded-xl bg-dark-900/70 backdrop-blur-md border border-white/[0.08]">
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/50 to-dark-950/10" />
+              </div>
+              <div className="relative z-10 p-6 sm:p-7">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/10">
                   {feature.icon}
                 </div>
-              </div>
-              <div className="relative z-10 p-7 pt-5 flex flex-col gap-3 flex-1">
-                <h3 className="text-xl font-semibold tracking-tight">
-                  {feature.title}
-                </h3>
-                <p className="text-white/50 leading-relaxed text-[15px]">
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight">{feature.title}</h3>
+                <p className="mt-2 text-sm sm:text-[15px] text-white/55 leading-relaxed max-w-md">
                   {feature.description}
                 </p>
               </div>
-              <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            </motion.div>
+            </motion.article>
           ))}
         </motion.div>
       </div>
@@ -1184,15 +1094,16 @@ function AppShowcaseSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-16 sm:mb-24"
+          className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end mb-16 sm:mb-20"
         >
-          <SectionBadge>{t("appShowcase.badge")}</SectionBadge>
-          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-            {t("appShowcase.title1")}
-            <br />
-            <span className="text-gradient">{t("appShowcase.title2")}</span>
-          </motion.h2>
-          <motion.p variants={fadeUp} custom={1} className="mt-5 text-lg text-white/40 max-w-xl mx-auto">
+          <div>
+            <motion.p variants={fadeUp} className="editorial-label mb-4">{t("appShowcase.badge")}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {t("appShowcase.title1")}{" "}
+              <span className="font-display italic font-normal text-gradient">{t("appShowcase.title2")}</span>
+            </motion.h2>
+          </div>
+          <motion.p variants={fadeUp} custom={2} className="text-lg text-white/45 leading-relaxed">
             {t("appShowcase.subtitle")}
           </motion.p>
         </motion.div>
@@ -1390,77 +1301,47 @@ function WhatsNewSection() {
   ];
 
   return (
-    <section id="whats-new" className="relative py-28 sm:py-32 overflow-hidden cv-auto">
-      <GradientBlob
-        className="w-[560px] h-[560px] top-10 left-0 -translate-x-1/3"
-        colors="from-accent-green/20 via-accent-emerald/10 to-transparent"
-      />
-
+    <section id="whats-new" className="relative py-28 sm:py-36 overflow-hidden cv-auto section-mesh">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end"
+          className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end mb-12"
         >
           <div>
-            <SectionBadge>{t("whatsNew.badge")}</SectionBadge>
-            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-              {t("whatsNew.title1")}
-              <br />
-              <span className="text-gradient">{t("whatsNew.title2")}</span>
+            <motion.p variants={fadeUp} className="editorial-label mb-4">{t("whatsNew.badge")}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {t("whatsNew.title1")}{" "}
+              <span className="font-display italic font-normal text-gradient">{t("whatsNew.title2")}</span>
             </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              custom={1}
-              className="mt-5 max-w-2xl text-lg leading-8 text-white/45"
-            >
-              {t("whatsNew.subtitle")}
-            </motion.p>
           </div>
-
-          <motion.div
-            variants={fadeUp}
-            custom={2}
-            className="rounded-3xl border border-accent-green/15 bg-white/[0.03] p-6 sm:p-7"
-          >
+          <motion.div variants={fadeUp} custom={2} className="nav-float p-6 sm:p-7">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex rounded-full border border-accent-green/20 bg-accent-green/10 px-3 py-1 text-xs font-semibold text-accent-green">
+              <span className="inline-flex rounded-full bg-accent-green/15 px-3 py-1 text-xs font-semibold text-accent-green">
                 {t("whatsNew.releaseLabel")}
               </span>
-              <span className="text-xs uppercase tracking-[0.2em] text-white/25">
-                {t("whatsNew.releaseValue")}
-              </span>
+              <span className="text-xs uppercase tracking-[0.2em] text-white/30">{t("whatsNew.releaseValue")}</span>
             </div>
-            <p className="mt-5 text-base leading-8 text-white/60">{t("whatsNew.lead")}</p>
+            <p className="mt-4 text-[15px] leading-7 text-white/55">{t("whatsNew.lead")}</p>
           </motion.div>
         </motion.div>
 
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
-          className="mt-10 grid gap-6 lg:grid-cols-3"
+          className="grid gap-4 lg:grid-cols-3"
         >
           {cards.map((card, i) => (
-            <motion.article
-              key={card.title}
-              variants={scaleIn}
-              custom={i}
-              whileHover={{ y: -6, transition: { duration: 0.28 } }}
-              className="group relative overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.03] p-7"
-            >
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${card.glow} opacity-70 transition-opacity duration-500 group-hover:opacity-100`}
-              />
+            <motion.article key={card.title} variants={scaleIn} custom={i} className="bento-card p-7 sm:p-8 group">
+              <div className={`absolute inset-0 bg-gradient-to-br ${card.glow} opacity-50 group-hover:opacity-80 transition-opacity duration-500`} />
               <div className="relative z-10">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.05] text-2xl">
-                  {card.icon}
-                </div>
-                <h3 className="mt-6 text-2xl font-semibold tracking-tight">{card.title}</h3>
-                <p className="mt-4 text-[15px] leading-7 text-white/55">{card.description}</p>
+                <span className="text-3xl">{card.icon}</span>
+                <h3 className="mt-5 text-xl sm:text-2xl font-bold tracking-tight">{card.title}</h3>
+                <p className="mt-3 text-[15px] leading-7 text-white/55">{card.description}</p>
               </div>
             </motion.article>
           ))}
@@ -1488,19 +1369,26 @@ function CantonsSection() {
   const cantons = Object.values(LANDING_IMAGES.cantons);
 
   return (
-    <section className="relative py-24 sm:py-28 overflow-hidden cv-auto">
+    <section className="relative py-28 sm:py-36 overflow-hidden cv-auto section-mesh">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
-          className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+          className="mb-16 grid gap-6 lg:grid-cols-[1fr_0.6fr] lg:items-end"
         >
           <div>
-            <SectionBadge>{cantonLabels[locale]}</SectionBadge>
-            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-              {cantonSubtitle[locale]}
+            <motion.p variants={fadeUp} className="editorial-label mb-4">{cantonLabels[locale]}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {cantonSubtitle[locale].includes("—") ? (
+                <>
+                  {cantonSubtitle[locale].split("—")[0]}
+                  <span className="font-display italic font-normal text-gradient"> —{cantonSubtitle[locale].split("—")[1]}</span>
+                </>
+              ) : (
+                cantonSubtitle[locale]
+              )}
             </motion.h2>
           </div>
         </motion.div>
@@ -1510,26 +1398,31 @@ function CantonsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           variants={staggerContainer}
-          className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible"
+          className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 scrollbar-hide"
         >
           {cantons.map((canton, i) => (
             <motion.article
               key={canton.name}
               variants={scaleIn}
               custom={i}
-              className="group relative flex-shrink-0 w-[280px] sm:w-auto snap-start aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.06]"
+              className="group relative flex-shrink-0 w-[min(85vw,380px)] snap-start aspect-[3/4] rounded-[1.75rem] overflow-hidden border border-white/[0.08]"
             >
               <Image
                 src={canton.src}
                 alt={canton.name}
                 fill
-                sizes="(max-width: 640px) 280px, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="380px"
+                className="object-cover transition-transform duration-1000 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-dark-900/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5">
-                <p className="text-lg font-bold text-white">{canton.name}</p>
-                <p className="text-xs text-white/50 mt-0.5">{t("features.f1Title")}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/30 to-transparent" />
+              <div className="absolute inset-0 flex items-end overflow-hidden pointer-events-none" aria-hidden>
+                <span className="canton-watermark text-[4.5rem] sm:text-[5rem] -mb-4 ml-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-700">
+                  {canton.name.split(" ")[0].slice(0, 4)}
+                </span>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
+                <p className="text-2xl sm:text-3xl font-bold tracking-tight">{canton.name}</p>
+                <p className="text-sm text-white/45 mt-1">{t("features.f1Title")}</p>
               </div>
             </motion.article>
           ))}
@@ -1557,74 +1450,48 @@ function EventsMarketSection() {
   ];
 
   return (
-    <section className="relative py-28 sm:py-32 overflow-hidden cv-auto">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.12),transparent_42%)]" />
-
+    <section className="relative py-28 sm:py-36 overflow-hidden cv-auto">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-16 sm:mb-20"
+          className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end mb-16"
         >
-          <SectionBadge>{t("eventsMarket.badge")}</SectionBadge>
-          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-            {t("eventsMarket.title1")}
-            <br />
-            <span className="text-gradient">{t("eventsMarket.title2")}</span>
-          </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            custom={1}
-            className="mt-5 max-w-3xl mx-auto text-lg leading-8 text-white/40"
-          >
+          <div>
+            <motion.p variants={fadeUp} className="editorial-label mb-4">{t("eventsMarket.badge")}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {t("eventsMarket.title1")}{" "}
+              <span className="font-display italic font-normal text-gradient">{t("eventsMarket.title2")}</span>
+            </motion.h2>
+          </div>
+          <motion.p variants={fadeUp} custom={2} className="text-lg text-white/45 leading-relaxed">
             {t("eventsMarket.subtitle")}
           </motion.p>
         </motion.div>
 
-        <div className="grid gap-7 lg:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-2">
           <motion.article
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
-            className="relative overflow-hidden rounded-[2rem] border border-accent-green/15 bg-[#111a15] p-7 sm:p-8"
+            className="bento-card p-8 sm:p-10 min-h-[420px] flex flex-col justify-between"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.22),transparent_40%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.15),transparent_50%)]" />
             <div className="relative z-10">
-              <div className="flex items-center justify-between gap-4">
-                <div className="inline-flex items-center gap-3">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-green/15 border border-accent-green/20 text-2xl">
-                    🎟️
-                  </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.24em] text-accent-green/70">
-                      {t("eventsMarket.eventsStat1")}
-                    </p>
-                    <h3 className="mt-1 text-3xl font-bold tracking-tight">{t("eventsMarket.eventsTitle")}</h3>
-                  </div>
+              <p className="editorial-label mb-3">{t("eventsMarket.eventsStat1")}</p>
+              <h3 className="text-3xl sm:text-4xl font-bold tracking-tight">{t("eventsMarket.eventsTitle")}</h3>
+              <p className="mt-4 text-[15px] leading-8 text-white/55 max-w-md">{t("eventsMarket.eventsDesc")}</p>
+            </div>
+            <div className="relative z-10 mt-8 space-y-2.5">
+              {eventPoints.map((point) => (
+                <div key={point} className="flex items-center gap-3 nav-float px-4 py-3">
+                  <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent-green" />
+                  <p className="text-sm text-white/65">{point}</p>
                 </div>
-                <span className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-semibold text-white/60">
-                  {t("eventsMarket.eventsStat2")}
-                </span>
-              </div>
-
-              <p className="mt-6 text-[15px] leading-8 text-white/60">
-                {t("eventsMarket.eventsDesc")}
-              </p>
-
-              <div className="mt-7 space-y-3">
-                {eventPoints.map((point) => (
-                  <div
-                    key={point}
-                    className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-3"
-                  >
-                    <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-accent-green" />
-                    <p className="text-sm leading-7 text-white/62">{point}</p>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
           </motion.article>
 
@@ -1633,42 +1500,21 @@ function EventsMarketSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.08, ease: [0.25, 0.4, 0.25, 1] }}
-            className="relative overflow-hidden rounded-[2rem] border border-amber-400/15 bg-[#171511] p-7 sm:p-8"
+            className="bento-card p-8 sm:p-10 min-h-[420px] flex flex-col justify-between"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(245,158,11,0.18),transparent_40%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(245,158,11,0.12),transparent_50%)]" />
             <div className="relative z-10">
-              <div className="flex items-center justify-between gap-4">
-                <div className="inline-flex items-center gap-3">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-400/15 border border-amber-300/20 text-2xl">
-                    🛍️
-                  </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.24em] text-amber-300/70">
-                      {t("eventsMarket.marketStat1")}
-                    </p>
-                    <h3 className="mt-1 text-3xl font-bold tracking-tight">{t("eventsMarket.marketTitle")}</h3>
-                  </div>
+              <p className="editorial-label mb-3 text-amber-300/80">{t("eventsMarket.marketStat1")}</p>
+              <h3 className="text-3xl sm:text-4xl font-bold tracking-tight">{t("eventsMarket.marketTitle")}</h3>
+              <p className="mt-4 text-[15px] leading-8 text-white/55 max-w-md">{t("eventsMarket.marketDesc")}</p>
+            </div>
+            <div className="relative z-10 mt-8 space-y-2.5">
+              {marketPoints.map((point) => (
+                <div key={point} className="flex items-center gap-3 nav-float px-4 py-3">
+                  <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-300" />
+                  <p className="text-sm text-white/65">{point}</p>
                 </div>
-                <span className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs font-semibold text-white/60">
-                  {t("eventsMarket.marketStat2")}
-                </span>
-              </div>
-
-              <p className="mt-6 text-[15px] leading-8 text-white/60">
-                {t("eventsMarket.marketDesc")}
-              </p>
-
-              <div className="mt-7 space-y-3">
-                {marketPoints.map((point) => (
-                  <div
-                    key={point}
-                    className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-3"
-                  >
-                    <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-amber-300" />
-                    <p className="text-sm leading-7 text-white/62">{point}</p>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
           </motion.article>
         </div>
@@ -1689,67 +1535,52 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="relative py-32 overflow-hidden cv-auto">
+    <section id="how-it-works" className="relative py-28 sm:py-36 overflow-hidden cv-auto section-mesh">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-20"
+          className="mb-16"
         >
-          <SectionBadge>{t("howItWorks.badge")}</SectionBadge>
-          <motion.h2
-            variants={fadeUp}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight"
-          >
-            {t("howItWorks.title1")}
-            <br />
-            <span className="text-gradient">{t("howItWorks.title2")}</span>
+          <motion.p variants={fadeUp} className="editorial-label mb-4">{t("howItWorks.badge")}</motion.p>
+          <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05] max-w-3xl">
+            {t("howItWorks.title1")}{" "}
+            <span className="font-display italic font-normal text-gradient">{t("howItWorks.title2")}</span>
           </motion.h2>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="relative grid md:grid-cols-3 gap-12 md:gap-8"
-        >
-          <div
-            className="hidden md:block absolute top-8 left-[20%] right-[20%] h-px"
-            aria-hidden="true"
-          >
-            <div className="h-full w-full bg-gradient-to-r from-accent-green/30 via-accent-emerald/20 to-accent-green/30" />
-          </div>
+        <div className="relative">
+          <div className="hidden lg:block absolute left-[calc(33.33%-1px)] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent-green/30 to-transparent" aria-hidden />
 
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              variants={fadeUp}
-              custom={i}
-              className="relative flex flex-col items-center text-center gap-5"
-            >
-              <div className="relative w-full max-w-[280px] aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.06] shadow-lg">
-                <Image
-                  src={step.image}
-                  alt={step.title}
-                  fill
-                  sizes="280px"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/70 to-transparent" />
-                <div className="absolute top-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-dark-900/80 backdrop-blur-sm border border-accent-green/20">
-                  <span className="text-sm font-bold text-gradient">{step.number}</span>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
+            className="space-y-16 lg:space-y-24"
+          >
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                variants={fadeUp}
+                custom={i}
+                className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${i % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}
+              >
+                <div className="relative aspect-[4/3] rounded-[1.75rem] overflow-hidden border border-white/[0.08] shadow-[0_30px_80px_-40px_rgba(34,197,94,0.4)]">
+                  <Image src={step.image} alt={step.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-950/60 to-transparent" />
+                  <span className="absolute top-5 left-5 nav-float px-4 py-2 text-sm font-bold text-gradient tabular-nums">{step.number}</span>
                 </div>
-              </div>
-              <h3 className="text-lg font-semibold tracking-tight">{step.title}</h3>
-              <p className="text-white/45 text-[15px] leading-relaxed max-w-xs">
-                {step.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+                <div className="lg:px-6">
+                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">{step.title}</h3>
+                  <p className="mt-4 text-white/50 text-[15px] sm:text-base leading-relaxed max-w-md">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -1761,67 +1592,40 @@ function ComingSoonSection() {
   const { t } = useLocale();
 
   return (
-    <section className="relative py-32 overflow-hidden cv-auto">
-      <GradientBlob
-        className="w-[500px] h-[500px] top-0 right-0"
-        colors="from-accent-spring/15 via-accent-teal/10 to-transparent"
-      />
-
-      <div className="relative z-10 mx-auto max-w-3xl px-6">
+    <section className="relative py-28 sm:py-36 overflow-hidden cv-auto">
+      <div className="relative z-10 mx-auto max-w-4xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="rounded-3xl glass-green glow-border p-10 sm:p-14 text-center"
+          className="relative rounded-[2rem] overflow-hidden border border-white/[0.08] mesh-hero"
         >
-          <SectionBadge>{t("comingSoon.badge")}</SectionBadge>
-
-          <motion.h2
-            variants={fadeUp}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight"
-          >
-            {t("comingSoon.title1")}
-            <br />
-            <span className="text-gradient">{t("comingSoon.title2")}</span>
-          </motion.h2>
-
-          <motion.p
-            variants={fadeUp}
-            custom={1}
-            className="mt-5 text-lg text-white/40 max-w-md mx-auto"
-          >
-            {t("comingSoon.subtitle")}
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            custom={2}
-            className="mt-10 flex flex-col items-center gap-4"
-          >
-            <a
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-accent-green to-accent-emerald px-7 py-4 text-sm font-semibold text-dark-950 hover:shadow-glow transition-shadow duration-300 whitespace-nowrap"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M21.4 4.6c.3-.9-.6-1.7-1.5-1.4L3.2 9.3c-1 .4-1 1.8.1 2.1l4.2 1.4 1.6 5c.3 1 1.6 1.2 2.2.4l2.4-3 4.7 3.5c.8.6 2 .2 2.2-.8l2.8-13.3ZM9 12.4l8.2-5.1-6.6 6.5-.3 3.3-1.3-4.7Z" />
-              </svg>
-              {t("comingSoon.notify")}
-            </a>
-            <p className="text-sm text-white/35">
-              Telegram:{" "}
-              <a
-                href={TELEGRAM_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-accent-green/80 hover:text-accent-green transition-colors"
-              >
-                @sweezyxswiss
+          <div className="absolute inset-0 bg-dark-950/60 backdrop-blur-sm" />
+          <div className="relative z-10 p-10 sm:p-16 text-center">
+            <motion.p variants={fadeUp} className="editorial-label mb-5">{t("comingSoon.badge")}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {t("comingSoon.title1")}{" "}
+              <span className="font-display italic font-normal text-gradient">{t("comingSoon.title2")}</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} custom={2} className="mt-5 text-lg text-white/45 max-w-md mx-auto">
+              {t("comingSoon.subtitle")}
+            </motion.p>
+            <motion.div variants={fadeUp} custom={3} className="mt-10 flex flex-col items-center gap-4">
+              <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener" className="pill-btn-primary gap-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M21.4 4.6c.3-.9-.6-1.7-1.5-1.4L3.2 9.3c-1 .4-1 1.8.1 2.1l4.2 1.4 1.6 5c.3 1 1.6 1.2 2.2.4l2.4-3 4.7 3.5c.8.6 2 .2 2.2-.8l2.8-13.3ZM9 12.4l8.2-5.1-6.6 6.5-.3 3.3-1.3-4.7Z" />
+                </svg>
+                {t("comingSoon.notify")}
               </a>
-            </p>
-          </motion.div>
+              <p className="text-sm text-white/35">
+                Telegram:{" "}
+                <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener" className="text-accent-green/80 hover:text-accent-green transition-colors">
+                  @sweezyxswiss
+                </a>
+              </p>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -1840,34 +1644,23 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="relative py-32 overflow-hidden cv-auto">
-      <GradientBlob
-        className="w-[500px] h-[500px] top-20 -right-20"
-        colors="from-accent-emerald/15 via-accent-teal/10 to-transparent"
-      />
-
+    <section className="relative py-28 sm:py-36 overflow-hidden cv-auto section-mesh">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-20"
+          className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end mb-16"
         >
-          <SectionBadge>{t("testimonials.badge")}</SectionBadge>
-          <motion.h2
-            variants={fadeUp}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight"
-          >
-            {t("testimonials.title1")}
-            <br />
-            <span className="text-gradient">{t("testimonials.title2")}</span>
-          </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            custom={1}
-            className="mt-5 text-lg text-white/40 max-w-xl mx-auto"
-          >
+          <div>
+            <motion.p variants={fadeUp} className="editorial-label mb-4">{t("testimonials.badge")}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {t("testimonials.title1")}{" "}
+              <span className="font-display italic font-normal text-gradient">{t("testimonials.title2")}</span>
+            </motion.h2>
+          </div>
+          <motion.p variants={fadeUp} custom={2} className="text-lg text-white/45 leading-relaxed">
             {t("testimonials.subtitle")}
           </motion.p>
         </motion.div>
@@ -1875,40 +1668,44 @@ function TestimonialsSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-6"
+          className="grid lg:grid-cols-[1.4fr_1fr] gap-5"
         >
-          {testimonials.map((item, i) => (
-            <motion.div
-              key={item.name}
-              variants={scaleIn}
-              custom={i}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              className="group relative rounded-2xl glass glass-hover p-8 flex flex-col gap-6"
-            >
-              <StarRating />
-              <p className="text-white/60 leading-relaxed text-[15px] flex-1">
-                &ldquo;{item.quote}&rdquo;
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-white/[0.08]">
-                  <Image
-                    src={item.avatar}
-                    alt={item.name}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">{item.name}</p>
-                  <p className="text-xs text-white/35">{item.role}</p>
-                </div>
+          <motion.article variants={scaleIn} className="bento-card p-8 sm:p-12 flex flex-col justify-between min-h-[360px]">
+            <span className="quote-mark" aria-hidden>&ldquo;</span>
+            <p className="font-display italic text-2xl sm:text-3xl lg:text-4xl leading-snug text-white/85 -mt-4">
+              {testimonials[0].quote}
+            </p>
+            <div className="flex items-center gap-4 mt-8">
+              <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full border-2 border-white/10">
+                <Image src={testimonials[0].avatar} alt={testimonials[0].name} fill sizes="56px" className="object-cover" />
               </div>
-              <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-accent-green/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            </motion.div>
-          ))}
+              <div>
+                <p className="font-semibold">{testimonials[0].name}</p>
+                <p className="text-sm text-white/40">{testimonials[0].role}</p>
+              </div>
+              <div className="ml-auto hidden sm:block"><StarRating /></div>
+            </div>
+          </motion.article>
+
+          <div className="grid gap-5">
+            {testimonials.slice(1).map((item, i) => (
+              <motion.article key={item.name} variants={scaleIn} custom={i + 1} className="bento-card p-6 sm:p-7 flex flex-col gap-4">
+                <StarRating />
+                <p className="text-white/60 leading-relaxed text-[15px] flex-1">&ldquo;{item.quote}&rdquo;</p>
+                <div className="flex items-center gap-3">
+                  <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border border-white/[0.08]">
+                    <Image src={item.avatar} alt={item.name} fill sizes="40px" className="object-cover" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">{item.name}</p>
+                    <p className="text-xs text-white/35">{item.role}</p>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
@@ -1931,24 +1728,19 @@ function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="relative py-32 overflow-hidden cv-auto">
+    <section id="faq" className="relative py-28 sm:py-36 overflow-hidden cv-auto">
       <div className="relative z-10 mx-auto max-w-3xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-16"
+          className="mb-14 text-center"
         >
-          <motion.h2
-            variants={fadeUp}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight"
-          >
+          <motion.p variants={fadeUp} className="editorial-label mb-4">{t("faq.subtitle")}</motion.p>
+          <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em]">
             {t("faq.title")}
           </motion.h2>
-          <motion.p variants={fadeUp} custom={1} className="mt-5 text-lg text-white/40">
-            {t("faq.subtitle")}
-          </motion.p>
         </motion.div>
 
         <motion.div
@@ -1959,7 +1751,7 @@ function FAQSection() {
           className="space-y-3"
         >
           {faqs.map((faq, i) => (
-            <motion.div key={i} variants={fadeUp} custom={i} className="rounded-2xl glass overflow-hidden">
+            <motion.div key={i} variants={fadeUp} custom={i} className="rounded-2xl nav-float overflow-hidden">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="flex items-center justify-between w-full px-6 py-5 text-left text-[15px] font-medium text-white/90 hover:text-white transition-colors"
@@ -2009,68 +1801,40 @@ function CTASection() {
   const { t } = useLocale();
 
   return (
-    <section id="download" className="relative py-32 overflow-hidden cv-auto">
+    <section id="download" className="relative py-20 sm:py-28 overflow-hidden cv-auto">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="relative rounded-3xl overflow-hidden min-h-[420px]"
+          className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden min-h-[480px] sm:min-h-[520px] flex items-center"
         >
           <div className="absolute inset-0">
-            <Image
-              src={LANDING_IMAGES.cta}
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover"
-              aria-hidden
-            />
+            <Image src={LANDING_IMAGES.cta} alt="" fill sizes="100vw" className="object-cover scale-105" aria-hidden />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-dark-900/85 via-dark-900/70 to-accent-green/20" />
-          <div className="absolute inset-0 bg-dark-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-dark-950/95 via-dark-950/70 to-dark-950/30" />
+          <div className="absolute inset-0 mesh-hero opacity-60" />
 
-          <div className="relative z-10 px-8 sm:px-16 py-20 sm:py-24 text-center">
-            <motion.h2
-              variants={fadeUp}
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight"
-            >
-              {t("cta.title1")}
-              <br />
-              <span className="text-gradient">{t("cta.title2")}</span>
+          <div className="relative z-10 px-8 sm:px-16 py-16 sm:py-20 max-w-2xl">
+            <motion.p variants={fadeUp} className="editorial-label mb-5">{t("cta.downloadOn")}</motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
+              {t("cta.title1")}{" "}
+              <span className="font-display italic font-normal text-gradient">{t("cta.title2")}</span>
             </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              custom={1}
-              className="mt-5 text-lg text-white/50 max-w-md mx-auto"
-            >
+            <motion.p variants={fadeUp} custom={2} className="mt-5 text-lg text-white/50 max-w-md">
               {t("cta.subtitle")}
             </motion.p>
-            <motion.div
-              variants={fadeUp}
-              custom={2}
-              className="mt-10 flex flex-wrap justify-center gap-4"
-            >
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group relative inline-flex items-center gap-3 rounded-2xl bg-white px-7 py-4 text-dark-900 font-semibold text-[15px] transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
-              >
+            <motion.div variants={fadeUp} custom={3} className="mt-10 flex flex-wrap gap-4">
+              <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className="pill-btn-primary gap-3">
                 <AppleLogo />
                 <div className="flex flex-col items-start leading-tight">
-                  <span className="text-[11px] font-normal opacity-60">
-                    {t("cta.downloadOn")}
-                  </span>
+                  <span className="text-[11px] font-normal opacity-60">{t("cta.downloadOn")}</span>
                   <span>{t("cta.appStore")}</span>
                 </div>
               </a>
-              <a
-                href="#features"
-                className="inline-flex items-center gap-2 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 px-7 py-4 text-[15px] font-medium backdrop-blur-sm transition-all duration-300"
-              >
-                {t("cta.learnMore")}
+              <a href="#features" className="pill-btn-ghost text-[15px]">
+                {t("cta.learnMore")} →
               </a>
             </motion.div>
           </div>
@@ -2090,20 +1854,13 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <StatsSection />
-      <GradientDivider />
       <FeaturesSection />
-      <GradientDivider />
       <AppShowcaseSection />
-      <GradientDivider />
       <WhatsNewSection />
-      <GradientDivider />
       <CantonsSection />
-      <GradientDivider />
       <EventsMarketSection />
-      <GradientDivider />
       <HowItWorksSection />
       <ComingSoonSection />
-      <GradientDivider />
       <TestimonialsSection />
       <FAQSection />
       <CTASection />

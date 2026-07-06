@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import { buildRootAlternates } from "../lib/alternates";
 import { LocaleProvider } from "../lib/locale-context";
 import { ThemeProvider } from "../lib/theme-context";
@@ -13,6 +13,14 @@ const inter = Inter({
   variable: "--font-inter",
   preload: true,
   fallback: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-display",
 });
 
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
@@ -97,7 +105,7 @@ export default function RootLayout({
   const currentYear = new Date().getFullYear();
 
   return (
-    <html lang="en" className={`antialiased ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`antialiased ${inter.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
       <head>
         {/* Prevent flash of wrong theme: apply .dark class synchronously before paint */}
         <script
