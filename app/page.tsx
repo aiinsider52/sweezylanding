@@ -537,11 +537,11 @@ function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.9, ease: [0.25, 0.4, 0.25, 1] }}
-          className="hidden lg:block absolute top-[18%] right-[8%] w-[150px] h-[150px] pointer-events-none z-10"
+          className="hidden lg:block absolute top-[18%] right-[8%] w-[180px] h-[180px] pointer-events-none z-10"
           aria-hidden
         >
-          <div className="floating-el relative w-full h-full drop-shadow-[0_20px_50px_rgba(34,197,94,0.35)]" style={{ ["--float-y" as string]: "18px", ["--float-d" as string]: "7s" }}>
-            <Image src={LANDING_IMAGES.glossy.heroBadge} alt="" fill sizes="150px" className="object-contain" />
+          <div className="floating-el relative w-full h-full drop-shadow-[0_24px_60px_rgba(34,197,94,0.45)]" style={{ ["--float-y" as string]: "18px", ["--float-d" as string]: "7s" }}>
+            <Image src={LANDING_IMAGES.glossy.heroBadge} alt="" fill sizes="180px" className="object-contain" />
           </div>
         </motion.div>
 
@@ -1341,8 +1341,8 @@ function WhatsNewSection() {
             <motion.article key={card.title} variants={scaleIn} custom={i} className="bento-card p-7 sm:p-8 group">
               <div className={`absolute inset-0 bg-gradient-to-br ${card.glow} opacity-50 group-hover:opacity-80 transition-opacity duration-500`} />
               <div className="relative z-10">
-                <div className="relative h-14 w-14 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                  <Image src={card.icon} alt="" fill sizes="56px" className="object-contain drop-shadow-[0_8px_20px_rgba(34,197,94,0.25)]" />
+                <div className="relative h-20 w-20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                  <Image src={card.icon} alt="" fill sizes="80px" className="object-contain drop-shadow-[0_12px_28px_rgba(34,197,94,0.35)]" />
                 </div>
                 <h3 className="mt-5 text-xl sm:text-2xl font-bold tracking-tight">{card.title}</h3>
                 <p className="mt-3 text-[15px] leading-7 text-white/55">{card.description}</p>
@@ -1841,17 +1841,20 @@ function CTASection() {
           <motion.div
             variants={scaleIn}
             custom={2}
-            className="relative hidden lg:block h-full min-h-[480px]"
+            className="relative hidden lg:flex items-center justify-center h-full min-h-[480px] overflow-hidden"
+            aria-hidden
           >
-            <Image
-              src={LANDING_IMAGES.glossy.ctaScene}
-              alt=""
-              fill
-              sizes="45vw"
-              className="object-cover"
-              aria-hidden
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a1610] via-[#0a1610]/10 to-transparent" />
+            <div className="absolute inset-0 mesh-hero opacity-80" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_45%,rgba(34,197,94,0.14),transparent_55%)]" />
+            <div className="relative w-36 h-36 floating-el drop-shadow-[0_20px_50px_rgba(34,197,94,0.35)]" style={{ ["--float-y" as string]: "14px", ["--float-d" as string]: "6s" }}>
+              <Image src={LANDING_IMAGES.glossy.iconLaunch} alt="" fill sizes="144px" className="object-contain" />
+            </div>
+            <div className="absolute top-[18%] right-[12%] w-20 h-20 floating-el opacity-75" style={{ ["--float-y" as string]: "10px", ["--float-d" as string]: "5s", animationDelay: "1s" }}>
+              <Image src={LANDING_IMAGES.glossy.iconGear} alt="" fill sizes="80px" className="object-contain drop-shadow-[0_12px_30px_rgba(34,197,94,0.3)]" />
+            </div>
+            <div className="absolute bottom-[20%] right-[28%] w-24 h-24 floating-el opacity-85" style={{ ["--float-y" as string]: "12px", ["--float-d" as string]: "7s", animationDelay: "2s" }}>
+              <Image src={LANDING_IMAGES.glossy.iconCart} alt="" fill sizes="96px" className="object-contain drop-shadow-[0_14px_36px_rgba(34,197,94,0.32)]" />
+            </div>
           </motion.div>
         </motion.div>
       </div>

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Generate BloomFi-style glossy 3D asset pack via Higgsfield CLI
+# Generate glossy 3D icons for the landing page, then cut out backgrounds → transparent PNG.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/public/images/3d"
@@ -36,8 +36,6 @@ gen() {
   echo "[$(date +%H:%M:%S)] DONE  $file" | tee -a "$LOG"
 }
 
-# Bare `wait` always returns 0 regardless of job outcomes, so failures must
-# be tracked per-PID or they get silently swallowed at the batch level.
 wait_batch() {
   local pid rc=0
   for pid in "$@"; do
@@ -50,16 +48,14 @@ export -f gen
 export OUT LOG
 FAILED=0
 
-STYLE="glossy 3D render, product visualization, soft studio lighting, subtle reflections, soft shadow beneath object, isolated on a smooth pastel mint-to-cream gradient background, high detail, clean minimal composition, no text, no logos, no watermarks"
+# Solid black studio backdrop — easy to flood-fill into transparency in cutout-3d-assets.py
+STYLE="glossy 3D render, product visualization, soft studio lighting, subtle reflections, single centered object, isolated on pure solid black background, high detail, clean minimal composition, no text, no logos, no watermarks"
 PALETTE="glossy emerald green and teal glass material with soft highlights"
 
 pids=()
 
 gen "hero-badge.jpg" gpt_image_2 1:1 \
   "A single glossy 3D Swiss cross emblem badge floating, $PALETTE, $STYLE" & pids+=($!)
-
-gen "cta-scene.jpg" gpt_image_2 16:9 \
-  "Abstract 3D scene of glossy glass mountain peaks and floating spheres, $PALETTE, dreamy soft pastel mint and cream gradient background, cinematic product-render aesthetic, $STYLE" & pids+=($!)
 
 gen "icon-launch.jpg" gpt_image_2 1:1 \
   "A single glossy 3D rocket icon floating, $PALETTE, $STYLE" & pids+=($!)
@@ -77,5 +73,8 @@ if [ "$FAILED" -ne 0 ]; then
   exit 1
 fi
 
-echo "All 3D asset generations complete. Files in $OUT"
-ls -la "$OUT"/*.jpg 2>/dev/null | wc -l
+echo "Cutting out backgrounds → transparent PNG..."
+python3 "$ROOT/scripts/cutout-3d-assets.py" | tee -a "$LOG"
+
+echo "All 3D asset generations complete. PNG files in $OUT"
+ls -la "$OUT"/*.png 2>/dev/null | wc -l

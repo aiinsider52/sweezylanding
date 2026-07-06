@@ -29,10 +29,9 @@ export const LANDING_IMAGES = {
   },
   cta: "/images/cta-banner.jpg",
   glossy: {
-    heroBadge: "/images/3d/hero-badge.jpg",
-    ctaScene: "/images/3d/cta-scene.jpg",
-    iconLaunch: "/images/3d/icon-launch.jpg",
-    iconCart: "/images/3d/icon-cart.jpg",
-    iconGear: "/images/3d/icon-gear.jpg",
+    heroBadge: "/images/3d/hero-badge.png",
+    iconLaunch: "/images/3d/icon-launch.png",
+    iconCart: "/images/3d/icon-cart.png",
+    iconGear: "/images/3d/icon-gear.png",
   },
 } as const;
