@@ -533,6 +533,18 @@ function HeroSection() {
           <span className="hero-watermark text-[20vw] sm:text-[15vw] translate-y-[18%]">SWITZERLAND</span>
         </div>
 
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.9, ease: [0.25, 0.4, 0.25, 1] }}
+          className="hidden lg:block absolute top-[18%] right-[8%] w-[150px] h-[150px] pointer-events-none z-10"
+          aria-hidden
+        >
+          <div className="floating-el relative w-full h-full drop-shadow-[0_20px_50px_rgba(34,197,94,0.35)]" style={{ ["--float-y" as string]: "18px", ["--float-d" as string]: "7s" }}>
+            <Image src={LANDING_IMAGES.glossy.heroBadge} alt="" fill sizes="150px" className="object-contain" />
+          </div>
+        </motion.div>
+
         <Navbar />
 
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-28 text-center">
@@ -1273,19 +1285,19 @@ function WhatsNewSection() {
     {
       title: t("whatsNew.card1Title"),
       description: t("whatsNew.card1Desc"),
-      icon: "🎉",
+      icon: LANDING_IMAGES.glossy.iconLaunch,
       glow: "from-accent-green/20 via-accent-emerald/10 to-transparent",
     },
     {
       title: t("whatsNew.card2Title"),
       description: t("whatsNew.card2Desc"),
-      icon: "🛒",
+      icon: LANDING_IMAGES.glossy.iconCart,
       glow: "from-amber-400/15 via-accent-green/10 to-transparent",
     },
     {
       title: t("whatsNew.card3Title"),
       description: t("whatsNew.card3Desc"),
-      icon: "⚙️",
+      icon: LANDING_IMAGES.glossy.iconGear,
       glow: "from-teal-400/15 via-accent-emerald/10 to-transparent",
     },
   ];
@@ -1329,7 +1341,9 @@ function WhatsNewSection() {
             <motion.article key={card.title} variants={scaleIn} custom={i} className="bento-card p-7 sm:p-8 group">
               <div className={`absolute inset-0 bg-gradient-to-br ${card.glow} opacity-50 group-hover:opacity-80 transition-opacity duration-500`} />
               <div className="relative z-10">
-                <span className="text-3xl">{card.icon}</span>
+                <div className="relative h-14 w-14 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                  <Image src={card.icon} alt="" fill sizes="56px" className="object-contain drop-shadow-[0_8px_20px_rgba(34,197,94,0.25)]" />
+                </div>
                 <h3 className="mt-5 text-xl sm:text-2xl font-bold tracking-tight">{card.title}</h3>
                 <p className="mt-3 text-[15px] leading-7 text-white/55">{card.description}</p>
               </div>
@@ -1799,16 +1813,9 @@ function CTASection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden min-h-[480px] sm:min-h-[520px] flex items-center"
+          className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden min-h-[480px] sm:min-h-[520px] bg-[#0a1610] grid lg:grid-cols-[1.1fr_0.9fr] items-center"
         >
-          <div className="absolute inset-0">
-            <Image src={LANDING_IMAGES.cta} alt="" fill sizes="100vw" className="object-cover scale-105 photo-grade" aria-hidden />
-          </div>
-          <div className="absolute inset-0 photo-grade-overlay" aria-hidden />
-          <div className="absolute inset-0 bg-gradient-to-r from-dark-950/95 via-dark-950/70 to-dark-950/30" />
-          <div className="absolute inset-0 mesh-hero opacity-60" />
-
-          <div className="relative z-10 px-8 sm:px-16 py-16 sm:py-20 max-w-2xl">
+          <div className="relative z-10 px-8 sm:px-16 py-16 sm:py-20">
             <motion.p variants={fadeUp} className="editorial-label mb-5">{t("cta.downloadOn")}</motion.p>
             <motion.h2 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.05]">
               {t("cta.title1")}{" "}
@@ -1830,6 +1837,22 @@ function CTASection() {
               </a>
             </motion.div>
           </div>
+
+          <motion.div
+            variants={scaleIn}
+            custom={2}
+            className="relative hidden lg:block h-full min-h-[480px]"
+          >
+            <Image
+              src={LANDING_IMAGES.glossy.ctaScene}
+              alt=""
+              fill
+              sizes="45vw"
+              className="object-cover"
+              aria-hidden
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a1610] via-[#0a1610]/10 to-transparent" />
+          </motion.div>
         </motion.div>
       </div>
     </section>

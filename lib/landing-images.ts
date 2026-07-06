@@ -28,4 +28,11 @@ export const LANDING_IMAGES = {
     settle: "/images/step-settle.jpg",
   },
   cta: "/images/cta-banner.jpg",
+  glossy: {
+    heroBadge: "/images/3d/hero-badge.jpg",
+    ctaScene: "/images/3d/cta-scene.jpg",
+    iconLaunch: "/images/3d/icon-launch.jpg",
+    iconCart: "/images/3d/icon-cart.jpg",
+    iconGear: "/images/3d/icon-gear.jpg",
+  },
 } as const;
