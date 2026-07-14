@@ -66,10 +66,16 @@ export function LocaleProvider({
     else if (lang.startsWith("de")) setLocaleState("de");
   }, [initialLocale, pathname]); // re-run on every navigation
 
-  /* Sync <html lang=""> attribute */
+  /*
+   * Only the root provider owns the document language. Locale routes wrap
+   * their content in a second provider, and letting both providers write to
+   * <html> creates a last-effect-wins race on client-side navigation.
+   */
   useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
+    if (initialLocale) return;
+
+    document.documentElement.lang = getLocaleFromPath(pathname ?? "") ?? locale;
+  }, [initialLocale, locale, pathname]);
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);

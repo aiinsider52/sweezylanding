@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { BASE_URL } from "../../lib/alternates";
-import { HomeSeoSections } from "../components/home/HomeSeoSections";
-import Home from "../page";
+import { LandingPage } from "../components/home/LandingPage";
 
 const CANONICAL_URL = `${BASE_URL}/en`;
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
@@ -40,10 +39,5 @@ export const metadata: Metadata = {
 };
 
 export default function EnPage() {
-  return (
-    <>
-      <Home />
-      <HomeSeoSections locale="en" />
-    </>
-  );
+  return <LandingPage locale="en" />;
 }
