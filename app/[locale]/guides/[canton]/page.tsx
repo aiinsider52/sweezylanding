@@ -38,6 +38,7 @@ const COPY: Record<
     srv3: string;
     srv4: string;
     ctaLead: (name: string) => string;
+    workflowLead: (name: string) => string;
   }
 > = {
   en: {
@@ -71,6 +72,8 @@ const COPY: Record<
     srv4: "Transport hubs, public service counters, and nearby banks",
     ctaLead: (name) =>
       `Use Sweezy to turn Swiss bureaucracy into a clear, step-by-step plan for registration, insurance, service discovery, and job preparation in ${name}.`,
+    workflowLead: (name) =>
+      `Instead of keeping notes in different apps, use Sweezy to understand the process, save your next step, and find the nearby services you need in ${name}.`,
   },
   uk: {
     home: "Головна",
@@ -103,6 +106,8 @@ const COPY: Record<
     srv4: "Транспортні вузли, public service counters і банки поруч",
     ctaLead: (name) =>
       `Використовуйте Sweezy, щоб пройти реєстрацію, страховку, пошук сервісів і старт у ${name} за зрозумілим покроковим планом.`,
+    workflowLead: (name) =>
+      `Замість нотаток у різних застосунках використовуйте Sweezy, щоб зрозуміти процес, зберегти наступний крок і знайти потрібні сервіси поруч у ${name}.`,
   },
   de: {
     home: "Startseite",
@@ -135,8 +140,44 @@ const COPY: Record<
     srv4: "Verkehrsknoten, Service-Schalter und Banken in der Nahe",
     ctaLead: (name) =>
       `Nutzen Sie Sweezy, um Anmeldung, Versicherung, Servicesuche und den Start in ${name} als klaren Schritt-fur-Schritt-Prozess zu organisieren.`,
+    workflowLead: (name) =>
+      `Statt Notizen in verschiedenen Apps zu verwalten, nutzen Sie Sweezy, um den Ablauf zu verstehen, den nächsten Schritt zu speichern und wichtige Services in ${name} zu finden.`,
   },
 };
+
+const OFFICE_SPOTLIGHTS = {
+  "appenzell-ausserrhoden": {
+    name: "Abteilung Migration Appenzell Ausserrhoden",
+    location: "9102 Herisau",
+    phone: "+41 71 343 63 33",
+    email: "migration@ar.ch",
+    website:
+      "https://staatskalender.ar.ch/organization/kantonale-behoerden/kantonale-verwaltung/departement-inneres-und-sicherheit/amt-fuer-inneres/abteilung-migration",
+    copy: {
+      en: {
+        metaTitle: "Herisau Migration Office: Contact & Registration Guide",
+        metaDescription:
+          "Official contact details for the Appenzell Ausserrhoden Migration Office in Herisau, plus registration and permit steps for newcomers.",
+        heading: "Herisau Migration Office: official contact",
+        body: "The Migration Division of Appenzell Ausserrhoden handles cantonal migration and residence-permit matters. For municipal address registration, contact your local residents' office first; for migration questions, use the official cantonal contact below.",
+      },
+      uk: {
+        metaTitle: "Міграційний офіс у Герізау: контакти та реєстрація",
+        metaDescription:
+          "Офіційні контакти міграційного відділу Appenzell Ausserrhoden у Герізау та основні кроки для реєстрації й дозволу на проживання.",
+        heading: "Міграційний офіс у Герізау: офіційні контакти",
+        body: "Міграційний відділ Appenzell Ausserrhoden відповідає за кантональні міграційні питання та дозволи на проживання. Реєстрацію адреси починайте у місцевому Einwohneramt, а щодо міграційних питань використовуйте офіційні контакти кантону.",
+      },
+      de: {
+        metaTitle: "Migrationsamt Herisau: Kontakt & Anmeldung",
+        metaDescription:
+          "Offizielle Kontaktdaten der Abteilung Migration Appenzell Ausserrhoden in Herisau sowie Hinweise zu Anmeldung und Aufenthaltsbewilligung.",
+        heading: "Migrationsamt Herisau: offizieller Kontakt",
+        body: "Die Abteilung Migration Appenzell Ausserrhoden bearbeitet kantonale Migrations- und Bewilligungsfragen. Die Wohnsitzanmeldung beginnt bei der zuständigen Einwohnerkontrolle Ihrer Gemeinde; für ausländerrechtliche Fragen nutzen Sie den offiziellen Kantonskontakt.",
+      },
+    },
+  },
+} as const;
 
 const LANG_MAP: Record<Locale, string> = {
   en: "en-US",
@@ -187,9 +228,11 @@ export async function generateMetadata({
   // Use keyword-rich meta for the 6 priority cantons (EN + UK)
   const rich = RICH_CANTONS[canton.slug];
   const richLocale = rich && (locale === "en" || locale === "uk") ? rich[locale] : null;
+  const officeSpotlight = OFFICE_SPOTLIGHTS[canton.slug as keyof typeof OFFICE_SPOTLIGHTS];
+  const officeCopy = officeSpotlight?.copy[locale];
 
-  const metaTitle = richLocale ? richLocale.metaTitle : copy.title(name);
-  const metaDescription = richLocale ? richLocale.metaDescription : copy.description(name, canton.capital);
+  const metaTitle = richLocale?.metaTitle ?? officeCopy?.metaTitle ?? copy.title(name);
+  const metaDescription = richLocale?.metaDescription ?? officeCopy?.metaDescription ?? copy.description(name, canton.capital);
 
   return {
     title: metaTitle,
@@ -243,6 +286,8 @@ export default function CantonGuidePage({
   // Check for rich content (EN + UK only for the 6 priority cantons)
   const richData = RICH_CANTONS[canton.slug];
   const rich = richData && (locale === "en" || locale === "uk") ? richData[locale] : null;
+  const officeSpotlight = OFFICE_SPOTLIGHTS[canton.slug as keyof typeof OFFICE_SPOTLIGHTS];
+  const officeCopy = officeSpotlight?.copy[locale];
 
   /* ── Schema.org ──────────────────────────────────────────────────────────── */
   const placeJsonLd = {
@@ -315,7 +360,14 @@ export default function CantonGuidePage({
         <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-white/70">
           <p className="font-medium text-white/90">{rich.registrationOfficeName}</p>
           <p className="mt-1">{rich.registrationOfficeAddress}</p>
-          <p className="mt-1 text-accent-green/80">{rich.registrationOfficeWebsite}</p>
+          <a
+            href={rich.registrationOfficeWebsite.startsWith("http") ? rich.registrationOfficeWebsite : `https://${rich.registrationOfficeWebsite}`}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-1 inline-flex break-all text-accent-green/80 underline underline-offset-4"
+          >
+            {rich.registrationOfficeWebsite}
+          </a>
         </div>
         <p className="mt-4 text-sm font-medium text-white/60">{rich.deadline}</p>
         <p className="mt-3 text-sm font-medium text-white/80">{rich.requiredDocs}</p>
@@ -408,7 +460,16 @@ export default function CantonGuidePage({
                   <td className="py-3 pr-4 font-medium text-white/85">{c.office}</td>
                   <td className="py-3 pr-4 text-white/60">{c.address}</td>
                   <td className="py-3 pr-4 text-white/60 whitespace-nowrap">{c.phone}</td>
-                  <td className="py-3 text-accent-green/80 text-xs break-all">{c.website}</td>
+                  <td className="py-3 text-accent-green/80 text-xs break-all">
+                    <a
+                      href={c.website.startsWith("http") ? c.website : `https://${c.website}`}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="underline underline-offset-4"
+                    >
+                      {c.website}
+                    </a>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -517,6 +578,39 @@ export default function CantonGuidePage({
         </ul>
       </section>
 
+      {officeSpotlight && officeCopy ? (
+        <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6">
+          <h2 className="text-2xl font-semibold tracking-tight">{officeCopy.heading}</h2>
+          <p className="mt-4 leading-8 text-white/70">{officeCopy.body}</p>
+          <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="text-white/40">Office</dt>
+              <dd className="mt-1 text-white/85">{officeSpotlight.name}</dd>
+            </div>
+            <div>
+              <dt className="text-white/40">Location</dt>
+              <dd className="mt-1 text-white/85">{officeSpotlight.location}</dd>
+            </div>
+            <div>
+              <dt className="text-white/40">Phone</dt>
+              <dd className="mt-1 text-white/85">{officeSpotlight.phone}</dd>
+            </div>
+            <div>
+              <dt className="text-white/40">Email</dt>
+              <dd className="mt-1 text-white/85">{officeSpotlight.email}</dd>
+            </div>
+          </dl>
+          <a
+            href={officeSpotlight.website}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-5 inline-flex text-sm font-medium text-accent-green underline underline-offset-4"
+          >
+            Official canton source →
+          </a>
+        </section>
+      ) : null}
+
       <section>
         <h2 className="text-2xl font-semibold tracking-tight">{copy.services}</h2>
         <p className="mt-4 leading-8 text-white/70">
@@ -533,11 +627,7 @@ export default function CantonGuidePage({
       <section>
         <h2 className="text-2xl font-semibold tracking-tight">{copy.whySweezy}</h2>
         <p className="mt-4 leading-8 text-white/70">{copy.sweezyLead(name)}</p>
-        <p className="mt-4 leading-8 text-white/70">
-          Instead of keeping notes in different apps, you can use Sweezy to move through the
-          practical settlement sequence: understand the process, save the next step, and locate
-          the nearby services you actually need in {name}.
-        </p>
+        <p className="mt-4 leading-8 text-white/70">{copy.workflowLead(name)}</p>
         {locale === "en" && canton.slug === "zurich" ? (
           <div className="mt-6 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-5">
             <h2 className="text-2xl font-semibold tracking-tight">Useful links for Zurich expats</h2>

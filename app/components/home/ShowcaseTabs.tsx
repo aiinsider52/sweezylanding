@@ -94,15 +94,19 @@ export function ShowcaseTabs({ modes }: { modes: ShowcaseMode[] }) {
         </div>
 
         <div className={styles.showcaseBackdrop} aria-hidden="true">
-          {active.images.map((image, index) => (
-            <span
-              key={image}
-              className={styles.showcaseBackdropLayer}
-              data-active={index === activeFrame ? "true" : "false"}
-            >
-              <Image src={image} alt="" fill unoptimized sizes="100vw" />
-            </span>
-          ))}
+          <span
+            key={active.images[activeFrame]}
+            className={styles.showcaseBackdropLayer}
+            data-active="true"
+          >
+            <Image
+              src={active.images[activeFrame]}
+              alt=""
+              fill
+              quality={60}
+              sizes="(max-width: 760px) 100vw, 1400px"
+            />
+          </span>
         </div>
 
         <div
@@ -134,8 +138,8 @@ export function ShowcaseTabs({ modes }: { modes: ShowcaseMode[] }) {
                 src={image}
                 alt={`${active.label}: ${active.title}, screen ${index + 1} of ${active.images.length}`}
                 fill
-                unoptimized
-                priority={active.id === "path"}
+                priority={active.id === "path" && index === 0}
+                quality={72}
                 sizes="(max-width: 760px) 60vw, 310px"
               />
             </button>

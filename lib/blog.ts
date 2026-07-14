@@ -7,9 +7,13 @@ export type PostFrontmatter = {
   title: string;
   description: string;
   publishedAt: string;
+  updatedAt?: string;
   author: string;
   keywords: string[];
   locale: "en" | "uk" | "de";
+  category?: string;
+  pillarPage?: boolean;
+  relatedPosts?: string[];
 };
 
 export type BlogPost = {
@@ -21,6 +25,15 @@ export type BlogPost = {
 };
 
 const LOCALES: Locale[] = ["en", "uk", "de"];
+
+const REDIRECTED_POSTS: Partial<Record<Locale, ReadonlySet<string>>> = {
+  uk: new Set(["poshuk-roboty-u-shveytcariyi", "status-s-shveytcariya-2026"]),
+  de: new Set(["krankenversicherung-schweiz-expats"]),
+};
+
+export function isRedirectedBlogPost(locale: Locale, slug: string) {
+  return REDIRECTED_POSTS[locale]?.has(slug) ?? false;
+}
 
 function getBlogDir(locale: Locale) {
   return path.join(process.cwd(), "content", "blog", locale);
@@ -43,13 +56,15 @@ function estimateReadingTime(content: string) {
 function parsePost(locale: Locale, slug: string, source: string): BlogPost {
   const { data, content } = matter(source);
   const frontmatter = data as PostFrontmatter;
+  // Article template already renders the only page-level H1 from frontmatter.
+  const articleContent = content.replace(/^\s*#\s+[^\r\n]+(?:\r?\n)+/, "");
 
   return {
     slug,
     locale,
     frontmatter,
-    content,
-    readingTimeMinutes: estimateReadingTime(content),
+    content: articleContent,
+    readingTimeMinutes: estimateReadingTime(articleContent),
   };
 }
 
@@ -61,6 +76,7 @@ export async function getPostSlugs(locale: Locale) {
   return files
     .filter((file) => file.endsWith(".md") || file.endsWith(".mdx"))
     .map((file) => file.replace(/\.(md|mdx)$/i, ""))
+    .filter((slug) => !isRedirectedBlogPost(locale, slug))
     .sort();
 }
 
@@ -105,4 +121,3 @@ export async function getAllBlogParams() {
 export function isLocale(value: string): value is Locale {
   return LOCALES.includes(value as Locale);
 }
-

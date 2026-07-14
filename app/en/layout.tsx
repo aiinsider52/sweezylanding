@@ -8,9 +8,9 @@ const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(BASE_URL),
-    title: "Sweezy — Your Guide to Life in Switzerland",
+    title: "Sweezy App — Life in Switzerland, Simplified",
     description:
-      "Step-by-step guides, checklists, service map and CV builder for expats in Switzerland. Available in English, Ukrainian and German.",
+      "Plan permits, registration, work, housing and daily life in Switzerland with personal checklists and local guidance in the Sweezy app.",
     alternates: {
       canonical: CANONICAL_URL,
       languages: {
@@ -21,9 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     openGraph: {
-      title: "Sweezy — Your Guide to Life in Switzerland",
+      title: "Sweezy App — Life in Switzerland, Simplified",
       description:
-        "Step-by-step guides, checklists, service map and CV builder for expats in Switzerland. Available in English, Ukrainian and German.",
+        "Personal checklists and local guidance for permits, registration, work, housing and daily life in Switzerland.",
       url: CANONICAL_URL,
       siteName: "Sweezy",
       images: [
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: DEFAULT_OG_IMAGE,
           width: 1200,
           height: 630,
-          alt: "Sweezy — Your Guide to Life in Switzerland",
+          alt: "Sweezy app for life in Switzerland",
         },
       ],
       locale: "en_US",
@@ -39,9 +39,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Sweezy — Your Guide to Life in Switzerland",
+      title: "Sweezy App — Life in Switzerland, Simplified",
       description:
-        "Step-by-step guides, checklists, service map and CV builder for expats in Switzerland. Available in English, Ukrainian and German.",
+        "Personal checklists and local guidance for newcomers to Switzerland.",
       images: [DEFAULT_OG_IMAGE],
     },
   };

@@ -79,9 +79,13 @@ export default function LocaleBlogLayout({
 
   return (
     <LocaleProvider initialLocale={params.locale}>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `document.documentElement.lang=${JSON.stringify(params.locale)};`,
+        }}
+      />
       <ContentTopBar />
       {children}
     </LocaleProvider>
   );
 }
-

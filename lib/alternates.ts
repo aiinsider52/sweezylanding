@@ -37,3 +37,16 @@ export function buildLocaleAlternates(
     },
   };
 }
+
+/**
+ * Use for localized pages that do not have verified one-to-one translations.
+ * Publishing hreflang URLs for missing translations sends crawlers to 404s.
+ */
+export function buildCanonicalAlternates(
+  locale: Locale,
+  pathWithoutLocale = "",
+): Metadata["alternates"] {
+  return {
+    canonical: localizedUrl(locale, pathWithoutLocale),
+  };
+}

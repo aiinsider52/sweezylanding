@@ -1,11 +1,14 @@
 import type { MetadataRoute } from "next";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
 import { cantons } from "../data/cantons";
+import { isLocale, isRedirectedBlogPost } from "../lib/blog";
 
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
 const STATIC_PAGES = ["support", "privacy", "terms", "cookies"] as const;
+const LOCALIZED_PAGES = ["about"] as const;
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
@@ -37,18 +40,23 @@ async function collectMdxFiles(dir: string): Promise<string[]> {
 async function getBlogEntries(): Promise<SitemapEntry[]> {
   const blogDir = path.join(process.cwd(), "content", "blog");
   const files = await collectMdxFiles(blogDir);
+  const indexableFiles = files.filter((filePath) => {
+    const slug = path.basename(filePath).replace(/\.(md|mdx)$/i, "");
+    const locale = path.basename(path.dirname(filePath));
+    return isLocale(locale) && !isRedirectedBlogPost(locale, slug);
+  });
 
   return Promise.all(
-    files.map(async (filePath) => {
-      const stats = await fs.stat(filePath);
+    indexableFiles.map(async (filePath) => {
+      const source = await fs.readFile(filePath, "utf8");
+      const { data } = matter(source);
       const slug = path.basename(filePath).replace(/\.(md|mdx)$/i, "");
       const locale = path.basename(path.dirname(filePath));
+      const lastModified = data.updatedAt ?? data.publishedAt;
 
       return {
         url: `${SITE_URL}/${locale}/blog/${slug}`,
-        lastModified: stats.mtime,
-        changeFrequency: "weekly",
-        priority: 0.8,
+        ...(lastModified ? { lastModified: new Date(lastModified) } : {}),
       } satisfies SitemapEntry;
     }),
   );
@@ -56,7 +64,7 @@ async function getBlogEntries(): Promise<SitemapEntry[]> {
 
 async function getStaticEntries(): Promise<SitemapEntry[]> {
   const appDir = path.join(process.cwd(), "app");
-  const pages: string[] = ["/", ...LOCALES.map((locale) => `/${locale}`)];
+  const pages: string[] = [...LOCALES.map((locale) => `/${locale}`)];
   const localizedBlogIndex = path.join(appDir, "[locale]", "blog", "page.tsx");
   const localizedGuidesIndex = path.join(appDir, "[locale]", "guides", "page.tsx");
   const localizedCantonGuide = path.join(appDir, "[locale]", "guides", "[canton]", "page.tsx");
@@ -77,6 +85,13 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
     );
   }
 
+  for (const slug of LOCALIZED_PAGES) {
+    const localizedPage = path.join(appDir, "[locale]", slug, "page.tsx");
+    if (await pathExists(localizedPage)) {
+      pages.push(...LOCALES.map((locale) => `/${locale}/${slug}`));
+    }
+  }
+
   for (const slug of STATIC_PAGES) {
     const rootPage = path.join(appDir, slug, "page.tsx");
     if (await pathExists(rootPage)) {
@@ -91,19 +106,12 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
     }
   }
 
-  return pages.map((page) => {
-    const isHomepage = page === "/";
-    const isLocaleHomepage = LOCALES.some((locale) => page === `/${locale}`);
-    const isGuideIndex = LOCALES.some((locale) => page === `/${locale}/guides`);
-    const isGuideDetail = /\/(en|uk|de)\/guides\/[^/]+$/.test(page);
-
-    return {
-      url: `${SITE_URL}${page}`,
-      lastModified: new Date(),
-      changeFrequency: isHomepage || isLocaleHomepage ? "daily" : "monthly",
-      priority: isHomepage ? 1 : isLocaleHomepage ? 1 : isGuideDetail ? 0.7 : isGuideIndex ? 0.6 : 0.5,
-    } satisfies SitemapEntry;
-  });
+  return pages.map(
+    (page) =>
+      ({
+        url: `${SITE_URL}${page}`,
+      }) satisfies SitemapEntry,
+  );
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -114,4 +122,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticEntries, ...blogEntries];
 }
-

@@ -10,6 +10,12 @@ import { LandingNav } from "./LandingNav";
 import { ShowcaseTabs } from "./ShowcaseTabs";
 import styles from "./landing.module.css";
 
+const ABOUT_LABEL: Record<Locale, string> = {
+  en: "About & editorial",
+  uk: "Про Sweezy та редакцію",
+  de: "Über Sweezy & Redaktion",
+};
+
 export function LandingPage({ locale }: { locale: Locale }) {
   const copy = landingCopy[locale];
   const currentYear = new Date().getFullYear();
@@ -39,7 +45,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
   };
 
   return (
-    <div className={styles.landing}>
+    <div lang={locale} className={styles.landing}>
       <JsonLd data={softwareSchema} />
       <div className={styles.navWrap}>
         <LandingNav locale={locale} copy={copy.nav} />
@@ -201,6 +207,10 @@ export function LandingPage({ locale }: { locale: Locale }) {
           <div>
             <p>{copy.footer.resources}</p>
             <Link href={`/${locale}/blog`}>{copy.nav.blog}</Link>
+            {locale === "uk" ? (
+              <Link href="/uk/blog/status-s-shveytcariya-povnyy-gid">Українцям у Швейцарії</Link>
+            ) : null}
+            <Link href={`/${locale}/about`}>{ABOUT_LABEL[locale]}</Link>
             <Link href="/support">{copy.footer.support}</Link>
             <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener">Telegram</a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer noopener">Instagram</a>

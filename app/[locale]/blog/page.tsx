@@ -60,6 +60,33 @@ function formatDate(locale: Locale, value: string) {
   });
 }
 
+const UK_FEATURED = [
+  {
+    href: "/uk/blog/status-s-shveytcariya-povnyy-gid",
+    eyebrow: "ГОЛОВНИЙ ГІД",
+    title: "Статус S у Швейцарії 2026–2027",
+    description: "Чинні правила, права, документи, робота, страхування та виплати в одному місці.",
+  },
+  {
+    href: "/uk/blog/status-s-pislya-bereznya-2027",
+    eyebrow: "ОНОВЛЕНО 14.07.2026",
+    title: "Що буде зі статусом S після березня 2027",
+    description: "Три сценарії Федеральної ради та зміни, які зараз лише обговорюються.",
+  },
+  {
+    href: "/uk/blog/poshuk-roboty-shveytcariya-2026",
+    eyebrow: "РОБОТА",
+    title: "Як знайти роботу у Швейцарії",
+    description: "Практичний план для українців: документи, резюме, вакансії та перші кроки.",
+  },
+  {
+    href: "/uk/blog/pereizd-do-shveytcariyi-chekist",
+    eyebrow: "ПЕРШІ 30 ДНІВ",
+    title: "Переїзд до Швейцарії: чеклист",
+    description: "Реєстрація, адреса, страхування, банк і справи, які не можна пропустити.",
+  },
+] as const;
+
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "uk" }, { locale: "de" }];
 }
@@ -114,7 +141,7 @@ export default async function BlogIndexPage({
   const posts = await getPostsByLocale(locale);
 
   return (
-    <main className="min-h-screen bg-dark-900 text-white">
+    <main lang={locale} className="min-h-screen bg-dark-900 text-white">
       <div className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
         <div className="mb-12">
           <Link
@@ -126,6 +153,42 @@ export default async function BlogIndexPage({
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{copy.h1}</h1>
           <p className="mt-4 max-w-2xl text-base text-white/55">{copy.description}</p>
         </div>
+
+        {locale === "uk" ? (
+          <section className="mb-14" aria-labelledby="ukrainian-start-title">
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent-green">
+                  Почніть звідси
+                </p>
+                <h2 id="ukrainian-start-title" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                  Найважливіше для українців
+                </h2>
+              </div>
+              <span className="hidden text-sm text-white/35 sm:block">Перевірено у липні 2026</span>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {UK_FEATURED.map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`group rounded-2xl border p-6 transition-all hover:-translate-y-0.5 hover:border-accent-green/55 ${
+                    index === 0
+                      ? "border-accent-green/35 bg-accent-green/[0.07] sm:col-span-2"
+                      : "border-white/10 bg-white/[0.03]"
+                  }`}
+                >
+                  <p className="font-mono text-[11px] tracking-[0.16em] text-accent-green/80">{item.eyebrow}</p>
+                  <h3 className="mt-3 text-xl font-semibold tracking-tight transition-colors group-hover:text-accent-green">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-white/55">{item.description}</p>
+                  <span className="mt-5 inline-flex text-sm font-medium text-accent-green">Відкрити →</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <div className="space-y-5">
           {posts.length === 0 ? (
@@ -142,7 +205,7 @@ export default async function BlogIndexPage({
                   <time dateTime={post.frontmatter.publishedAt}>
                     {formatDate(locale, post.frontmatter.publishedAt)}
                   </time>
-                  <span>{post.readingTimeMinutes} min read</span>
+                  <span>{post.readingTimeMinutes} {locale === "uk" ? "хв читання" : locale === "de" ? "Min. Lesezeit" : "min read"}</span>
                   <span>{post.frontmatter.author}</span>
                 </div>
                 <h2 className="text-2xl font-semibold tracking-tight">
@@ -179,4 +242,3 @@ export default async function BlogIndexPage({
     </main>
   );
 }
-

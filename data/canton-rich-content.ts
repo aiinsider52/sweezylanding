@@ -97,17 +97,17 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       },
     ],
     en: {
-      metaTitle: "Moving to Zurich: Guide for Newcomers & Expats (2026)",
+      metaTitle: "Moving to Zurich in 2026: Registration, Housing & First Steps",
       metaDescription:
-        "Complete guide to moving to Zurich: registration at Personenmeldeamt, residence permits, health insurance (avg CHF 480/month), housing and German language courses. Updated 2026.",
-      h1: "Guide for Newcomers: Zurich",
+        "Moving to Zurich? Learn how to register within 14 days, book the residents' office, handle permits, insurance and housing, and plan your first weeks.",
+      h1: "Moving to Zurich: Guide for Newcomers and Expats",
       intro:
         "Zurich is Switzerland's largest city and economic hub, home to over 440,000 residents — roughly 32% of whom are foreign nationals. The canton offers one of the world's highest standards of living, a strong job market spanning finance, technology, and pharmaceuticals, and an efficient public-service infrastructure. Housing competition is intense, especially in the city proper, and registering within 14 days of arrival is a legal requirement.",
       registrationLead:
-        "After moving to Zurich, you must register at your local Personenmeldeamt within 14 days. The City of Zurich operates three main offices: Stadthaus (city centre), Oerlikon (north), and Schwamendingen (north-east). If you live in a suburban municipality such as Winterthur, Uster, or Dietikon, register at the local Einwohnerkontrolle instead.",
-      registrationOfficeName: "Personenmeldeamt Zürich – Stadthaus",
-      registrationOfficeAddress: "Stadthausquai 17, 8001 Zürich",
-      registrationOfficeWebsite: "stadt-zuerich.ch/prd/de/index/bev/bev_reg.html",
+        "After moving to Zurich, register with the municipality where you live within 14 days. New arrivals in the City of Zurich should book the required residents' office appointment; since May 2026, in-person services are appointment-based at the Zürich Nord and Zürich West locations. If you live in Winterthur, Uster, Dietikon or another municipality, register with that municipality's Einwohnerkontrolle instead.",
+      registrationOfficeName: "Personenmeldeamt Stadt Zürich",
+      registrationOfficeAddress: "Appointment location shown during booking (Zürich Nord or Zürich West)",
+      registrationOfficeWebsite: "https://www.stadt-zuerich.ch/de/lebenslagen/einwohner-services/umziehen-melden.html",
       registrationDocs: [
         "Valid passport or national identity card",
         "Rental contract or written confirmation of your address",
@@ -147,7 +147,7 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       faq: [
         {
           q: "How long does registration take at the Personenmeldeamt in Zurich?",
-          a: "Walk-in appointments are available at all three city offices. The registration itself takes 15–30 minutes. Your permit card arrives by post within 2–4 weeks. If you need a digital confirmation same day (e.g. for opening a bank account), ask staff for a Bestätigung der Anmeldung.",
+          a: "Since May 2026, in-person services at the City of Zurich Personenmeldeamt require an appointment. Processing time and permit follow-up depend on your case. Use the city's booking flow and bring every document listed in the appointment confirmation.",
         },
         {
           q: "What is the cheapest health insurance option in Zurich canton in 2026?",
@@ -191,17 +191,17 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       avgRent: "Average 1-room apartment rent:",
     },
     uk: {
-      metaTitle: "Переїзд до Цюриха: гід для новоприбулих 2026",
+      metaTitle: "Переїзд до Цюриха 2026: реєстрація, житло та перші кроки",
       metaDescription:
-        "Повний гід для переїзду до Цюриха: реєстрація в Personenmeldeamt, дозвіл на проживання, медична страховка (~480 CHF/місяць), статус S, мовні курси та житло.",
-      h1: "Путівник для новоприбулих: Цюрих",
+        "Переїжджаєте до Цюриха? Дізнайтеся, як зареєструватися протягом 14 днів, записатися до Personenmeldeamt і впорядкувати дозвіл, страховку та житло.",
+      h1: "Переїзд до Цюриха: гід для новоприбулих",
       intro:
         "Цюрих — найбільше місто Швейцарії та її економічний центр. Тут проживає понад 440 000 людей, з яких близько 32% — іноземці. Кантон пропонує найвищий у світі рівень якості життя, розвинений ринок праці у фінансах, технологіях та фармацевтиці й ефективну систему державних послуг. Ринок житла дуже конкурентний, а реєстрація після переїзду є юридичним обов'язком.",
       registrationLead:
-        "Після переїзду до Цюриха ви зобов'язані зареєструватися в Personenmeldeamt протягом 14 днів. У місті Цюрих працюють три головних офіси: Stadthaus (центр), Oerlikon (північ) та Schwamendingen (північний схід). Якщо ви живете в приміській общині — Вінтертур, Устер, Дітікон — реєструйтесь у місцевому Einwohnerkontrolle.",
-      registrationOfficeName: "Personenmeldeamt Zürich – Stadthaus",
-      registrationOfficeAddress: "Stadthausquai 17, 8001 Zürich",
-      registrationOfficeWebsite: "stadt-zuerich.ch/prd/de/index/bev/bev_reg.html",
+        "Після переїзду зареєструйтеся у громаді проживання протягом 14 днів. Новоприбулим у місті Цюрих потрібно заздалегідь записатися до Personenmeldeamt; з травня 2026 року особистий прийом відбувається за записом у Zürich Nord або Zürich West. Якщо ви живете у Вінтертурі, Устері, Дітіконі чи іншій громаді, звертайтеся до місцевого Einwohnerkontrolle.",
+      registrationOfficeName: "Personenmeldeamt міста Цюрих",
+      registrationOfficeAddress: "Місце прийому вказується під час запису (Zürich Nord або Zürich West)",
+      registrationOfficeWebsite: "https://www.stadt-zuerich.ch/de/lebenslagen/einwohner-services/umziehen-melden.html",
       registrationDocs: [
         "Дійсний паспорт або посвідчення особи",
         "Договір оренди або письмове підтвердження адреси проживання",
@@ -243,7 +243,7 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       faq: [
         {
           q: "Скільки займає реєстрація в Personenmeldeamt Цюриха?",
-          a: "Прийом без попереднього запису доступний у всіх трьох офісах. Сама процедура займає 15–30 хвилин. Картка дозволу надходить поштою через 2–4 тижні. Якщо потрібне підтвердження того ж дня — попросіть Bestätigung der Anmeldung.",
+          a: "З травня 2026 року особисті послуги Personenmeldeamt у місті Цюрих надаються за попереднім записом. Тривалість опрацювання й наступні кроки щодо дозволу залежать від вашої ситуації. Використовуйте офіційний запис і принесіть усі документи з підтвердження зустрічі.",
         },
         {
           q: "Яке найдешевше медичне страхування в Цюриху 2026?",

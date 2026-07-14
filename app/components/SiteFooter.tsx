@@ -63,6 +63,9 @@ export function SiteFooter({ year }: { year: number }) {
         { label: t("footer.faqLink"), href: `${localeHome}#faq` },
         { label: t("footer.contact"), href: "mailto:support@sweezy.world" },
         { label: t("footer.blog"), href: localeBlog },
+        ...(locale === "uk"
+          ? [{ label: "Українцям у Швейцарії", href: "/uk/blog/status-s-shveytcariya-povnyy-gid" }]
+          : []),
       ],
     },
     {
