@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { List, X } from "@phosphor-icons/react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { APP_STORE_URL } from "../../../lib/links";
 import type { Locale } from "../../../lib/i18n";
@@ -11,6 +12,7 @@ import styles from "./landing.module.css";
 
 export function LandingNav({ locale, copy }: { locale: Locale; copy: LandingCopy["nav"] }) {
   const [isOpen, setIsOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -63,18 +65,27 @@ export function LandingNav({ locale, copy }: { locale: Locale; copy: LandingCopy
         </button>
       </div>
 
-      {isOpen && (
-        <div id="landing-mobile-menu" className={styles.mobileMenu}>
-          {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setIsOpen(false)}>{link.label}</a>
-          ))}
-          <Link href={`/${locale}/guides`} onClick={() => setIsOpen(false)}>{copy.guides}</Link>
-          <Link href={`/${locale}/blog`} onClick={() => setIsOpen(false)}>{copy.blog}</Link>
-          <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className={styles.mobileCta}>
-            {copy.app}
-          </a>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen ? (
+          <motion.div
+            id="landing-mobile-menu"
+            className={styles.mobileMenu}
+            initial={reduceMotion ? false : { opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.985 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {links.map((link) => (
+              <a key={link.href} href={link.href} onClick={() => setIsOpen(false)}>{link.label}</a>
+            ))}
+            <Link href={`/${locale}/guides`} onClick={() => setIsOpen(false)}>{copy.guides}</Link>
+            <Link href={`/${locale}/blog`} onClick={() => setIsOpen(false)}>{copy.blog}</Link>
+            <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className={styles.mobileCta}>
+              {copy.app}
+            </a>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </nav>
   );
 }

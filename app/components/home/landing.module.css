@@ -253,12 +253,24 @@
   font-size: 14px;
   font-weight: 760;
   text-decoration: none;
-  transition: transform 160ms ease, background 160ms ease;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), background 180ms ease, box-shadow 180ms ease;
 }
 
 .primaryButton {
   background: var(--lime);
   color: var(--ink);
+  box-shadow: 0 10px 28px rgba(183, 255, 0, 0.12);
+}
+
+.primaryButton:hover,
+.ctaButton:hover {
+  transform: translateY(-3px);
+}
+
+.primaryButton:active,
+.secondaryButton:active,
+.ctaButton:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .secondaryButton {
@@ -286,6 +298,12 @@
   border-radius: 34px;
   background: #151715;
   box-shadow: 0 50px 110px rgba(0, 0, 0, 0.36);
+  transition: box-shadow 320ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.heroVisual:hover {
+  box-shadow: 0 58px 130px rgba(0, 0, 0, 0.46);
+  transform: translateY(-5px);
 }
 
 .heroVisualLabel {
@@ -321,6 +339,36 @@
 
 .appFrameClusterItem img {
   object-fit: cover;
+}
+
+.appFrameMotionLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  will-change: transform;
+}
+
+.appFrameClusterItem[data-position="main"] .appFrameMotionLayer {
+  animation: frameFloat 6.4s ease-in-out infinite;
+}
+
+.appFrameClusterItem[data-position="left"] .appFrameMotionLayer {
+  animation: frameFloat 7.1s 0.8s ease-in-out infinite reverse;
+}
+
+.appFrameClusterItem[data-position="right"] .appFrameMotionLayer {
+  animation: frameFloat 6.8s 1.6s ease-in-out infinite;
+}
+
+@keyframes frameFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.008);
+  }
 }
 
 .appFrameClusterItem[data-position="main"] {
@@ -365,6 +413,13 @@
   justify-content: center;
   padding: 28px clamp(22px, 4vw, 64px);
   border-right: 1px solid var(--line-light);
+  transition: background 220ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.proof div:hover {
+  z-index: 1;
+  background: rgba(126, 199, 255, 0.18);
+  transform: translateY(-6px);
 }
 
 .proof div:last-child {
@@ -474,6 +529,12 @@
   font-size: 12px;
   font-weight: 650;
   cursor: pointer;
+  transition: color 180ms ease, background 220ms ease, transform 180ms ease;
+}
+
+.showcaseTab:hover,
+.showcaseTabActive:hover {
+  transform: translateY(-1px);
 }
 
 .showcaseTabActive {
@@ -756,6 +817,19 @@
   border: 1px solid var(--line-dark);
   border-radius: 28px;
   background: var(--ink-soft);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms ease, border-color 220ms ease;
+}
+
+.valueCard:hover {
+  z-index: 2;
+  border-color: rgba(242, 243, 238, 0.34);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.24);
+  transform: translateY(-8px) rotate(-0.35deg);
+}
+
+.valueCard:nth-child(even):hover {
+  transform: translateY(-8px) rotate(0.35deg);
 }
 
 .valueCard[data-tone="0"] {
@@ -827,6 +901,21 @@
   align-items: center;
   min-height: 190px;
   border-bottom: 1px solid var(--line-light);
+  transition: background 240ms ease, padding 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.methodList li:hover {
+  padding-right: 20px;
+  padding-left: 20px;
+  background: rgba(126, 199, 255, 0.12);
+}
+
+.methodList h3 {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.methodList li:hover h3 {
+  transform: translateX(8px);
 }
 
 .methodList > li > span {
@@ -887,11 +976,26 @@
   border: 1px solid var(--line-dark);
   border-radius: 28px;
   isolation: isolate;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 360ms ease, border-color 220ms ease;
+}
+
+.storyCard:hover {
+  z-index: 2;
+  border-color: rgba(183, 255, 0, 0.38);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.38);
+  transform: translateY(-9px);
 }
 
 .storyImage {
   z-index: -2;
   object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 500ms ease;
+}
+
+.storyCard:hover .storyImage {
+  filter: saturate(1.08);
+  transform: scale(1.045);
 }
 
 .storyOverlay {
@@ -968,6 +1072,15 @@
 
 .faqItem button svg {
   flex: 0 0 auto;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faqItem button:hover svg {
+  transform: rotate(90deg);
+}
+
+.faqAnswer {
+  overflow: hidden;
 }
 
 .faqItem [role="region"] p {

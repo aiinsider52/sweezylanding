@@ -7,6 +7,7 @@ import { JsonLd } from "../seo/JsonLd";
 import { AppFrameCluster } from "./AppFrameCluster";
 import { LandingFaq } from "./LandingFaq";
 import { LandingNav } from "./LandingNav";
+import { MotionArticle, MotionListItem, MotionReveal } from "./MotionReveal";
 import { ShowcaseTabs } from "./ShowcaseTabs";
 import styles from "./landing.module.css";
 
@@ -53,7 +54,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
 
       <main>
         <section className={styles.hero}>
-          <div className={styles.heroCopy}>
+          <MotionReveal className={styles.heroCopy}>
             <p className={styles.eyebrow}>{copy.hero.eyebrow}</p>
             <h1>
               {copy.hero.title}
@@ -67,9 +68,9 @@ export function LandingPage({ locale }: { locale: Locale }) {
               <a href="#product" className={styles.secondaryButton}>{copy.hero.secondary}</a>
             </div>
             <p className={styles.heroNote}>{copy.hero.footnote}</p>
-          </div>
+          </MotionReveal>
 
-          <div className={styles.heroVisual}>
+          <MotionReveal className={styles.heroVisual} delay={0.12} hoverLift>
             <div className={styles.heroVisualLabel}>
               <span>Sweezy</span>
               <span>01 — PATH</span>
@@ -83,7 +84,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
               alt="Sweezy personal journey through relocation tasks"
               priority
             />
-          </div>
+          </MotionReveal>
         </section>
 
         <section className={styles.proof} aria-label="Sweezy in numbers">
@@ -96,59 +97,59 @@ export function LandingPage({ locale }: { locale: Locale }) {
         </section>
 
         <section id="product" className={styles.productSection}>
-          <div className={styles.sectionIntro}>
+          <MotionReveal className={styles.sectionIntro}>
             <p className={styles.eyebrow}>{copy.product.eyebrow}</p>
             <h2>{copy.product.title}</h2>
             <p>{copy.product.body}</p>
-          </div>
+          </MotionReveal>
           <ShowcaseTabs modes={copy.product.modes} />
         </section>
 
         <section className={styles.valueSection}>
-          <div className={styles.valueHeader}>
+          <MotionReveal className={styles.valueHeader}>
             <p className={styles.eyebrow}>{copy.value.eyebrow}</p>
             <h2>{copy.value.title}</h2>
-          </div>
+          </MotionReveal>
           <div className={styles.valueGrid}>
             {copy.value.items.map((item, index) => (
-              <article key={item.title} className={styles.valueCard} data-tone={index}>
+              <MotionArticle key={item.title} className={styles.valueCard} dataTone={index} delay={index * 0.055}>
                 <div>
                   <span>{item.tag}</span>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
-              </article>
+              </MotionArticle>
             ))}
           </div>
         </section>
 
         <section id="method" className={styles.methodSection}>
-          <div className={styles.methodHeader}>
+          <MotionReveal className={styles.methodHeader}>
             <p className={styles.eyebrow}>{copy.method.eyebrow}</p>
             <h2>{copy.method.title}</h2>
-          </div>
+          </MotionReveal>
           <ol className={styles.methodList}>
             {copy.method.steps.map((step, index) => (
-              <li key={step.title}>
+              <MotionListItem key={step.title} delay={index * 0.045}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <h3>{step.title}</h3>
                   <p>{step.body}</p>
                 </div>
-              </li>
+              </MotionListItem>
             ))}
           </ol>
         </section>
 
         <section id="stories" className={styles.storiesSection}>
-          <div className={styles.storiesHeader}>
+          <MotionReveal className={styles.storiesHeader}>
             <p className={styles.eyebrow}>{copy.stories.eyebrow}</p>
             <h2>{copy.stories.title}</h2>
-          </div>
+          </MotionReveal>
           <div className={styles.storyGrid}>
-            {copy.stories.items.map((story) => (
-              <article key={story.name} className={styles.storyCard}>
+            {copy.stories.items.map((story, index) => (
+              <MotionArticle key={story.name} className={styles.storyCard} delay={index * 0.06}>
                 <Image src={story.image} alt="" fill sizes="(max-width: 760px) 92vw, 33vw" className={styles.storyImage} />
                 <div className={styles.storyOverlay} />
                 <blockquote>“{story.quote}”</blockquote>
@@ -156,21 +157,21 @@ export function LandingPage({ locale }: { locale: Locale }) {
                   <strong>{story.name}</strong>
                   <span>{story.role}</span>
                 </footer>
-              </article>
+              </MotionArticle>
             ))}
           </div>
         </section>
 
         <section id="faq" className={styles.faqSection}>
-          <div className={styles.faqHeader}>
+          <MotionReveal className={styles.faqHeader}>
             <p className={styles.eyebrow}>{copy.faq.eyebrow}</p>
             <h2>{copy.faq.title}</h2>
-          </div>
+          </MotionReveal>
           <LandingFaq items={copy.faq.items} />
         </section>
 
         <section className={styles.ctaSection}>
-          <div className={styles.ctaCopy}>
+          <MotionReveal className={styles.ctaCopy}>
             <p className={styles.eyebrow}>{copy.cta.eyebrow}</p>
             <h2>{copy.cta.title}</h2>
             <p>{copy.cta.body}</p>
@@ -178,8 +179,8 @@ export function LandingPage({ locale }: { locale: Locale }) {
               {copy.cta.button}
             </a>
             <span>{copy.cta.note}</span>
-          </div>
-          <div className={styles.ctaVisual}>
+          </MotionReveal>
+          <MotionReveal className={styles.ctaVisual} delay={0.1} hoverLift>
             <AppFrameCluster
               frames={[
                 "/app-frames/profile-situation.png",
@@ -188,7 +189,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
               ]}
               alt="Sweezy Passport with personal progress and achievements"
             />
-          </div>
+          </MotionReveal>
         </section>
       </main>
 

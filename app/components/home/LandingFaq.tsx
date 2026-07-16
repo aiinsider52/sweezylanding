@@ -1,6 +1,7 @@
 "use client";
 
 import { Minus, Plus } from "@phosphor-icons/react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useId, useState } from "react";
 import type { LandingCopy } from "../../../lib/landing-copy";
 import styles from "./landing.module.css";
@@ -8,6 +9,7 @@ import styles from "./landing.module.css";
 export function LandingFaq({ items }: { items: LandingCopy["faq"]["items"] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const baseId = useId();
+  const reduceMotion = useReducedMotion();
 
   return (
     <div className={styles.faqList}>
@@ -29,9 +31,22 @@ export function LandingFaq({ items }: { items: LandingCopy["faq"]["items"] }) {
                 {isOpen ? <Minus size={22} weight="bold" aria-hidden /> : <Plus size={22} weight="bold" aria-hidden />}
               </button>
             </h3>
-            <div id={panelId} role="region" aria-labelledby={triggerId} hidden={!isOpen}>
-              <p>{item.answer}</p>
-            </div>
+            <AnimatePresence initial={false}>
+              {isOpen ? (
+                <motion.div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={triggerId}
+                  initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  className={styles.faqAnswer}
+                >
+                  <p>{item.answer}</p>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
           </div>
         );
       })}
