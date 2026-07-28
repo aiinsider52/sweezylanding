@@ -8,6 +8,7 @@ import { AppFrameCluster } from "./AppFrameCluster";
 import { LandingFaq } from "./LandingFaq";
 import { LandingNav } from "./LandingNav";
 import { MotionArticle, MotionListItem, MotionReveal } from "./MotionReveal";
+import { PartnerNetwork } from "./PartnerNetwork";
 import { ShowcaseTabs } from "./ShowcaseTabs";
 import styles from "./landing.module.css";
 
@@ -162,6 +163,8 @@ export function LandingPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        <PartnerNetwork copy={copy.partner} locale={locale} />
+
         <section id="faq" className={styles.faqSection}>
           <MotionReveal className={styles.faqHeader}>
             <p className={styles.eyebrow}>{copy.faq.eyebrow}</p>
@@ -203,6 +206,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             <p>{copy.footer.product}</p>
             <a href="#product">{copy.nav.product}</a>
             <a href="#method">{copy.nav.method}</a>
+            <a href="#partners">{copy.nav.partners}</a>
             <Link href={`/${locale}/guides`}>{copy.nav.guides}</Link>
           </div>
           <div>

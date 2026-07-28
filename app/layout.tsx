@@ -4,6 +4,7 @@ import { buildRootAlternates } from "../lib/alternates";
 import { LocaleProvider } from "../lib/locale-context";
 import { ThemeProvider } from "../lib/theme-context";
 import { SiteFooter } from "./components/SiteFooter";
+import { Telemetry } from "./components/Telemetry";
 import "./globals.css";
 
 const inter = Inter({
@@ -121,6 +122,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen overflow-x-hidden">
+        <Telemetry />
         <ThemeProvider>
           <LocaleProvider>
             {children}

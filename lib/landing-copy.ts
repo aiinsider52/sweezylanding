@@ -13,6 +13,7 @@ export type LandingCopy = {
     product: string;
     method: string;
     stories: string;
+    partners: string;
     faq: string;
     guides: string;
     blog: string;
@@ -50,6 +51,41 @@ export type LandingCopy = {
     eyebrow: string;
     title: string;
     items: Array<{ quote: string; name: string; role: string; image: string }>;
+  };
+  partner: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    primary: string;
+    secondary: string;
+    passport: string;
+    verified: string;
+    types: Array<{
+      label: string;
+      kicker: string;
+      title: string;
+      body: string;
+      benefits: string[];
+    }>;
+    flowLabel: string;
+    steps: Array<{ title: string; body: string }>;
+    form: {
+      title: string;
+      body: string;
+      organization: string;
+      organizationPlaceholder: string;
+      type: string;
+      canton: string;
+      cantonPlaceholder: string;
+      website: string;
+      websitePlaceholder: string;
+      email: string;
+      emailPlaceholder: string;
+      submit: string;
+      close: string;
+      note: string;
+      opened: string;
+    };
   };
   faq: {
     eyebrow: string;
@@ -108,6 +144,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       product: "Inside Sweezy",
       method: "How it works",
       stories: "Stories",
+      partners: "Partners",
       faq: "FAQ",
       guides: "Guides",
       blog: "Blog",
@@ -195,6 +232,61 @@ export const landingCopy: Record<Locale, LandingCopy> = {
         { quote: "The checklist made the first month feel manageable instead of chaotic.", name: "Sarah L.", role: "Moved to Geneva", image: "/images/testimonial-sarah.jpg" },
       ],
     },
+    partner: {
+      eyebrow: "Sweezy Partner Network",
+      title: "Bring trusted help closer to people who need it.",
+      body: "Add your service, expertise or public programme to Sweezy. We place useful help next to the relocation moment that creates the need.",
+      primary: "Become a partner",
+      secondary: "How partnership works",
+      passport: "Partner passport",
+      verified: "Verified by Sweezy",
+      types: [
+        {
+          label: "Business & services",
+          kicker: "LOCAL SERVICE",
+          title: "Meet newcomers at the point of need",
+          body: "For language schools, insurers, banks, housing services, lawyers and local providers.",
+          benefits: ["Relevant discovery inside Sweezy", "Verified partner profile", "Qualified enquiries"],
+        },
+        {
+          label: "Experts & communities",
+          kicker: "TRUSTED PEOPLE",
+          title: "Turn local knowledge into practical support",
+          body: "For relocation experts, translators, psychologists, associations and community organisers.",
+          benefits: ["Expert visibility", "Community events", "Co-created practical guides"],
+        },
+        {
+          label: "Employers & institutions",
+          kicker: "PUBLIC IMPACT",
+          title: "Help people integrate with less friction",
+          body: "For employers, municipalities, cantons, universities, NGOs and integration programmes.",
+          benefits: ["Structured newcomer onboarding", "Local programme distribution", "Clear impact touchpoints"],
+        },
+      ],
+      flowLabel: "From application to launch",
+      steps: [
+        { title: "Apply", body: "Tell us who you help and where you operate." },
+        { title: "Get verified", body: "We review relevance, details and user value." },
+        { title: "Go live", body: "Your offer appears where it helps most." },
+      ],
+      form: {
+        title: "Start a partnership",
+        body: "Share the essentials. We will continue the conversation by email.",
+        organization: "Organisation",
+        organizationPlaceholder: "Company or organisation name",
+        type: "Partnership type",
+        canton: "Canton or region",
+        cantonPlaceholder: "For example Zürich or Switzerland-wide",
+        website: "Website",
+        websitePlaceholder: "https://",
+        email: "Contact email",
+        emailPlaceholder: "name@company.ch",
+        submit: "Prepare application email",
+        close: "Close form",
+        note: "Your email app opens with a prepared application. Nothing is sent before you confirm.",
+        opened: "Email draft prepared. If it did not open, write to support@sweezy.world.",
+      },
+    },
     faq: {
       eyebrow: "Before you download",
       title: "Useful answers. No fine print.",
@@ -229,6 +321,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       product: "Всередині Sweezy",
       method: "Як це працює",
       stories: "Історії",
+      partners: "Партнерам",
       faq: "FAQ",
       guides: "Гіди",
       blog: "Блог",
@@ -292,6 +385,61 @@ export const landingCopy: Record<Locale, LandingCopy> = {
         { quote: "Чекліст зробив перший місяць керованим замість хаотичного.", name: "Сара Л.", role: "Переїхала до Женеви", image: "/images/testimonial-sarah.jpg" },
       ],
     },
+    partner: {
+      eyebrow: "Партнерська мережа Sweezy",
+      title: "Допомагайте людям відчути себе своїми у Швейцарії.",
+      body: "Додайте свій сервіс, експертизу або програму до Sweezy. Ми покажемо допомогу саме тоді, коли вона потрібна під час переїзду.",
+      primary: "Стати партнером",
+      secondary: "Як працює партнерство",
+      passport: "Паспорт партнера",
+      verified: "Перевірено Sweezy",
+      types: [
+        {
+          label: "Бізнес і сервіси",
+          kicker: "ЛОКАЛЬНИЙ СЕРВІС",
+          title: "Будьте поруч у момент реальної потреби",
+          body: "Для мовних шкіл, страхових, банків, житлових сервісів, юристів і локальних провайдерів.",
+          benefits: ["Релевантна присутність у Sweezy", "Перевірений профіль партнера", "Цільові звернення"],
+        },
+        {
+          label: "Експерти й спільноти",
+          kicker: "ЛЮДИ, ЯКИМ ДОВІРЯЮТЬ",
+          title: "Перетворюйте локальні знання на підтримку",
+          body: "Для relocation-експертів, перекладачів, психологів, асоціацій та організаторів спільнот.",
+          benefits: ["Видимість експерта", "Події спільноти", "Спільні практичні гайди"],
+        },
+        {
+          label: "Роботодавці й інституції",
+          kicker: "СУСПІЛЬНИЙ ВПЛИВ",
+          title: "Допомагайте інтегруватися без зайвих бар’єрів",
+          body: "Для компаній, громад, кантонів, університетів, NGO та інтеграційних програм.",
+          benefits: ["Зрозумілий онбординг новоприбулих", "Поширення локальних програм", "Вимірювані точки взаємодії"],
+        },
+      ],
+      flowLabel: "Від заявки до запуску",
+      steps: [
+        { title: "Подайте заявку", body: "Розкажіть, кому допомагаєте й де працюєте." },
+        { title: "Пройдіть перевірку", body: "Ми перевіримо дані, релевантність і користь." },
+        { title: "Вийдіть у Sweezy", body: "Ваша пропозиція з’явиться у потрібному контексті." },
+      ],
+      form: {
+        title: "Почати партнерство",
+        body: "Залиште основну інформацію. Далі продовжимо розмову електронною поштою.",
+        organization: "Організація",
+        organizationPlaceholder: "Назва компанії або організації",
+        type: "Тип партнерства",
+        canton: "Кантон або регіон",
+        cantonPlaceholder: "Наприклад Zürich або вся Швейцарія",
+        website: "Вебсайт",
+        websitePlaceholder: "https://",
+        email: "Контактний email",
+        emailPlaceholder: "name@company.ch",
+        submit: "Підготувати лист-заявку",
+        close: "Закрити форму",
+        note: "Відкриється готова чернетка у вашій пошті. Нічого не надсилається без підтвердження.",
+        opened: "Чернетку підготовлено. Якщо вона не відкрилася, напишіть на support@sweezy.world.",
+      },
+    },
     faq: {
       eyebrow: "Перед завантаженням",
       title: "Корисні відповіді. Без дрібного шрифту.",
@@ -326,6 +474,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       product: "Sweezy entdecken",
       method: "So funktioniert es",
       stories: "Erfahrungen",
+      partners: "Partner",
       faq: "FAQ",
       guides: "Guides",
       blog: "Blog",
@@ -388,6 +537,61 @@ export const landingCopy: Record<Locale, LandingCopy> = {
         { quote: "Ich fand die richtige Stelle und wusste vor dem Termin, was ich mitbringen muss.", name: "Thomas M.", role: "Nach Basel gezogen", image: "/images/testimonial-marco.jpg" },
         { quote: "Die Checkliste machte den ersten Monat überschaubar statt chaotisch.", name: "Sarah L.", role: "Nach Genf gezogen", image: "/images/testimonial-sarah.jpg" },
       ],
+    },
+    partner: {
+      eyebrow: "Sweezy Partner Network",
+      title: "Bringen Sie verlässliche Hilfe näher zu den Menschen.",
+      body: "Ergänzen Sie Sweezy mit Ihrem Service, Ihrer Expertise oder Ihrem Programm. Wir zeigen Hilfe genau in dem Moment, in dem sie beim Umzug gebraucht wird.",
+      primary: "Partner werden",
+      secondary: "So funktioniert die Partnerschaft",
+      passport: "Partnerpass",
+      verified: "Von Sweezy geprüft",
+      types: [
+        {
+          label: "Unternehmen & Services",
+          kicker: "LOKALER SERVICE",
+          title: "Erreichen Sie Neuzuzüger im richtigen Moment",
+          body: "Für Sprachschulen, Versicherungen, Banken, Wohnservices, Kanzleien und lokale Anbieter.",
+          benefits: ["Relevante Präsenz in Sweezy", "Geprüftes Partnerprofil", "Qualifizierte Anfragen"],
+        },
+        {
+          label: "Experten & Communities",
+          kicker: "VERTRAUENSWÜRDIGE MENSCHEN",
+          title: "Machen Sie lokales Wissen praktisch nutzbar",
+          body: "Für Relocation-Experten, Übersetzer, Psychologen, Vereine und Community-Organisatoren.",
+          benefits: ["Sichtbarkeit als Experte", "Community-Events", "Gemeinsame praktische Guides"],
+        },
+        {
+          label: "Arbeitgeber & Institutionen",
+          kicker: "ÖFFENTLICHE WIRKUNG",
+          title: "Erleichtern Sie Integration ohne Umwege",
+          body: "Für Unternehmen, Gemeinden, Kantone, Hochschulen, NGOs und Integrationsprogramme.",
+          benefits: ["Strukturiertes Onboarding", "Verteilung lokaler Programme", "Klare Wirkungspunkte"],
+        },
+      ],
+      flowLabel: "Von der Bewerbung zum Start",
+      steps: [
+        { title: "Bewerben", body: "Zeigen Sie, wem Sie helfen und wo Sie tätig sind." },
+        { title: "Prüfen lassen", body: "Wir prüfen Angaben, Relevanz und Nutzwert." },
+        { title: "Live gehen", body: "Ihr Angebot erscheint im passenden Kontext." },
+      ],
+      form: {
+        title: "Partnerschaft starten",
+        body: "Teilen Sie die wichtigsten Angaben. Danach sprechen wir per E-Mail weiter.",
+        organization: "Organisation",
+        organizationPlaceholder: "Name des Unternehmens oder der Organisation",
+        type: "Art der Partnerschaft",
+        canton: "Kanton oder Region",
+        cantonPlaceholder: "Zum Beispiel Zürich oder schweizweit",
+        website: "Website",
+        websitePlaceholder: "https://",
+        email: "Kontakt-E-Mail",
+        emailPlaceholder: "name@firma.ch",
+        submit: "Bewerbungs-E-Mail vorbereiten",
+        close: "Formular schließen",
+        note: "Ihre E-Mail-App öffnet einen vorbereiteten Entwurf. Gesendet wird erst nach Ihrer Bestätigung.",
+        opened: "E-Mail-Entwurf vorbereitet. Falls er sich nicht geöffnet hat: support@sweezy.world.",
+      },
     },
     faq: {
       eyebrow: "Vor dem Download",
