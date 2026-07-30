@@ -222,7 +222,7 @@
 .cinematicJourney {
   --journey-progress: 0;
   position: relative;
-  height: 520svh;
+  height: 570svh;
   background: #080b0a;
 }
 
@@ -2663,7 +2663,7 @@
   }
 
   .cinematicJourney {
-    height: 460svh;
+    height: 505svh;
   }
 
   .cinematicSticky {
@@ -2673,7 +2673,7 @@
   }
 
   .cinematicVideo[data-scene="3"] {
-    object-position: right center;
+    object-position: 87% center;
   }
 
   .cinematicShade {

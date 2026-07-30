@@ -7,28 +7,39 @@ import { APP_STORE_URL } from "../../../lib/links";
 import styles from "./landing.module.css";
 import { useReducedMotionPreference } from "./useReducedMotionPreference";
 
-const CLIP_DURATION = 5.041667;
 const CLIP_OVERLAP = 0.25;
-const LAST_FRAME_TIME = CLIP_DURATION - 1 / 24;
 
 const clips = [
   {
     src: "/cinematic/journey-01-kyiv-station.mp4",
     poster: "/cinematic/journey-01-kyiv-station-poster.webp",
+    duration: 5.041667,
   },
   {
     src: "/cinematic/journey-02-station-carpathians.mp4",
     poster: "/cinematic/journey-02-station-carpathians-poster.webp",
+    duration: 5.041667,
   },
   {
     src: "/cinematic/journey-03-carpathians-alps.mp4",
     poster: "/cinematic/journey-03-carpathians-alps-poster.webp",
+    duration: 5.041667,
   },
   {
     src: "/cinematic/journey-04-alps-lucerne.mp4",
     poster: "/cinematic/journey-04-alps-lucerne-poster.webp",
+    duration: 7.041667,
   },
 ] as const;
+
+const clipStarts = clips.map((_, index) =>
+  clips
+    .slice(0, index)
+    .reduce((total, clip) => total + clip.duration - CLIP_OVERLAP, 0),
+);
+const journeyDuration =
+  clips.reduce((total, clip) => total + clip.duration, 0) -
+  CLIP_OVERLAP * (clips.length - 1);
 
 const journeyCopy: Record<
   Locale,
@@ -98,30 +109,30 @@ export function CinematicJourney({ locale, hero }: CinematicJourneyProps) {
       const rect = section.getBoundingClientRect();
       const travelDistance = Math.max(section.offsetHeight - window.innerHeight, 1);
       const progress = Math.min(Math.max(-rect.top / travelDistance, 0), 1);
-      const totalDuration = CLIP_DURATION * clips.length - CLIP_OVERLAP * (clips.length - 1);
-      const timelineTime = progress * totalDuration;
+      const timelineTime = progress * journeyDuration;
 
       section.style.setProperty("--journey-progress", progress.toFixed(4));
 
       videoRefs.current.forEach((video, index) => {
         if (!video) return;
 
-        const clipStart = index * (CLIP_DURATION - CLIP_OVERLAP);
+        const clip = clips[index];
+        const clipStart = clipStarts[index];
         const rawLocalTime = timelineTime - clipStart;
-        const localTime = Math.min(Math.max(rawLocalTime, 0), LAST_FRAME_TIME);
+        const localTime = Math.min(Math.max(rawLocalTime, 0), clip.duration - 1 / 24);
         const isNearTimeline =
-          rawLocalTime >= -CLIP_OVERLAP && rawLocalTime <= CLIP_DURATION + CLIP_OVERLAP;
+          rawLocalTime >= -CLIP_OVERLAP && rawLocalTime <= clip.duration + CLIP_OVERLAP;
 
-        let opacity = rawLocalTime >= 0 && rawLocalTime <= CLIP_DURATION ? 1 : 0;
+        let opacity = rawLocalTime >= 0 && rawLocalTime <= clip.duration ? 1 : 0;
         if (index > 0 && rawLocalTime >= 0 && rawLocalTime < CLIP_OVERLAP) {
           opacity = rawLocalTime / CLIP_OVERLAP;
         }
         if (
           index < clips.length - 1 &&
-          rawLocalTime > CLIP_DURATION - CLIP_OVERLAP &&
-          rawLocalTime <= CLIP_DURATION
+          rawLocalTime > clip.duration - CLIP_OVERLAP &&
+          rawLocalTime <= clip.duration
         ) {
-          opacity = (CLIP_DURATION - rawLocalTime) / CLIP_OVERLAP;
+          opacity = (clip.duration - rawLocalTime) / CLIP_OVERLAP;
         }
 
         video.style.opacity = Math.min(Math.max(opacity, 0), 1).toFixed(3);
@@ -135,10 +146,12 @@ export function CinematicJourney({ locale, hero }: CinematicJourneyProps) {
         }
       });
 
-      const nextScene = Math.min(
-        Math.floor((timelineTime + CLIP_OVERLAP / 2) / (CLIP_DURATION - CLIP_OVERLAP)),
-        clips.length - 1,
-      );
+      let nextScene = 0;
+      for (let index = 1; index < clips.length; index += 1) {
+        if (timelineTime >= clipStarts[index] + CLIP_OVERLAP / 2) {
+          nextScene = index;
+        }
+      }
       if (nextScene !== currentScene) {
         currentScene = nextScene;
         setSceneIndex(nextScene);
