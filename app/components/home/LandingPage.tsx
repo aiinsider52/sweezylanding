@@ -5,6 +5,7 @@ import { landingCopy } from "../../../lib/landing-copy";
 import { APP_STORE_URL, INSTAGRAM_URL, TELEGRAM_URL } from "../../../lib/links";
 import { JsonLd } from "../seo/JsonLd";
 import { AppFrameCluster } from "./AppFrameCluster";
+import { CinematicJourney } from "./CinematicJourney";
 import { LandingFaq } from "./LandingFaq";
 import { LandingNav } from "./LandingNav";
 import { MotionArticle, MotionListItem, MotionReveal } from "./MotionReveal";
@@ -54,39 +55,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
       </div>
 
       <main>
-        <section className={styles.hero}>
-          <MotionReveal className={styles.heroCopy}>
-            <p className={styles.eyebrow}>{copy.hero.eyebrow}</p>
-            <h1>
-              {copy.hero.title}
-              <span>{copy.hero.accent}</span>
-            </h1>
-            <p className={styles.heroBody}>{copy.hero.body}</p>
-            <div className={styles.heroActions}>
-              <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className={styles.primaryButton}>
-                {copy.hero.primary}
-              </a>
-              <a href="#product" className={styles.secondaryButton}>{copy.hero.secondary}</a>
-            </div>
-            <p className={styles.heroNote}>{copy.hero.footnote}</p>
-          </MotionReveal>
-
-          <MotionReveal className={styles.heroVisual} delay={0.12} hoverLift>
-            <div className={styles.heroVisualLabel}>
-              <span>Sweezy</span>
-              <span>01 — PATH</span>
-            </div>
-            <AppFrameCluster
-              frames={[
-                "/app-frames/path-city-hub.png",
-                "/app-frames/path-journey.png",
-                "/app-frames/path-permit-checklist.png",
-              ]}
-              alt="Sweezy personal journey through relocation tasks"
-              priority
-            />
-          </MotionReveal>
-        </section>
+        <CinematicJourney locale={locale} hero={copy.hero} />
 
         <section className={styles.proof} aria-label="Sweezy in numbers">
           {copy.proof.map((item) => (
