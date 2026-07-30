@@ -5,6 +5,7 @@ import { landingCopy } from "../../../lib/landing-copy";
 import { APP_STORE_URL, INSTAGRAM_URL, TELEGRAM_URL } from "../../../lib/links";
 import { JsonLd } from "../seo/JsonLd";
 import { AppFrameCluster } from "./AppFrameCluster";
+import { AnimatedProof } from "./AnimatedProof";
 import { CinematicJourney } from "./CinematicJourney";
 import { LandingFaq } from "./LandingFaq";
 import { LandingNav } from "./LandingNav";
@@ -57,14 +58,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
       <main>
         <CinematicJourney locale={locale} hero={copy.hero} />
 
-        <section className={styles.proof} aria-label="Sweezy in numbers">
-          {copy.proof.map((item) => (
-            <div key={item.label}>
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </section>
+        <AnimatedProof items={copy.proof} />
 
         <section id="product" className={styles.productSection}>
           <MotionReveal className={styles.sectionIntro}>

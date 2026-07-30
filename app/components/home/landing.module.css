@@ -806,13 +806,6 @@
   justify-content: center;
   padding: 28px clamp(22px, 4vw, 64px);
   border-right: 1px solid var(--line-light);
-  transition: background 220ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.proof div:hover {
-  z-index: 1;
-  background: rgba(126, 199, 255, 0.18);
-  transform: translateY(-6px);
 }
 
 .proof div:last-child {
