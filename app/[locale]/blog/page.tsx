@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { getPostsByLocale, isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
+import { getPostImage } from "../../../lib/editorial";
+import styles from "../editorial.module.css";
 
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
@@ -18,6 +21,9 @@ const COPY: Record<
     backHome: string;
     exploreGuides: string;
     exploreGuidesDesc: string;
+    eyebrow: string;
+    latest: string;
+    articles: string;
   }
 > = {
   en: {
@@ -29,6 +35,9 @@ const COPY: Record<
     backHome: "Back to homepage",
     exploreGuides: "Explore Canton Guides",
     exploreGuidesDesc: "Looking for canton-specific information? Browse our detailed guides for all 26 Swiss cantons.",
+    eyebrow: "FIELD NOTES · SWITZERLAND",
+    latest: "Latest field note",
+    articles: "Practical notes",
   },
   uk: {
     metaTitle: "Блог Sweezy: Гіди для українців у Швейцарії",
@@ -39,6 +48,9 @@ const COPY: Record<
     backHome: "Назад на головну",
     exploreGuides: "Гіди по кантонах",
     exploreGuidesDesc: "Шукаєте інформацію по конкретному кантону? Перегляньте наші детальні гіди для всіх 26 кантонів Швейцарії.",
+    eyebrow: "ПОЛЬОВІ НОТАТКИ · ШВЕЙЦАРІЯ",
+    latest: "Останній матеріал",
+    articles: "Практичні матеріали",
   },
   de: {
     metaTitle: "Sweezy Blog: Ratgeber für Expats & Neuzugezogene in der Schweiz",
@@ -49,6 +61,9 @@ const COPY: Record<
     backHome: "Zur Startseite",
     exploreGuides: "Kantons-Guides entdecken",
     exploreGuidesDesc: "Suchen Sie kantonsspezifische Informationen? Durchstöbern Sie unsere detaillierten Guides für alle 26 Schweizer Kantone.",
+    eyebrow: "FIELD NOTES · SCHWEIZ",
+    latest: "Neuester Beitrag",
+    articles: "Praktische Notizen",
   },
 };
 
@@ -139,104 +154,120 @@ export default async function BlogIndexPage({
   const locale = params.locale;
   const copy = COPY[locale];
   const posts = await getPostsByLocale(locale);
+  const [leadPost, ...remainingPosts] = posts;
 
   return (
-    <main lang={locale} className="min-h-screen bg-dark-900 text-white">
-      <div className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
-        <div className="mb-12">
-          <Link
-            href={`/${locale}`}
-            className="mb-6 inline-flex text-sm text-white/45 transition-colors hover:text-white"
-          >
-            {copy.backHome}
-          </Link>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{copy.h1}</h1>
-          <p className="mt-4 max-w-2xl text-base text-white/55">{copy.description}</p>
+    <main lang={locale} className={styles.page}>
+      <div className={styles.shell}>
+        <div className={styles.hero}>
+          <div>
+            <p className={styles.eyebrow}>{copy.eyebrow}</p>
+            <h1 className={styles.heroTitle}>{copy.h1}</h1>
+          </div>
+          <div className={styles.heroAside}>
+            <div className={styles.heroCount}>
+              {posts.length} <span>{copy.articles}</span>
+            </div>
+            <p>{copy.description}</p>
+          </div>
         </div>
 
         {locale === "uk" ? (
-          <section className="mb-14" aria-labelledby="ukrainian-start-title">
-            <div className="mb-5 flex items-end justify-between gap-4">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent-green">
-                  Почніть звідси
-                </p>
-                <h2 id="ukrainian-start-title" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-                  Найважливіше для українців
-                </h2>
-              </div>
-              <span className="hidden text-sm text-white/35 sm:block">Перевірено у липні 2026</span>
+          <section aria-labelledby="ukrainian-start-title">
+            <div className={styles.sectionHead}>
+              <h2 id="ukrainian-start-title">Почніть звідси</h2>
+              <span className={styles.eyebrow}>Перевірено · липень 2026</span>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className={styles.featuredRoute}>
               {UK_FEATURED.map((item, index) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`group rounded-2xl border p-6 transition-all hover:-translate-y-0.5 hover:border-accent-green/55 ${
-                    index === 0
-                      ? "border-accent-green/35 bg-accent-green/[0.07] sm:col-span-2"
-                      : "border-white/10 bg-white/[0.03]"
-                  }`}
+                  className={styles.routeItem}
                 >
-                  <p className="font-mono text-[11px] tracking-[0.16em] text-accent-green/80">{item.eyebrow}</p>
-                  <h3 className="mt-3 text-xl font-semibold tracking-tight transition-colors group-hover:text-accent-green">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-white/55">{item.description}</p>
-                  <span className="mt-5 inline-flex text-sm font-medium text-accent-green">Відкрити →</span>
+                  <div className="flex items-center justify-between">
+                    <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
+                    <span className={styles.eyebrow}>{item.eyebrow}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
                 </Link>
               ))}
             </div>
           </section>
         ) : null}
 
-        <div className="space-y-5">
-          {posts.length === 0 ? (
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-10 text-white/50">
-              {copy.empty}
+        {leadPost ? (
+          <>
+            <div className={styles.sectionHead}>
+              <h2>{copy.latest}</h2>
+              <span className={styles.eyebrow}>01</span>
             </div>
-          ) : (
-            posts.map((post) => (
-              <article
-                key={post.slug}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-white/20"
-              >
-                <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-white/40">
-                  <time dateTime={post.frontmatter.publishedAt}>
-                    {formatDate(locale, post.frontmatter.publishedAt)}
-                  </time>
-                  <span>{post.readingTimeMinutes} {locale === "uk" ? "хв читання" : locale === "de" ? "Min. Lesezeit" : "min read"}</span>
-                  <span>{post.frontmatter.author}</span>
+            <Link href={`/${locale}/blog/${leadPost.slug}`} className={styles.featured}>
+              <div className={styles.featuredMedia}>
+                <Image
+                  src={getPostImage(leadPost.slug)}
+                  alt=""
+                  fill
+                  priority
+                  sizes="(max-width: 800px) 100vw, 62vw"
+                />
+              </div>
+              <div className={styles.featuredCopy}>
+                <div>
+                  <div className={styles.meta}>
+                    <time dateTime={leadPost.frontmatter.publishedAt}>
+                      {formatDate(locale, leadPost.frontmatter.publishedAt)}
+                    </time>
+                    <span>{leadPost.readingTimeMinutes} {locale === "uk" ? "хв" : locale === "de" ? "Min." : "min"}</span>
+                  </div>
+                  <h2>{leadPost.frontmatter.title}</h2>
+                  <p>{leadPost.frontmatter.description}</p>
                 </div>
-                <h2 className="text-2xl font-semibold tracking-tight">
-                  <Link
-                    href={`/${locale}/blog/${post.slug}`}
-                    className="transition-colors hover:text-accent-green"
-                  >
-                    {post.frontmatter.title}
-                  </Link>
-                </h2>
-                <p className="mt-3 text-white/55">{post.frontmatter.description}</p>
-                <span
-                  aria-hidden="true"
-                  className="mt-5 inline-flex text-sm font-medium text-accent-green"
-                >
+                <span className={styles.arrowButton}>
                   {copy.readMore} →
                 </span>
-              </article>
-            ))
-          )}
-        </div>
+              </div>
+            </Link>
+          </>
+        ) : (
+          <p className="py-12 opacity-50">{copy.empty}</p>
+        )}
 
-        <div className="mt-16 rounded-2xl border border-accent-green/20 bg-accent-green/[0.03] p-6">
-          <h2 className="text-xl font-semibold tracking-tight">{copy.exploreGuides}</h2>
-          <p className="mt-2 text-white/55 text-sm">{copy.exploreGuidesDesc}</p>
-          <Link
-            href={`/${locale}/guides`}
-            className="mt-4 inline-flex text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
-          >
-            {copy.exploreGuides} →
-          </Link>
+        {remainingPosts.length ? (
+          <>
+            <div className={styles.sectionHead}>
+              <h2>{copy.articles}</h2>
+              <span className={styles.eyebrow}>02 — {String(posts.length).padStart(2, "0")}</span>
+            </div>
+            <div className={styles.postGrid}>
+              {remainingPosts.map((post) => (
+                <Link key={post.slug} href={`/${locale}/blog/${post.slug}`} className={styles.postCard}>
+                  <div className={styles.cardMedia}>
+                    <Image src={getPostImage(post.slug)} alt="" fill sizes="(max-width: 560px) 100vw, 50vw" />
+                  </div>
+                  <div className={styles.cardCopy}>
+                    <div className={styles.meta}>
+                      <time dateTime={post.frontmatter.publishedAt}>{formatDate(locale, post.frontmatter.publishedAt)}</time>
+                      <span>{post.readingTimeMinutes} {locale === "uk" ? "хв" : locale === "de" ? "Min." : "min"}</span>
+                    </div>
+                    <h2>{post.frontmatter.title}</h2>
+                    <p>{post.frontmatter.description}</p>
+                    <span className={styles.cardLink}>{copy.readMore} <span aria-hidden>↗</span></span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </>
+        ) : null}
+
+        <div className={styles.cta}>
+          <div>
+            <p className={styles.eyebrow}>26 cantons · local detail</p>
+            <h2>{copy.exploreGuides}</h2>
+            <p className="mt-5 max-w-xl text-white/55">{copy.exploreGuidesDesc}</p>
+          </div>
+          <Link href={`/${locale}/guides`}>{copy.exploreGuides} →</Link>
         </div>
       </div>
     </main>

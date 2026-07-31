@@ -45,19 +45,19 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
         }}
       />
-      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-white/45">
+      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-current opacity-55">
         <ol className="flex flex-wrap items-center gap-2 list-none p-0">
           {items.map((item, index) => (
             <li key={`${item.url}-${index}`} className="flex items-center gap-2">
               {index < items.length - 1 ? (
                 <>
-                  <Link href={toHref(item.url)} className="transition-colors hover:text-white">
+                  <Link href={toHref(item.url)} className="transition-opacity hover:opacity-60">
                     {item.name}
                   </Link>
                   <span aria-hidden>/</span>
                 </>
               ) : (
-                <span aria-current="page" className="text-white/65">
+                <span aria-current="page" className="opacity-75">
                   {item.name}
                 </span>
               )}

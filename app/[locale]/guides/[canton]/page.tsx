@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
@@ -9,6 +10,8 @@ import { isLocale } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
 import { APP_STORE_URL } from "../../../../lib/links";
 import Link from "next/link";
+import { getCantonImage } from "../../../../lib/editorial";
+import styles from "../../editorial.module.css";
 
 /* ─── Generic copy (all 26 cantons, all 3 locales) ─── */
 const COPY: Record<
@@ -319,33 +322,40 @@ export default function CantonGuidePage({
         })),
       }
     : null;
+  const cantonImage = getCantonImage(canton.slug);
 
   /* ── Shared header ───────────────────────────────────────────────────────── */
   const header = (
-    <header className="mb-10 border-b border-white/10 pb-8">
-      <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-        {rich ? rich.h1 : copy.title(name).replace(" | Sweezy", "")}
-      </h1>
-      <p className="mt-4 max-w-3xl text-lg text-white/55">
-        {rich ? rich.intro : copy.description(name, canton.capital)}
-      </p>
-      <div className="mt-6 grid gap-3 sm:grid-cols-3 text-sm text-white/60">
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+    <header className={styles.guideHero}>
+      <div className={styles.guideHeroCopy}>
+        <div>
+          <p className={styles.eyebrow}>Sweezy canton route · CH</p>
+          <h1>{rich ? rich.h1 : copy.title(name).replace(" | Sweezy", "")}</h1>
+          <p>{rich ? rich.intro : copy.description(name, canton.capital)}</p>
+        </div>
+        <div className={styles.guideStats}>
+          <div>
           <p className="text-white/35">{copy.capital}</p>
           <p className="mt-1 text-base font-medium text-white">{canton.capital}</p>
-        </div>
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+          </div>
+          <div>
           <p className="text-white/35">{copy.population}</p>
           <p className="mt-1 text-base font-medium text-white">
             {formatPopulation(locale, canton.population)}
           </p>
-        </div>
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+          </div>
+          <div>
           <p className="text-white/35">{copy.languageRegion}</p>
           <p className="mt-1 text-base font-medium text-white">
             {getLanguageRegion(locale, canton)}
           </p>
+          </div>
         </div>
+      </div>
+      <div className={styles.guideMedia}>
+        {cantonImage ? (
+          <Image src={cantonImage} alt="" fill priority sizes="(max-width: 800px) 100vw, 40vw" />
+        ) : null}
       </div>
     </header>
   );
@@ -690,13 +700,13 @@ export default function CantonGuidePage({
   );
 
   return (
-    <main className="min-h-screen bg-dark-900 text-white">
+    <main lang={locale} className={styles.page}>
       <JsonLd data={placeJsonLd} />
       {faqJsonLd && <JsonLd data={faqJsonLd} />}
-      <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
+      <article className={styles.guideDetail}>
         <Breadcrumb items={breadcrumbItems} />
         {header}
-        {rich ? richBody : genericBody}
+        <div className={styles.guideBody}>{rich ? richBody : genericBody}</div>
       </article>
     </main>
   );

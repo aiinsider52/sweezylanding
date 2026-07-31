@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -14,6 +15,8 @@ import type { Locale } from "../../../../lib/i18n";
 import Link from "next/link";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
+import { getPostImage } from "../../../../lib/editorial";
+import styles from "../../editorial.module.css";
 
 function formatDate(locale: Locale, value: string) {
   return new Date(value).toLocaleDateString(
@@ -224,80 +227,115 @@ export default async function BlogPostPage({
     url: canonicalUrl,
   };
   return (
-    <main lang={locale} className="min-h-screen bg-dark-900 text-white">
+    <main lang={locale} className={styles.page}>
       <JsonLd data={articleJsonLd} />
-      <article className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
-        <header className="mb-10 border-b border-white/10 pb-8">
-          <Breadcrumb items={breadcrumbItems} />
-          <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-white/40">
-            <time dateTime={post.frontmatter.publishedAt}>
-              {formatDate(locale, post.frontmatter.publishedAt)}
-            </time>
-            <span>
-              {post.readingTimeMinutes}{" "}
-              {locale === "uk" ? "хв читання" : locale === "de" ? "Min. Lesezeit" : "min read"}
-            </span>
-            <Link href={`/${locale}/about`} className="transition-colors hover:text-white">
-              {post.frontmatter.author}
-            </Link>
-            <span>
-              {articleCopy.updated}: {formatDate(locale, post.frontmatter.updatedAt ?? post.frontmatter.publishedAt)}
-            </span>
+      <article className={styles.articleShell}>
+        <header className={styles.articleHero}>
+          <div className={styles.articleIntro}>
+            <div>
+              <Breadcrumb items={breadcrumbItems} />
+              <div className={styles.meta}>
+                <time dateTime={post.frontmatter.publishedAt}>
+                  {formatDate(locale, post.frontmatter.publishedAt)}
+                </time>
+                <span>
+                  {post.readingTimeMinutes}{" "}
+                  {locale === "uk" ? "хв читання" : locale === "de" ? "Min. Lesezeit" : "min read"}
+                </span>
+                <span>{post.frontmatter.category ?? "Sweezy field note"}</span>
+              </div>
+              <h1>{post.frontmatter.title}</h1>
+              <p>{post.frontmatter.description}</p>
+            </div>
+            <div className="flex flex-wrap items-end justify-between gap-5 border-t border-white/15 pt-6 text-sm text-white/55">
+              <div>
+                <span className={styles.eyebrow}>By</span>
+                <Link href={`/${locale}/about`} className="mt-2 block font-semibold text-white">
+                  {post.frontmatter.author}
+                </Link>
+              </div>
+              <div className="text-right">
+                <span className={styles.eyebrow}>{articleCopy.updated}</span>
+                <strong className="mt-2 block text-white">
+                  {formatDate(locale, post.frontmatter.updatedAt ?? post.frontmatter.publishedAt)}
+                </strong>
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            {post.frontmatter.title}
-          </h1>
-          <p className="mt-4 text-lg text-white/55">{post.frontmatter.description}</p>
+          <div className={styles.articleVisual}>
+            <Image
+              src={getPostImage(post.slug)}
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 800px) 100vw, 40vw"
+            />
+          </div>
         </header>
 
-        <div className="prose prose-invert max-w-none">{content}</div>
+        <div className={styles.articleLayout}>
+          <aside className={styles.articleRail}>
+            <div className={styles.articleRailBlock}>
+              <span className={styles.eyebrow}>{COPY[locale].blog}</span>
+              <strong>{post.frontmatter.category ?? "Relocation guide"}</strong>
+            </div>
+            <div className={styles.articleRailBlock}>
+              <span className={styles.eyebrow}>{articleCopy.updated}</span>
+              <strong>{formatDate(locale, post.frontmatter.updatedAt ?? post.frontmatter.publishedAt)}</strong>
+            </div>
+            <div className={styles.articleRailBlock}>
+              <Link href={`/${locale}/blog`} className="text-sm font-semibold">← {COPY[locale].blog}</Link>
+            </div>
+          </aside>
 
-        <aside className="mt-10 rounded-xl border border-white/10 bg-white/[0.03] p-5 text-sm text-white/55">
-          <p>{articleCopy.editorial}</p>
-          <Link
-            href={`/${locale}/about`}
-            className="mt-2 inline-flex font-medium text-accent-green transition-colors hover:text-accent-emerald"
-          >
-            {articleCopy.editorialLink} →
-          </Link>
-        </aside>
+          <div className={styles.articleBody}>{content}</div>
+
+          <aside className={styles.articleAside}>
+            <span className={styles.index}>✓</span>
+            <h2>{articleCopy.editorial}</h2>
+            <Link href={`/${locale}/about`} className="mt-8 inline-flex text-sm font-bold">
+              {articleCopy.editorialLink} →
+            </Link>
+          </aside>
+        </div>
 
         {relatedPosts.length > 0 ? (
-          <section className="mt-12 border-t border-white/10 pt-10" aria-labelledby="related-articles-title">
-            <h2 id="related-articles-title" className="text-2xl font-semibold tracking-tight">
-              {articleCopy.related}
-            </h2>
-            <div className="mt-5 grid gap-4 sm:grid-cols-3">
-              {relatedPosts.map((relatedPost) => (
-                <article key={relatedPost.slug} className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-                  <h3 className="font-semibold leading-snug">{relatedPost.frontmatter.title}</h3>
-                  <Link
-                    href={`/${locale}/blog/${relatedPost.slug}`}
-                    className="mt-4 inline-flex text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
-                  >
-                    {articleCopy.read} →
-                  </Link>
-                </article>
+          <section className="mt-24 border-t border-black/15 pt-8" aria-labelledby="related-articles-title">
+            <div className={styles.sectionHead}>
+              <h2 id="related-articles-title">{articleCopy.related}</h2>
+              <span className={styles.eyebrow}>Next route</span>
+            </div>
+            <div className={styles.relatedGrid}>
+              {relatedPosts.map((relatedPost, index) => (
+                <Link
+                  key={relatedPost.slug}
+                  href={`/${locale}/blog/${relatedPost.slug}`}
+                  className={styles.relatedCard}
+                >
+                  <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-10 text-2xl font-semibold leading-tight tracking-tight">
+                    {relatedPost.frontmatter.title}
+                  </h3>
+                  <span className={styles.cardLink}>{articleCopy.read} <span aria-hidden>↗</span></span>
+                </Link>
               ))}
             </div>
           </section>
         ) : null}
 
-        <nav className="mt-12 flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-5">
-          <p className="text-sm text-white/55">
-            {locale === "uk"
-              ? "Досліджуйте гіди по кантонах Швейцарії"
-              : locale === "de"
-                ? "Entdecken Sie unsere Kantons-Guides"
-                : "Explore our Swiss canton guides"}
-          </p>
-          <Link
-            href={`/${locale}/guides`}
-            className="flex-shrink-0 text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
-          >
-            {locale === "uk" ? "Гіди" : "Guides"} →
-          </Link>
-        </nav>
+        <div className={styles.cta}>
+          <div>
+            <p className={styles.eyebrow}>26 cantons · local detail</p>
+            <h2>
+              {locale === "uk"
+                ? "Знайдіть свій кантон."
+                : locale === "de"
+                  ? "Finden Sie Ihren Kanton."
+                  : "Find your canton."}
+            </h2>
+          </div>
+          <Link href={`/${locale}/guides`}>{locale === "uk" ? "Гіди" : "Guides"} →</Link>
+        </div>
       </article>
     </main>
   );

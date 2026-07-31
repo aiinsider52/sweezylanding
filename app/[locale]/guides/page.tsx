@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Breadcrumb } from "../../components/Breadcrumb";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { cantons } from "../../../data/cantons";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
+import { getCantonImage } from "../../../lib/editorial";
+import styles from "../editorial.module.css";
 
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
@@ -23,6 +25,9 @@ const COPY: Record<
     openGuide: string;
     readBlog: string;
     readBlogDesc: string;
+    eyebrow: string;
+    allCantons: string;
+    routes: string;
   }
 > = {
   en: {
@@ -38,6 +43,9 @@ const COPY: Record<
     openGuide: "Open guide",
     readBlog: "Read Our Blog",
     readBlogDesc: "Get practical tips, insights, and step-by-step advice for expats in Switzerland.",
+    eyebrow: "26 CANTONS · ONE CLEAR SYSTEM",
+    allCantons: "Choose your canton",
+    routes: "local routes",
   },
   uk: {
     title: "Гіди по кантонах Швейцарії",
@@ -52,6 +60,9 @@ const COPY: Record<
     openGuide: "Відкрити гід",
     readBlog: "Читайте наш блог",
     readBlogDesc: "Практичні поради та покрокові інструкції для життя у Швейцарії.",
+    eyebrow: "26 КАНТОНІВ · ОДНА ЗРОЗУМІЛА СИСТЕМА",
+    allCantons: "Оберіть свій кантон",
+    routes: "локальних маршрутів",
   },
   de: {
     title: "Schweizer Kantons-Guides",
@@ -66,6 +77,9 @@ const COPY: Record<
     openGuide: "Guide öffnen",
     readBlog: "Lesen Sie unseren Blog",
     readBlogDesc: "Praktische Tipps und Schritt-fur-Schritt-Anleitungen fur Expats in der Schweiz.",
+    eyebrow: "26 KANTONE · EIN KLARES SYSTEM",
+    allCantons: "Kanton auswählen",
+    routes: "lokale Routen",
   },
 };
 
@@ -132,70 +146,76 @@ export default function GuidesIndexPage({
 
   const locale = params.locale;
   const copy = COPY[locale];
-  const breadcrumbItems = [
-    { name: copy.breadcrumbHome, url: `/${locale}` },
-    { name: copy.breadcrumbGuides, url: `${BASE_URL}/${locale}/guides` },
-  ];
-
   return (
-    <main className="min-h-screen bg-dark-900 text-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24">
-        <div className="mb-12">
-          <Breadcrumb items={breadcrumbItems} />
-          <Link
-            href={`/${locale}`}
-            className="mb-6 inline-flex text-sm text-white/45 transition-colors hover:text-white"
-          >
-            {copy.backHome}
-          </Link>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{copy.title}</h1>
-          <p className="mt-4 max-w-3xl text-base text-white/55">{copy.description}</p>
+    <main lang={locale} className={styles.page}>
+      <div className={styles.shell}>
+        <div className={styles.hero}>
+          <div>
+            <p className={styles.eyebrow}>{copy.eyebrow}</p>
+            <h1 className={styles.heroTitle}>{copy.title}</h1>
+          </div>
+          <div className={styles.heroAside}>
+            <div className={styles.heroCount}>
+              26 <span>{copy.routes}</span>
+            </div>
+            <p>{copy.description}</p>
+          </div>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {cantons.map((canton) => (
-            <article
-              key={canton.slug}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
-            >
-              <h2 className="text-2xl font-semibold tracking-tight">
-                {getCantonName(locale, canton)}
-              </h2>
-              <div className="mt-4 space-y-2 text-sm text-white/55">
-                <p>
-                  <span className="text-white/80">{copy.capital}:</span> {canton.capital}
-                </p>
-                <p>
-                  <span className="text-white/80">{copy.population}:</span>{" "}
-                  {new Intl.NumberFormat(locale === "uk" ? "uk-UA" : locale === "de" ? "de-CH" : "en-US").format(canton.population)}
-                </p>
-                <p>
-                  <span className="text-white/80">{copy.languageRegion}:</span>{" "}
-                  {getLanguageRegion(locale, canton)}
-                </p>
-              </div>
+        <div className={styles.sectionHead}>
+          <h2>{copy.allCantons}</h2>
+          <span className={styles.eyebrow}>01 — 26</span>
+        </div>
+
+        <div className={styles.cantonGrid}>
+          {cantons.map((canton, index) => {
+            const image = getCantonImage(canton.slug);
+            return (
               <Link
+                key={canton.slug}
                 href={`/${locale}/guides/${canton.slug}`}
-                className="mt-5 inline-flex text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
+                className={styles.cantonCard}
               >
-                {copy.openGuide}
+                {image ? (
+                  <div className={styles.cardMedia}>
+                    <Image
+                      src={image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 560px) 100vw, (max-width: 1050px) 50vw, 25vw"
+                    />
+                  </div>
+                ) : null}
+                <div className={styles.cardCopy}>
+                  <div className="flex items-center justify-between">
+                    <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
+                    <span className={styles.eyebrow}>{getLanguageRegion(locale, canton)}</span>
+                  </div>
+                  <h2>{getCantonName(locale, canton)}</h2>
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm opacity-60">
+                    <span>{copy.capital}: {canton.capital}</span>
+                    <span>
+                      {new Intl.NumberFormat(locale === "uk" ? "uk-UA" : locale === "de" ? "de-CH" : "en-US").format(canton.population)}
+                    </span>
+                  </div>
+                  <span className={styles.cardLink}>
+                    {copy.openGuide} <span aria-hidden>↗</span>
+                  </span>
+                </div>
               </Link>
-            </article>
-          ))}
+            );
+          })}
         </div>
 
-        <div className="mt-16 rounded-2xl border border-accent-green/20 bg-accent-green/[0.03] p-6">
-          <h2 className="text-xl font-semibold tracking-tight">{copy.readBlog}</h2>
-          <p className="mt-2 text-white/55 text-sm">{copy.readBlogDesc}</p>
-          <Link
-            href={`/${locale}/blog`}
-            className="mt-4 inline-flex text-sm font-medium text-accent-green transition-colors hover:text-accent-emerald"
-          >
-            {copy.readBlog} →
-          </Link>
+        <div className={styles.cta}>
+          <div>
+            <p className={styles.eyebrow}>Sweezy editorial</p>
+            <h2>{copy.readBlog}</h2>
+            <p className="mt-5 max-w-xl text-white/55">{copy.readBlogDesc}</p>
+          </div>
+          <Link href={`/${locale}/blog`}>{copy.readBlog} →</Link>
         </div>
       </div>
     </main>
   );
 }
-
