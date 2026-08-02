@@ -180,7 +180,7 @@ export default function GuidesIndexPage({
                   <div className={styles.cardMedia}>
                     <Image
                       src={image}
-                      alt=""
+                      alt={`${getCantonName(locale, canton)} canton in Switzerland — local guide, services and relocation information`}
                       fill
                       sizes="(max-width: 560px) 100vw, (max-width: 1050px) 50vw, 25vw"
                     />

@@ -9,9 +9,9 @@ export function ContentTopBar() {
   const { locale } = useLocale();
 
   const labels = {
-    en: { home: "Home", guides: "Guides", blog: "Blog" },
-    uk: { home: "Головна", guides: "Гіди", blog: "Блог" },
-    de: { home: "Startseite", guides: "Guides", blog: "Blog" },
+    en: { home: "Home", guides: "Guides", places: "Places", blog: "Blog" },
+    uk: { home: "Головна", guides: "Гіди", places: "Місця", blog: "Блог" },
+    de: { home: "Startseite", guides: "Guides", places: "Orte", blog: "Blog" },
   } as const;
 
   const l = labels[locale] ?? labels.en;
@@ -38,6 +38,12 @@ export function ContentTopBar() {
             className="rounded-full px-4 py-2 text-white/55 transition-colors hover:bg-[#82c8ff] hover:text-black"
           >
             {l.guides}
+          </Link>
+          <Link
+            href={`/${locale}/places`}
+            className="rounded-full px-4 py-2 text-white/55 transition-colors hover:bg-[#adff00] hover:text-black"
+          >
+            {l.places}
           </Link>
           <Link
             href={`/${locale}/blog`}

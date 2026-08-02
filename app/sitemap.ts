@@ -3,6 +3,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { cantons } from "../data/cantons";
+import { travelDestinations } from "../data/travel-destinations";
 import { isLocale, isRedirectedBlogPost } from "../lib/blog";
 
 const SITE_URL = "https://www.sweezy.world";
@@ -68,6 +69,8 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
   const localizedBlogIndex = path.join(appDir, "[locale]", "blog", "page.tsx");
   const localizedGuidesIndex = path.join(appDir, "[locale]", "guides", "page.tsx");
   const localizedCantonGuide = path.join(appDir, "[locale]", "guides", "[canton]", "page.tsx");
+  const localizedPlacesIndex = path.join(appDir, "[locale]", "places", "page.tsx");
+  const localizedPlace = path.join(appDir, "[locale]", "places", "[slug]", "page.tsx");
 
   if (await pathExists(localizedBlogIndex)) {
     pages.push(...LOCALES.map((locale) => `/${locale}/blog`));
@@ -83,6 +86,14 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
         cantons.map((canton) => `/${locale}/guides/${canton.slug}`),
       ),
     );
+  }
+
+  if (await pathExists(localizedPlacesIndex)) {
+    pages.push(...LOCALES.map((locale) => `/${locale}/places`));
+  }
+
+  if (await pathExists(localizedPlace)) {
+    pages.push(...LOCALES.flatMap((locale) => travelDestinations.map((place) => `/${locale}/places/${place.slug}`)));
   }
 
   for (const slug of LOCALIZED_PAGES) {

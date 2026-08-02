@@ -25,7 +25,7 @@ export function LandingNav({ locale, copy }: { locale: Locale; copy: LandingCopy
     { href: "#method", label: copy.method },
     { href: "#stories", label: copy.stories },
     { href: "#partners", label: copy.partners },
-    { href: "#faq", label: copy.faq },
+    { href: `/${locale}/places`, label: copy.places, route: true },
   ];
 
   return (
@@ -36,9 +36,7 @@ export function LandingNav({ locale, copy }: { locale: Locale; copy: LandingCopy
       </Link>
 
       <div className={styles.desktopLinks}>
-        {links.map((link) => (
-          <a key={link.href} href={link.href}>{link.label}</a>
-        ))}
+        {links.map((link) => link.route ? <Link key={link.href} href={link.href}>{link.label}</Link> : <a key={link.href} href={link.href}>{link.label}</a>)}
       </div>
 
       <div className={styles.navActions}>
@@ -66,9 +64,8 @@ export function LandingNav({ locale, copy }: { locale: Locale; copy: LandingCopy
 
       {isOpen ? (
           <div id="landing-mobile-menu" className={styles.mobileMenu} data-open="true">
-            {links.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setIsOpen(false)}>{link.label}</a>
-            ))}
+            {links.map((link) => link.route ? <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)}>{link.label}</Link> : <a key={link.href} href={link.href} onClick={() => setIsOpen(false)}>{link.label}</a>)}
+            <a href="#faq" onClick={() => setIsOpen(false)}>{copy.faq}</a>
             <Link href={`/${locale}/guides`} onClick={() => setIsOpen(false)}>{copy.guides}</Link>
             <Link href={`/${locale}/blog`} onClick={() => setIsOpen(false)}>{copy.blog}</Link>
             <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className={styles.mobileCta}>

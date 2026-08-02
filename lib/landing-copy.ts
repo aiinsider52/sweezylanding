@@ -16,6 +16,7 @@ export type LandingCopy = {
     partners: string;
     faq: string;
     guides: string;
+    places: string;
     blog: string;
     app: string;
     menu: string;
@@ -147,6 +148,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       partners: "Partners",
       faq: "FAQ",
       guides: "Guides",
+      places: "Places",
       blog: "Blog",
       app: "Get the app",
       menu: "Open menu",
@@ -324,6 +326,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       partners: "Партнерам",
       faq: "FAQ",
       guides: "Гіди",
+      places: "Місця",
       blog: "Блог",
       app: "Завантажити",
       menu: "Відкрити меню",
@@ -477,6 +480,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       partners: "Partner",
       faq: "FAQ",
       guides: "Guides",
+      places: "Orte",
       blog: "Blog",
       app: "App laden",
       menu: "Menü öffnen",

@@ -4,6 +4,7 @@ import type { Locale } from "../../../lib/i18n";
 import { landingCopy } from "../../../lib/landing-copy";
 import { APP_STORE_URL, INSTAGRAM_URL, TELEGRAM_URL } from "../../../lib/links";
 import { JsonLd } from "../seo/JsonLd";
+import { destinationImage, travelDestinations } from "../../../data/travel-destinations";
 import { AppFrameCluster } from "./AppFrameCluster";
 import { AnimatedProof } from "./AnimatedProof";
 import { CinematicJourney } from "./CinematicJourney";
@@ -18,6 +19,12 @@ const ABOUT_LABEL: Record<Locale, string> = {
   en: "About & editorial",
   uk: "Про Sweezy та редакцію",
   de: "Über Sweezy & Redaktion",
+};
+
+const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
+  en: { eyebrow: "SWITZERLAND OUTSIDE THE CHECKLIST", title: "Live here. Explore here.", body: "Sweezy now combines relocation guidance with practical routes to Switzerland's mountains, lakes, cities and natural landmarks.", open: "Open place", all: "Explore all places" },
+  uk: { eyebrow: "ШВЕЙЦАРІЯ ПОЗА ЧЕКЛИСТОМ", title: "Живіть тут. Відкривайте тут.", body: "Sweezy поєднує допомогу з переїздом із практичними маршрутами до гір, озер, міст і природних пам'яток Швейцарії.", open: "Відкрити місце", all: "Усі красиві місця" },
+  de: { eyebrow: "SCHWEIZ AUSSERHALB DER CHECKLISTE", title: "Hier leben. Hier entdecken.", body: "Sweezy verbindet Umzugshilfe mit praktischen Routen zu Bergen, Seen, Städten und Naturwundern der Schweiz.", open: "Ort öffnen", all: "Alle Orte entdecken" },
 };
 
 export function LandingPage({ locale }: { locale: Locale }) {
@@ -59,6 +66,31 @@ export function LandingPage({ locale }: { locale: Locale }) {
         <CinematicJourney locale={locale} hero={copy.hero} />
 
         <AnimatedProof items={copy.proof} />
+
+        <section className={styles.placesSection}>
+          <MotionReveal className={styles.placesHeader}>
+            <p className={styles.eyebrow}>{PLACES_COPY[locale].eyebrow}</p>
+            <h2>{PLACES_COPY[locale].title}</h2>
+            <p>{PLACES_COPY[locale].body}</p>
+          </MotionReveal>
+          <div className={styles.placesGrid}>
+            {travelDestinations.slice(0, 4).map((place, index) => (
+              <MotionArticle key={place.slug} className={styles.placeCard} delay={index * 0.055}>
+                <Link href={`/${locale}/places/${place.slug}`}>
+                  <Image src={destinationImage(place)} alt={place.alt[locale][0]} fill sizes="(max-width: 760px) 92vw, 25vw" />
+                  <span className={styles.placeShade} />
+                  <span className={styles.placeNumber}>{String(index + 1).padStart(2, "0")}</span>
+                  <span className={styles.placeCopy}>
+                    <small>{place.region[locale]}</small>
+                    <strong>{place.title[locale]}</strong>
+                    <em>{PLACES_COPY[locale].open} ↗</em>
+                  </span>
+                </Link>
+              </MotionArticle>
+            ))}
+          </div>
+          <Link href={`/${locale}/places`} className={styles.placesButton}>{PLACES_COPY[locale].all} →</Link>
+        </section>
 
         <section id="product" className={styles.productSection}>
           <MotionReveal className={styles.sectionIntro}>
@@ -114,7 +146,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
           <div className={styles.storyGrid}>
             {copy.stories.items.map((story, index) => (
               <MotionArticle key={story.name} className={styles.storyCard} delay={index * 0.06}>
-                <Image src={story.image} alt="" fill sizes="(max-width: 760px) 92vw, 33vw" className={styles.storyImage} />
+                <Image src={story.image} alt={`${story.name}, Sweezy user sharing relocation experience in Switzerland`} fill sizes="(max-width: 760px) 92vw, 33vw" className={styles.storyImage} />
                 <div className={styles.storyOverlay} />
                 <blockquote>“{story.quote}”</blockquote>
                 <footer>
@@ -171,6 +203,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             <a href="#method">{copy.nav.method}</a>
             <a href="#partners">{copy.nav.partners}</a>
             <Link href={`/${locale}/guides`}>{copy.nav.guides}</Link>
+            <Link href={`/${locale}/places`}>{PLACES_COPY[locale].all}</Link>
           </div>
           <div>
             <p>{copy.footer.resources}</p>

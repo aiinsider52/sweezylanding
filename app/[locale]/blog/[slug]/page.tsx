@@ -265,7 +265,7 @@ export default async function BlogPostPage({
           <div className={styles.articleVisual}>
             <Image
               src={getPostImage(post.slug)}
-              alt=""
+              alt={`${post.frontmatter.title} — practical Sweezy guide for life in Switzerland`}
               fill
               priority
               sizes="(max-width: 800px) 100vw, 40vw"

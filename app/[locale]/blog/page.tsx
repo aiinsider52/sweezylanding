@@ -207,7 +207,7 @@ export default async function BlogIndexPage({
               <div className={styles.featuredMedia}>
                 <Image
                   src={getPostImage(leadPost.slug)}
-                  alt=""
+                  alt={`${leadPost.frontmatter.title} — ${leadPost.frontmatter.description}`}
                   fill
                   priority
                   sizes="(max-width: 800px) 100vw, 62vw"
@@ -244,7 +244,7 @@ export default async function BlogIndexPage({
               {remainingPosts.map((post) => (
                 <Link key={post.slug} href={`/${locale}/blog/${post.slug}`} className={styles.postCard}>
                   <div className={styles.cardMedia}>
-                    <Image src={getPostImage(post.slug)} alt="" fill sizes="(max-width: 560px) 100vw, 50vw" />
+                    <Image src={getPostImage(post.slug)} alt={`${post.frontmatter.title} — Sweezy Switzerland guide`} fill sizes="(max-width: 560px) 100vw, 50vw" />
                   </div>
                   <div className={styles.cardCopy}>
                     <div className={styles.meta}>

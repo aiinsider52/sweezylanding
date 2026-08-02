@@ -44,6 +44,7 @@ export function SiteFooter({ year }: { year: number }) {
   const localeHome = `/${locale}`;
   const localeGuides = `/${locale}/guides`;
   const localeBlog = `/${locale}/blog`;
+  const localePlaces = `/${locale}/places`;
   const guidesLabel = locale === "uk" ? "Гіди" : locale === "de" ? "Ratgeber" : "Guides";
 
   const columns = [
@@ -53,6 +54,7 @@ export function SiteFooter({ year }: { year: number }) {
         { label: t("footer.features"), href: `${localeHome}#product` },
         { label: t("footer.howItWorks"), href: `${localeHome}#method` },
         { label: guidesLabel, href: localeGuides },
+        { label: locale === "uk" ? "Красиві місця" : locale === "de" ? "Schöne Orte" : "Beautiful places", href: localePlaces },
         { label: t("footer.download"), href: APP_STORE_URL },
       ],
     },

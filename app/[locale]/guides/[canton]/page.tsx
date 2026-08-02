@@ -354,7 +354,7 @@ export default function CantonGuidePage({
       </div>
       <div className={styles.guideMedia}>
         {cantonImage ? (
-          <Image src={cantonImage} alt="" fill priority sizes="(max-width: 800px) 100vw, 40vw" />
+          <Image src={cantonImage} alt={`${name} canton in Switzerland — city landscape and local relocation guide`} fill priority sizes="(max-width: 800px) 100vw, 40vw" />
         ) : null}
       </div>
     </header>
