@@ -8,21 +8,21 @@ const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 const LOCALE_METADATA = {
   en: {
-    title: "Sweezy — Your Guide to Life in Switzerland",
+    title: "Sweezy App — Move to Switzerland with Clear Steps",
     description:
-      "Step-by-step guides, checklists, service map and CV builder for expats in Switzerland. Available in English, Ukrainian and German.",
+      "Sweezy app combines step-by-step relocation guides, checklists, jobs, local places and community help for newcomers moving to Switzerland.",
     ogLocale: "en_US",
   },
   uk: {
-    title: "Sweezy — Ваш гід для життя у Швейцарії",
+    title: "Sweezy — застосунок для українців у Швейцарії",
     description:
-      "Покрокові гайди, чеклісти, карта сервісів та CV builder для українців у Швейцарії.",
+      "Переїзд і життя у Швейцарії: покрокові гайди, документи, робота, красиві місця та допомога спільноти в застосунку Sweezy.",
     ogLocale: "uk_UA",
   },
   de: {
-    title: "Sweezy — Dein Ratgeber für das Leben in der Schweiz",
+    title: "Sweezy App — Ankommen und leben in der Schweiz",
     description:
-      "Schritt-für-Schritt-Anleitungen, Checklisten und Servicekarte für Expats in der Schweiz.",
+      "Schritt-für-Schritt-Guides, Checklisten, Jobs, Orte und Community-Hilfe für Menschen, die neu in die Schweiz ziehen.",
     ogLocale: "de_DE",
   },
 } as const;

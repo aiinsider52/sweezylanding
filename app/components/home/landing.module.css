@@ -1354,6 +1354,7 @@
   border-radius: 999px;
   color: var(--paper);
   background: rgba(255,255,255,.055);
+  grid-column: 2;
 }
 
 .appStoreRating span { color: var(--lime); letter-spacing: .08em; }

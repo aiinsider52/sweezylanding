@@ -29,9 +29,9 @@ const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sweezy.world"),
-  title: "Sweezy — Life in Switzerland. Simplified.",
+  title: "Sweezy App — Move to Switzerland with Clear Steps",
   description:
-    "Sweezy helps newcomers navigate life in Switzerland with step-by-step guides, smart checklists, and curated official resources. Available in English, Ukrainian, and German.",
+    "Sweezy app helps newcomers move to Switzerland with step-by-step guides, checklists, jobs, local places and community support in English, Ukrainian and German.",
   keywords: [
     "Switzerland",
     "expat",

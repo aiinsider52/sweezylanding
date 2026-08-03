@@ -231,7 +231,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       eyebrow: "Verified App Store reviews",
       title: "Real words from people starting life in Switzerland.",
       items: [
-        { quote: "A high-quality, convenient app with useful and concise information.", name: "itsmaasha", role: "5-star App Store review · translated", image: "/app-frames/path-home.png" },
+        { quote: "A high-quality, convenient app with useful and concise information.", name: "itsmaasha", role: "5-star App Store review · translated", image: "/app-frames/path-journey.png" },
         { quote: "A great app that helps you settle in Switzerland quickly — 10/10.", name: "Jeka__", role: "5-star App Store review · translated", image: "/app-frames/profile-situation.png" },
         { quote: "I came from Ukraine with children. The app helped us understand everything quickly.", name: "_Tina_01", role: "5-star App Store review · translated", image: "/app-frames/profile-access.png" },
       ],
@@ -386,7 +386,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       eyebrow: "Перевірені відгуки App Store",
       title: "Справжні слова людей, які починають життя у Швейцарії.",
       items: [
-        { quote: "Дуже якісний та зручний додаток, із цікавою, корисною та лаконічною інформацією.", name: "itsmaasha", role: "Відгук App Store · 5 зірок", image: "/app-frames/path-home.png" },
+        { quote: "Дуже якісний та зручний додаток, із цікавою, корисною та лаконічною інформацією.", name: "itsmaasha", role: "Відгук App Store · 5 зірок", image: "/app-frames/path-journey.png" },
         { quote: "Дуже класна програма, допомагає швидко облаштуватися у Швейцарії — 10/10.", name: "Jeka__", role: "Відгук App Store · 5 зірок", image: "/app-frames/profile-situation.png" },
         { quote: "Їхала з України з дітьми. Дякую додатку, що допоміг швидко з усім розібратися!", name: "_Tina_01", role: "Відгук App Store · 5 зірок", image: "/app-frames/profile-access.png" },
       ],
@@ -541,7 +541,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       eyebrow: "Verifizierte App-Store-Bewertungen",
       title: "Echte Stimmen von Menschen, die in der Schweiz neu starten.",
       items: [
-        { quote: "Eine hochwertige, praktische App mit nützlichen und prägnanten Informationen.", name: "itsmaasha", role: "5-Sterne-App-Store-Bewertung · übersetzt", image: "/app-frames/path-home.png" },
+        { quote: "Eine hochwertige, praktische App mit nützlichen und prägnanten Informationen.", name: "itsmaasha", role: "5-Sterne-App-Store-Bewertung · übersetzt", image: "/app-frames/path-journey.png" },
         { quote: "Eine tolle App, die beim schnellen Einleben in der Schweiz hilft — 10/10.", name: "Jeka__", role: "5-Sterne-App-Store-Bewertung · übersetzt", image: "/app-frames/profile-situation.png" },
         { quote: "Ich kam mit Kindern aus der Ukraine. Die App half uns, alles schnell zu verstehen.", name: "_Tina_01", role: "5-Sterne-App-Store-Bewertung · übersetzt", image: "/app-frames/profile-access.png" },
       ],

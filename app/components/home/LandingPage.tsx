@@ -35,6 +35,12 @@ export function LandingPage({ locale }: { locale: Locale }) {
         downloadUrl: APP_STORE_URL,
         inLanguage: ["en", "uk", "de"],
         aggregateRating: { "@type": "AggregateRating", ratingValue: "4.2", ratingCount: "5", bestRating: "5" },
+        review: copy.stories.items.map((item) => ({
+          "@type": "Review",
+          author: { "@type": "Person", name: item.name },
+          reviewBody: item.quote,
+          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        })),
         offers: { "@type": "Offer", price: "0", priceCurrency: "CHF" },
       },
       {
