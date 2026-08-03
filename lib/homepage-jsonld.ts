@@ -36,8 +36,8 @@ export function buildHomepageJsonLd(locale: Locale) {
         inLanguage: ["en", "uk", "de"],
         aggregateRating: {
           "@type": "AggregateRating",
-          ratingValue: "4.9",
-          ratingCount: "120",
+          ratingValue: "4.2",
+          ratingCount: "5",
           bestRating: "5",
         },
         offers: {

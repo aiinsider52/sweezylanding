@@ -228,12 +228,12 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       ],
     },
     stories: {
-      eyebrow: "From first users",
-      title: "Designed for the moment everything feels unfamiliar.",
+      eyebrow: "Verified App Store reviews",
+      title: "Real words from people starting life in Switzerland.",
       items: [
-        { quote: "The permit guide gave me a sequence, not another article. That changed everything.", name: "Maria K.", role: "Moved to Zürich", image: "/images/testimonial-olena.jpg" },
-        { quote: "I found the right office and understood what to bring before I went there.", name: "Thomas M.", role: "Moved to Basel", image: "/images/testimonial-marco.jpg" },
-        { quote: "The checklist made the first month feel manageable instead of chaotic.", name: "Sarah L.", role: "Moved to Geneva", image: "/images/testimonial-sarah.jpg" },
+        { quote: "A high-quality, convenient app with useful and concise information.", name: "itsmaasha", role: "5-star App Store review · translated", image: "/app-frames/path-home.png" },
+        { quote: "A great app that helps you settle in Switzerland quickly — 10/10.", name: "Jeka__", role: "5-star App Store review · translated", image: "/app-frames/profile-situation.png" },
+        { quote: "I came from Ukraine with children. The app helped us understand everything quickly.", name: "_Tina_01", role: "5-star App Store review · translated", image: "/app-frames/profile-access.png" },
       ],
     },
     partner: {
@@ -383,12 +383,12 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       ],
     },
     stories: {
-      eyebrow: "Від перших користувачів",
-      title: "Для моменту, коли навколо все незнайоме.",
+      eyebrow: "Перевірені відгуки App Store",
+      title: "Справжні слова людей, які починають життя у Швейцарії.",
       items: [
-        { quote: "Гайд про дозвіл дав мені послідовність, а не ще одну статтю. Це змінило все.", name: "Марія К.", role: "Переїхала до Цюриха", image: "/images/testimonial-olena.jpg" },
-        { quote: "Я знайшов потрібну установу й заздалегідь зрозумів, що взяти із собою.", name: "Томас М.", role: "Переїхав до Базеля", image: "/images/testimonial-marco.jpg" },
-        { quote: "Чекліст зробив перший місяць керованим замість хаотичного.", name: "Сара Л.", role: "Переїхала до Женеви", image: "/images/testimonial-sarah.jpg" },
+        { quote: "Дуже якісний та зручний додаток, із цікавою, корисною та лаконічною інформацією.", name: "itsmaasha", role: "Відгук App Store · 5 зірок", image: "/app-frames/path-home.png" },
+        { quote: "Дуже класна програма, допомагає швидко облаштуватися у Швейцарії — 10/10.", name: "Jeka__", role: "Відгук App Store · 5 зірок", image: "/app-frames/profile-situation.png" },
+        { quote: "Їхала з України з дітьми. Дякую додатку, що допоміг швидко з усім розібратися!", name: "_Tina_01", role: "Відгук App Store · 5 зірок", image: "/app-frames/profile-access.png" },
       ],
     },
     partner: {
@@ -538,12 +538,12 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       ],
     },
     stories: {
-      eyebrow: "Von ersten Nutzern",
-      title: "Für den Moment, in dem alles neu wirkt.",
+      eyebrow: "Verifizierte App-Store-Bewertungen",
+      title: "Echte Stimmen von Menschen, die in der Schweiz neu starten.",
       items: [
-        { quote: "Der Bewilligungs-Guide gab mir eine Reihenfolge statt eines weiteren Artikels.", name: "Maria K.", role: "Nach Zürich gezogen", image: "/images/testimonial-olena.jpg" },
-        { quote: "Ich fand die richtige Stelle und wusste vor dem Termin, was ich mitbringen muss.", name: "Thomas M.", role: "Nach Basel gezogen", image: "/images/testimonial-marco.jpg" },
-        { quote: "Die Checkliste machte den ersten Monat überschaubar statt chaotisch.", name: "Sarah L.", role: "Nach Genf gezogen", image: "/images/testimonial-sarah.jpg" },
+        { quote: "Eine hochwertige, praktische App mit nützlichen und prägnanten Informationen.", name: "itsmaasha", role: "5-Sterne-App-Store-Bewertung · übersetzt", image: "/app-frames/path-home.png" },
+        { quote: "Eine tolle App, die beim schnellen Einleben in der Schweiz hilft — 10/10.", name: "Jeka__", role: "5-Sterne-App-Store-Bewertung · übersetzt", image: "/app-frames/profile-situation.png" },
+        { quote: "Ich kam mit Kindern aus der Ukraine. Die App half uns, alles schnell zu verstehen.", name: "_Tina_01", role: "5-Sterne-App-Store-Bewertung · übersetzt", image: "/app-frames/profile-access.png" },
       ],
     },
     partner: {

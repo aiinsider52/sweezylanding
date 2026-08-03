@@ -1343,6 +1343,23 @@
   gap: 42px;
 }
 
+.appStoreRating {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  margin-top: 22px;
+  padding: 11px 15px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  color: var(--paper);
+  background: rgba(255,255,255,.055);
+}
+
+.appStoreRating span { color: var(--lime); letter-spacing: .08em; }
+.appStoreRating strong { font-size: 14px; }
+.appStoreRating em { color: rgba(245,245,239,.55); font-size: 12px; font-style: normal; }
+
 .storyGrid {
   display: grid;
   grid-template-columns: 1.2fr 0.9fr 0.9fr;

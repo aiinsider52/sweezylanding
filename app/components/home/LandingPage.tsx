@@ -2,24 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "../../../lib/i18n";
 import { landingCopy } from "../../../lib/landing-copy";
-import { APP_STORE_URL, INSTAGRAM_URL, TELEGRAM_URL } from "../../../lib/links";
+import { APP_STORE_URL } from "../../../lib/links";
 import { JsonLd } from "../seo/JsonLd";
 import { destinationImage, travelDestinations } from "../../../data/travel-destinations";
 import { AppFrameCluster } from "./AppFrameCluster";
 import { AnimatedProof } from "./AnimatedProof";
 import { CinematicJourney } from "./CinematicJourney";
 import { LandingFaq } from "./LandingFaq";
-import { LandingNav } from "./LandingNav";
 import { MotionArticle, MotionListItem, MotionReveal } from "./MotionReveal";
 import { PartnerNetwork } from "./PartnerNetwork";
 import { ShowcaseTabs } from "./ShowcaseTabs";
 import styles from "./landing.module.css";
-
-const ABOUT_LABEL: Record<Locale, string> = {
-  en: "About & editorial",
-  uk: "Про Sweezy та редакцію",
-  de: "Über Sweezy & Redaktion",
-};
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
   en: { eyebrow: "SWITZERLAND OUTSIDE THE CHECKLIST", title: "Live here. Explore here.", body: "Sweezy now combines relocation guidance with practical routes to Switzerland's mountains, lakes, cities and natural landmarks.", open: "Open place", all: "Explore all places" },
@@ -29,7 +22,6 @@ const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string
 
 export function LandingPage({ locale }: { locale: Locale }) {
   const copy = landingCopy[locale];
-  const currentYear = new Date().getFullYear();
   const softwareSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -42,6 +34,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
         url: `https://www.sweezy.world/${locale}`,
         downloadUrl: APP_STORE_URL,
         inLanguage: ["en", "uk", "de"],
+        aggregateRating: { "@type": "AggregateRating", ratingValue: "4.2", ratingCount: "5", bestRating: "5" },
         offers: { "@type": "Offer", price: "0", priceCurrency: "CHF" },
       },
       {
@@ -58,10 +51,6 @@ export function LandingPage({ locale }: { locale: Locale }) {
   return (
     <div lang={locale} className={styles.landing}>
       <JsonLd data={softwareSchema} />
-      <div className={styles.navWrap}>
-        <LandingNav locale={locale} copy={copy.nav} />
-      </div>
-
       <main>
         <CinematicJourney locale={locale} hero={copy.hero} />
 
@@ -142,6 +131,9 @@ export function LandingPage({ locale }: { locale: Locale }) {
           <MotionReveal className={styles.storiesHeader}>
             <p className={styles.eyebrow}>{copy.stories.eyebrow}</p>
             <h2>{copy.stories.title}</h2>
+            <a href={APP_STORE_URL} target="_blank" rel="noreferrer noopener" className={styles.appStoreRating} aria-label="Sweezy App Store rating: 4.2 out of 5 from 5 ratings">
+              <span aria-hidden>★★★★★</span><strong>4.2 / 5</strong><em>5 App Store ratings ↗</em>
+            </a>
           </MotionReveal>
           <div className={styles.storyGrid}>
             {copy.stories.items.map((story, index) => (
@@ -191,43 +183,6 @@ export function LandingPage({ locale }: { locale: Locale }) {
         </section>
       </main>
 
-      <footer className={styles.footer}>
-        <div className={styles.footerBrand}>
-          <Image src="/brand/sweezy-mark.svg" alt="" width={42} height={42} />
-          <div><strong>Sweezy</strong><span>{copy.footer.line}</span></div>
-        </div>
-        <div className={styles.footerLinks}>
-          <div>
-            <p>{copy.footer.product}</p>
-            <a href="#product">{copy.nav.product}</a>
-            <a href="#method">{copy.nav.method}</a>
-            <a href="#partners">{copy.nav.partners}</a>
-            <Link href={`/${locale}/guides`}>{copy.nav.guides}</Link>
-            <Link href={`/${locale}/places`}>{PLACES_COPY[locale].all}</Link>
-          </div>
-          <div>
-            <p>{copy.footer.resources}</p>
-            <Link href={`/${locale}/blog`}>{copy.nav.blog}</Link>
-            {locale === "uk" ? (
-              <Link href="/uk/blog/status-s-shveytcariya-povnyy-gid">Українцям у Швейцарії</Link>
-            ) : null}
-            <Link href={`/${locale}/about`}>{ABOUT_LABEL[locale]}</Link>
-            <Link href="/support">{copy.footer.support}</Link>
-            <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener">Telegram</a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer noopener">Instagram</a>
-          </div>
-          <div>
-            <p>{copy.footer.legal}</p>
-            <Link href="/privacy">{copy.footer.privacy}</Link>
-            <Link href="/terms">{copy.footer.terms}</Link>
-            <Link href="/cookies">{copy.footer.cookies}</Link>
-          </div>
-        </div>
-        <div className={styles.footerBottom}>
-          <span>© {currentYear} Sweezy</span>
-          <span>Made in Switzerland by AI Insider</span>
-        </div>
-      </footer>
     </div>
   );
 }

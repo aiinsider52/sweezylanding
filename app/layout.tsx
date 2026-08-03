@@ -4,6 +4,7 @@ import { buildRootAlternates } from "../lib/alternates";
 import { LocaleProvider } from "../lib/locale-context";
 import { ThemeProvider } from "../lib/theme-context";
 import { SiteFooter } from "./components/SiteFooter";
+import { SiteHeader } from "./components/SiteHeader";
 import { Telemetry } from "./components/Telemetry";
 import "./globals.css";
 
@@ -125,6 +126,7 @@ export default function RootLayout({
         <Telemetry />
         <ThemeProvider>
           <LocaleProvider>
+            <SiteHeader />
             {children}
             <SiteFooter year={currentYear} />
           </LocaleProvider>

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useLocale } from "../../lib/locale-context";
 import { APP_STORE_URL, INSTAGRAM_URL } from "../../lib/links";
 import { BrandLogo } from "./BrandLogo";
@@ -40,7 +39,6 @@ function FooterLink({
 
 export function SiteFooter({ year }: { year: number }) {
   const { t, locale } = useLocale();
-  const pathname = usePathname();
   const localeHome = `/${locale}`;
   const localeGuides = `/${locale}/guides`;
   const localeBlog = `/${locale}/blog`;
@@ -83,10 +81,8 @@ export function SiteFooter({ year }: { year: number }) {
     },
   ];
 
-  if (/^\/(en|uk|de)\/?$/.test(pathname)) return null;
-
   return (
-    <footer className="relative">
+    <footer className="relative bg-[#0c0f0d] text-white">
       {/* Top gradient accent */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-accent-green/30 to-transparent" />
 
