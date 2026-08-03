@@ -8,9 +8,9 @@ const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(BASE_URL),
-    title: "Sweezy App — Life in Switzerland, Simplified",
+    title: "Sweezy App — Move to Switzerland with Clear Steps",
     description:
-      "Plan permits, registration, work, housing and daily life in Switzerland with personal checklists and local guidance in the Sweezy app.",
+      "Sweezy app combines relocation guides, checklists, jobs, local places and community help for newcomers moving to Switzerland.",
     alternates: {
       canonical: CANONICAL_URL,
       languages: {
@@ -21,9 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     openGraph: {
-      title: "Sweezy App — Life in Switzerland, Simplified",
+      title: "Sweezy App — Move to Switzerland with Clear Steps",
       description:
-        "Personal checklists and local guidance for permits, registration, work, housing and daily life in Switzerland.",
+        "Relocation guides, checklists, jobs, local places and community help for newcomers moving to Switzerland.",
       url: CANONICAL_URL,
       siteName: "Sweezy",
       images: [
@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Sweezy App — Life in Switzerland, Simplified",
+      title: "Sweezy App — Move to Switzerland with Clear Steps",
       description:
         "Personal checklists and local guidance for newcomers to Switzerland.",
       images: [DEFAULT_OG_IMAGE],

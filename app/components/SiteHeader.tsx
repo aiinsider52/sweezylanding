@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { APP_STORE_URL } from "../../lib/links";
 import type { Locale } from "../../lib/i18n";
+import { ThemeToggle } from "./ThemeToggle";
 import styles from "./SiteHeader.module.css";
 
 const LABELS = {
@@ -55,6 +56,7 @@ export function SiteHeader() {
           <div className={styles.languages} aria-label="Language">
             {(["en", "uk", "de"] as const).map((item) => <Link key={item} href={`/${item}`} aria-current={item === locale ? "page" : undefined}>{item === "uk" ? "UA" : item.toUpperCase()}</Link>)}
           </div>
+          <ThemeToggle />
           <a className={styles.app} href={APP_STORE_URL} target="_blank" rel="noreferrer noopener">{copy.app}</a>
           <button className={styles.menu} type="button" onClick={() => setOpen((value) => !value)} aria-label={open ? copy.close : copy.menu} aria-expanded={open} aria-controls="site-mobile-menu">
             {open ? <X size={22} weight="bold" aria-hidden /> : <List size={22} weight="bold" aria-hidden />}
