@@ -12,9 +12,9 @@
 }
 
 .shell {
-  width: min(100% - 32px, 1500px);
+  width: min(100% - 32px, 1360px);
   margin-inline: auto;
-  padding: clamp(38px, 6vw, 88px) 0 96px;
+  padding: clamp(28px, 4vw, 58px) 0 72px;
 }
 
 .eyebrow {
@@ -27,14 +27,14 @@
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr);
   gap: 20px;
-  padding-bottom: clamp(32px, 5vw, 72px);
+  padding-bottom: clamp(24px, 3.5vw, 46px);
   border-bottom: 1px solid var(--line);
 }
 
 .heroTitle {
   max-width: 980px;
   margin-top: 28px;
-  font-size: clamp(48px, 7.1vw, 116px);
+  font-size: clamp(44px, 5.8vw, 84px);
   font-weight: 700;
   line-height: .86;
   letter-spacing: -.075em;
@@ -62,7 +62,7 @@
   align-items: baseline;
   gap: 12px;
   margin-bottom: 32px;
-  font-size: clamp(72px, 10vw, 150px);
+  font-size: clamp(62px, 7vw, 104px);
   font-weight: 700;
   line-height: .68;
   letter-spacing: -.08em;
@@ -95,7 +95,7 @@
 .featured {
   display: grid;
   grid-template-columns: 1.25fr .75fr;
-  min-height: min(660px, 70vh);
+  min-height: min(520px, calc(100svh - 150px));
   overflow: hidden;
   border-radius: 34px;
   background: var(--ink);
@@ -104,7 +104,7 @@
 
 .featuredMedia {
   position: relative;
-  min-height: 430px;
+  min-height: 350px;
   overflow: hidden;
 }
 
@@ -125,12 +125,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: clamp(28px, 4vw, 58px);
+  padding: clamp(24px, 3vw, 40px);
 }
 
 .featuredCopy h2 {
   margin-top: 24px;
-  font-size: clamp(35px, 4.2vw, 68px);
+  font-size: clamp(31px, 3.4vw, 50px);
   font-weight: 650;
   line-height: .96;
   letter-spacing: -.055em;
@@ -160,14 +160,13 @@
 
 .postGrid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .postCard {
-  grid-column: span 4;
   display: flex;
-  min-height: 510px;
+  min-height: 420px;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -175,14 +174,9 @@
   background: rgba(255,255,255,.32);
 }
 
-.postCard:nth-child(5n + 1),
-.postCard:nth-child(5n + 2) {
-  grid-column: span 6;
-}
-
 .cardMedia {
   position: relative;
-  min-height: 230px;
+  min-height: 170px;
   overflow: hidden;
   background: #d9ddd5;
 }
@@ -191,7 +185,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 24px;
+  padding: 20px;
 }
 
 .meta {
@@ -207,14 +201,15 @@
 .cardCopy h2,
 .cardCopy h3 {
   margin-top: 18px;
-  font-size: clamp(24px, 2.2vw, 36px);
+  font-size: clamp(22px, 1.8vw, 29px);
   font-weight: 650;
-  line-height: 1.02;
+  line-height: 1.04;
   letter-spacing: -.045em;
 }
 
 .cardCopy p {
-  margin-top: 14px;
+  margin-top: 12px;
+  font-size: 14px;
   color: rgba(12,15,13,.58);
   line-height: 1.55;
 }
@@ -224,7 +219,7 @@
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 26px;
+  padding-top: 20px;
   font-size: 13px;
   font-weight: 700;
 }
@@ -319,7 +314,7 @@
 }
 
 .articleShell {
-  width: min(100% - 32px, 1500px);
+  width: min(100% - 32px, 1360px);
   margin-inline: auto;
   padding: 40px 0 100px;
 }
@@ -328,14 +323,14 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, .62fr);
   gap: 18px;
-  min-height: min(720px, 78vh);
+  min-height: min(620px, calc(100svh - 112px));
 }
 
 .articleIntro {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: clamp(28px, 4vw, 58px);
+  padding: clamp(26px, 3.4vw, 46px);
   border-radius: 34px;
   background: var(--ink);
   color: white;
@@ -344,7 +339,7 @@
 .articleIntro h1 {
   max-width: 1000px;
   margin-top: 30px;
-  font-size: clamp(43px, 6vw, 88px);
+  font-size: clamp(39px, 4.8vw, 68px);
   font-weight: 650;
   line-height: .92;
   letter-spacing: -.062em;
@@ -360,7 +355,7 @@
 
 .articleVisual {
   position: relative;
-  min-height: 480px;
+  min-height: 420px;
   overflow: hidden;
   border-radius: 34px;
 }
@@ -585,6 +580,7 @@
 }
 
 @media (max-width: 1050px) {
+  .postGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cantonGrid { grid-template-columns: repeat(3, 1fr); }
   .articleLayout { grid-template-columns: minmax(0, 1fr) 250px; }
   .articleRail { display: none; }
@@ -598,7 +594,6 @@
   .featuredRoute { grid-template-columns: repeat(2, 1fr); }
   .routeItem:nth-child(2) { border-right: 0; }
   .routeItem:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-  .postCard, .postCard:nth-child(n) { grid-column: span 6; }
   .cantonGrid { grid-template-columns: repeat(2, 1fr); }
   .articleLayout { grid-template-columns: 1fr; }
   .articleAside { position: static; }
@@ -616,7 +611,8 @@
   .featuredRoute { grid-template-columns: 1fr; }
   .routeItem { min-height: 210px; border-right: 0; border-bottom: 1px solid var(--line); }
   .routeItem:last-child { border-bottom: 0; }
-  .postCard, .postCard:nth-child(n) { grid-column: 1 / -1; min-height: 460px; }
+  .postGrid { grid-template-columns: 1fr; }
+  .postCard { min-height: 410px; }
   .cantonGrid { grid-template-columns: 1fr; }
   .cantonCard { min-height: 340px; }
   .articleHero { min-height: auto; }
