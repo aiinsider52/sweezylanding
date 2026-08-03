@@ -322,6 +322,24 @@ export default function CantonGuidePage({
         })),
       }
     : null;
+  const guideJsonLd = rich
+    ? {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: rich.h1,
+        description: rich.metaDescription,
+        url: canonicalUrl,
+        inLanguage: locale === "uk" ? "uk" : locale === "de" ? "de" : "en",
+        dateModified: rich.reviewedAt,
+        about: {
+          "@type": "Place",
+          name,
+        },
+        ...(rich.officialSources?.length
+          ? { citation: rich.officialSources.map((source) => source.url) }
+          : {}),
+      }
+    : null;
   const cantonImage = getCantonImage(canton.slug);
 
   /* ── Shared header ───────────────────────────────────────────────────────── */
@@ -703,9 +721,64 @@ export default function CantonGuidePage({
     <main lang={locale} className={styles.page}>
       <JsonLd data={placeJsonLd} />
       {faqJsonLd && <JsonLd data={faqJsonLd} />}
+      {guideJsonLd && <JsonLd data={guideJsonLd} />}
       <article className={styles.guideDetail}>
         <Breadcrumb items={breadcrumbItems} />
         {header}
+        {rich?.summaryAnswer ? (
+          <section className={styles.answerPanel} aria-labelledby="canton-short-answer">
+            <div className={styles.answerMain}>
+              <span className={styles.eyebrow}>
+                {locale === "uk" ? "Коротка відповідь" : "Short answer"}
+              </span>
+              <h2 id="canton-short-answer">{rich.summaryAnswer}</h2>
+              <dl className={styles.answerFacts}>
+                {rich.appliesTo ? (
+                  <div>
+                    <dt>{locale === "uk" ? "Для кого" : "Applies to"}</dt>
+                    <dd>{rich.appliesTo}</dd>
+                  </div>
+                ) : null}
+                {rich.jurisdiction ? (
+                  <div>
+                    <dt>{locale === "uk" ? "Юрисдикція" : "Jurisdiction"}</dt>
+                    <dd>{rich.jurisdiction}</dd>
+                  </div>
+                ) : null}
+                {rich.reviewedAt ? (
+                  <div>
+                    <dt>{locale === "uk" ? "Перевірено" : "Last reviewed"}</dt>
+                    <dd>
+                      <time dateTime={rich.reviewedAt}>
+                        {new Intl.DateTimeFormat(locale === "uk" ? "uk-UA" : "en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }).format(new Date(rich.reviewedAt))}
+                      </time>
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
+            </div>
+            <div className={styles.answerEvidence}>
+              <div>
+                <span className={styles.eyebrow}>
+                  {locale === "uk" ? "Офіційні джерела" : "Official sources"}
+                </span>
+                <ol className={styles.sourceList}>
+                  {rich.officialSources?.map((source) => (
+                    <li key={source.url}>
+                      <a href={source.url} target="_blank" rel="noreferrer noopener">
+                        {source.name} <span aria-hidden>↗</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </section>
+        ) : null}
         <div className={styles.guideBody}>{rich ? richBody : genericBody}</div>
       </article>
     </main>

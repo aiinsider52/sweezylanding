@@ -41,6 +41,14 @@ export type LocaleRich = {
   housingAidInfo: string;
   faq: FaqEntry[];
   blogLinks: BlogLinkEntry[];
+  summaryAnswer?: string;
+  reviewedAt?: string;
+  appliesTo?: string;
+  jurisdiction?: string;
+  officialSources?: Array<{
+    name: string;
+    url: string;
+  }>;
   // UI labels
   sectionRegistration: string;
   sectionPermit: string;
@@ -103,6 +111,31 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       h1: "Moving to Zurich: Guide for Newcomers and Expats",
       intro:
         "Zurich is Switzerland's largest city and economic hub, home to over 440,000 residents — roughly 32% of whom are foreign nationals. The canton offers one of the world's highest standards of living, a strong job market spanning finance, technology, and pharmaceuticals, and an efficient public-service infrastructure. Housing competition is intense, especially in the city proper, and registering within 14 days of arrival is a legal requirement.",
+      summaryAnswer:
+        "After moving to Zurich, register with the municipality where you actually live within 14 days. City of Zurich residents book a Personenmeldeamt appointment; residents of another canton municipality use that municipality's Einwohnerkontrolle. Residence-permit decisions and extensions are handled by the Canton of Zurich Migration Office, while basic health insurance is generally due within three months.",
+      reviewedAt: "2026-08-03",
+      appliesTo:
+        "New residents moving to the City of Zurich or another municipality in Canton Zurich. Permit documents vary by nationality and reason for stay.",
+      jurisdiction:
+        "Municipal registration, cantonal residence permits and federal health-insurance rules.",
+      officialSources: [
+        {
+          name: "City of Zurich — arrival, registration and first steps",
+          url: "https://www.stadt-zuerich.ch/de/lebenslagen/neu-in-zuerich/zuzug-ausland/willkommen.html",
+        },
+        {
+          name: "Canton Zurich — residence and family reunification",
+          url: "https://www.zh.ch/de/migration-integration/willkommen/english/residence-and-family-reunification.html",
+        },
+        {
+          name: "Canton Zurich — Migration Office",
+          url: "https://www.zh.ch/de/sicherheitsdirektion/migrationsamt.html",
+        },
+        {
+          name: "Federal Office of Public Health — insurance requirement",
+          url: "https://www.bag.admin.ch/en/health-insurance-requirement-to-obtain-insurance-for-persons-resident-in-switzerland",
+        },
+      ],
       registrationLead:
         "After moving to Zurich, register with the municipality where you live within 14 days. New arrivals in the City of Zurich should book the required residents' office appointment; since May 2026, in-person services are appointment-based at the Zürich Nord and Zürich West locations. If you live in Winterthur, Uster, Dietikon or another municipality, register with that municipality's Einwohnerkontrolle instead.",
       registrationOfficeName: "Personenmeldeamt Stadt Zürich",
@@ -112,12 +145,12 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
         "Valid passport or national identity card",
         "Rental contract or written confirmation of your address",
         "Work permit or employment contract (if applicable)",
-        "For Status S holders: Permit N card",
+        "For Status S holders: current S permit or the document requested in the appointment confirmation",
         "Family documents: marriage certificate, children's birth certificates",
         "Payment: CHF 20–30 registration fee (cash or card)",
       ],
       permitLead:
-        "The Migrationsamt des Kantons Zürich handles all residence permit applications for Zurich canton. EU/EFTA citizens with a valid employment contract receive a B permit at the Personenmeldeamt on the same visit. Non-EU nationals require employer-led sponsorship and federal SEM approval before entering Switzerland. The Migrationsamt can advise on permit-category questions, extension timelines, and family reunification.",
+        "The Migrationsamt des Kantons Zürich decides residence-permit matters for the canton. EU/EFTA citizens generally register and submit their residence application through their municipality; the permit type depends on the employment or stay conditions. Many non-EU/EFTA employment routes require an employer-led application before work or entry. Check the official canton flow for your nationality and purpose of stay.",
       healthPremium: "~CHF 480/month",
       healthSubsidyInfo:
         "Apply for Prämienverbilligung (premium reduction) at sozialversicherungen.zh.ch. Single-person households with income up to approx. CHF 69,100/year may qualify. Applications are processed by SVA Zürich — submit by 31 March of the coverage year. To reduce premiums immediately: compare on priminfo.admin.ch, select a Telmed or HMO model, and raise your franchise to CHF 2,500 (saves up to CHF 150/month).",
@@ -197,6 +230,31 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       h1: "Переїзд до Цюриха: гід для новоприбулих",
       intro:
         "Цюрих — найбільше місто Швейцарії та її економічний центр. Тут проживає понад 440 000 людей, з яких близько 32% — іноземці. Кантон пропонує найвищий у світі рівень якості життя, розвинений ринок праці у фінансах, технологіях та фармацевтиці й ефективну систему державних послуг. Ринок житла дуже конкурентний, а реєстрація після переїзду є юридичним обов'язком.",
+      summaryAnswer:
+        "Після переїзду до Цюриха зареєструйтеся у громаді фактичного проживання протягом 14 днів. Жителі міста Цюрих записуються до Personenmeldeamt, а жителі інших громад кантону — до свого Einwohnerkontrolle. Дозволи вирішує Migrationsamt кантону, а базову страховку зазвичай потрібно оформити протягом трьох місяців.",
+      reviewedAt: "2026-08-03",
+      appliesTo:
+        "Нові жителі міста Цюрих та інших громад кантону; документи залежать від громадянства й підстави перебування.",
+      jurisdiction:
+        "Муніципальна реєстрація, кантональні дозволи на проживання та федеральне медичне страхування.",
+      officialSources: [
+        {
+          name: "Місто Цюрих — прибуття, реєстрація та перші кроки",
+          url: "https://www.stadt-zuerich.ch/de/lebenslagen/neu-in-zuerich/zuzug-ausland/willkommen.html",
+        },
+        {
+          name: "Кантон Цюрих — проживання та возз'єднання сім'ї",
+          url: "https://www.zh.ch/de/migration-integration/willkommen/deutsch/aufenthalt-und-familiennachzug.html",
+        },
+        {
+          name: "Кантон Цюрих — Migrationsamt",
+          url: "https://www.zh.ch/de/sicherheitsdirektion/migrationsamt.html",
+        },
+        {
+          name: "BAG — обов'язок оформити медичне страхування",
+          url: "https://www.bag.admin.ch/en/health-insurance-requirement-to-obtain-insurance-for-persons-resident-in-switzerland",
+        },
+      ],
       registrationLead:
         "Після переїзду зареєструйтеся у громаді проживання протягом 14 днів. Новоприбулим у місті Цюрих потрібно заздалегідь записатися до Personenmeldeamt; з травня 2026 року особистий прийом відбувається за записом у Zürich Nord або Zürich West. Якщо ви живете у Вінтертурі, Устері, Дітіконі чи іншій громаді, звертайтеся до місцевого Einwohnerkontrolle.",
       registrationOfficeName: "Personenmeldeamt міста Цюрих",
@@ -206,12 +264,12 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
         "Дійсний паспорт або посвідчення особи",
         "Договір оренди або письмове підтвердження адреси проживання",
         "Трудовий договір або дозвіл на роботу (за наявності)",
-        "Для власників статусу S: картка N",
+        "Для власників Status S: чинне посвідчення S або документ із підтвердження запису",
         "Документи сім'ї: свідоцтво про шлюб, свідоцтва про народження дітей",
         "Оплата реєстраційного збору: CHF 20–30",
       ],
       permitLead:
-        "Migrationsamt des Kantons Zürich займається всіма питаннями дозволів на проживання в кантоні. Громадяни ЄС/ЄЕФТ з трудовим договором отримують дозвіл B прямо в Personenmeldeamt. Громадяни третіх країн потребують спонсорства роботодавця та дозволу SEM.",
+        "Migrationsamt des Kantons Zürich ухвалює рішення щодо дозволів на проживання. Громадяни ЄС/ЄАВТ зазвичай реєструються та подають заяву через громаду, а тип дозволу залежить від умов роботи або перебування. Для багатьох робочих маршрутів громадян країн поза ЄС/ЄАВТ роботодавець має подати заяву до початку роботи або в'їзду.",
       permitStatusSNote:
         "Власники статусу S реєструються в Personenmeldeamt, пред'являючи картку N. Для питань виплат і соціальної підтримки звертайтесь до Sozialamt Kanton Zürich. Детальніше — у нашому повному гіді по статусу S.",
       healthPremium: "~480 CHF/місяць",
