@@ -43,6 +43,11 @@ const ARTICLE_COPY: Record<
     editorialLink: string;
     related: string;
     read: string;
+    answer: string;
+    appliesTo: string;
+    jurisdiction: string;
+    sources: string;
+    changes: string;
   }
 > = {
   en: {
@@ -51,6 +56,11 @@ const ARTICLE_COPY: Record<
     editorialLink: "Editorial standards",
     related: "Continue reading",
     read: "Read guide",
+    answer: "Short answer",
+    appliesTo: "Applies to",
+    jurisdiction: "Jurisdiction",
+    sources: "Official sources",
+    changes: "What changed",
   },
   uk: {
     updated: "Остання перевірка",
@@ -58,6 +68,11 @@ const ARTICLE_COPY: Record<
     editorialLink: "Редакційні стандарти",
     related: "Читайте далі",
     read: "Відкрити гід",
+    answer: "Коротка відповідь",
+    appliesTo: "Для кого",
+    jurisdiction: "Юрисдикція",
+    sources: "Офіційні джерела",
+    changes: "Що змінилося",
   },
   de: {
     updated: "Zuletzt geprüft",
@@ -65,6 +80,11 @@ const ARTICLE_COPY: Record<
     editorialLink: "Redaktionelle Standards",
     related: "Weiterlesen",
     read: "Ratgeber öffnen",
+    answer: "Kurzantwort",
+    appliesTo: "Gilt für",
+    jurisdiction: "Zuständigkeit",
+    sources: "Offizielle Quellen",
+    changes: "Änderungsverlauf",
   },
 };
 
@@ -225,6 +245,20 @@ export default async function BlogPostPage({
     inLanguage: LANGUAGE_CODE_MAP[locale],
     isAccessibleForFree: true,
     url: canonicalUrl,
+    ...(post.frontmatter.officialSources?.length
+      ? { citation: post.frontmatter.officialSources.map((source) => source.url) }
+      : {}),
+    ...(post.frontmatter.jurisdiction
+      ? { about: { "@type": "Thing", name: post.frontmatter.jurisdiction } }
+      : {}),
+    ...(post.frontmatter.reviewer
+      ? {
+          reviewedBy: {
+            "@type": "Person",
+            name: post.frontmatter.reviewer,
+          },
+        }
+      : {}),
   };
   return (
     <main lang={locale} className={styles.page}>
@@ -272,6 +306,73 @@ export default async function BlogPostPage({
             />
           </div>
         </header>
+
+        {post.frontmatter.summaryAnswer ? (
+          <section className={styles.answerPanel} aria-labelledby="article-short-answer">
+            <div className={styles.answerMain}>
+              <span className={styles.eyebrow}>{articleCopy.answer}</span>
+              <h2 id="article-short-answer">{post.frontmatter.summaryAnswer}</h2>
+              <dl className={styles.answerFacts}>
+                {post.frontmatter.appliesTo ? (
+                  <div>
+                    <dt>{articleCopy.appliesTo}</dt>
+                    <dd>{post.frontmatter.appliesTo}</dd>
+                  </div>
+                ) : null}
+                {post.frontmatter.jurisdiction ? (
+                  <div>
+                    <dt>{articleCopy.jurisdiction}</dt>
+                    <dd>{post.frontmatter.jurisdiction}</dd>
+                  </div>
+                ) : null}
+                <div>
+                  <dt>{articleCopy.updated}</dt>
+                  <dd>
+                    <time dateTime={post.frontmatter.reviewedAt ?? post.frontmatter.updatedAt ?? post.frontmatter.publishedAt}>
+                      {formatDate(
+                        locale,
+                        post.frontmatter.reviewedAt ??
+                          post.frontmatter.updatedAt ??
+                          post.frontmatter.publishedAt,
+                      )}
+                    </time>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <div className={styles.answerEvidence}>
+              {post.frontmatter.officialSources?.length ? (
+                <div>
+                  <span className={styles.eyebrow}>{articleCopy.sources}</span>
+                  <ol className={styles.sourceList}>
+                    {post.frontmatter.officialSources.map((source) => (
+                      <li key={source.url}>
+                        <a href={source.url} target="_blank" rel="noreferrer noopener">
+                          {source.name} <span aria-hidden>↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ) : null}
+
+              {post.frontmatter.changeLog?.length ? (
+                <div className={styles.changeLog}>
+                  <span className={styles.eyebrow}>{articleCopy.changes}</span>
+                  <ol>
+                    {post.frontmatter.changeLog.map((entry) => (
+                      <li key={`${entry.date}-${entry.note}`}>
+                        <time dateTime={entry.date}>{formatDate(locale, entry.date)}</time>
+                        <p>{entry.note}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ) : null}
+            </div>
+          </section>
+        ) : null}
 
         <div className={styles.articleLayout}>
           <aside className={styles.articleRail}>

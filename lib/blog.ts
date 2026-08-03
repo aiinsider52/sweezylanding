@@ -14,6 +14,20 @@ export type PostFrontmatter = {
   category?: string;
   pillarPage?: boolean;
   relatedPosts?: string[];
+  summaryAnswer?: string;
+  appliesTo?: string;
+  reviewedAt?: string;
+  effectiveDate?: string;
+  reviewer?: string;
+  jurisdiction?: string;
+  officialSources?: Array<{
+    name: string;
+    url: string;
+  }>;
+  changeLog?: Array<{
+    date: string;
+    note: string;
+  }>;
 };
 
 export type BlogPost = {

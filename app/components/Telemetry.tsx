@@ -17,7 +17,20 @@ type ClientEvent =
       type: "client-error" | "unhandled-rejection";
       name: string;
       message: string;
+    }
+  | {
+      type: "ai-referral";
+      name: string;
+      referrer: string;
     };
+
+const AI_REFERRERS: Array<[RegExp, string]> = [
+  [/chatgpt\.com|openai\.com/i, "ChatGPT"],
+  [/claude\.ai|anthropic\.com/i, "Claude"],
+  [/perplexity\.ai/i, "Perplexity"],
+  [/gemini\.google\.com/i, "Gemini"],
+  [/copilot\.microsoft\.com/i, "Microsoft Copilot"],
+];
 
 function trim(value: unknown, maxLength = 300) {
   return String(value ?? "Unknown error").slice(0, maxLength);
@@ -57,6 +70,19 @@ export function Telemetry() {
   });
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sourceParam = params.get("utm_source") ?? "";
+    const referral = `${document.referrer} ${sourceParam}`;
+    const aiSource = AI_REFERRERS.find(([pattern]) => pattern.test(referral))?.[1];
+
+    if (aiSource) {
+      sendEvent({
+        type: "ai-referral",
+        name: aiSource,
+        referrer: trim(document.referrer || sourceParam, 300),
+      });
+    }
+
     const onError = (event: ErrorEvent) => {
       sendEvent({
         type: "client-error",
