@@ -71,6 +71,8 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
   const localizedCantonGuide = path.join(appDir, "[locale]", "guides", "[canton]", "page.tsx");
   const localizedPlacesIndex = path.join(appDir, "[locale]", "places", "page.tsx");
   const localizedPlace = path.join(appDir, "[locale]", "places", "[slug]", "page.tsx");
+  const localizedJobsIndex = path.join(appDir, "[locale]", "jobs", "page.tsx");
+  const localizedJobsPost = path.join(appDir, "[locale]", "jobs", "post", "page.tsx");
 
   if (await pathExists(localizedBlogIndex)) {
     pages.push(...LOCALES.map((locale) => `/${locale}/blog`));
@@ -94,6 +96,14 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
 
   if (await pathExists(localizedPlace)) {
     pages.push(...LOCALES.flatMap((locale) => travelDestinations.map((place) => `/${locale}/places/${place.slug}`)));
+  }
+
+  if (await pathExists(localizedJobsIndex)) {
+    pages.push(...LOCALES.map((locale) => `/${locale}/jobs`));
+  }
+
+  if (await pathExists(localizedJobsPost)) {
+    pages.push(...LOCALES.map((locale) => `/${locale}/jobs/post`));
   }
 
   for (const slug of LOCALIZED_PAGES) {

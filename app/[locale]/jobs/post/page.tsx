@@ -1,0 +1,14 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { buildLocaleAlternates, BASE_URL } from "../../../../lib/alternates";
+import { isLocale } from "../../../../lib/blog";
+import type { Locale } from "../../../../lib/i18n";
+import { EmployerJobForm } from "./EmployerJobForm";
+import styles from "../jobs.module.css";
+
+const COPY:Record<Locale,any>={en:{title:"Post a job in Switzerland",description:"Submit a real vacancy for human review. Sweezy checks clarity, employer identity and application details before publication.",eyebrow:"FOR EMPLOYERS · SWEEZY JOBS",back:"Back to jobs",steps:[["Describe","Add role, location and conditions."],["Review","Sweezy checks details and employer."],["Publish","Approved vacancy appears for candidates."]]},uk:{title:"Розмістити вакансію у Швейцарії",description:"Подайте реальну вакансію на ручну модерацію. Перед публікацією Sweezy перевіряє опис, роботодавця й контакти для відгуку.",eyebrow:"РОБОТОДАВЦЯМ · SWEEZY JOBS",back:"До вакансій",steps:[["Опишіть","Додайте роль, місто й умови."],["Перевірка","Sweezy перевірить дані й компанію."],["Публікація","Схвалена вакансія з’явиться кандидатам."]]},de:{title:"Stelle in der Schweiz veröffentlichen",description:"Reale Stelle zur manuellen Prüfung einreichen. Sweezy prüft Klarheit, Arbeitgeber und Bewerbungsdaten vor Veröffentlichung.",eyebrow:"FÜR ARBEITGEBER · SWEEZY JOBS",back:"Zur Jobbörse",steps:[["Beschreiben","Rolle, Ort und Bedingungen angeben."],["Prüfung","Sweezy prüft Angaben und Arbeitgeber."],["Publizieren","Freigegebene Stelle wird sichtbar."]]}};
+export function generateStaticParams(){return [{locale:"en"},{locale:"uk"},{locale:"de"}]}
+export async function generateMetadata({params}:{params:{locale:string}}):Promise<Metadata>{if(!isLocale(params.locale))return{};const c=COPY[params.locale];return{title:c.title,description:c.description,alternates:buildLocaleAlternates(params.locale,"/jobs/post"),robots:{index:true,follow:true},openGraph:{title:c.title,description:c.description,url:`${BASE_URL}/${params.locale}/jobs/post`}}}
+export default function PostJobPage({params}:{params:{locale:string}}){if(!isLocale(params.locale))notFound();const locale=params.locale;const c=COPY[locale];return <main lang={locale} className={styles.page}><div className={styles.shell}><Link href={`/${locale}/jobs`} className={styles.eyebrow}>← {c.back}</Link><div className={styles.formShell} style={{marginTop:24}}><aside className={styles.formIntro}><p className={styles.eyebrow}>{c.eyebrow}</p><h1>{c.title}</h1><p>{c.description}</p><div className={styles.steps}>{c.steps.map((x:string[],i:number)=><div className={styles.step} key={x[0]}><span>0{i+1}</span><div><strong>{x[0]}</strong><p>{x[1]}</p></div></div>)}</div></aside><EmployerJobForm locale={locale}/></div></div></main>}
+

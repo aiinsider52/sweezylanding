@@ -45,6 +45,7 @@ export function SiteFooter({ year }: { year: number }) {
   const localeGuides = `/${locale}/guides`;
   const localeBlog = `/${locale}/blog`;
   const localePlaces = `/${locale}/places`;
+  const localeJobs = `/${locale}/jobs`;
   const guidesLabel = locale === "uk" ? "Гіди" : locale === "de" ? "Ratgeber" : "Guides";
 
   const columns = [
@@ -55,6 +56,8 @@ export function SiteFooter({ year }: { year: number }) {
         { label: t("footer.howItWorks"), href: `${localeHome}#method` },
         { label: guidesLabel, href: localeGuides },
         { label: locale === "uk" ? "Красиві місця" : locale === "de" ? "Schöne Orte" : "Beautiful places", href: localePlaces },
+        { label: locale === "uk" ? "Вакансії" : "Jobs", href: localeJobs },
+        { label: locale === "uk" ? "Розмістити вакансію" : locale === "de" ? "Stelle veröffentlichen" : "Post a vacancy", href: `${localeJobs}/post` },
         { label: t("footer.download"), href: APP_STORE_URL },
       ],
     },

@@ -26,6 +26,7 @@ export function LandingNav({ locale, copy }: { locale: Locale; copy: LandingCopy
     { href: "#stories", label: copy.stories },
     { href: "#partners", label: copy.partners },
     { href: `/${locale}/places`, label: copy.places, route: true },
+    { href: `/${locale}/jobs`, label: copy.jobs, route: true },
   ];
 
   return (
