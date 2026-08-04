@@ -143,13 +143,19 @@ export function LandingPage({ locale }: { locale: Locale }) {
           </MotionReveal>
           <div className={styles.storyGrid}>
             {copy.stories.items.map((story, index) => (
-              <MotionArticle key={story.name} className={styles.storyCard} delay={index * 0.06}>
-                <Image src={story.image} alt={`${story.name}, Sweezy user sharing relocation experience in Switzerland`} fill sizes="(max-width: 760px) 92vw, 33vw" className={styles.storyImage} />
-                <div className={styles.storyOverlay} />
-                <blockquote>“{story.quote}”</blockquote>
+              <MotionArticle key={story.name} className={styles.storyCard} dataTone={index} delay={index * 0.06}>
+                <div className={styles.storyMeta}>
+                  <span className={styles.storyStars} aria-label="5 out of 5 stars">★★★★★</span>
+                  <span>REVIEW / {String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <blockquote>{story.quote}</blockquote>
                 <footer>
-                  <strong>{story.name}</strong>
-                  <span>{story.role}</span>
+                  <div className={styles.storyAvatar} aria-hidden>{story.name.slice(0, 1).toUpperCase()}</div>
+                  <div>
+                    <strong>{story.name}</strong>
+                    <span>{story.role}</span>
+                  </div>
+                  <i aria-hidden>↗</i>
                 </footer>
               </MotionArticle>
             ))}

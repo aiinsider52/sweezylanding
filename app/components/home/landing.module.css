@@ -1363,8 +1363,9 @@
 
 .storyGrid {
   display: grid;
-  grid-template-columns: 1.2fr 0.9fr 0.9fr;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.78fr);
+  grid-template-rows: repeat(2, minmax(235px, auto));
+  gap: 14px;
   width: min(1320px, 100%);
   margin: 72px auto 0;
 }
@@ -1372,66 +1373,104 @@
 .storyCard {
   position: relative;
   display: flex;
-  min-height: 510px;
+  min-height: 0;
   overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
-  padding: 34px;
-  border: 1px solid var(--line-dark);
+  padding: clamp(26px, 3vw, 44px);
+  border: 1px solid rgba(16, 18, 16, 0.14);
   border-radius: 28px;
-  isolation: isolate;
+  color: var(--ink);
+  background: var(--paper-bright);
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 360ms ease, border-color 220ms ease;
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 360ms ease;
 }
+
+.storyCard:first-child {
+  grid-row: 1 / 3;
+  min-height: 540px;
+}
+
+.storyCard[data-tone="1"] { background: #dcecf5; }
+.storyCard[data-tone="2"] { color: var(--paper-bright); background: #202522; border-color: rgba(255,255,255,.14); }
+
+.storyCard::after {
+  content: "“";
+  position: absolute;
+  right: clamp(18px, 3vw, 42px);
+  bottom: clamp(-72px, -5vw, -38px);
+  color: rgba(16, 18, 16, 0.055);
+  font-size: clamp(180px, 24vw, 360px);
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.storyCard[data-tone="2"]::after { color: rgba(255,255,255,.055); }
 
 .storyCard:hover {
   z-index: 2;
-  border-color: rgba(183, 255, 0, 0.38);
-  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.38);
-  transform: translateY(-9px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.25);
+  transform: translateY(-6px) rotate(-0.25deg);
 }
 
-.storyImage {
-  z-index: -2;
-  object-fit: cover;
-  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 500ms ease;
+.storyMeta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: rgba(16,18,16,.48);
+  font: 700 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
 }
 
-.storyCard:hover .storyImage {
-  filter: saturate(1.08);
-  transform: scale(1.045);
-}
-
-.storyOverlay {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: rgba(16, 18, 16, 0.56);
-}
+.storyCard[data-tone="2"] .storyMeta { color: rgba(245,245,239,.52); }
+.storyStars { color: #6c9200; letter-spacing: .08em; }
+.storyCard[data-tone="2"] .storyStars { color: var(--lime); }
 
 .storyCard blockquote {
-  margin: 0;
-  color: var(--paper-bright);
-  font-size: clamp(24px, 2.5vw, 40px);
-  font-weight: 650;
-  letter-spacing: -0.045em;
-  line-height: 1.08;
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  margin: clamp(28px, 5vw, 72px) 0;
+  color: inherit;
+  font-size: clamp(27px, 3.25vw, 56px);
+  font-weight: 720;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.storyCard:not(:first-child) blockquote {
+  margin: 28px 0 34px;
+  font-size: clamp(24px, 2.15vw, 36px);
+  line-height: 1.02;
 }
 
 .storyCard footer {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(16,18,16,.16);
 }
 
-.storyCard footer strong {
-  font-size: 14px;
-}
+.storyCard[data-tone="2"] footer { border-color: rgba(255,255,255,.14); }
+.storyAvatar { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; color: var(--ink); background: var(--lime); font-size: 14px; font-weight: 800; }
+.storyCard footer div:nth-child(2) { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.storyCard footer strong { font-size: 14px; }
 
 .storyCard footer span {
-  color: rgba(242, 243, 238, 0.62);
-  font-size: 12px;
+  color: rgba(16,18,16,.5);
+  font-size: 11px;
 }
+
+.storyCard[data-tone="2"] footer span { color: rgba(245,245,239,.55); }
+.storyCard footer i { font-size: 20px; font-style: normal; }
 
 .partnerSection {
   padding: 140px max(24px, calc((100vw - 1320px) / 2));
@@ -2298,13 +2337,15 @@
   }
 
   .storyCard {
-    min-height: clamp(320px, 45svh, 440px);
+    min-height: 0;
     padding: clamp(24px, 2.3vw, 31px);
     border-radius: 24px;
   }
 
+  .storyCard:first-child { min-height: clamp(430px, 55svh, 520px); }
+
   .storyCard blockquote {
-    font-size: clamp(23px, 2.2vw, 34px);
+    font-size: clamp(30px, 3.5vw, 48px);
   }
 
   .partnerSection {
@@ -2979,21 +3020,24 @@
 
   .storyGrid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
     margin-top: 48px;
   }
 
   .storyCard:first-child {
     grid-column: auto;
+    grid-row: auto;
   }
 
   .storyCard {
-    min-height: 430px;
+    min-height: 360px;
     padding: 26px;
     border-radius: 22px;
   }
 
   .storyCard blockquote {
-    font-size: 29px;
+    margin: 44px 0;
+    font-size: clamp(29px, 8vw, 40px);
   }
 
   .partnerHeader {
