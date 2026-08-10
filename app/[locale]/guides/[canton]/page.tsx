@@ -12,6 +12,7 @@ import { APP_STORE_URL } from "../../../../lib/links";
 import Link from "next/link";
 import { getCantonImage } from "../../../../lib/editorial";
 import styles from "../../editorial.module.css";
+import { SEO_CLUSTERS } from "../../../../data/seo-clusters";
 
 /* ─── Generic copy (all 26 cantons, all 3 locales) ─── */
 const COPY: Record<
@@ -681,6 +682,9 @@ export default function CantonGuidePage({
                 </Link>
                 .
               </p>
+              <p>
+                Continue with the <Link href="/en/blog/swiss-tax-return-2026" className="text-accent-green transition-colors hover:text-accent-emerald">Swiss tax return guide</Link>, <Link href="/en/blog/how-to-find-job-switzerland-foreigner" className="text-accent-green transition-colors hover:text-accent-emerald">job-search guide</Link>, and <Link href="/en/blog/swiss-residence-permit-guide" className="text-accent-green transition-colors hover:text-accent-emerald">residence permit guide</Link>.
+              </p>
             </div>
           </div>
         ) : null}
@@ -700,6 +704,13 @@ export default function CantonGuidePage({
         >
           {locale === "uk" ? "Блог" : "Blog"} →
         </Link>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold tracking-tight">{locale === "uk" ? "Наступні практичні кроки" : locale === "de" ? "Nächste praktische Schritte" : "Next practical steps"}</h2>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          {SEO_CLUSTERS[locale].map((cluster) => <Link key={cluster.key} href={cluster.href} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-accent-green/40"><strong className="block text-white">{cluster.title}</strong><span className="mt-2 block text-sm leading-6 text-white/55">{cluster.description}</span></Link>)}
+        </div>
       </section>
 
       <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.05] p-6">

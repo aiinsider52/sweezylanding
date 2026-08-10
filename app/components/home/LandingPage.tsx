@@ -5,6 +5,7 @@ import { landingCopy } from "../../../lib/landing-copy";
 import { APP_STORE_URL } from "../../../lib/links";
 import { JsonLd } from "../seo/JsonLd";
 import { destinationImage, travelDestinations } from "../../../data/travel-destinations";
+import { SEO_CLUSTERS } from "../../../data/seo-clusters";
 import { AppFrameCluster } from "./AppFrameCluster";
 import { AnimatedProof } from "./AnimatedProof";
 import { CinematicJourney } from "./CinematicJourney";
@@ -61,6 +62,14 @@ export function LandingPage({ locale }: { locale: Locale }) {
         <CinematicJourney locale={locale} hero={copy.hero} />
 
         <AnimatedProof items={copy.proof} />
+
+        <section className={styles.knowledgeSection} aria-labelledby="knowledge-title">
+          <MotionReveal className={styles.knowledgeHeader}>
+            <p className={styles.eyebrow}>{locale === "uk" ? "ПЕРЕВІРЕНІ ТЕМАТИЧНІ ГІДИ" : locale === "de" ? "GEPRÜFTE THEMENGUIDES" : "VERIFIED KNOWLEDGE HUBS"}</p>
+            <h2 id="knowledge-title">{locale === "uk" ? "Від питання — до чіткої відповіді." : locale === "de" ? "Von der Frage zur klaren Antwort." : "From question to clear answer."}</h2>
+          </MotionReveal>
+          <div className={styles.knowledgeGrid}>{SEO_CLUSTERS[locale].map((cluster,index)=><MotionArticle key={cluster.key} className={styles.knowledgeCard} delay={index*.045}><Link href={cluster.href}><span>0{index+1}</span><h3>{cluster.title}</h3><p>{cluster.description}</p><strong>↗</strong></Link></MotionArticle>)}</div>
+        </section>
 
         <section className={styles.placesSection}>
           <MotionReveal className={styles.placesHeader}>

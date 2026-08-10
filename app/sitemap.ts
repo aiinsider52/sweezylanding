@@ -4,6 +4,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { cantons } from "../data/cantons";
 import { travelDestinations } from "../data/travel-destinations";
+import { PLACE_CATEGORIES, placeRegions } from "../data/place-hubs";
 import { isLocale, isRedirectedBlogPost } from "../lib/blog";
 
 const SITE_URL = "https://www.sweezy.world";
@@ -92,6 +93,8 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
 
   if (await pathExists(localizedPlacesIndex)) {
     pages.push(...LOCALES.map((locale) => `/${locale}/places`));
+    pages.push(...LOCALES.flatMap((locale) => PLACE_CATEGORIES.map((category) => `/${locale}/places/category/${category}`)));
+    pages.push(...LOCALES.flatMap((locale) => placeRegions().map((region) => `/${locale}/places/region/${region}`)));
   }
 
   if (await pathExists(localizedPlace)) {
