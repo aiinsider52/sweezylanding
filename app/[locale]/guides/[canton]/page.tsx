@@ -155,6 +155,7 @@ const OFFICE_SPOTLIGHTS = {
     location: "9102 Herisau",
     phone: "+41 71 343 63 33",
     email: "migration@ar.ch",
+    verifiedAt: "2026-08-12",
     website:
       "https://staatskalender.ar.ch/organization/kantonale-behoerden/kantonale-verwaltung/departement-inneres-und-sicherheit/amt-fuer-inneres/abteilung-migration",
     copy: {
@@ -341,6 +342,17 @@ export default function CantonGuidePage({
           : {}),
       }
     : null;
+  const officeJsonLd = officeSpotlight && officeCopy ? {
+    "@context": "https://schema.org",
+    "@type": "GovernmentOffice",
+    name: officeSpotlight.name,
+    description: officeCopy.body,
+    url: officeSpotlight.website,
+    telephone: officeSpotlight.phone,
+    email: officeSpotlight.email,
+    address: { "@type": "PostalAddress", postalCode: "9102", addressLocality: "Herisau", addressCountry: "CH" },
+    areaServed: { "@type": "AdministrativeArea", name: "Appenzell Ausserrhoden" },
+  } : null;
   const cantonImage = getCantonImage(canton.slug);
 
   /* ── Shared header ───────────────────────────────────────────────────────── */
@@ -637,6 +649,11 @@ export default function CantonGuidePage({
           >
             Official canton source →
           </a>
+          <p className="mt-4 text-xs text-white/40">{locale === "uk" ? "Контакти перевірено" : locale === "de" ? "Kontakte geprüft" : "Contact details verified"}: <time dateTime={officeSpotlight.verifiedAt}>12 August 2026</time></p>
+          <div className="mt-6 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-2">
+            <div><h3 className="font-semibold text-white">{locale === "uk" ? "Де реєструвати адресу?" : locale === "de" ? "Wo melde ich den Wohnsitz an?" : "Where do I register my address?"}</h3><p className="mt-2 text-sm leading-6 text-white/60">{locale === "uk" ? "У Einwohnerkontrolle вашої громади. Міграційний відділ кантону відповідає за міграційні питання та дозволи." : locale === "de" ? "Bei der Einwohnerkontrolle Ihrer Gemeinde. Die kantonale Abteilung Migration bearbeitet ausländerrechtliche und Bewilligungsfragen." : "At your municipality's residents office. Canton migration division handles migration and residence-permit matters."}</p></div>
+            <div><h3 className="font-semibold text-white">{locale === "uk" ? "Чи це офіс лише для Герізау?" : locale === "de" ? "Ist die Stelle nur für Herisau zuständig?" : "Is this office only for Herisau?"}</h3><p className="mt-2 text-sm leading-6 text-white/60">{locale === "uk" ? "Ні. Це кантональний відділ Appenzell Ausserrhoden, розташований у Герізау." : locale === "de" ? "Nein. Es ist die kantonale Abteilung für Appenzell Ausserrhoden mit Sitz in Herisau." : "No. It is canton authority for Appenzell Ausserrhoden, located in Herisau."}</p></div>
+          </div>
         </section>
       ) : null}
 
@@ -733,6 +750,7 @@ export default function CantonGuidePage({
       <JsonLd data={placeJsonLd} />
       {faqJsonLd && <JsonLd data={faqJsonLd} />}
       {guideJsonLd && <JsonLd data={guideJsonLd} />}
+      {officeJsonLd && <JsonLd data={officeJsonLd} />}
       <article className={styles.guideDetail}>
         <Breadcrumb items={breadcrumbItems} />
         {header}

@@ -116,7 +116,7 @@ export async function generateMetadata({
     title: post.frontmatter.title,
     description: post.frontmatter.description,
     keywords: post.frontmatter.keywords,
-    authors: [{ name: post.frontmatter.author }],
+    authors: [{ name: post.frontmatter.author, url: `${BASE_URL}/${params.locale}/authors/sweezy-team` }],
     alternates: buildCanonicalAlternates(params.locale, pathWithoutLocale),
     openGraph: {
       title: post.frontmatter.title,
@@ -227,7 +227,7 @@ export default async function BlogPostPage({
     author: {
       "@type": "Organization",
       name: post.frontmatter.author,
-      url: `${BASE_URL}/${locale}/about`,
+      url: `${BASE_URL}/${locale}/authors/sweezy-team`,
     },
     publisher: {
       "@type": "Organization",
@@ -284,7 +284,7 @@ export default async function BlogPostPage({
             <div className="flex flex-wrap items-end justify-between gap-5 border-t border-white/15 pt-6 text-sm text-white/55">
               <div>
                 <span className={styles.eyebrow}>By</span>
-                <Link href={`/${locale}/about`} className="mt-2 block font-semibold text-white">
+                <Link href={`/${locale}/authors/sweezy-team`} className="mt-2 block font-semibold text-white">
                   {post.frontmatter.author}
                 </Link>
               </div>
@@ -394,7 +394,7 @@ export default async function BlogPostPage({
           <aside className={styles.articleAside}>
             <span className={styles.index}>✓</span>
             <h2>{articleCopy.editorial}</h2>
-            <Link href={`/${locale}/about`} className="mt-8 inline-flex text-sm font-bold">
+            <Link href={`/${locale}/editorial`} className="mt-8 inline-flex text-sm font-bold">
               {articleCopy.editorialLink} →
             </Link>
           </aside>

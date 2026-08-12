@@ -28,8 +28,10 @@ const content = `# Sweezy
 
 ## Editorial information
 
-- [About Sweezy and editorial standards](${BASE_URL}/en/about)
-- [Ukrainian editorial standards](${BASE_URL}/uk/about)
+- [About Sweezy](${BASE_URL}/en/about)
+- [English editorial standards](${BASE_URL}/en/editorial)
+- [Ukrainian editorial standards](${BASE_URL}/uk/editorial)
+- [Sweezy editorial team](${BASE_URL}/en/authors/sweezy-team)
 - [Support and corrections](${BASE_URL}/support)
 - [XML sitemap](${BASE_URL}/sitemap.xml)
 
