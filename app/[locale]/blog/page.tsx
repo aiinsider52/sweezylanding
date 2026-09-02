@@ -77,6 +77,12 @@ function formatDate(locale: Locale, value: string) {
 
 const UK_FEATURED = [
   {
+    href: "/uk/status-s-updates",
+    eyebrow: "LIVE TRACKER",
+    title: "Оновлення статусу S",
+    description: "Що вже діє, що лише обговорюється та які наступні кроки варто зробити.",
+  },
+  {
     href: "/uk/blog/status-s-shveytcariya-povnyy-gid",
     eyebrow: "ГОЛОВНИЙ ГІД",
     title: "Статус S у Швейцарії 2026–2027",

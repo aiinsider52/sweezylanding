@@ -11,6 +11,7 @@ const content = `# Sweezy
 - [Ukrainian Sweezy homepage](${BASE_URL}/uk)
 - [Ukrainian Switzerland guides](${BASE_URL}/uk/blog)
 - [Complete Status S guide for Ukrainians](${BASE_URL}/uk/blog/status-s-shveytcariya-povnyy-gid)
+- [Verified Status S updates tracker](${BASE_URL}/uk/status-s-updates)
 - [Status S after March 2027](${BASE_URL}/uk/blog/status-s-pislya-bereznya-2027)
 - [Finding work in Switzerland for Ukrainians](${BASE_URL}/uk/blog/poshuk-roboty-shveytcariya-2026)
 - [Moving to Switzerland checklist](${BASE_URL}/uk/blog/pereizd-do-shveytcariyi-chekist)

@@ -149,10 +149,34 @@ const COPY: Record<
   },
 };
 
-const OFFICE_SPOTLIGHTS = {
+type OfficeCopy = {
+  metaTitle: string;
+  metaDescription: string;
+  heading: string;
+  body: string;
+};
+
+type OfficeSpotlight = {
+  name: string;
+  regionName: string;
+  location: string;
+  streetAddress?: string;
+  postalCode: string;
+  addressLocality: string;
+  phone: string;
+  email?: string;
+  verifiedAt: string;
+  website: string;
+  copy: Record<Locale, OfficeCopy>;
+};
+
+const OFFICE_SPOTLIGHTS: Record<string, OfficeSpotlight> = {
   "appenzell-ausserrhoden": {
     name: "Abteilung Migration Appenzell Ausserrhoden",
+    regionName: "Appenzell Ausserrhoden",
     location: "9102 Herisau",
+    postalCode: "9102",
+    addressLocality: "Herisau",
     phone: "+41 71 343 63 33",
     email: "migration@ar.ch",
     verifiedAt: "2026-08-12",
@@ -182,7 +206,102 @@ const OFFICE_SPOTLIGHTS = {
       },
     },
   },
-} as const;
+  zug: {
+    name: "Amt für Migration Kanton Zug",
+    regionName: "Zug",
+    location: "Aabachstrasse 1, 6301 Zug",
+    streetAddress: "Aabachstrasse 1",
+    postalCode: "6301",
+    addressLocality: "Zug",
+    phone: "+41 41 594 40 00",
+    email: "info.afm@zg.ch",
+    verifiedAt: "2026-09-02",
+    website: "https://zg.ch/de/sicherheitsdirektion/amt-fuer-migration",
+    copy: {
+      en: {
+        metaTitle: "Zug Migration Office & Moving Guide | Sweezy",
+        metaDescription: "Official Zug Migration Office contact details plus residence, work-permit and local registration guidance for newcomers moving to Canton Zug.",
+        heading: "Zug Migration Office: official contact",
+        body: "The Canton Zug Migration Office handles entry, residence and employment matters for foreign nationals. Address registration still starts with your Zug municipality; permit and migration questions belong to the cantonal office.",
+      },
+      uk: {
+        metaTitle: "Міграційний офіс Zug: контакти та гід | Sweezy",
+        metaDescription: "Офіційні контакти міграційного офісу кантону Zug та пояснення щодо реєстрації адреси, проживання й дозволу на роботу.",
+        heading: "Міграційний офіс Zug: офіційні контакти",
+        body: "Міграційний офіс кантону Zug відповідає за в’їзд, проживання та працевлаштування іноземців. Реєстрацію адреси починайте у своїй громаді, а питання дозволу й міграції адресуйте кантональному офісу.",
+      },
+      de: {
+        metaTitle: "Migrationsamt Zug: Kontakt & Umzugsratgeber | Sweezy",
+        metaDescription: "Offizielle Kontaktdaten des Amts für Migration Zug sowie Hinweise zu Wohnsitzanmeldung, Aufenthalt und Arbeitsbewilligung.",
+        heading: "Migrationsamt Zug: offizieller Kontakt",
+        body: "Das Amt für Migration des Kantons Zug regelt Einreise, Aufenthalt und Erwerbstätigkeit ausländischer Personen. Die Wohnsitzanmeldung beginnt bei Ihrer Zuger Gemeinde; Bewilligungs- und Migrationsfragen bearbeitet das kantonale Amt.",
+      },
+    },
+  },
+  "st-gallen": {
+    name: "Migrationsamt Kanton St.Gallen — Ausländerabteilung",
+    regionName: "St. Gallen",
+    location: "Oberer Graben 38, 9001 St.Gallen",
+    streetAddress: "Oberer Graben 38",
+    postalCode: "9001",
+    addressLocality: "St.Gallen",
+    phone: "+41 58 229 36 90",
+    verifiedAt: "2026-09-02",
+    website: "https://www.sg.ch/politik-verwaltung/departemente-und-staatskanzlei/sicherheits--und-justizdepartement/migrationsamt.html",
+    copy: {
+      en: {
+        metaTitle: "St. Gallen Migration Office & Moving Guide | Sweezy",
+        metaDescription: "Official St. Gallen Migration Office contact plus residence-permit and local registration guidance for newcomers moving to the canton.",
+        heading: "St. Gallen Migration Office: official contact",
+        body: "The Canton St. Gallen Migration Office implements federal migration and identity-document rules. Use your municipality for local arrival registration and the cantonal Foreign Nationals Division for residence-permit matters.",
+      },
+      uk: {
+        metaTitle: "Міграційний офіс St. Gallen: контакти та гід | Sweezy",
+        metaDescription: "Офіційні контакти міграційного офісу St. Gallen та пояснення щодо реєстрації й дозволу на проживання у кантоні.",
+        heading: "Міграційний офіс St. Gallen: офіційні контакти",
+        body: "Міграційний офіс кантону St. Gallen виконує федеральні правила у сфері міграції та документів. Прибуття реєструйте у своїй громаді, а питання дозволу на проживання спрямовуйте до кантонального відділу у справах іноземців.",
+      },
+      de: {
+        metaTitle: "Migrationsamt St. Gallen: Kontakt & Umzug | Sweezy",
+        metaDescription: "Offizieller Kontakt des Migrationsamts St. Gallen plus Hinweise zu Anmeldung und Aufenthaltsbewilligung im Kanton.",
+        heading: "Migrationsamt St. Gallen: offizieller Kontakt",
+        body: "Das Migrationsamt des Kantons St. Gallen setzt die bundesrechtlichen Vorgaben zu Migration und Ausweisen um. Die Ankunft melden Sie bei Ihrer Gemeinde; die Ausländerabteilung bearbeitet Aufenthalts- und Bewilligungsfragen.",
+      },
+    },
+  },
+  fribourg: {
+    name: "Service de la population et des migrants (SPoMi)",
+    regionName: "Fribourg",
+    location: "Route d’Englisberg 11, 1763 Granges-Paccot",
+    streetAddress: "Route d’Englisberg 11",
+    postalCode: "1763",
+    addressLocality: "Granges-Paccot",
+    phone: "+41 26 305 14 92",
+    email: "spomi@fr.ch",
+    verifiedAt: "2026-09-02",
+    website: "https://www.fr.ch/dsjs/spomi",
+    copy: {
+      en: {
+        metaTitle: "Fribourg SPoMi Migration Office & Moving Guide | Sweezy",
+        metaDescription: "Official Fribourg SPoMi contact plus arrival, residence and foreign-worker guidance for newcomers moving to Canton Fribourg.",
+        heading: "Fribourg SPoMi: official contact",
+        body: "Fribourg’s Population and Migrants Service handles foreign-national, asylum and foreign-workforce procedures. Arrival requirements vary by municipality and nationality, so confirm your route with the municipality and SPoMi.",
+      },
+      uk: {
+        metaTitle: "Міграційна служба Fribourg SPoMi: контакти | Sweezy",
+        metaDescription: "Офіційні контакти SPoMi Fribourg та пояснення щодо прибуття, проживання й працевлаштування іноземців у кантоні.",
+        heading: "Fribourg SPoMi: офіційні контакти",
+        body: "Служба населення та мігрантів Fribourg веде процедури для іноземців, притулку й іноземної робочої сили. Маршрут реєстрації залежить від громади та громадянства — перевірте його у своїй громаді та SPoMi.",
+      },
+      de: {
+        metaTitle: "Migrationsamt Freiburg SPoMi: Kontakt & Umzug | Sweezy",
+        metaDescription: "Offizieller Kontakt des Freiburger SPoMi plus Hinweise zu Anmeldung, Aufenthalt und ausländischen Arbeitskräften.",
+        heading: "Freiburg SPoMi: offizieller Kontakt",
+        body: "Das Amt für Bevölkerung und Migration Freiburg bearbeitet Verfahren für ausländische Personen, Asyl und ausländische Arbeitskräfte. Der Anmeldeweg hängt von Gemeinde und Staatsangehörigkeit ab; bestätigen Sie ihn bei Gemeinde und SPoMi.",
+      },
+    },
+  },
+};
 
 const LANG_MAP: Record<Locale, string> = {
   en: "en-US",
@@ -206,6 +325,13 @@ function formatPopulation(locale: Locale, value: number) {
   return new Intl.NumberFormat(
     locale === "uk" ? "uk-UA" : locale === "de" ? "de-CH" : "en-US",
   ).format(value);
+}
+
+function formatVerifiedDate(locale: Locale, value: string) {
+  return new Intl.DateTimeFormat(
+    locale === "uk" ? "uk-UA" : locale === "de" ? "de-CH" : "en-GB",
+    { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" },
+  ).format(new Date(`${value}T00:00:00Z`));
 }
 
 export async function generateStaticParams() {
@@ -349,9 +475,15 @@ export default function CantonGuidePage({
     description: officeCopy.body,
     url: officeSpotlight.website,
     telephone: officeSpotlight.phone,
-    email: officeSpotlight.email,
-    address: { "@type": "PostalAddress", postalCode: "9102", addressLocality: "Herisau", addressCountry: "CH" },
-    areaServed: { "@type": "AdministrativeArea", name: "Appenzell Ausserrhoden" },
+    ...(officeSpotlight.email ? { email: officeSpotlight.email } : {}),
+    address: {
+      "@type": "PostalAddress",
+      ...(officeSpotlight.streetAddress ? { streetAddress: officeSpotlight.streetAddress } : {}),
+      postalCode: officeSpotlight.postalCode,
+      addressLocality: officeSpotlight.addressLocality,
+      addressCountry: "CH",
+    },
+    areaServed: { "@type": "AdministrativeArea", name: officeSpotlight.regionName },
   } : null;
   const cantonImage = getCantonImage(canton.slug);
 
@@ -634,12 +766,12 @@ export default function CantonGuidePage({
             </div>
             <div>
               <dt className="text-white/40">Phone</dt>
-              <dd className="mt-1 text-white/85">{officeSpotlight.phone}</dd>
+              <dd className="mt-1 text-white/85"><a href={`tel:${officeSpotlight.phone.replace(/\s/g, "")}`} className="hover:text-accent-green">{officeSpotlight.phone}</a></dd>
             </div>
-            <div>
+            {officeSpotlight.email ? <div>
               <dt className="text-white/40">Email</dt>
-              <dd className="mt-1 text-white/85">{officeSpotlight.email}</dd>
-            </div>
+              <dd className="mt-1 text-white/85"><a href={`mailto:${officeSpotlight.email}`} className="hover:text-accent-green">{officeSpotlight.email}</a></dd>
+            </div> : null}
           </dl>
           <a
             href={officeSpotlight.website}
@@ -649,10 +781,10 @@ export default function CantonGuidePage({
           >
             Official canton source →
           </a>
-          <p className="mt-4 text-xs text-white/40">{locale === "uk" ? "Контакти перевірено" : locale === "de" ? "Kontakte geprüft" : "Contact details verified"}: <time dateTime={officeSpotlight.verifiedAt}>12 August 2026</time></p>
+          <p className="mt-4 text-xs text-white/40">{locale === "uk" ? "Контакти перевірено" : locale === "de" ? "Kontakte geprüft" : "Contact details verified"}: <time dateTime={officeSpotlight.verifiedAt}>{formatVerifiedDate(locale, officeSpotlight.verifiedAt)}</time></p>
           <div className="mt-6 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-2">
             <div><h3 className="font-semibold text-white">{locale === "uk" ? "Де реєструвати адресу?" : locale === "de" ? "Wo melde ich den Wohnsitz an?" : "Where do I register my address?"}</h3><p className="mt-2 text-sm leading-6 text-white/60">{locale === "uk" ? "У Einwohnerkontrolle вашої громади. Міграційний відділ кантону відповідає за міграційні питання та дозволи." : locale === "de" ? "Bei der Einwohnerkontrolle Ihrer Gemeinde. Die kantonale Abteilung Migration bearbeitet ausländerrechtliche und Bewilligungsfragen." : "At your municipality's residents office. Canton migration division handles migration and residence-permit matters."}</p></div>
-            <div><h3 className="font-semibold text-white">{locale === "uk" ? "Чи це офіс лише для Герізау?" : locale === "de" ? "Ist die Stelle nur für Herisau zuständig?" : "Is this office only for Herisau?"}</h3><p className="mt-2 text-sm leading-6 text-white/60">{locale === "uk" ? "Ні. Це кантональний відділ Appenzell Ausserrhoden, розташований у Герізау." : locale === "de" ? "Nein. Es ist die kantonale Abteilung für Appenzell Ausserrhoden mit Sitz in Herisau." : "No. It is canton authority for Appenzell Ausserrhoden, located in Herisau."}</p></div>
+            <div><h3 className="font-semibold text-white">{locale === "uk" ? "За який регіон відповідає офіс?" : locale === "de" ? "Für welche Region ist die Stelle zuständig?" : "Which region does this office serve?"}</h3><p className="mt-2 text-sm leading-6 text-white/60">{locale === "uk" ? `Це кантональна служба для ${officeSpotlight.regionName}; офіс розташований у ${officeSpotlight.addressLocality}.` : locale === "de" ? `Die kantonale Stelle ist für ${officeSpotlight.regionName} zuständig und befindet sich in ${officeSpotlight.addressLocality}.` : `This canton authority serves ${officeSpotlight.regionName} and is located in ${officeSpotlight.addressLocality}.`}</p></div>
           </div>
         </section>
       ) : null}

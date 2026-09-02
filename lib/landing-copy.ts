@@ -161,7 +161,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       title: "Your next step in Switzerland.",
       accent: "Already mapped.",
       body:
-        "Permits, documents, work, local services and community — Sweezy turns a complicated move into a path you can follow.",
+        "Permits, documents, work, local services and Sweezy community — one complicated move turned into a path you can follow.",
       primary: "Download for iPhone",
       secondary: "See how it works",
       footnote: "Available in English, Ukrainian and German",
@@ -194,7 +194,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
         },
         {
           id: "market",
-          label: "Market & community",
+          label: "Sweezy community",
           title: "People and services nearby",
           description: "Find trusted help, local events and community answers without starting from zero.",
           images: sharedImages.market,
