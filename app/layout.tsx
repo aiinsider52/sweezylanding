@@ -96,6 +96,11 @@ const websiteSchema = {
     "@type": "Organization",
     name: "Sweezy",
     url: "https://www.sweezy.world",
+    sameAs: [
+      "https://t.me/sweezyxswiss",
+      "https://www.facebook.com/groups/1682658272463856",
+      "https://www.instagram.com/sweezy.app/",
+    ],
   },
 };
 

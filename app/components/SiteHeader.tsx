@@ -11,9 +11,9 @@ import { ThemeToggle } from "./ThemeToggle";
 import styles from "./SiteHeader.module.css";
 
 const LABELS = {
-  en: { home: "Home", guides: "Guides", places: "Places", jobs: "Jobs", blog: "Blog", app: "Get app", menu: "Open menu", close: "Close menu" },
-  uk: { home: "Головна", guides: "Гіди", places: "Місця", jobs: "Робота", blog: "Блог", app: "Завантажити", menu: "Відкрити меню", close: "Закрити меню" },
-  de: { home: "Start", guides: "Guides", places: "Orte", jobs: "Jobs", blog: "Blog", app: "App laden", menu: "Menü öffnen", close: "Menü schließen" },
+  en: { home: "Home", guides: "Guides", places: "Places", jobs: "Jobs", community: "Community", blog: "Blog", app: "Get app", menu: "Open menu", close: "Close menu" },
+  uk: { home: "Головна", guides: "Гіди", places: "Місця", jobs: "Робота", community: "Спільнота", blog: "Блог", app: "Завантажити", menu: "Відкрити меню", close: "Закрити меню" },
+  de: { home: "Start", guides: "Guides", places: "Orte", jobs: "Jobs", community: "Community", blog: "Blog", app: "App laden", menu: "Menü öffnen", close: "Menü schließen" },
 } as const;
 
 function localeFromPath(pathname: string): Locale {
@@ -32,6 +32,7 @@ export function SiteHeader() {
     [`/${locale}/guides`, copy.guides],
     [`/${locale}/places`, copy.places],
     [`/${locale}/jobs`, copy.jobs],
+    [`/${locale}/community`, copy.community],
     [`/${locale}/blog`, copy.blog],
   ] as const;
 

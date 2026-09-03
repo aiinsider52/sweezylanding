@@ -18,6 +18,7 @@ const content = `# Sweezy
 - [Swiss canton guides in Ukrainian](${BASE_URL}/uk/guides)
 - [Jobs in Switzerland](${BASE_URL}/uk/jobs)
 - [Places to visit in Switzerland](${BASE_URL}/uk/places)
+- [Sweezy community on Telegram and Facebook](${BASE_URL}/uk/community)
 
 ## English resources
 

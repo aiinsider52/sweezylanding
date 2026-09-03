@@ -10,7 +10,7 @@ import { isLocale, isRedirectedBlogPost } from "../lib/blog";
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
 const STATIC_PAGES = ["support", "privacy", "terms", "cookies"] as const;
-const LOCALIZED_PAGES = ["about", "editorial", "authors/sweezy-team"] as const;
+const LOCALIZED_PAGES = ["about", "community", "editorial", "authors/sweezy-team"] as const;
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 

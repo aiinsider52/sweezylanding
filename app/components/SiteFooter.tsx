@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "../../lib/locale-context";
-import { APP_STORE_URL, INSTAGRAM_URL } from "../../lib/links";
+import { APP_STORE_URL, FACEBOOK_COMMUNITY_URL, INSTAGRAM_URL, TELEGRAM_URL } from "../../lib/links";
 import { BrandLogo } from "./BrandLogo";
 
 function FooterLink({
@@ -66,6 +66,7 @@ export function SiteFooter({ year }: { year: number }) {
         { label: t("footer.faqLink"), href: `${localeHome}#faq` },
         { label: t("footer.contact"), href: "mailto:support@sweezy.world" },
         { label: t("footer.blog"), href: localeBlog },
+        { label: locale === "uk" ? "Спільнота Sweezy" : locale === "de" ? "Sweezy Community" : "Sweezy community", href: `/${locale}/community` },
         { label: locale === "uk" ? "Редакційні стандарти" : locale === "de" ? "Redaktionelle Standards" : "Editorial standards", href: `/${locale}/editorial` },
         ...(locale === "uk"
           ? [{ label: "Українцям у Швейцарії", href: "/uk/blog/status-s-shveytcariya-povnyy-gid" }]
@@ -146,6 +147,24 @@ export function SiteFooter({ year }: { year: number }) {
                     stroke="none"
                   />
                 </svg>
+              </a>
+              <a
+                href={TELEGRAM_URL}
+                aria-label="Sweezy Telegram community"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 text-white/40 hover:text-white"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 3.3a1.2 1.2 0 0 0-1.25-.2L2.8 9.9c-.84.32-.8 1.51.06 1.77l4.5 1.38 1.75 5.42c.27.84 1.35 1.03 1.88.33l2.49-3.26 4.61 3.4c.68.5 1.65.12 1.82-.71l2.13-13.76a1.2 1.2 0 0 0-.34-1.17ZM9.35 16.4l-.92-2.85 7.72-5.43-6.8 8.28Z"/></svg>
+              </a>
+              <a
+                href={FACEBOOK_COMMUNITY_URL}
+                aria-label="Sweezy Facebook community"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 text-white/40 hover:text-white"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.6 22v-9h3l.45-3.5H13.6V7.26c0-1.01.28-1.7 1.74-1.7h1.86V2.44c-.32-.04-1.43-.14-2.72-.14-2.69 0-4.53 1.64-4.53 4.66V9.5H6.9V13h3.05v9h3.65Z"/></svg>
               </a>
             </div>
           </div>

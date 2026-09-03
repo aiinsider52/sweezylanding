@@ -12,6 +12,7 @@ import { CinematicJourney } from "./CinematicJourney";
 import { LandingFaq } from "./LandingFaq";
 import { MotionArticle, MotionListItem, MotionReveal } from "./MotionReveal";
 import { PartnerNetwork } from "./PartnerNetwork";
+import { CommunityBanner } from "./CommunityBanner";
 import { ShowcaseTabs } from "./ShowcaseTabs";
 import styles from "./landing.module.css";
 
@@ -70,6 +71,8 @@ export function LandingPage({ locale }: { locale: Locale }) {
           </MotionReveal>
           <div className={styles.knowledgeGrid}>{SEO_CLUSTERS[locale].map((cluster,index)=><MotionArticle key={cluster.key} className={styles.knowledgeCard} delay={index*.045}><Link href={cluster.href}><span>0{index+1}</span><h3>{cluster.title}</h3><p>{cluster.description}</p><strong>↗</strong></Link></MotionArticle>)}</div>
         </section>
+
+        <CommunityBanner locale={locale} />
 
         <section className={styles.placesSection}>
           <MotionReveal className={styles.placesHeader}>
