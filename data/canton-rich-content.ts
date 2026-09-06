@@ -193,16 +193,24 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       ],
       blogLinks: [
         {
-          href: "/en/blog/moving-to-zurich-guide",
-          label: "Moving to Zurich: The Complete Expat Guide (2026)",
+          href: "/en/blog/swiss-tax-return-2026",
+          label: "Swiss Tax Return 2026: deadline, CHF 120,000 rule and deductions",
         },
         {
-          href: "/en/blog/how-to-register-switzerland",
-          label: "How to Register in Switzerland as a Foreigner",
+          href: "/en/blog/how-to-find-job-switzerland-foreigner",
+          label: "How to Find a Job in Switzerland as a Foreigner",
         },
         {
-          href: "/en/blog/work-permit-switzerland-non-eu-2026",
-          label: "Work Permit Switzerland for Non-EU Citizens",
+          href: "/uk/blog/medychne-strakhuvannya-shveytcariya",
+          label: "Health insurance in Switzerland — Ukrainian guide",
+        },
+        {
+          href: "/uk/blog/status-s-shveytcariya-povnyy-gid",
+          label: "Status S in Switzerland — Ukrainian guide",
+        },
+        {
+          href: "/en/places",
+          label: "Places to visit from Zurich: routes and practical planning",
         },
       ],
       sectionRegistration: "First Steps After Arrival",

@@ -12,10 +12,18 @@ import { Breadcrumb } from "../../../components/Breadcrumb";
 import { DestinationLocator } from "./DestinationLocator";
 import styles from "../travel.module.css";
 
-const COPY: Record<Locale, { home: string; places: string; why: string; highlights: string; plan: string; season: string; duration: string; arrival: string; tip: string; gallery: string; source: string; related: string; map: string }> = {
-  en: { home: "Home", places: "Places", why: "Why go", highlights: "What to see", plan: "Plan your visit", season: "Best time", duration: "Time needed", arrival: "Getting there", tip: "Practical tip", gallery: "See the landscape", source: "Destination facts reviewed using official Switzerland Tourism information.", related: "Continue exploring", map: "Open in Maps" },
-  uk: { home: "Головна", places: "Місця", why: "Чому варто поїхати", highlights: "Що подивитися", plan: "Сплануйте поїздку", season: "Коли їхати", duration: "Скільки часу", arrival: "Як дістатися", tip: "Практична порада", gallery: "Подивіться краєвид", source: "Факти про місце перевірено за офіційними матеріалами Switzerland Tourism.", related: "Продовжити подорож", map: "Відкрити на мапі" },
-  de: { home: "Startseite", places: "Orte", why: "Warum hinfahren", highlights: "Was ansehen", plan: "Besuch planen", season: "Beste Zeit", duration: "Zeitbedarf", arrival: "Anreise", tip: "Praktischer Tipp", gallery: "Landschaft ansehen", source: "Fakten mit offiziellen Informationen von Schweiz Tourismus geprüft.", related: "Weiter entdecken", map: "In Maps öffnen" },
+const OESCHINEN_REVIEW = {
+  date: "2026-09-07",
+  url: "https://www.oeschinensee.ch/en/",
+  en: "Before travelling, check the operator's live trail and lift status and the reservation rules for your ticket. The direct path from the upper station to the lake takes about 20 minutes; longer panorama hikes are separate routes. Weather and closures can change your plan.",
+  uk: "Перед поїздкою перевірте актуальний стан стежок і підйомника та правила бронювання для вашого квитка на сайті оператора. Прямий шлях від верхньої станції до озера займає близько 20 хвилин; довші панорамні походи — окремі маршрути. Погода й закриття можуть змінити план.",
+  de: "Prüfen Sie vor der Anreise den aktuellen Weg- und Bahnstatus sowie die Reservierungsregeln für Ihr Ticket beim Betreiber. Der direkte Weg von der Bergstation zum See dauert etwa 20 Minuten; längere Panoramawanderungen sind eigene Routen. Wetter und Sperrungen können den Plan ändern.",
+};
+
+const COPY: Record<Locale, { home: string; places: string; why: string; highlights: string; plan: string; season: string; duration: string; arrival: string; tip: string; gallery: string; source: string; related: string; map: string; answer: string; applies: string; appliesValue: string; reviewed: string; official: string }> = {
+  en: { home: "Home", places: "Places", why: "Why go", highlights: "What to see", plan: "Plan your visit", season: "Best time", duration: "Time needed", arrival: "Getting there", tip: "Practical tip", gallery: "See the landscape", source: "Destination facts reviewed using official Switzerland Tourism information.", related: "Continue exploring", map: "Open in Maps", answer: "Quick answer", applies: "Useful for", appliesValue: "Independent day-trip and itinerary planning", reviewed: "Last reviewed", official: "Official destination source" },
+  uk: { home: "Головна", places: "Місця", why: "Чому варто поїхати", highlights: "Що подивитися", plan: "Сплануйте поїздку", season: "Коли їхати", duration: "Скільки часу", arrival: "Як дістатися", tip: "Практична порада", gallery: "Подивіться краєвид", source: "Факти про місце перевірено за офіційними матеріалами Switzerland Tourism.", related: "Продовжити подорож", map: "Відкрити на мапі", answer: "Коротка відповідь", applies: "Для кого", appliesValue: "Для самостійної одноденної поїздки або маршруту", reviewed: "Перевірено", official: "Офіційне джерело про місце" },
+  de: { home: "Startseite", places: "Orte", why: "Warum hinfahren", highlights: "Was ansehen", plan: "Besuch planen", season: "Beste Zeit", duration: "Zeitbedarf", arrival: "Anreise", tip: "Praktischer Tipp", gallery: "Landschaft ansehen", source: "Fakten mit offiziellen Informationen von Schweiz Tourismus geprüft.", related: "Weiter entdecken", map: "In Maps öffnen", answer: "Kurzantwort", applies: "Geeignet für", appliesValue: "Selbstständige Tagesausflüge und Reiseplanung", reviewed: "Geprüft", official: "Offizielle Reisezielquelle" },
 };
 
 type Credit = { title: string; pageUrl: string; creator: string; license: string; licenseUrl: string };
@@ -45,11 +53,13 @@ export default function DestinationPage({ params }: { params: { locale: string; 
   if (!place) notFound();
   const locale = params.locale;
   const copy = COPY[locale];
+  const operatorReview = place.slug === "oeschinen-lake" ? OESCHINEN_REVIEW : null;
   const editorial = buildDestinationEditorial(place, locale);
   const related = travelDestinations.filter((item) => item.slug !== place.slug && (item.category === place.category || item.region[locale].split(" · ")[0] === place.region[locale].split(" · ")[0])).slice(0, 3);
   const credits = (imageCredits as Record<string, Credit[]>)[place.slug] || [];
   const schema = { "@context": "https://schema.org", "@graph": [
     { "@type": "TouristAttraction", name: place.title[locale], description: place.description[locale], image: [0, 1, 2].map((index) => `${BASE_URL}${destinationImage(place, index)}`), url: `${BASE_URL}/${locale}/places/${place.slug}`, geo: { "@type": "GeoCoordinates", latitude: place.coordinates.latitude, longitude: place.coordinates.longitude }, touristType: [place.category, "nature", "culture"] },
+    { "@type": "WebPage", name: place.title[locale], description: place.summary[locale], url: `${BASE_URL}/${locale}/places/${place.slug}`, inLanguage: locale, citation: [place.sourceUrl, ...(operatorReview ? [operatorReview.url] : [])], about: { "@type": "TouristAttraction", name: place.title[locale] } },
     { "@type": "FAQPage", mainEntity: editorial.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) },
   ] };
 
@@ -65,6 +75,24 @@ export default function DestinationPage({ params }: { params: { locale: string; 
           <div className={styles.facts}><div><span>{copy.season}</span><strong>{place.season[locale]}</strong></div><div><span>{copy.duration}</span><strong>{place.duration[locale]}</strong></div><div><span>{copy.arrival}</span><strong>{place.arrival[locale]}</strong></div></div>
         </div>
       </header>
+
+      <section className={styles.answerPanel} aria-labelledby="destination-short-answer">
+        <div>
+          <p className={styles.eyebrow}>{copy.answer}</p>
+          <h2 id="destination-short-answer">{place.summary[locale]}</h2>
+          <dl>
+            <div><dt>{copy.applies}</dt><dd>{copy.appliesValue}</dd></div>
+            <div><dt>{copy.season}</dt><dd>{place.season[locale]}</dd></div>
+            <div><dt>{copy.duration}</dt><dd>{place.duration[locale]}</dd></div>
+          </dl>
+        </div>
+        <a href={place.sourceUrl} target="_blank" rel="noreferrer noopener"><span>{copy.official}</span><strong>Switzerland Tourism ↗</strong></a>
+      </section>
+
+      {operatorReview && <section className={styles.experience}>
+        <p className={styles.eyebrow}>{copy.tip}</p>
+        <div><h2>{copy.plan}</h2><p>{operatorReview[locale]}</p><p><a href={operatorReview.url} target="_blank" rel="noreferrer noopener">Oeschinensee ↗</a> · {copy.reviewed}: <time dateTime={operatorReview.date}>{operatorReview.date}</time></p></div>
+      </section>}
 
       <div className={styles.body}>
         <div className={styles.prose}><h2>{copy.why}</h2><p>{place.description[locale]}</p><p>{place.whyVisit[locale]}</p><h2>{copy.highlights}</h2><ul className={styles.highlights}>{place.highlights[locale].map((item) => <li key={item}>↗ {item}</li>)}</ul></div>

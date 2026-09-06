@@ -3,6 +3,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/en/blog/moving-to-zurich-guide",
+        destination: "/en/guides/zurich",
+        permanent: true,
+      },
+      {
         source: "/uk/blog/poshuk-roboty-u-shveytcariyi",
         destination: "/uk/blog/poshuk-roboty-shveytcariya-2026",
         permanent: true,

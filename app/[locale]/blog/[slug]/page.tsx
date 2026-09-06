@@ -16,6 +16,7 @@ import Link from "next/link";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import { getPostImage } from "../../../../lib/editorial";
+import { getUkrainianAuthorityRoute } from "../../../../data/authority-routes";
 import styles from "../../editorial.module.css";
 
 function formatDate(locale: Locale, value: string) {
@@ -209,6 +210,7 @@ export default async function BlogPostPage({
 
   const locale = params.locale;
   const articleCopy = ARTICLE_COPY[locale];
+  const authorityRoute = getUkrainianAuthorityRoute(locale, post.slug);
   const canonicalUrl = `${BASE_URL}/${locale}/blog/${params.slug}`;
   const ogImageUrl = `${BASE_URL}/${locale}/blog/${params.slug}/opengraph-image`;
   const breadcrumbItems = [
@@ -260,9 +262,25 @@ export default async function BlogPostPage({
         }
       : {}),
   };
+  const authorityRouteJsonLd = authorityRoute
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Шлях українця у Швейцарії",
+        itemListOrder: "https://schema.org/ItemListOrderAscending",
+        numberOfItems: authorityRoute.length,
+        itemListElement: authorityRoute.map((step, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: step.title,
+          url: `${BASE_URL}${step.href}`,
+        })),
+      }
+    : null;
   return (
     <main lang={locale} className={styles.page}>
       <JsonLd data={articleJsonLd} />
+      {authorityRouteJsonLd ? <JsonLd data={authorityRouteJsonLd} /> : null}
       <article className={styles.articleShell}>
         <header className={styles.articleHero}>
           <div className={styles.articleIntro}>
@@ -372,6 +390,28 @@ export default async function BlogPostPage({
               ) : null}
             </div>
           </section>
+        ) : null}
+
+        {authorityRoute ? (
+          <nav className={styles.authorityRoute} aria-labelledby="ukrainian-authority-route-title">
+            <div className={styles.authorityRouteHead}>
+              <span className={styles.eyebrow}>Sweezy · перевірений маршрут</span>
+              <h2 id="ukrainian-authority-route-title">Від статусу до життя у Швейцарії</h2>
+              <p>Оберіть свій наступний крок: документи, реєстрація, робота, страхування або підтримка спільноти.</p>
+            </div>
+            <ol>
+              {authorityRoute.map((step, index) => {
+                const current = step.href === `/${locale}/blog/${post.slug}`;
+                return (
+                  <li key={step.key} data-current={current || undefined}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div><strong>{step.title}</strong><p>{step.description}</p></div>
+                    {current ? <em>Ви тут</em> : <Link href={step.href}>Відкрити <span aria-hidden>↗</span></Link>}
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
         ) : null}
 
         <div className={styles.articleLayout}>

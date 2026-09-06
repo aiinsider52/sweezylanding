@@ -361,7 +361,6 @@ export async function generateMetadata({
   const richLocale = rich && (locale === "en" || locale === "uk") ? rich[locale] : null;
   const officeSpotlight = OFFICE_SPOTLIGHTS[canton.slug as keyof typeof OFFICE_SPOTLIGHTS];
   const officeCopy = officeSpotlight?.copy[locale];
-
   const metaTitle = richLocale?.metaTitle ?? officeCopy?.metaTitle ?? copy.title(name);
   const metaDescription = richLocale?.metaDescription ?? officeCopy?.metaDescription ?? copy.description(name, canton.capital);
 
@@ -419,6 +418,18 @@ export default function CantonGuidePage({
   const rich = richData && (locale === "en" || locale === "uk") ? richData[locale] : null;
   const officeSpotlight = OFFICE_SPOTLIGHTS[canton.slug as keyof typeof OFFICE_SPOTLIGHTS];
   const officeCopy = officeSpotlight?.copy[locale];
+  const officeFaq = officeSpotlight
+    ? [
+        {
+          question: locale === "uk" ? "Де реєструвати адресу?" : locale === "de" ? "Wo melde ich den Wohnsitz an?" : "Where do I register my address?",
+          answer: locale === "uk" ? "У Einwohnerkontrolle вашої громади. Міграційний відділ кантону відповідає за міграційні питання та дозволи." : locale === "de" ? "Bei der Einwohnerkontrolle Ihrer Gemeinde. Die kantonale Migrationsstelle bearbeitet ausländerrechtliche und Bewilligungsfragen." : "At your municipality's residents office. The canton migration division handles migration and residence-permit matters.",
+        },
+        {
+          question: locale === "uk" ? "За який регіон відповідає офіс?" : locale === "de" ? "Für welche Region ist die Stelle zuständig?" : "Which region does this office serve?",
+          answer: locale === "uk" ? `Це кантональна служба для ${officeSpotlight.regionName}; офіс розташований у ${officeSpotlight.addressLocality}.` : locale === "de" ? `Die kantonale Stelle ist für ${officeSpotlight.regionName} zuständig und befindet sich in ${officeSpotlight.addressLocality}.` : `This canton authority serves ${officeSpotlight.regionName} and is located in ${officeSpotlight.addressLocality}.`,
+        },
+      ]
+    : [];
 
   /* ── Schema.org ──────────────────────────────────────────────────────────── */
   const placeJsonLd = {
@@ -484,6 +495,26 @@ export default function CantonGuidePage({
       addressCountry: "CH",
     },
     areaServed: { "@type": "AdministrativeArea", name: officeSpotlight.regionName },
+  } : null;
+  const officeGuideJsonLd = officeSpotlight && officeCopy ? {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: officeCopy.metaTitle,
+    description: officeCopy.metaDescription,
+    url: canonicalUrl,
+    inLanguage: locale,
+    dateModified: officeSpotlight.verifiedAt,
+    citation: [officeSpotlight.website],
+    about: { "@type": "GovernmentOffice", name: officeSpotlight.name, url: officeSpotlight.website },
+  } : null;
+  const officeFaqJsonLd = officeSpotlight && !rich ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: officeFaq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
   } : null;
   const cantonImage = getCantonImage(canton.slug);
 
@@ -783,8 +814,7 @@ export default function CantonGuidePage({
           </a>
           <p className="mt-4 text-xs text-white/40">{locale === "uk" ? "Контакти перевірено" : locale === "de" ? "Kontakte geprüft" : "Contact details verified"}: <time dateTime={officeSpotlight.verifiedAt}>{formatVerifiedDate(locale, officeSpotlight.verifiedAt)}</time></p>
           <div className="mt-6 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-2">
-            <div><h3 className="font-semibold text-white">{locale === "uk" ? "Де реєструвати адресу?" : locale === "de" ? "Wo melde ich den Wohnsitz an?" : "Where do I register my address?"}</h3><p className="mt-2 text-sm leading-6 text-white/60">{locale === "uk" ? "У Einwohnerkontrolle вашої громади. Міграційний відділ кантону відповідає за міграційні питання та дозволи." : locale === "de" ? "Bei der Einwohnerkontrolle Ihrer Gemeinde. Die kantonale Abteilung Migration bearbeitet ausländerrechtliche und Bewilligungsfragen." : "At your municipality's residents office. Canton migration division handles migration and residence-permit matters."}</p></div>
-            <div><h3 className="font-semibold text-white">{locale === "uk" ? "За який регіон відповідає офіс?" : locale === "de" ? "Für welche Region ist die Stelle zuständig?" : "Which region does this office serve?"}</h3><p className="mt-2 text-sm leading-6 text-white/60">{locale === "uk" ? `Це кантональна служба для ${officeSpotlight.regionName}; офіс розташований у ${officeSpotlight.addressLocality}.` : locale === "de" ? `Die kantonale Stelle ist für ${officeSpotlight.regionName} zuständig und befindet sich in ${officeSpotlight.addressLocality}.` : `This canton authority serves ${officeSpotlight.regionName} and is located in ${officeSpotlight.addressLocality}.`}</p></div>
+            {officeFaq.map((item) => <div key={item.question}><h3 className="font-semibold text-white">{item.question}</h3><p className="mt-2 text-sm leading-6 text-white/60">{item.answer}</p></div>)}
           </div>
         </section>
       ) : null}
@@ -813,10 +843,10 @@ export default function CantonGuidePage({
               <p>
                 Read the in-depth{" "}
                 <Link
-                  href="/en/blog/moving-to-zurich-guide"
+                  href="/en/guides/zurich"
                   className="text-accent-green transition-colors hover:text-accent-emerald"
                 >
-                  Moving to Zurich Guide
+                  Zurich registration and moving guide
                 </Link>{" "}
                 for district-by-district registration advice, housing tips, transport costs, and
                 first-week priorities.
@@ -883,6 +913,8 @@ export default function CantonGuidePage({
       {faqJsonLd && <JsonLd data={faqJsonLd} />}
       {guideJsonLd && <JsonLd data={guideJsonLd} />}
       {officeJsonLd && <JsonLd data={officeJsonLd} />}
+      {officeGuideJsonLd && <JsonLd data={officeGuideJsonLd} />}
+      {officeFaqJsonLd && <JsonLd data={officeFaqJsonLd} />}
       <article className={styles.guideDetail}>
         <Breadcrumb items={breadcrumbItems} />
         {header}
@@ -937,6 +969,23 @@ export default function CantonGuidePage({
                   ))}
                 </ol>
               </div>
+            </div>
+          </section>
+        ) : null}
+        {officeSpotlight && officeCopy ? (
+          <section className={styles.answerPanel} aria-labelledby="office-short-answer">
+            <div className={styles.answerMain}>
+              <span className={styles.eyebrow}>{locale === "uk" ? "Коротка відповідь" : locale === "de" ? "Kurzantwort" : "Short answer"}</span>
+              <h2 id="office-short-answer">{officeCopy.body}</h2>
+              <dl className={styles.answerFacts}>
+                <div><dt>{locale === "uk" ? "Застосовується до" : locale === "de" ? "Gilt für" : "Applies to"}</dt><dd>{officeSpotlight.regionName}</dd></div>
+                <div><dt>{locale === "uk" ? "Відповідальний орган" : locale === "de" ? "Zuständige Stelle" : "Responsible office"}</dt><dd>{officeSpotlight.name}</dd></div>
+                <div><dt>{locale === "uk" ? "Перевірено" : locale === "de" ? "Geprüft" : "Last reviewed"}</dt><dd><time dateTime={officeSpotlight.verifiedAt}>{formatVerifiedDate(locale, officeSpotlight.verifiedAt)}</time></dd></div>
+              </dl>
+            </div>
+            <div className={styles.answerEvidence}>
+              <span className={styles.eyebrow}>{locale === "uk" ? "Офіційне джерело" : locale === "de" ? "Offizielle Quelle" : "Official source"}</span>
+              <ol className={styles.sourceList}><li><a href={officeSpotlight.website} target="_blank" rel="noreferrer noopener">{officeSpotlight.name} <span aria-hidden>↗</span></a></li></ol>
             </div>
           </section>
         ) : null}

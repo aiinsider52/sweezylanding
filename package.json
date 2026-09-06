@@ -7,6 +7,7 @@
     "build": "next build",
     "seo:ai-benchmark": "node scripts/ai-citation-benchmark.mjs",
     "seo:ai-benchmark:csv": "node scripts/ai-citation-benchmark.mjs --csv",
+    "seo:ai-benchmark:sheet": "node scripts/ai-citation-benchmark.mjs --output=reports/ai-citation-2026-09-04.csv",
     "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run",
     "indexnow:submit": "node scripts/indexnow-submit.mjs",
     "start": "next start",

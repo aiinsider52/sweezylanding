@@ -41,6 +41,7 @@ export type BlogPost = {
 const LOCALES: Locale[] = ["en", "uk", "de"];
 
 const REDIRECTED_POSTS: Partial<Record<Locale, ReadonlySet<string>>> = {
+  en: new Set(["moving-to-zurich-guide"]),
   uk: new Set(["poshuk-roboty-u-shveytcariyi", "status-s-shveytcariya-2026"]),
   de: new Set(["krankenversicherung-schweiz-expats"]),
 };
