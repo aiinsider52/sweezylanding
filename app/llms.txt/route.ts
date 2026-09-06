@@ -18,6 +18,9 @@ const content = `# Sweezy
 - [Swiss canton guides in Ukrainian](${BASE_URL}/uk/guides)
 - [Jobs in Switzerland](${BASE_URL}/uk/jobs)
 - [Places to visit in Switzerland](${BASE_URL}/uk/places)
+- [Oeschinen Lake practical guide](${BASE_URL}/uk/places/oeschinen-lake)
+- [Rhine Falls practical guide](${BASE_URL}/uk/places/rhine-falls)
+- [Mount Rigi practical guide](${BASE_URL}/uk/places/mount-rigi)
 - [Plan a trip in Switzerland](${BASE_URL}/uk/planning)
 - [Sweezy community on Telegram and Facebook](${BASE_URL}/uk/community)
 
@@ -29,6 +32,8 @@ const content = `# Sweezy
 - [Swiss tax return 2026](${BASE_URL}/en/blog/swiss-tax-return-2026)
 - [Swiss tax system for expats](${BASE_URL}/en/blog/swiss-tax-system-expats)
 - [Aletsch Glacier travel guide](${BASE_URL}/en/places/aletsch-glacier)
+- [Ruinaulta Rhine Gorge travel guide](${BASE_URL}/en/places/ruinaulta)
+- [Creux du Van travel guide](${BASE_URL}/en/places/creux-du-van)
 - [Switzerland travel planning guide](${BASE_URL}/en/planning)
 
 ## Editorial information

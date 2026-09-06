@@ -6,7 +6,34 @@ import re
 from playwright.sync_api import sync_playwright
 
 
-BASE = "http://127.0.0.1:3016"
+BASE = "http://127.0.0.1:3017"
+PRIORITY_DESTINATIONS = {
+    "oeschinen-lake": {
+        "en": "Choose the right level",
+        "uk": "Оберіть правильний рівень",
+        "de": "Das passende Niveau wählen",
+    },
+    "rhine-falls": {
+        "en": "Two banks, two perspectives",
+        "uk": "Два береги — два ракурси",
+        "de": "Zwei Ufer, zwei Perspektiven",
+    },
+    "ruinaulta": {
+        "en": "Read the gorge from below",
+        "uk": "Побачте ущелину знизу",
+        "de": "Die Schlucht von unten lesen",
+    },
+    "mount-rigi": {
+        "en": "Choose the access corridor",
+        "uk": "Оберіть напрям підйому",
+        "de": "Den Zugang wählen",
+    },
+    "creux-du-van": {
+        "en": "Understand the amphitheatre",
+        "uk": "Зрозумійте скельний амфітеатр",
+        "de": "Den Felskessel verstehen",
+    },
+}
 LOCALES = {
     "en": {
         "aletsch": ["In-depth guide", "Choose your version of the day", "Sources and review", "Plan the whole trip"],
@@ -73,6 +100,31 @@ with sync_playwright() as playwright:
                 if width == 1440:
                     totals[path] = len(re.findall(r"\b[\wÀ-žА-Яа-яІіЇїЄєҐґ'-]+\b", body))
 
+            for slug, labels in PRIORITY_DESTINATIONS.items():
+                path = f"/{locale}/places/{slug}"
+                response = page.goto(BASE + path, wait_until="load")
+                page.wait_for_timeout(150)
+                assert response and response.ok, (path, response.status if response else None)
+
+                body = page.locator("main").inner_text()
+                assert labels[locale].casefold() in body.casefold(), (path, labels[locale])
+                assert "2026-09-07" in body, (path, "missing review date")
+                assert page.locator('section[aria-labelledby="destination-depth-title"]').count() == 1, path
+                assert page.locator('section[aria-labelledby="destination-sources-title"] a[href^="https://"]').count() >= 2, path
+                assert page.locator(f'a[href="/{locale}/planning"]').count() >= 1, path
+
+                overflow = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+                assert overflow <= 1, (path, width, overflow)
+                assert page.locator('link[rel="canonical"]').get_attribute("href") == f"https://www.sweezy.world{path}"
+
+                types = schema_types(schemas(page))
+                assert {"WebPage", "FAQPage", "TouristAttraction"}.issubset(types), (path, types)
+
+                if width == 1440:
+                    words = len(re.findall(r"\b[\wÀ-žА-Яа-яІіЇїЄєҐґ'-]+\b", body))
+                    assert words >= 700, (path, words)
+                    totals[path] = words
+
         assert not console_errors, console_errors
         page.close()
 
@@ -82,6 +134,11 @@ with sync_playwright() as playwright:
     page.locator('section[aria-labelledby="destination-depth-title"]').screenshot(path="/private/tmp/sweezy-aletsch-guide-section.png")
     page.goto(BASE + "/en/planning", wait_until="load")
     page.screenshot(path="/private/tmp/sweezy-planning-hub.png", full_page=False)
+    for slug in PRIORITY_DESTINATIONS:
+        page.goto(BASE + f"/en/places/{slug}", wait_until="load")
+        page.locator('section[aria-labelledby="destination-depth-title"]').screenshot(
+            path=f"/private/tmp/sweezy-{slug}-depth.png"
+        )
 
     sitemap = page.request.get(BASE + "/sitemap.xml")
     assert sitemap.ok
@@ -92,6 +149,14 @@ with sync_playwright() as playwright:
     llms = page.request.get(BASE + "/llms.txt")
     assert llms.ok
     assert "/en/places/aletsch-glacier" in llms.text()
+    for path in [
+        "/uk/places/oeschinen-lake",
+        "/uk/places/rhine-falls",
+        "/uk/places/mount-rigi",
+        "/en/places/ruinaulta",
+        "/en/places/creux-du-van",
+    ]:
+        assert path in llms.text(), path
     assert "/en/planning" in llms.text()
     assert "/uk/planning" in llms.text()
 

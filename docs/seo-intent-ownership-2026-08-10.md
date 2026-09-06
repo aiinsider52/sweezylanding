@@ -13,6 +13,11 @@ One query family has one canonical owner. Supporting pages answer narrower quest
 | Ukrainian Sweezy community | `/uk/community` | Telegram and Facebook groups | final step of Ukrainian route; metadata held during observation window |
 | Places | `/{locale}/places` | category, region and destination hubs | indexable hierarchy added |
 | Aletsch Glacier travel | `/{locale}/places/aletsch-glacier` | Aletsch region and mountain category hubs | unique long-form destination owner with dated primary sources |
+| Oeschinen Lake travel | `/{locale}/places/oeschinen-lake` | Bernese Oberland and lake category hubs | access-level, live-operation and route-choice owner |
+| Rhine Falls travel | `/{locale}/places/rhine-falls` | Schaffhausen and nature category hubs | bank choice, access and boat-season owner |
+| Ruinaulta travel | `/{locale}/places/ruinaulta` | Graubünden and nature category hubs | rail, gorge-floor and viewpoint itinerary owner |
+| Mount Rigi travel | `/{locale}/places/mount-rigi` | Central Switzerland and mountain category hubs | access-corridor and transport-loop owner |
+| Creux du Van travel | `/{locale}/places/creux-du-van` | Neuchâtel and nature category hubs | full-hike versus upper-access owner |
 | Switzerland trip planning | `/{locale}/planning` | destination, category and region pages | practical transport, weather, maps and backup-route hub |
 
 Review rule: inspect GSC every 14 days. If two URLs rank for same query family, compare usefulness, backlinks and conversions; consolidate weaker URL instead of publishing third page.
