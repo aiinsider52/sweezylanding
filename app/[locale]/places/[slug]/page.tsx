@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../../lib/alternates";
 import { buildDestinationEditorial } from "../../../../data/destination-editorial";
+import { getDestinationDepth } from "../../../../data/destination-depth";
 import { destinationImage, getTravelDestination, travelDestinations } from "../../../../data/travel-destinations";
 import imageCredits from "../../../../data/destination-image-credits.json";
 import { isLocale } from "../../../../lib/blog";
@@ -24,6 +25,12 @@ const COPY: Record<Locale, { home: string; places: string; why: string; highligh
   en: { home: "Home", places: "Places", why: "Why go", highlights: "What to see", plan: "Plan your visit", season: "Best time", duration: "Time needed", arrival: "Getting there", tip: "Practical tip", gallery: "See the landscape", source: "Destination facts reviewed using official Switzerland Tourism information.", related: "Continue exploring", map: "Open in Maps", answer: "Quick answer", applies: "Useful for", appliesValue: "Independent day-trip and itinerary planning", reviewed: "Last reviewed", official: "Official destination source" },
   uk: { home: "Головна", places: "Місця", why: "Чому варто поїхати", highlights: "Що подивитися", plan: "Сплануйте поїздку", season: "Коли їхати", duration: "Скільки часу", arrival: "Як дістатися", tip: "Практична порада", gallery: "Подивіться краєвид", source: "Факти про місце перевірено за офіційними матеріалами Switzerland Tourism.", related: "Продовжити подорож", map: "Відкрити на мапі", answer: "Коротка відповідь", applies: "Для кого", appliesValue: "Для самостійної одноденної поїздки або маршруту", reviewed: "Перевірено", official: "Офіційне джерело про місце" },
   de: { home: "Startseite", places: "Orte", why: "Warum hinfahren", highlights: "Was ansehen", plan: "Besuch planen", season: "Beste Zeit", duration: "Zeitbedarf", arrival: "Anreise", tip: "Praktischer Tipp", gallery: "Landschaft ansehen", source: "Fakten mit offiziellen Informationen von Schweiz Tourismus geprüft.", related: "Weiter entdecken", map: "In Maps öffnen", answer: "Kurzantwort", applies: "Geeignet für", appliesValue: "Selbstständige Tagesausflüge und Reiseplanung", reviewed: "Geprüft", official: "Offizielle Reisezielquelle" },
+};
+
+const DEPTH_COPY: Record<Locale, { guide: string; choose: string; bestFor: string; route: string; watch: string; checklist: string; sources: string; planning: string; planningBody: string; planningCta: string }> = {
+  en: { guide: "In-depth guide", choose: "Choose your version of the day", bestFor: "Best for", route: "Plan", watch: "Check first", checklist: "Before leaving", sources: "Sources and review", planning: "Plan the whole trip", planningBody: "Transport, weather, maps and a backup route — one practical checklist for travelling around Switzerland.", planningCta: "Open travel planner" },
+  uk: { guide: "Детальний путівник", choose: "Оберіть свій формат дня", bestFor: "Для кого", route: "План", watch: "Спочатку перевірте", checklist: "Перед виїздом", sources: "Джерела й перевірка", planning: "Сплануйте всю поїздку", planningBody: "Транспорт, погода, карти й запасний маршрут — один практичний чекліст для подорожей Швейцарією.", planningCta: "Відкрити планувальник" },
+  de: { guide: "Ausführlicher Guide", choose: "Passenden Tagesplan wählen", bestFor: "Geeignet für", route: "Plan", watch: "Zuerst prüfen", checklist: "Vor der Abfahrt", sources: "Quellen und Prüfung", planning: "Ganze Reise planen", planningBody: "Verkehr, Wetter, Karten und Ersatzroute — eine praktische Checkliste für Reisen durch die Schweiz.", planningCta: "Reiseplaner öffnen" },
 };
 
 type Credit = { title: string; pageUrl: string; creator: string; license: string; licenseUrl: string };
@@ -53,14 +60,19 @@ export default function DestinationPage({ params }: { params: { locale: string; 
   if (!place) notFound();
   const locale = params.locale;
   const copy = COPY[locale];
+  const depthCopy = DEPTH_COPY[locale];
   const operatorReview = place.slug === "oeschinen-lake" ? OESCHINEN_REVIEW : null;
   const editorial = buildDestinationEditorial(place, locale);
+  const depth = getDestinationDepth(place.slug);
+  const faq = depth ? [...depth.faq.map((item) => ({ question: item.question[locale], answer: item.answer[locale] })), ...editorial.faq] : editorial.faq;
+  const citations = Array.from(new Set([place.sourceUrl, ...(operatorReview ? [operatorReview.url] : []), ...(depth ? depth.sources.map((source) => source.url) : [])]));
+  const additionalSources = depth?.sources.filter((source) => source.url !== place.sourceUrl) ?? [];
   const related = travelDestinations.filter((item) => item.slug !== place.slug && (item.category === place.category || item.region[locale].split(" · ")[0] === place.region[locale].split(" · ")[0])).slice(0, 3);
   const credits = (imageCredits as Record<string, Credit[]>)[place.slug] || [];
   const schema = { "@context": "https://schema.org", "@graph": [
     { "@type": "TouristAttraction", name: place.title[locale], description: place.description[locale], image: [0, 1, 2].map((index) => `${BASE_URL}${destinationImage(place, index)}`), url: `${BASE_URL}/${locale}/places/${place.slug}`, geo: { "@type": "GeoCoordinates", latitude: place.coordinates.latitude, longitude: place.coordinates.longitude }, touristType: [place.category, "nature", "culture"] },
-    { "@type": "WebPage", name: place.title[locale], description: place.summary[locale], url: `${BASE_URL}/${locale}/places/${place.slug}`, inLanguage: locale, citation: [place.sourceUrl, ...(operatorReview ? [operatorReview.url] : [])], about: { "@type": "TouristAttraction", name: place.title[locale] } },
-    { "@type": "FAQPage", mainEntity: editorial.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) },
+    { "@type": "WebPage", name: place.title[locale], description: place.summary[locale], url: `${BASE_URL}/${locale}/places/${place.slug}`, inLanguage: locale, ...(depth ? { dateModified: depth.reviewedAt } : {}), citation: citations, about: { "@type": "TouristAttraction", name: place.title[locale] } },
+    { "@type": "FAQPage", mainEntity: faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) },
   ] };
 
   return <main lang={locale} className={styles.page}>
@@ -100,6 +112,22 @@ export default function DestinationPage({ params }: { params: { locale: string; 
       </div>
 
       <section className={styles.experience}><p className={styles.eyebrow}>{place.region[locale]}</p><div><h2>{editorial.labels.experience}</h2><p>{editorial.experience}</p></div></section>
+
+      {depth ? <section className={styles.depthGuide} aria-labelledby="destination-depth-title">
+        <div className={styles.depthIntro}>
+          <p className={styles.eyebrow}>{depthCopy.guide}</p>
+          <h2 id="destination-depth-title">{place.title[locale]}</h2>
+          <p>{depth.lead[locale]}</p>
+        </div>
+        <div className={styles.depthChapters}>{depth.sections.map((section, index) => <article key={section.title[locale]}>
+          <span>0{index + 1}</span><div><h3>{section.title[locale]}</h3>{section.paragraphs[locale].map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+        </article>)}</div>
+      </section> : null}
+
+      {depth ? <section className={styles.tripOptions} aria-labelledby="trip-options-title">
+        <div className={styles.sectionLead}><p className={styles.eyebrow}>01 — 03</p><h2 id="trip-options-title">{depthCopy.choose}</h2></div>
+        <div className={styles.optionGrid}>{depth.options.map((option, index) => <article key={option.title[locale]}><span>0{index + 1}</span><h3>{option.title[locale]}</h3><dl><div><dt>{depthCopy.bestFor}</dt><dd>{option.bestFor[locale]}</dd></div><div><dt>{depthCopy.route}</dt><dd>{option.plan[locale]}</dd></div><div><dt>{depthCopy.watch}</dt><dd>{option.watch[locale]}</dd></div></dl></article>)}</div>
+      </section> : null}
       <DestinationLocator locale={locale} title={place.title[locale]} region={place.region[locale]} latitude={place.coordinates.latitude} longitude={place.coordinates.longitude} />
 
       <section className={styles.routeSection}>
@@ -114,9 +142,13 @@ export default function DestinationPage({ params }: { params: { locale: string; 
         <div className={styles.prepareGrid}>{editorial.preparation.map((item, index) => <article key={item.title}><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
       </section>
 
-      <section className={styles.faq}><div className={styles.sectionLead}><p className={styles.eyebrow}>FAQ</p><h2>{editorial.labels.faq}</h2></div><div>{editorial.faq.map((item) => <details key={item.question}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}</div></section>
+      {depth ? <section className={styles.depthChecklist} aria-labelledby="depth-checklist-title"><div><p className={styles.eyebrow}>{depthCopy.checklist}</p><h2 id="depth-checklist-title">{depthCopy.checklist}</h2></div><ol>{depth.checklist[locale].map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}</ol></section> : null}
 
-      <p className={styles.source}>{copy.source} <a href={place.sourceUrl} target="_blank" rel="noreferrer noopener">Switzerland Tourism ↗</a>{credits.length ? <span className={styles.credits}>Images: {credits.map((credit, index) => <a key={credit.pageUrl} href={credit.pageUrl} target="_blank" rel="noreferrer noopener">{credit.creator} · {credit.license}{index < credits.length - 1 ? ", " : ""}</a>)}</span> : null}</p>
+      <section className={styles.faq}><div className={styles.sectionLead}><p className={styles.eyebrow}>FAQ</p><h2>{editorial.labels.faq}</h2></div><div>{faq.map((item) => <details key={item.question}><summary>{item.question}<span>+</span></summary><p>{item.answer}</p></details>)}</div></section>
+
+      <aside className={styles.planningBridge}><div><p className={styles.eyebrow}>{depthCopy.planning}</p><h2>{depthCopy.planning}</h2><p>{depthCopy.planningBody}</p></div><Link href={`/${locale}/planning`}>{depthCopy.planningCta} ↗</Link></aside>
+
+      <div className={styles.source}><p>{depth ? `${depthCopy.sources}: ${depth.reviewedAt}.` : copy.source}</p><a href={place.sourceUrl} target="_blank" rel="noreferrer noopener">Switzerland Tourism ↗</a>{additionalSources.map((source) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer noopener">{source.name} ↗</a>)}{credits.length ? <span className={styles.credits}>Images: {credits.map((credit, index) => <a key={credit.pageUrl} href={credit.pageUrl} target="_blank" rel="noreferrer noopener">{credit.creator} · {credit.license}{index < credits.length - 1 ? ", " : ""}</a>)}</span> : null}</div>
       {related.length ? <section className={styles.related}><h2>{copy.related}</h2><div className={styles.relatedGrid}>{related.map((item) => <Link key={item.slug} href={`/${locale}/places/${item.slug}`} className={styles.relatedCard}><p className={styles.eyebrow}>{item.region[locale]}</p><h3>{item.title[locale]}</h3><span>{copy.related} ↗</span></Link>)}</div></section> : null}
     </article>
   </main>;

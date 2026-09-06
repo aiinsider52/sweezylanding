@@ -12,5 +12,7 @@ One query family has one canonical owner. Supporting pages answer narrower quest
 | Ukrainian address registration | `/uk/blog/yak-zareyestruvatysya-v-shveytcariyi` | local canton offices; separate SEM protection procedure | linked from homepage route and Status S, work and insurance owners |
 | Ukrainian Sweezy community | `/uk/community` | Telegram and Facebook groups | final step of Ukrainian route; metadata held during observation window |
 | Places | `/{locale}/places` | category, region and destination hubs | indexable hierarchy added |
+| Aletsch Glacier travel | `/{locale}/places/aletsch-glacier` | Aletsch region and mountain category hubs | unique long-form destination owner with dated primary sources |
+| Switzerland trip planning | `/{locale}/planning` | destination, category and region pages | practical transport, weather, maps and backup-route hub |
 
 Review rule: inspect GSC every 14 days. If two URLs rank for same query family, compare usefulness, backlinks and conversions; consolidate weaker URL instead of publishing third page.
