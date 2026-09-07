@@ -5,6 +5,7 @@ import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 import { Breadcrumb } from "../../components/Breadcrumb";
+import { CorporateHero } from "../../components/CorporateHero";
 import styles from "./planning.module.css";
 
 const COPY: Record<Locale, {
@@ -111,6 +112,12 @@ const FEATURED_COPY = {
   de: { eyebrow: "Ort + Kanton", title: "Landschaft und Alltag zusammen planen", place: "Ortsguide öffnen", canton: "Kantonsguide öffnen" },
 } satisfies Record<Locale, { eyebrow: string; title: string; place: string; canton: string }>;
 
+const HERO_UI = {
+  en: { code: "PLANNING / 01", panel: "Trip control", signals: [["Transport", "SBB timetable"], ["Weather", "MeteoSwiss"], ["Route", "Official maps"]] },
+  uk: { code: "ПЛАНУВАННЯ / 01", panel: "Контроль подорожі", signals: [["Транспорт", "Розклад SBB"], ["Погода", "MeteoSwiss"], ["Маршрут", "Офіційні карти"]] },
+  de: { code: "PLANUNG / 01", panel: "Reisecheck", signals: [["Verkehr", "SBB-Fahrplan"], ["Wetter", "MeteoSchweiz"], ["Route", "Offizielle Karten"]] },
+} satisfies Record<Locale, { code: string; panel: string; signals: [string, string][] }>;
+
 export function generateStaticParams() { return ["en", "uk", "de"].map((locale) => ({ locale })); }
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -124,6 +131,7 @@ export default function PlanningPage({ params }: { params: { locale: string } })
   const locale = params.locale;
   const copy = COPY[locale];
   const featuredCopy = FEATURED_COPY[locale];
+  const heroUi = HERO_UI[locale];
   const schema = { "@context": "https://schema.org", "@graph": [
     { "@type": "WebPage", name: copy.title, description: copy.description, url: `${BASE_URL}/${locale}/planning`, inLanguage: locale, dateModified: "2026-09-07", citation: TOOLS.map((tool) => tool.url) },
     { "@type": "ItemList", name: copy.toolsTitle, numberOfItems: TOOLS.length, itemListElement: TOOLS.map((tool, index) => ({ "@type": "ListItem", position: index + 1, name: tool.name, url: tool.url })) },
@@ -133,7 +141,15 @@ export default function PlanningPage({ params }: { params: { locale: string } })
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
     <article className={styles.shell}>
       <Breadcrumb items={[{ name: locale === "uk" ? "Головна" : locale === "de" ? "Start" : "Home", url: `/${locale}` }, { name: copy.eyebrow, url: `${BASE_URL}/${locale}/planning` }]} />
-      <header className={styles.hero}><p>{copy.eyebrow}</p><h1>{copy.title}</h1><span>{copy.description}</span><Link href={`/${locale}/places`}>{copy.places} ↗</Link></header>
+      <CorporateHero
+        eyebrow={copy.eyebrow}
+        title={copy.title}
+        description={copy.description}
+        sectionCode={heroUi.code}
+        panelLabel={heroUi.panel}
+        signals={heroUi.signals.map(([label, value]) => ({ label, value }))}
+        primaryAction={{ label: copy.places, href: `/${locale}/places` }}
+      />
       <section className={styles.start}><div><p>{copy.eyebrow}</p><h2>{copy.start}</h2><span>{copy.startBody}</span></div><div className={styles.modes}>{copy.modes.map((mode, index) => <Link key={mode.title} href={mode.href}><small>0{index + 1}</small><h3>{mode.title}</h3><p>{mode.body}</p><b>↗</b></Link>)}</div></section>
       <section className={styles.featured}><div><p>{featuredCopy.eyebrow}</p><h2>{featuredCopy.title}</h2></div><div className={styles.featuredGrid}>{FEATURED_REGIONS.map((item, index) => <article key={item.place}><small>0{index + 1}</small><h3>{item.title[locale]}</h3><p>{item.body[locale]}</p><div><Link href={`/${locale}/places/${item.place}`}>{featuredCopy.place} ↗</Link><Link href={`/${locale}/guides/${item.canton}`}>{featuredCopy.canton} ↗</Link></div></article>)}</div></section>
       <section className={styles.process}><div><p>{copy.eyebrow}</p><h2>{copy.processTitle}</h2></div><ol>{copy.process.map((step, index) => <li key={step.title}><span>0{index + 1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol></section>

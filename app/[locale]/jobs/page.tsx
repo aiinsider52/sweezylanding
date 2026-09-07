@@ -5,6 +5,8 @@ import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 import { jobs } from "../../../data/jobs";
+import { Breadcrumb } from "../../components/Breadcrumb";
+import { CorporateHero } from "../../components/CorporateHero";
 import styles from "./jobs.module.css";
 
 const COPY: Record<Locale, any> = {
@@ -13,6 +15,39 @@ const COPY: Record<Locale, any> = {
   de:{title:"Jobs in der Schweiz, leichter zu finden",accent:"leichter",description:"Geprüfte Stellen für internationale Talente, Neuankömmlinge und Ukrainer in der Schweiz. Arbeitgeber können Stellen zur Prüfung einreichen.",eyebrow:"SWEEZY JOBS · SCHWEIZ",post:"Stelle veröffentlichen",guide:"Ratgeber zur Jobsuche",route:["Arbeitgeber reicht ein","Sweezy prüft","Talent bewirbt sich"],section:"Arbeit, die zum Leben passt",sectionBody:"Ort, Pensum, Sprache und Bewilligungsanforderungen sind vor der Bewerbung klar.",categories:[["Lokale Jobs","Gastronomie, Handel und Services"],["Office & Tech","Operations, Product und Support"],["Facharbeit","Bau, Logistik und Pflege"],["Flexibel","Teilzeit, hybrid und remote"]],openTitle:"Jobbörse startet",openBody:"Erste Arbeitgeber-Einreichungen werden geprüft. Keine gescrapten, abgelaufenen oder anonymen Anzeigen — nur von Sweezy geprüfte Stellen.",empty:"Noch keine geprüften Stellen veröffentlicht.",seo:"Jobs in der Schweiz für internationale Talente und Ukrainer. Stellen finden oder Job bei Sweezy einreichen."}
 };
 const guideHref:Record<Locale,string>={en:"/en/blog/how-to-find-job-switzerland-foreigner",uk:"/uk/blog/poshuk-roboty-shveytcariya-2026",de:"/de/guides"};
+const HERO_UI:Record<Locale,{code:string;panel:string;labels:string[]}>= {
+  en:{code:"WORK / 02",panel:"Verified vacancy flow",labels:["Submit","Review","Match"]},
+  uk:{code:"РОБОТА / 02",panel:"Перевірка вакансії",labels:["Подання","Перевірка","Відгук"]},
+  de:{code:"ARBEIT / 02",panel:"Geprüfter Stellenweg",labels:["Eingang","Prüfung","Kontakt"]},
+};
 export function generateStaticParams(){return [{locale:"en"},{locale:"uk"},{locale:"de"}]}
 export async function generateMetadata({params}:{params:{locale:string}}):Promise<Metadata>{if(!isLocale(params.locale))return{};const c=COPY[params.locale];return{title:c.title,description:c.seo,keywords:params.locale==="uk"?["вакансії у Швейцарії","робота у Швейцарії для українців","знайти роботу у Швейцарії","вакансії Швейцарія"]:["jobs in Switzerland","jobs Switzerland expats","Swiss jobs","post a job Switzerland"],alternates:buildLocaleAlternates(params.locale,"/jobs"),openGraph:{title:c.title,description:c.seo,url:`${BASE_URL}/${params.locale}/jobs`,type:"website"}}}
-export default function JobsPage({params}:{params:{locale:string}}){if(!isLocale(params.locale))notFound();const locale=params.locale;const c=COPY[locale];const schema={"@context":"https://schema.org","@type":"CollectionPage",name:c.title,description:c.seo,url:`${BASE_URL}/${locale}/jobs`,mainEntity:{"@type":"ItemList",numberOfItems:jobs.length,itemListElement:[]}};return <main lang={locale} className={styles.page}><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/><div className={styles.shell}><section className={styles.hero}><div className={styles.heroCopy}><div><p className={styles.eyebrow}>{c.eyebrow}</p><h1>{c.title.replace(c.accent,"")}<em>{c.accent}</em></h1><p>{c.description}</p><div className={styles.heroActions}><Link className={styles.primary} href={`/${locale}/jobs/post`}>{c.post}<span aria-hidden>→</span></Link><Link className={styles.secondary} href={guideHref[locale]}>{c.guide}<span aria-hidden>↗</span></Link></div></div><p className={styles.eyebrow}>VERIFIED · LOCAL · HUMAN REVIEW</p></div><div className={styles.route} aria-label={c.route.join(", ")}><span className={styles.routeNode}>01</span><span className={styles.routeNode}>02</span><span className={styles.routeNode}>03</span><div className={styles.routeLabel}><span className={styles.eyebrow}>START</span><strong>{c.route[0]}</strong></div><div className={styles.routeLabel}><span className={styles.eyebrow}>MATCH</span><strong>{c.route[2]}</strong></div></div></section><header className={styles.sectionHead}><div><p className={styles.eyebrow}>SWISS WORK MAP</p><h2>{c.section}</h2></div><p>{c.sectionBody}</p></header><div className={styles.categories}>{c.categories.map((x:string[],i:number)=><article className={styles.category} key={x[0]}><span className={styles.eyebrow}>0{i+1}</span><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div><section className={styles.empty}><div><p className={styles.eyebrow}>{c.empty}</p><h3>{c.openTitle}</h3><p>{c.openBody}</p></div><Link className={styles.primary} href={`/${locale}/jobs/post`}>{c.post}<span aria-hidden>→</span></Link></section></div></main>}
+export default function JobsPage({params}:{params:{locale:string}}){
+  if(!isLocale(params.locale))notFound();
+  const locale=params.locale;
+  const c=COPY[locale];
+  const heroUi=HERO_UI[locale];
+  const schema={"@context":"https://schema.org","@type":"CollectionPage",name:c.title,description:c.seo,url:`${BASE_URL}/${locale}/jobs`,mainEntity:{"@type":"ItemList",numberOfItems:jobs.length,itemListElement:[]}};
+  return <main lang={locale} className={styles.page}>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/>
+    <div className={styles.shell}>
+      <Breadcrumb items={[
+        {name:locale==="uk"?"Головна":locale==="de"?"Start":"Home",url:`/${locale}`},
+        {name:c.eyebrow,url:`${BASE_URL}/${locale}/jobs`},
+      ]}/>
+      <CorporateHero
+        eyebrow={c.eyebrow}
+        title={c.title}
+        description={c.description}
+        sectionCode={heroUi.code}
+        panelLabel={heroUi.panel}
+        signals={c.route.map((value:string,index:number)=>({label:heroUi.labels[index],value}))}
+        primaryAction={{label:c.post,href:`/${locale}/jobs/post`}}
+        secondaryAction={{label:c.guide,href:guideHref[locale]}}
+      />
+      <header className={styles.sectionHead}><div><p className={styles.eyebrow}>SWISS WORK MAP</p><h2>{c.section}</h2></div><p>{c.sectionBody}</p></header>
+      <div className={styles.categories}>{c.categories.map((x:string[],i:number)=><article className={styles.category} key={x[0]}><span className={styles.eyebrow}>0{i+1}</span><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div>
+      <section className={styles.empty}><div><p className={styles.eyebrow}>{c.empty}</p><h3>{c.openTitle}</h3><p>{c.openBody}</p></div><Link className={styles.primary} href={`/${locale}/jobs/post`}>{c.post}<span aria-hidden>→</span></Link></section>
+    </div>
+  </main>
+}

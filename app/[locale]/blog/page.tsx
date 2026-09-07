@@ -6,6 +6,8 @@ import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { getPostsByLocale, isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 import { getPostImage } from "../../../lib/editorial";
+import { Breadcrumb } from "../../components/Breadcrumb";
+import { CorporateHero } from "../../components/CorporateHero";
 import styles from "../editorial.module.css";
 
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
@@ -108,6 +110,12 @@ const UK_FEATURED = [
   },
 ] as const;
 
+const HERO_UI = {
+  en: { code: "GUIDES / 04", panel: "Sweezy knowledge desk", count: "Published guides", focus: "Relocation & permits", current: "Reviewed guidance" },
+  uk: { code: "ГІДИ / 04", panel: "База знань Sweezy", count: "Опубліковано", focus: "Статус S і переїзд", current: "Перевірені матеріали" },
+  de: { code: "RATGEBER / 04", panel: "Sweezy Wissensbasis", count: "Veröffentlichte Guides", focus: "Umzug & Bewilligung", current: "Geprüfte Orientierung" },
+} satisfies Record<Locale, { code: string; panel: string; count: string; focus: string; current: string }>;
+
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "uk" }, { locale: "de" }];
 }
@@ -159,28 +167,34 @@ export default async function BlogIndexPage({
 
   const locale = params.locale;
   const copy = COPY[locale];
+  const heroUi = HERO_UI[locale];
   const posts = await getPostsByLocale(locale);
   const [leadPost, ...remainingPosts] = posts;
 
   return (
     <main lang={locale} className={styles.page}>
       <div className={styles.shell}>
-        <div className={styles.hero}>
-          <div>
-            <p className={styles.eyebrow}>{copy.eyebrow}</p>
-            <h1 className={styles.heroTitle}>{copy.h1}</h1>
-          </div>
-          <div className={styles.heroAside}>
-            <div className={styles.heroCount}>
-              {posts.length} <span>{copy.articles}</span>
-            </div>
-            <p>{copy.description}</p>
-          </div>
-        </div>
+        <Breadcrumb items={[
+          { name: locale === "uk" ? "Головна" : locale === "de" ? "Start" : "Home", url: `/${locale}` },
+          { name: copy.eyebrow, url: `${BASE_URL}/${locale}/blog` },
+        ]} />
+        <CorporateHero
+          eyebrow={copy.eyebrow}
+          title={copy.h1}
+          description={copy.description}
+          sectionCode={heroUi.code}
+          panelLabel={heroUi.panel}
+          signals={[
+            { label: heroUi.count, value: String(posts.length) },
+            { label: heroUi.focus, value: copy.articles },
+            { label: heroUi.current, value: "2026" },
+          ]}
+          primaryAction={{ label: copy.latest, href: "#latest" }}
+        />
 
         {locale === "uk" ? (
           <section aria-labelledby="ukrainian-start-title">
-            <div className={styles.sectionHead}>
+            <div className={styles.sectionHead} id="latest">
               <h2 id="ukrainian-start-title">Почніть звідси</h2>
               <span className={styles.eyebrow}>Перевірено · липень 2026</span>
             </div>
@@ -205,7 +219,7 @@ export default async function BlogIndexPage({
 
         {leadPost ? (
           <>
-            <div className={styles.sectionHead}>
+            <div className={styles.sectionHead} id={locale === "uk" ? undefined : "latest"}>
               <h2>{copy.latest}</h2>
               <span className={styles.eyebrow}>01</span>
             </div>

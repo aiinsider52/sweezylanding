@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 import { FACEBOOK_COMMUNITY_URL, TELEGRAM_URL } from "../../../lib/links";
+import { Breadcrumb } from "../../components/Breadcrumb";
+import { CorporateHero } from "../../components/CorporateHero";
 import { JsonLd } from "../../components/seo/JsonLd";
+import styles from "./community.module.css";
 
 const COPY: Record<Locale, {
   title: string; description: string; eyebrow: string; intro: string;
@@ -52,6 +54,12 @@ const COPY: Record<Locale, {
   },
 };
 
+const HERO_UI = {
+  en: { code: "COMMUNITY / 03", panel: "Official Sweezy spaces", join: "Open community", signals: [["Telegram", "Fast updates"], ["Facebook", "Shared experience"], ["Access", "Free to join"]] },
+  uk: { code: "СПІЛЬНОТА / 03", panel: "Офіційні простори Sweezy", join: "Відкрити спільноту", signals: [["Telegram", "Швидкі оновлення"], ["Facebook", "Спільний досвід"], ["Доступ", "Безкоштовно"]] },
+  de: { code: "COMMUNITY / 03", panel: "Offizielle Sweezy-Räume", join: "Community öffnen", signals: [["Telegram", "Schnelle Updates"], ["Facebook", "Gemeinsame Erfahrung"], ["Zugang", "Kostenlos"]] },
+} satisfies Record<Locale, { code: string; panel: string; join: string; signals: [string, string][] }>;
+
 export function generateStaticParams() { return ["en", "uk", "de"].map((locale) => ({ locale })); }
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -64,10 +72,49 @@ export default function CommunityPage({ params }: { params: { locale: string } }
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
   const copy = COPY[locale];
+  const heroUi = HERO_UI[locale];
   const url = `${BASE_URL}/${locale}/community`;
   const schema = [
     { "@context": "https://schema.org", "@type": "WebPage", name: copy.title, description: copy.description, url, inLanguage: locale, about: { "@type": "Organization", name: "Sweezy", url: BASE_URL, sameAs: [TELEGRAM_URL, FACEBOOK_COMMUNITY_URL] } },
     { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) },
   ];
-  return <main lang={locale} className="min-h-screen bg-[#0c0f0d] text-white"><JsonLd data={schema}/><article className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20"><Link href={`/${locale}`} className="text-sm text-white/45">← Sweezy</Link><header className="mt-10 grid gap-7 border-b border-white/10 pb-12 lg:grid-cols-[.42fr_1fr]"><p className="text-xs font-bold tracking-[.2em] text-[#adff00]">{copy.eyebrow}</p><div><h1 className="max-w-5xl text-5xl font-bold leading-[.92] tracking-[-.06em] sm:text-7xl lg:text-8xl">{copy.title}</h1><p className="mt-7 max-w-3xl text-lg leading-8 text-white/65">{copy.intro}</p></div></header><section className="grid gap-3 py-12 md:grid-cols-2"><a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener" className="flex min-h-[360px] flex-col rounded-3xl bg-[#7ec8ff] p-8 text-black transition-transform hover:-translate-y-1"><span className="text-xs font-bold tracking-[.16em]">01 · TELEGRAM</span><h2 className="mt-auto text-4xl font-bold tracking-[-.05em] sm:text-5xl">{copy.telegramTitle}</h2><p className="mt-5 max-w-xl leading-7 text-black/60">{copy.telegramBody}</p><strong className="mt-8">{copy.telegramCta} ↗</strong></a><a href={FACEBOOK_COMMUNITY_URL} target="_blank" rel="noreferrer noopener" className="flex min-h-[360px] flex-col rounded-3xl bg-[#adff00] p-8 text-black transition-transform hover:-translate-y-1"><span className="text-xs font-bold tracking-[.16em]">02 · FACEBOOK</span><h2 className="mt-auto text-4xl font-bold tracking-[-.05em] sm:text-5xl">{copy.facebookTitle}</h2><p className="mt-5 max-w-xl leading-7 text-black/60">{copy.facebookBody}</p><strong className="mt-8">{copy.facebookCta} ↗</strong></a></section><section className="border-t border-white/10 py-12"><h2 className="text-4xl font-bold tracking-[-.05em] sm:text-6xl">{copy.purposeTitle}</h2><div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{copy.purposes.map(([title, body], index) => <div key={title} className="rounded-3xl border border-white/10 bg-white/[.035] p-6"><span className="text-xs font-bold text-[#adff00]">0{index + 1}</span><h3 className="mt-12 text-2xl font-semibold">{title}</h3><p className="mt-4 leading-7 text-white/55">{body}</p></div>)}</div></section><section className="grid gap-8 border-t border-white/10 py-12 lg:grid-cols-[.45fr_1fr]"><h2 className="text-4xl font-bold tracking-[-.05em]">{copy.rulesTitle}</h2><ol className="space-y-3">{copy.rules.map((rule, index) => <li key={rule} className="flex gap-5 rounded-2xl border border-white/10 p-5"><span className="font-mono text-xs text-[#adff00]">0{index + 1}</span><span className="leading-7 text-white/65">{rule}</span></li>)}</ol></section><section className="border-t border-white/10 py-12"><h2 className="text-4xl font-bold tracking-[-.05em]">FAQ</h2><div className="mt-8 grid gap-3 lg:grid-cols-3">{copy.faq.map((item) => <article key={item.q} className="rounded-3xl border border-white/10 p-6"><h3 className="text-xl font-semibold">{item.q}</h3><p className="mt-4 leading-7 text-white/55">{item.a}</p></article>)}</div></section></article></main>;
+
+  return <main lang={locale} className={styles.page}>
+    <JsonLd data={schema}/>
+    <article className={styles.shell}>
+      <Breadcrumb items={[
+        {name:locale==="uk"?"Головна":locale==="de"?"Start":"Home",url:`/${locale}`},
+        {name:copy.eyebrow,url},
+      ]}/>
+      <CorporateHero
+        eyebrow={copy.eyebrow}
+        title={copy.title}
+        description={copy.intro}
+        sectionCode={heroUi.code}
+        panelLabel={heroUi.panel}
+        signals={heroUi.signals.map(([label,value])=>({label,value}))}
+        primaryAction={{label:copy.telegramCta,href:TELEGRAM_URL,external:true}}
+        secondaryAction={{label:copy.facebookCta,href:FACEBOOK_COMMUNITY_URL,external:true}}
+      />
+      <section className={styles.platforms} aria-label={heroUi.join}>
+        <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener" className={styles.platform}>
+          <span className={styles.eyebrow}>01 · TELEGRAM</span><h2>{copy.telegramTitle}</h2><p>{copy.telegramBody}</p><strong>{copy.telegramCta} ↗</strong>
+        </a>
+        <a href={FACEBOOK_COMMUNITY_URL} target="_blank" rel="noreferrer noopener" className={styles.platform}>
+          <span className={styles.eyebrow}>02 · FACEBOOK</span><h2>{copy.facebookTitle}</h2><p>{copy.facebookBody}</p><strong>{copy.facebookCta} ↗</strong>
+        </a>
+      </section>
+      <section className={styles.section}>
+        <div className={styles.sectionHead}><span className={styles.eyebrow}>SWEEZY / COMMUNITY</span><h2>{copy.purposeTitle}</h2></div>
+        <div className={styles.purposeGrid}>{copy.purposes.map(([title,body],index)=><article key={title} className={styles.purpose}><span className={styles.eyebrow}>0{index+1}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
+      </section>
+      <section className={styles.section}>
+        <div className={styles.sectionHead}><h2>{copy.rulesTitle}</h2><ol className={styles.rules}>{copy.rules.map((rule,index)=><li key={rule}><span>0{index+1}</span>{rule}</li>)}</ol></div>
+      </section>
+      <section className={styles.section}>
+        <div className={styles.sectionHead}><span className={styles.eyebrow}>FAQ / 03</span><h2>FAQ</h2></div>
+        <div className={styles.faqGrid}>{copy.faq.map(item=><article key={item.q}><h3>{item.q}</h3><p>{item.a}</p></article>)}</div>
+      </section>
+    </article>
+  </main>;
 }

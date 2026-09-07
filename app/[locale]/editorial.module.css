@@ -12,7 +12,7 @@
 }
 
 .shell {
-  width: min(100% - 32px, 1360px);
+  width: min(100% - 32px, 1380px);
   margin-inline: auto;
   padding: clamp(28px, 4vw, 58px) 0 72px;
 }
