@@ -18,6 +18,9 @@ One query family has one canonical owner. Supporting pages answer narrower quest
 | Ruinaulta travel | `/{locale}/places/ruinaulta` | Graubünden and nature category hubs | rail, gorge-floor and viewpoint itinerary owner |
 | Mount Rigi travel | `/{locale}/places/mount-rigi` | Central Switzerland and mountain category hubs | access-corridor and transport-loop owner |
 | Creux du Van travel | `/{locale}/places/creux-du-van` | Neuchâtel and nature category hubs | full-hike versus upper-access owner |
+| Lavaux vineyard travel | `/{locale}/places/lavaux-vineyards` | Vaud canton, lake category and Planning hubs | one-section vineyard route, public transport and working-landscape owner |
+| Lake Murten travel | `/{locale}/places/lake-murten` | Fribourg canton, lake category and Planning hubs | Murten old town, seasonal lake and Mont Vully itinerary owner |
+| Bern Old Town travel | `/{locale}/places/bern-old-town` | Bern canton, culture category and Planning hubs | UNESCO city walk, arcades, Aare and weather-proof route owner |
 | Switzerland trip planning | `/{locale}/planning` | destination, category and region pages | practical transport, weather, maps and backup-route hub |
 
 Review rule: inspect GSC every 14 days. If two URLs rank for same query family, compare usefulness, backlinks and conversions; consolidate weaker URL instead of publishing third page.

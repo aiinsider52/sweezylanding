@@ -13,6 +13,7 @@ import Link from "next/link";
 import { getCantonImage } from "../../../../lib/editorial";
 import styles from "../../editorial.module.css";
 import { SEO_CLUSTERS } from "../../../../data/seo-clusters";
+import { travelDestinations } from "../../../../data/travel-destinations";
 
 /* ─── Generic copy (all 26 cantons, all 3 locales) ─── */
 const COPY: Record<
@@ -406,6 +407,7 @@ export default function CantonGuidePage({
   const locale = params.locale;
   const copy = COPY[locale];
   const name = getCantonName(locale, canton);
+  const regionalPlaces = travelDestinations.filter((place) => place.cantonGuideSlug === canton.slug).slice(0, 3);
   const canonicalUrl = `${BASE_URL}/${locale}/guides/${canton.slug}`;
   const breadcrumbItems = [
     { name: copy.home, url: `/${locale}` },
@@ -989,7 +991,7 @@ export default function CantonGuidePage({
             </div>
           </section>
         ) : null}
-        <div className={styles.guideBody}>{rich ? richBody : genericBody}</div>
+        <div className={styles.guideBody}>{rich ? richBody : genericBody}{regionalPlaces.length ? <section className="mt-10 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-green">{locale === "uk" ? "Місця цього кантону" : locale === "de" ? "Orte in diesem Kanton" : "Places in this canton"}</p><h2 className="mt-3 text-2xl font-semibold tracking-tight">{locale === "uk" ? `Сплануйте поїздку в кантоні ${name}` : locale === "de" ? `Ausflug im Kanton ${name} planen` : `Plan a trip in ${name}`}</h2><div className="mt-5 grid gap-3 sm:grid-cols-2">{regionalPlaces.map((place) => <Link key={place.slug} href={`/${locale}/places/${place.slug}`} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-accent-green/40"><strong className="block text-white">{place.title[locale]}</strong><span className="mt-2 block text-sm leading-6 text-white/55">{place.summary[locale]}</span><span className="mt-3 block text-sm font-medium text-accent-green">{locale === "uk" ? "Відкрити гід місця" : locale === "de" ? "Ortsguide öffnen" : "Open place guide"} →</span></Link>)}</div><Link href={`/${locale}/planning`} className="mt-5 inline-flex text-sm font-medium text-accent-green underline underline-offset-4">{locale === "uk" ? "Планувальник подорожі" : locale === "de" ? "Reiseplaner" : "Travel planner"} →</Link></section> : null}</div>
       </article>
     </main>
   );

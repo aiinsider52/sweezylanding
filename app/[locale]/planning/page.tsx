@@ -99,6 +99,18 @@ const TOOLS = [
   { name: "SwitzerlandMobility", url: "https://schweizmobil.ch/en", role: { en: "Signed hiking, cycling and accessible routes", uk: "Марковані пішохідні, велосипедні й безбар’єрні маршрути", de: "Markierte Wander-, Velo- und hindernisfreie Routen" } },
 ] as const;
 
+const FEATURED_REGIONS = [
+  { place: "lavaux-vineyards", canton: "vaud", title: { en: "Lavaux and Vaud", uk: "Лаво й кантон Во", de: "Lavaux und Waadt" }, body: { en: "UNESCO vineyard paths, Lake Geneva transport and the practical Vaud context for a French-speaking stay.", uk: "Виноградні стежки UNESCO, транспорт біля Женевського озера й практичний контекст франкомовного кантону Во.", de: "UNESCO-Rebwege, Verkehr am Genfersee und praktischer Waadt-Kontext für einen französischsprachigen Aufenthalt." } },
+  { place: "lake-murten", canton: "fribourg", title: { en: "Lake Murten and Fribourg", uk: "Озеро Муртен і Фрібур", de: "Murtensee und Freiburg" }, body: { en: "A bilingual city-and-lake route linked to the Fribourg guide for registration, local offices and daily life.", uk: "Двомовний маршрут містом і озером, пов’язаний із гідом Фрібура про реєстрацію, офіси й повсякденне життя.", de: "Zweisprachige Stadt-und-See-Route mit Freiburg-Guide zu Anmeldung, Behörden und Alltag." } },
+  { place: "bern-old-town", canton: "bern", title: { en: "Bern city and canton", uk: "Місто й кантон Берн", de: "Stadt und Kanton Bern" }, body: { en: "A walkable UNESCO capital route paired with the bilingual canton guide for newcomers planning more than a day trip.", uk: "Пішохідний маршрут столицею UNESCO плюс двомовний гід кантону для тих, хто планує не лише одноденну поїздку.", de: "Begehbare UNESCO-Hauptstadtroute plus zweisprachiger Kantonsguide für mehr als einen Tagesausflug." } },
+] as const;
+
+const FEATURED_COPY = {
+  en: { eyebrow: "Place + canton", title: "Plan the landscape and the life around it", place: "Open place guide", canton: "Open canton guide" },
+  uk: { eyebrow: "Місце + кантон", title: "Плануйте краєвид і життя навколо нього", place: "Відкрити гід місця", canton: "Відкрити гід кантону" },
+  de: { eyebrow: "Ort + Kanton", title: "Landschaft und Alltag zusammen planen", place: "Ortsguide öffnen", canton: "Kantonsguide öffnen" },
+} satisfies Record<Locale, { eyebrow: string; title: string; place: string; canton: string }>;
+
 export function generateStaticParams() { return ["en", "uk", "de"].map((locale) => ({ locale })); }
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -111,6 +123,7 @@ export default function PlanningPage({ params }: { params: { locale: string } })
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
   const copy = COPY[locale];
+  const featuredCopy = FEATURED_COPY[locale];
   const schema = { "@context": "https://schema.org", "@graph": [
     { "@type": "WebPage", name: copy.title, description: copy.description, url: `${BASE_URL}/${locale}/planning`, inLanguage: locale, dateModified: "2026-09-07", citation: TOOLS.map((tool) => tool.url) },
     { "@type": "ItemList", name: copy.toolsTitle, numberOfItems: TOOLS.length, itemListElement: TOOLS.map((tool, index) => ({ "@type": "ListItem", position: index + 1, name: tool.name, url: tool.url })) },
@@ -122,6 +135,7 @@ export default function PlanningPage({ params }: { params: { locale: string } })
       <Breadcrumb items={[{ name: locale === "uk" ? "Головна" : locale === "de" ? "Start" : "Home", url: `/${locale}` }, { name: copy.eyebrow, url: `${BASE_URL}/${locale}/planning` }]} />
       <header className={styles.hero}><p>{copy.eyebrow}</p><h1>{copy.title}</h1><span>{copy.description}</span><Link href={`/${locale}/places`}>{copy.places} ↗</Link></header>
       <section className={styles.start}><div><p>{copy.eyebrow}</p><h2>{copy.start}</h2><span>{copy.startBody}</span></div><div className={styles.modes}>{copy.modes.map((mode, index) => <Link key={mode.title} href={mode.href}><small>0{index + 1}</small><h3>{mode.title}</h3><p>{mode.body}</p><b>↗</b></Link>)}</div></section>
+      <section className={styles.featured}><div><p>{featuredCopy.eyebrow}</p><h2>{featuredCopy.title}</h2></div><div className={styles.featuredGrid}>{FEATURED_REGIONS.map((item, index) => <article key={item.place}><small>0{index + 1}</small><h3>{item.title[locale]}</h3><p>{item.body[locale]}</p><div><Link href={`/${locale}/places/${item.place}`}>{featuredCopy.place} ↗</Link><Link href={`/${locale}/guides/${item.canton}`}>{featuredCopy.canton} ↗</Link></div></article>)}</div></section>
       <section className={styles.process}><div><p>{copy.eyebrow}</p><h2>{copy.processTitle}</h2></div><ol>{copy.process.map((step, index) => <li key={step.title}><span>0{index + 1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol></section>
       <section className={styles.tools}><div><p>{copy.eyebrow}</p><h2>{copy.toolsTitle}</h2><span>{copy.toolsBody}</span></div><div>{TOOLS.map((tool, index) => <a key={tool.name} href={tool.url} target="_blank" rel="noreferrer noopener"><small>0{index + 1}</small><h3>{tool.name}</h3><p>{tool.role[locale]}</p><b>{copy.open} ↗</b></a>)}</div></section>
       <section className={styles.check}><div><p>{copy.eyebrow}</p><h2>{copy.checkTitle}</h2></div><ol>{copy.checklist.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}</ol></section>

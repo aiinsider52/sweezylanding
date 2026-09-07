@@ -1,5 +1,6 @@
 import type { Locale } from "../lib/i18n";
 import { batch12DestinationDepth } from "./destination-depth-batch12";
+import { batch13DestinationDepth } from "./destination-depth-batch13";
 
 type LocalizedText = Record<Locale, string>;
 type LocalizedList = Record<Locale, string[]>;
@@ -19,6 +20,7 @@ const list = (en: string[], uk: string[], de: string[]): LocalizedList => ({ en,
 
 const guides: Record<string, DestinationDepth> = {
   ...batch12DestinationDepth,
+  ...batch13DestinationDepth,
   "aletsch-glacier": {
     reviewedAt: "2026-09-07",
     sources: [

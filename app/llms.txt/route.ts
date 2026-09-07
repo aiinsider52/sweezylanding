@@ -21,6 +21,9 @@ const content = `# Sweezy
 - [Oeschinen Lake practical guide](${BASE_URL}/uk/places/oeschinen-lake)
 - [Rhine Falls practical guide](${BASE_URL}/uk/places/rhine-falls)
 - [Mount Rigi practical guide](${BASE_URL}/uk/places/mount-rigi)
+- [Lavaux Vineyard Terraces practical guide](${BASE_URL}/uk/places/lavaux-vineyards)
+- [Lake Murten practical guide](${BASE_URL}/uk/places/lake-murten)
+- [Bern Old Town practical guide](${BASE_URL}/uk/places/bern-old-town)
 - [Plan a trip in Switzerland](${BASE_URL}/uk/planning)
 - [Sweezy community on Telegram and Facebook](${BASE_URL}/uk/community)
 
@@ -34,6 +37,9 @@ const content = `# Sweezy
 - [Aletsch Glacier travel guide](${BASE_URL}/en/places/aletsch-glacier)
 - [Ruinaulta Rhine Gorge travel guide](${BASE_URL}/en/places/ruinaulta)
 - [Creux du Van travel guide](${BASE_URL}/en/places/creux-du-van)
+- [Lavaux Vineyard Terraces travel guide](${BASE_URL}/en/places/lavaux-vineyards)
+- [Lake Murten travel guide](${BASE_URL}/en/places/lake-murten)
+- [Bern Old Town travel guide](${BASE_URL}/en/places/bern-old-town)
 - [Switzerland travel planning guide](${BASE_URL}/en/planning)
 
 ## Editorial information

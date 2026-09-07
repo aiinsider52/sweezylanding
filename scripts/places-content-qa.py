@@ -33,6 +33,26 @@ PRIORITY_DESTINATIONS = {
         "uk": "Зрозумійте скельний амфітеатр",
         "de": "Den Felskessel verstehen",
     },
+    "lavaux-vineyards": {
+        "en": "Read Lavaux as a living landscape",
+        "uk": "Побачте в Лаво живий ландшафт",
+        "de": "Lavaux als lebendige Landschaft lesen",
+    },
+    "lake-murten": {
+        "en": "Start with Murten's compact old town",
+        "uk": "Почніть із компактного старого міста Муртена",
+        "de": "Mit Murtens kompakter Altstadt beginnen",
+    },
+    "bern-old-town": {
+        "en": "Why Bern became a UNESCO city",
+        "uk": "Чому Берн став містом UNESCO",
+        "de": "Warum Bern UNESCO-Stadt wurde",
+    },
+}
+CANTON_LINKS = {
+    "lavaux-vineyards": "vaud",
+    "lake-murten": "fribourg",
+    "bern-old-town": "bern",
 }
 LOCALES = {
     "en": {
@@ -93,6 +113,9 @@ with sync_playwright() as playwright:
                 assert "WebPage" in types and "FAQPage" in types, (path, types)
                 if key == "planning":
                     assert "ItemList" in types, (path, types)
+                    for slug, canton in CANTON_LINKS.items():
+                        assert page.locator(f'a[href="/{locale}/places/{slug}"]').count() >= 1, (path, slug)
+                        assert page.locator(f'a[href="/{locale}/guides/{canton}"]').count() >= 1, (path, canton)
                 else:
                     assert "TouristAttraction" in types, (path, types)
                     assert page.locator(f'a[href="/{locale}/planning"]').count() >= 1, path
@@ -112,6 +135,8 @@ with sync_playwright() as playwright:
                 assert page.locator('section[aria-labelledby="destination-depth-title"]').count() == 1, path
                 assert page.locator('section[aria-labelledby="destination-sources-title"] a[href^="https://"]').count() >= 2, path
                 assert page.locator(f'a[href="/{locale}/planning"]').count() >= 1, path
+                if slug in CANTON_LINKS:
+                    assert page.locator(f'a[href="/{locale}/guides/{CANTON_LINKS[slug]}"]').count() >= 1, path
 
                 overflow = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
                 assert overflow <= 1, (path, width, overflow)
@@ -145,6 +170,7 @@ with sync_playwright() as playwright:
     sitemap_text = sitemap.text()
     for locale in LOCALES:
         assert f"https://www.sweezy.world/{locale}/planning" in sitemap_text
+        assert f"https://www.sweezy.world/{locale}/places/lake-murten" in sitemap_text
 
     llms = page.request.get(BASE + "/llms.txt")
     assert llms.ok
@@ -155,10 +181,24 @@ with sync_playwright() as playwright:
         "/uk/places/mount-rigi",
         "/en/places/ruinaulta",
         "/en/places/creux-du-van",
+        "/en/places/lavaux-vineyards",
+        "/en/places/lake-murten",
+        "/en/places/bern-old-town",
+        "/uk/places/lavaux-vineyards",
+        "/uk/places/lake-murten",
+        "/uk/places/bern-old-town",
     ]:
         assert path in llms.text(), path
     assert "/en/planning" in llms.text()
     assert "/uk/planning" in llms.text()
+
+    for slug, canton in CANTON_LINKS.items():
+        for locale in LOCALES:
+            path = f"/{locale}/guides/{canton}"
+            response = page.goto(BASE + path, wait_until="load")
+            assert response and response.ok, (path, response.status if response else None)
+            assert page.locator(f'a[href="/{locale}/places/{slug}"]').count() >= 1, (path, slug)
+            assert page.locator(f'a[href="/{locale}/planning"]').count() >= 1, path
 
     browser.close()
 
