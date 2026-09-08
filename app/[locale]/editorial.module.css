@@ -94,18 +94,21 @@
 
 .featured {
   display: grid;
-  grid-template-columns: 1.25fr .75fr;
-  min-height: min(520px, calc(100svh - 150px));
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  min-height: 430px;
   overflow: hidden;
-  border-radius: 34px;
-  background: var(--ink);
-  color: white;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: #fff;
+  color: var(--ink);
 }
 
 .featuredMedia {
   position: relative;
-  min-height: 350px;
+  min-height: 430px;
   overflow: hidden;
+  border-right: 1px solid var(--line);
+  background: #d9ddd5;
 }
 
 .featuredMedia img,
@@ -125,22 +128,37 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: clamp(24px, 3vw, 40px);
+  padding: clamp(26px, 3.3vw, 46px);
 }
 
 .featuredCopy h2 {
-  margin-top: 24px;
-  font-size: clamp(31px, 3.4vw, 50px);
+  margin-top: 32px;
+  font-size: clamp(31px, 3.2vw, 48px);
   font-weight: 650;
-  line-height: .96;
+  line-height: .98;
   letter-spacing: -.055em;
 }
 
 .featuredCopy p {
-  margin-top: 22px;
-  color: rgba(255,255,255,.62);
-  font-size: 17px;
-  line-height: 1.55;
+  margin-top: 18px;
+  color: rgba(12,15,13,.62);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.storyLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font: 700 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.storyLabel span:first-child {
+  color: #456800;
 }
 
 .arrowButton {
@@ -151,7 +169,7 @@
   width: 100%;
   margin-top: 34px;
   padding: 17px 20px;
-  border-radius: 999px;
+  border-radius: 13px;
   background: var(--lime);
   color: var(--ink);
   font-size: 14px;
@@ -160,32 +178,61 @@
 
 .postGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .postCard {
   display: flex;
-  min-height: 420px;
+  grid-column: span 4;
+  min-height: 390px;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: rgba(255,255,255,.32);
+  border-radius: 22px;
+  background: rgba(255,255,255,.58);
+}
+
+.postCardWide {
+  display: grid;
+  grid-column: span 8;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, .88fr);
+  min-height: 330px;
 }
 
 .cardMedia {
   position: relative;
-  min-height: 170px;
+  min-height: 182px;
   overflow: hidden;
   background: #d9ddd5;
 }
+
+.postCardWide .cardMedia { min-height: 100%; border-right: 1px solid var(--line); }
+
+.imageTopic,
+.imageIssue {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  background: rgba(12,15,13,.82);
+  color: #fff;
+  font: 700 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.imageTopic { left: 14px; }
+.imageIssue { right: 14px; color: var(--lime); }
 
 .cardCopy {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 21px 18px;
 }
 
 .meta {
@@ -200,12 +247,14 @@
 
 .cardCopy h2,
 .cardCopy h3 {
-  margin-top: 18px;
-  font-size: clamp(22px, 1.8vw, 29px);
+  margin-top: 17px;
+  font-size: clamp(21px, 1.7vw, 28px);
   font-weight: 650;
   line-height: 1.04;
   letter-spacing: -.045em;
 }
+
+.postCardWide .cardCopy h2 { font-size: clamp(27px, 2.4vw, 38px); }
 
 .cardCopy p {
   margin-top: 12px;
@@ -743,6 +792,9 @@
 
 @media (max-width: 1050px) {
   .postGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .postCard,
+  .postCardWide { display: flex; grid-column: span 1; min-height: 410px; }
+  .postCardWide .cardMedia { min-height: 182px; border-right: 0; }
   .cantonGrid { grid-template-columns: repeat(3, 1fr); }
   .articleLayout { grid-template-columns: minmax(0, 1fr) 220px; }
   .articleRail { display: none; }
@@ -753,6 +805,7 @@
   .heroTitle { max-width: 12ch; }
   .heroAside { display: grid; grid-template-columns: .5fr 1fr; gap: 22px; }
   .heroCount { margin: 0; }
+  .featuredMedia { min-height: 300px; border-right: 0; border-bottom: 1px solid var(--line); }
   .featuredRoute { grid-template-columns: repeat(2, 1fr); }
   .routeItem:nth-child(2) { border-right: 0; }
   .routeItem:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
@@ -774,13 +827,20 @@
   .heroTitle { font-size: clamp(45px, 15vw, 74px); }
   .heroAside { grid-template-columns: 1fr; }
   .heroCount { font-size: 90px; }
-  .featured { border-radius: 24px; }
-  .featuredMedia { min-height: 340px; }
+  .featured { min-height: 0; border-radius: 20px; }
+  .featuredMedia { min-height: 225px; }
+  .featuredCopy { padding: 22px 19px 19px; }
+  .featuredCopy h2 { margin-top: 24px; font-size: 31px; }
+  .featuredCopy p { font-size: 14px; }
+  .arrowButton { margin-top: 24px; padding: 14px 16px; }
   .featuredRoute { grid-template-columns: 1fr; }
   .routeItem { min-height: 210px; border-right: 0; border-bottom: 1px solid var(--line); }
   .routeItem:last-child { border-bottom: 0; }
   .postGrid { grid-template-columns: 1fr; }
-  .postCard { min-height: 410px; }
+  .postCard,
+  .postCardWide { min-height: 390px; border-radius: 20px; }
+  .cardMedia,
+  .postCardWide .cardMedia { min-height: 195px; }
   .cantonGrid { grid-template-columns: 1fr; }
   .cantonCard { min-height: 340px; }
   .articleHero { gap: 8px; }

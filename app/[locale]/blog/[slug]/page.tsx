@@ -15,7 +15,7 @@ import type { Locale } from "../../../../lib/i18n";
 import Link from "next/link";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
-import { getPostImage } from "../../../../lib/editorial";
+import { getPostImage, getPostImageAlt } from "../../../../lib/editorial";
 import { getUkrainianAuthorityRoute } from "../../../../data/authority-routes";
 import styles from "../../editorial.module.css";
 
@@ -112,6 +112,7 @@ export async function generateMetadata({
   const canonicalUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}`;
   const ogImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/opengraph-image`;
   const twitterImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/twitter-image`;
+  const imageAlt = getPostImageAlt(params.locale, post.frontmatter.title, post.slug);
 
   return {
     title: post.frontmatter.title,
@@ -132,7 +133,7 @@ export async function generateMetadata({
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: post.frontmatter.title,
+          alt: imageAlt,
         },
       ],
     },
@@ -223,7 +224,17 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.frontmatter.title,
     description: post.frontmatter.description,
-    image: ogImageUrl,
+    image: {
+      "@type": "ImageObject",
+      url: ogImageUrl,
+      contentUrl: ogImageUrl,
+      name: post.frontmatter.title,
+      caption: getPostImageAlt(locale, post.frontmatter.title, post.slug),
+      width: 1200,
+      height: 630,
+      representativeOfPage: true,
+      creditText: "Sweezy editorial",
+    },
     datePublished: post.frontmatter.publishedAt,
     dateModified: post.frontmatter.updatedAt ?? post.frontmatter.publishedAt,
     author: {
@@ -316,8 +327,8 @@ export default async function BlogPostPage({
           </div>
           <div className={styles.articleVisual}>
             <Image
-              src={getPostImage(post.slug)}
-              alt={`${post.frontmatter.title} — practical Sweezy guide for life in Switzerland`}
+              src={getPostImage(locale, post.slug)}
+              alt={getPostImageAlt(locale, post.frontmatter.title, post.slug)}
               fill
               priority
               sizes="(max-width: 800px) 100vw, 40vw"

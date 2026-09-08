@@ -5,12 +5,10 @@ import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { getPostsByLocale, isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
-import { getPostImage } from "../../../lib/editorial";
+import { getPostArtwork, getPostImage, getPostImageAlt } from "../../../lib/editorial";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { CorporateHero } from "../../components/CorporateHero";
 import styles from "../editorial.module.css";
-
-const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 const COPY: Record<
   Locale,
@@ -128,6 +126,7 @@ export async function generateMetadata({
   if (!isLocale(params.locale)) return {};
   const copy = COPY[params.locale];
   const canonicalUrl = `${BASE_URL}/${params.locale}/blog`;
+  const socialImage = `${canonicalUrl}/opengraph-image`;
 
   return {
     title: copy.metaTitle,
@@ -140,7 +139,7 @@ export async function generateMetadata({
       siteName: "Sweezy",
       images: [
         {
-          url: DEFAULT_OG_IMAGE,
+          url: socialImage,
           width: 1200,
           height: 630,
           alt: copy.metaTitle,
@@ -153,7 +152,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: copy.metaTitle,
       description: copy.description,
-      images: [DEFAULT_OG_IMAGE],
+      images: [socialImage],
     },
   };
 }
@@ -226,8 +225,8 @@ export default async function BlogIndexPage({
             <Link href={`/${locale}/blog/${leadPost.slug}`} className={styles.featured}>
               <div className={styles.featuredMedia}>
                 <Image
-                  src={getPostImage(leadPost.slug)}
-                  alt={`${leadPost.frontmatter.title} — ${leadPost.frontmatter.description}`}
+                  src={getPostImage(locale, leadPost.slug)}
+                  alt={getPostImageAlt(locale, leadPost.frontmatter.title, leadPost.slug)}
                   fill
                   priority
                   sizes="(max-width: 800px) 100vw, 62vw"
@@ -235,6 +234,10 @@ export default async function BlogIndexPage({
               </div>
               <div className={styles.featuredCopy}>
                 <div>
+                  <div className={styles.storyLabel}>
+                    <span>{getPostArtwork(leadPost.slug, locale).label}</span>
+                    <span>SWEEZY / 01</span>
+                  </div>
                   <div className={styles.meta}>
                     <time dateTime={leadPost.frontmatter.publishedAt}>
                       {formatDate(locale, leadPost.frontmatter.publishedAt)}
@@ -261,10 +264,24 @@ export default async function BlogIndexPage({
               <span className={styles.eyebrow}>02 — {String(posts.length).padStart(2, "0")}</span>
             </div>
             <div className={styles.postGrid}>
-              {remainingPosts.map((post) => (
-                <Link key={post.slug} href={`/${locale}/blog/${post.slug}`} className={styles.postCard}>
+              {remainingPosts.map((post, index) => {
+                const artwork = getPostArtwork(post.slug, locale);
+                const isWide = index % 7 === 0 || index % 7 === 4;
+                return (
+                <Link
+                  key={post.slug}
+                  href={`/${locale}/blog/${post.slug}`}
+                  className={`${styles.postCard} ${isWide ? styles.postCardWide : ""}`}
+                >
                   <div className={styles.cardMedia}>
-                    <Image src={getPostImage(post.slug)} alt={`${post.frontmatter.title} — Sweezy Switzerland guide`} fill sizes="(max-width: 560px) 100vw, 50vw" />
+                    <Image
+                      src={getPostImage(locale, post.slug)}
+                      alt={getPostImageAlt(locale, post.frontmatter.title, post.slug)}
+                      fill
+                      sizes={isWide ? "(max-width: 800px) 100vw, 48vw" : "(max-width: 560px) 100vw, 32vw"}
+                    />
+                    <span className={styles.imageTopic}>{artwork.label}</span>
+                    <span className={styles.imageIssue}>{String(index + 2).padStart(2, "0")}</span>
                   </div>
                   <div className={styles.cardCopy}>
                     <div className={styles.meta}>
@@ -276,7 +293,7 @@ export default async function BlogIndexPage({
                     <span className={styles.cardLink}>{copy.readMore} <span aria-hidden>↗</span></span>
                   </div>
                 </Link>
-              ))}
+              )})}
             </div>
           </>
         ) : null}

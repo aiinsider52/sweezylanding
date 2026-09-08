@@ -10,7 +10,7 @@ import { isLocale } from "../../../../lib/blog";
 import type { Locale } from "../../../../lib/i18n";
 import { APP_STORE_URL } from "../../../../lib/links";
 import Link from "next/link";
-import { getCantonImage } from "../../../../lib/editorial";
+import { getCantonImage, getCantonImageAlt } from "../../../../lib/editorial";
 import styles from "../../editorial.module.css";
 import { SEO_CLUSTERS } from "../../../../data/seo-clusters";
 import { travelDestinations } from "../../../../data/travel-destinations";
@@ -550,7 +550,7 @@ export default function CantonGuidePage({
       </div>
       <div className={styles.guideMedia}>
         {cantonImage ? (
-          <Image src={cantonImage} alt={`${name} canton in Switzerland — city landscape and local relocation guide`} fill priority sizes="(max-width: 800px) 100vw, 40vw" />
+          <Image src={cantonImage} alt={getCantonImageAlt(locale, name)} fill priority sizes="(max-width: 800px) 100vw, 40vw" />
         ) : null}
       </div>
     </header>

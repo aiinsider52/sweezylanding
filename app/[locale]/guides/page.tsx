@@ -6,7 +6,7 @@ import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { cantons } from "../../../data/cantons";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
-import { getCantonImage } from "../../../lib/editorial";
+import { getCantonImage, getCantonImageAlt } from "../../../lib/editorial";
 import styles from "../editorial.module.css";
 
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
@@ -180,7 +180,7 @@ export default function GuidesIndexPage({
                   <div className={styles.cardMedia}>
                     <Image
                       src={image}
-                      alt={`${getCantonName(locale, canton)} canton in Switzerland — local guide, services and relocation information`}
+                      alt={getCantonImageAlt(locale, getCantonName(locale, canton))}
                       fill
                       sizes="(max-width: 560px) 100vw, (max-width: 1050px) 50vw, 25vw"
                     />

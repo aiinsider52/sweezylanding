@@ -34,6 +34,9 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/api/",
       },
     ],
-    sitemap: "https://www.sweezy.world/sitemap.xml",
+    sitemap: [
+      "https://www.sweezy.world/sitemap.xml",
+      "https://www.sweezy.world/image-sitemap.xml",
+    ],
   };
 }

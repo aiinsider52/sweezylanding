@@ -22,6 +22,12 @@ const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string
   de: { eyebrow: "SCHWEIZ AUSSERHALB DER CHECKLISTE", title: "Hier leben. Hier entdecken.", body: "Sweezy verbindet Umzugshilfe mit praktischen Routen zu Bergen, Seen, Städten und Naturwundern der Schweiz.", open: "Ort öffnen", all: "Alle Orte entdecken" },
 };
 
+const PASSPORT_IMAGE_ALT: Record<Locale, string> = {
+  en: "Sweezy app passport showing personal relocation progress, profile and access in Switzerland",
+  uk: "Паспорт застосунку Sweezy з особистим прогресом переїзду, профілем і доступом у Швейцарії",
+  de: "Sweezy App-Pass mit persönlichem Umzugsfortschritt, Profil und Zugang in der Schweiz",
+};
+
 export function LandingPage({ locale }: { locale: Locale }) {
   const copy = landingCopy[locale];
   const softwareSchema = {
@@ -201,7 +207,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
                 "/app-frames/profile-passport.png",
                 "/app-frames/profile-access.png",
               ]}
-              alt="Sweezy Passport with personal progress and achievements"
+              alt={PASSPORT_IMAGE_ALT[locale]}
             />
           </MotionReveal>
         </section>
