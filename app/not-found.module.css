@@ -1,0 +1,20 @@
+.page { background: #f1f2ed; color: #0c0f0d; min-height: calc(100svh - 72px); padding: 24px 20px 48px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.art { display: block; width: min(760px, 100%); height: auto; mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent), linear-gradient(to bottom, transparent, #000 5% 92%, transparent); mask-composite: intersect; }
+.page h1 { margin: 4px 0 0; font-size: 48px; font-weight: 800; line-height: 1.12; letter-spacing: 0; }
+.page > p { margin: 18px 0 0; max-width: 680px; color: #646864; font-size: 18px; line-height: 1.5; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 26px; }
+.actions a { display: flex; justify-content: space-between; align-items: center; gap: 28px; min-height: 52px; min-width: 220px; padding: 14px 24px; border: 1px solid #0c0f0d; border-radius: 999px; font-weight: 700; }
+.actions a:first-child { background: #adff00; border-color: #adff00; }
+.actions a:hover { background: #82c8ff; border-color: #82c8ff; }
+.links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px 32px; width: min(640px, 100%); border-top: 1px solid #0c0f0d33; margin-top: 32px; padding-top: 24px; font-size: 14px; }
+.links a:hover { text-decoration: underline; }
+.page a:focus-visible { outline: 3px solid #1981c9; outline-offset: 5px; }
+@media (max-width: 600px) {
+  .page { min-height: calc(100svh - 61px); padding: 32px 20px; }
+  .art { margin: 12px 0 24px; }
+  .page h1 { font-size: 30px; overflow-wrap: anywhere; }
+  .page > p { font-size: 16px; }
+  .actions { width: 100%; flex-direction: column; }
+  .actions a { width: 100%; }
+  .links { gap: 14px 20px; }
+}

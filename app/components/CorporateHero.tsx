@@ -68,7 +68,7 @@ export function CorporateHero({
           <p className={styles.description}>{description}</p>
         </div>
 
-        {companion === "community" ? <SweezyCompanion pose="wave" className={styles.welcomeCompanion} priority /> : null}
+        {companion === "community" ? <SweezyCompanion pose="greeting" className={styles.welcomeCompanion} priority /> : null}
         {(primaryAction || secondaryAction) ? (
           <div className={styles.actions}>
             {primaryAction ? <Action action={primaryAction} primary /> : null}

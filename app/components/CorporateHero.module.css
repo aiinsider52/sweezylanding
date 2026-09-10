@@ -233,7 +233,7 @@
 .community .description { max-width: 620px; }
 .community .welcomeCompanion { grid-column: 2; grid-row: 2; width: 210px; height: 275px; align-self: end; margin-bottom: -54px; }
 .community .welcomeCompanion { width: 330px; height: 330px; margin-left: -90px; margin-bottom: -54px; overflow: hidden; }
-.community .welcomeCompanion img { object-fit: contain; transform: scale(1.8) translateY(24%); transform-origin: center top; }
+.community .welcomeCompanion img { object-fit: cover; object-position: center top; transform: none; }
 .blog .signalPanel { padding-bottom: 310px; }
 .blog .panelCompanion { width: 100%; height: 290px; right: 0; overflow: hidden; }
 .blog .panelCompanion img { object-fit: cover; object-position: center top; }
@@ -259,7 +259,7 @@
   .community .copy { display: flex; }
   .community .welcomeCompanion { width: 145px; height: 190px; margin: 14px 0 0 auto; }
   .community .welcomeCompanion { width: 235px; height: 210px; margin: 18px -12px 0 auto; border-bottom: 1px solid var(--hero-line); }
-  .community .welcomeCompanion img { transform: scale(1.8) translateY(5%); }
+  .community .welcomeCompanion img { transform: none; }
   .community .actions { width: 100%; margin-top: 0; }
   .planning .signalPanel { padding-bottom: 190px; }
   .planning .panelCompanion { height: 185px; width: 185px; }
