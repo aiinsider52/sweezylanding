@@ -219,3 +219,40 @@
 @media (prefers-reduced-motion: reduce) {
   .primaryAction, .secondaryAction { transition: none; }
 }
+
+.planning .copy h1, .community .copy h1 { font-size: 56px; letter-spacing: 0; line-height: 1.04; }
+.planning .copy, .community .copy { position: relative; }
+.planning .signalList, .blog .signalList, .jobs .signalList { flex: none; padding-bottom: 0; }
+.planning .signalPanel { padding-bottom: 250px; }
+.blog .signalPanel, .jobs .signalPanel { padding-bottom: 218px; }
+.planning .panelCompanion { position: absolute; bottom: 0; right: 4px; width: 235px; height: 235px; }
+.blog .panelCompanion, .jobs .panelCompanion { position: absolute; right: 8px; bottom: 0; width: 205px; height: 218px; }
+.planning .panelFoot { position: absolute; bottom: 22px; left: 24px; max-width: 80px; font-size: 8px; }
+.community .copy { display: grid; grid-template-columns: minmax(0, 1fr) 210px; column-gap: 16px; }
+.community .copy > div:first-child { grid-column: 1 / -1; }
+.community .description { max-width: 620px; }
+.community .welcomeCompanion { grid-column: 2; grid-row: 2; width: 210px; height: 275px; align-self: end; margin-bottom: -54px; }
+.community .actions { grid-column: 1; grid-row: 2; align-self: end; align-items: start; }
+@media (max-width: 1100px) {
+  .planning .copy h1, .community .copy h1 { font-size: 44px; }
+  .community .copy { grid-template-columns: minmax(0, 1fr) 150px; }
+  .community .welcomeCompanion { width: 150px; height: 225px; margin-bottom: -40px; }
+}
+@media (max-width: 860px) {
+  .planning .signalPanel { padding-bottom: 210px; }
+  .planning .panelCompanion { height: 200px; width: 200px; }
+  .blog .signalPanel, .jobs .signalPanel { padding-bottom: 200px; }
+  .blog .panelCompanion, .jobs .panelCompanion { width: 190px; height: 200px; }
+  .community .signalPanel { display: none; }
+  .community .welcomeCompanion { margin-bottom: -30px; }
+}
+@media (max-width: 560px) {
+  .planning .copy h1, .community .copy h1 { font-size: 34px; }
+  .community .copy { display: flex; }
+  .community .welcomeCompanion { width: 145px; height: 190px; margin: 14px 0 0 auto; }
+  .community .actions { width: 100%; margin-top: 0; }
+  .planning .signalPanel { padding-bottom: 190px; }
+  .planning .panelCompanion { height: 185px; width: 185px; }
+  .blog .signalPanel, .jobs .signalPanel { padding-bottom: 176px; }
+  .blog .panelCompanion, .jobs .panelCompanion { width: 164px; height: 176px; }
+}

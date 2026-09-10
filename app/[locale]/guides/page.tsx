@@ -8,6 +8,7 @@ import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 import { getCantonImage, getCantonImageAlt } from "../../../lib/editorial";
 import styles from "../editorial.module.css";
+import { SweezyCompanion } from "../../components/SweezyCompanion";
 
 const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
@@ -149,11 +150,12 @@ export default function GuidesIndexPage({
   return (
     <main lang={locale} className={styles.page}>
       <div className={styles.shell}>
-        <div className={styles.hero}>
+        <div className={`${styles.hero} ${styles.guidesHero}`}>
           <div>
             <p className={styles.eyebrow}>{copy.eyebrow}</p>
             <h1 className={styles.heroTitle}>{copy.title}</h1>
           </div>
+          <SweezyCompanion pose="guide" className={styles.guideCompanion} priority />
           <div className={styles.heroAside}>
             <div className={styles.heroCount}>
               26 <span>{copy.routes}</span>

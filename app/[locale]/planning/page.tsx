@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { isLocale } from "../../../lib/blog";
@@ -142,6 +143,7 @@ export default function PlanningPage({ params }: { params: { locale: string } })
     <article className={styles.shell}>
       <Breadcrumb items={[{ name: locale === "uk" ? "Головна" : locale === "de" ? "Start" : "Home", url: `/${locale}` }, { name: copy.eyebrow, url: `${BASE_URL}/${locale}/planning` }]} />
       <CorporateHero
+        companion="planning"
         eyebrow={copy.eyebrow}
         title={copy.title}
         description={copy.description}
@@ -150,7 +152,7 @@ export default function PlanningPage({ params }: { params: { locale: string } })
         signals={heroUi.signals.map(([label, value]) => ({ label, value }))}
         primaryAction={{ label: copy.places, href: `/${locale}/places` }}
       />
-      <section className={styles.start}><div><p>{copy.eyebrow}</p><h2>{copy.start}</h2><span>{copy.startBody}</span></div><div className={styles.modes}>{copy.modes.map((mode, index) => <Link key={mode.title} href={mode.href}><small>0{index + 1}</small><h3>{mode.title}</h3><p>{mode.body}</p><b>↗</b></Link>)}</div></section>
+      <section className={styles.start}><div><p>{copy.eyebrow}</p><h2>{copy.start}</h2><span>{copy.startBody}</span></div><div className={styles.modes}>{copy.modes.map((mode, index) => <Link key={mode.title} href={mode.href}><small>0{index + 1}</small><Image src={["/destinations/swiss-discovery-lavaux.webp", "/destinations/swiss-discovery-matterhorn.webp", "/images/canton-lucerne.jpg"][index]} width={480} height={300} alt="" sizes="(max-width: 900px) 90vw, 30vw" /><h3>{mode.title}</h3><p>{mode.body}</p><b aria-hidden>↗</b></Link>)}</div></section>
       <section className={styles.featured}><div><p>{featuredCopy.eyebrow}</p><h2>{featuredCopy.title}</h2></div><div className={styles.featuredGrid}>{FEATURED_REGIONS.map((item, index) => <article key={item.place}><small>0{index + 1}</small><h3>{item.title[locale]}</h3><p>{item.body[locale]}</p><div><Link href={`/${locale}/places/${item.place}`}>{featuredCopy.place} ↗</Link><Link href={`/${locale}/guides/${item.canton}`}>{featuredCopy.canton} ↗</Link></div></article>)}</div></section>
       <section className={styles.process}><div><p>{copy.eyebrow}</p><h2>{copy.processTitle}</h2></div><ol>{copy.process.map((step, index) => <li key={step.title}><span>0{index + 1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol></section>
       <section className={styles.tools}><div><p>{copy.eyebrow}</p><h2>{copy.toolsTitle}</h2><span>{copy.toolsBody}</span></div><div>{TOOLS.map((tool, index) => <a key={tool.name} href={tool.url} target="_blank" rel="noreferrer noopener"><small>0{index + 1}</small><h3>{tool.name}</h3><p>{tool.role[locale]}</p><b>{copy.open} ↗</b></a>)}</div></section>

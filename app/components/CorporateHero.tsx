@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import styles from "./CorporateHero.module.css";
+import { SweezyCompanion } from "./SweezyCompanion";
 
 type HeroAction = {
   label: string;
@@ -22,6 +23,7 @@ type CorporateHeroProps = {
   signals: HeroSignal[];
   primaryAction?: HeroAction;
   secondaryAction?: HeroAction;
+  companion?: "planning" | "community" | "blog" | "jobs";
 };
 
 function Action({ action, primary = false }: { action: HeroAction; primary?: boolean }) {
@@ -44,9 +46,18 @@ export function CorporateHero({
   signals,
   primaryAction,
   secondaryAction,
+  companion,
 }: CorporateHeroProps) {
+  const panelCompanion = companion === "planning"
+    ? "planning"
+    : companion === "blog"
+      ? "guide"
+      : companion === "jobs"
+        ? "done"
+        : null;
+
   return (
-    <header className={styles.hero}>
+    <header className={`${styles.hero} ${companion ? styles[companion] : ""}`}>
       <div className={styles.copy}>
         <div>
           <div className={styles.kicker}>
@@ -57,6 +68,7 @@ export function CorporateHero({
           <p className={styles.description}>{description}</p>
         </div>
 
+        {companion === "community" ? <SweezyCompanion pose="wave" className={styles.welcomeCompanion} priority /> : null}
         {(primaryAction || secondaryAction) ? (
           <div className={styles.actions}>
             {primaryAction ? <Action action={primaryAction} primary /> : null}
@@ -82,6 +94,7 @@ export function CorporateHero({
             </li>
           ))}
         </ol>
+        {panelCompanion ? <SweezyCompanion pose={panelCompanion} className={styles.panelCompanion} priority /> : null}
         <p className={styles.panelFoot}>SWEEZY / SWITZERLAND <span aria-hidden>↗</span></p>
       </aside>
     </header>

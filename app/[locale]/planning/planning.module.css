@@ -6,3 +6,15 @@
 /* Shared corporate hero spacing. Legacy hero rules stay isolated to the old class. */
 .shell { width: min(100% - 40px, 1380px); padding-top: 36px; }
 @media(max-width:580px){.shell{padding-top:24px}}
+
+.start { margin: 42px 0 70px; }
+.start > div:first-child { display: block; }
+.start h2 { margin: 14px 0; font-size: 44px; line-height: 1.1; letter-spacing: 0; }
+.start > div:first-child > span { display: block; font-size: 16px; }
+.modes { gap: 24px; margin-top: 28px; }
+.modes a, .modes a:nth-child(2), .modes a:nth-child(3) { background: transparent; color: #0c0f0d; border-radius: 0; min-height: 0; padding: 18px 0; border-top: 1px solid #0c0f0d35; }
+.modes img { display: block; width: 100%; height: 185px; object-fit: cover; border-radius: 8px; margin: 20px 0; }
+.modes h3 { margin-top: 0; font-size: 27px; line-height: 1.12; letter-spacing: 0; }
+.modes p { font-size: 14px; }
+.modes b { top: 8px; right: 0; }
+@media(max-width:600px) { .start h2 { font-size: 32px; } .modes img { height: 200px; } }

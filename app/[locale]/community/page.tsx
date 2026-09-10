@@ -87,6 +87,7 @@ export default function CommunityPage({ params }: { params: { locale: string } }
         {name:copy.eyebrow,url},
       ]}/>
       <CorporateHero
+        companion="community"
         eyebrow={copy.eyebrow}
         title={copy.title}
         description={copy.intro}

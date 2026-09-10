@@ -14,6 +14,7 @@ import { MotionArticle, MotionListItem, MotionReveal } from "./MotionReveal";
 import { PartnerNetwork } from "./PartnerNetwork";
 import { CommunityBanner } from "./CommunityBanner";
 import { ShowcaseTabs } from "./ShowcaseTabs";
+import { SweezyCompanion, type CompanionPose } from "../SweezyCompanion";
 import styles from "./landing.module.css";
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
@@ -142,6 +143,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             {copy.method.steps.map((step, index) => (
               <MotionListItem key={step.title} delay={index * 0.045}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
+                <SweezyCompanion pose={(["welcome", "route", "done"] as CompanionPose[])[index]} className={styles.methodCompanion} />
                 <div>
                   <h3>{step.title}</h3>
                   <p>{step.body}</p>

@@ -178,6 +178,7 @@ export default async function BlogIndexPage({
           { name: copy.eyebrow, url: `${BASE_URL}/${locale}/blog` },
         ]} />
         <CorporateHero
+          companion="blog"
           eyebrow={copy.eyebrow}
           title={copy.h1}
           description={copy.description}

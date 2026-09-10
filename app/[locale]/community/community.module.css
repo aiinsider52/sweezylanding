@@ -63,3 +63,10 @@
   .section{padding:38px 0}
 }
 @media(prefers-reduced-motion:reduce){.platform{transition:none}}
+
+.platforms { padding: 36px 0; gap: 16px; }
+.platform { min-height: 220px; border-radius: 8px; padding: 24px; }
+.platform:last-child { background: #fff; }
+.platform h2 { margin-top: 22px; max-width: 22ch; font-size: 28px; line-height: 1.12; letter-spacing: 0; }
+.platform p { font-size: 14px; }
+@media(max-width:620px) { .platform h2 { font-size: 24px; } }
