@@ -51,7 +51,7 @@ export function CorporateHero({
   const panelCompanion = companion === "planning"
     ? "planning"
     : companion === "blog"
-      ? "guide"
+      ? "reader"
       : companion === "jobs"
         ? "done"
         : null;

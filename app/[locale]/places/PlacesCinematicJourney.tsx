@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "../../../lib/i18n";
-import { SweezyCompanion } from "../../components/SweezyCompanion";
 import { useReducedMotionPreference } from "../../components/home/useReducedMotionPreference";
 import styles from "./travel.module.css";
 
@@ -126,7 +125,6 @@ export function PlacesCinematicJourney({ locale, title, description, eyebrow, co
           <p className={styles.eyebrow}>{copy.scenes[3]}</p>
           <h2>{copy.final}</h2>
           <a href="#places-catalog" tabIndex={finalVisible ? undefined : -1}>{copy.explore}<span aria-hidden>↓</span></a>
-          <SweezyCompanion pose="route" className={styles.placesFinalCompanion} />
         </div>
 
         <div className={styles.placesScroll} aria-hidden="true"><span>{copy.scroll}</span><i /></div>

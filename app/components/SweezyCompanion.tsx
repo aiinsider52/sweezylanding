@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./SweezyCompanion.module.css";
 
-export type CompanionPose = "welcome" | "route" | "done" | "guide" | "planning" | "wave";
+export type CompanionPose = "welcome" | "route" | "done" | "guide" | "planning" | "wave" | "reader";
 
 export function SweezyCompanion({ pose, className = "", priority = false }: {
   pose: CompanionPose;
@@ -9,7 +9,7 @@ export function SweezyCompanion({ pose, className = "", priority = false }: {
   priority?: boolean;
 }) {
   return <span className={`${styles.companion} ${className}`} data-pose={pose} aria-hidden="true">
-    <Image src={`/brand/companion/${pose}.webp`} alt="" fill
+    <Image src={`/brand/companion/${pose}.${pose === "reader" ? "png" : "webp"}`} alt="" fill
       sizes="(max-width: 600px) 150px, 300px" priority={priority} />
   </span>;
 }
