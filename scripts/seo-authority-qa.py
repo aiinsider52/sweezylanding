@@ -1,11 +1,13 @@
-"""Local production smoke test. Start Next.js on port 3015 before running."""
+"""Local production smoke test. Set QA_BASE_URL to override port 3015."""
 
+import os
 from playwright.sync_api import sync_playwright
 
-BASE = "http://127.0.0.1:3015"
+BASE = os.environ.get("QA_BASE_URL", "http://127.0.0.1:3015").rstrip("/")
 
 checks = [
-    ("/en/guides/zurich", ["Swiss Tax Return 2026", "How to Find a Job", "Health insurance", "Status S", "Places to visit"]),
+    ("/en/guides/zurich", ["Swiss Tax Return 2026", "How to Find a Job", "Your Zurich moving checklist", "Zürich Süd", "Places to visit"]),
+    ("/uk/guides/zurich", ["Чекліст переїзду", "Zürich Süd"]),
     ("/uk/blog/status-s-shveytcariya-povnyy-gid", ["Від статусу до життя у Швейцарії", "Реєстрація", "Спільнота"]),
     ("/uk/blog/yak-zareyestruvatysya-v-shveytcariyi", ["Коротка відповідь", "RegisterMe", "Від статусу до життя у Швейцарії"]),
     ("/uk/blog/poshuk-roboty-shveytcariya-2026", ["Від статусу до життя у Швейцарії"]),
@@ -29,6 +31,13 @@ with sync_playwright() as p:
             body = page.locator("body").inner_text()
             for text in texts:
                 assert text.casefold() in body.casefold(), (path, text)
+            assert page.locator("h1").count() == 1, path
+            assert page.locator('link[rel="canonical"]').get_attribute("href") == "https://www.sweezy.world" + path
+            robots = page.locator('meta[name="robots"]').get_attribute("content") if page.locator('meta[name="robots"]').count() else ""
+            assert "noindex" not in robots, path
+            if path.endswith("/guides/zurich"):
+                for anchor in ["registration", "permit", "housing"]:
+                    assert page.locator(f"#{anchor}").count() == 1, anchor
             overflow = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
             assert overflow <= 1, (path, width, overflow)
         assert not errors, errors

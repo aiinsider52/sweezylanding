@@ -559,8 +559,21 @@ export default function CantonGuidePage({
   /* ── Rich body ───────────────────────────────────────────────────────────── */
   const richBody = rich && richData ? (
     <div className="space-y-10">
+      {rich.arrivalPlan && (
+        <nav aria-label={rich.arrivalPlan.title} className="pt-8">
+          <h2 className="text-2xl font-semibold">{rich.arrivalPlan.title}</h2>
+          <ol className="mt-4 list-decimal space-y-4 pl-6">
+            {rich.arrivalPlan.steps.map((step) => (
+              <li key={step.href}>
+                <a href={step.href} className="font-semibold underline underline-offset-4">{step.title}</a>
+                <p className="mt-1 text-sm leading-7 text-white/70">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
       {/* Registration */}
-      <section>
+      <section id="registration" className="scroll-mt-24">
         <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionRegistration}</h2>
         <p className="mt-4 leading-8 text-white/70">{rich.registrationLead}</p>
         <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-white/70">
@@ -585,7 +598,7 @@ export default function CantonGuidePage({
       </section>
 
       {/* Permit */}
-      <section>
+      <section id="permit" className="scroll-mt-24">
         <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionPermit}</h2>
         <p className="mt-4 leading-8 text-white/70">{rich.permitLead}</p>
         {rich.permitStatusSNote && (
@@ -605,7 +618,7 @@ export default function CantonGuidePage({
       </section>
 
       {/* Health insurance */}
-      <section>
+      <section id="health-insurance" className="scroll-mt-24">
         <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionHealth}</h2>
         <p className="mt-3 text-sm text-white/50">{rich.avgPremium}</p>
         <p className="text-2xl font-bold text-accent-green">{rich.healthPremium}</p>
@@ -630,7 +643,7 @@ export default function CantonGuidePage({
       </section>
 
       {/* Housing */}
-      <section>
+      <section id="housing" className="scroll-mt-24">
         <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionHousing}</h2>
         <p className="mt-3 text-sm text-white/50">{rich.avgRent}</p>
         <p className="text-xl font-bold text-white">{rich.housingAvgRent}</p>

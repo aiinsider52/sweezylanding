@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useLocale } from "../../lib/locale-context";
 import { APP_STORE_URL, FACEBOOK_COMMUNITY_URL, INSTAGRAM_URL, TELEGRAM_URL } from "../../lib/links";
 import { BrandLogo } from "./BrandLogo";
+import { SEO_CLUSTERS } from "../../data/seo-clusters";
 
 function FooterLink({
   href,
@@ -70,9 +71,9 @@ export function SiteFooter({ year }: { year: number }) {
         { label: t("footer.blog"), href: localeBlog },
         { label: locale === "uk" ? "Спільнота Sweezy" : locale === "de" ? "Sweezy Community" : "Sweezy community", href: `/${locale}/community` },
         { label: locale === "uk" ? "Редакційні стандарти" : locale === "de" ? "Redaktionelle Standards" : "Editorial standards", href: `/${locale}/editorial` },
-        ...(locale === "uk"
-          ? [{ label: "Українцям у Швейцарії", href: "/uk/blog/status-s-shveytcariya-povnyy-gid" }]
-          : []),
+        ...SEO_CLUSTERS[locale]
+          .filter((cluster) => cluster.key !== "places" && cluster.key !== "community")
+          .map((cluster) => ({ label: cluster.title, href: cluster.href })),
       ],
     },
     {
