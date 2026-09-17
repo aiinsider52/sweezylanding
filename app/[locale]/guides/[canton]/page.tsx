@@ -199,10 +199,10 @@ const OFFICE_SPOTLIGHTS: Record<string, OfficeSpotlight> = {
         body: "Міграційний відділ Appenzell Ausserrhoden відповідає за кантональні міграційні питання та дозволи на проживання. Реєстрацію адреси починайте у місцевому Einwohneramt, а щодо міграційних питань використовуйте офіційні контакти кантону.",
       },
       de: {
-        metaTitle: "Migrationsamt Herisau: Kontakt & Anmeldung",
+        metaTitle: "Migrationsamt Herisau (Appenzell AR): Kontakt & Anmeldung",
         metaDescription:
-          "Offizielle Kontaktdaten der Abteilung Migration Appenzell Ausserrhoden in Herisau sowie Hinweise zu Anmeldung und Aufenthaltsbewilligung.",
-        heading: "Migrationsamt Herisau: offizieller Kontakt",
+          "Migrationsamt Herisau: offizieller Kontakt der Abteilung Migration Appenzell Ausserrhoden plus Hinweise zu Anmeldung und Aufenthaltsbewilligung.",
+        heading: "Migrationsamt Herisau und Appenzell Ausserrhoden: offizieller Kontakt",
         body: "Die Abteilung Migration Appenzell Ausserrhoden bearbeitet kantonale Migrations- und Bewilligungsfragen. Die Wohnsitzanmeldung beginnt bei der zuständigen Einwohnerkontrolle Ihrer Gemeinde; für ausländerrechtliche Fragen nutzen Sie den offiziellen Kantonskontakt.",
       },
     },

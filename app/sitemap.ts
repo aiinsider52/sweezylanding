@@ -67,6 +67,7 @@ async function getBlogEntries(): Promise<SitemapEntry[]> {
 async function getStaticEntries(): Promise<SitemapEntry[]> {
   const appDir = path.join(process.cwd(), "app");
   const pages: string[] = [...LOCALES.map((locale) => `/${locale}`)];
+  const zurichRegistration = path.join(appDir, "[locale]", "guides", "zurich", "registration", "page.tsx");
   const ukrainianStatusUpdates = path.join(appDir, "uk", "status-s-updates", "page.tsx");
   const localizedBlogIndex = path.join(appDir, "[locale]", "blog", "page.tsx");
   const localizedGuidesIndex = path.join(appDir, "[locale]", "guides", "page.tsx");
@@ -94,6 +95,10 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
         cantons.map((canton) => `/${locale}/guides/${canton.slug}`),
       ),
     );
+  }
+
+  if (await pathExists(zurichRegistration)) {
+    pages.push("/en/guides/zurich/registration");
   }
 
   if (await pathExists(localizedPlacesIndex)) {

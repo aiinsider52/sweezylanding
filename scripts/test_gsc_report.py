@@ -19,6 +19,11 @@ class MetricsTests(unittest.TestCase):
                 writer.writerow([day, 1, 100, "1%", 10])
         with (folder / "Страницы.csv").open("w", encoding="utf-8", newline="") as output:
             csv.writer(output).writerow(["Популярные страницы", "Kлики", "Показы", "CTR", "Позиция"])
+        with (folder / "Запросы.csv").open("w", encoding="utf-8", newline="") as output:
+            writer = csv.writer(output)
+            writer.writerow(["Популярные запросы", "Kлики", "Показы", "CTR", "Позиция"])
+            writer.writerow(["moving to zurich", 2, 152, "1.32%", 23.69])
+            writer.writerow(["sweezy app", 7, 88, "7.95%", 4.94])
 
     def test_windows_partial_month_and_unknown_visitors(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -30,6 +35,10 @@ class MetricsTests(unittest.TestCase):
             self.assertTrue(result["months"]["2026-08"]["complete"])
             self.assertFalse(result["months"]["2026-09"]["complete"])
             self.assertIsNone(result["visitor_goal"]["achieved"])
+            self.assertEqual(
+                result["non_brand_query_opportunities"][0]["Популярные запросы"],
+                "moving to zurich",
+            )
 
     def test_missing_and_duplicate_dates_fail(self):
         with tempfile.TemporaryDirectory() as temporary:

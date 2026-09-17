@@ -7,6 +7,7 @@ BASE = os.environ.get("QA_BASE_URL", "http://127.0.0.1:3015").rstrip("/")
 
 checks = [
     ("/en/guides/zurich", ["Swiss Tax Return 2026", "How to Find a Job", "Your Zurich moving checklist", "Zürich Süd", "Places to visit"]),
+    ("/en/guides/zurich/registration", ["Register in Zurich", "Within 14 days", "Zurich South", "Personenmeldeamt and Migrationsamt"]),
     ("/uk/guides/zurich", ["Чекліст переїзду", "Zürich Süd"]),
     ("/uk/blog/status-s-shveytcariya-povnyy-gid", ["Від статусу до життя у Швейцарії", "Реєстрація", "Спільнота"]),
     ("/uk/blog/yak-zareyestruvatysya-v-shveytcariyi", ["Коротка відповідь", "RegisterMe", "Від статусу до життя у Швейцарії"]),
@@ -14,7 +15,9 @@ checks = [
     ("/uk/blog/medychne-strakhuvannya-shveytcariya", ["Від статусу до життя у Швейцарії"]),
     ("/en/blog/swiss-tax-return-2026", ["at least CHF 120,000", "voluntary"]),
     ("/en/guides/appenzell-ausserrhoden", ["Short answer", "Official source", "Where do I register my address?"]),
+    ("/de/guides/appenzell-ausserrhoden", ["Migrationsamt Herisau und Appenzell Ausserrhoden", "Offizielle Quelle"]),
     ("/en/guides/fribourg", ["Short answer", "Official source", "Which region does this office serve?"]),
+    ("/en/community", ["Sweezy Community for Newcomers in Switzerland", "Join Telegram", "Join Facebook group"]),
     ("/uk/places/oeschinen-lake", ["Коротка відповідь", "Офіційне джерело про місце", "FAQ"]),
 ]
 
@@ -48,10 +51,24 @@ with sync_playwright() as p:
     assert redirect.status == 308, redirect.status
     sitemap = page.request.get(BASE + "/sitemap.xml")
     assert sitemap.ok and "/en/blog/moving-to-zurich-guide" not in sitemap.text()
+    assert "/en/guides/zurich/registration" in sitemap.text()
+    unavailable = page.request.get(BASE + "/de/guides/zurich/registration")
+    assert unavailable.status == 404, unavailable.status
     response = page.goto(BASE + "/en/blog/moving-to-zurich-guide", wait_until="load")
     assert response and response.ok
     assert page.url == BASE + "/en/guides/zurich", page.url
     assert page.locator('link[rel="canonical"]').get_attribute("href") == "https://www.sweezy.world/en/guides/zurich"
+
+    page.goto(BASE + "/en/guides/zurich", wait_until="load")
+    assert page.locator('a[href="/en/guides/zurich/registration"]').count() >= 1
+
+    page.goto(BASE + "/en/guides/zurich/registration", wait_until="load")
+    json_ld = page.locator('script[type="application/ld+json"]').all_text_contents()
+    assert any('"FAQPage"' in item for item in json_ld)
+    assert any('"WebPage"' in item and '"citation"' in item for item in json_ld)
+
+    page.goto(BASE + "/en/community", wait_until="load")
+    assert page.title() == "Sweezy Community: Telegram & Facebook Switzerland"
 
     page.goto(BASE + "/uk/blog/status-s-shveytcariya-povnyy-gid", wait_until="load")
     json_ld = page.locator('script[type="application/ld+json"]').all_text_contents()

@@ -114,7 +114,7 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
         title: "Your Zurich moving checklist",
         steps: [
           { title: "Before moving: prepare your housing documents", text: "Keep your rental confirmation and application records together. Separate confirmed costs from estimates in your moving budget.", href: "#housing" },
-          { title: "After arrival: choose the correct registration appointment", text: "Check whether you are arriving from abroad or moving within Switzerland before booking.", href: "#registration" },
+          { title: "After arrival: choose the correct registration appointment", text: "Check whether you are arriving from abroad or moving within Switzerland before booking.", href: "/en/guides/zurich/registration" },
           { title: "Next: track permit and insurance follow-up", text: "Keep the authority's next request alongside your insurance paperwork so neither gets lost after registration.", href: "#permit" },
         ],
       },
@@ -201,6 +201,10 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
         },
       ],
       blogLinks: [
+        {
+          href: "/en/guides/zurich/registration",
+          label: "Register in Zurich: appointment, deadline and required documents",
+        },
         {
           href: "/en/blog/swiss-tax-return-2026",
           label: "Swiss Tax Return 2026: deadline, CHF 120,000 rule and deductions",

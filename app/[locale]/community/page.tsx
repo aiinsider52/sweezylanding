@@ -10,7 +10,7 @@ import { JsonLd } from "../../components/seo/JsonLd";
 import styles from "./community.module.css";
 
 const COPY: Record<Locale, {
-  title: string; description: string; eyebrow: string; intro: string;
+  title: string; metaTitle?: string; description: string; eyebrow: string; intro: string;
   telegramTitle: string; telegramBody: string; telegramCta: string;
   facebookTitle: string; facebookBody: string; facebookCta: string;
   purposeTitle: string; purposes: [string, string][];
@@ -18,7 +18,8 @@ const COPY: Record<Locale, {
 }> = {
   en: {
     title: "Sweezy Community for Newcomers in Switzerland",
-    description: "Join Sweezy community on Telegram and Facebook for practical exchange, relocation updates and connections among newcomers and Ukrainians in Switzerland.",
+    metaTitle: "Sweezy Community: Telegram & Facebook Switzerland",
+    description: "Join the official Sweezy community on Telegram or Facebook for Switzerland relocation updates, practical questions and newcomer connections.",
     eyebrow: "COMMUNITY · SWITZERLAND",
     intro: "Sweezy connects product guidance with real conversation. Use our official Telegram and Facebook spaces to follow updates, exchange experience and meet people navigating life in Switzerland.",
     telegramTitle: "Fast updates. Direct conversation.", telegramBody: "Telegram works best for timely Sweezy news, quick questions and staying close to community activity.", telegramCta: "Join Telegram",
@@ -65,7 +66,8 @@ export function generateStaticParams() { return ["en", "uk", "de"].map((locale) 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
   const copy = COPY[params.locale];
-  return { title: copy.title, description: copy.description, alternates: buildLocaleAlternates(params.locale, "/community"), openGraph: { title: copy.title, description: copy.description, url: `${BASE_URL}/${params.locale}/community`, type: "website" } };
+  const title = copy.metaTitle ?? copy.title;
+  return { title, description: copy.description, alternates: buildLocaleAlternates(params.locale, "/community"), openGraph: { title, description: copy.description, url: `${BASE_URL}/${params.locale}/community`, type: "website" } };
 }
 
 export default function CommunityPage({ params }: { params: { locale: string } }) {

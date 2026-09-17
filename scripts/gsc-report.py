@@ -65,13 +65,26 @@ def build_report(folder):
         [row for row in pages if int(row["Показы"]) >= 100 and float(row["Позиция"]) <= 20],
         key=lambda row: int(row["Показы"]), reverse=True,
     )
+    queries = read_csv(folder / "Запросы.csv")
+    query_opportunities = sorted(
+        [
+            row for row in queries
+            if int(row["Показы"]) >= 15
+            and 4 <= float(row["Позиция"]) <= 30
+            and "sweezy" not in row["Популярные запросы"].lower()
+        ],
+        key=lambda row: (int(row["Показы"]), -float(row["Позиция"])),
+        reverse=True,
+    )
     return {
         "from": str(start), "to": str(end),
         "measurement_note": "GSC clicks are not unique visitors. Position is impression-weighted from rounded daily data. Page opportunities use the full export period, not the last 28 days.",
         "visitor_goal": {"monthly_unique_visitors": 500, "measured_unique_visitors": None, "achieved": None},
         "total": metrics(rows), "months": months,
         "last_28_days": current, "previous_28_days": previous,
-        "growth_percent": growth, "page_opportunities": opportunities,
+        "growth_percent": growth,
+        "page_opportunities": opportunities,
+        "non_brand_query_opportunities": query_opportunities,
     }
 
 
