@@ -119,10 +119,10 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
         ],
       },
       intro:
-        "Zurich is Switzerland's largest city and economic hub, home to over 440,000 residents — roughly 32% of whom are foreign nationals. The canton offers one of the world's highest standards of living, a strong job market spanning finance, technology, and pharmaceuticals, and an efficient public-service infrastructure. Housing competition is intense, especially in the city proper, and registering within 14 days of arrival is a legal requirement.",
+        "Moving to Zurich starts with three decisions: where you will live, which residence route applies to you, and what you need to arrange before arrival. This guide connects housing preparation, city registration, permit follow-up, insurance and language support. Check whether your address is inside Zurich city: another municipality in the canton has its own registration office.",
       summaryAnswer:
         "After moving to Zurich, register with the municipality where you actually live within 14 days. City of Zurich residents book a Personenmeldeamt appointment; residents of another canton municipality use that municipality's Einwohnerkontrolle. Residence-permit decisions and extensions are handled by the Canton of Zurich Migration Office, while basic health insurance is generally due within three months.",
-      reviewedAt: "2026-08-03",
+      reviewedAt: "2026-09-21",
       appliesTo:
         "New residents moving to the City of Zurich or another municipality in Canton Zurich. Permit documents vary by nationality and reason for stay.",
       jurisdiction:
@@ -130,7 +130,7 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       officialSources: [
         {
           name: "City of Zurich — arrival, registration and first steps",
-          url: "https://www.stadt-zuerich.ch/de/lebenslagen/neu-in-zuerich/zuzug-ausland/willkommen.html",
+          url: "https://www.stadt-zuerich.ch/zuzug",
         },
         {
           name: "Canton Zurich — residence and family reunification",
@@ -144,6 +144,9 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
           name: "Federal Office of Public Health — insurance requirement",
           url: "https://www.bag.admin.ch/en/health-insurance-requirement-to-obtain-insurance-for-persons-resident-in-switzerland",
         },
+        { name: "SVA Zurich — premium reduction applications", url: "https://svazurich.ch/unsere-produkte/weitere-produkte/krankenversicherung--kvg-/praemienverbilligung/anmeldung.html" },
+        { name: "Federal Office of Public Health — premiums and cost sharing", url: "https://www.bag.admin.ch/en/health-insurance-premiums-and-co-payment" },
+        { name: "City of Zurich — German courses", url: "https://www.stadt-zuerich.ch/de/lebenslagen/neu-in-zuerich/zuzug-ausland/deutsch-lernen.html" },
       ],
       registrationLead:
         "Register within 14 days in your municipality. Arriving from abroad in the City of Zurich? Book an in-person appointment at Zürich Süd. Nord/West guidance for moves within the city is a different procedure. Follow the location and documents in your booking confirmation; other canton municipalities have their own offices.",
@@ -160,47 +163,49 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       ],
       permitLead:
         "The Migrationsamt des Kantons Zürich decides residence-permit matters for the canton. EU/EFTA citizens generally register and submit their residence application through their municipality; the permit type depends on the employment or stay conditions. Many non-EU/EFTA employment routes require an employer-led application before work or entry. Check the official canton flow for your nationality and purpose of stay.",
-      healthPremium: "~CHF 480/month",
+      healthPremium: "Compare a quote for your postcode and age",
       healthSubsidyInfo:
-        "Apply for Prämienverbilligung (premium reduction) at sozialversicherungen.zh.ch. Single-person households with income up to approx. CHF 69,100/year may qualify. Applications are processed by SVA Zürich — submit by 31 March of the coverage year. To reduce premiums immediately: compare on priminfo.admin.ch, select a Telmed or HMO model, and raise your franchise to CHF 2,500 (saves up to CHF 150/month).",
+        "Use the official Priminfo comparison for your postcode, age, accident cover, deductible and insurance model. Budget for both premiums and out-of-pocket costs: a higher deductible lowers the premium but increases what you may pay for treatment. SVA Zurich handles premium reductions; check its application page for the relevant year, household circumstances and deadline. A single income threshold does not describe every household.",
       healthHospitalNote:
-        "Main emergency hospitals: Universitätsspital Zürich (USZ) at Rämistrasse 100 (+41 44 255 11 11) and Stadtspital Triemli at Birmensdorferstrasse 497 (+41 44 416 11 11). For non-emergency GP visits, use the Healthpoint app or search ärzte.ch for English-speaking doctors.",
+        "Before choosing a family-doctor, HMO or Telmed model, check its first-contact rules and whether your preferred practice participates. Ask the practice about appointment availability and consultation languages before relying on it for routine care.",
       courses: [
         {
-          name: "HEKS Zürich – Sprachförderung",
+          name: "City of Zurich course search",
           description:
-            "Free German integration courses for Status S holders and recognized refugees. Multiple levels (A1–B1), small groups, Ukrainian-speaking staff available. Register at heks.ch/region/zurich.",
+            "Start with the city's German-course database. Compare level, timetable, location and course format before contacting a provider.",
         },
         {
-          name: "Volkshochschule Zürich (VHS)",
+          name: "Subsidized German courses",
           description:
-            "Subsidized German courses from A1 to C1. Prices from CHF 195 per course level, multiple intake dates per year. volkshochschule.ch",
+            "The city lists courses it co-finances. Check eligibility and funding conditions for the particular course; subsidized does not mean every course is free for every resident.",
         },
         {
-          name: "Migros Klubschule Zürich",
+          name: "Choose a sustainable schedule",
           description:
-            "Group German courses at locations across Zurich, from CHF 250 per course. Flexible schedules including evenings. migros-klubschule.ch",
+            "Ask about placement, attendance requirements, childcare and cancellation terms. Compare the full course cost, including materials, before enrolling.",
         },
       ],
-      housingAvgRent: "CHF 1,800–2,200 / month",
+      housingAvgRent: "Rent + additional charges + moving costs",
       housingPortals: ["homegate.ch", "immoscout24.ch", "comparis.ch/immobilien", "ronorp.net"],
       housingAidInfo:
-        "Wohnversorgung Zürich manages subsidized housing — waitlists of 2–5 years. For urgent situations through Sozialhilfe, contact soziale-einrichtungen.ch. Many expats find housing faster via Facebook groups 'Zürich Wohnungen' and 'Expats in Zurich' or through employer-provided accommodation during the first months.",
+        "Build your budget from current listings for the size and location you need. Record the net rent, additional charges, deposit and any temporary-accommodation overlap separately. Prepare identification, employment or income evidence and the documents requested by the landlord. For temporary housing, ask the municipality which address confirmation it accepts for registration. Compare commuting time as well as rent before choosing a municipality outside the city.",
       faq: [
         {
           q: "How long does registration take at the Personenmeldeamt in Zurich?",
           a: "Book before attending. Arrivals from abroad use the city's Zuzug aus dem Ausland appointment, not the procedure for an address change within Zurich. Allow for separate permit follow-up; the city does not promise one processing time for every case.",
         },
         {
-          q: "What is the cheapest health insurance option in Zurich canton in 2026?",
-          a: "With a CHF 2,500 franchise and a Telmed or HMO model, you can reduce the adult premium from ~CHF 480 to CHF 310–360/month. Compare all approved tariffs at priminfo.admin.ch — select canton 'Zürich', your age, and model. Switch by 30 November each year.",
+          q: "How much should I budget for health insurance in Zurich?",
+          a: "Compare current Priminfo quotes for your postcode, age and chosen model. Include the deductible and cost sharing in your budget, not just the monthly premium. Check SVA Zurich separately for premium-reduction eligibility.",
         },
         {
-          q: "Are there English or Ukrainian-speaking support services in Zurich?",
-          a: "Yes. HEKS Zürich has Ukrainian-speaking case workers and runs free language courses. The Facebook group 'Українці у Цюриху' has 30,000+ members sharing housing tips, job openings, and practical advice. For English-speaking support, contact the International Welcome Centre Zurich (IWCZ) at internazionale.ch.",
+          q: "Do I register in Zurich city if I live elsewhere in the canton?",
+          a: "Use the municipality where you actually live. A postal address in Canton Zurich does not automatically make the City of Zurich Personenmeldeamt responsible for your registration. Check your municipality's arrival instructions.",
         },
       ],
       blogLinks: [
+        { href: "/en/blog/finding-apartment-switzerland", label: "Finding an apartment: applications and rental preparation" },
+        { href: "/en/blog/how-to-register-switzerland", label: "Registration in Switzerland: choose your municipality and process" },
         {
           href: "/en/guides/zurich/registration",
           label: "Register in Zurich: appointment, deadline and required documents",
@@ -241,8 +246,8 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
       colWebsite: "Website",
       deadline: "Registration deadline: within 14 days of arrival.",
       requiredDocs: "Required documents:",
-      avgPremium: "Average health insurance premium (2026, adult, standard):",
-      avgRent: "Average 1-room apartment rent:",
+      avgPremium: "Your health-insurance budget:",
+      avgRent: "Your housing budget:",
     },
     uk: {
       metaTitle: "Переїзд до Цюриха 2026: реєстрація, житло та перші кроки",
