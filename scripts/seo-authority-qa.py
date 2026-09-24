@@ -11,8 +11,8 @@ checks = [
     ("/uk/guides/zurich", ["Чекліст переїзду", "Zürich Süd"]),
     ("/uk/blog/status-s-shveytcariya-povnyy-gid", ["Від статусу до життя у Швейцарії", "Реєстрація", "Спільнота"]),
     ("/uk/blog/yak-zareyestruvatysya-v-shveytcariyi", ["Коротка відповідь", "RegisterMe", "Від статусу до життя у Швейцарії"]),
-    ("/uk/blog/poshuk-roboty-shveytcariya-2026", ["Від статусу до життя у Швейцарії"]),
-    ("/uk/blog/medychne-strakhuvannya-shveytcariya", ["Від статусу до життя у Швейцарії"]),
+    ("/uk/blog/poshuk-roboty-shveytcariya-2026", ["Від статусу до життя у Швейцарії", "Усний трудовий договір також може бути чинним", "щонайменше 8 годин"]),
+    ("/uk/blog/medychne-strakhuvannya-shveytcariya", ["Від статусу до життя у Швейцарії", "470 CHF", "1530 CHF", "лише з дати вступу"]),
     ("/en/blog/swiss-tax-return-2026", ["at least CHF 120,000", "voluntary"]),
     ("/en/guides/appenzell-ausserrhoden", ["Short answer", "Official source", "Where do I register my address?"]),
     ("/de/guides/appenzell-ausserrhoden", ["Migrationsamt Herisau und Appenzell Ausserrhoden", "Offizielle Quelle"]),
@@ -47,6 +47,14 @@ with sync_playwright() as p:
         page.close()
 
     page = browser.new_page()
+    for slug in ["poshuk-roboty-shveytcariya-2026", "medychne-strakhuvannya-shveytcariya"]:
+        page.goto(BASE + "/uk/blog/" + slug, wait_until="load")
+        for href in set(page.locator('article a[href^="/uk/"]').evaluate_all("links => links.map(link => link.getAttribute('href'))")):
+            linked = page.request.get(BASE + href)
+            assert linked.ok, (slug, href, linked.status)
+        structured = page.locator('script[type="application/ld+json"]').all_text_contents()
+        assert any('"BlogPosting"' in item and '2026-09-24' in item for item in structured), slug
+
     redirect = page.request.get(BASE + "/en/blog/moving-to-zurich-guide", max_redirects=0)
     assert redirect.status == 308, redirect.status
     sitemap = page.request.get(BASE + "/sitemap.xml")
