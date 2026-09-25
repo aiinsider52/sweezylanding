@@ -15,6 +15,7 @@ import type { Locale } from "../../../../lib/i18n";
 import Link from "next/link";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
+import { SweezyCompanion } from "../../../components/SweezyCompanion";
 import { getPostImage, getPostImageAlt } from "../../../../lib/editorial";
 import { getUkrainianAuthorityRoute } from "../../../../data/authority-routes";
 import styles from "../../editorial.module.css";
@@ -475,7 +476,7 @@ export default async function BlogPostPage({
           </section>
         ) : null}
 
-        <div className={styles.cta}>
+        <div className={`${styles.cta} ${styles.companionCta}`}>
           <div>
             <p className={styles.eyebrow}>26 cantons · local detail</p>
             <h2>
@@ -487,6 +488,7 @@ export default async function BlogPostPage({
             </h2>
           </div>
           <Link href={`/${locale}/guides`}>{locale === "uk" ? "Гіди" : "Guides"} →</Link>
+          <SweezyCompanion pose="reader" className={styles.ctaCompanion} />
         </div>
       </article>
     </main>

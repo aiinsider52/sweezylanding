@@ -5,6 +5,8 @@ import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
 import { JsonLd } from "../../components/seo/JsonLd";
+import { SweezyCompanion } from "../../components/SweezyCompanion";
+import styles from "./about.module.css";
 
 type AboutCopy = {
   metaTitle: string;
@@ -180,9 +182,12 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/60">{copy.intro}</p>
         </header>
 
-        <section className="py-10">
+        <section className={styles.mission}>
+          <div className={styles.missionCopy}>
           <h2 className="text-2xl font-semibold tracking-tight">{copy.missionTitle}</h2>
           <p className="mt-4 leading-8 text-white/65">{copy.mission}</p>
+          </div>
+          <SweezyCompanion pose="greeting" className={styles.companion} />
         </section>
 
         <section className="border-t border-white/10 py-10">

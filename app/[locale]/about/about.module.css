@@ -1,0 +1,26 @@
+.mission {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: center;
+  gap: 32px;
+  padding-top: 40px;
+  overflow: hidden;
+}
+
+.missionCopy { padding-bottom: 40px; }
+
+.companion {
+  width: 280px;
+  height: 300px;
+  align-self: end;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 4%);
+  mask-composite: intersect;
+}
+
+.companion img { object-fit: cover; object-position: center top; }
+
+@media (max-width: 640px) {
+  .mission { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .missionCopy { padding-bottom: 16px; }
+  .companion { justify-self: end; width: 240px; height: 220px; }
+}
