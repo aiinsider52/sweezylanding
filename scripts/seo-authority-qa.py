@@ -14,6 +14,7 @@ checks = [
     ("/uk/blog/poshuk-roboty-shveytcariya-2026", ["Від статусу до життя у Швейцарії", "Усний трудовий договір також може бути чинним", "щонайменше 8 годин"]),
     ("/uk/blog/medychne-strakhuvannya-shveytcariya", ["Від статусу до життя у Швейцарії", "470 CHF", "1530 CHF", "лише з дати вступу"]),
     ("/en/blog/swiss-tax-return-2026", ["at least CHF 120,000", "voluntary"]),
+    ("/en/blog/swiss-tax-system-expats", ["at least CHF 120,000", "not a tariff correction", "A refund is not guaranteed"]),
     ("/en/guides/appenzell-ausserrhoden", ["Short answer", "Official source", "Where do I register my address?"]),
     ("/de/guides/appenzell-ausserrhoden", ["Migrationsamt Herisau und Appenzell Ausserrhoden", "Offizielle Quelle"]),
     ("/en/guides/fribourg", ["Short answer", "Official source", "Which region does this office serve?"]),
@@ -38,6 +39,12 @@ with sync_playwright() as p:
             assert page.locator('link[rel="canonical"]').get_attribute("href") == "https://www.sweezy.world" + path
             robots = page.locator('meta[name="robots"]').get_attribute("content") if page.locator('meta[name="robots"]').count() else ""
             assert "noindex" not in robots, path
+            if path.endswith("/blog/swiss-tax-system-expats") or path.endswith("/blog/swiss-tax-return-2026"):
+                related = page.locator('a[class*="relatedCard"]')
+                expected = "swiss-tax-return-2026" if path.endswith("swiss-tax-system-expats") else "swiss-tax-system-expats"
+                assert related.first.get_attribute("href") == "/en/blog/" + expected
+                links = related.evaluate_all("items => items.map(item => item.getAttribute('href'))")
+                assert len(links) == len(set(links)) and path not in links
             if path.endswith("/guides/zurich"):
                 for anchor in ["registration", "permit", "housing"]:
                     assert page.locator(f"#{anchor}").count() == 1, anchor
@@ -47,6 +54,12 @@ with sync_playwright() as p:
         page.close()
 
     page = browser.new_page()
+    page.goto(BASE + "/en/blog/swiss-tax-system-expats", wait_until="load")
+    for href in set(page.locator('article a[href^="/en/"]').evaluate_all("links => links.map(link => link.getAttribute('href'))")):
+        linked = page.request.get(BASE + href)
+        assert linked.ok, (href, linked.status)
+    structured = page.locator('script[type="application/ld+json"]').all_text_contents()
+    assert any('"BlogPosting"' in item and '2026-09-28' in item for item in structured)
     for slug in ["poshuk-roboty-shveytcariya-2026", "medychne-strakhuvannya-shveytcariya"]:
         page.goto(BASE + "/uk/blog/" + slug, wait_until="load")
         for href in set(page.locator('article a[href^="/uk/"]').evaluate_all("links => links.map(link => link.getAttribute('href'))")):

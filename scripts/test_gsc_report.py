@@ -35,6 +35,8 @@ class MetricsTests(unittest.TestCase):
             self.assertTrue(result["months"]["2026-08"]["complete"])
             self.assertFalse(result["months"]["2026-09"]["complete"])
             self.assertIsNone(result["visitor_goal"]["achieved"])
+            self.assertIsNone(result["visitor_goal"]["measured_site_visits"])
+            self.assertEqual(result["visitor_goal"]["monthly_site_visits_range"], [2000, 3000])
             self.assertEqual(
                 result["non_brand_query_opportunities"][0]["Популярные запросы"],
                 "moving to zurich",

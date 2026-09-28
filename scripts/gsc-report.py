@@ -78,8 +78,8 @@ def build_report(folder):
     )
     return {
         "from": str(start), "to": str(end),
-        "measurement_note": "GSC clicks are not unique visitors. Position is impression-weighted from rounded daily data. Page opportunities use the full export period, not the last 28 days.",
-        "visitor_goal": {"monthly_unique_visitors": 500, "measured_unique_visitors": None, "achieved": None},
+        "measurement_note": "GSC clicks are not site visits or unique visitors. Position is impression-weighted from rounded daily data. Page and query opportunities use the full export period, not the last 28 days. Separate page and query exports cannot identify which queries generated a page's impressions.",
+        "visitor_goal": {"monthly_site_visits_range": [2000, 3000], "measured_site_visits": None, "achieved": None},
         "total": metrics(rows), "months": months,
         "last_28_days": current, "previous_28_days": previous,
         "growth_percent": growth,

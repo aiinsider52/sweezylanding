@@ -16,7 +16,7 @@ import Link from "next/link";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import { SweezyCompanion } from "../../../components/SweezyCompanion";
-import { getPostImage, getPostImageAlt } from "../../../../lib/editorial";
+import { getPostImage, getPostImageAlt, selectRelatedPosts } from "../../../../lib/editorial";
 import { getUkrainianAuthorityRoute } from "../../../../data/authority-routes";
 import styles from "../../editorial.module.css";
 
@@ -158,16 +158,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const allPosts = await getPostsByLocale(params.locale);
-  const preferredRelated = post.frontmatter.relatedPosts ?? [];
-  const relatedPosts = [
-    ...preferredRelated
-      .map((slug) => allPosts.find((candidate) => candidate.slug === slug))
-      .filter((candidate): candidate is NonNullable<typeof candidate> => Boolean(candidate)),
-    ...allPosts.filter(
-      (candidate) =>
-        candidate.slug !== post.slug && !preferredRelated.includes(candidate.slug),
-    ),
-  ].slice(0, 3);
+  const relatedPosts = selectRelatedPosts(post, allPosts);
 
   const { content } = await compileMDX<PostFrontmatter>({
     source: post.content,

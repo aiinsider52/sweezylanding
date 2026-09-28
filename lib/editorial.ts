@@ -69,6 +69,22 @@ export function getCantonImage(slug: string) {
   return CANTON_IMAGES[slug] ?? null;
 }
 
+export function selectRelatedPosts<T extends { slug: string; locale: Locale; frontmatter: { relatedPosts?: string[] } }>(post: T, posts: T[]): T[] {
+  const candidates = posts.filter((candidate) => candidate.locale === post.locale && candidate.slug !== post.slug);
+  const topic = getPostArtwork(post.slug, post.locale).key;
+  const preferred = (post.frontmatter.relatedPosts ?? []).flatMap((slug) => {
+    const candidate = candidates.find((item) => item.slug === slug);
+    return candidate ? [candidate] : [];
+  });
+  const sameTopic = topic === "guide" ? [] : candidates.filter((candidate) => getPostArtwork(candidate.slug, post.locale).key === topic);
+  const seen = new Set<string>();
+  return [...preferred, ...sameTopic, ...candidates].filter((candidate) => {
+    if (seen.has(candidate.slug)) return false;
+    seen.add(candidate.slug);
+    return true;
+  }).slice(0, 3);
+}
+
 export function getCantonImageAlt(locale: Locale, cantonName: string) {
   if (locale === "uk") {
     return `${cantonName}, Швейцарія — міський краєвид і практичний гід для переїзду та реєстрації`;
