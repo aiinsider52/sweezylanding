@@ -16,6 +16,7 @@ import { CommunityBanner } from "./CommunityBanner";
 import { ShowcaseTabs } from "./ShowcaseTabs";
 import { SweezyCompanion, type CompanionPose } from "../SweezyCompanion";
 import styles from "./landing.module.css";
+import { StarterKitBanner } from "../StarterKitBanner";
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
   en: { eyebrow: "SWITZERLAND OUTSIDE THE CHECKLIST", title: "Live here. Explore here.", body: "Sweezy now combines relocation guidance with practical routes to Switzerland's mountains, lakes, cities and natural landmarks.", open: "Open place", all: "Explore all places" },
@@ -182,6 +183,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        <StarterKitBanner locale={locale} />
         <PartnerNetwork copy={copy.partner} locale={locale} />
 
         <section id="faq" className={styles.faqSection}>

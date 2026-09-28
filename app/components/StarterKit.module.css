@@ -1,0 +1,64 @@
+.banner { background: #0c110e; color: #f4f5ef; padding: 48px 24px 0; }
+.bannerInner { max-width: 1200px; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 40px; align-items: center; }
+.copy { padding-bottom: 48px; }
+.eyebrow { font: 11px monospace; color: #b6ff00; margin-bottom: 16px; }
+.title { font-size: 40px; line-height: 1.1; letter-spacing: 0; font-weight: 700; max-width: 720px; }
+.intro { font-size: 17px; line-height: 1.6; color: #b8c0b9; max-width: 650px; margin: 20px 0; }
+.button { display: inline-flex; align-items: center; gap: 16px; background: #b6ff00; color: #101510; border-radius: 6px; padding: 14px 20px; font-weight: 700; }
+.button:focus-visible, .main a:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }
+.banner .companion, .hero .companion { width: 290px; height: 310px; align-self: end; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 4%); mask-composite: intersect; }
+.companion img { object-fit: cover; object-position: center top; }
+.main { background: #f2f3ee; color: #101510; padding: 52px max(20px, calc((100% - 1120px) / 2)) 64px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 36px; background: #0c110e; color: white; padding: 32px 32px 0; }
+.hero h1 { font-size: 44px; line-height: 1.08; font-weight: 750; letter-spacing: 0; }
+.heroText { padding-bottom: 32px; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin: 32px 0 12px; }
+.toolbar button { display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; }
+.toolbar button:focus-visible { outline: 3px solid #346b91; outline-offset: 4px; }
+.saved, .note { font-size: 14px; line-height: 1.6; color: #4c5850; }
+.note { margin: 22px 0; border-left: 3px solid #65994c; padding-left: 18px; }
+.days { margin: 28px 0; }
+.day { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 16px; padding: 25px 0; border-top: 1px solid #b6beb4; break-inside: avoid; }
+.number { font: 22px monospace; color: #4b6653; }
+.day h2 { font-size: 23px; font-weight: 700; margin-bottom: 12px; letter-spacing: 0; }
+.task { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; cursor: pointer; line-height: 1.6; }
+.task input { flex: 0 0 20px; width: 20px; height: 20px; accent-color: #426f35; margin-top: 3px; }
+.task input:checked + span { color: #577051; text-decoration: line-through; }
+.sources { border-top: 1px solid #b6beb4; padding-top: 24px; }
+.sources h2 { font-size: 20px; font-weight: 700; }
+.sources ul { display: flex; gap: 14px 24px; flex-wrap: wrap; margin: 16px 0; }
+.sources a { text-decoration: underline; }
+.end { border-top: 1px solid #b6beb4; margin-top: 28px; padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.end h2 { font-size: 24px; font-weight: 700; }
+.printBrand { display: none; }
+@media (max-width: 700px) {
+  .bannerInner, .hero { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .title { font-size: 30px; }
+  .hero h1 { font-size: 34px; }
+  .hero { padding: 24px 20px 0; }
+  .main { padding-top: 24px; }
+  .banner .companion, .hero .companion { width: 240px; height: 220px; justify-self: end; }
+  .copy { padding-bottom: 20px; }
+  .day { grid-template-columns: 36px minmax(0, 1fr); gap: 10px; }
+}
+@media print {
+  @page { size: A4; margin: 14mm; }
+  :global(body):has(.printBrand) { background: white !important; min-height: 0 !important; }
+  :global(body):has(.printBrand) > :global(header), :global(body):has(.printBrand) > :global(footer) { display: none !important; }
+  .main { padding: 0; background: white; color: black; }
+  .printBrand { display: block; font-weight: 800; margin-bottom: 12px; }
+  .hero { padding: 16px; grid-template-columns: minmax(0, 1fr) 110px; print-color-adjust: exact; }
+  .hero h1 { font-size: 28px; }
+  .heroText { padding: 0; }
+  .hero .companion { width: 110px; height: 120px; }
+  .intro { font-size: 12px; margin: 12px 0 0; }
+  .hero .button, .toolbar, .saved, .end { display: none; }
+  .note { font-size: 10px; margin: 16px 0; }
+  .days { margin: 10px 0; }
+  .day { padding: 7px 0; grid-template-columns: 35px minmax(0, 1fr); }
+  .day h2 { font-size: 16px; margin: 0; }
+  .task { font-size: 11px; padding: 4px 0; }
+  .task input { width: 13px; height: 13px; flex-basis: 13px; }
+  .sources { font-size: 10px; padding-top: 12px; break-inside: avoid; }
+  .sources h2 { font-size: 14px; }
+}
