@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const EVENT_TYPES = new Set(["web-vital", "client-error", "unhandled-rejection", "ai-referral"]);
+const EVENT_TYPES = new Set(["web-vital", "client-error", "unhandled-rejection", "ai-referral", "service-contact"]);
 
 function text(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.slice(0, maxLength) : undefined;
@@ -40,6 +40,7 @@ export async function POST(request: Request) {
     name: text(payload.name, 80),
     message: text(payload.message, 300),
     referrer: text(payload.referrer, 300),
+    attribution: text(payload.attribution, 20),
     path: text(payload.path, 200),
     id: text(payload.id, 120),
     rating: text(payload.rating, 24),

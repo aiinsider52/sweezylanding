@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { identifyCrawler } from "./lib/discovery";
 
 export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/") {
@@ -7,19 +8,13 @@ export function middleware(request: NextRequest) {
   }
 
   const userAgent = request.headers.get("user-agent") ?? "";
-  const crawler = [
-    "OAI-SearchBot",
-    "ChatGPT-User",
-    "GPTBot",
-    "ClaudeBot",
-    "PerplexityBot",
-    "Googlebot",
-    "bingbot",
-  ].find((name) => userAgent.toLowerCase().includes(name.toLowerCase()));
+  const crawler = identifyCrawler(userAgent);
 
   if (crawler) {
     console.info("[search-crawler]", JSON.stringify({
-      crawler,
+      crawler: crawler.agent,
+      purpose: crawler.purpose,
+      identityVerified: false,
       path: request.nextUrl.pathname,
       timestamp: new Date().toISOString(),
     }));

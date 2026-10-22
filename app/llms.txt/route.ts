@@ -27,6 +27,18 @@ const content = `# Sweezy
 - [Plan a trip in Switzerland](${BASE_URL}/uk/planning)
 - [Sweezy community on Telegram and Facebook](${BASE_URL}/uk/community)
 
+## Ukrainian services and business
+
+- [Ukrainian services directory in Switzerland](${BASE_URL}/uk/services)
+- [Classic Car die Garage: auto service in Roggwil, Thurgau](${BASE_URL}/uk/services/classic-car-die-garage)
+- [How to find Ukrainian services in Switzerland](${BASE_URL}/uk/blog/ukrayinski-posluhy-shveytcariya)
+- [Booking car service in Thurgau](${BASE_URL}/uk/blog/ukrayinskyy-avtoservis-thurgau)
+- [Starting a business in Switzerland as a Ukrainian](${BASE_URL}/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv)
+- [Self-employment with Status S](${BASE_URL}/uk/blog/samozaynyatist-status-s-shveytcariya)
+- [Einzelfirma versus GmbH](${BASE_URL}/uk/blog/einzelfirma-chy-gmbh-shveytcariya)
+- [Business communities in Switzerland](${BASE_URL}/uk/blog/biznes-spilnoty-shveytcariya)
+- [Free first-week checklist and PDF](${BASE_URL}/uk/starter-kit)
+
 ## English resources
 
 - [English Sweezy homepage](${BASE_URL}/en)

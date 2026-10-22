@@ -35,6 +35,7 @@ export function SiteHeader() {
     [`/${locale}/jobs`, copy.jobs],
     [`/${locale}/community`, copy.community],
     [`/${locale}/blog`, copy.blog],
+    ...(locale === "uk" ? [["/uk/services", "Послуги"] as const] : []),
   ] as const;
 
   useEffect(() => setOpen(false), [pathname]);

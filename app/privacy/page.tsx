@@ -3,15 +3,22 @@
 import { LegalPageShell } from "../components/LegalPageShell";
 import { useLocale } from "../../lib/locale-context";
 
+const WEBSITE_METRICS = {
+  en: { title: "Website measurements", text: "The website records page paths, timestamps, technical performance and errors in server logs. Referral measurements use the referring domain or a campaign source parameter to identify a possible AI referral. Service contact measurements record the provider identifier and the clicked action (phone, email, website or map). They do not collect message contents or confirm that a call, booking or purchase took place." },
+  uk: { title: "Вимірювання на сайті", text: "Сайт записує в серверні журнали шлях сторінки, час події, технічні показники та помилки. Для визначення можливого переходу з ІІ використовуємо домен джерела або параметр кампанії. Для контактів із сервісами фіксуємо ідентифікатор виконавця й натиснуту дію: телефон, email, сайт або карта. Ці події не містять тексту повідомлень і не підтверджують дзвінок, запис чи купівлю." },
+  de: { title: "Messungen auf der Website", text: "Die Website erfasst Seitenpfade, Zeitpunkte, technische Leistungsdaten und Fehler in Serverprotokollen. Verweise werden anhand der Herkunfts-Domain oder eines Kampagnenparameters einer möglichen KI-Quelle zugeordnet. Bei Kontaktlinks erfassen wir die Anbieterkennung und die angeklickte Aktion: Telefon, E-Mail, Website oder Karte. Diese Ereignisse enthalten keine Nachrichteninhalte und bestätigen keinen Anruf, keine Buchung und keinen Kauf." },
+};
+
 export default function PrivacyPolicy() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const websiteMetrics = WEBSITE_METRICS[locale];
 
   return (
     <LegalPageShell
       document="privacy"
       label={t("privacyPage.label")}
       title={t("privacyPage.title")}
-      lastUpdated={t("privacyPage.lastUpdated")}
+      lastUpdated={locale === "uk" ? "Останнє оновлення: 22 жовтня 2026" : locale === "de" ? "Zuletzt aktualisiert: 22. Oktober 2026" : "Last updated: October 22, 2026"}
     >
       <section><h2>{t("privacyPage.s1Title")}</h2><p>{t("privacyPage.s1Text")}</p></section>
       <section>
@@ -28,6 +35,7 @@ export default function PrivacyPolicy() {
           <li><strong>{t("privacyPage.s2bItem3Label")}</strong> {t("privacyPage.s2bItem3Text")}</li>
         </ul>
       </section>
+      <section><h2>{websiteMetrics.title}</h2><p>{websiteMetrics.text}</p></section>
       <section>
         <h2>{t("privacyPage.s3Title")}</h2>
         <p>{t("privacyPage.s3Intro")}</p>

@@ -10,6 +10,7 @@ export const SEO_CLUSTERS: Record<Locale, SeoCluster[]> = {
     { key: "places", title: "Explore Switzerland", description: "Practical destination guides, routes and local planning.", href: "/en/places" },
   ],
   uk: [
+    { key: "services", title: "Українські послуги", description: "Локальні фахівці, прямі контакти й практичні поради. Починаємо з автосервісу в Тургау.", href: "/uk/services" },
     { key: "business", title: "Власний бізнес у Швейцарії", description: "Старт для українців, самозайнятість зі статусом S, Einzelfirma чи GmbH та бізнес-спільноти.", href: "/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" },
     { key: "status-s", title: "Статус S у Швейцарії", description: "Права, продовження, робота, страхування та документи.", href: "/uk/blog/status-s-shveytcariya-povnyy-gid" },
     { key: "registration", title: "Реєстрація після переїзду", description: "Gemeinde, строки, потрібні документи та дозвіл на проживання.", href: "/uk/blog/yak-zareyestruvatysya-v-shveytcariyi" },

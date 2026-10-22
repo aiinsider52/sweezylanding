@@ -33,12 +33,8 @@ export function AnimatedProof({ items }: { items: ProofItem[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotionPreference();
   const parsed = useMemo(() => items.map((item) => parseValue(item.value)), [items]);
-  const [visibleValues, setVisibleValues] = useState(() =>
-    items.map((item, index) => {
-      const value = parsed[index];
-      return value.number === null ? item.value : `${value.prefix}0${value.suffix}`;
-    }),
-  );
+  // Keep real values in server-rendered HTML for readers without JavaScript.
+  const [visibleValues, setVisibleValues] = useState(() => items.map((item) => item.value));
   const [shouldCount, setShouldCount] = useState(false);
 
   useEffect(() => {

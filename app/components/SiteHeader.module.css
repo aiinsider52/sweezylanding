@@ -34,7 +34,7 @@
 .mobile a { padding: 13px 14px; border-radius: 12px; color: rgba(255,255,255,.72); font-weight: 600; }
 .mobile a:hover { background: rgba(255,255,255,.07); color: white; }
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
   .inner { grid-template-columns: 1fr auto; }
   .nav { display: none; }
   .app { display: none; }

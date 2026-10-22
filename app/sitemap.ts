@@ -6,6 +6,7 @@ import { cantons } from "../data/cantons";
 import { travelDestinations } from "../data/travel-destinations";
 import { PLACE_CATEGORIES, placeRegions } from "../data/place-hubs";
 import { isLocale, isRedirectedBlogPost } from "../lib/blog";
+import { ukrainianServices, servicePath } from "../data/ukrainian-services";
 
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
@@ -154,5 +155,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getBlogEntries(),
   ]);
 
-  return [...staticEntries, ...blogEntries];
+  return [...staticEntries, ...blogEntries,
+    { url: `${SITE_URL}/uk/services` },
+    ...ukrainianServices.map((service) => ({ url: `${SITE_URL}${servicePath(service)}`, lastModified: new Date(service.checkedAt) })),
+  ];
 }

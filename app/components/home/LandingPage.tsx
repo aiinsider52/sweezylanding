@@ -17,6 +17,7 @@ import { ShowcaseTabs } from "./ShowcaseTabs";
 import { SweezyCompanion, type CompanionPose } from "../SweezyCompanion";
 import styles from "./landing.module.css";
 import { StarterKitBanner } from "../StarterKitBanner";
+import { ServicesSpotlight } from "../services/ServicesSpotlight";
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
   en: { eyebrow: "THE SWEEZY SELECTION", title: "Four places to start exploring.", body: "Rhine Falls, Rigi, Lake Oeschinen and Lavaux: four Swiss favourites with practical guides to transport, seasons and planning your visit.", open: "Plan your visit", all: "Explore all places" },
@@ -89,6 +90,8 @@ export function LandingPage({ locale }: { locale: Locale }) {
         </section>
 
         <CommunityBanner locale={locale} />
+
+        {locale === "uk" ? <ServicesSpotlight /> : null}
 
         <section className={styles.placesSection}>
           <MotionReveal className={styles.placesHeader}>

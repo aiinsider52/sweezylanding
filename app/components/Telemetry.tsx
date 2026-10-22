@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useReportWebVitals } from "next/web-vitals";
+import { detectAiReferral } from "../../lib/discovery";
 
 type ClientEvent =
   | {
@@ -22,15 +23,13 @@ type ClientEvent =
       type: "ai-referral";
       name: string;
       referrer: string;
+      attribution: "referrer" | "utm";
+    }
+  | {
+      type: "service-contact";
+      name: string;
+      id: string;
     };
-
-const AI_REFERRERS: Array<[RegExp, string]> = [
-  [/chatgpt\.com|openai\.com/i, "ChatGPT"],
-  [/claude\.ai|anthropic\.com/i, "Claude"],
-  [/perplexity\.ai/i, "Perplexity"],
-  [/gemini\.google\.com/i, "Gemini"],
-  [/copilot\.microsoft\.com/i, "Microsoft Copilot"],
-];
 
 function trim(value: unknown, maxLength = 300) {
   return String(value ?? "Unknown error").slice(0, maxLength);
@@ -72,16 +71,23 @@ export function Telemetry() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const sourceParam = params.get("utm_source") ?? "";
-    const referral = `${document.referrer} ${sourceParam}`;
-    const aiSource = AI_REFERRERS.find(([pattern]) => pattern.test(referral))?.[1];
+    const referral = detectAiReferral(document.referrer, sourceParam);
 
-    if (aiSource) {
+    if (referral) {
       sendEvent({
         type: "ai-referral",
-        name: aiSource,
-        referrer: trim(document.referrer || sourceParam, 300),
+        ...referral,
       });
     }
+
+    const onServiceContact = (event: MouseEvent) => {
+      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[data-service][data-service-action]") : null;
+      const id = link?.dataset.service;
+      const action = link?.dataset.serviceAction;
+      if (id && /^[a-z0-9-]{1,80}$/.test(id) && action && ["phone", "email", "website", "directions"].includes(action)) {
+        sendEvent({ type: "service-contact", name: action, id });
+      }
+    };
 
     const onError = (event: ErrorEvent) => {
       sendEvent({
@@ -102,9 +108,11 @@ export function Telemetry() {
 
     window.addEventListener("error", onError);
     window.addEventListener("unhandledrejection", onUnhandledRejection);
+    document.addEventListener("click", onServiceContact);
     return () => {
       window.removeEventListener("error", onError);
       window.removeEventListener("unhandledrejection", onUnhandledRejection);
+      document.removeEventListener("click", onServiceContact);
     };
   }, []);
 

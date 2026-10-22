@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "seo:ai-benchmark": "node scripts/ai-citation-benchmark.mjs",
+    "seo:ai-discovery": "node scripts/ai-discovery-benchmark.mjs",
+    "seo:ai-access": "node scripts/check-ai-discovery.mjs",
     "seo:ai-benchmark:csv": "node scripts/ai-citation-benchmark.mjs --csv",
     "seo:ai-benchmark:sheet": "node scripts/ai-citation-benchmark.mjs --output=reports/ai-citation-2026-09-04.csv",
     "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run",
