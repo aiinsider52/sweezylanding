@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { LocaleProvider } from "../../lib/locale-context";
+import { DEFAULT_OG_IMAGE } from "../../lib/social";
 
 const BASE_URL = "https://www.sweezy.world";
 const CANONICAL_URL = `${BASE_URL}/de`;
-const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

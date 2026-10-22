@@ -5,6 +5,10 @@
 .title { font-size: 40px; line-height: 1.1; letter-spacing: 0; font-weight: 700; max-width: 720px; }
 .intro { font-size: 17px; line-height: 1.6; color: #b8c0b9; max-width: 650px; margin: 20px 0; }
 .button { display: inline-flex; align-items: center; gap: 16px; background: #b6ff00; color: #101510; border-radius: 6px; padding: 14px 20px; font-weight: 700; }
+.actions { display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap; }
+.secondary { display: inline-flex; gap: 12px; align-items: center; color: #f4f5ef; text-decoration: underline; text-underline-offset: 5px; padding: 12px 0; }
+.secondary:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }
+.downloadNote { font-size: 13px; line-height: 1.5; color: #b8c0b9; margin-top: 14px; }
 .button:focus-visible, .main a:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }
 .banner .companion, .hero .companion { width: 290px; height: 310px; align-self: end; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 4%); mask-composite: intersect; }
 .companion img { object-fit: cover; object-position: center top; }

@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getPostBySlug, isLocale } from "../../../../lib/blog";
 import { getPostArtwork } from "../../../../lib/editorial";
+import { getSocialFonts } from "../../../../lib/social-fonts";
 
 export const runtime = "nodejs";
 export const alt = "Sweezy editorial guide cover";
@@ -11,13 +12,13 @@ const LOCALE_BADGES = { en: "EN", uk: "UA", de: "DE" } as const;
 
 export default async function OpenGraphImage({ params }: { params: { locale: string; slug: string } }) {
   const locale = isLocale(params.locale) ? params.locale : "en";
-  const post = await getPostBySlug(locale, params.slug);
+  const [post, fonts] = await Promise.all([getPostBySlug(locale, params.slug), getSocialFonts()]);
   const title = post?.frontmatter.title ?? "Sweezy Switzerland Guide";
   const artwork = getPostArtwork(params.slug, locale);
   const fontSize = title.length > 78 ? 49 : title.length > 56 ? 57 : 66;
 
   return new ImageResponse(
-    <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", overflow: "hidden", background: "#f1f2ed", color: "#0c0f0d", fontFamily: 'Arial, "Segoe UI", sans-serif' }}>
+    <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", overflow: "hidden", background: "#f1f2ed", color: "#0c0f0d", fontFamily: "Noto Sans" }}>
       <div style={{ display: "flex", width: 770, flexDirection: "column", justifyContent: "space-between", padding: "46px 52px 42px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 26, fontWeight: 800 }}>
@@ -54,6 +55,6 @@ export default async function OpenGraphImage({ params }: { params: { locale: str
         <div style={{ position: "absolute", bottom: 36, right: 32, width: 30, height: 30, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 99, background: artwork.accent, border: "2px solid #0c0f0d", fontSize: 11, fontWeight: 900 }}>{artwork.issue}</div>
       </div>
     </div>,
-    size,
+    { ...size, fonts },
   );
 }

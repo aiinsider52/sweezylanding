@@ -23,4 +23,9 @@ assert.deepEqual(slugs(post(tax.slug, [bank.slug, bank.slug, tax.slug, "missing"
 assert.deepEqual(slugs(tax, [tax, overview, overview, post("steuer", [], "de")]), [overview.slug]);
 assert.deepEqual(slugs(tax, []), []);
 assert.deepEqual(slugs(post("unclassified"), [jobs, post("another-unclassified"), bank]), [jobs.slug, "another-unclassified", bank.slug]);
+const business = ["biznes-u-shveytcariyi-dlya-ukrayintsiv", "samozaynyatist-status-s-shveytcariya", "einzelfirma-chy-gmbh-shveytcariya", "biznes-spilnoty-shveytcariya"].map((slug) => post(slug, [], "uk"));
+for (const item of business) {
+  assert.equal(exportsObject.getPostArtwork(item.slug, "uk").key, "business");
+  assert.deepEqual(slugs(item, [post("status-s-robota-shveytcariya", [], "uk"), ...business]), business.filter((candidate) => candidate.slug !== item.slug).map((candidate) => candidate.slug));
+}
 console.log("Related-post tests passed: topic, editorial priority, duplicates, self, locale, fallback.");

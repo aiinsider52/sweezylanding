@@ -42,7 +42,7 @@ const COPY: Record<
   uk: {
     metaTitle: "Блог Sweezy: Гіди для українців у Швейцарії",
     h1: "Гіди для українців у Швейцарії",
-    description: "Покрокові інструкції для переїзду до Швейцарії: статус S, медична страховка, реєстрація, пошук роботи та житла. Актуально 2026.",
+    description: "Гіди для українців у Швейцарії: статус S, робота, власний бізнес, реєстрація, страхування та житло. Покрокові плани й офіційні джерела.",
     empty: "Для цієї мови ще немає опублікованих статей.",
     readMore: "Читати статтю",
     backHome: "Назад на головну",
@@ -76,6 +76,12 @@ function formatDate(locale: Locale, value: string) {
 }
 
 const UK_FEATURED = [
+  {
+    href: "/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv",
+    eyebrow: "ВЛАСНА СПРАВА",
+    title: "Бізнес у Швейцарії для українців",
+    description: "З чого почати, як оформити самозайнятість, обрати форму та знайти бізнес-спільноту.",
+  },
   {
     href: "/uk/status-s-updates",
     eyebrow: "LIVE TRACKER",
@@ -196,7 +202,7 @@ export default async function BlogIndexPage({
           <section aria-labelledby="ukrainian-start-title">
             <div className={styles.sectionHead} id="latest">
               <h2 id="ukrainian-start-title">Почніть звідси</h2>
-              <span className={styles.eyebrow}>Перевірено · липень 2026</span>
+              <span className={styles.eyebrow}>Офіційні джерела · практичні кроки</span>
             </div>
             <div className={styles.featuredRoute}>
               {UK_FEATURED.map((item, index) => (

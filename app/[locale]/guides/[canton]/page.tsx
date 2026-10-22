@@ -14,6 +14,7 @@ import { getCantonImage, getCantonImageAlt } from "../../../../lib/editorial";
 import styles from "../../editorial.module.css";
 import { SEO_CLUSTERS } from "../../../../data/seo-clusters";
 import { travelDestinations } from "../../../../data/travel-destinations";
+import { StarterKitBanner } from "../../../components/StarterKitBanner";
 
 /* ─── Generic copy (all 26 cantons, all 3 locales) ─── */
 const COPY: Record<
@@ -119,8 +120,8 @@ const COPY: Record<
     guides: "Guides",
     title: (name) => `Umzug nach ${name} — Expat Guide | Sweezy`,
     description: (name, capital) =>
-      `Praktischer Expat-Guide fur ${name}: Anmeldung, Dokumente, wichtige Services in ${capital} und ein strukturierter Start im Kanton.`,
-    overview: "Kantonsuberblick",
+      `Praktischer Expat-Guide für ${name}: Anmeldung, Dokumente, wichtige Services in ${capital} und ein strukturierter Start im Kanton.`,
+    overview: "Kantonsüberblick",
     registration: "Anmeldung und erste Schritte",
     services: "Wichtige Services am Anfang",
     whySweezy: "Warum Sweezy in diesem Kanton hilft",
@@ -129,32 +130,39 @@ const COPY: Record<
     population: "Bevölkerung",
     languageRegion: "Sprachregion",
     registrationLead: (name, capital) =>
-      `In ${name} gibt es kantonale Besonderheiten, aber der Start nach dem Umzug beginnt fast immer mit der lokalen Anmeldung in oder nahe ${capital}. Nach dem Einzug sollten Sie die Website Ihrer Gemeinde prufen, bei Bedarf einen Termin buchen und Pass, Wohnnachweis, Arbeitsvertrag oder andere Aufenthaltsunterlagen bereithalten.`,
+      `Nach einem Umzug nach ${name} hängt der Anmeldeweg von Ihrer Wohngemeinde, Staatsangehörigkeit und bisherigen Adresse ab. Prüfen Sie die örtlichen Vorgaben, buchen Sie bei Bedarf einen Termin und halten Sie Pass, Wohnnachweis, Arbeitsvertrag oder andere Aufenthaltsunterlagen bereit.`,
     servicesLead: (name, capital) =>
-      `In ${name} sollten Expats fruh einige Kernstellen kennen: Gemeinde, zustandige Migrationsstelle, Krankenversicherungsoptionen, Spitaler oder Kliniken, Verkehrsanbindung und praktische Bankservices in ${capital} oder Ihrer Wohnregion.`,
+      `In ${name} sollten Expats früh einige Kernstellen kennen: Gemeinde, zuständige Migrationsstelle, Krankenversicherungsoptionen, Spitäler oder Kliniken, Verkehrsanbindung und praktische Bankservices in ${capital} oder Ihrer Wohnregion.`,
     sweezyLead: (name) =>
-      `Sweezy ist in ${name} besonders hilfreich, weil die App nicht nur Informationen liefert, sondern den ganzen Ankommensprozess strukturiert. Guides, Checklisten, Services in der Nahe und nachste Schritte bleiben dadurch an einem Ort.`,
+      `Sweezy ist in ${name} besonders hilfreich, weil die App nicht nur Informationen liefert, sondern den ganzen Ankommensprozess strukturiert. Guides, Checklisten, Services in der Nähe und nächste Schritte bleiben dadurch an einem Ort.`,
     overviewLead: (name, capital, population, region) =>
-      `${name} gehort zu den 26 Schweizer Kantonen und verbindet lokale Verwaltung, praktische Infrastruktur und kantonsspezifische Ablaufe. Mit rund ${population} Einwohnern, dem Hauptort ${capital} und einem ${region.toLowerCase()} Umfeld lohnt es sich, den Umzug sowohl organisatorisch als auch alltagstauglich vorzubereiten.`,
-    reg1: "Prufen Sie die Website Ihrer Gemeinde auf Fristen, Termine und Formulare.",
+      `${name} gehört zu den 26 Schweizer Kantonen und verbindet lokale Verwaltung, praktische Infrastruktur und kantonsspezifische Abläufe. Mit rund ${population} Einwohnern und dem Hauptort ${capital} lohnt es sich, den Umzug sowohl organisatorisch als auch alltagstauglich vorzubereiten.`,
+    reg1: "Prüfen Sie die Website Ihrer Gemeinde auf Fristen, Termine und Formulare.",
     reg2: "Bereiten Sie Pass, Mietvertrag, Aufenthaltsgrundlage und Familiendokumente vor.",
     reg3: "Behalten Sie danach Krankenversicherung, Bank und Permit-Follow-up im Blick.",
     srv1: "Gemeindeverwaltung oder Einwohneramt",
-    srv2: "Zustandige kantonale Migrations- oder Bewilligungsstelle",
-    srv3: "Spitaler, Kliniken und versicherungsnahe Services",
-    srv4: "Verkehrsknoten, Service-Schalter und Banken in der Nahe",
+    srv2: "Zuständige kantonale Migrations- oder Bewilligungsstelle",
+    srv3: "Spitäler, Kliniken und versicherungsnahe Services",
+    srv4: "Verkehrsknoten, Service-Schalter und Banken in der Nähe",
     ctaLead: (name) =>
-      `Nutzen Sie Sweezy, um Anmeldung, Versicherung, Servicesuche und den Start in ${name} als klaren Schritt-fur-Schritt-Prozess zu organisieren.`,
+      `Nutzen Sie Sweezy, um Anmeldung, Versicherung, Servicesuche und den Start in ${name} als klaren Schritt-für-Schritt-Prozess zu organisieren.`,
     workflowLead: (name) =>
       `Statt Notizen in verschiedenen Apps zu verwalten, nutzen Sie Sweezy, um den Ablauf zu verstehen, den nächsten Schritt zu speichern und wichtige Services in ${name} zu finden.`,
   },
 };
 
 type OfficeCopy = {
+  heroTitle?: string;
+  heroIntro?: string;
+  contactFirst?: boolean;
+  updatedAt?: string;
   metaTitle: string;
   metaDescription: string;
   heading: string;
   body: string;
+  registrationLead?: string;
+  registrationSource?: { label: string; url: string };
+  faq?: { question: string; answer: string }[];
 };
 
 type OfficeSpotlight = {
@@ -180,7 +188,7 @@ const OFFICE_SPOTLIGHTS: Record<string, OfficeSpotlight> = {
     addressLocality: "Herisau",
     phone: "+41 71 343 63 33",
     email: "migration@ar.ch",
-    verifiedAt: "2026-08-12",
+    verifiedAt: "2026-10-22",
     website:
       "https://staatskalender.ar.ch/organization/kantonale-behoerden/kantonale-verwaltung/departement-inneres-und-sicherheit/amt-fuer-inneres/abteilung-migration",
     copy: {
@@ -200,6 +208,10 @@ const OFFICE_SPOTLIGHTS: Record<string, OfficeSpotlight> = {
       },
       de: {
         metaTitle: "Migrationsamt Herisau (Appenzell AR): Kontakt & Anmeldung",
+        heroTitle: "Migrationsamt Herisau: Kontakt und Ankommen in Appenzell AR",
+        heroIntro: "Sie suchen das Migrationsamt Herisau? Die zuständige kantonale Stelle heisst Abteilung Migration Appenzell Ausserrhoden. Hier finden Sie den offiziellen Kontakt und eine Orientierung für Ihre nächsten Schritte im Kanton. Sweezy ist ein unabhängiger Guide.",
+        contactFirst: true,
+        updatedAt: "2026-10-22",
         metaDescription:
           "Migrationsamt Herisau: offizieller Kontakt der Abteilung Migration Appenzell Ausserrhoden plus Hinweise zu Anmeldung und Aufenthaltsbewilligung.",
         heading: "Migrationsamt Herisau und Appenzell Ausserrhoden: offizieller Kontakt",
@@ -223,19 +235,28 @@ const OFFICE_SPOTLIGHTS: Record<string, OfficeSpotlight> = {
         metaTitle: "Zug Migration Office & Moving Guide | Sweezy",
         metaDescription: "Official Zug Migration Office contact details plus residence, work-permit and local registration guidance for newcomers moving to Canton Zug.",
         heading: "Zug Migration Office: official contact",
-        body: "The Canton Zug Migration Office handles entry, residence and employment matters for foreign nationals. Address registration still starts with your Zug municipality; permit and migration questions belong to the cantonal office.",
+        body: "The Canton Zug Migration Office handles entry, residence and employment matters for foreign nationals. For foreign nationals moving to the City of Zug from abroad or another canton, the city directs registration documents to the cantonal Migration Office, which passes the registration to the city.",
+        registrationLead: "Check both your nationality and where you are moving from. Foreign nationals arriving in the City of Zug from abroad or another canton register through the Canton Zug Migration Office. For a move within the canton, the city says to deregister with the previous municipality; it receives registration from the Migration Office. Swiss citizens follow the separate city registration procedure. For another Zug municipality, check its own arrival instructions.",
+        updatedAt: "2026-10-22",
+        registrationSource: { label: "City of Zug: arrival routes by nationality and previous residence", url: "https://stadtzug.ch/de/leben/wohnen-umziehen/umziehen/zuzug" },
       },
       uk: {
         metaTitle: "Міграційний офіс Zug: контакти та гід | Sweezy",
         metaDescription: "Офіційні контакти міграційного офісу кантону Zug та пояснення щодо реєстрації адреси, проживання й дозволу на роботу.",
         heading: "Міграційний офіс Zug: офіційні контакти",
-        body: "Міграційний офіс кантону Zug відповідає за в’їзд, проживання та працевлаштування іноземців. Реєстрацію адреси починайте у своїй громаді, а питання дозволу й міграції адресуйте кантональному офісу.",
+        body: "Міграційний офіс кантону Zug відповідає за в’їзд, проживання та працевлаштування іноземців. Іноземців, які переїжджають до міста Zug з-за кордону чи іншого кантону, місто спрямовує для реєстрації до кантонального Amt für Migration; звідти дані передають місту.",
+        registrationLead: "Для іноземців після переїзду до міста Zug з-за кордону чи іншого кантону реєстрація починається в Amt für Migration кантону. При переїзді в межах кантону місто вказує знятися з реєстрації у попередній громаді; дані нової реєстрації воно отримує від міграційного офісу. Для громадян Швейцарії є окрема міська процедура. Якщо живете в іншій громаді кантону, перевірте її власні інструкції.",
+        updatedAt: "2026-10-22",
+        registrationSource: { label: "Місто Zug: порядок реєстрації за громадянством і попередньою адресою", url: "https://stadtzug.ch/de/leben/wohnen-umziehen/umziehen/zuzug" },
       },
       de: {
         metaTitle: "Migrationsamt Zug: Kontakt & Umzugsratgeber | Sweezy",
         metaDescription: "Offizielle Kontaktdaten des Amts für Migration Zug sowie Hinweise zu Wohnsitzanmeldung, Aufenthalt und Arbeitsbewilligung.",
         heading: "Migrationsamt Zug: offizieller Kontakt",
-        body: "Das Amt für Migration des Kantons Zug regelt Einreise, Aufenthalt und Erwerbstätigkeit ausländischer Personen. Die Wohnsitzanmeldung beginnt bei Ihrer Zuger Gemeinde; Bewilligungs- und Migrationsfragen bearbeitet das kantonale Amt.",
+        body: "Das Amt für Migration des Kantons Zug regelt Einreise, Aufenthalt und Erwerbstätigkeit ausländischer Personen. Ausländische Personen, die aus dem Ausland oder einem anderen Kanton in die Stadt Zug ziehen, melden sich laut Stadt beim kantonalen Amt für Migration an; die Stadt erhält die Anmeldung von dort.",
+        registrationLead: "Ausländische Personen melden einen Zuzug aus dem Ausland oder einem anderen Kanton in die Stadt Zug beim kantonalen Amt für Migration an. Bei einem Umzug innerhalb des Kantons verlangt die Stadt die Abmeldung bei der bisherigen Gemeinde und erhält die Anmeldung vom Migrationsamt. Schweizer Staatsangehörige nutzen das separate städtische Verfahren. Für andere Zuger Gemeinden die jeweiligen Zuzugsinformationen prüfen.",
+        updatedAt: "2026-10-22",
+        registrationSource: { label: "Stadt Zug: Zuzug nach Staatsangehörigkeit und bisherigem Wohnort", url: "https://stadtzug.ch/de/leben/wohnen-umziehen/umziehen/zuzug" },
       },
     },
   },
@@ -255,6 +276,9 @@ const OFFICE_SPOTLIGHTS: Record<string, OfficeSpotlight> = {
         metaDescription: "Official St. Gallen Migration Office contact plus residence-permit and local registration guidance for newcomers moving to the canton.",
         heading: "St. Gallen Migration Office: official contact",
         body: "The Canton St. Gallen Migration Office implements federal migration and identity-document rules. Use your municipality for local arrival registration and the cantonal Foreign Nationals Division for residence-permit matters.",
+        registrationLead: "First check whether your new address is in the City of St. Gallen or another municipality in the canton. The city's Population Services (Bevölkerungsdienste) handle local arrival registration; foreign residents must register within 14 days and before starting work. Confirm the route for your nationality and previous residence, rather than assuming an online address change covers a first arrival from abroad. If you live elsewhere in the canton, use that municipality's instructions.",
+        updatedAt: "2026-10-22",
+        registrationSource: { label: "City of St. Gallen: arrival and residence registration", url: "https://www.stadt.sg.ch/home/gesellschaft-sicherheit/leben-schweiz/aufenthalt-niederlassung-bewilligung.html" },
       },
       uk: {
         metaTitle: "Міграційний офіс St. Gallen: контакти та гід | Sweezy",
@@ -279,26 +303,50 @@ const OFFICE_SPOTLIGHTS: Record<string, OfficeSpotlight> = {
     addressLocality: "Granges-Paccot",
     phone: "+41 26 305 14 92",
     email: "spomi@fr.ch",
-    verifiedAt: "2026-09-02",
-    website: "https://www.fr.ch/dsjs/spomi",
+    verifiedAt: "2026-09-28",
+    website: "https://www.fr.ch/de/sjsd/bma",
     copy: {
       en: {
-        metaTitle: "Fribourg SPoMi Migration Office & Moving Guide | Sweezy",
-        metaDescription: "Official Fribourg SPoMi contact plus arrival, residence and foreign-worker guidance for newcomers moving to Canton Fribourg.",
+        metaTitle: "Fribourg SPoMi: Contact, Registration & Appointments",
+        heroTitle: "Fribourg SPoMi: contact and appointments",
+        metaDescription: "Find Fribourg's SPoMi/BMA in Granges-Paccot: official contact, registration guidance, postal procedures and biometric appointments.",
         heading: "Fribourg SPoMi: official contact",
         body: "Fribourg’s Population and Migrants Service handles foreign-national, asylum and foreign-workforce procedures. Arrival requirements vary by municipality and nationality, so confirm your route with the municipality and SPoMi.",
+        registrationLead: "Municipal registration and a residence-permit application are separate tasks. For a move from abroad or another canton, confirm the documents and sequence with SPoMi/BMA and your actual municipality, not automatically the city of Fribourg. Use your official notice as the checklist for your case.",
+        faq: [
+          { question: "Do I have to visit SPoMi in person?", answer: "Many procedures accept post or email. Some cases require attendance; check the official instructions before travelling." },
+          { question: "How do I get a biometric appointment?", answer: "The invitation arrives by post. To reschedule, use the official link and code on your notice." },
+          { question: "Which opening hours apply?", answer: "Departments have different hours. Check the official contact page for your service, not a general map listing." },
+        ],
       },
       uk: {
-        metaTitle: "Міграційна служба Fribourg SPoMi: контакти | Sweezy",
-        metaDescription: "Офіційні контакти SPoMi Fribourg та пояснення щодо прибуття, проживання й працевлаштування іноземців у кантоні.",
+        metaTitle: "SPoMi Fribourg: контакти, реєстрація та біометрія",
+        heroTitle: "SPoMi Fribourg: контакти та прийом",
+        metaDescription: "SPoMi/BMA у Granges-Paccot: офіційні контакти, реєстрація, документи поштою та запрошення на біометрію у кантоні Фрібур.",
         heading: "Fribourg SPoMi: офіційні контакти",
         body: "Служба населення та мігрантів Fribourg веде процедури для іноземців, притулку й іноземної робочої сили. Маршрут реєстрації залежить від громади та громадянства — перевірте його у своїй громаді та SPoMi.",
+        registrationLead: "Реєстрація у громаді та заява на дозвіл проживання — різні завдання. Після переїзду з-за кордону або іншого кантону уточніть документи й порядок у SPoMi/BMA та своїй громаді, не обов’язково у місті Fribourg. Використовуйте офіційний лист як перелік вимог саме для вашої справи.",
+        faq: [
+          { question: "Чи треба особисто йти до SPoMi?", answer: "Багато процедур доступні поштою або email. Деякі справи вимагають присутності: перевірте офіційні вказівки до поїздки." },
+          { question: "Як отримати запис на біометрію?", answer: "Запрошення надходить поштою. Для перенесення використовуйте офіційне посилання й код із листа." },
+          { question: "Які години прийому перевіряти?", answer: "Відділи мають різні години. Звіряйте потрібну послугу на офіційній сторінці контактів, а не лише на карті." },
+        ],
       },
       de: {
-        metaTitle: "Migrationsamt Freiburg SPoMi: Kontakt & Umzug | Sweezy",
-        metaDescription: "Offizieller Kontakt des Freiburger SPoMi plus Hinweise zu Anmeldung, Aufenthalt und ausländischen Arbeitskräften.",
-        heading: "Freiburg SPoMi: offizieller Kontakt",
+        metaTitle: "Migrationsamt Freiburg: BMA/SPoMi Kontakt & Termine",
+        heroTitle: "Migrationsamt Freiburg Schweiz: BMA / SPoMi und erste Schritte",
+        heroIntro: "Sie suchen das Migrationsamt im Kanton Freiburg? Auf Deutsch heisst die Stelle Amt für Bevölkerung und Migration (BMA), auf Französisch Service de la population et des migrants (SPoMi). Dieser unabhängige Sweezy-Guide verbindet den offiziellen Kontakt mit einer Orientierung für den Start im Kanton.",
+        contactFirst: true,
+        updatedAt: "2026-10-22",
+        metaDescription: "BMA/SPoMi in Granges-Paccot: offizieller Kontakt, Anmeldung, Verfahren per Post und Biometrietermin. Zuständige Stelle vor dem Besuch prüfen.",
+        heading: "Migrationsamt Freiburg: BMA / SPoMi",
         body: "Das Amt für Bevölkerung und Migration Freiburg bearbeitet Verfahren für ausländische Personen, Asyl und ausländische Arbeitskräfte. Der Anmeldeweg hängt von Gemeinde und Staatsangehörigkeit ab; bestätigen Sie ihn bei Gemeinde und SPoMi.",
+        registrationLead: "Gemeindeanmeldung und Aufenthaltsgesuch sind getrennte Aufgaben. Bei Zuzug aus dem Ausland oder einem anderen Kanton Unterlagen und Reihenfolge mit BMA/SPoMi und der tatsächlichen Wohngemeinde klären, nicht automatisch mit der Stadt Freiburg. Die amtliche Mitteilung als Checkliste für den eigenen Fall verwenden.",
+        faq: [
+          { question: "Muss ich persönlich zum BMA?", answer: "Viele Verfahren sind per Post oder E-Mail möglich. Einzelne Fälle verlangen Anwesenheit; vor der Anreise die amtlichen Hinweise prüfen." },
+          { question: "Wie erhalte ich einen Biometrietermin?", answer: "Die Einladung kommt per Post. Zur Verschiebung den offiziellen Link und Zugangscode auf der Mitteilung verwenden." },
+          { question: "Welche Öffnungszeiten gelten?", answer: "Die Sektoren haben unterschiedliche Zeiten. Den zuständigen Dienst auf der offiziellen Kontaktseite prüfen, nicht nur einen Karteneintrag." },
+        ],
       },
     },
   },
@@ -424,12 +472,13 @@ export default function CantonGuidePage({
     ? [
         {
           question: locale === "uk" ? "Де реєструвати адресу?" : locale === "de" ? "Wo melde ich den Wohnsitz an?" : "Where do I register my address?",
-          answer: locale === "uk" ? "У Einwohnerkontrolle вашої громади. Міграційний відділ кантону відповідає за міграційні питання та дозволи." : locale === "de" ? "Bei der Einwohnerkontrolle Ihrer Gemeinde. Die kantonale Migrationsstelle bearbeitet ausländerrechtliche und Bewilligungsfragen." : "At your municipality's residents office. The canton migration division handles migration and residence-permit matters.",
+          answer: officeCopy?.registrationLead ?? (locale === "uk" ? "У Einwohnerkontrolle вашої громади. Міграційний відділ кантону відповідає за міграційні питання та дозволи." : locale === "de" ? "Bei der Einwohnerkontrolle Ihrer Gemeinde. Die kantonale Migrationsstelle bearbeitet ausländerrechtliche und Bewilligungsfragen." : "At your municipality's residents office. The canton migration division handles migration and residence-permit matters."),
         },
         {
           question: locale === "uk" ? "За який регіон відповідає офіс?" : locale === "de" ? "Für welche Region ist die Stelle zuständig?" : "Which region does this office serve?",
           answer: locale === "uk" ? `Це кантональна служба для ${officeSpotlight.regionName}; офіс розташований у ${officeSpotlight.addressLocality}.` : locale === "de" ? `Die kantonale Stelle ist für ${officeSpotlight.regionName} zuständig und befindet sich in ${officeSpotlight.addressLocality}.` : `This canton authority serves ${officeSpotlight.regionName} and is located in ${officeSpotlight.addressLocality}.`,
         },
+        ...(officeCopy?.faq ?? []),
       ]
     : [];
 
@@ -505,8 +554,8 @@ export default function CantonGuidePage({
     description: officeCopy.metaDescription,
     url: canonicalUrl,
     inLanguage: locale,
-    dateModified: officeSpotlight.verifiedAt,
-    citation: [officeSpotlight.website],
+    dateModified: officeCopy.updatedAt ?? officeSpotlight.verifiedAt,
+    citation: [officeSpotlight.website, ...(officeCopy.registrationSource ? [officeCopy.registrationSource.url] : [])],
     about: { "@type": "GovernmentOffice", name: officeSpotlight.name, url: officeSpotlight.website },
   } : null;
   const officeFaqJsonLd = officeSpotlight && !rich ? {
@@ -526,8 +575,8 @@ export default function CantonGuidePage({
       <div className={styles.guideHeroCopy}>
         <div>
           <p className={styles.eyebrow}>Sweezy canton route · CH</p>
-          <h1>{rich ? rich.h1 : copy.title(name).replace(" | Sweezy", "")}</h1>
-          <p>{rich ? rich.intro : copy.description(name, canton.capital)}</p>
+          <h1>{rich ? rich.h1 : officeCopy?.heroTitle ?? copy.title(name).replace(" | Sweezy", "")}</h1>
+          <p>{rich ? rich.intro : officeCopy?.heroIntro ?? (officeCopy?.heroTitle ? officeCopy.metaDescription : copy.description(name, canton.capital))}</p>
         </div>
         <div className={styles.guideStats}>
           <div>
@@ -770,9 +819,47 @@ export default function CantonGuidePage({
     </div>
   ) : null;
 
+  const officeContact = officeSpotlight && officeCopy ? (
+        <section id="migration-office-contact" className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6">
+          <h2 className="text-2xl font-semibold tracking-tight">{officeCopy.heading}</h2>
+          <p className="mt-4 leading-8 text-white/70">{officeCopy.body}</p>
+          <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="text-white/40">{locale === "de" ? "Zuständige Stelle" : locale === "uk" ? "Служба" : "Office"}</dt>
+              <dd className="mt-1 text-white/85">{officeSpotlight.name}</dd>
+            </div>
+            <div>
+              <dt className="text-white/40">{locale === "de" ? "Ort" : locale === "uk" ? "Місце" : "Location"}</dt>
+              <dd className="mt-1 text-white/85">{officeSpotlight.location}</dd>
+            </div>
+            <div>
+              <dt className="text-white/40">{locale === "de" ? "Telefon" : locale === "uk" ? "Телефон" : "Phone"}</dt>
+              <dd className="mt-1 text-white/85"><a href={`tel:${officeSpotlight.phone.replace(/\s/g, "")}`} className="hover:text-accent-green">{officeSpotlight.phone}</a></dd>
+            </div>
+            {officeSpotlight.email ? <div>
+              <dt className="text-white/40">Email</dt>
+              <dd className="mt-1 text-white/85"><a href={`mailto:${officeSpotlight.email}`} className="hover:text-accent-green">{officeSpotlight.email}</a></dd>
+            </div> : null}
+          </dl>
+          <a
+            href={officeSpotlight.website}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-5 inline-flex text-sm font-medium text-accent-green underline underline-offset-4"
+          >
+            {locale === "de" ? "Offizielle Kantonsseite" : locale === "uk" ? "Офіційна сторінка кантону" : "Official canton source"} →
+          </a>
+          <p className="mt-4 text-xs text-white/40">{locale === "uk" ? "Контакти перевірено" : locale === "de" ? "Kontakte geprüft" : "Contact details verified"}: <time dateTime={officeSpotlight.verifiedAt}>{formatVerifiedDate(locale, officeSpotlight.verifiedAt)}</time></p>
+          <div className="mt-6 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-2">
+            {officeFaq.map((item) => <div key={item.question}><h3 className="font-semibold text-white">{item.question}</h3><p className="mt-2 text-sm leading-6 text-white/60">{item.answer}</p></div>)}
+          </div>
+        </section>
+      ) : null;
+
   /* ── Generic body (all other cantons) ───────────────────────────────────── */
   const genericBody = (
     <div className="space-y-10">
+      {officeCopy?.contactFirst ? officeContact : null}
       <section>
         <h2 className="text-2xl font-semibold tracking-tight">{copy.overview}</h2>
         <p className="mt-4 leading-8 text-white/70">
@@ -788,8 +875,9 @@ export default function CantonGuidePage({
       <section>
         <h2 className="text-2xl font-semibold tracking-tight">{copy.registration}</h2>
         <p className="mt-4 leading-8 text-white/70">
-          {copy.registrationLead(name, canton.capital)}
+          {officeCopy?.registrationLead ?? copy.registrationLead(name, canton.capital)}
         </p>
+        {officeCopy?.registrationSource ? <p className="mt-3 text-sm"><a href={officeCopy.registrationSource.url} target="_blank" rel="noreferrer noopener" className="text-accent-green underline underline-offset-4">{officeCopy.registrationSource.label} ↗</a></p> : null}
         <ul className="mt-4 list-disc space-y-2 pl-6 text-white/70">
           <li>{copy.reg1}</li>
           <li>{copy.reg2}</li>
@@ -797,42 +885,7 @@ export default function CantonGuidePage({
         </ul>
       </section>
 
-      {officeSpotlight && officeCopy ? (
-        <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6">
-          <h2 className="text-2xl font-semibold tracking-tight">{officeCopy.heading}</h2>
-          <p className="mt-4 leading-8 text-white/70">{officeCopy.body}</p>
-          <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
-            <div>
-              <dt className="text-white/40">Office</dt>
-              <dd className="mt-1 text-white/85">{officeSpotlight.name}</dd>
-            </div>
-            <div>
-              <dt className="text-white/40">Location</dt>
-              <dd className="mt-1 text-white/85">{officeSpotlight.location}</dd>
-            </div>
-            <div>
-              <dt className="text-white/40">Phone</dt>
-              <dd className="mt-1 text-white/85"><a href={`tel:${officeSpotlight.phone.replace(/\s/g, "")}`} className="hover:text-accent-green">{officeSpotlight.phone}</a></dd>
-            </div>
-            {officeSpotlight.email ? <div>
-              <dt className="text-white/40">Email</dt>
-              <dd className="mt-1 text-white/85"><a href={`mailto:${officeSpotlight.email}`} className="hover:text-accent-green">{officeSpotlight.email}</a></dd>
-            </div> : null}
-          </dl>
-          <a
-            href={officeSpotlight.website}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="mt-5 inline-flex text-sm font-medium text-accent-green underline underline-offset-4"
-          >
-            Official canton source →
-          </a>
-          <p className="mt-4 text-xs text-white/40">{locale === "uk" ? "Контакти перевірено" : locale === "de" ? "Kontakte geprüft" : "Contact details verified"}: <time dateTime={officeSpotlight.verifiedAt}>{formatVerifiedDate(locale, officeSpotlight.verifiedAt)}</time></p>
-          <div className="mt-6 grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-2">
-            {officeFaq.map((item) => <div key={item.question}><h3 className="font-semibold text-white">{item.question}</h3><p className="mt-2 text-sm leading-6 text-white/60">{item.answer}</p></div>)}
-          </div>
-        </section>
-      ) : null}
+      {!officeCopy?.contactFirst ? officeContact : null}
 
       <section>
         <h2 className="text-2xl font-semibold tracking-tight">{copy.services}</h2>
@@ -1000,12 +1053,13 @@ export default function CantonGuidePage({
             </div>
             <div className={styles.answerEvidence}>
               <span className={styles.eyebrow}>{locale === "uk" ? "Офіційне джерело" : locale === "de" ? "Offizielle Quelle" : "Official source"}</span>
-              <ol className={styles.sourceList}><li><a href={officeSpotlight.website} target="_blank" rel="noreferrer noopener">{officeSpotlight.name} <span aria-hidden>↗</span></a></li></ol>
+              <ol className={styles.sourceList}><li><a href={officeSpotlight.website} target="_blank" rel="noreferrer noopener">{officeSpotlight.name} <span aria-hidden>↗</span></a></li>{officeCopy.registrationSource ? <li><a href={officeCopy.registrationSource.url} target="_blank" rel="noreferrer noopener">{officeCopy.registrationSource.label} <span aria-hidden>↗</span></a></li> : null}</ol>
             </div>
           </section>
         ) : null}
         <div className={styles.guideBody}>{rich ? richBody : genericBody}{regionalPlaces.length ? <section className="mt-10 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-green">{locale === "uk" ? "Місця цього кантону" : locale === "de" ? "Orte in diesem Kanton" : "Places in this canton"}</p><h2 className="mt-3 text-2xl font-semibold tracking-tight">{locale === "uk" ? `Сплануйте поїздку в кантоні ${name}` : locale === "de" ? `Ausflug im Kanton ${name} planen` : `Plan a trip in ${name}`}</h2><div className="mt-5 grid gap-3 sm:grid-cols-2">{regionalPlaces.map((place) => <Link key={place.slug} href={`/${locale}/places/${place.slug}`} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-accent-green/40"><strong className="block text-white">{place.title[locale]}</strong><span className="mt-2 block text-sm leading-6 text-white/55">{place.summary[locale]}</span><span className="mt-3 block text-sm font-medium text-accent-green">{locale === "uk" ? "Відкрити гід місця" : locale === "de" ? "Ortsguide öffnen" : "Open place guide"} →</span></Link>)}</div><Link href={`/${locale}/planning`} className="mt-5 inline-flex text-sm font-medium text-accent-green underline underline-offset-4">{locale === "uk" ? "Планувальник подорожі" : locale === "de" ? "Reiseplaner" : "Travel planner"} →</Link></section> : null}</div>
       </article>
+      <StarterKitBanner locale={locale} />
     </main>
   );
 }

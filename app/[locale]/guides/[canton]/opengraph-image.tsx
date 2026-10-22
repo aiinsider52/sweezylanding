@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { cantons, getCantonBySlug } from "../../../../data/cantons";
 import type { Locale } from "../../../../lib/i18n";
 import { isLocale } from "../../../../lib/blog";
+import { getSocialFonts } from "../../../../lib/social-fonts";
 
 export const runtime = "nodejs";
 export const alt = "Sweezy Guides";
@@ -32,6 +33,7 @@ export default async function OpenGraphImage({
   const canton = getCantonBySlug(params.canton);
   const title = canton ? getCantonName(locale, canton) : "Swiss Canton Guide";
   const badge = LOCALE_BADGES[locale];
+  const fonts = await getSocialFonts();
 
   return new ImageResponse(
     (
@@ -45,8 +47,7 @@ export default async function OpenGraphImage({
           backgroundColor: "#0d0f14",
           color: "white",
           padding: "54px 64px 42px",
-          fontFamily:
-            'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+          fontFamily: "Noto Sans",
         }}
       >
         <div
@@ -134,6 +135,6 @@ export default async function OpenGraphImage({
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts },
   );
 }

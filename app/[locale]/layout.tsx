@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../lib/alternates";
 import { LocaleProvider } from "../../lib/locale-context";
 import { isLocale } from "../../lib/blog";
+import { DEFAULT_OG_IMAGE } from "../../lib/social";
 
-const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 const LOCALE_METADATA = {
   en: {

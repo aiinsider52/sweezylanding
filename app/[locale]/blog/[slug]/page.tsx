@@ -16,6 +16,7 @@ import Link from "next/link";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import { SweezyCompanion } from "../../../components/SweezyCompanion";
+import { StarterKitBanner } from "../../../components/StarterKitBanner";
 import { getPostImage, getPostImageAlt, selectRelatedPosts } from "../../../../lib/editorial";
 import { getUkrainianAuthorityRoute } from "../../../../data/authority-routes";
 import styles from "../../editorial.module.css";
@@ -442,6 +443,8 @@ export default async function BlogPostPage({
             </Link>
           </aside>
         </div>
+
+        <StarterKitBanner locale={locale} />
 
         {relatedPosts.length > 0 ? (
           <section className="mt-24 border-t border-black/15 pt-8" aria-labelledby="related-articles-title">

@@ -6,10 +6,11 @@ import { Breadcrumb } from "../../../../components/Breadcrumb";
 import { JsonLd } from "../../../../components/seo/JsonLd";
 import { BASE_URL } from "../../../../../lib/alternates";
 import styles from "../../../editorial.module.css";
+import { RegistrationChecklist } from "./RegistrationChecklist";
 
 const PATH = "/en/guides/zurich/registration";
 const URL = `${BASE_URL}${PATH}`;
-const REVIEWED_AT = "2026-09-17";
+const REVIEWED_AT = "2026-10-22";
 const CITY_ARRIVAL_URL = "https://www.stadt-zuerich.ch/zuzug";
 const CITY_MOVE_URL = "https://www.stadt-zuerich.ch/umzug";
 const CANTON_MIGRATION_URL = "https://www.zh.ch/de/sicherheitsdirektion/migrationsamt.html";
@@ -26,6 +27,10 @@ const faq = [
   {
     q: "Can I register a move to Zurich online?",
     a: "If you are moving from another Swiss municipality, check whether your case can use eUmzugCH. Arrivals from abroad must attend in person with an appointment.",
+  },
+  {
+    q: "What if the next appointment is after the 14-day deadline?",
+    a: "Book the next available appointment and request a deadline extension through the city's contact form. Keep your booking confirmation; a later appointment does not automatically extend the deadline.",
   },
   {
     q: "Is Personenmeldeamt the same as Migrationsamt Zurich?",
@@ -84,7 +89,7 @@ export default function ZurichRegistrationPage({ params }: { params: { locale: s
   ];
 
   return (
-    <main lang="en" className={styles.page}>
+    <main lang="en" className={styles.page} data-registration-guide>
       <JsonLd data={schema} />
       <article className={styles.articleShell}>
         <Breadcrumb items={[
@@ -98,7 +103,7 @@ export default function ZurichRegistrationPage({ params }: { params: { locale: s
           <div className={styles.articleIntro}>
             <div>
               <span className={styles.eyebrow}>ZURICH / REGISTRATION</span>
-              <p className={styles.meta}>Official-source guide · Reviewed September 17, 2026</p>
+              <p className={styles.meta}>Official-source guide · Reviewed October 22, 2026</p>
               <h1>Register in Zurich: appointment, deadline and documents</h1>
               <p>Choose the correct city process before booking. Arrival from abroad, arrival from another Swiss municipality and an address change inside Zurich follow different routes.</p>
             </div>
@@ -131,7 +136,7 @@ export default function ZurichRegistrationPage({ params }: { params: { locale: s
           </div>
         </section>
 
-        <div className={styles.articleLayout}>
+        <div className={styles.articleLayout} data-registration-content>
           <nav className={styles.articleRail} aria-label="On this page">
             <div className={styles.articleRailBlock}><span className={styles.eyebrow}>01</span><strong><a href="#route">Choose route</a></strong></div>
             <div className={styles.articleRailBlock}><span className={styles.eyebrow}>02</span><strong><a href="#documents">Documents</a></strong></div>
@@ -154,21 +159,10 @@ export default function ZurichRegistrationPage({ params }: { params: { locale: s
                 </table>
               </div>
               <p>City registration is due within 14 days. For a new arrival, the city accepts registration only after the effective move-in date.</p>
+              <p><strong>No appointment within 14 days?</strong> The city asks you to book the next available appointment and also request a deadline extension through the contact form on its <a href={CITY_ARRIVAL_URL} target="_blank" rel="noreferrer noopener">arrival-registration page</a>. A later booking does not automatically extend the deadline.</p>
             </section>
 
-            <section id="documents" className="scroll-mt-24">
-              <h2>Documents for arrival from abroad</h2>
-              <p>The official city list includes the following items. Your appointment confirmation may add case-specific requirements.</p>
-              <ul>
-                <li>Passport. EU/EFTA nationals may use a national identity card.</li>
-                <li>Rental contract, housing confirmation or sublease.</li>
-                <li>Assurance of a residence permit or visa authorisation, if already issued.</li>
-                <li>Employment contract or proof of study.</li>
-                <li>Original civil-status documents for relevant family cases.</li>
-                <li>Payment for migration-related fees, which depend on permit type.</li>
-              </ul>
-              <p>Do not upload passports, permits or civil-status papers to public chats. Use the city's booking flow or secure contact channel.</p>
-            </section>
+            <RegistrationChecklist />
 
             <section id="offices" className="scroll-mt-24">
               <h2>Personenmeldeamt and Migrationsamt do different work</h2>
@@ -187,6 +181,7 @@ export default function ZurichRegistrationPage({ params }: { params: { locale: s
                 <li><Link href="/en/guides/zurich">Moving to Zurich: housing, insurance and first steps</Link></li>
                 <li><Link href="/en/blog/how-to-register-switzerland">How to register in Switzerland</Link></li>
                 <li><Link href="/en/blog/swiss-residence-permit-guide">Swiss residence permit guide</Link></li>
+                <li><Link href="/en/starter-kit">Your first week in Switzerland: the full starter kit</Link></li>
               </ul>
             </section>
           </div>

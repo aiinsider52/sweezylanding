@@ -43,14 +43,17 @@ export async function generateMetadata({ params }: { params: { locale: string; s
   if (!isLocale(params.locale)) return {};
   const place = getTravelDestination(params.slug);
   if (!place) return {};
+  const depth = getDestinationDepth(place.slug);
   const suffix = params.locale === "uk" ? "що подивитися, маршрут і поради" : params.locale === "de" ? "Sehenswürdigkeiten, Anreise und Tipps" : "things to see, route and travel tips";
+  const title = depth?.seoTitle?.[params.locale] ?? `${place.title[params.locale]}: ${suffix}`;
+  const description = depth?.seoDescription?.[params.locale] ?? `${place.summary[params.locale]} ${place.description[params.locale]}`.slice(0, 158);
   return {
-    title: `${place.title[params.locale]}: ${suffix}`,
-    description: `${place.summary[params.locale]} ${place.description[params.locale]}`.slice(0, 158),
+    title,
+    description,
     keywords: [place.title[params.locale], place.region[params.locale], params.locale === "uk" ? "куди поїхати у Швейцарії" : "Switzerland travel guide", params.locale === "uk" ? "що подивитися у Швейцарії" : "places to visit Switzerland"],
     alternates: buildLocaleAlternates(params.locale, `/places/${place.slug}`),
-    openGraph: { title: place.title[params.locale], description: place.summary[params.locale], url: `${BASE_URL}/${params.locale}/places/${place.slug}`, type: "article", images: [{ url: destinationImage(place), width: 1600, height: 1200, alt: place.alt[params.locale][0] }] },
-    twitter: { card: "summary_large_image", images: [destinationImage(place)] },
+    openGraph: { title, description, url: `${BASE_URL}/${params.locale}/places/${place.slug}`, type: "article", images: [{ url: destinationImage(place), width: 1600, height: 1200, alt: place.alt[params.locale][0] }] },
+    twitter: { card: "summary_large_image", title, description, images: [destinationImage(place)] },
   };
 }
 
@@ -64,10 +67,16 @@ export default function DestinationPage({ params }: { params: { locale: string; 
   const operatorReview = place.slug === "oeschinen-lake" ? OESCHINEN_REVIEW : null;
   const editorial = buildDestinationEditorial(place, locale);
   const depth = getDestinationDepth(place.slug);
-  const faq = depth ? [...depth.faq.map((item) => ({ question: item.question[locale], answer: item.answer[locale] })), ...editorial.faq] : editorial.faq;
+  const faq = depth ? [...depth.faq.map((item) => ({ question: item.question[locale], answer: item.answer[locale] })), ...(depth.route ? [] : editorial.faq)] : editorial.faq;
   const citations = Array.from(new Set([place.sourceUrl, ...(operatorReview ? [operatorReview.url] : []), ...(depth ? depth.sources.map((source) => source.url) : [])]));
   const additionalSources = depth?.sources.filter((source) => source.url !== place.sourceUrl) ?? [];
-  const related = travelDestinations.filter((item) => item.slug !== place.slug && (item.category === place.category || item.region[locale].split(" · ")[0] === place.region[locale].split(" · ")[0])).slice(0, 3);
+  const preferredRelated = (depth?.relatedSlugs ?? []).flatMap((slug) => {
+    const destination = getTravelDestination(slug);
+    return destination && destination.slug !== place.slug ? [destination] : [];
+  });
+  const fallbackRelated = travelDestinations.filter((item) => item.slug !== place.slug && (item.category === place.category || item.region[locale].split(" · ")[0] === place.region[locale].split(" · ")[0]));
+  const related = Array.from(new Map([...preferredRelated, ...fallbackRelated].map((item) => [item.slug, item])).values()).slice(0, 3);
+  const route = depth?.route?.map((step, index) => ({ number: String(index + 1).padStart(2, "0"), title: step.title[locale], text: step.text[locale] })) ?? editorial.route;
   const credits = (imageCredits as Record<string, Credit[]>)[place.slug] || [];
   const schema = { "@context": "https://schema.org", "@graph": [
     { "@type": "TouristAttraction", name: place.title[locale], description: place.description[locale], image: [0, 1, 2].map((index) => `${BASE_URL}${destinationImage(place, index)}`), url: `${BASE_URL}/${locale}/places/${place.slug}`, geo: { "@type": "GeoCoordinates", latitude: place.coordinates.latitude, longitude: place.coordinates.longitude }, touristType: [place.category, "nature", "culture"] },
@@ -132,7 +141,7 @@ export default function DestinationPage({ params }: { params: { locale: string; 
 
       <section className={styles.routeSection}>
         <div className={styles.sectionLead}><p className={styles.eyebrow}>{editorial.labels.route}</p><h2>{editorial.labels.route}</h2><p>{editorial.labels.routeIntro}</p></div>
-        <ol className={styles.routeGrid}>{editorial.route.map((step) => <li key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
+        <ol className={styles.routeGrid}>{route.map((step) => <li key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
       </section>
 
       <section><p className={styles.eyebrow}>{copy.gallery}</p><div className={styles.gallery}>{[1, 2].map((index) => <figure key={index}><Image src={destinationImage(place, index)} alt={place.alt[locale][index]} fill sizes="(max-width: 900px) 100vw, 60vw" /><figcaption>{place.alt[locale][index]}</figcaption></figure>)}</div></section>

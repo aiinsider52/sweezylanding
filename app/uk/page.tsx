@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { BASE_URL } from "../../lib/alternates";
 import { LandingPage } from "../components/home/LandingPage";
+import { DEFAULT_OG_IMAGE } from "../../lib/social";
 
 const CANONICAL_URL = `${BASE_URL}/uk`;
-const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 export const metadata: Metadata = {
   title: "Sweezy для українців у Швейцарії — статус S, робота й документи",

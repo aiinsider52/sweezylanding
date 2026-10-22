@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getPostsByLocale, isLocale } from "../../../lib/blog";
+import { getSocialFonts } from "../../../lib/social-fonts";
 
 export const runtime = "nodejs";
 export const alt = "Sweezy Switzerland guide library";
@@ -14,11 +15,11 @@ const COPY = {
 
 export default async function BlogOpenGraphImage({ params }: { params: { locale: string } }) {
   const locale = isLocale(params.locale) ? params.locale : "en";
-  const posts = await getPostsByLocale(locale);
+  const [posts, fonts] = await Promise.all([getPostsByLocale(locale), getSocialFonts()]);
   const copy = COPY[locale];
 
   return new ImageResponse(
-    <div style={{ width: "100%", height: "100%", display: "flex", background: "#0c0f0d", color: "#f3f4ef", fontFamily: 'Arial, "Segoe UI", sans-serif' }}>
+    <div style={{ width: "100%", height: "100%", display: "flex", background: "#0c0f0d", color: "#f3f4ef", fontFamily: "Noto Sans" }}>
       <div style={{ width: 820, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "50px 58px 46px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 28, fontWeight: 800 }}><div style={{ width: 40, height: 40, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 10, background: "#adff00", color: "#0c0f0d" }}>S</div>Sweezy</div>
         <div style={{ display: "flex", flexDirection: "column" }}><span style={{ marginBottom: 20, color: "#adff00", fontSize: 16, fontWeight: 800, letterSpacing: 3 }}>{copy.label}</span><div style={{ display: "flex", maxWidth: 720, fontSize: 70, fontWeight: 850, lineHeight: .95, letterSpacing: -3.6 }}>{copy.title}</div></div>
@@ -30,6 +31,6 @@ export default async function BlogOpenGraphImage({ params }: { params: { locale:
         <div style={{ width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid #0c0f0d", borderRadius: 99, fontSize: 22 }}>↗</div>
       </div>
     </div>,
-    size,
+    { ...size, fonts },
   );
 }

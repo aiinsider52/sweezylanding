@@ -6,6 +6,7 @@ import { ThemeProvider } from "../lib/theme-context";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { Telemetry } from "./components/Telemetry";
+import { DEFAULT_OG_IMAGE } from "../lib/social";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,8 +25,6 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
   variable: "--font-display",
 });
-
-const DEFAULT_OG_IMAGE = "/screenshots/home.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sweezy.world"),
@@ -81,7 +80,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B0F19",
+  themeColor: "#0c0f0d",
 };
 
 const websiteSchema = {

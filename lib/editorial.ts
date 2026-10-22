@@ -19,6 +19,7 @@ const GENERATED_POST_IMAGES: Partial<Record<Locale, Record<string, string>>> = {
 };
 
 const TOPICS = [
+  { pattern: /biznes|samozaynyatist|einzelfirma|gmbh/i, key: "business", accent: "#adff00", soft: "#dff7b4" },
   { pattern: /status-s|prodovzh|vidmova|bezpechni/i, key: "status", accent: "#adff00", soft: "#dff7b4" },
   { pattern: /job|robot|arbeit|cv|lebenslauf|work-permit/i, key: "work", accent: "#82c8ff", soft: "#c9e8ff" },
   { pattern: /insurance|versicherung|strakhuv|strakhiv/i, key: "insurance", accent: "#70d6a8", soft: "#ccefdc" },
@@ -31,6 +32,7 @@ const TOPICS = [
 ] as const;
 
 const TOPIC_LABELS: Record<string, Record<Locale, string>> = {
+  business: { en: "Business", uk: "Власний бізнес", de: "Unternehmen" },
   status: { en: "Status S", uk: "Статус S", de: "Status S" },
   work: { en: "Work", uk: "Робота", de: "Arbeit" },
   insurance: { en: "Health insurance", uk: "Медичне страхування", de: "Krankenversicherung" },

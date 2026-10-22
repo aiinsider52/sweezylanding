@@ -1,11 +1,16 @@
 import type { Locale } from "../lib/i18n";
 import { batch12DestinationDepth } from "./destination-depth-batch12";
 import { batch13DestinationDepth } from "./destination-depth-batch13";
+import { blauseeDepth } from "./destination-depth-blausee";
 
 type LocalizedText = Record<Locale, string>;
 type LocalizedList = Record<Locale, string[]>;
 
 export type DestinationDepth = {
+  seoTitle?: LocalizedText;
+  seoDescription?: LocalizedText;
+  relatedSlugs?: string[];
+  route?: { title: LocalizedText; text: LocalizedText }[];
   reviewedAt: string;
   sources: { name: string; url: string }[];
   lead: LocalizedText;
@@ -21,6 +26,7 @@ const list = (en: string[], uk: string[], de: string[]): LocalizedList => ({ en,
 const guides: Record<string, DestinationDepth> = {
   ...batch12DestinationDepth,
   ...batch13DestinationDepth,
+  blausee: blauseeDepth,
   "aletsch-glacier": {
     reviewedAt: "2026-09-07",
     sources: [

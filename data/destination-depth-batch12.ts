@@ -9,6 +9,7 @@ const list = (en: string[], uk: string[], de: string[]): LocalizedList => ({ en,
 
 export const batch12DestinationDepth: Record<string, DestinationDepth> = {
   "oeschinen-lake": {
+    relatedSlugs: ["blausee", "bern-old-town", "lake-murten"],
     reviewedAt: "2026-09-07",
     sources: [
       { name: "Oeschinensee — hiking", url: "https://www.oeschinensee.ch/en/wandern/" },
@@ -91,9 +92,12 @@ export const batch12DestinationDepth: Record<string, DestinationDepth> = {
   },
 
   "rhine-falls": {
-    reviewedAt: "2026-09-07",
+    reviewedAt: "2026-09-28",
+    seoTitle: t("Rhine Falls: Entry, Opening Hours & Train Access", "Рейнський водоспад: вхід, години та як дістатися", "Rheinfall Schaffhausen: Eintritt, Öffnungszeiten & Anreise"),
+    seoDescription: t("Choose Neuhausen or Schloss Laufen: free river-basin access, paid viewing platforms, train stations and separate boat schedules at Rhine Falls.", "Оберіть Neuhausen або Schloss Laufen: безкоштовний берег, платні платформи, залізничні станції та окремий розклад човнів.", "Neuhausen oder Schloss Laufen? Kostenloses Rheinfallbecken, kostenpflichtige Plattformen, passende Bahnhöfe und separate Schifffahrtszeiten."),
     sources: [
       { name: "Rheinfall — official visitor information", url: "https://rheinfall.ch/en/inform/journey/map" },
+      { name: "Rheinfall: opening hours and admission (checked 2026-09-28)", url: "https://rheinfall.ch/informieren/oeffnungszeiten-preise/liste" },
       { name: "Switzerland Tourism — Rhine Falls", url: "https://www.myswitzerland.com/ru/destinations/rhine-falls/" },
     ],
     lead: t(
@@ -126,7 +130,8 @@ export const batch12DestinationDepth: Record<string, DestinationDepth> = {
     checklist: list(["Choose north, south or both banks", "Check current platform and boat operation", "Use the station matching your first bank", "Protect phone and camera from spray", "Allow walking time between viewpoints", "Keep Schaffhausen as the nearby extension"], ["Оберіть північний, південний або обидва береги", "Перевірте роботу платформ і човнів", "Приїдьте на станцію потрібного берега", "Захистіть телефон і камеру від бризок", "Закладіть час між оглядовими точками", "Додайте поруч старе місто Schaffhausen"], ["Nordufer, Südufer oder beide wählen", "Betrieb von Plattformen und Booten prüfen", "Passenden Bahnhof zum ersten Ufer nutzen", "Telefon und Kamera vor Gischt schützen", "Gehzeit zwischen Aussichtspunkten einplanen", "Schaffhausen als nahe Ergänzung nutzen"]),
     faq: [
       { question: t("Which side of Rhine Falls is better?", "Який берег Рейнського водоспаду кращий?", "Welche Rheinfallseite ist besser?"), answer: t("Neuhausen gives the broad frontal view; Schloss Laufen gives a closer, more structured platform experience. Choose Neuhausen for a short overview and Schloss Laufen for proximity, or combine both with half a day.", "Neuhausen дає широкий фронтальний вид, Schloss Laufen — ближчі структуровані платформи. Для короткого огляду оберіть Neuhausen, для близькості — Schloss Laufen, а за пів дня поєднайте обидва.", "Neuhausen bietet den breiten Frontalblick, Schloss Laufen nähere, strukturierte Plattformen. Für den kurzen Überblick Neuhausen, für Nähe Schloss Laufen oder bei einem halben Tag beide.") },
-      { question: t("Is Rhine Falls free to visit?", "Чи безкоштовне відвідування Рейнського водоспаду?", "Ist der Rheinfall kostenlos?"), answer: t("The northern basin is generally freely accessible. Schloss Laufen platforms and some attractions require tickets. Check current official prices because individual offers can change.", "Північна чаша загалом доступна безкоштовно. Платформи Schloss Laufen та окремі атракції потребують квитка. Перевірте актуальні офіційні ціни.", "Das nördliche Becken ist grundsätzlich frei zugänglich. Plattformen bei Schloss Laufen und einzelne Angebote sind kostenpflichtig. Aktuelle offizielle Preise prüfen.") },
+      { question: t("Is Rhine Falls free to visit?", "Чи безкоштовне відвідування Рейнського водоспаду?", "Ist der Rheinfall kostenlos?"), answer: t("The basin at Schlössli Wörth is free. Schloss Laufen platforms cost CHF 5 for adults and CHF 3 for children aged 6–15, checked 28 September 2026. Boats and parking are separate; confirm current prices with the operator.", "Берег біля Schlössli Wörth безкоштовний. Платформи Schloss Laufen: CHF 5 дорослим, CHF 3 дітям 6–15 років; перевірено 28 вересня 2026. Човни й паркування окремо; звірте актуальні ціни в оператора.", "Das Becken beim Schlössli Wörth ist kostenlos. Schloss-Laufen-Plattformen: CHF 5 für Erwachsene, CHF 3 für Kinder von 6–15 Jahren; geprüft am 28. September 2026. Boote und Parking separat; aktuelle Preise beim Betreiber prüfen.") },
+      { question: t("What are the Rhine Falls opening hours?", "Які години доступу до Рейнського водоспаду?", "Welche Öffnungszeiten hat der Rheinfall?"), answer: t("The waterfall area is accessible around the clock, year-round. This does not mean boats, paid attractions or visitor services operate at night; check each service separately.", "Територія водоспаду доступна цілодобово весь рік. Це не означає нічної роботи човнів, платних атракцій або сервісів: їхні години перевіряйте окремо.", "Das Rheinfallgebiet ist ganzjährig rund um die Uhr zugänglich. Boote, kostenpflichtige Angebote und Besucherdienste haben eigene Betriebszeiten; diese separat prüfen.") },
       { question: t("Do I need a boat trip to experience Rhine Falls?", "Чи обов’язково брати човен?", "Brauche ich eine Bootsfahrt für den Rheinfall?"), answer: t("No. The land viewpoints show the falls well. Boats add a seasonal close-water experience and should be treated as an optional layer, not the core plan.", "Ні. Наземні оглядові точки добре показують водоспад. Човен додає сезонний досвід близько до води, але не є основою плану.", "Nein. Die Aussichtspunkte an Land zeigen den Fall gut. Boote ergänzen saisonal die Nähe zum Wasser, sind aber nicht der Kernplan.") },
     ],
   },

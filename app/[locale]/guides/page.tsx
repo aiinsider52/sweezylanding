@@ -10,7 +10,7 @@ import { getCantonImage, getCantonImageAlt } from "../../../lib/editorial";
 import styles from "../editorial.module.css";
 import { SweezyCompanion } from "../../components/SweezyCompanion";
 
-const DEFAULT_OG_IMAGE = "/screenshots/home.png";
+import { DEFAULT_OG_IMAGE } from "../../../lib/social";
 
 const COPY: Record<
   Locale,

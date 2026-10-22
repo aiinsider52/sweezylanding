@@ -69,6 +69,7 @@ export function SiteFooter({ year }: { year: number }) {
         { label: t("footer.faqLink"), href: `${localeHome}#faq` },
         { label: t("footer.contact"), href: "mailto:support@sweezy.world" },
         { label: t("footer.blog"), href: localeBlog },
+        { label: locale === "uk" ? "Безкоштовний стартовий набір" : locale === "de" ? "Kostenloses Startpaket" : "Free starter kit", href: `/${locale}/starter-kit` },
         { label: locale === "uk" ? "Спільнота Sweezy" : locale === "de" ? "Sweezy Community" : "Sweezy community", href: `/${locale}/community` },
         { label: locale === "uk" ? "Редакційні стандарти" : locale === "de" ? "Redaktionelle Standards" : "Editorial standards", href: `/${locale}/editorial` },
         ...SEO_CLUSTERS[locale]

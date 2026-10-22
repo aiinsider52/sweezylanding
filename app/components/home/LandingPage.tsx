@@ -19,10 +19,16 @@ import styles from "./landing.module.css";
 import { StarterKitBanner } from "../StarterKitBanner";
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
-  en: { eyebrow: "SWITZERLAND OUTSIDE THE CHECKLIST", title: "Live here. Explore here.", body: "Sweezy now combines relocation guidance with practical routes to Switzerland's mountains, lakes, cities and natural landmarks.", open: "Open place", all: "Explore all places" },
-  uk: { eyebrow: "ШВЕЙЦАРІЯ ПОЗА ЧЕКЛИСТОМ", title: "Живіть тут. Відкривайте тут.", body: "Sweezy поєднує допомогу з переїздом із практичними маршрутами до гір, озер, міст і природних пам'яток Швейцарії.", open: "Відкрити місце", all: "Усі красиві місця" },
-  de: { eyebrow: "SCHWEIZ AUSSERHALB DER CHECKLISTE", title: "Hier leben. Hier entdecken.", body: "Sweezy verbindet Umzugshilfe mit praktischen Routen zu Bergen, Seen, Städten und Naturwundern der Schweiz.", open: "Ort öffnen", all: "Alle Orte entdecken" },
+  en: { eyebrow: "THE SWEEZY SELECTION", title: "Four places to start exploring.", body: "Rhine Falls, Rigi, Lake Oeschinen and Lavaux: four Swiss favourites with practical guides to transport, seasons and planning your visit.", open: "Plan your visit", all: "Explore all places" },
+  uk: { eyebrow: "ВИБІР SWEEZY", title: "Чотири місця для першої поїздки.", body: "Рейнський водоспад, Рігі, озеро Ешинен та Лаво: відомі місця Швейцарії з гідами про дорогу, сезон і підготовку до поїздки.", open: "Спланувати поїздку", all: "Усі красиві місця" },
+  de: { eyebrow: "DIE SWEEZY-AUSWAHL", title: "Vier Orte für Ihre nächste Reise.", body: "Rheinfall, Rigi, Oeschinensee und Lavaux: bekannte Schweizer Ausflugsziele mit praktischen Guides zu Anreise, Saison und Planung.", open: "Ausflug planen", all: "Alle Orte entdecken" },
 };
+
+const FEATURED_PLACE_SLUGS = ["rhine-falls", "mount-rigi", "oeschinen-lake", "lavaux-vineyards"];
+const FEATURED_PLACES = FEATURED_PLACE_SLUGS.flatMap((slug) => {
+  const place = travelDestinations.find((candidate) => candidate.slug === slug);
+  return place ? [place] : [];
+});
 
 const PASSPORT_IMAGE_ALT: Record<Locale, string> = {
   en: "Sweezy app passport showing personal relocation progress, profile and access in Switzerland",
@@ -72,6 +78,8 @@ export function LandingPage({ locale }: { locale: Locale }) {
 
         <AnimatedProof items={copy.proof} />
 
+        <StarterKitBanner locale={locale} />
+
         <section className={styles.knowledgeSection} aria-labelledby="knowledge-title">
           <MotionReveal className={styles.knowledgeHeader}>
             <p className={styles.eyebrow}>{locale === "uk" ? "ПЕРЕВІРЕНІ ТЕМАТИЧНІ ГІДИ" : locale === "de" ? "GEPRÜFTE THEMENGUIDES" : "VERIFIED KNOWLEDGE HUBS"}</p>
@@ -89,7 +97,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             <p>{PLACES_COPY[locale].body}</p>
           </MotionReveal>
           <div className={styles.placesGrid}>
-            {travelDestinations.slice(0, 4).map((place, index) => (
+            {FEATURED_PLACES.map((place, index) => (
               <MotionArticle key={place.slug} className={styles.placeCard} delay={index * 0.055}>
                 <Link href={`/${locale}/places/${place.slug}`}>
                   <Image src={destinationImage(place)} alt={place.alt[locale][0]} fill sizes="(max-width: 760px) 92vw, 25vw" />
@@ -183,7 +191,6 @@ export function LandingPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <StarterKitBanner locale={locale} />
         <PartnerNetwork copy={copy.partner} locale={locale} />
 
         <section id="faq" className={styles.faqSection}>
