@@ -9,14 +9,6 @@ const CANTON_IMAGES: Record<string, string> = {
   "basel-stadt": "/images/canton-basel.jpg",
 };
 
-const GENERATED_POST_IMAGES: Partial<Record<Locale, Record<string, string>>> = {
-  uk: {
-    "status-s-pislya-bereznya-2027": "/editorial/status-s-after-march-2027.webp",
-    "poshuk-roboty-shveytcariya-2026": "/editorial/job-search-switzerland-ukrainians.webp",
-    "yak-zekonomyty-na-strakhovantsi-shveytcariya": "/editorial/swiss-health-insurance-savings.webp",
-    "bezpechni-rehiony-ukrainy-status-s": "/editorial/status-s-safe-regions-ukraine.webp",
-  },
-};
 
 const TOPICS = [
   { pattern: /posluhy|avtoservis/i, key: "services", accent: "#82c8ff", soft: "#c9e8ff" },
@@ -100,7 +92,12 @@ export function getCantonImageAlt(locale: Locale, cantonName: string) {
 }
 
 export function getPostImage(locale: Locale, slug: string) {
-  return GENERATED_POST_IMAGES[locale]?.[slug] ?? `/${locale}/blog/${slug}/opengraph-image`;
+  const topic = getPostArtwork(slug, locale).key;
+  return `/editorial/covers/${topic === "guide" ? "relocation" : topic}.webp`;
+}
+
+export function getPostDisplayTitle(title: string) {
+  return title.split(/\s+\|\s+/)[0].trim();
 }
 
 export function getPostSocialImage(locale: Locale, slug: string) {
@@ -109,7 +106,7 @@ export function getPostSocialImage(locale: Locale, slug: string) {
 
 export function getPostImageAlt(locale: Locale, title: string, slug: string) {
   const topic = getPostArtwork(slug, locale).label;
-  if (locale === "uk") return `Редакційна обкладинка Sweezy про «${title}» — тема: ${topic}`;
-  if (locale === "de") return `Redaktionelles Sweezy-Titelbild zu „${title}“ — Thema: ${topic}`;
-  return `Sweezy editorial cover for “${title}” — ${topic}`;
+  if (locale === "uk") return `Редакційна ілюстрація Sweezy до «${title}» — тема: ${topic}`;
+  if (locale === "de") return `Redaktionelle Sweezy-Illustration zu „${title}“ — Thema: ${topic}`;
+  return `Sweezy editorial illustration for “${title}” — ${topic}`;
 }

@@ -1,0 +1,83 @@
+{
+  "created": "2026-10-23",
+  "purpose": "Illustrative editorial covers for Sweezy articles",
+  "assets": [
+    {
+      "topic": "banking",
+      "source": "exec-58524bad-ff2c-4d8c-ad00-da358e0f6aac.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 183950
+    },
+    {
+      "topic": "tax",
+      "source": "exec-d223f69e-808a-4d08-9653-2ef7f01c458b.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 165574
+    },
+    {
+      "topic": "digital",
+      "source": "exec-460e8ae0-78b5-49e5-9d8f-c781ef228c76.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 112030
+    },
+    {
+      "topic": "work",
+      "source": "exec-cdc4cd0a-3b5b-4e58-affc-03fd70fcdd61.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 184404
+    },
+    {
+      "topic": "insurance",
+      "source": "exec-0a7b83b6-6d61-4394-97c9-f546ce24cdf2.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 313224
+    },
+    {
+      "topic": "housing",
+      "source": "exec-e80fe06c-9b65-47fc-a64a-2c53f8913e47.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 214594
+    },
+    {
+      "topic": "registration",
+      "source": "exec-4ee15a70-f3ec-41c0-aade-29c10bdbcd58.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 328178
+    },
+    {
+      "topic": "business",
+      "source": "exec-9b9cebed-c472-4d14-a3f5-7423634be064.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 302330
+    },
+    {
+      "topic": "services",
+      "source": "exec-d8af07e5-ea33-438e-a7d1-ef8f4485a25a.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 171724
+    },
+    {
+      "topic": "status",
+      "source": "exec-8a2801f0-4a7e-4f84-b7c8-e295524bd50b.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 171454
+    },
+    {
+      "topic": "relocation",
+      "source": "exec-362158f8-2b24-4803-812d-257144dcf9eb.png",
+      "width": 1440,
+      "height": 960,
+      "bytes": 169334
+    }
+  ]
+}

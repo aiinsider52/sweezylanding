@@ -17,9 +17,10 @@ import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import { SweezyCompanion } from "../../../components/SweezyCompanion";
 import { StarterKitBanner } from "../../../components/StarterKitBanner";
-import { getPostImage, getPostImageAlt, selectRelatedPosts } from "../../../../lib/editorial";
+import { getPostImage, getPostImageAlt, selectRelatedPosts, getPostDisplayTitle } from "../../../../lib/editorial";
 import { getUkrainianAuthorityRoute } from "../../../../data/authority-routes";
 import styles from "../../editorial.module.css";
+import journal from "../journal.module.css";
 
 function formatDate(locale: Locale, value: string) {
   return new Date(value).toLocaleDateString(
@@ -286,8 +287,8 @@ export default async function BlogPostPage({
       <JsonLd data={articleJsonLd} />
       {authorityRouteJsonLd ? <JsonLd data={authorityRouteJsonLd} /> : null}
       <article className={styles.articleShell}>
-        <header className={styles.articleHero}>
-          <div className={styles.articleIntro}>
+        <header className={journal.articleHero}>
+          <div className={journal.articleIntro}>
             <div>
               <Breadcrumb items={breadcrumbItems} />
               <div className={styles.meta}>
@@ -300,7 +301,7 @@ export default async function BlogPostPage({
                 </span>
                 <span>{post.frontmatter.category ?? "Sweezy field note"}</span>
               </div>
-              <h1>{post.frontmatter.title}</h1>
+              <h1>{getPostDisplayTitle(post.frontmatter.title)}</h1>
               <p>{post.frontmatter.description}</p>
             </div>
             <div className="flex flex-wrap items-end justify-between gap-5 border-t border-white/15 pt-6 text-sm text-white/55">
@@ -318,13 +319,13 @@ export default async function BlogPostPage({
               </div>
             </div>
           </div>
-          <div className={styles.articleVisual}>
+          <div className={journal.articleVisual}>
             <Image
               src={getPostImage(locale, post.slug)}
               alt={getPostImageAlt(locale, post.frontmatter.title, post.slug)}
               fill
               priority
-              sizes="(max-width: 800px) 100vw, 40vw"
+              sizes="(max-width: 1000px) 100vw, 600px"
             />
           </div>
         </header>
@@ -452,18 +453,21 @@ export default async function BlogPostPage({
               <h2 id="related-articles-title">{articleCopy.related}</h2>
               <span className={styles.eyebrow}>Next route</span>
             </div>
-            <div className={styles.relatedGrid}>
+            <div className={journal.relatedGrid}>
               {relatedPosts.map((relatedPost, index) => (
                 <Link
                   key={relatedPost.slug}
                   href={`/${locale}/blog/${relatedPost.slug}`}
-                  className={styles.relatedCard}
+                  className={journal.relatedCard}
                 >
-                  <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-10 text-2xl font-semibold leading-tight tracking-tight">
-                    {relatedPost.frontmatter.title}
-                  </h3>
-                  <span className={styles.cardLink}>{articleCopy.read} <span aria-hidden>↗</span></span>
+                  <div className={journal.relatedImage}>
+                    <Image src={getPostImage(locale, relatedPost.slug)} alt={getPostImageAlt(locale, relatedPost.frontmatter.title, relatedPost.slug)} fill sizes="(max-width: 620px) 100vw, 390px" />
+                  </div>
+                  <div className={journal.relatedCopy}>
+                    <span className={styles.eyebrow}>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{getPostDisplayTitle(relatedPost.frontmatter.title)}</h3>
+                    <span>{articleCopy.read} <span aria-hidden>↗</span></span>
+                  </div>
                 </Link>
               ))}
             </div>

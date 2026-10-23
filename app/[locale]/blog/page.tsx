@@ -5,9 +5,9 @@ import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { getPostsByLocale, isLocale } from "../../../lib/blog";
 import type { Locale } from "../../../lib/i18n";
-import { getPostArtwork, getPostImage, getPostImageAlt } from "../../../lib/editorial";
+import { getPostArtwork, getPostImage, getPostImageAlt, getPostDisplayTitle } from "../../../lib/editorial";
 import { Breadcrumb } from "../../components/Breadcrumb";
-import { CorporateHero } from "../../components/CorporateHero";
+import journal from "./journal.module.css";
 import styles from "../editorial.module.css";
 
 const COPY: Record<
@@ -183,20 +183,18 @@ export default async function BlogIndexPage({
           { name: locale === "uk" ? "Головна" : locale === "de" ? "Start" : "Home", url: `/${locale}` },
           { name: copy.eyebrow, url: `${BASE_URL}/${locale}/blog` },
         ]} />
-        <CorporateHero
-          companion="blog"
-          eyebrow={copy.eyebrow}
-          title={copy.h1}
-          description={copy.description}
-          sectionCode={heroUi.code}
-          panelLabel={heroUi.panel}
-          signals={[
-            { label: heroUi.count, value: String(posts.length) },
-            { label: heroUi.focus, value: copy.articles },
-            { label: heroUi.current, value: "2026" },
-          ]}
-          primaryAction={{ label: copy.latest, href: "#latest" }}
-        />
+        <header className={journal.intro}>
+          <div>
+            <p className={journal.eyebrow}>{copy.eyebrow}</p>
+            <h1>{copy.h1}</h1>
+            <p className={journal.description}>{copy.description}</p>
+          </div>
+          <a href="#latest" className={journal.libraryNote}>
+            <span className={journal.noteTop}>SWEEZY / JOURNAL <span aria-hidden>↙</span></span>
+            <strong>{String(posts.length).padStart(2, "0")}<span>{heroUi.count}</span></strong>
+            <span className={journal.noteBottom}>{copy.latest} <span aria-hidden>↓</span></span>
+          </a>
+        </header>
 
         {locale === "uk" ? (
           <section aria-labelledby="ukrainian-start-title">
@@ -204,12 +202,12 @@ export default async function BlogIndexPage({
               <h2 id="ukrainian-start-title">Почніть звідси</h2>
               <span className={styles.eyebrow}>Офіційні джерела · практичні кроки</span>
             </div>
-            <div className={styles.featuredRoute}>
+            <div className={journal.startGrid}>
               {UK_FEATURED.map((item, index) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={styles.routeItem}
+                  className={journal.startItem}
                 >
                   <div className="flex items-center justify-between">
                     <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
@@ -229,17 +227,17 @@ export default async function BlogIndexPage({
               <h2>{copy.latest}</h2>
               <span className={styles.eyebrow}>01</span>
             </div>
-            <Link href={`/${locale}/blog/${leadPost.slug}`} className={styles.featured}>
-              <div className={styles.featuredMedia}>
+            <Link href={`/${locale}/blog/${leadPost.slug}`} className={journal.featured}>
+              <div className={journal.featuredMedia}>
                 <Image
                   src={getPostImage(locale, leadPost.slug)}
                   alt={getPostImageAlt(locale, leadPost.frontmatter.title, leadPost.slug)}
                   fill
                   priority
-                  sizes="(max-width: 800px) 100vw, 62vw"
+                  sizes="(max-width: 620px) 100vw, 740px"
                 />
               </div>
-              <div className={styles.featuredCopy}>
+              <div className={journal.featuredCopy}>
                 <div>
                   <div className={styles.storyLabel}>
                     <span>{getPostArtwork(leadPost.slug, locale).label}</span>
@@ -251,10 +249,10 @@ export default async function BlogIndexPage({
                     </time>
                     <span>{leadPost.readingTimeMinutes} {locale === "uk" ? "хв" : locale === "de" ? "Min." : "min"}</span>
                   </div>
-                  <h2>{leadPost.frontmatter.title}</h2>
+                  <h2>{getPostDisplayTitle(leadPost.frontmatter.title)}</h2>
                   <p>{leadPost.frontmatter.description}</p>
                 </div>
-                <span className={styles.arrowButton}>
+                <span className={journal.featuredAction}>
                   {copy.readMore} →
                 </span>
               </div>
@@ -270,34 +268,32 @@ export default async function BlogIndexPage({
               <h2>{copy.articles}</h2>
               <span className={styles.eyebrow}>02 — {String(posts.length).padStart(2, "0")}</span>
             </div>
-            <div className={styles.postGrid}>
-              {remainingPosts.map((post, index) => {
+            <div className={journal.postGrid}>
+              {remainingPosts.map((post) => {
                 const artwork = getPostArtwork(post.slug, locale);
-                const isWide = index % 7 === 0 || index % 7 === 4;
                 return (
                 <Link
                   key={post.slug}
                   href={`/${locale}/blog/${post.slug}`}
-                  className={`${styles.postCard} ${isWide ? styles.postCardWide : ""}`}
+                  className={journal.postCard}
                 >
-                  <div className={styles.cardMedia}>
+                  <div className={journal.cardMedia}>
                     <Image
                       src={getPostImage(locale, post.slug)}
                       alt={getPostImageAlt(locale, post.frontmatter.title, post.slug)}
                       fill
-                      sizes={isWide ? "(max-width: 800px) 100vw, 48vw" : "(max-width: 560px) 100vw, 32vw"}
+                      sizes="(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 440px"
                     />
-                    <span className={styles.imageTopic}>{artwork.label}</span>
-                    <span className={styles.imageIssue}>{String(index + 2).padStart(2, "0")}</span>
+                    <span className={journal.imageTopic}>{artwork.label}</span>
                   </div>
-                  <div className={styles.cardCopy}>
+                  <div className={journal.cardCopy}>
                     <div className={styles.meta}>
                       <time dateTime={post.frontmatter.publishedAt}>{formatDate(locale, post.frontmatter.publishedAt)}</time>
                       <span>{post.readingTimeMinutes} {locale === "uk" ? "хв" : locale === "de" ? "Min." : "min"}</span>
                     </div>
-                    <h2>{post.frontmatter.title}</h2>
+                    <h2>{getPostDisplayTitle(post.frontmatter.title)}</h2>
                     <p>{post.frontmatter.description}</p>
-                    <span className={styles.cardLink}>{copy.readMore} <span aria-hidden>↗</span></span>
+                    <span className={journal.cardLink}>{copy.readMore} <span aria-hidden>↗</span></span>
                   </div>
                 </Link>
               )})}
