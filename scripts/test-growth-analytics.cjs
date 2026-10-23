@@ -1,0 +1,123 @@
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const os = require("node:os");
+const { runInNewContext } = require("node:vm");
+const { webcrypto } = require("node:crypto");
+const { execFileSync } = require("node:child_process");
+const ts = require("typescript");
+
+const listeners = new Map(), domListeners = new Map(), sent = [], files = [], fallbacks = [];
+const local = new Map(), session = new Map();
+const storage = map => ({ getItem: key => map.get(key) ?? null, setItem: (key, value) => map.set(key, value), removeItem: key => map.delete(key) });
+let responseMode = "complete", savedFiles = 0;
+const location = { pathname: "/uk/countries/germany/business", origin: "http://localhost:3032", search: "?utm_source=chatgpt&secret=never-store-this", assign: value => fallbacks.push(value) };
+class FakeElement { closest() { return this; } }
+const document = { referrer: "https://chatgpt.com/c/secret-conversation", body: { appendChild() {} }, createElement: () => ({ click: () => savedFiles++, remove() {} }), addEventListener: (key, fn) => domListeners.set(key, fn), removeEventListener: key => domListeners.delete(key) };
+const window = { addEventListener: (key, fn) => listeners.set(key, fn), removeEventListener: key => listeners.delete(key), dispatchEvent: event => listeners.get(event.type)?.(event), setTimeout: fn => fn() };
+const sandbox = { process, Buffer, URL, URLSearchParams, Request, Response, Headers, AbortSignal, Uint8Array, TextDecoder, Blob, Event, Element: FakeElement, crypto: webcrypto, localStorage: storage(local), sessionStorage: storage(session), window, document, location, console,
+  fetch: async (url, options) => {
+    if (url === "/api/events") { sent.push(JSON.parse(options.body)); return new Response(null, { status: 204 }); }
+    files.push(options?.headers ?? {});
+    return new Response("%PDF-test-complete", { headers: { "content-type": "application/pdf", "content-length": responseMode === "complete" ? "18" : "999", ...(responseMode === "encoded" ? { "content-encoding": "gzip" } : {}) } });
+  },
+};
+const cache = new Map();
+function load(file) {
+  file = path.resolve(file);
+  if (cache.has(file)) return cache.get(file);
+  const result = {}; cache.set(file, result);
+  const output = ts.transpileModule(fs.readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true, jsx: ts.JsxEmit.React } }).outputText;
+  runInNewContext(output, { ...sandbox, exports: result, require: name => {
+    if (name === "react") return { useEffect: fn => fn() };
+    if (name === "next/navigation") return { usePathname: () => location.pathname };
+    if (!name.startsWith(".")) return require(name);
+    const candidate = path.resolve(path.dirname(file), name);
+    if (candidate.endsWith(".json")) return require(candidate);
+    return load(candidate + (fs.existsSync(candidate + ".ts") ? ".ts" : ".tsx"));
+  } });
+  return result;
+}
+const tick = async () => { for (let i=0;i<6;i++) await new Promise(resolve => setImmediate(resolve)); };
+
+(async () => {
+  const core = load("lib/analytics.ts"), client = load("lib/analytics-client.ts");
+  assert.equal(core.sourceForVisit("https://chatgpt.com.evil.example/path"), "other");
+  assert.equal(core.sourceForVisit("https://gemini.google.com/app"), "gemini");
+  assert.equal(core.sourceForVisit("https://www.perplexity.com/search/example"), "perplexity");
+  assert.equal(core.sourceForVisit("https://www.google.ch/search?q=private"), "google");
+  assert.equal(core.metricPath("/uk/blog/guide?email=private#fragment"), "/uk/blog/guide");
+  assert.equal(core.metricPath("/uk/../../private"), null);
+  assert.equal(client.analyticsSession(), null);
+  assert.equal(session.size, 0);
+  load("app/components/GrowthAnalytics.tsx").GrowthAnalytics();
+  assert.equal(sent.length, 0, "No page event before consent");
+  client.setConsent("accepted"); await tick();
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0].event, "page_view");
+  assert.equal(sent[0].source, "chatgpt");
+  assert(!JSON.stringify(sent).includes("secret"));
+  const link = new FakeElement();
+  Object.assign(link, { href: location.origin + "/api/download/business-germany?locale=uk", download: "germany.pdf", dataset: { download: "business-germany", placement: "test-guide" }, setAttribute() {}, removeAttribute() {} });
+  const click = target => domListeners.get("click")({ target, button: 0, preventDefault() {}, defaultPrevented: false });
+  click(link); await tick();
+  assert.equal(sent.filter(row => row.event === "download_requested").length, 1);
+  assert.equal(sent.filter(row => row.event === "download_received").length, 1);
+  assert.equal(savedFiles, 1);
+  const requestId = sent.find(row => row.event === "download_requested").eventId;
+  assert.equal(sent.find(row => row.event === "download_received").eventId, requestId);
+  assert.equal(files[0]["x-sweezy-download"], requestId);
+  const appLink = new FakeElement(); Object.assign(appLink, { href: "https://apps.apple.com/app/sweezy/id6759244315", dataset: {} });
+  click(appLink); await tick();
+  assert.equal(sent.filter(row => row.event === "app_click").length, 1);
+  const providerLink = new FakeElement(); Object.assign(providerLink, { href: "tel:+4315245015300", dataset: { service: "interface-malva", serviceAction: "phone" } });
+  click(providerLink); await tick();
+  assert.equal(sent.find(row => row.event === "service_contact").provider, "interface-malva");
+  responseMode = "truncated";
+  click(link); await tick();
+  assert.equal(sent.filter(row => row.event === "download_received").length, 1, "Truncated PDF cannot count as received");
+  assert.equal(sent.filter(row => row.event === "download_failed").length, 1);
+  assert.equal(fallbacks.length, 1);
+  responseMode = "encoded";
+  click(link); await tick();
+  assert.equal(sent.filter(row => row.event === "download_received").length, 2, "A decoded compressed response must not be compared to encoded Content-Length");
+  responseMode = "complete";
+  client.setConsent("declined"); await tick();
+  const before = sent.length;
+  click(link); await tick();
+  assert.equal(sent.length, before, "Opt-out stops usage metrics");
+  assert.equal(session.size, 0);
+  assert.equal(savedFiles, 3, "Download still works after declining");
+  assert.equal(Object.keys(files.at(-1)).length, 0, "No session header after declining");
+  local.set(core.CONSENT_KEY, JSON.stringify({ version: "v1", choice: "accepted", at: Date.now()-181*86400000 }));
+  assert.equal(client.analyticsSession(), null, "Expired consent does not restart measurements");
+
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "sweezy-metrics-test-"));
+  process.env.SWEEZY_ANALYTICS_DIR = directory;
+  const route = load("app/api/events/route.ts");
+  const sample = { event: "download_requested", session: webcrypto.randomUUID(), eventId: webcrypto.randomUUID(), path: "/uk/resources?private=value", entry: "/uk/countries/germany", source: "google", asset: "business-germany", country: "austria", ip: "do-not-store", arbitrary: "do-not-store" };
+  const post = (data, extra = {}) => route.POST(new Request(location.origin+"/api/events", { method: "POST", headers: { origin: location.origin, "x-sweezy-consent": "v1", ...extra }, body: typeof data === "string" ? data : JSON.stringify(data) }));
+  assert.equal((await post(sample)).status, 204);
+  assert.equal((await post(sample, { origin: "https://other.example" })).status, 403);
+  assert.equal((await post(sample, { "x-sweezy-consent": "" })).status, 403);
+  assert.equal((await post({ ...sample, event: "download_served" })).status, 400);
+  assert.equal((await post({ ...sample, asset: "../../secret" })).status, 400);
+  assert.equal((await post("x".repeat(5000))).status, 413);
+  assert.equal((await post("not-json")).status, 400);
+  const log = fs.readFileSync(path.join(directory, fs.readdirSync(directory)[0]), "utf8");
+  assert(!log.includes("private") && !log.includes("do-not-store"));
+  assert.equal(JSON.parse(log).country, "germany", "Asset country is authoritative");
+  const { persistMetric } = load("lib/analytics-store.ts");
+  const event = core.validateMetric({ ...sample, path: "/uk/resources" });
+  await persistMetric({ ...event, event: "download_served" });
+  await persistMetric({ ...event, event: "download_received" });
+  await persistMetric({ ...event, event: "app_click", asset: undefined, eventId: webcrypto.randomUUID() });
+  const report = JSON.parse(execFileSync(process.execPath, ["scripts/analytics-report.mjs", "--dir", directory], { encoding: "utf8" }));
+  assert.equal(report.funnel.pdfRequests, 1);
+  assert.equal(report.funnel.serverCorroboratedReceipts, 1);
+  assert.equal(report.funnel.sessionsWithAppClickAfterPdf, 1);
+  assert.equal(report.measuredTabSessions, 1);
+  fs.rmSync(directory, { recursive: true });
+  delete process.env.SWEEZY_ANALYTICS_DIR;
+  console.log("Growth analytics passed: opt-in/decline/expiry, PDF receipt vs truncation, working opt-out download, request correlation, input limits, private-data exclusion, persistent storage and funnel reporting.");
+})().catch(error => { console.error(error); process.exitCode = 1; });

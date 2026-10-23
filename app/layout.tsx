@@ -7,6 +7,8 @@ import { THEME_BOOTSTRAP } from "../lib/theme";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { Telemetry } from "./components/Telemetry";
+import { GrowthAnalytics } from "./components/GrowthAnalytics";
+import { AnalyticsConsent } from "./components/AnalyticsConsent";
 import { DEFAULT_OG_IMAGE } from "../lib/social";
 import "./globals.css";
 import "./theme.css";
@@ -30,9 +32,9 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sweezy.world"),
-  title: "Sweezy App — Move to Switzerland with Clear Steps",
+  title: "Sweezy — Life in Switzerland, Germany and Austria",
   description:
-    "Sweezy app helps newcomers move to Switzerland with step-by-step guides, checklists, jobs, local places and community support in English, Ukrainian and German.",
+    "Sweezy helps newcomers navigate Switzerland, Germany and Austria with practical guides, checklists and local support in English, Ukrainian and German.",
   keywords: [
     "Switzerland",
     "expat",
@@ -47,16 +49,16 @@ export const metadata: Metadata = {
   authors: [{ name: "Sweezy by AI Insider" }],
   alternates: buildRootAlternates(),
   openGraph: {
-    title: "Sweezy — Life in Switzerland. Simplified.",
+    title: "Sweezy — Your next step in DACH",
     description:
-      "Navigate life in Switzerland with step-by-step guides and structured checklists.",
+      "Practical guides and checklists for life in Switzerland, Germany and Austria.",
     url: "https://www.sweezy.world",
     images: [
       {
         url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Sweezy — Life in Switzerland. Simplified.",
+        alt: "Sweezy — Your next step in DACH",
       },
     ],
     type: "website",
@@ -65,9 +67,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sweezy — Life in Switzerland. Simplified.",
+    title: "Sweezy — Your next step in DACH",
     description:
-      "Navigate life in Switzerland with step-by-step guides and structured checklists.",
+      "Practical guides and checklists for life in Switzerland, Germany and Austria.",
     images: [DEFAULT_OG_IMAGE],
   },
   robots: {
@@ -91,7 +93,7 @@ const websiteSchema = {
   name: "Sweezy",
   url: "https://www.sweezy.world",
   description:
-    "Sweezy helps newcomers navigate life in Switzerland with step-by-step guides, smart checklists, and curated official resources.",
+    "Sweezy helps newcomers navigate life in Switzerland, Germany and Austria with practical guides, checklists and local support.",
   inLanguage: ["en", "uk", "de"],
   publisher: {
     "@type": "Organization",
@@ -130,6 +132,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen overflow-x-hidden">
         <Telemetry />
+        <GrowthAnalytics />
+        <AnalyticsConsent />
         <ThemeProvider>
           <LocaleProvider>
             <SiteHeader />

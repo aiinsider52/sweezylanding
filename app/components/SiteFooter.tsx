@@ -12,15 +12,15 @@ import styles from "./SiteFooter.module.css";
 
 const copy = {
   uk: {
-    eyebrow: "Твій супутник у Швейцарії", title: "Твоя Швейцарія.", accent: "Твій наступний крок.",
+    eyebrow: "Твій супутник у DACH", title: "Почувайся вдома.", accent: "Твій наступний крок.",
     intro: "Від перших документів до місць, які захоплюють подих. Ідемо разом?", app: "Завантажити Sweezy", kit: "8 місць для списку мрій", free: "Безкоштовний PDF", farewell: "До нових відкриттів!", discover: "Відкривай", settle: "Почувайся вдома", together: "Залишаймося поруч", guides: "Гіди по кантонах", places: "Красиві місця", planning: "Планування подорожі", jobs: "Вакансії", postJob: "Розмістити вакансію", starter: "Перший тиждень: стартовий набір", community: "Спільнота Sweezy", editorial: "Редакційні стандарти", note: "Менше невідомого. Більше свого.", made: "Створено у Швейцарії", top: "Нагору", social: "Знайди своїх", legal: "Юридична інформація", navigation: "Навігація сайтом",
   },
   en: {
-    eyebrow: "Your companion in Switzerland", title: "Your Switzerland.", accent: "Your next chapter.",
+    eyebrow: "Your companion across DACH", title: "Feel at home.", accent: "Your next chapter.",
     intro: "From your first paperwork to places that take your breath away. Shall we?", app: "Get Sweezy", kit: "8 places for your wish list", free: "Free PDF guide", farewell: "See you out there!", discover: "Go explore", settle: "Feel at home", together: "Stay in touch", guides: "Cantonal guides", places: "Beautiful places", planning: "Travel planning", jobs: "Jobs", postJob: "Post a vacancy", starter: "Your first week: starter kit", community: "Sweezy community", editorial: "Editorial standards", note: "Less unfamiliar. More like home.", made: "Made in Switzerland", top: "Back to top", social: "Find your people", legal: "Legal information", navigation: "Site navigation",
   },
   de: {
-    eyebrow: "Dein Begleiter in der Schweiz", title: "Deine Schweiz.", accent: "Dein nächstes Kapitel.",
+    eyebrow: "Dein Begleiter in DACH", title: "Fühl dich zu Hause.", accent: "Dein nächstes Kapitel.",
     intro: "Von den ersten Formularen bis zu Orten, die den Atem rauben. Kommst du mit?", app: "Sweezy herunterladen", kit: "8 Orte für deine Wunschliste", free: "Kostenloser PDF-Guide", farewell: "Bis zum nächsten Abenteuer!", discover: "Geh auf Entdeckung", settle: "Fühl dich zu Hause", together: "Bleiben wir in Kontakt", guides: "Kantonale Ratgeber", places: "Schöne Orte", planning: "Reiseplanung", jobs: "Jobs", postJob: "Stelle veröffentlichen", starter: "Deine erste Woche: Startpaket", community: "Sweezy Community", editorial: "Redaktionelle Standards", note: "Weniger fremd. Mehr zu Hause.", made: "In der Schweiz entwickelt", top: "Nach oben", social: "Finde deine Community", legal: "Rechtliche Informationen", navigation: "Seitennavigation",
   },
 } satisfies Record<Locale, Record<string, string>>;
@@ -45,6 +45,8 @@ export function SiteFooter({ year }: { year: number }) {
   const t = translations[locale].footer as Record<string, string>;
   const home = `/${locale}`;
   const discover = [
+    { label: "DACH · CH / DE / AT", href: `${home}/countries` },
+    { label: locale === "uk" ? "Безкоштовні PDF" : locale === "de" ? "Kostenlose PDFs" : "Free PDF checklists", href: `${home}/resources` },
     { label: c.places, href: `${home}/places` },
     { label: c.planning, href: `${home}/planning` },
     { label: c.guides, href: `${home}/guides` },
@@ -83,7 +85,7 @@ export function SiteFooter({ year }: { year: number }) {
           <div className={styles.orbit} aria-hidden="true"><span /><span /></div>
           <span className={styles.farewell}>{c.farewell}<svg viewBox="0 0 30 20" fill="none" aria-hidden="true"><path d="M2 2c0 12 10 14 23 10m-5-5 6 5-4 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
           <SweezyCompanion pose="greeting" className={styles.mascot} sizes="(max-width: 640px) 280px, 380px" />
-          <span className={styles.passport} aria-hidden="true">SWEEZY EXPLORER<span>CH / 01</span></span>
+          <span className={styles.passport} aria-hidden="true">SWEEZY EXPLORER<span>DE / AT / CH</span></span>
         </div>
       </div>
 

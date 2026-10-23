@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { isLocale } from "../../../lib/blog";
 import { BASE_URL, buildLocaleAlternates } from "../../../lib/alternates";
 import { DEFAULT_OG_IMAGE } from "../../../lib/social";
-import { getTravelKitPlaces, travelKitCopy, travelKitPdf } from "../../../data/travel-kit";
+import { getTravelKitPlaces, travelKitCopy } from "../../../data/travel-kit";
+import { DownloadLink } from "../../components/DownloadLink";
 import { TravelKitBanner } from "../../components/TravelKitBanner";
 import { JsonLd } from "../../components/seo/JsonLd";
 import { TravelChecklist } from "./TravelChecklist";
@@ -32,7 +33,7 @@ export default function TravelKitPage({ params }: { params: { locale: string } }
       <section className={styles.planner}><div><p className={styles.eyebrow}>NEXT / YOUR DAY OUT</p><h2>{copy.planner}</h2><p>{copy.plannerBody}</p><Link href={`/${locale}/planning`}>{locale === "uk" ? "Спланувати поїздку" : locale === "de" ? "Ausflug planen" : "Plan your trip"} ↗</Link></div><ol>{copy.tasks.map((task) => <li key={task}>{task}</li>)}</ol></section>
       <p className={styles.note}>{copy.note}</p>
       <section className={styles.sources}><h2>{copy.sources}</h2><ul>{places.map((place) => <li key={place.slug}><a href={place.source.url} target="_blank" rel="noreferrer noopener">{place.title} · {place.source.name} ↗</a></li>)}</ul><p>{copy.reviewed}</p></section>
-      <div className={styles.bottomLinks}><a href={travelKitPdf(locale)} download>{copy.download} ↓</a><Link href={`/${locale}/places`}>{copy.all} ↗</Link><Link href={`/${locale}/starter-kit`}>{copy.firstWeek} ↗</Link></div>
+      <div className={styles.bottomLinks}><DownloadLink asset="travel-kit" locale={locale} placement="travel-kit-page">{copy.download} ↓</DownloadLink><Link href={`/${locale}/places`}>{copy.all} ↗</Link><Link href={`/${locale}/starter-kit`}>{copy.firstWeek} ↗</Link></div>
     </div>
   </main>;
 }

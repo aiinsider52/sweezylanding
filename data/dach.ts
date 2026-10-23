@@ -1,0 +1,58 @@
+import type { Locale } from "../lib/i18n";
+import type { DownloadId } from "./downloads";
+
+export const COUNTRIES = ["switzerland", "germany", "austria"] as const;
+export type Country = typeof COUNTRIES[number];
+export const DACH_TOPICS = ["registration", "work", "business"] as const;
+export type DachTopic = typeof DACH_TOPICS[number];
+export const REVIEWED_AT = "2026-10-23";
+type Local = Record<Locale, string>;
+export const countryData: Record<Country, { code: string; name: Local; title: Local; description: Local; image: string; alt: Local; starter: DownloadId; business: DownloadId }> = {
+  switzerland: { code: "CH", name: { uk: "Швейцарія", en: "Switzerland", de: "Schweiz" }, title: { uk: "Ваш маршрут у Швейцарії.", en: "Your route through Switzerland.", de: "Dein Weg in der Schweiz." }, description: { uk: "Реєстрація в громаді, статус S, робота, страхування, бізнес і місцеві послуги. Почніть із потрібного кроку й свого кантону.", en: "Municipal registration, permits, work, insurance, business and local services. Start with your next step and your canton.", de: "Gemeindeanmeldung, Bewilligungen, Arbeit, Versicherungen, Gründung und lokale Angebote. Beginne mit deinem nächsten Schritt und deinem Kanton." }, image: "/images/canton-lucerne.jpg", alt: { uk: "Міський краєвид Люцерна у Швейцарії", en: "City view of Lucerne in Switzerland", de: "Stadtansicht von Luzern in der Schweiz" }, starter: "first-week", business: "business-ch" },
+  germany: { code: "DE", name: { uk: "Німеччина", en: "Germany", de: "Deutschland" }, title: { uk: "Облаштуватися в Німеччині.", en: "Make your start in Germany.", de: "In Deutschland ankommen." }, description: { uk: "Anmeldung, право на роботу та власна справа: практичні кроки для українців і новоприбулих з офіційними джерелами.", en: "Anmeldung, permission to work and starting a business: practical steps for Ukrainians and newcomers, linked to official sources.", de: "Anmeldung, Arbeitserlaubnis und Selbstständigkeit: praktische Schritte für Menschen aus der Ukraine und andere Neuankommende mit offiziellen Quellen." }, image: "/editorial/countries/germany.webp", alt: { uk: "Редакційна ілюстрація берлінської вулиці з історичними фасадами та кафе", en: "Editorial illustration of a Berlin street with historic facades and cafés", de: "Redaktionelle Illustration einer Berliner Straße mit Altbaufassaden und Cafés" }, starter: "starter-germany", business: "business-germany" },
+  austria: { code: "AT", name: { uk: "Австрія", en: "Austria", de: "Österreich" }, title: { uk: "Свій початок в Австрії.", en: "Find your footing in Austria.", de: "Dein Anfang in Österreich." }, description: { uk: "Meldezettel, документи про проживання, робота та Gewerbe. Зрозумілий старт із поясненням різниці між адресою й міграційним статусом.", en: "Meldezettel, residence documents, work and Gewerbe. A clear starting point that distinguishes address registration from immigration status.", de: "Meldezettel, Aufenthaltsdokumente, Arbeit und Gewerbe. Ein klarer Einstieg mit dem Unterschied zwischen Wohnsitzmeldung und Aufenthaltsrecht." }, image: "/editorial/countries/austria.webp", alt: { uk: "Редакційна ілюстрація віденської вулиці з кафе та трамваєм", en: "Editorial illustration of a Vienna street with a café and tram", de: "Redaktionelle Illustration einer Wiener Straße mit Café und Straßenbahn" }, starter: "starter-austria", business: "business-austria" },
+};
+export const countrySeoTitles: Record<Country, Record<Locale, string>> = {
+  switzerland: { uk: "Життя у Швейцарії: переїзд, робота та бізнес", en: "Living in Switzerland: moving, work and business", de: "Leben in der Schweiz: Umzug, Arbeit und Gründung" },
+  germany: { uk: "Життя в Німеччині: реєстрація, робота та бізнес", en: "Living in Germany: registration, work and business", de: "Leben in Deutschland: Anmeldung, Arbeit und Gründung" },
+  austria: { uk: "Життя в Австрії: реєстрація, робота та бізнес", en: "Living in Austria: registration, work and business", de: "Leben in Österreich: Anmeldung, Arbeit und Gründung" },
+};
+export const topicNames: Record<DachTopic, Local> = {
+  registration: { uk: "Реєстрація й перші документи", en: "Registration and first documents", de: "Anmeldung und erste Dokumente" },
+  work: { uk: "Робота та страхування", en: "Work and insurance", de: "Arbeit und Versicherung" },
+  business: { uk: "Власний бізнес і самозайнятість", en: "Business and self-employment", de: "Gründung und Selbstständigkeit" },
+};
+export type Source = { name: string; url: string };
+const DE_REG: Source = { name: "Bundesportal — Wohnsitz anmelden", url: "https://verwaltung.bund.de/leistungsverzeichnis/en/leistung/99115005104001/herausgeber/BY-365/region/090000000000" };
+const DE_WORK: Source = { name: "Germany4Ukraine — work and support", url: "https://www.germany4ukraine.de/EN/arbeit-und-soziales/suche-nach-arbeit-fuer-ukrainer/seite.html" };
+const DE_HEALTH: Source = { name: "Bundesgesundheitsministerium — health insurance", url: "https://www.bundesgesundheitsministerium.de/en/themen/krankenversicherung/online-ratgeber-krankenversicherung/krankenversicherung/statutory-health-insurance-shi" };
+const DE_BUSINESS: Source = { name: "Make it in Germany — starting a business", url: "https://www.make-it-in-germany.com/en/working-in-germany/starting-business" };
+const AT_REG: Source = { name: "oesterreich.gv.at — Meldezettel", url: "https://www.oesterreich.gv.at/en/themen/persoenliche_dokumente_und_bestaetigungen/an__abmeldung_des_wohnsitzes/Seite.1180200" };
+const AT_WORK: Source = { name: "Sozialministerium — Work and Migration", url: "https://www.sozialministerium.gv.at/en/Topics/Labour/Labour-Market/Work-and-migration.html" };
+const AT_HEALTH: Source = { name: "Stadt Wien — health system in Austria", url: "https://start.wien.gv.at/en/gesundheit-en" };
+const AT_BUSINESS: Source = { name: "Unternehmensserviceportal — Gewerbeanmeldung", url: "https://www.usp.gv.at/en/gruendung/EAP/gewerbeanmeldung.html" };
+export const guideSources: Record<"germany" | "austria", Record<DachTopic, Source[]>> = {
+  germany: { registration: [DE_REG, DE_HEALTH, DE_WORK], work: [DE_WORK, DE_HEALTH, DE_BUSINESS], business: [DE_BUSINESS, DE_WORK, DE_HEALTH] },
+  austria: { registration: [AT_REG, AT_WORK, AT_HEALTH], work: [AT_WORK, AT_HEALTH, AT_BUSINESS], business: [AT_BUSINESS, AT_WORK, AT_HEALTH] },
+};
+export const countrySources: Record<Country, Source[]> = {
+  switzerland: [{ name: "ch.ch — moving to Switzerland", url: "https://www.ch.ch/en/foreign-nationals-in-switzerland/living-in-switzerland/moving-to-switzerland/" }, { name: "KMU Portal — setting up a business", url: "https://www.kmu.admin.ch/en/setting-up-overview" }, { name: "KMU Portal — self-employment formalities", url: "https://www.kmu.admin.ch/en/self-employment-guidelines" }],
+  germany: [DE_REG, DE_WORK, DE_HEALTH, DE_BUSINESS], austria: [AT_REG, AT_WORK, AT_HEALTH, AT_BUSINESS],
+};
+export function isCountry(value: string): value is Country { return COUNTRIES.includes(value as Country); }
+export function countryPath(locale: Locale, country: Country) { return `/${locale}/countries/${country}`; }
+export function topicHref(locale: Locale, country: Country, topic: DachTopic) {
+  if (country !== "switzerland") return `${countryPath(locale, country)}/${topic}`;
+  const paths: Record<Locale, Record<DachTopic, string>> = {
+    uk: { registration: "/uk/blog/yak-zareyestruvatysya-v-shveytcariyi", work: "/uk/blog/poshuk-roboty-shveytcariya-2026", business: "/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" },
+    en: { registration: "/en/blog/how-to-register-switzerland", work: "/en/blog/how-to-find-job-switzerland-foreigner", business: "/en/countries/switzerland#business" },
+    de: { registration: "/de/blog/anmeldung-schweiz-auslaender", work: "/de/guides", business: "/de/countries/switzerland#business" },
+  };
+  return paths[locale][topic];
+}
+
+export const dachCopy = {
+  uk: { eyebrow: "SWEEZY / DACH", title: "Три країни. Ваш наступний крок.", intro: "Швейцарія, Німеччина та Австрія: оберіть країну, а ми допоможемо розібратися з документами, роботою й власною справою.", countries: "Оберіть свою країну", open: "Відкрити гід", topics: "З чого почнемо?", resources: "Безкоштовні чек-листи", download: "Завантажити PDF", free: "Безкоштовно · Без реєстрації", sources: "Офіційні джерела", reviewed: "Джерела перевірено", scope: "Умови залежать від громадянства, документа про проживання й конкретної ситуації. Реєстрація адреси не надає автоматичного права на роботу чи бізнес.", other: "Інші країни DACH", services: "Послуги та допомога поруч", faq: "Поширені запитання", applies: "Для кого цей гід", answer: "Коротка відповідь", next: "Наступні кроки", author: "Підготовлено редакцією Sweezy", all: "Усі країни", businessNote: "До запуску справи уточніть право на самозайнятість, правову форму, визнання діяльності, страхування та податкові обов’язки. Для статусу S перевірте процедуру у своєму кантоні.", businessAction: "Гід для українців про власну справу", countryScope: "Швейцарський розділ: кантони, статус S і практичні гіди." },
+  en: { eyebrow: "SWEEZY / DACH", title: "Three countries. Your next step.", intro: "Switzerland, Germany and Austria: choose your country and find your way through documents, work and starting a business.", countries: "Choose your country", open: "Open the guide", topics: "Where shall we start?", resources: "Free checklists", download: "Download PDF", free: "Free · No signup", sources: "Official sources", reviewed: "Sources checked", scope: "Requirements depend on your citizenship, residence document and individual circumstances. Registering an address does not automatically grant permission to work or run a business.", other: "Other DACH countries", services: "Local services and support", faq: "Frequently asked questions", applies: "Who this guide is for", answer: "Short answer", next: "Next steps", author: "Prepared by the Sweezy editorial team", all: "All countries", businessNote: "Before starting, clarify self-employment permission, business structure, recognition of your activity, insurance and tax obligations. For Status S, check the procedure with your canton.", businessAction: "Business guide for Ukrainians (Ukrainian)", countryScope: "Swiss section: cantons, permits and practical guides." },
+  de: { eyebrow: "SWEEZY / DACH", title: "Drei Länder. Dein nächster Schritt.", intro: "Schweiz, Deutschland und Österreich: Wähle dein Land und finde Orientierung zu Dokumenten, Arbeit und Selbstständigkeit.", countries: "Wähle dein Land", open: "Ratgeber öffnen", topics: "Womit beginnen wir?", resources: "Kostenlose Checklisten", download: "PDF herunterladen", free: "Kostenlos · Ohne Anmeldung", sources: "Offizielle Quellen", reviewed: "Quellen geprüft", scope: "Die Voraussetzungen hängen von Staatsangehörigkeit, Aufenthaltsdokument und persönlicher Situation ab. Eine Wohnsitzmeldung erlaubt nicht automatisch eine Erwerbstätigkeit oder Unternehmensgründung.", other: "Weitere DACH-Länder", services: "Angebote und Hilfe vor Ort", faq: "Häufige Fragen", applies: "Für wen dieser Ratgeber gedacht ist", answer: "Kurzantwort", next: "Nächste Schritte", author: "Erstellt von der Sweezy-Redaktion", all: "Alle Länder", businessNote: "Kläre vor dem Start die Erlaubnis zur Selbstständigkeit, Rechtsform, Anerkennung der Tätigkeit, Versicherungen und Steuerpflichten. Beim Status S ist das Verfahren mit dem Kanton abzuklären.", businessAction: "Gründungsratgeber für Ukrainer (Ukrainisch)", countryScope: "Schweizer Bereich: Kantone, Bewilligungen und praktische Ratgeber." },
+} satisfies Record<Locale, Record<string, string>>;

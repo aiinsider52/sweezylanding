@@ -11,17 +11,17 @@ import styles from "./SiteHeader.module.css";
 
 const LABELS = {
   uk: {
-    home: "Sweezy — на головну", tagline: "Твоя Швейцарія", life: "Життя", explore: "Відкривай", community: "Спільнота", blog: "Блог", app: "Завантажити", menu: "Відкрити меню", close: "Закрити меню", navigation: "Головна навігація", language: "Мова сайту", light: "Увімкнути світлу тему", dark: "Увімкнути темну тему",
+    home: "Sweezy — на головну", tagline: "Твій DACH-гід", life: "Життя", explore: "Відкривай", community: "Спільнота", blog: "Блог", app: "Завантажити", menu: "Відкрити меню", close: "Закрити меню", navigation: "Головна навігація", language: "Мова сайту", light: "Увімкнути світлу тему", dark: "Увімкнути темну тему",
     lifeTitle: "Почувайся вдома.", lifeIntro: "Зрозумілі кроки для життя у Швейцарії.", guides: "Гіди по кантонах", guidesDesc: "Документи, страхування, перші кроки", jobs: "Робота у Швейцарії", jobsDesc: "Вакансії та нові можливості", services: "Українські послуги", servicesDesc: "Знайди своїх фахівців поруч", business: "Власний бізнес", businessDesc: "Як розпочати свою справу", starter: "Твій перший тиждень.", starterDesc: "Зібрали важливі кроки в одному стартовому наборі.", starterAction: "Забрати стартовий набір", free: "Безкоштовно · PDF",
     exploreTitle: "Більше, ніж краєвид.", exploreIntro: "Знайди привід для наступної маленької подорожі.", places: "Красиві місця", placesDesc: "Гори, озера та міста з історією", planning: "Планування подорожі", planningDesc: "Від ідеї до маршруту на день", wishlist: "Твій список мрій", wishlistDesc: "8 місць, які хочеться побачити", feature: "Швейцарія, яку варто побачити.", featureAction: "Відкрити мінігід", all: "Разом зі Sweezy", communityDesc: "Обмін досвідом та свої люди", blogDesc: "Корисні відповіді й нові історії", mobileTitle: "Куди вирушаємо?",
   },
   en: {
-    home: "Sweezy — home", tagline: "Your Switzerland", life: "Live here", explore: "Explore", community: "Community", blog: "Journal", app: "Get Sweezy", menu: "Open menu", close: "Close menu", navigation: "Primary navigation", language: "Site language", light: "Switch to light theme", dark: "Switch to dark theme",
+    home: "Sweezy — home", tagline: "Your DACH guide", life: "Live here", explore: "Explore", community: "Community", blog: "Journal", app: "Get Sweezy", menu: "Open menu", close: "Close menu", navigation: "Primary navigation", language: "Site language", light: "Switch to light theme", dark: "Switch to dark theme",
     lifeTitle: "Make yourself at home.", lifeIntro: "Clear steps for your life in Switzerland.", guides: "Cantonal guides", guidesDesc: "Paperwork, insurance and first steps", jobs: "Work in Switzerland", jobsDesc: "Jobs and new opportunities", services: "Ukrainian services", servicesDesc: "Find local professionals", business: "Your own business", businessDesc: "Start building your next chapter", starter: "Your first week, sorted.", starterDesc: "The essential first steps, together in one starter kit.", starterAction: "Get the starter kit", free: "Free guide · PDF",
     exploreTitle: "More than a pretty view.", exploreIntro: "Find a reason for your next little adventure.", places: "Beautiful places", placesDesc: "Mountains, lakes and historic towns", planning: "Travel planning", planningDesc: "Turn an idea into a day out", wishlist: "Your Swiss wish list", wishlistDesc: "8 places you will want to see", feature: "Switzerland, worth exploring.", featureAction: "Open the mini guide", all: "Together with Sweezy", communityDesc: "Shared experiences and your people", blogDesc: "Useful answers and fresh stories", mobileTitle: "Where shall we go?",
   },
   de: {
-    home: "Sweezy — Startseite", tagline: "Deine Schweiz", life: "Leben", explore: "Entdecken", community: "Community", blog: "Journal", app: "App laden", menu: "Menü öffnen", close: "Menü schließen", navigation: "Hauptnavigation", language: "Sprache der Website", light: "Helles Design aktivieren", dark: "Dunkles Design aktivieren",
+    home: "Sweezy — Startseite", tagline: "Dein DACH-Guide", life: "Leben", explore: "Entdecken", community: "Community", blog: "Journal", app: "App laden", menu: "Menü öffnen", close: "Menü schließen", navigation: "Hauptnavigation", language: "Sprache der Website", light: "Helles Design aktivieren", dark: "Dunkles Design aktivieren",
     lifeTitle: "Fühl dich zu Hause.", lifeIntro: "Klare Schritte für dein Leben in der Schweiz.", guides: "Kantonale Ratgeber", guidesDesc: "Dokumente, Versicherung und erste Schritte", jobs: "Arbeiten in der Schweiz", jobsDesc: "Jobs und neue Möglichkeiten", services: "Ukrainische Dienstleistungen", servicesDesc: "Fachleute in deiner Nähe finden", business: "Dein eigenes Unternehmen", businessDesc: "Dein nächstes Kapitel beginnt hier", starter: "Deine erste Woche.", starterDesc: "Die wichtigsten ersten Schritte in einem Startpaket.", starterAction: "Startpaket mitnehmen", free: "Kostenloser Guide · PDF",
     exploreTitle: "Mehr als eine schöne Aussicht.", exploreIntro: "Finde einen Anlass für dein nächstes kleines Abenteuer.", places: "Schöne Orte", placesDesc: "Berge, Seen und historische Städte", planning: "Reiseplanung", planningDesc: "Von der Idee zum Tagesausflug", wishlist: "Deine Schweizer Wunschliste", wishlistDesc: "8 Orte, die du sehen möchtest", feature: "Die Schweiz wartet auf dich.", featureAction: "Mini-Guide öffnen", all: "Zusammen mit Sweezy", communityDesc: "Erfahrungen teilen, Menschen finden", blogDesc: "Hilfreiche Antworten und neue Geschichten", mobileTitle: "Wohin geht’s als Nächstes?",
   },
@@ -47,6 +47,8 @@ export function SiteHeader() {
   const close = () => setOpen(null);
   const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const life: MenuItem[] = [
+    { href: `${home}/countries`, label: "DACH", description: locale === "uk" ? "Швейцарія · Німеччина · Австрія" : locale === "de" ? "Schweiz · Deutschland · Österreich" : "Switzerland · Germany · Austria" },
+    { href: `${home}/resources`, label: locale === "uk" ? "Безкоштовні PDF" : locale === "de" ? "Kostenlose PDFs" : "Free PDF checklists", description: locale === "uk" ? "Переїзд і бізнес: оберіть країну" : locale === "de" ? "Umzug und Gründung: Land wählen" : "Moving and business: choose your country" },
     { href: `${home}/guides`, label: c.guides, description: c.guidesDesc },
     { href: `${home}/jobs`, label: c.jobs, description: c.jobsDesc },
     ...(locale === "uk" ? [
@@ -146,12 +148,12 @@ export function SiteHeader() {
             {feature(kind)}
           </div>
         </div>)}
-        <Link href={`${home}/community`} onClick={close} className={styles.directLink} aria-current={active(`${home}/community`) ? "page" : undefined}>{c.community}</Link>
+        <Link href={`${home}/countries`} onClick={close} className={styles.directLink} aria-current={active(`${home}/countries`) ? "page" : undefined}>DACH</Link>
         <Link href={`${home}/blog`} onClick={close} className={styles.directLink} aria-current={active(`${home}/blog`) && pathname !== business ? "page" : undefined}>{c.blog}</Link>
       </nav>
       <div className={styles.actions}>
         <nav className={styles.languages} aria-label={c.language}>
-          {(["uk", "en", "de"] as const).map(item => <Link key={item} href={`/${item}`} hrefLang={item} lang={item} data-selected={item === locale} aria-label={item === "uk" ? "Українська" : item === "de" ? "Deutsch" : "English"} onClick={close}>{item === "uk" ? "UA" : item.toUpperCase()}</Link>)}
+          {(["uk", "en", "de"] as const).map(item => <Link key={item} href={/^\/(uk|en|de)\/(countries(?:\/.*)?|resources)$/.test(pathname) ? pathname.replace(/^\/(uk|en|de)/, `/${item}`) : `/${item}`} hrefLang={item} lang={item} data-selected={item === locale} aria-label={item === "uk" ? "Українська" : item === "de" ? "Deutsch" : "English"} onClick={close}>{item === "uk" ? "UA" : item.toUpperCase()}</Link>)}
         </nav>
         <ThemeToggle className={styles.themeToggle} labels={{ light: c.light, dark: c.dark }} />
         <a className={styles.app} href={APP_STORE_URL} target="_blank" rel="noreferrer noopener">{c.app}<span><Arrow /></span></a>

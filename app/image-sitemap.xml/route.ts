@@ -3,6 +3,7 @@ import { getPostsByLocale } from "../../lib/blog";
 import { cantons } from "../../data/cantons";
 import { getCantonImage, getCantonImageAlt, getPostImage, getPostImageAlt } from "../../lib/editorial";
 import type { Locale } from "../../lib/i18n";
+import { COUNTRIES, countryData, countryPath } from "../../data/dach";
 
 const BASE_URL = "https://www.sweezy.world";
 const LOCALES: Locale[] = ["en", "uk", "de"];
@@ -69,7 +70,8 @@ export async function GET() {
     }),
   );
 
-  const urls = [...blogEntries, ...placeEntries, ...cantonEntries].map(({ page, images }) => `
+  const countryEntries = LOCALES.flatMap(locale => COUNTRIES.map(country => ({ page: `${BASE_URL}${countryPath(locale, country)}`, images: [{ location: absoluteImageUrl(countryData[country].image), title: countryData[country].name[locale], caption: countryData[country].alt[locale] }] })));
+  const urls = [...blogEntries, ...placeEntries, ...cantonEntries, ...countryEntries].map(({ page, images }) => `
   <url>
     <loc>${escapeXml(page)}</loc>${images.map((image) => `
     <image:image>

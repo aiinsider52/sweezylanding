@@ -3,8 +3,9 @@ const nextConfig = {
   experimental: {
     // Keep Cyrillic fonts with Node image routes in traced deployments.
     outputFileTracingIncludes: {
-      "/**/opengraph-image": ["./public/fonts/NotoSans-*.ttf"],
-      "/**/twitter-image": ["./public/fonts/NotoSans-*.ttf"],
+      "/**/opengraph-image": ["./public/fonts/NotoSans-*.ttf", "./public/editorial/posts/social/*.jpg"],
+      "/**/twitter-image": ["./public/fonts/NotoSans-*.ttf", "./public/editorial/posts/social/*.jpg"],
+      "/api/download/**": ["./public/downloads/*.pdf"],
     },
   },
   async redirects() {

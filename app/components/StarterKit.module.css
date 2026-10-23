@@ -4,7 +4,7 @@
 .eyebrow { font: 11px monospace; color: #b6ff00; margin-bottom: 16px; }
 .title { font-size: 40px; line-height: 1.1; letter-spacing: 0; font-weight: 700; max-width: 720px; }
 .intro { font-size: 17px; line-height: 1.6; color: #b8c0b9; max-width: 650px; margin: 20px 0; }
-.button { display: inline-flex; align-items: center; gap: 16px; background: #b6ff00; color: var(--theme-text); border-radius: 6px; padding: 14px 20px; font-weight: 700; }
+.button { display: inline-flex; align-items: center; gap: 16px; background: #b6ff00; color: #142015; border-radius: 6px; padding: 14px 20px; font-weight: 700; }
 .actions { display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap; }
 .secondary { display: inline-flex; gap: 12px; align-items: center; color: #f4f5ef; text-decoration: underline; text-underline-offset: 5px; padding: 12px 0; }
 .secondary:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }

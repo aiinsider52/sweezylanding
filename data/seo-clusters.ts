@@ -4,12 +4,14 @@ export type SeoCluster = { key: string; title: string; description: string; href
 
 export const SEO_CLUSTERS: Record<Locale, SeoCluster[]> = {
   en: [
+    { key: "dach", title: "Germany, Austria and Switzerland", description: "Choose your country for registration, work, business and local support.", href: "/en/countries" },
     { key: "permits", title: "Permits and registration", description: "Registration, residence permits and first official steps.", href: "/en/blog/swiss-residence-permit-guide" },
     { key: "work", title: "Work in Switzerland", description: "Job search, work permits and application preparation.", href: "/en/blog/how-to-find-job-switzerland-foreigner" },
     { key: "tax", title: "Swiss taxes", description: "Tax returns, Quellensteuer, deadlines and filing decisions.", href: "/en/blog/swiss-tax-return-2026" },
     { key: "places", title: "Explore Switzerland", description: "Practical destination guides, routes and local planning.", href: "/en/places" },
   ],
   uk: [
+    { key: "dach", title: "Німеччина, Австрія та Швейцарія", description: "Оберіть країну: реєстрація, робота, бізнес і допомога поруч.", href: "/uk/countries" },
     { key: "services", title: "Українські послуги", description: "Локальні фахівці, прямі контакти й практичні поради. Починаємо з автосервісу в Тургау.", href: "/uk/services" },
     { key: "business", title: "Власний бізнес у Швейцарії", description: "Старт для українців, самозайнятість зі статусом S, Einzelfirma чи GmbH та бізнес-спільноти.", href: "/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" },
     { key: "status-s", title: "Статус S у Швейцарії", description: "Права, продовження, робота, страхування та документи.", href: "/uk/blog/status-s-shveytcariya-povnyy-gid" },
@@ -20,6 +22,7 @@ export const SEO_CLUSTERS: Record<Locale, SeoCluster[]> = {
     { key: "places", title: "Куди поїхати", description: "Гори, озера, міста та практичні маршрути Швейцарією.", href: "/uk/places" },
   ],
   de: [
+    { key: "dach", title: "Deutschland, Österreich und Schweiz", description: "Wähle dein Land für Anmeldung, Arbeit, Gründung und lokale Hilfe.", href: "/de/countries" },
     { key: "insurance", title: "Krankenversicherung", description: "Grundversicherung, Franchise und erste Schritte für Expats.", href: "/de/blog/krankenversicherung-expats-schweiz" },
     { key: "work", title: "Arbeiten in der Schweiz", description: "Kantonale Guides, Anmeldung und praktische Vorbereitung.", href: "/de/guides" },
     { key: "permits", title: "Anmeldung und Bewilligung", description: "Behörden, Dokumente und kantonale Abläufe.", href: "/de/guides/zurich" },

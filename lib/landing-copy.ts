@@ -157,11 +157,11 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       close: "Close menu",
     },
     hero: {
-      eyebrow: "Swiss life, in one clear system",
-      title: "Your next step in Switzerland.",
+      eyebrow: "Life in DACH, in one clear system",
+      title: "Your next step in DACH.",
       accent: "Already mapped.",
       body:
-        "Permits, documents, work, local services and Sweezy community — one complicated move turned into a path you can follow.",
+        "Switzerland, Germany and Austria: find your next step with practical guides, checklists, local services and the Sweezy community.",
       primary: "Download for iPhone",
       secondary: "See how it works",
       footnote: "Available in English, Ukrainian and German",
@@ -295,7 +295,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       eyebrow: "Before you download",
       title: "Useful answers. No fine print.",
       items: [
-        { question: "Who is Sweezy for?", answer: "Newcomers, expats and Ukrainians building a life in Switzerland — from first paperwork to work, housing and local services." },
+        { question: "Who is Sweezy for?", answer: "Newcomers, expats and Ukrainians building a life in Switzerland, Germany or Austria. Choose your country: procedures and available guidance differ." },
         { question: "Is the app free?", answer: "You can start with Sweezy for free. Any paid additions are shown clearly inside the app before you choose them." },
         { question: "Which languages are available?", answer: "English, Ukrainian and German are supported across the core product experience." },
         { question: "Does guidance change by canton?", answer: "Yes. Sweezy connects national guidance with canton and municipality context whenever local rules matter." },
@@ -336,11 +336,11 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       close: "Закрити меню",
     },
     hero: {
-      eyebrow: "Життя у Швейцарії — в одній зрозумілій системі",
-      title: "Ваш наступний крок у Швейцарії.",
+      eyebrow: "Життя в DACH — в одній зрозумілій системі",
+      title: "Ваш наступний крок у DACH.",
       accent: "Уже визначено.",
       body:
-        "Дозволи, документи, робота, локальні сервіси й спільнота — Sweezy перетворює складний переїзд на маршрут, яким легко рухатися.",
+        "Швейцарія, Німеччина та Австрія: практичні гіди, чек-листи, місцеві послуги й спільнота Sweezy допоможуть зробити наступний крок.",
       primary: "Завантажити для iPhone",
       secondary: "Подивитися, як працює",
       footnote: "Українська, English та Deutsch",
@@ -450,7 +450,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       eyebrow: "Перед завантаженням",
       title: "Корисні відповіді. Без дрібного шрифту.",
       items: [
-        { question: "Для кого Sweezy?", answer: "Для новоприбулих, експатів та українців, які будують життя у Швейцарії — від перших документів до роботи, житла й локальних сервісів." },
+        { question: "Для кого Sweezy?", answer: "Для новоприбулих, експатів та українців у Швейцарії, Німеччині й Австрії. Оберіть країну: процедури та доступні матеріали відрізняються." },
         { question: "Застосунок безкоштовний?", answer: "Почати користуватися Sweezy можна безкоштовно. Платні можливості, якщо вони потрібні, показуються до підтвердження." },
         { question: "Які мови доступні?", answer: "Основний досвід Sweezy доступний українською, англійською та німецькою." },
         { question: "Поради відрізняються за кантонами?", answer: "Так. Sweezy поєднує загальношвейцарські правила з контекстом кантону й громади, коли це важливо." },
@@ -491,8 +491,8 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       close: "Menü schließen",
     },
     hero: {
-      eyebrow: "Das Leben in der Schweiz — in einem klaren System",
-      title: "Ihr nächster Schritt in der Schweiz.",
+      eyebrow: "Das Leben in DACH — in einem klaren System",
+      title: "Ihr nächster Schritt in DACH.",
       accent: "Bereits sortiert.",
       body:
         "Bewilligungen, Dokumente, Arbeit, lokale Services und Community — Sweezy macht aus einem komplexen Umzug einen Weg, dem Sie folgen können.",
@@ -605,7 +605,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       eyebrow: "Vor dem Download",
       title: "Nützliche Antworten. Kein Kleingedrucktes.",
       items: [
-        { question: "Für wen ist Sweezy?", answer: "Für Neuzuzüger, Expats und Ukrainer, die ein Leben in der Schweiz aufbauen — von ersten Dokumenten bis Arbeit, Wohnen und lokale Services." },
+        { question: "Für wen ist Sweezy?", answer: "Für Neuankommende, Expats und Menschen aus der Ukraine in der Schweiz, Deutschland und Österreich. Wähle dein Land: Verfahren und verfügbare Inhalte unterscheiden sich." },
         { question: "Ist die App kostenlos?", answer: "Der Einstieg in Sweezy ist kostenlos. Kostenpflichtige Ergänzungen werden vor der Auswahl klar angezeigt." },
         { question: "Welche Sprachen gibt es?", answer: "Das Kernprodukt ist auf Deutsch, Englisch und Ukrainisch verfügbar." },
         { question: "Unterscheiden sich Hinweise je Kanton?", answer: "Ja. Sweezy verbindet nationale Regeln mit Kanton und Gemeinde, wenn lokale Unterschiede wichtig sind." },

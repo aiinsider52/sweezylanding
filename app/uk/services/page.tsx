@@ -8,6 +8,7 @@ import { JsonLd } from "../../components/seo/JsonLd";
 import { ServiceDirectory } from "../../components/services/ServiceDirectory";
 import { StarterKitBanner } from "../../components/StarterKitBanner";
 import { SweezyCompanion } from "../../components/SweezyCompanion";
+import { serviceHubs } from "../../../data/service-hubs";
 import styles from "../../components/services/services.module.css";
 
 const title = "Українські послуги у Швейцарії — каталог Sweezy";
@@ -39,6 +40,7 @@ export default function ServicesPage() {
       <section className={styles.section} aria-labelledby="service-list-title">
         <h2 id="service-list-title">Оберіть послугу поруч</h2>
         <ServiceDirectory services={ukrainianServices.map(servicePreview)} />
+        <div className={styles.actions}>{serviceHubs.map(hub => <Link key={hub.slug} href={`/uk/services/${hub.kind}/${hub.slug}`} className={styles.textLink}>{hub.title} →</Link>)}</div>
       </section>
       <section className={styles.section}>
         <h2>Як обрати послугу й домовитися про роботу</h2>
@@ -53,6 +55,8 @@ export default function ServicesPage() {
       </section>
       <section className={styles.section}>
         <h2>Знаєте український сервіс?</h2>
+        <p>Шукаєте допомогу в Німеччині чи Австрії? У розділах країн є офіційні інформаційні портали та місцеві консультації.</p>
+        <div className={styles.actions}><Link href="/uk/countries/germany" className={styles.textLink}>Німеччина →</Link><Link href="/uk/countries/austria" className={styles.textLink}>Австрія →</Link></div>
         <p>Надішліть назву, сайт, кантон, перелік послуг і доступні мови. Редакція перевірить дані перед додаванням.</p>
         <div className={styles.actions}><a href="mailto:support@sweezy.world?subject=Ukrainian%20service%20for%20Sweezy" className={styles.button}>Запропонувати сервіс →</a><Link href="/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" className={styles.textLink}>Запускаєте власний бізнес?</Link></div>
       </section>

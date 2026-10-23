@@ -1,11 +1,23 @@
 import { BASE_URL } from "../../lib/alternates";
 import { ukrainianServices, servicePath } from "../../data/ukrainian-services";
+import { COUNTRIES, DACH_TOPICS } from "../../data/dach";
 
 export const dynamic = "force-static";
 
 const content = `# Sweezy
 
-> Sweezy provides practical, source-backed guidance for newcomers and Ukrainians moving to and living in Switzerland. Core content is available in Ukrainian, English and German.
+> Sweezy provides practical, source-backed guidance for newcomers and Ukrainians in Switzerland, Germany and Austria (DACH). Website languages are Ukrainian, English and German; language does not determine country. Existing canton and Swiss Status S articles apply to Switzerland only.
+
+## DACH country guides
+
+${["uk", "en", "de"].flatMap(locale => [
+  `- [Choose a DACH country (${locale})](${BASE_URL}/${locale}/countries)`,
+  ...COUNTRIES.map(country => `- [${country} guide (${locale})](${BASE_URL}/${locale}/countries/${country})`),
+  ...["germany", "austria"].flatMap(country => DACH_TOPICS.map(topic => `- [${country}: ${topic} (${locale})](${BASE_URL}/${locale}/countries/${country}/${topic})`)),
+  `- [Free country-specific PDF checklists (${locale})](${BASE_URL}/${locale}/resources)`,
+]).join("\n")}
+
+Country guides distinguish address registration, residence status, permission to work, qualifications and business registration. They publish the source-check date, official source links and visible FAQs. No quoted external expert review or guaranteed immigration outcome is claimed. Support resources distinguish an official online directory from an in-person advice service.
 
 ## Primary knowledge hubs
 

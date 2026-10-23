@@ -7,6 +7,8 @@ import { travelDestinations } from "../data/travel-destinations";
 import { PLACE_CATEGORIES, placeRegions } from "../data/place-hubs";
 import { isLocale, isRedirectedBlogPost } from "../lib/blog";
 import { ukrainianServices, servicePath } from "../data/ukrainian-services";
+import { serviceHubs } from "../data/service-hubs";
+import { COUNTRIES, DACH_TOPICS, REVIEWED_AT } from "../data/dach";
 
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
@@ -156,6 +158,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   return [...staticEntries, ...blogEntries,
+    ...LOCALES.flatMap(locale => [
+      { url: `${SITE_URL}/${locale}/countries`, lastModified: new Date(REVIEWED_AT) },
+      { url: `${SITE_URL}/${locale}/resources`, lastModified: new Date(REVIEWED_AT) },
+      ...COUNTRIES.map(country => ({ url: `${SITE_URL}/${locale}/countries/${country}`, lastModified: new Date(REVIEWED_AT) })),
+      ...(["germany", "austria"] as const).flatMap(country => DACH_TOPICS.map(topic => ({ url: `${SITE_URL}/${locale}/countries/${country}/${topic}`, lastModified: new Date(REVIEWED_AT) }))),
+    ]),
+    ...serviceHubs.map(hub => ({ url: `${SITE_URL}/uk/services/${hub.kind}/${hub.slug}` })),
     { url: `${SITE_URL}/uk/services` },
     ...ukrainianServices.map((service) => ({ url: `${SITE_URL}${servicePath(service)}`, lastModified: new Date(service.checkedAt) })),
   ];

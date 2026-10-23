@@ -7,6 +7,7 @@ import { firstWeek, kitSources } from "../../../data/first-week";
 import { SweezyCompanion } from "../../components/SweezyCompanion";
 import { Checklist } from "./Checklist";
 import styles from "../../components/StarterKit.module.css";
+import { DownloadLink } from "../../components/DownloadLink";
 
 export function generateStaticParams() { return ["uk", "en", "de"].map(locale => ({ locale })); }
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
@@ -25,7 +26,7 @@ export default function StarterKit({ params }: { params: { locale: string } }) {
         <p className={styles.eyebrow}>{copy.badge}</p>
         <h1>{copy.title}</h1>
         <p className={styles.intro}>{copy.intro}</p>
-        <a className={styles.button} href={`/downloads/sweezy-first-week-${locale}.pdf`} download>{copy.download}<span aria-hidden>↓</span></a>
+        <DownloadLink asset="first-week" locale={locale} placement="starter-kit-page" className={styles.button}>{copy.download}<span aria-hidden>↓</span></DownloadLink>
       </div>
       <SweezyCompanion pose="reader" className={styles.companion} priority />
     </div>

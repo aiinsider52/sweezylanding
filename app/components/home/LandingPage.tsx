@@ -18,6 +18,8 @@ import { SweezyCompanion, type CompanionPose } from "../SweezyCompanion";
 import styles from "./landing.module.css";
 import { TravelKitBanner } from "../TravelKitBanner";
 import { ServicesSpotlight } from "../services/ServicesSpotlight";
+import { CountryCards } from "../CountryCards";
+import { dachCopy } from "../../../data/dach";
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
   en: { eyebrow: "THE SWEEZY SELECTION", title: "Four places to start exploring.", body: "Rhine Falls, Rigi, Lake Oeschinen and Lavaux: four Swiss favourites with practical guides to transport, seasons and planning your visit.", open: "Plan your visit", all: "Explore all places" },
@@ -83,6 +85,11 @@ export function LandingPage({ locale }: { locale: Locale }) {
       <JsonLd data={softwareSchema} />
       <main>
         <CinematicJourney locale={locale} hero={copy.hero} />
+
+        <section className={styles.knowledgeSection} id="dach-countries" aria-labelledby="dach-title">
+          <div className={styles.knowledgeHeader}><p className={styles.eyebrow}>SWEEZY / DE · AT · CH</p><h2 id="dach-title">{dachCopy[locale].countries}</h2></div>
+          <CountryCards locale={locale} />
+        </section>
 
         <AnimatedProof items={copy.proof} />
 

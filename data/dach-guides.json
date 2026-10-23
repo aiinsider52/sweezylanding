@@ -1,0 +1,1062 @@
+{
+  "germany": {
+    "registration": {
+      "en": {
+        "title": "Anmeldung in Germany: your first registration steps",
+        "description": "Prepare your address registration, understand the two-week rule and keep residence permission, work and health insurance separate.",
+        "summary": "After moving into a home in Germany, you generally register your address with the local registration office within two weeks. Anmeldung records where you live; it does not grant a residence permit, permission to work or health insurance.",
+        "appliesTo": "People moving into accommodation in Germany, including Ukrainians, EU citizens and other international newcomers. Accommodation type and individual circumstances can affect the procedure.",
+        "sections": [
+          {
+            "title": "Start with the address where you actually live",
+            "body": "Look for the registration service on the official website of your city or municipality. Depending on the location, the office may be called Bürgeramt, Bürgerbüro or Einwohnermeldeamt. The general deadline runs from moving into accommodation, not from signing the rental contract. Check the local instructions and whether your accommodation is handled through a different registration process. A hotel booking, a mailing address and a registered home are not interchangeable.",
+            "checklist": [
+              "Find the responsible local registration office.",
+              "Check the appointment process and the two-week deadline.",
+              "Keep evidence of your move-in date and booking attempts."
+            ]
+          },
+          {
+            "title": "Prepare the appointment and accommodation confirmation",
+            "body": "Read the document list published by your own registration office before attending. You will normally need an identity document and confirmation from the accommodation provider, commonly called Wohnungsgeberbestätigung. A rental contract is not automatically a substitute for that confirmation. Family registrations may require additional civil-status documents. If an appointment is unavailable, ask the office how to meet your obligation and keep its response rather than assuming a later appointment changes the legal deadline.",
+            "checklist": [
+              "Request the accommodation provider’s confirmation in advance.",
+              "Check documents for every person you are registering.",
+              "Keep the Meldebestätigung after the registration appointment."
+            ]
+          },
+          {
+            "title": "Handle immigration permission as a separate task",
+            "body": "Your nationality and existing residence document determine which immigration steps apply. EU citizens, people with temporary protection and people entering under other residence routes do not follow an identical process. Ukrainians seeking protection should check the current Germany4Ukraine guidance and the responsible foreigners authority. Registering an address does not by itself establish eligibility for temporary protection. If you already have protection in another country, clarify the consequences before planning a move or changing benefits.",
+            "checklist": [
+              "Identify the residence route that applies to your situation.",
+              "Contact the foreigners authority about documents and permissions.",
+              "Keep address registration and immigration paperwork in separate folders."
+            ]
+          },
+          {
+            "title": "Confirm insurance and organise the next practical steps",
+            "body": "Arrange a health-insurance assessment alongside the administrative appointments. Germany has statutory and private insurance systems; the appropriate route depends on matters such as employment and previous coverage. The registration certificate is not an insurance policy. Ask the responsible insurer or benefits office when your coverage begins and what proof is available. Once the address is confirmed, update relevant contacts and keep appointment confirmations, official correspondence and insurance information somewhere you can find them easily.",
+            "checklist": [
+              "Ask which insurer or office is responsible for your coverage.",
+              "Verify the start date rather than assuming automatic insurance.",
+              "Use the first-week checklist to organise remaining appointments."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Does Anmeldung allow me to work?",
+            "a": "No. Address registration and permission to work are different matters. Check the wording of your residence document and any accompanying conditions. An employer or the foreigners authority can help you identify which evidence is required before employment starts."
+          },
+          {
+            "q": "What if I cannot find an appointment within two weeks?",
+            "a": "Contact the responsible registration office promptly, follow its instructions and retain your booking attempts and correspondence. Do not assume that a late appointment automatically removes the registration obligation or that another city can register your address."
+          },
+          {
+            "q": "Can I register a friend’s address before moving in?",
+            "a": "Register the address where you actually take up accommodation and obtain the appropriate accommodation confirmation. If you are staying with someone temporarily, ask the local office which rules apply to that arrangement before submitting your registration."
+          }
+        ]
+      },
+      "uk": {
+        "title": "Anmeldung у Німеччині: перші кроки реєстрації",
+        "description": "Як підготувати реєстрацію адреси в Німеччині, врахувати двотижневий строк і окремо оформити перебування, роботу та страхування.",
+        "summary": "Після заселення в житло в Німеччині адресу зазвичай потрібно зареєструвати протягом двох тижнів. Anmeldung підтверджує місце проживання. Вона сама по собі не надає дозволу на перебування, права працювати чи медичного страхування.",
+        "appliesTo": "Для людей, які заселяються в житло в Німеччині: українців, громадян ЄС та інших новоприбулих. Тип помешкання й особисті обставини можуть впливати на процедуру.",
+        "sections": [
+          {
+            "title": "Почніть з адреси фактичного проживання",
+            "body": "Знайдіть послугу реєстрації на офіційному сайті свого міста або громади. Установа може називатися Bürgeramt, Bürgerbüro чи Einwohnermeldeamt. Загальний строк відраховують від заселення, а не від підписання договору оренди. Перевірте місцеві інструкції: для окремих видів розміщення можуть діяти інші процедури. Бронювання готелю, адреса для листування та зареєстроване житло не є взаємозамінними поняттями. Відразу з’ясуйте, який саме варіант стосується вашого помешкання.",
+            "checklist": [
+              "Знайдіть відповідальну установу за місцем вашого житла.",
+              "Перевірте запис на прийом і двотижневий строк.",
+              "Збережіть дату заселення та підтвердження спроб записатися."
+            ]
+          },
+          {
+            "title": "Підготуйте документи та підтвердження житла",
+            "body": "Орієнтуйтеся на перелік документів саме вашої установи. Зазвичай потрібні документ, що посвідчує особу, та підтвердження від особи, яка надає житло: Wohnungsgeberbestätigung. Договір оренди не варто автоматично вважати його заміною. Для реєстрації родини можуть знадобитися додаткові документи про сімейний стан. Якщо вільного прийому немає, зверніться до установи й уточніть порядок дій. Збережіть відповідь: сама відсутність запису не означає, що обов’язок реєстрації зникає.",
+            "checklist": [
+              "Заздалегідь попросіть Wohnungsgeberbestätigung у того, хто надає житло.",
+              "Перевірте документи для кожного члена родини окремо.",
+              "Після прийому збережіть підтвердження реєстрації Meldebestätigung."
+            ]
+          },
+          {
+            "title": "Окремо перевірте підставу для перебування",
+            "body": "Громадянство та наявний документ на перебування визначають ваш подальший маршрут. Громадяни ЄС, люди з тимчасовим захистом і люди з іншими підставами проживання не проходять однакову процедуру. Українцям, які звертаються по захист, варто перевірити актуальні інструкції Germany4Ukraine та місцевої Ausländerbehörde. Реєстрація адреси не підтверджує автоматично право на тимчасовий захист. Якщо ви вже маєте захист в іншій країні, спочатку уточніть наслідки переїзду, а потім змінюйте місце проживання та виплати.",
+            "checklist": [
+              "Визначте підставу перебування саме у вашій ситуації.",
+              "Уточніть потрібні документи й дозволи в Ausländerbehörde.",
+              "Зберігайте реєстрацію адреси окремо від документів на перебування."
+            ]
+          },
+          {
+            "title": "Підтвердьте страхування та наступні практичні кроки",
+            "body": "Паралельно з реєстрацією з’ясуйте порядок медичного страхування. У Німеччині є державна та приватна системи; відповідний шлях залежить, зокрема, від роботи й попереднього страхування. Meldebestätigung не замінює страхового покриття. Запитайте у страхової каси або відповідальної установи, з якої дати ви застраховані та який документ це підтверджує. Після оформлення адреси оновіть потрібні контакти. Зберіть в одному місці записи на прийом, офіційні листи й інформацію про страхування, щоб не пропустити наступні дії.",
+            "checklist": [
+              "З’ясуйте, яка каса або установа відповідає за ваше страхування.",
+              "Перевірте дату початку покриття замість припущення про автоматичне оформлення.",
+              "Використайте чекліст першого тижня для решти організаційних кроків."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Чи дає Anmeldung право працювати?",
+            "a": "Ні. Реєстрація адреси та дозвіл на роботу — різні питання. Перевірте формулювання у своєму документі на перебування й додаткові умови. До початку роботи уточніть у роботодавця або Ausländerbehörde, які підтвердження потрібні у вашій ситуації."
+          },
+          {
+            "q": "Що робити, якщо немає прийому протягом двох тижнів?",
+            "a": "Якнайшвидше зверніться до відповідальної установи, дотримуйтеся її інструкцій та зберігайте спроби запису й листування. Не вважайте, що пізня дата прийому автоматично скасовує обов’язок реєстрації або що адресу можна оформити в будь-якому іншому місті."
+          },
+          {
+            "q": "Чи можна зареєструвати адресу знайомих до переїзду?",
+            "a": "Реєструйте місце, де ви фактично оселилися, та отримайте належне підтвердження від особи, яка надає житло. Якщо мешкаєте у знайомих тимчасово, спочатку уточніть у місцевій установі правила для такого виду розміщення."
+          }
+        ]
+      },
+      "de": {
+        "title": "Anmeldung in Deutschland: die ersten Schritte",
+        "description": "Wohnsitz anmelden, die Zweiwochenfrist beachten und Aufenthalt, Arbeitsberechtigung sowie Krankenversicherung getrennt organisieren.",
+        "summary": "Wer in Deutschland eine Wohnung bezieht, muss sich grundsätzlich innerhalb von zwei Wochen bei der zuständigen Meldebehörde anmelden. Die Anmeldung erfasst den Wohnort. Sie ersetzt weder einen Aufenthaltstitel noch eine Arbeitsberechtigung oder Krankenversicherung.",
+        "appliesTo": "Für Menschen, die in Deutschland eine Unterkunft beziehen: ukrainische Staatsangehörige, EU-Bürger und andere Zugewanderte. Unterkunftsart und persönliche Umstände können das Verfahren beeinflussen.",
+        "sections": [
+          {
+            "title": "Bei der tatsächlich bezogenen Wohnung beginnen",
+            "body": "Suchen Sie den Anmeldeservice auf der offiziellen Internetseite Ihrer Stadt oder Gemeinde. Die zuständige Stelle kann Bürgeramt, Bürgerbüro oder Einwohnermeldeamt heissen. Die allgemeine Frist beginnt mit dem Einzug, nicht mit der Unterzeichnung des Mietvertrags. Lesen Sie die örtlichen Hinweise und prüfen Sie, ob Ihre Unterkunft einem besonderen Meldeverfahren unterliegt. Ein Hotelaufenthalt, eine reine Postanschrift und eine angemeldete Wohnung sind nicht dasselbe. Entscheidend ist die konkrete Wohnsituation, die Sie der zuständigen Stelle schildern.",
+            "checklist": [
+              "Die zuständige Meldebehörde für die neue Adresse ermitteln.",
+              "Terminverfahren und Zweiwochenfrist auf der Behördenwebsite prüfen.",
+              "Einzugsdatum und Kontaktversuche zur Terminbuchung nachvollziehbar aufbewahren."
+            ]
+          },
+          {
+            "title": "Termin und Wohnungsgeberbestätigung vorbereiten",
+            "body": "Prüfen Sie vor dem Besuch die Unterlagenliste Ihrer eigenen Meldebehörde. Üblicherweise benötigen Sie einen Identitätsnachweis und die Wohnungsgeberbestätigung der Person, die Ihnen die Unterkunft zur Verfügung stellt. Der Mietvertrag ist nicht automatisch ein Ersatz dafür. Bei Familien können weitere Personenstandsurkunden erforderlich sein. Wenn kein Termin verfügbar ist, fragen Sie die Behörde nach dem richtigen Vorgehen und bewahren Sie die Antwort auf. Eine spätere Terminbestätigung bedeutet nicht von selbst, dass die gesetzliche Pflicht entfällt.",
+            "checklist": [
+              "Die Wohnungsgeberbestätigung rechtzeitig bei der Unterkunftsperson anfordern.",
+              "Die erforderlichen Unterlagen für jede anzumeldende Person prüfen.",
+              "Die Meldebestätigung nach dem Termin sicher ablegen."
+            ]
+          },
+          {
+            "title": "Aufenthaltsrecht als eigenen Schritt klären",
+            "body": "Staatsangehörigkeit und vorhandene Aufenthaltsdokumente bestimmen, welche weiteren Schritte erforderlich sind. Für EU-Bürger, Menschen mit vorübergehendem Schutz und Personen mit anderen Aufenthaltszwecken gelten unterschiedliche Voraussetzungen. Ukrainische Schutzsuchende sollten die aktuellen Hinweise von Germany4Ukraine und ihrer Ausländerbehörde prüfen. Eine angemeldete Adresse belegt nicht automatisch einen Anspruch auf vorübergehenden Schutz. Wer bereits Schutz in einem anderen Land hat, sollte die Folgen eines Wechsels klären, bevor Unterkunft, Leistungsbezug oder Aufenthaltsplanung umgestellt werden.",
+            "checklist": [
+              "Den passenden Aufenthaltsweg anhand der eigenen Situation bestimmen.",
+              "Benötigte Dokumente und Berechtigungen bei der Ausländerbehörde klären.",
+              "Meldeunterlagen und Aufenthaltsunterlagen getrennt und vollständig aufbewahren."
+            ]
+          },
+          {
+            "title": "Versicherung bestätigen und den Alltag organisieren",
+            "body": "Klären Sie parallel zu den Behördenterminen Ihre Krankenversicherung. In Deutschland bestehen gesetzliche und private Versicherungssysteme; der passende Weg hängt unter anderem von Beschäftigung und bisherigem Versicherungsschutz ab. Eine Meldebestätigung ist kein Versicherungsnachweis. Fragen Sie die Krankenkasse oder zuständige Leistungsstelle, ab wann Versicherungsschutz besteht und wie Sie ihn nachweisen können. Aktualisieren Sie nach der Anmeldung wichtige Kontakte und Anschriften. Eine gemeinsame Übersicht über Termine, Behördenpost und Versicherungsunterlagen hilft, die nächsten praktischen Schritte verlässlich zu erledigen.",
+            "checklist": [
+              "Die zuständige Krankenkasse oder Leistungsstelle für Versicherungsschutz ansprechen.",
+              "Den Versicherungsbeginn bestätigen lassen und nicht automatisch voraussetzen.",
+              "Offene Termine mit der Checkliste für die erste Woche ordnen."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Darf ich nach der Anmeldung automatisch arbeiten?",
+            "a": "Nein. Wohnsitzanmeldung und Arbeitsberechtigung sind verschiedene Angelegenheiten. Prüfen Sie die Einträge in Ihrem Aufenthaltsdokument und mögliche Nebenbestimmungen. Fragen Sie vor Arbeitsbeginn bei der Ausländerbehörde oder dem Arbeitgeber nach, welche Nachweise für Ihre konkrete Situation benötigt werden."
+          },
+          {
+            "q": "Was gilt, wenn innerhalb von zwei Wochen kein Termin frei ist?",
+            "a": "Melden Sie sich möglichst früh bei der zuständigen Behörde, folgen Sie ihren Hinweisen und dokumentieren Sie Buchungsversuche sowie Antworten. Ein später Termin beseitigt die Meldepflicht nicht automatisch. Auch eine andere Stadt ist nicht ohne Weiteres für Ihre Adresse zuständig."
+          },
+          {
+            "q": "Kann ich mich vor dem Einzug bei Freunden anmelden?",
+            "a": "Melden Sie die Unterkunft an, die Sie tatsächlich beziehen, und holen Sie die passende Bestätigung des Wohnungsgebers ein. Bei einem vorübergehenden Aufenthalt sollten Sie vorab mit der örtlichen Behörde klären, welche Meldevorschriften für diese konkrete Unterbringung gelten."
+          }
+        ]
+      }
+    },
+    "work": {
+      "en": {
+        "title": "Working in Germany: permission, applications and insurance",
+        "description": "Employment permission, applications and health insurance for jobseekers in Germany.",
+        "summary": "A job offer and permission to work are separate requirements. First identify your residence route and any employment conditions, then prepare applications, clarify recognition where necessary and confirm how health insurance will be arranged when employment begins.",
+        "appliesTo": "International jobseekers in Germany, including Ukrainians with temporary protection, EU citizens and people using other residence routes. Regulated professions require additional checks.",
+        "sections": [
+          {
+            "title": "Check the exact permission in your documents",
+            "body": "Start with your residence document and any additional sheet. EU citizens and people arriving through ordinary third-country employment routes do not have identical requirements. For Ukrainians covered by temporary protection, check the conditions on the residence permit or provisional document, particularly the entry Erwerbstätigkeit erlaubt. Ukrainian nationality alone is not proof of employment permission. If a document is unclear, expired or missing the relevant entry, ask the foreigners authority before accepting a start date.",
+            "checklist": [
+              "Identify your residence route and employment conditions.",
+              "Check the main document and any supplementary sheet together.",
+              "Clarify unclear permissions with the responsible foreigners authority."
+            ]
+          },
+          {
+            "title": "Prepare a focused application and check qualifications",
+            "body": "Build a CV showing your experience, qualifications, language skills and contact details. Match it to the job rather than sending an identical application for every position. Use the Federal Employment Agency and recognised local advice services to understand the job market. For a regulated profession, professional recognition or authorisation may be necessary before practising. A translated diploma and formal recognition are different things. Ask the relevant recognition advisory service which documents and competent authority apply to your occupation.",
+            "checklist": [
+              "Prepare a clear CV and relevant evidence of experience.",
+              "Use official vacancy searches and local employment advice.",
+              "Check recognition requirements before applying for regulated professional work."
+            ]
+          },
+          {
+            "title": "Read the contract and confirm insurance arrangements",
+            "body": "Before starting, check the employer’s identity, workplace, duties, working hours, gross pay and the written terms of employment. Clarify whether the offer is genuinely employment or a request to invoice as a self-employed person. That distinction changes administrative and insurance responsibilities. Ask your chosen health insurer and employer how registration will work and when coverage starts. Germany has statutory and private insurance systems; the appropriate arrangement depends on your circumstances, and an address registration does not establish it.",
+            "checklist": [
+              "Keep the written offer and contract for your records.",
+              "Confirm whether you will be employed or self-employed.",
+              "Ask about the responsible insurer and start of coverage."
+            ]
+          },
+          {
+            "title": "Plan the first weeks and use appropriate support",
+            "body": "Make a practical list for your first working days: required identity and residence documents, payroll information requested by the employer and any professional authorisation. Discuss the reporting obligations that apply if you receive public support before your income changes. The employment agency, Jobcenter where responsible, and migration counselling services have different roles; contact the service relevant to your situation.",
+            "checklist": [
+              "Confirm the documents your employer actually needs for onboarding.",
+              "Report changes to the responsible benefits office when required.",
+              "Keep an application log and book suitable advice if needed."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Can a Ukrainian passport alone prove that I may work?",
+            "a": "No. Permission depends on your residence situation and the applicable conditions, not nationality alone. For temporary protection, check the residence or provisional document and the employment entry. Ask the foreigners authority if the wording is missing or uncertain."
+          },
+          {
+            "q": "Do I need recognition for every job?",
+            "a": "No. Requirements depend on the occupation. Regulated professions have specific recognition or professional-authorisation rules. Other roles may allow an employer to assess your experience directly. Check your exact occupation with an official recognition advisory service before paying for translations or procedures."
+          },
+          {
+            "q": "What if an employer asks me to invoice instead of signing an employment contract?",
+            "a": "Clarify the proposed arrangement before agreeing. Self-employment has different residence, tax, registration and insurance implications, and the actual working relationship matters. An invoice label alone does not settle the classification. Seek appropriate advice if the role looks like dependent employment."
+          }
+        ]
+      },
+      "uk": {
+        "title": "Робота в Німеччині: дозвіл, заявки та страхування",
+        "description": "Перевірте право працювати, підготуйте резюме й уточніть медичне страхування перед початком роботи в Німеччині.",
+        "summary": "Пропозиція роботи та право працювати — окремі умови. Спочатку визначте свою підставу перебування й обмеження в документах. Потім готуйте заявки, перевіряйте потребу у визнанні професії та погоджуйте порядок страхування після працевлаштування.",
+        "appliesTo": "Для іноземців, які шукають роботу в Німеччині: українців із тимчасовим захистом, громадян ЄС та людей з іншими підставами перебування. Для регульованих професій потрібні додаткові перевірки.",
+        "sections": [
+          {
+            "title": "Перевірте точне формулювання дозволу в документах",
+            "body": "Почніть із документа на перебування та додаткового аркуша, якщо він є. Для громадян ЄС і людей зі звичайними дозволами на роботу для громадян третіх країн діють різні вимоги. Українцям із тимчасовим захистом потрібно перевірити умови в дозволі або тимчасовому документі, зокрема запис Erwerbstätigkeit erlaubt. Самого українського громадянства недостатньо для підтвердження права працювати. Якщо запис незрозумілий, документ прострочений або потрібного формулювання немає, зверніться до Ausländerbehörde до погодження дати початку роботи.",
+            "checklist": [
+              "Визначте свою підставу перебування та умови трудової діяльності.",
+              "Перевірте основний документ разом з усіма додатковими аркушами.",
+              "Уточніть незрозумілі формулювання у відповідальній Ausländerbehörde."
+            ]
+          },
+          {
+            "title": "Підготуйте заявку та перевірте професійні вимоги",
+            "body": "Складіть резюме з досвідом, освітою, мовами та актуальними контактами. Адаптуйте його до конкретної вакансії замість однакового тексту для всіх роботодавців. Використовуйте пошук Федерального агентства зайнятості та місцеві консультації для орієнтації на ринку. Для регульованої професії перед початком практики може знадобитися визнання кваліфікації чи професійний дозвіл. Переклад диплома та офіційне визнання — різні процедури. Уточніть у профільній консультації, які документи потрібні саме для вашого фаху та хто розглядає заяву.",
+            "checklist": [
+              "Підготуйте зрозуміле резюме та підтвердження відповідного досвіду.",
+              "Користуйтеся офіційним пошуком вакансій і консультаціями щодо працевлаштування.",
+              "Перевірте визнання кваліфікації перед роботою в регульованій професії."
+            ]
+          },
+          {
+            "title": "Прочитайте договір і уточніть страхове оформлення",
+            "body": "До початку роботи перевірте роботодавця, місце роботи, обов’язки, години, зарплату брутто та письмові умови договору. З’ясуйте, чи пропонують саме працевлаштування, чи просять виставляти рахунки як самозайнята особа. Від цього залежать адміністративні дії та страхові обов’язки. Запитайте роботодавця й обрану страхову касу про порядок реєстрації та дату початку покриття. У Німеччині є державна й приватна системи: потрібний варіант залежить від обставин, а реєстрація адреси сама по собі його не визначає.",
+            "checklist": [
+              "Збережіть письмову пропозицію та підписаний договір.",
+              "Підтвердьте, чи йдеться про найману працю або самозайнятість.",
+              "Уточніть відповідальну страхову касу та дату початку покриття."
+            ]
+          },
+          {
+            "title": "Організуйте перші тижні та звертайтеся по підтримку",
+            "body": "Складіть практичний список для початку роботи: документи особи й перебування, дані для нарахування зарплати, які попросив роботодавець, і потрібні професійні дозволи. Якщо отримуєте державну допомогу, завчасно уточніть обов’язок повідомлення про зміну доходу. Агентство зайнятості, Jobcenter у відповідних випадках та міграційні консультації виконують різні функції. Обирайте установу відповідно до свого питання. Ведіть список відправлених заявок, співбесід і відповідей, щоб своєчасно нагадувати про себе й не надсилати повторно неповні документи.",
+            "checklist": [
+              "Підтвердьте перелік документів, потрібних роботодавцю для оформлення.",
+              "Повідомляйте відповідальну установу про зміни доходу, коли це потрібно.",
+              "Ведіть журнал заявок і запишіться на відповідну консультацію."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Чи достатньо українського паспорта для права працювати?",
+            "a": "Ні. Право працювати залежить від підстави перебування та відповідних умов, а не лише від громадянства. Для тимчасового захисту перевірте дозвіл або тимчасовий документ і запис щодо роботи. Якщо формулювання відсутнє чи незрозуміле, зверніться до Ausländerbehörde."
+          },
+          {
+            "q": "Чи потрібно визнавати диплом для будь-якої роботи?",
+            "a": "Ні. Це залежить від конкретної професії. Регульовані професії мають спеціальні правила визнання чи допуску до практики. Для інших вакансій роботодавець може оцінювати досвід самостійно. Перевірте свій фах в офіційній консультації до оплати перекладів і процедур."
+          },
+          {
+            "q": "Що робити, якщо замість трудового договору пропонують рахунки?",
+            "a": "Уточніть форму співпраці до погодження. Самозайнятість має інші вимоги щодо перебування, реєстрації, податків і страхування; важливі також фактичні умови роботи. Сама назва рахунка не визначає статус. Якщо робота схожа на найману, зверніться по консультацію."
+          }
+        ]
+      },
+      "de": {
+        "title": "Arbeiten in Deutschland: Erlaubnis, Bewerbung und Versicherung",
+        "description": "Arbeitsberechtigung prüfen, passende Bewerbungen vorbereiten und die Krankenversicherung vor dem Arbeitsbeginn klären.",
+        "summary": "Ein Stellenangebot und die Erlaubnis zu arbeiten sind getrennte Voraussetzungen. Klären Sie zuerst Ihren Aufenthaltsweg und die Beschäftigungsbedingungen. Danach folgen Bewerbungen, gegebenenfalls die Berufsanerkennung und die Bestätigung des Versicherungsschutzes zum Arbeitsbeginn.",
+        "appliesTo": "Für internationale Arbeitsuchende in Deutschland, darunter ukrainische Schutzberechtigte, EU-Bürger und Personen mit anderen Aufenthaltstiteln. Bei reglementierten Berufen sind zusätzliche Prüfungen erforderlich.",
+        "sections": [
+          {
+            "title": "Die konkrete Berechtigung in den Dokumenten prüfen",
+            "body": "Beginnen Sie mit Ihrem Aufenthaltsdokument und einem gegebenenfalls vorhandenen Zusatzblatt. Für EU-Bürger und Menschen mit regulären Aufenthaltstiteln zur Beschäftigung gelten unterschiedliche Voraussetzungen. Ukrainische Personen mit vorübergehendem Schutz sollten die Bedingungen im Aufenthaltstitel oder vorläufigen Dokument prüfen, insbesondere den Eintrag Erwerbstätigkeit erlaubt. Die ukrainische Staatsangehörigkeit allein ist kein Nachweis einer Arbeitsberechtigung. Bei unklaren Einträgen, fehlenden Dokumenten oder Fragen zur Gültigkeit sollte die Ausländerbehörde vor der Vereinbarung eines Arbeitsbeginns Auskunft geben.",
+            "checklist": [
+              "Aufenthaltsweg und Bedingungen der Erwerbstätigkeit gemeinsam prüfen.",
+              "Aufenthaltsdokument und gegebenenfalls vorhandenes Zusatzblatt vollständig lesen.",
+              "Unklare Einträge vor Arbeitsbeginn bei der Ausländerbehörde klären."
+            ]
+          },
+          {
+            "title": "Bewerbung und berufliche Nachweise gezielt vorbereiten",
+            "body": "Erstellen Sie einen übersichtlichen Lebenslauf mit Erfahrung, Qualifikationen, Sprachkenntnissen und aktuellen Kontaktdaten. Passen Sie die Bewerbung an die jeweilige Stelle an. Die Jobsuche der Bundesagentur für Arbeit und örtliche Beratungsangebote helfen bei der Orientierung. Für reglementierte Berufe kann vor der Berufsausübung eine Anerkennung oder Berufszulassung notwendig sein. Eine übersetzte Urkunde ist nicht dasselbe wie eine formelle Anerkennung. Klären Sie deshalb mit einer Anerkennungsberatung, welche Unterlagen und welche zuständige Stelle für Ihren Beruf relevant sind.",
+            "checklist": [
+              "Lebenslauf und passende Nachweise zur bisherigen Berufserfahrung zusammenstellen.",
+              "Offizielle Stellensuchen und örtliche Beratungsangebote zur Orientierung nutzen.",
+              "Anerkennungsregeln vor der Bewerbung in einem reglementierten Beruf prüfen."
+            ]
+          },
+          {
+            "title": "Vertragsbedingungen und Krankenversicherung bestätigen",
+            "body": "Prüfen Sie vor dem Start die Identität des Arbeitgebers, Arbeitsort, Aufgaben, Arbeitszeit, Bruttoentgelt und schriftliche Vertragsbedingungen. Klären Sie, ob tatsächlich ein Arbeitsverhältnis angeboten wird oder ob Sie Rechnungen als Selbstständiger stellen sollen. Davon hängen andere Melde- und Versicherungspflichten ab. Fragen Sie die gewählte Krankenkasse und den Arbeitgeber, wie die Anmeldung erfolgt und ab wann Versicherungsschutz besteht. Deutschland hat gesetzliche und private Versicherungssysteme; die richtige Zuordnung hängt von Ihrer Situation ab und entsteht nicht durch die Wohnsitzanmeldung.",
+            "checklist": [
+              "Schriftliches Angebot und Vertrag für die eigenen Unterlagen aufbewahren.",
+              "Den Unterschied zwischen Beschäftigung und selbstständiger Tätigkeit ausdrücklich klären.",
+              "Zuständige Krankenversicherung und Beginn des Versicherungsschutzes bestätigen lassen."
+            ]
+          },
+          {
+            "title": "Die ersten Wochen planen und passende Hilfe nutzen",
+            "body": "Notieren Sie für den Einstieg die benötigten Identitäts- und Aufenthaltsdokumente, vom Arbeitgeber angefragte Angaben zur Lohnabrechnung sowie gegebenenfalls eine Berufszulassung. Wenn Sie öffentliche Leistungen erhalten, klären Sie rechtzeitig, welche Einkommensänderungen Sie melden müssen. Arbeitsagentur, zuständiges Jobcenter und Migrationsberatung übernehmen unterschiedliche Aufgaben. Wählen Sie die Stelle passend zu Ihrer Frage aus. Eine einfache Liste der Bewerbungen, Gespräche und Antworten hilft, Nachfragen zu stellen und nicht wiederholt unvollständige Unterlagen einzureichen.",
+            "checklist": [
+              "Vom Arbeitgeber benötigte Unterlagen für den Einstieg gezielt bestätigen.",
+              "Erforderliche Einkommensmeldungen mit der zuständigen Leistungsstelle abstimmen.",
+              "Bewerbungen dokumentieren und bei Bedarf einen Beratungstermin vereinbaren."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Reicht ein ukrainischer Pass als Nachweis der Arbeitsberechtigung?",
+            "a": "Nein. Die Berechtigung richtet sich nach der Aufenthaltssituation und den geltenden Bedingungen, nicht allein nach der Staatsangehörigkeit. Prüfen Sie bei vorübergehendem Schutz das Aufenthaltsdokument beziehungsweise die vorläufige Bescheinigung und den Eintrag zur Erwerbstätigkeit. Bei Unklarheiten hilft die zuständige Ausländerbehörde."
+          },
+          {
+            "q": "Brauche ich für jede Stelle eine Anerkennung?",
+            "a": "Nein. Die Voraussetzungen hängen vom konkreten Beruf ab. Für reglementierte Berufe gelten besondere Anerkennungs- oder Zulassungsregeln. Bei anderen Tätigkeiten kann der Arbeitgeber Ihre Erfahrung selbst bewerten. Klären Sie Ihren Beruf bei einer offiziellen Beratungsstelle, bevor Sie Übersetzungen oder Verfahren bezahlen."
+          },
+          {
+            "q": "Was gilt, wenn ich statt eines Arbeitsvertrags Rechnungen stellen soll?",
+            "a": "Klären Sie das Modell vor einer Zusage. Selbstständigkeit hat andere aufenthaltsrechtliche, steuerliche und versicherungsrechtliche Folgen. Die tatsächlichen Arbeitsbedingungen sind entscheidend; die Bezeichnung einer Rechnung allein legt den Status nicht fest. Lassen Sie unklare Konstellationen vorab fachlich beurteilen."
+          }
+        ]
+      }
+    },
+    "business": {
+      "en": {
+        "title": "Starting a business in Germany: permission and registration",
+        "description": "A practical route through residence permission, Gewerbe or freelance classification, qualifications, tax organisation and useful start-up advice in Germany.",
+        "summary": "Before taking paid work independently, check that your residence situation permits it. Then clarify the classification of the actual activity, any professional requirements, the relevant registration authority and tax and insurance responsibilities.",
+        "appliesTo": "International founders planning self-employment in Germany, including Ukrainians with temporary protection and people considering a separate entrepreneurial residence route.",
+        "sections": [
+          {
+            "title": "Check whether your current status permits self-employment",
+            "body": "Read the permission and conditions in your residence document before advertising a service or accepting paid assignments. EU citizens and people with third-country residence titles have different starting points. For Ukrainians with temporary protection, check the actual employment wording and current official guidance. The ordinary residence route for entrepreneurs is a separate topic; do not assume that everyone needs a new entrepreneurial visa, or that every existing permit automatically allows independent work. Resolve uncertainty with the foreigners authority.",
+            "checklist": [
+              "Read the residence document and any additional conditions.",
+              "Ask explicitly whether the planned independent activity is permitted.",
+              "Clarify the route before committing to contracts or premises."
+            ]
+          },
+          {
+            "title": "Describe the activity before choosing the registration route",
+            "body": "Germany distinguishes freelance professional activity, commonly called Freiberuflichkeit, from a commercial trade, Gewerbe. The substance of your work and the applicable professional rules matter. A trade is generally registered with the responsible trade office; freelance professional activity is handled through the tax authorities. Check whether your profession needs recognition, a professional licence, chamber registration or other authorisation before you begin operating.",
+            "checklist": [
+              "Write a precise description of the services you will sell.",
+              "Clarify classification with the competent authority or qualified adviser.",
+              "Check professional qualifications, permissions and registration responsibilities."
+            ]
+          },
+          {
+            "title": "Plan taxes, records and insurance from the beginning",
+            "body": "Prepare a modest business plan showing customers, costs, expected income and the practical way you will deliver your service. Arrange the required tax registration and ask which declarations and invoicing rules apply to your activity. VAT treatment depends on your circumstances; do not assume a small business is outside all tax obligations. Clarify health insurance and any other compulsory professional cover. Keep business and personal records organised, retain invoices and reserve money for payments that may arise later.",
+            "checklist": [
+              "Prepare a realistic budget and separate business records.",
+              "Confirm tax registration and invoicing requirements before the first invoice.",
+              "Ask the insurer about coverage for your actual working arrangement."
+            ]
+          },
+          {
+            "title": "Use local advice and test the idea carefully",
+            "body": "Use the official Make it in Germany start-up guidance to map the process and find the relevant authorities. The local IHK, Handwerkskammer where appropriate and municipal business-development services can help you identify suitable advice and networks. Start by checking demand, discussing the idea with potential customers and listing open administrative questions. Record which authority answered each question and what still needs clarification.",
+            "checklist": [
+              "Find the chamber or start-up advice service for your activity.",
+              "Bring your activity description, residence documents and draft budget.",
+              "Test customer demand while keeping unresolved permissions visible."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Can I choose Freiberufler simply because I work alone?",
+            "a": "No. Working alone does not determine the classification. It depends on the actual activity and applicable rules. Describe the work accurately and clarify its treatment with the tax authority or a qualified adviser before relying on freelance status."
+          },
+          {
+            "q": "Does temporary protection mean I need a separate entrepreneur visa?",
+            "a": "Not necessarily. Existing residence permissions may already allow self-employment, but the actual document and conditions must be checked. A dedicated entrepreneurial residence route is a different legal path. Ask the foreigners authority which route applies to your own circumstances."
+          },
+          {
+            "q": "Can I open the business first and sort insurance out later?",
+            "a": "Plan insurance and registration before taking on work. Health-insurance responsibilities and any professional cover depend on the activity and personal situation. Ask the responsible insurer and authority when obligations begin, and budget for them rather than treating them as optional future costs."
+          }
+        ]
+      },
+      "uk": {
+        "title": "Власний бізнес у Німеччині: дозвіл і реєстрація",
+        "description": "Як перевірити право на самозайнятість у Німеччині, розібратися з Gewerbe та Freiberufler, податками, страхуванням і консультаціями.",
+        "summary": "До перших платних замовлень перевірте, чи дозволяє ваша підстава перебування самостійну діяльність. Далі визначте класифікацію послуг, професійні вимоги, відповідальну установу та податкові й страхові обов’язки. Сама назва бізнесу не вирішує цих питань.",
+        "appliesTo": "Для іноземних засновників, які планують самозайнятість у Німеччині: українців із тимчасовим захистом та людей, які розглядають окрему підприємницьку підставу для перебування.",
+        "sections": [
+          {
+            "title": "Перевірте право на самозайнятість у своєму статусі",
+            "body": "Прочитайте дозвіл і додаткові умови в документі на перебування до реклами послуг або прийняття платного замовлення. Громадяни ЄС та люди з дозволами для громадян третіх країн мають різні вихідні умови. Українцям із тимчасовим захистом потрібно перевірити конкретний запис про трудову діяльність та актуальні офіційні інструкції. Звичайний підприємницький маршрут перебування — окреме питання. Не варто вважати, що всім потрібна нова бізнес-віза або що будь-який наявний документ автоматично дозволяє незалежну роботу.",
+            "checklist": [
+              "Прочитайте документ на перебування разом з додатковими умовами.",
+              "Прямо запитайте, чи дозволена саме запланована самостійна діяльність.",
+              "Уточніть підставу до зобов’язань за договорами або орендою."
+            ]
+          },
+          {
+            "title": "Спочатку опишіть діяльність, потім обирайте реєстрацію",
+            "body": "У Німеччині розрізняють вільну професійну діяльність Freiberuflichkeit і комерційну діяльність Gewerbe. Це не просто вибір назви чи зручнішого податкового результату: важливі фактичний зміст роботи та професійні правила. Gewerbe зазвичай оформлюють у відповідальному торговому відомстві, а вільну професійну діяльність — через податкову установу. До початку роботи перевірте, чи потрібні визнання кваліфікації, професійний допуск, реєстрація в палаті або інший дозвіл. Пояснюйте конкретні послуги, а не лише загальну назву своєї професії.",
+            "checklist": [
+              "Письмово опишіть конкретні послуги, які плануєте продавати клієнтам.",
+              "Уточніть класифікацію в установі або у кваліфікованого консультанта.",
+              "Перевірте кваліфікацію, дозволи та відповідальність за потрібні реєстрації."
+            ]
+          },
+          {
+            "title": "Заздалегідь організуйте податки, документи та страхування",
+            "body": "Підготуйте простий бізнес-план: хто ваш клієнт, які витрати й очікувані доходи та як ви надаватимете послугу. Оформіть потрібну податкову реєстрацію й уточніть, які декларації та правила рахунків стосуються діяльності. Порядок ПДВ залежить від обставин: невеликий масштаб не означає відсутності всіх податкових обов’язків. Перевірте медичне страхування та обов’язкове професійне покриття, якщо воно потрібне. Ведіть окремий облік особистих і бізнесових операцій, зберігайте рахунки й залишайте резерв на майбутні платежі.",
+            "checklist": [
+              "Складіть реалістичний бюджет і окремий облік бізнесових операцій.",
+              "Уточніть податкову реєстрацію та правила до першого рахунка.",
+              "Обговоріть зі страховою касою свою фактичну модель роботи."
+            ]
+          },
+          {
+            "title": "Використовуйте місцеві консультації та перевіряйте попит",
+            "body": "Офіційний портал Make it in Germany допомагає зрозуміти послідовність дій і знайти відповідальні установи. Місцева IHK, Handwerkskammer для відповідних видів діяльності та міські служби розвитку бізнесу можуть скерувати до потрібних консультацій і мереж. Зустріч спільноти корисна для знайомств, але не замінює професійного дозволу чи податкового висновку. Обговоріть ідею з потенційними клієнтами та складіть список адміністративних питань. Записуйте, яка установа відповіла на кожне питання й що залишилося уточнити.",
+            "checklist": [
+              "Знайдіть палату або консультацію для вашого виду діяльності.",
+              "Візьміть опис послуг, документи на перебування й чернетку бюджету.",
+              "Перевіряйте попит, окремо відстежуючи ще не з’ясовані дозволи."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Чи можна обрати Freiberufler лише тому, що працюю сам?",
+            "a": "Ні. Самостійна робота без працівників не визначає класифікацію. Значення мають фактичні послуги та відповідні правила. Точно опишіть діяльність і уточніть її податкове трактування у Finanzamt або кваліфікованого консультанта, перш ніж покладатися на статус вільної професії."
+          },
+          {
+            "q": "Чи потрібна окрема бізнес-віза, якщо маю тимчасовий захист?",
+            "a": "Не обов’язково. Наявне право перебування може дозволяти самозайнятість, але потрібно перевірити документ і його умови. Окремий підприємницький маршрут є іншою правовою підставою. Запитайте Ausländerbehörde, які правила застосовуються саме до вас і вашої запланованої діяльності."
+          },
+          {
+            "q": "Чи можна відкрити справу, а страхування оформити потім?",
+            "a": "Плануйте реєстрацію та страхування до прийняття роботи. Медичне й обов’язкове професійне покриття залежать від діяльності та особистої ситуації. Уточніть у відповідальній касі й установі дату виникнення обов’язків та врахуйте витрати в бюджеті, замість відкладати їх на невизначене майбутнє."
+          }
+        ]
+      },
+      "de": {
+        "title": "In Deutschland gründen: Erlaubnis und Anmeldung",
+        "description": "Selbstständigkeit vorbereiten: Aufenthaltsrecht, Gewerbe oder freier Beruf, Qualifikationen, steuerliche Organisation und passende Gründungsberatung.",
+        "summary": "Prüfen Sie vor den ersten bezahlten Aufträgen, ob Ihre Aufenthaltssituation die Selbstständigkeit erlaubt. Danach klären Sie die tatsächliche Tätigkeit, berufliche Voraussetzungen, zuständige Anmeldestellen sowie Steuer- und Versicherungspflichten. Eine Geschäftsbezeichnung allein beantwortet diese Fragen nicht.",
+        "appliesTo": "Für internationale Gründer in Deutschland, darunter ukrainische Personen mit vorübergehendem Schutz und Menschen, die einen eigenen unternehmerischen Aufenthaltsweg prüfen.",
+        "sections": [
+          {
+            "title": "Die Erlaubnis zur selbstständigen Tätigkeit zuerst prüfen",
+            "body": "Lesen Sie die Einträge und Nebenbestimmungen Ihres Aufenthaltsdokuments, bevor Sie Leistungen anbieten oder bezahlte Aufträge annehmen. EU-Bürger und Menschen mit Aufenthaltstiteln für Drittstaatsangehörige haben unterschiedliche Ausgangspunkte. Ukrainische Schutzberechtigte sollten die konkrete Erwerbserlaubnis und aktuelle behördliche Hinweise prüfen. Der reguläre Aufenthaltsweg für Unternehmer ist ein eigenes Thema. Nicht jede Person braucht deshalb ein neues Gründungsvisum; gleichzeitig erlaubt nicht jeder vorhandene Titel automatisch eine selbstständige Tätigkeit. Unklarheiten sollten vor verbindlichen Zusagen mit der Ausländerbehörde geklärt werden.",
+            "checklist": [
+              "Aufenthaltsdokument und alle einschlägigen Nebenbestimmungen vollständig lesen.",
+              "Die Zulässigkeit der konkret geplanten selbstständigen Tätigkeit ausdrücklich klären.",
+              "Berechtigung vor verbindlichen Verträgen oder der Anmietung von Räumen bestätigen."
+            ]
+          },
+          {
+            "title": "Tätigkeit beschreiben und die richtige Anmeldung bestimmen",
+            "body": "Deutschland unterscheidet freiberufliche Tätigkeit und Gewerbe. Diese Einordnung ist keine frei wählbare Geschäftsbezeichnung und auch keine einfache Entscheidung für ein bevorzugtes Steuerergebnis. Entscheidend sind der Inhalt Ihrer Arbeit und die jeweiligen Berufsregeln. Ein Gewerbe wird grundsätzlich beim zuständigen Gewerbeamt angemeldet; freiberufliche Tätigkeit wird steuerlich beim Finanzamt erfasst. Prüfen Sie ausserdem, ob Anerkennung, Berufszulassung, Kammerzugehörigkeit oder weitere Genehmigungen notwendig sind. Eine genaue Leistungsbeschreibung hilft den zuständigen Stellen wesentlich mehr als ein allgemeiner Berufsname.",
+            "checklist": [
+              "Die konkret angebotenen Leistungen verständlich und schriftlich beschreiben.",
+              "Die Einordnung mit zuständiger Stelle oder qualifizierter Beratung klären.",
+              "Berufsqualifikation, Genehmigungen und erforderliche Anmeldungen vor dem Start prüfen."
+            ]
+          },
+          {
+            "title": "Steuern, Unterlagen und Versicherung früh organisieren",
+            "body": "Erstellen Sie einen einfachen Geschäftsplan mit Zielkunden, Kosten, erwarteten Einnahmen und der praktischen Durchführung Ihrer Leistungen. Klären Sie die steuerliche Erfassung sowie Erklärungs- und Rechnungsanforderungen für Ihre Tätigkeit. Die umsatzsteuerliche Behandlung hängt von den Umständen ab; ein kleines Unternehmen ist nicht automatisch von allen steuerlichen Pflichten befreit. Besprechen Sie Krankenversicherung und gegebenenfalls vorgeschriebene berufliche Absicherung. Halten Sie private und betriebliche Unterlagen auseinander, bewahren Sie Rechnungen auf und planen Sie Rücklagen für spätere Zahlungsverpflichtungen ein.",
+            "checklist": [
+              "Ein realistisches Budget und getrennte betriebliche Aufzeichnungen vorbereiten.",
+              "Steuerliche Erfassung und Rechnungsanforderungen vor der ersten Rechnung klären.",
+              "Den tatsächlichen Arbeitsumfang und Versicherungsbeginn mit dem Versicherer besprechen."
+            ]
+          },
+          {
+            "title": "Beratung und Netzwerke sinnvoll für den Start nutzen",
+            "body": "Die offizielle Gründungsinformation von Make it in Germany bietet einen ersten Überblick und verweist auf zuständige Stellen. Örtliche IHK, gegebenenfalls Handwerkskammer und kommunale Wirtschaftsförderung können passende Beratung und Kontakte vermitteln. Ein Treffen in einer Community kann das Netzwerk erweitern, ersetzt aber keine berufliche Zulassung oder steuerliche Beurteilung. Prüfen Sie die Nachfrage durch Gespräche mit möglichen Kunden und sammeln Sie offene Verwaltungsfragen. Notieren Sie zu jeder Frage, welche zuständige Stelle geantwortet hat und was noch zu klären ist.",
+            "checklist": [
+              "Passende Kammer oder Gründungsberatung für die konkrete Tätigkeit finden.",
+              "Leistungsbeschreibung, Aufenthaltsunterlagen und einen ersten Budgetentwurf mitbringen.",
+              "Kundennachfrage prüfen und noch offene Genehmigungsfragen getrennt dokumentieren."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Kann ich Freiberufler wählen, weil ich allein arbeite?",
+            "a": "Nein. Dass Sie ohne Beschäftigte arbeiten, bestimmt die Einordnung nicht. Massgeblich sind die tatsächliche Tätigkeit und die geltenden Regeln. Beschreiben Sie die Leistungen präzise und klären Sie die steuerliche Behandlung mit dem Finanzamt oder qualifizierter Beratung, bevor Sie von Freiberuflichkeit ausgehen."
+          },
+          {
+            "q": "Brauche ich mit vorübergehendem Schutz ein eigenes Gründungsvisum?",
+            "a": "Nicht unbedingt. Eine vorhandene Aufenthaltsberechtigung kann Selbstständigkeit bereits erlauben. Entscheidend sind das konkrete Dokument und seine Bedingungen. Ein besonderer unternehmerischer Aufenthaltsweg ist eine andere Rechtsgrundlage. Lassen Sie bei der Ausländerbehörde klären, was in Ihrer individuellen Situation tatsächlich erforderlich ist."
+          },
+          {
+            "q": "Kann ich die Versicherung erst nach der Gründung klären?",
+            "a": "Planen Sie Versicherung und erforderliche Anmeldungen vor den ersten Aufträgen. Krankenversicherung und gegebenenfalls berufliche Pflichtversicherung richten sich nach Tätigkeit und persönlicher Situation. Fragen Sie die zuständigen Stellen, wann die Pflichten beginnen, und berücksichtigen Sie die Kosten von Anfang an in Ihrer Planung."
+          }
+        ]
+      }
+    }
+  },
+  "austria": {
+    "registration": {
+      "en": {
+        "title": "Meldezettel in Austria: register your address correctly",
+        "description": "Understand Austria’s three-day address-registration rule, prepare the accommodation provider’s signature and distinguish registration from residence permission.",
+        "summary": "When you move into accommodation in Austria, address registration is generally due within three days. The signed Meldezettel is part of that procedure. Address registration, an immigration residence document and health-insurance cover are three separate administrative matters.",
+        "appliesTo": "Newcomers taking up accommodation in Austria, including Ukrainians, EU and EEA citizens, Swiss citizens and other third-country nationals. Check exceptions for your accommodation type.",
+        "sections": [
+          {
+            "title": "Start the three-day process after actual move-in",
+            "body": "Find the registration authority responsible for your new accommodation: the municipal office, the municipal administration in a chartered city or the district office in Vienna. The general deadline is three days after moving into the accommodation, rather than after signing the rental agreement. Registration must reflect an actual stay; a convenient postal address is not enough.",
+            "checklist": [
+              "Identify the registration authority for the actual address.",
+              "Check the three-day deadline and available submission methods.",
+              "Confirm whether your accommodation follows the ordinary registration procedure."
+            ]
+          },
+          {
+            "title": "Prepare a separate signed form for each person",
+            "body": "For the ordinary procedure, complete the registration form clearly and obtain the accommodation provider’s signature. The provider is the person who actually supplies the accommodation; this can be the owner, main tenant or another relevant person depending on the arrangement. Prepare the identity and civil-status evidence requested by the authority. Each person needs a separate form. If you intend to submit documents remotely, check the accepted method and required originals or certified copies before sending anything.",
+            "checklist": [
+              "Obtain the accommodation provider’s signature on the correct form.",
+              "Prepare the documents required for every accompanying family member.",
+              "Keep the written registration confirmation after the procedure."
+            ]
+          },
+          {
+            "title": "Separate Meldezettel from your right to remain",
+            "body": "An address registration does not establish immigration permission or a right to work. EU, EEA and Swiss citizens staying longer may need a separate Anmeldebescheinigung under their residence rules; this is not the Meldezettel. People from third countries must check the residence route relevant to their circumstances. Ukrainians seeking temporary protection should follow the official police-registration and BFA guidance about the Ausweis für Vertriebene. If protection already exists in another country, clarify the implications before transferring your living arrangements.",
+            "checklist": [
+              "Identify the residence procedure that matches your own situation.",
+              "Treat address registration and immigration documents as separate tasks.",
+              "Check any existing protection status before planning a country change."
+            ]
+          },
+          {
+            "title": "Confirm insurance and keep essential records together",
+            "body": "Ask which route provides your health coverage and from which date it applies. Employment, self-employment, co-insurance and other circumstances can lead to different arrangements. Austrian employees are commonly insured through ÖGK, while SVS is relevant for many self-employed people. An e-card is evidence of coverage, not a replacement for establishing insurance eligibility. Do not assume the address registration creates insurance.",
+            "checklist": [
+              "Ask the responsible insurer or support office about coverage.",
+              "Confirm the start date and available insurance evidence.",
+              "Use the arrival checklist to organise the remaining appointments."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Are Meldezettel and Anmeldebescheinigung the same document?",
+            "a": "No. The address-registration form and confirmation concern where you live. An Anmeldebescheinigung concerns residence rights for qualifying EU, EEA and Swiss citizens. Other newcomers have different residence documents. Check the required process according to your nationality, duration of stay and personal circumstances."
+          },
+          {
+            "q": "Can I register before I actually move in?",
+            "a": "The official procedure requires actual accommodation. The accommodation provider confirms it by signing the form. A future rental contract or postal address alone is not a substitute. Check with the responsible registration authority if your accommodation arrangement is unusual or temporary."
+          },
+          {
+            "q": "Does an Austrian registered address mean I already have health insurance?",
+            "a": "No. Confirm your coverage with the responsible insurer or support authority. The relevant route may depend on employment, self-employment, family arrangements or other circumstances. Keep written evidence of the coverage start date and ask what to use while waiting for an e-card."
+          }
+        ]
+      },
+      "uk": {
+        "title": "Meldezettel в Австрії: як зареєструвати адресу",
+        "description": "Триденний строк реєстрації в Австрії, підпис особи, яка надає житло, та відмінність між Meldezettel і документами на перебування.",
+        "summary": "Після заселення в житло в Австрії адресу зазвичай потрібно зареєструвати протягом трьох днів. Підписаний Meldezettel є частиною цієї процедури. Реєстрація адреси, право на перебування та медичне страхування — три окремі адміністративні питання.",
+        "appliesTo": "Для новоприбулих, які заселяються в житло в Австрії: українців, громадян ЄС, ЄЕЗ і Швейцарії та інших громадян третіх країн. Перевіряйте винятки для свого типу помешкання.",
+        "sections": [
+          {
+            "title": "Почніть процедуру після фактичного заселення",
+            "body": "Знайдіть установу, яка реєструє вашу нову адресу: муніципалітет, міську адміністрацію у містах з відповідними повноваженнями або районну установу у Відні. Загальний строк становить три дні після заселення, а не після підписання договору оренди. Реєстрація має відображати фактичне проживання: зручної поштової адреси недостатньо. Прочитайте офіційні інструкції щодо свого помешкання. Для туристичного розміщення й деяких коротких перебувань передбачено інший порядок, тому спочатку уточніть, яка процедура підходить саме вам.",
+            "checklist": [
+              "Знайдіть відповідальну установу за фактичною адресою житла.",
+              "Перевірте триденний строк та доступні способи подання документів.",
+              "Уточніть, чи застосовується до вашого житла звичайна процедура."
+            ]
+          },
+          {
+            "title": "Підготуйте окрему підписану форму для кожної людини",
+            "body": "Для звичайної процедури розбірливо заповніть форму реєстрації та отримайте підпис особи, яка надає житло. Залежно від домовленості це може бути власник, основний орендар або інша особа, яка фактично забезпечує проживання. Підготуйте документи особи й підтвердження особистих даних за переліком установи. Кожній людині потрібна окрема форма. Якщо подаєте документи дистанційно, спочатку перевірте дозволений спосіб, необхідність оригіналів чи засвідчених копій і порядок отримання підтвердження після оформлення.",
+            "checklist": [
+              "Отримайте підпис особи, яка надає житло, у потрібній формі.",
+              "Підготуйте документи для кожного члена родини окремо.",
+              "Збережіть письмове підтвердження реєстрації після завершення процедури."
+            ]
+          },
+          {
+            "title": "Відокремте Meldezettel від права на перебування",
+            "body": "Реєстрація адреси не надає міграційного дозволу чи права працювати. Для громадян ЄС, ЄЕЗ і Швейцарії за тривалішого проживання може бути потрібна окрема Anmeldebescheinigung: це не Meldezettel. Громадянам третіх країн потрібно перевіряти підставу перебування відповідно до власних обставин. Українцям, які звертаються по тимчасовий захист, слід дотримуватися офіційних інструкцій поліційної реєстрації та BFA щодо Ausweis für Vertriebene. Якщо захист уже оформлений в іншій країні, уточніть наслідки до зміни житла й отримання допомоги.",
+            "checklist": [
+              "Визначте процедуру перебування відповідно до своєї особистої ситуації.",
+              "Ведіть реєстрацію адреси та оформлення міграційних документів окремо.",
+              "Перед зміною країни перевірте наслідки наявного тимчасового захисту."
+            ]
+          },
+          {
+            "title": "Підтвердьте страхування та зберіть важливі документи",
+            "body": "З’ясуйте, на якій підставі ви отримуєте медичне покриття та з якої дати воно діє. Працевлаштування, самозайнятість, сімейне страхування та інші обставини можуть передбачати різні процедури. Наймані працівники часто застраховані через ÖGK, а для багатьох самозайнятих важлива SVS. E-card підтверджує покриття, але не замінює визначення права на страхування. Не вважайте, що воно з’являється разом із реєстрацією адреси. Зберіть підтвердження реєстрації, документи на перебування, страхове листування та найближчі прийоми в одному практичному списку.",
+            "checklist": [
+              "Запитайте про покриття у відповідальної страхової чи установи підтримки.",
+              "Підтвердьте дату початку страхування та доступні документи про покриття.",
+              "Скористайтеся чеклістом прибуття для решти організаційних прийомів."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Meldezettel та Anmeldebescheinigung — це один документ?",
+            "a": "Ні. Форма й підтвердження реєстрації адреси стосуються місця проживання. Anmeldebescheinigung підтверджує право перебування для відповідних громадян ЄС, ЄЕЗ і Швейцарії. Для інших людей передбачено інші документи. Перевірте процедуру залежно від громадянства, тривалості перебування та своїх особистих обставин."
+          },
+          {
+            "q": "Чи можна зареєструватися до фактичного заселення?",
+            "a": "Офіційна процедура передбачає реальне проживання, яке підтверджує підписом особа, що надає житло. Майбутній договір оренди чи поштова адреса самі по собі цього не замінюють. За незвичного або тимчасового розміщення уточніть правила у відповідальній установі."
+          },
+          {
+            "q": "Чи означає зареєстрована адреса, що я вже маю страхування?",
+            "a": "Ні. Підтвердьте покриття у відповідальній страховій касі або установі підтримки. Порядок залежить від працевлаштування, самозайнятості, сімейних чи інших обставин. Збережіть підтвердження дати початку страхування й запитайте, які документи використовувати до отримання e-card."
+          }
+        ]
+      },
+      "de": {
+        "title": "Meldezettel in Österreich: die Adresse richtig anmelden",
+        "description": "Die Dreitagesfrist beachten, die Unterschrift des Unterkunftgebers vorbereiten und Meldung, Aufenthaltsrecht sowie Versicherung unterscheiden.",
+        "summary": "Nach dem Bezug einer Unterkunft in Österreich ist die Wohnsitzmeldung grundsätzlich innerhalb von drei Tagen erforderlich. Der unterschriebene Meldezettel gehört zu diesem Verfahren. Wohnsitzmeldung, aufenthaltsrechtliches Dokument und Krankenversicherung sind drei getrennte Verwaltungsangelegenheiten.",
+        "appliesTo": "Für neu zuziehende Menschen in Österreich, darunter ukrainische Staatsangehörige, EU-, EWR- und Schweizer Bürger sowie andere Drittstaatsangehörige. Ausnahmen hängen unter anderem von der Unterkunftsart ab.",
+        "sections": [
+          {
+            "title": "Die Dreitagesfrist beginnt mit dem tatsächlichen Einzug",
+            "body": "Ermitteln Sie die für Ihre neue Unterkunft zuständige Meldebehörde: Gemeindeamt, Magistrat in einer Statutarstadt oder Magistratisches Bezirksamt in Wien. Die allgemeine Frist beträgt drei Tage ab Bezug der Unterkunft und beginnt nicht bereits mit der Unterschrift unter den Mietvertrag. Eine Meldung muss tatsächliches Wohnen abbilden; eine reine Postadresse reicht nicht aus. Lesen Sie die offiziellen Hinweise für die jeweilige Unterkunft. Touristische Beherbergung und bestimmte kurze Aufenthalte können anderen Meldeverfahren unterliegen, weshalb die konkrete Unterbringung wichtig ist.",
+            "checklist": [
+              "Die zuständige Meldebehörde anhand der tatsächlichen Unterkunft bestimmen.",
+              "Dreitagesfrist und zulässige Einreichungsmöglichkeiten auf der Behördenwebsite prüfen.",
+              "Für die eigene Unterkunft das anwendbare Meldeverfahren bestätigen."
+            ]
+          },
+          {
+            "title": "Für jede Person ein unterschriebenes Formular vorbereiten",
+            "body": "Füllen Sie für das gewöhnliche Verfahren den Meldezettel vollständig und leserlich aus und holen Sie die Unterschrift des Unterkunftgebers ein. Unterkunftgeber ist die Person, die tatsächlich Unterkunft gewährt; je nach Vereinbarung kann das etwa der Eigentümer oder Hauptmieter sein. Bereiten Sie die von der Behörde verlangten Identitäts- und Personenstandsnachweise vor. Für jede Person ist ein eigenes Formular erforderlich. Prüfen Sie bei einer Einreichung ohne persönliche Vorsprache vorab den zulässigen Weg sowie die Anforderungen an Originale oder beglaubigte Kopien.",
+            "checklist": [
+              "Die Unterschrift des tatsächlichen Unterkunftgebers am richtigen Formular einholen.",
+              "Die erforderlichen Nachweise für jedes mitziehende Familienmitglied vorbereiten.",
+              "Die schriftliche Meldebestätigung nach Abschluss des Verfahrens aufbewahren."
+            ]
+          },
+          {
+            "title": "Meldezettel und Aufenthaltsberechtigung getrennt behandeln",
+            "body": "Die Wohnsitzmeldung schafft weder ein Aufenthaltsrecht noch eine Arbeitsberechtigung. EU-, EWR- und Schweizer Bürger können bei einem längeren Aufenthalt eine eigene Anmeldebescheinigung benötigen; diese ist nicht mit dem Meldezettel identisch. Drittstaatsangehörige müssen den zu ihrer Situation passenden Aufenthaltsweg prüfen. Ukrainische Schutzsuchende sollten die offiziellen Hinweise zur polizeilichen Registrierung und zum vom BFA ausgestellten Ausweis für Vertriebene beachten. Besteht bereits Schutz in einem anderen Land, sind die Folgen eines Wechsels vor der Umstellung von Unterkunft und Leistungen zu klären.",
+            "checklist": [
+              "Den zur persönlichen Situation passenden Aufenthaltsweg feststellen.",
+              "Wohnsitzmeldung und aufenthaltsrechtliche Dokumente als getrennte Aufgaben organisieren.",
+              "Vor einem Länderwechsel bestehende Schutzrechte und deren Folgen prüfen."
+            ]
+          },
+          {
+            "title": "Versicherung bestätigen und wichtige Nachweise zusammenhalten",
+            "body": "Fragen Sie, über welchen Weg Ihr Krankenversicherungsschutz besteht und ab welchem Datum er gilt. Beschäftigung, Selbstständigkeit, Mitversicherung und andere Umstände können zu unterschiedlichen Zuständigkeiten führen. Arbeitnehmer sind häufig bei der ÖGK versichert, für viele Selbstständige ist die SVS relevant. Die e-card weist Versicherungsschutz nach, ersetzt aber nicht die Klärung der Versicherungsberechtigung. Eine Wohnsitzmeldung allein begründet keine Krankenversicherung. Eine gemeinsame Übersicht über Meldebestätigung, Aufenthaltsdokumente, Versicherungsschreiben und anstehende Termine hilft, die ersten Wochen zuverlässig zu organisieren.",
+            "checklist": [
+              "Zuständigen Versicherungsträger oder zuständige Unterstützungsstelle nach dem Schutz fragen.",
+              "Versicherungsbeginn und verfügbare Nachweise für Arztbesuche bestätigen lassen.",
+              "Die Ankunftscheckliste zum Ordnen der weiteren Termine verwenden."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Sind Meldezettel und Anmeldebescheinigung dasselbe?",
+            "a": "Nein. Meldeformular und Meldebestätigung betreffen den Wohnort. Die Anmeldebescheinigung betrifft das Aufenthaltsrecht entsprechend berechtigter EU-, EWR- und Schweizer Bürger. Für andere Zugewanderte bestehen andere Aufenthaltsdokumente. Das erforderliche Verfahren richtet sich nach Staatsangehörigkeit, Aufenthaltsdauer und den persönlichen Umständen."
+          },
+          {
+            "q": "Kann ich mich bereits vor dem Einzug anmelden?",
+            "a": "Das offizielle Verfahren setzt eine tatsächlich bezogene Unterkunft voraus. Der Unterkunftgeber bestätigt dies durch seine Unterschrift. Ein zukünftiger Mietvertrag oder eine reine Postanschrift ersetzt den Einzug nicht. Klären Sie ungewöhnliche oder vorübergehende Unterbringung vorab mit der zuständigen Meldebehörde."
+          },
+          {
+            "q": "Bedeutet eine gemeldete Adresse automatisch Krankenversicherung?",
+            "a": "Nein. Bestätigen Sie den Versicherungsschutz beim zuständigen Träger oder der verantwortlichen Unterstützungsstelle. Die Zuordnung kann von Beschäftigung, Selbstständigkeit, Familienverhältnissen oder anderen Umständen abhängen. Bewahren Sie den bestätigten Versicherungsbeginn auf und fragen Sie nach einem Nachweis, falls die e-card noch aussteht."
+          }
+        ]
+      }
+    },
+    "work": {
+      "en": {
+        "title": "Working in Austria: status, job search and insurance",
+        "description": "Find the right Austrian work-permission route, prepare applications, check professional recognition and confirm social-insurance arrangements.",
+        "summary": "Check your residence status before starting work in Austria. Displaced Ukrainians holding an Ausweis für Vertriebene have a different employment route from ordinary third-country applicants. Match job applications to your skills and clarify professional recognition, contract terms and insurance before the first working day.",
+        "appliesTo": "International jobseekers in Austria, including displaced Ukrainians, EU, EEA and Swiss citizens and people considering other residence routes. Rules depend on the actual status and occupation.",
+        "sections": [
+          {
+            "title": "Identify your actual access to employment",
+            "body": "Start with the residence document you hold rather than nationality alone. EU, EEA and Swiss citizens have free access to the Austrian labour market under the relevant rules. Displaced Ukrainians who possess an Ausweis für Vertriebene can take employed work without a separate employment permit under the exemption described by the Austrian ministry. Other third-country applicants must check their specific residence and employment route.",
+            "checklist": [
+              "Check your residence document and the conditions attached to it.",
+              "Distinguish displaced-person status from other residence routes.",
+              "Ask the responsible authority about unclear eligibility before starting work."
+            ]
+          },
+          {
+            "title": "Use AMS and check professional recognition early",
+            "body": "The Austrian Public Employment Service, AMS, offers job-search information and support according to the applicant’s circumstances. Prepare a CV with experience, qualifications, language skills and a clear way to contact you. For regulated professions, recognition or authorisation may be necessary before practising. A translated diploma does not by itself provide professional permission. Use an official recognition advisory service to establish which authority and evidence are relevant to your occupation.",
+            "checklist": [
+              "Prepare a focused CV and evidence of relevant experience.",
+              "Use official AMS information and suitable vacancy searches.",
+              "Clarify recognition before committing to work in a regulated profession."
+            ]
+          },
+          {
+            "title": "Check the employment terms and practical onboarding",
+            "body": "Before agreeing, confirm the employer’s identity, work location, duties, hours and gross remuneration. Ask for the applicable written employment terms and check which collective agreement covers the role where relevant. Discuss when work begins and which documents payroll needs. If you are asked to issue invoices, clarify whether the proposal is actually self-employment; it has different registration and insurance consequences.",
+            "checklist": [
+              "Confirm duties, hours, remuneration and written terms before starting.",
+              "Ask which collective agreement or classification is relevant to the role.",
+              "Separate employment offers from proposals for independent contracting."
+            ]
+          },
+          {
+            "title": "Confirm coverage and report relevant changes",
+            "body": "Ask the employer and responsible insurer how your social-insurance registration will be handled and when health coverage starts. Many employees are insured through ÖGK, while SVS is relevant to many self-employed people. The exact arrangement depends on the work and personal circumstances; do not assume every small job creates the same cover. If you receive support, ask the responsible office which changes to employment and income you must report.",
+            "checklist": [
+              "Confirm the responsible insurance institution and coverage start date.",
+              "Ask which evidence to use if the e-card has not arrived.",
+              "Notify the relevant support office of changes when required."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Do all Ukrainian citizens have the same permission to work?",
+            "a": "No. The actual residence status and document matter. The ministry’s exemption concerns displaced people holding an Ausweis für Vertriebene. People using another residence route must check its conditions. Ukrainian nationality or an Austrian registered address alone does not establish the same employment rights."
+          },
+          {
+            "q": "Does an Ausweis für Vertriebene remove professional qualification requirements?",
+            "a": "No. Access to employment and permission to practise a regulated profession are separate matters. Check recognition or professional-authorisation requirements for your occupation even if your residence status permits work. An official recognition advisory service can help identify the competent authority and documents."
+          },
+          {
+            "q": "Can I assume health insurance starts with every job offer?",
+            "a": "No. A job offer is not an insurance confirmation. Ask the employer and insurer about the actual arrangement, registration and start date, especially if the hours or earnings are limited or you combine different activities. Keep the reply with your onboarding records."
+          }
+        ]
+      },
+      "uk": {
+        "title": "Робота в Австрії: статус, пошук і страхування",
+        "description": "Перевірте право на роботу в Австрії, підготуйте заявки, з’ясуйте визнання професії та порядок соціального страхування.",
+        "summary": "До початку роботи в Австрії перевірте свій статус перебування. Для переміщених українців з Ausweis für Vertriebene діє інший порядок, ніж для звичайних заявників із третіх країн. Підготуйте відповідні заявки, уточніть професійний допуск, умови договору та страхування до першого робочого дня.",
+        "appliesTo": "Для іноземців, які шукають роботу в Австрії: переміщених українців, громадян ЄС, ЄЕЗ і Швейцарії та людей з іншими підставами перебування. Правила залежать від фактичного статусу й професії.",
+        "sections": [
+          {
+            "title": "Визначте фактичний доступ до найманої роботи",
+            "body": "Почніть із документа на перебування, а не лише громадянства. Громадяни ЄС, ЄЕЗ і Швейцарії мають вільний доступ до австрійського ринку праці відповідно до застосовних правил. Переміщені українці, які мають Ausweis für Vertriebene, можуть працювати за наймом без окремого дозволу на працевлаштування за винятком, описаним австрійським міністерством. Для інших громадян третіх країн потрібно перевіряти конкретну підставу перебування та трудові умови. Зареєстрована адреса не замінює документа, який підтверджує відповідні права.",
+            "checklist": [
+              "Перевірте документ на перебування та умови, які до нього належать.",
+              "Розрізняйте статус переміщеної особи та інші підстави проживання.",
+              "До початку роботи уточніть незрозуміле право у відповідальній установі."
+            ]
+          },
+          {
+            "title": "Користуйтеся AMS та завчасно перевіряйте професію",
+            "body": "Австрійська служба зайнятості AMS надає інформацію про пошук роботи й підтримку відповідно до обставин людини. Підготуйте резюме з досвідом, кваліфікаціями, мовами та зрозумілими контактами. Обирайте відповідні вакансії й адаптуйте заявку до посади. Для регульованої професії перед практикою може знадобитися визнання або професійний дозвіл. Сам переклад диплома не надає такого допуску. Через офіційну консультацію з визнання кваліфікації з’ясуйте, яка установа й які підтвердження стосуються вашого фаху, перш ніж оплачувати додаткові процедури.",
+            "checklist": [
+              "Підготуйте резюме під вакансію та підтвердження відповідного досвіду.",
+              "Користуйтеся офіційною інформацією AMS і належним пошуком вакансій.",
+              "Уточніть визнання до погодження роботи в регульованій професії."
+            ]
+          },
+          {
+            "title": "Перевірте умови роботи й практичне оформлення",
+            "body": "До згоди перевірте роботодавця, місце роботи, завдання, години та оплату брутто. Попросіть письмові умови працевлаштування й з’ясуйте, який колективний договір застосовується до посади, якщо це доречно. Обговоріть дату початку та документи для нарахування зарплати. Якщо замість оформлення просять виставляти рахунки, уточніть, чи йдеться фактично про самозайнятість: вона має інші реєстраційні та страхові наслідки. Зберігайте пропозицію, домовленості й важливе листування разом, щоб за потреби всі сторони могли перевірити однакові умови.",
+            "checklist": [
+              "До початку підтвердьте обов’язки, години, оплату та письмові умови.",
+              "Запитайте про колективний договір або класифікацію відповідної посади.",
+              "Відокремлюйте найману роботу від пропозицій незалежного підряду."
+            ]
+          },
+          {
+            "title": "Підтвердьте страхування та повідомляйте про зміни",
+            "body": "Запитайте роботодавця й відповідального страховика, як відбудеться реєстрація соціального страхування та з якої дати починається медичне покриття. Багато найманих працівників застраховані через ÖGK, а для багатьох самозайнятих важлива SVS. Конкретний порядок залежить від роботи й особистих обставин: не вважайте, що кожна невелика зайнятість дає однакове покриття. E-card підтверджує страхування, а не право проживати чи працювати. Якщо отримуєте допомогу, уточніть в установі, про які зміни роботи й доходу потрібно повідомляти.",
+            "checklist": [
+              "Підтвердьте відповідальну страхову установу та дату початку покриття.",
+              "Запитайте про документи для підтвердження, поки e-card не надійшла.",
+              "За потреби повідомляйте відповідальну установу підтримки про зміни."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Чи всі громадяни України мають однакове право працювати?",
+            "a": "Ні. Важливі фактичний статус перебування та документ. Виняток міністерства стосується переміщених осіб з Ausweis für Vertriebene. Для іншої підстави проживання перевіряють її умови. Саме українське громадянство чи зареєстрована австрійська адреса не підтверджують однакових трудових прав."
+          },
+          {
+            "q": "Чи скасовує Ausweis für Vertriebene вимоги до професії?",
+            "a": "Ні. Доступ до роботи та допуск до регульованої професії — окремі питання. Перевіряйте визнання кваліфікації чи професійну авторизацію навіть за статусу, який дозволяє працювати. Офіційна консультація допоможе визначити відповідальну установу та потрібні документи саме для вашого фаху."
+          },
+          {
+            "q": "Чи можна вважати, що страхування починається з будь-якої пропозиції роботи?",
+            "a": "Ні. Пропозиція вакансії не підтверджує страхування. Уточніть у роботодавця й каси фактичний порядок, реєстрацію та дату початку покриття, особливо за обмежених годин, невеликого доходу або поєднання діяльності. Зберігайте відповідь разом з іншими документами оформлення."
+          }
+        ]
+      },
+      "de": {
+        "title": "Arbeiten in Österreich: Status, Stellensuche und Versicherung",
+        "description": "Arbeitsmarktzugang klären, Bewerbungen vorbereiten, Berufsanerkennung prüfen und die Sozialversicherung zum Arbeitsbeginn bestätigen.",
+        "summary": "Prüfen Sie vor Arbeitsbeginn Ihren Aufenthaltsstatus in Österreich. Für ukrainische Vertriebene mit Ausweis für Vertriebene gilt ein anderer Beschäftigungszugang als für reguläre Drittstaatsangehörige. Bereiten Sie passende Bewerbungen vor und klären Sie Berufsanerkennung, Vertragsbedingungen sowie Versicherung vor dem ersten Arbeitstag.",
+        "appliesTo": "Für internationale Arbeitsuchende in Österreich: ukrainische Vertriebene, EU-, EWR- und Schweizer Bürger sowie Menschen mit anderen Aufenthaltswegen. Entscheidend sind tatsächlicher Status und Beruf.",
+        "sections": [
+          {
+            "title": "Den tatsächlichen Zugang zur Beschäftigung feststellen",
+            "body": "Beginnen Sie mit dem vorhandenen Aufenthaltsdokument und nicht allein mit der Staatsangehörigkeit. EU-, EWR- und Schweizer Bürger haben nach den entsprechenden Regelungen freien Zugang zum österreichischen Arbeitsmarkt. Ukrainische Vertriebene mit Ausweis für Vertriebene können aufgrund der vom Ministerium beschriebenen Ausnahme eine unselbstständige Beschäftigung ohne gesonderte Beschäftigungsbewilligung aufnehmen. Andere Drittstaatsangehörige müssen ihren konkreten Aufenthalts- und Beschäftigungsweg prüfen. Eine gemeldete Adresse ersetzt nicht das Dokument, aus dem sich die entsprechende Berechtigung ergibt. Klären Sie fehlende oder widersprüchliche Unterlagen deshalb vor dem Arbeitsbeginn.",
+            "checklist": [
+              "Aufenthaltsdokument und die damit verbundenen Bedingungen vollständig prüfen.",
+              "Vertriebenenstatus von anderen aufenthaltsrechtlichen Wegen klar unterscheiden.",
+              "Unklare Berechtigung vor Arbeitsbeginn mit der zuständigen Stelle klären."
+            ]
+          },
+          {
+            "title": "AMS nutzen und die Berufsanerkennung früh prüfen",
+            "body": "Das Arbeitsmarktservice AMS bietet Informationen und Unterstützung bei der Stellensuche entsprechend der persönlichen Situation. Bereiten Sie einen Lebenslauf mit Erfahrung, Qualifikationen, Sprachkenntnissen und gut erreichbaren Kontaktdaten vor. Wählen Sie passende Stellen aus und stimmen Sie die Bewerbung darauf ab. Bei reglementierten Berufen können Anerkennung oder Berufszulassung vor der Berufsausübung erforderlich sein. Eine übersetzte Urkunde ersetzt diese Zulassung nicht. Eine offizielle Anerkennungsberatung hilft, die zuständige Stelle und die für den konkreten Beruf notwendigen Nachweise zu bestimmen.",
+            "checklist": [
+              "Einen passenden Lebenslauf und Nachweise relevanter Berufserfahrung zusammenstellen.",
+              "Offizielle AMS-Informationen und geeignete Stellensuchen für Bewerbungen nutzen.",
+              "Anerkennung vor einer verbindlichen Zusage für reglementierte Arbeit klären."
+            ]
+          },
+          {
+            "title": "Arbeitsbedingungen und den praktischen Einstieg prüfen",
+            "body": "Bestätigen Sie vor der Zusage Arbeitgeber, Arbeitsort, Aufgaben, Arbeitszeit und Bruttoentgelt. Fragen Sie nach den schriftlichen Beschäftigungsbedingungen und gegebenenfalls dem einschlägigen Kollektivvertrag für die Stelle. Besprechen Sie den Beginn und die für die Lohnverrechnung benötigten Dokumente. Sollten Sie stattdessen Rechnungen stellen, klären Sie, ob tatsächlich Selbstständigkeit vorgeschlagen wird; damit sind andere Anmelde- und Versicherungspflichten verbunden. Bewahren Sie Angebot, Vereinbarung und wichtige Korrespondenz gemeinsam auf, damit spätere Fragen anhand derselben Unterlagen geklärt werden können.",
+            "checklist": [
+              "Aufgaben, Arbeitszeit, Entgelt und schriftliche Bedingungen vorab bestätigen.",
+              "Nach einschlägigem Kollektivvertrag und passender Einstufung der Stelle fragen.",
+              "Ein Arbeitsverhältnis von einem Angebot selbstständiger Auftragstätigkeit unterscheiden."
+            ]
+          },
+          {
+            "title": "Versicherung bestätigen und Änderungen richtig melden",
+            "body": "Fragen Sie Arbeitgeber und zuständigen Versicherungsträger, wie die Sozialversicherungsanmeldung erfolgt und wann der Krankenversicherungsschutz beginnt. Viele Beschäftigte sind bei der ÖGK versichert, für viele Selbstständige ist die SVS zuständig. Die konkrete Absicherung hängt von Tätigkeit und persönlicher Lage ab; nicht jede kleine Beschäftigung führt zum gleichen Schutz. Die e-card ist ein Versicherungsnachweis und kein Aufenthalts- oder Arbeitsdokument. Wenn Sie Unterstützungsleistungen erhalten, klären Sie mit der zuständigen Stelle, welche Änderungen bei Beschäftigung und Einkommen gemeldet werden müssen.",
+            "checklist": [
+              "Zuständigen Versicherungsträger und Beginn des Schutzes ausdrücklich bestätigen lassen.",
+              "Bei ausstehender e-card nach einem vorläufigen Versicherungsnachweis fragen.",
+              "Erforderliche Änderungen bei der verantwortlichen Unterstützungsstelle rechtzeitig melden."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Haben alle ukrainischen Staatsangehörigen dieselbe Arbeitsberechtigung?",
+            "a": "Nein. Der tatsächliche Aufenthaltsstatus und das zugehörige Dokument sind entscheidend. Die Ausnahme des Ministeriums betrifft Vertriebene mit Ausweis für Vertriebene. Andere Aufenthaltswege haben eigene Bedingungen. Die ukrainische Staatsangehörigkeit oder eine österreichische Meldeadresse allein begründen nicht denselben Zugang zur Beschäftigung."
+          },
+          {
+            "q": "Ersetzt der Ausweis für Vertriebene die berufliche Qualifikation?",
+            "a": "Nein. Arbeitsmarktzugang und Zulassung zu einem reglementierten Beruf sind verschiedene Fragen. Prüfen Sie Anerkennungs- oder Zulassungsanforderungen auch dann, wenn Ihr Aufenthaltsstatus Beschäftigung erlaubt. Eine offizielle Anerkennungsberatung kann die für Ihren Beruf zuständige Behörde und die erforderlichen Dokumente bestimmen."
+          },
+          {
+            "q": "Besteht mit jedem Stellenangebot automatisch Krankenversicherung?",
+            "a": "Nein. Ein Angebot ist kein Versicherungsnachweis. Klären Sie tatsächliche Beschäftigung, Anmeldung und Versicherungsbeginn mit Arbeitgeber und Versicherungsträger, insbesondere bei geringem Umfang oder mehreren Tätigkeiten. Bewahren Sie die Antwort gemeinsam mit den Unterlagen zum Arbeitsbeginn auf und fragen Sie bei Unklarheiten nach."
+          }
+        ]
+      }
+    },
+    "business": {
+      "en": {
+        "title": "Starting a business in Austria: activity, permission and registration",
+        "description": "Prepare Austrian self-employment by checking residence permission, the trade rules, qualifications, tax registration, social insurance and start-up advice.",
+        "summary": "In Austria, first check whether your residence situation allows the planned independent activity. Then establish whether the work falls under the trade rules or another professional framework. Gewerbeanmeldung, tax responsibilities, professional qualifications and social insurance need to be considered together before trading.",
+        "appliesTo": "International founders planning self-employment in Austria, including displaced Ukrainians, EU, EEA and Swiss citizens and people considering a separate entrepreneurial residence route.",
+        "sections": [
+          {
+            "title": "Check the right to undertake this specific activity",
+            "body": "Start with your actual residence document and the activity you intend to offer. EU, EEA and Swiss citizens and people from third countries have different legal starting points. Displaced Ukrainians should verify the rules applicable to their document rather than relying on nationality or assuming that employee access settles every business requirement. Ask the competent authority or a qualified start-up adviser how your situation affects the planned activity before signing binding contracts.",
+            "checklist": [
+              "Prepare your residence document and a precise activity description.",
+              "Ask whether the planned independent work is permitted in your situation.",
+              "Resolve the residence question before taking paid assignments or premises."
+            ]
+          },
+          {
+            "title": "Distinguish trades, regulated activities and other professions",
+            "body": "Activities covered by the Austrian Gewerbeordnung generally require trade registration with the competent authority at the business location. A free trade and a regulated trade are not the same: regulated trades require evidence of professional competence or the applicable alternative authorisation. Some independent professional activities fall under other frameworks instead of ordinary trade registration. Do not transfer the German Freiberufler classification to Austria without checking the actual Austrian rules.",
+            "checklist": [
+              "Clarify whether the activity falls under the Austrian trade rules.",
+              "Check competence requirements or professional authorisation before operating.",
+              "Identify the responsible district or city authority for registration."
+            ]
+          },
+          {
+            "title": "Organise taxes, records and social insurance together",
+            "body": "Ask which tax registration, declarations and invoicing requirements apply to the chosen activity and legal form. Small scale does not automatically remove every tax or record-keeping obligation. Clarify social-insurance responsibilities with the appropriate institution; SVS is relevant for many self-employed people. Check when reporting and coverage obligations begin. Retain invoices, separate business records from personal spending and allow for future tax and insurance payments.",
+            "checklist": [
+              "Draft a realistic budget including tax and insurance responsibilities.",
+              "Confirm registration and invoice requirements before issuing the first invoice.",
+              "Ask the insurance institution about reporting duties and coverage dates."
+            ]
+          },
+          {
+            "title": "Use official advice and build a relevant local network",
+            "body": "Use the Austrian Business Service Portal, USP, to follow the steps for your activity and locate the relevant authority. A regional WKO start-up service can help clarify trade classification and point you to appropriate business advice. Use founder events and community contacts to understand customer needs and find collaborators.",
+            "checklist": [
+              "Find suitable official guidance and regional start-up advice.",
+              "List open questions about permissions, qualifications, tax and insurance.",
+              "Use local networking to test demand and collect practical feedback."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Does a free trade mean that no registration is required?",
+            "a": "No. In this context, a free trade is distinguished from a regulated trade by the competence requirements. An activity subject to the trade rules still requires the appropriate registration. Confirm the classification and the conditions for your specific activity before starting."
+          },
+          {
+            "q": "Can I use Germany’s Freiberufler rules for an Austrian business?",
+            "a": "No. Austria has its own trade and professional frameworks. Some activities fall outside ordinary trade registration, but the classification must be checked under Austrian rules. Describe the actual services and obtain guidance from the competent authority or qualified adviser rather than choosing a label."
+          },
+          {
+            "q": "Can I assume the residence card resolves tax and insurance registration?",
+            "a": "No. Residence permission, trade or professional registration, tax obligations and social insurance are different matters. Clarify each step and the date when it applies. Keep written answers and include the expected obligations in your budget before accepting your first paid work."
+          }
+        ]
+      },
+      "uk": {
+        "title": "Власний бізнес в Австрії: діяльність, дозвіл і реєстрація",
+        "description": "Підготуйте самозайнятість в Австрії: перевірте перебування, правила Gewerbe, кваліфікації, податки, соціальне страхування та консультації для засновників.",
+        "summary": "В Австрії спочатку перевіряють, чи дозволяє підстава перебування заплановану незалежну діяльність. Потім визначають, чи підпадає робота під правила Gewerbe або інший професійний порядок. До старту потрібно разом розглянути реєстрацію, податки, кваліфікацію та соціальне страхування.",
+        "appliesTo": "Для іноземних засновників, які планують самозайнятість в Австрії: переміщених українців, громадян ЄС, ЄЕЗ і Швейцарії та людей, які розглядають окремий підприємницький маршрут перебування.",
+        "sections": [
+          {
+            "title": "Перевірте право саме на заплановану діяльність",
+            "body": "Почніть із фактичного документа на перебування й конкретних послуг, які плануєте надавати. Реєстрація адреси сама по собі не дозволяє самозайнятість. Для громадян ЄС, ЄЕЗ і Швейцарії та громадян третіх країн діють різні вихідні правила. Переміщеним українцям варто перевірити умови свого документа, а не покладатися лише на громадянство або вважати, що доступ до найманої роботи закриває всі бізнесові вимоги. До обов’язкових договорів запитайте відповідальну установу чи кваліфікованого консультанта, як ваш статус впливає на діяльність.",
+            "checklist": [
+              "Підготуйте документ на перебування та точний опис майбутньої діяльності.",
+              "Запитайте, чи дозволена саме така незалежна робота у вашій ситуації.",
+              "Уточніть підставу до платних замовлень або оренди приміщення."
+            ]
+          },
+          {
+            "title": "Розрізняйте Gewerbe, регульовану діяльність та інші професії",
+            "body": "Діяльність, яка підпадає під австрійську Gewerbeordnung, зазвичай потребує реєстрації у відповідальній установі за місцем бізнесу. Вільне та регульоване Gewerbe відрізняються: для регульованої діяльності потрібно підтвердження професійної компетентності або передбачена альтернативна авторизація. Частина незалежних професій має інші правила замість звичайної торгової реєстрації. Не переносіть німецьку класифікацію Freiberufler на Австрію без перевірки місцевих вимог. Правильний порядок визначають фактичні послуги, а не зручна назва. Уточніть вимоги до початку практичної роботи з клієнтами.",
+            "checklist": [
+              "Уточніть, чи охоплюють австрійські правила Gewerbe вашу конкретну діяльність.",
+              "Перевірте вимоги компетентності або професійного дозволу до роботи.",
+              "Знайдіть відповідальну районну чи міську установу для оформлення."
+            ]
+          },
+          {
+            "title": "Організуйте податки, облік і соціальне страхування разом",
+            "body": "Складіть простий план: клієнти, регулярні витрати, очікуваний дохід і спосіб надання послуг. Запитайте, які податкові реєстрації, декларації та правила рахунків стосуються вибраної діяльності й правової форми. Невеликий масштаб не скасовує автоматично всіх податкових чи облікових обов’язків. Уточніть соціальне страхування у відповідальній установі: SVS важлива для багатьох самозайнятих. Перевірте, з якої дати виникають обов’язки повідомлення та покриття. Зберігайте рахунки, відокремлюйте бізнесові записи від особистих витрат і передбачайте майбутні податкові та страхові платежі.",
+            "checklist": [
+              "Підготуйте реалістичний бюджет із податковими та страховими обов’язками.",
+              "Уточніть реєстрацію й вимоги до виставлення першого рахунка.",
+              "Запитайте страхову установу про повідомлення та дати початку покриття."
+            ]
+          },
+          {
+            "title": "Користуйтеся офіційними консультаціями та місцевими контактами",
+            "body": "Австрійський портал послуг для бізнесу USP допомагає пройти етапи для своєї діяльності й знайти відповідальну установу. Регіональний сервіс WKO для засновників може допомогти з класифікацією Gewerbe та скерувати на відповідну консультацію. Візьміть конкретний опис послуг, документ на перебування та початковий бюджет, щоб обговорення стосувалося саме ваших обставин. Події для підприємців і контакти спільноти корисні для розуміння клієнтів та пошуку партнерів. Участь у бізнес-спільноті не означає отримання професійного дозволу, погодженого фінансування чи гарантованих замовлень.",
+            "checklist": [
+              "Знайдіть відповідні офіційні інструкції та регіональну консультацію для засновників.",
+              "Складіть список відкритих питань про дозволи, кваліфікації, податки й страхування.",
+              "Перевіряйте попит через місцеві знайомства та практичний відгук."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Чи означає вільне Gewerbe, що реєстрація не потрібна?",
+            "a": "Ні. У цьому контексті вільне Gewerbe відрізняється від регульованого вимогами до професійної компетентності. Діяльність, яка підпадає під торгові правила, усе одно потребує належного оформлення. Підтвердьте класифікацію та умови для конкретних послуг, перш ніж починати їх надавати."
+          },
+          {
+            "q": "Чи можна застосувати німецькі правила Freiberufler до австрійської справи?",
+            "a": "Ні. Австрія має власні торгові та професійні правила. Деякі види діяльності не потребують звичайної Gewerbeanmeldung, але класифікацію перевіряють за австрійськими вимогами. Опишіть фактичні послуги та зверніться до відповідальної установи або кваліфікованого консультанта замість простого вибору назви."
+          },
+          {
+            "q": "Чи вирішує картка перебування питання податків і страхування?",
+            "a": "Ні. Право перебувати, реєстрація діяльності чи професії, податкові обов’язки та соціальне страхування є різними питаннями. Уточніть кожен крок і дату його застосування. Зберігайте письмові відповіді та врахуйте очікувані обов’язки в бюджеті до першої платної роботи."
+          }
+        ]
+      },
+      "de": {
+        "title": "In Österreich gründen: Tätigkeit, Erlaubnis und Anmeldung",
+        "description": "Österreichische Selbstständigkeit vorbereiten: Aufenthalt, Gewerberecht, Qualifikationen, steuerliche Erfassung, Sozialversicherung und Gründungsberatung.",
+        "summary": "Prüfen Sie in Österreich zuerst, ob Ihre Aufenthaltssituation die geplante selbstständige Tätigkeit zulässt. Danach klären Sie Gewerberecht oder andere Berufsregeln. Gewerbeanmeldung, steuerliche Pflichten, Qualifikationsnachweise und Sozialversicherung müssen vor der Aufnahme der Tätigkeit gemeinsam betrachtet werden.",
+        "appliesTo": "Für internationale Gründer in Österreich, darunter ukrainische Vertriebene, EU-, EWR- und Schweizer Bürger sowie Personen, die einen eigenständigen unternehmerischen Aufenthaltsweg prüfen.",
+        "sections": [
+          {
+            "title": "Die Berechtigung für die konkrete Tätigkeit prüfen",
+            "body": "Beginnen Sie mit Ihrem tatsächlichen Aufenthaltsdokument und den Leistungen, die Sie anbieten möchten. Eine Wohnsitzmeldung allein berechtigt nicht zur Selbstständigkeit. Für EU-, EWR- und Schweizer Bürger sowie Drittstaatsangehörige bestehen unterschiedliche rechtliche Ausgangspunkte. Ukrainische Vertriebene sollten die für ihr Dokument geltenden Bedingungen prüfen, statt nur auf die Staatsangehörigkeit zu verweisen oder aus dem Beschäftigungszugang sämtliche Gründungsvoraussetzungen abzuleiten. Fragen Sie die zuständige Behörde oder qualifizierte Gründungsberatung vor verbindlichen Verträgen, wie sich Ihre Aufenthaltssituation auf die geplante Tätigkeit auswirkt.",
+            "checklist": [
+              "Aufenthaltsdokument und eine präzise Beschreibung der geplanten Tätigkeit vorbereiten.",
+              "Die Zulässigkeit genau dieser selbstständigen Arbeit ausdrücklich bestätigen lassen.",
+              "Aufenthaltsfragen vor bezahlten Aufträgen oder verbindlicher Raumanmietung klären."
+            ]
+          },
+          {
+            "title": "Gewerbe und andere berufliche Rahmenbedingungen unterscheiden",
+            "body": "Tätigkeiten im Anwendungsbereich der österreichischen Gewerbeordnung benötigen grundsätzlich eine Gewerbeanmeldung bei der zuständigen Behörde am Unternehmensstandort. Ein freies Gewerbe unterscheidet sich vom reglementierten Gewerbe: Für reglementierte Tätigkeiten ist ein Befähigungsnachweis oder die entsprechende alternative Berechtigung erforderlich. Manche selbstständigen Berufe unterliegen anderen Regeln anstelle der gewöhnlichen Gewerbeanmeldung. Übertragen Sie die deutsche Einordnung als Freiberufler deshalb nicht ungeprüft auf Österreich. Klären Sie den genauen Rahmen vor der praktischen Arbeit mit Kunden.",
+            "checklist": [
+              "Den Anwendungsbereich des Gewerberechts für die konkrete Leistung klären.",
+              "Befähigungsnachweise oder berufliche Zulassung vor der Tätigkeit prüfen.",
+              "Zuständige Bezirksverwaltungsbehörde oder Stadtverwaltung für die Anmeldung feststellen."
+            ]
+          },
+          {
+            "title": "Steuern, Aufzeichnungen und Sozialversicherung gemeinsam organisieren",
+            "body": "Erstellen Sie einen einfachen Plan mit Kunden, laufenden Kosten, erwarteten Einnahmen und der praktischen Leistungserbringung. Fragen Sie nach steuerlicher Erfassung, Erklärungs- und Rechnungsanforderungen für Tätigkeit und Rechtsform. Ein kleiner Umfang befreit nicht automatisch von allen steuerlichen oder buchhalterischen Pflichten. Klären Sie die Sozialversicherung beim zuständigen Träger; die SVS ist für viele Selbstständige relevant. Fragen Sie nach Beginn von Meldepflichten und Versicherungsschutz. Bewahren Sie Rechnungen auf, trennen Sie betriebliche Unterlagen von privaten Ausgaben und planen Sie zukünftige Steuer- sowie Versicherungszahlungen ein.",
+            "checklist": [
+              "Realistisches Budget einschliesslich Steuer- und Versicherungspflichten vorbereiten.",
+              "Erfassung und Rechnungsanforderungen vor der ersten ausgestellten Rechnung bestätigen.",
+              "Versicherungsträger nach Meldepflichten und dem konkreten Beginn des Schutzes fragen."
+            ]
+          },
+          {
+            "title": "Offizielle Beratung und passende lokale Netzwerke nutzen",
+            "body": "Das österreichische Unternehmensserviceportal USP bietet Orientierung zu den Schritten und zuständigen Stellen für Ihre Tätigkeit. Ein regionaler WKO-Gründerservice kann bei der gewerberechtlichen Einordnung helfen und passende Beratung vermitteln. Bringen Sie eine konkrete Leistungsbeschreibung, Ihr Aufenthaltsdokument und einen ersten Budgetentwurf mit, damit das Gespräch Ihre tatsächlichen Umstände berücksichtigt. Gründerveranstaltungen und Community-Kontakte helfen, Kundenbedürfnisse kennenzulernen und mögliche Partner zu finden. Die Teilnahme an einem Unternehmensnetzwerk begründet weder eine Berufszulassung noch eine Förderzusage oder garantierte Kundschaft.",
+            "checklist": [
+              "Passende offizielle Informationen und regionale Gründungsberatung finden.",
+              "Offene Fragen zu Berechtigungen, Qualifikation, Steuern und Versicherung auflisten.",
+              "Lokale Kontakte für Nachfrageprüfung und konkretes Feedback zur Geschäftsidee nutzen."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "q": "Bedeutet freies Gewerbe, dass keine Anmeldung nötig ist?",
+            "a": "Nein. Freie und reglementierte Gewerbe unterscheiden sich hier hinsichtlich der Befähigungsanforderungen. Eine Tätigkeit im Anwendungsbereich des Gewerberechts benötigt weiterhin die passende Anmeldung. Bestätigen Sie Einordnung und Voraussetzungen für die konkrete Leistung, bevor Sie mit der Ausübung beginnen oder verbindlich Leistungen zusagen."
+          },
+          {
+            "q": "Kann ich deutsche Freiberufler-Regeln für Österreich verwenden?",
+            "a": "Nein. Österreich hat eigene gewerbe- und berufsrechtliche Rahmenbedingungen. Manche Tätigkeiten fallen nicht unter die gewöhnliche Gewerbeanmeldung; die Einordnung muss jedoch nach österreichischen Regeln erfolgen. Beschreiben Sie die tatsächlichen Leistungen und fragen Sie zuständige Behörde oder qualifizierte Beratung, statt lediglich eine Bezeichnung auszuwählen."
+          },
+          {
+            "q": "Erledigt die Aufenthaltskarte auch Steuer- und Versicherungsanmeldung?",
+            "a": "Nein. Aufenthaltsberechtigung, Gewerbe- oder Berufsanmeldung, steuerliche Pflichten und Sozialversicherung sind verschiedene Angelegenheiten. Klären Sie jeden Schritt und den jeweiligen Beginn. Bewahren Sie schriftliche Antworten auf und berücksichtigen Sie die erwarteten Pflichten im Budget, bevor Sie die erste bezahlte Tätigkeit annehmen."
+          }
+        ]
+      }
+    }
+  }
+}

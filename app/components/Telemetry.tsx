@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useReportWebVitals } from "next/web-vitals";
-import { detectAiReferral } from "../../lib/discovery";
 
 type ClientEvent =
   | {
@@ -18,17 +17,6 @@ type ClientEvent =
       type: "client-error" | "unhandled-rejection";
       name: string;
       message: string;
-    }
-  | {
-      type: "ai-referral";
-      name: string;
-      referrer: string;
-      attribution: "referrer" | "utm";
-    }
-  | {
-      type: "service-contact";
-      name: string;
-      id: string;
     };
 
 function trim(value: unknown, maxLength = 300) {
@@ -69,26 +57,6 @@ export function Telemetry() {
   });
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const sourceParam = params.get("utm_source") ?? "";
-    const referral = detectAiReferral(document.referrer, sourceParam);
-
-    if (referral) {
-      sendEvent({
-        type: "ai-referral",
-        ...referral,
-      });
-    }
-
-    const onServiceContact = (event: MouseEvent) => {
-      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[data-service][data-service-action]") : null;
-      const id = link?.dataset.service;
-      const action = link?.dataset.serviceAction;
-      if (id && /^[a-z0-9-]{1,80}$/.test(id) && action && ["phone", "email", "website", "directions"].includes(action)) {
-        sendEvent({ type: "service-contact", name: action, id });
-      }
-    };
-
     const onError = (event: ErrorEvent) => {
       sendEvent({
         type: "client-error",
@@ -108,11 +76,9 @@ export function Telemetry() {
 
     window.addEventListener("error", onError);
     window.addEventListener("unhandledrejection", onUnhandledRejection);
-    document.addEventListener("click", onServiceContact);
     return () => {
       window.removeEventListener("error", onError);
       window.removeEventListener("unhandledrejection", onUnhandledRejection);
-      document.removeEventListener("click", onServiceContact);
     };
   }, []);
 

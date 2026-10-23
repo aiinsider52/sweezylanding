@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "../../lib/i18n";
-import { travelKitCopy, travelKitPdf, TRAVEL_KIT_SLUGS } from "../../data/travel-kit";
+import { travelKitCopy, TRAVEL_KIT_SLUGS } from "../../data/travel-kit";
+import { DownloadLink } from "./DownloadLink";
 import { SweezyCompanion } from "./SweezyCompanion";
 import styles from "./TravelKit.module.css";
 
@@ -17,7 +18,7 @@ export function TravelKitBanner({ locale, headingAs = "h2" }: { locale: Locale; 
         <Heading>{copy.title}</Heading>
         <p className={styles.intro}>{copy.intro}</p>
         <div className={styles.actions}>
-          <a href={travelKitPdf(locale)} download className={styles.primary} data-download="travel-kit" data-placement="travel-kit-banner">{copy.download}<span aria-hidden="true">↓</span></a>
+          <DownloadLink asset="travel-kit" locale={locale} placement="travel-kit-banner" className={styles.primary}>{copy.download}<span aria-hidden="true">↓</span></DownloadLink>
           <Link href={headingAs === "h1" ? "#travel-checklist" : `/${locale}/swiss-bucket-list`} className={styles.secondary}>{copy.open}<span aria-hidden="true">↗</span></Link>
         </div>
         <ul className={styles.benefits}><li>{copy.free}</li><li>{copy.pages}</li><li>{copy.noSignup}</li></ul>

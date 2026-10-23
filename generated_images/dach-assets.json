@@ -1,0 +1,9 @@
+{
+  "created": "2026-10-23",
+  "purpose": "Illustrative DACH country and brand artwork, not photographs of service providers",
+  "assets": [
+    { "country": "germany", "source": "exec-0d29b133-b1dc-4ee1-8ac6-431c546c9d5d.png", "cover": "/editorial/countries/germany.webp", "social": "/editorial/countries/germany-social.jpg" },
+    { "country": "austria", "source": "exec-0dc1c72a-d0d4-4542-bc79-eaf34aef287a.png", "cover": "/editorial/countries/austria.webp", "social": "/editorial/countries/austria-social.jpg" },
+    { "country": "dach", "source": "exec-13e48e44-0090-4186-9a20-f5f1c0716927.png", "social": "/social/sweezy-dach-v1.jpg" }
+  ]
+}

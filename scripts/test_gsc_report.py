@@ -1,9 +1,12 @@
 import importlib.util
 import csv
+import json
 from datetime import date, timedelta
 from pathlib import Path
 import tempfile
 import unittest
+import subprocess
+import sys
 from zipfile import ZipFile
 from xml.sax.saxutils import escape
 
@@ -105,6 +108,24 @@ class MetricsTests(unittest.TestCase):
         for value in ["1.5", "-1", "NaN", "inf"]:
             with self.assertRaises(ValueError):
                 report.count(value)
+
+    def test_priority_queue_uses_real_export_window_and_top_ten(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            self.fixture(folder, [date(2026, 8, 26) + timedelta(days=i) for i in range(56)])
+            with (folder / "Страницы.csv").open("a", encoding="utf-8", newline="") as output:
+                writer = csv.writer(output)
+                for index in range(15):
+                    writer.writerow([f"https://www.sweezy.world/en/blog/guide-{index}", 0, 100+index, "0%", 8])
+                writer.writerow(["https://other.example/", 0, 9999, "0%", 1])
+                writer.writerow(["https://www.sweezy.world/en/too-far", 0, 9999, "0%", 80])
+            raw = subprocess.check_output([sys.executable, str(Path(__file__).with_name("seo-priorities.py")), str(folder)], text=True)
+            result = json.loads(raw)
+            self.assertEqual(len(result["selected"]), 10)
+            self.assertEqual(result["eligibleCount"], 15)
+            self.assertEqual(result["exportPeriod"]["to"], "2026-10-20")
+            self.assertTrue(result["selected"][0]["url"].endswith("guide-14"))
+            self.assertIn("not the latest 28-day", result["note"])
 
 
 if __name__ == "__main__":
