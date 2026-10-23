@@ -1,221 +1,126 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLocale } from "../../lib/locale-context";
+import { translations, type Locale } from "../../lib/i18n";
 import { APP_STORE_URL, FACEBOOK_COMMUNITY_URL, INSTAGRAM_URL, TELEGRAM_URL } from "../../lib/links";
-import { BrandLogo } from "./BrandLogo";
 import { SEO_CLUSTERS } from "../../data/seo-clusters";
+import { BrandLogo } from "./BrandLogo";
+import { SweezyCompanion } from "./SweezyCompanion";
+import styles from "./SiteFooter.module.css";
 
-function FooterLink({
-  href,
-  className,
-  children,
-}: {
-  href: string;
-  className: string;
-  children: React.ReactNode;
-}) {
-  const isExternal = href.startsWith("http");
-  const isMail = href.startsWith("mailto:");
+const copy = {
+  uk: {
+    eyebrow: "Твій супутник у Швейцарії", title: "Твоя Швейцарія.", accent: "Твій наступний крок.",
+    intro: "Від перших документів до місць, які захоплюють подих. Ідемо разом?", app: "Завантажити Sweezy", kit: "8 місць для списку мрій", free: "Безкоштовний PDF", farewell: "До нових відкриттів!", discover: "Відкривай", settle: "Почувайся вдома", together: "Залишаймося поруч", guides: "Гіди по кантонах", places: "Красиві місця", planning: "Планування подорожі", jobs: "Вакансії", postJob: "Розмістити вакансію", starter: "Перший тиждень: стартовий набір", community: "Спільнота Sweezy", editorial: "Редакційні стандарти", note: "Менше невідомого. Більше свого.", made: "Створено у Швейцарії", top: "Нагору", social: "Знайди своїх", legal: "Юридична інформація", navigation: "Навігація сайтом",
+  },
+  en: {
+    eyebrow: "Your companion in Switzerland", title: "Your Switzerland.", accent: "Your next chapter.",
+    intro: "From your first paperwork to places that take your breath away. Shall we?", app: "Get Sweezy", kit: "8 places for your wish list", free: "Free PDF guide", farewell: "See you out there!", discover: "Go explore", settle: "Feel at home", together: "Stay in touch", guides: "Cantonal guides", places: "Beautiful places", planning: "Travel planning", jobs: "Jobs", postJob: "Post a vacancy", starter: "Your first week: starter kit", community: "Sweezy community", editorial: "Editorial standards", note: "Less unfamiliar. More like home.", made: "Made in Switzerland", top: "Back to top", social: "Find your people", legal: "Legal information", navigation: "Site navigation",
+  },
+  de: {
+    eyebrow: "Dein Begleiter in der Schweiz", title: "Deine Schweiz.", accent: "Dein nächstes Kapitel.",
+    intro: "Von den ersten Formularen bis zu Orten, die den Atem rauben. Kommst du mit?", app: "Sweezy herunterladen", kit: "8 Orte für deine Wunschliste", free: "Kostenloser PDF-Guide", farewell: "Bis zum nächsten Abenteuer!", discover: "Geh auf Entdeckung", settle: "Fühl dich zu Hause", together: "Bleiben wir in Kontakt", guides: "Kantonale Ratgeber", places: "Schöne Orte", planning: "Reiseplanung", jobs: "Jobs", postJob: "Stelle veröffentlichen", starter: "Deine erste Woche: Startpaket", community: "Sweezy Community", editorial: "Redaktionelle Standards", note: "Weniger fremd. Mehr zu Hause.", made: "In der Schweiz entwickelt", top: "Nach oben", social: "Finde deine Community", legal: "Rechtliche Informationen", navigation: "Seitennavigation",
+  },
+} satisfies Record<Locale, Record<string, string>>;
 
-  if (isExternal || isMail) {
-    return (
-      <a
-        href={href}
-        className={className}
-        target={isExternal ? "_blank" : undefined}
-        rel={isExternal ? "noreferrer noopener" : undefined}
-      >
-        {children}
-      </a>
-    );
+function Arrow({ diagonal = false }: { diagonal?: boolean }) {
+  return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={diagonal ? "M6 18 18 6M6 6h12v12" : "M4 12h16m-7-7 7 7-7 7"} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
+function FooterLink({ href, className, children }: { href: string; className?: string; children: React.ReactNode }) {
+  if (href.startsWith("http") || href.startsWith("mailto:")) {
+    const external = href.startsWith("http");
+    return <a href={href} className={className} target={external ? "_blank" : undefined} rel={external ? "noreferrer noopener" : undefined}>{children}</a>;
   }
-
-  return (
-    <Link href={href} className={className}>
-      {children}
-    </Link>
-  );
+  return <Link href={href} className={className}>{children}</Link>;
 }
 
 export function SiteFooter({ year }: { year: number }) {
-  const { t, locale } = useLocale();
-  const localeHome = `/${locale}`;
-  const localeGuides = `/${locale}/guides`;
-  const localeBlog = `/${locale}/blog`;
-  const localePlaces = `/${locale}/places`;
-  const localePlanning = `/${locale}/planning`;
-  const localeJobs = `/${locale}/jobs`;
-  const guidesLabel = locale === "uk" ? "Гіди" : locale === "de" ? "Ratgeber" : "Guides";
-
+  const { locale: preferredLocale } = useLocale();
+  const segment = usePathname()?.split("/")[1];
+  const locale: Locale = segment === "uk" || segment === "en" || segment === "de" ? segment : preferredLocale;
+  const c = copy[locale];
+  const t = translations[locale].footer as Record<string, string>;
+  const home = `/${locale}`;
+  const discover = [
+    { label: c.places, href: `${home}/places` },
+    { label: c.planning, href: `${home}/planning` },
+    { label: c.guides, href: `${home}/guides` },
+    { label: t.blog, href: `${home}/blog` },
+    { label: c.jobs, href: `${home}/jobs` },
+    { label: c.postJob, href: `${home}/jobs/post` },
+  ];
   const columns = [
-    {
-      title: t("footer.product"),
-      links: [
-        { label: t("footer.features"), href: `${localeHome}#product` },
-        { label: t("footer.howItWorks"), href: `${localeHome}#method` },
-        { label: guidesLabel, href: localeGuides },
-        { label: locale === "uk" ? "Красиві місця" : locale === "de" ? "Schöne Orte" : "Beautiful places", href: localePlaces },
-        { label: locale === "uk" ? "Планування подорожі" : locale === "de" ? "Reiseplanung" : "Travel planning", href: localePlanning },
-        { label: locale === "uk" ? "Вакансії" : "Jobs", href: localeJobs },
-        { label: locale === "uk" ? "Розмістити вакансію" : locale === "de" ? "Stelle veröffentlichen" : "Post a vacancy", href: `${localeJobs}/post` },
-        { label: t("footer.download"), href: APP_STORE_URL },
-      ],
-    },
-    {
-      title: t("footer.resources"),
-      links: [
-        { label: t("footer.support"), href: "/support" },
-        { label: t("footer.faqLink"), href: `${localeHome}#faq` },
-        { label: t("footer.contact"), href: "mailto:support@sweezy.world" },
-        { label: t("footer.blog"), href: localeBlog },
-        { label: locale === "uk" ? "Безкоштовний стартовий набір" : locale === "de" ? "Kostenloses Startpaket" : "Free starter kit", href: `/${locale}/starter-kit` },
-        { label: locale === "uk" ? "8 місць для вашого списку мрій" : locale === "de" ? "8 Orte für Ihre Wunschliste" : "8 places for your Swiss wish list", href: `/${locale}/swiss-bucket-list` },
-        { label: locale === "uk" ? "Спільнота Sweezy" : locale === "de" ? "Sweezy Community" : "Sweezy community", href: `/${locale}/community` },
-        { label: locale === "uk" ? "Редакційні стандарти" : locale === "de" ? "Redaktionelle Standards" : "Editorial standards", href: `/${locale}/editorial` },
-        ...SEO_CLUSTERS[locale]
-          .filter((cluster) => cluster.key !== "places" && cluster.key !== "community")
-          .map((cluster) => ({ label: cluster.title, href: cluster.href })),
-      ],
-    },
-    {
-      title: t("footer.legal"),
-      links: [
-        { label: t("footer.privacy"), href: "/privacy" },
-        { label: t("footer.terms"), href: "/terms" },
-        { label: t("footer.cookies"), href: "/cookies" },
-      ],
-    },
+    { title: c.discover, links: discover },
+    { title: c.settle, links: [
+      ...SEO_CLUSTERS[locale].filter(cluster => cluster.key !== "places" && cluster.key !== "community" && !discover.some(link => link.href === cluster.href)).map(cluster => ({ label: cluster.title, href: cluster.href })),
+      { label: c.starter, href: `${home}/starter-kit` },
+    ] },
+    { title: c.together, links: [
+      { label: c.community, href: `${home}/community` },
+      { label: t.support, href: "/support" },
+      { label: t.faqLink, href: `${home}#faq` },
+      { label: c.editorial, href: `${home}/editorial` },
+      { label: "support@sweezy.world", href: "mailto:support@sweezy.world" },
+    ] },
   ];
 
-  return (
-    <footer className="relative bg-[#0c0f0d] text-white">
-      {/* Top gradient accent */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-accent-green/30 to-transparent" />
-
-      <div className="mx-auto max-w-7xl px-6 pt-16 pb-8">
-        {/* Main grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          {/* Brand column */}
-          <div className="lg:col-span-3">
-            <Link href={localeHome} className="flex items-center gap-2.5 mb-5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-green/15 to-accent-emerald/10 border border-white/[0.06]">
-                <BrandLogo variant="mark" className="h-8 w-8 object-cover" />
-              </div>
-              <span className="text-xl font-bold tracking-tight">Sweezy</span>
-            </Link>
-            <p className="text-white/40 text-[15px] leading-relaxed max-w-xs mb-4">
-              {t("footer.tagline")}
-            </p>
-            <a
-              href="https://www.aiinsider.it.com"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center gap-2 mb-6 text-xs text-white/25 hover:text-accent-green/70 transition-colors duration-300 group"
-            >
-              <span className="h-4 w-4 rounded-md bg-gradient-to-br from-accent-green/60 to-accent-emerald/40 flex items-center justify-center">
-                <span className="text-[8px] font-bold text-white">AI</span>
-              </span>
-              A product by AI Insider
-              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" className="opacity-40 group-hover:opacity-70 transition-opacity">
-                <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-3">
-              {/* Instagram */}
-              <a
-                href={INSTAGRAM_URL}
-                aria-label="Instagram"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 text-white/40 hover:text-white"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <circle cx="12" cy="12" r="5" />
-                  <circle
-                    cx="17.5"
-                    cy="6.5"
-                    r="1"
-                    fill="currentColor"
-                    stroke="none"
-                  />
-                </svg>
-              </a>
-              <a
-                href={TELEGRAM_URL}
-                aria-label="Sweezy Telegram community"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 text-white/40 hover:text-white"
-              >
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 3.3a1.2 1.2 0 0 0-1.25-.2L2.8 9.9c-.84.32-.8 1.51.06 1.77l4.5 1.38 1.75 5.42c.27.84 1.35 1.03 1.88.33l2.49-3.26 4.61 3.4c.68.5 1.65.12 1.82-.71l2.13-13.76a1.2 1.2 0 0 0-.34-1.17ZM9.35 16.4l-.92-2.85 7.72-5.43-6.8 8.28Z"/></svg>
-              </a>
-              <a
-                href={FACEBOOK_COMMUNITY_URL}
-                aria-label="Sweezy Facebook community"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 text-white/40 hover:text-white"
-              >
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.6 22v-9h3l.45-3.5H13.6V7.26c0-1.01.28-1.7 1.74-1.7h1.86V2.44c-.32-.04-1.43-.14-2.72-.14-2.69 0-4.53 1.64-4.53 4.66V9.5H6.9V13h3.05v9h3.65Z"/></svg>
-              </a>
-            </div>
+  return <footer id="site-footer" className={styles.footer}>
+    <div className={styles.shell}>
+      <div className={styles.invitation}>
+        <div className={styles.invitationCopy}>
+          <p className={styles.eyebrow}><span className={styles.swissCross} aria-hidden="true" />{c.eyebrow}</p>
+          <h2>{c.title}<br /><em>{c.accent}</em></h2>
+          <p className={styles.intro}>{c.intro}</p>
+          <div className={styles.actions}>
+            <FooterLink href={APP_STORE_URL} className={styles.appLink}>{c.app}<span><Arrow diagonal /></span></FooterLink>
+            <Link href={`${home}/swiss-bucket-list`} className={styles.kitLink}><span><small>{c.free}</small>{c.kit}</span><Arrow diagonal /></Link>
           </div>
-
-          {/* Link columns */}
-          {columns.map((col) => (
-            <div key={col.title} className="lg:col-span-3">
-              <h4 className="text-sm font-semibold text-white/70 uppercase tracking-wider mb-5">
-                {col.title}
-              </h4>
-              <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <FooterLink
-                      href={link.href}
-                      className="text-[15px] text-white/35 hover:text-white/70 transition-colors duration-300"
-                    >
-                      {link.label}
-                    </FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
         </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-white/[0.04] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/20">
-            &copy; {year} Sweezy. {t("footer.copyright")}
-          </p>
-          <div className="flex items-center gap-1.5 text-sm text-white/20">
-            <span>{t("footer.madeWith")}</span>
-            <span>·</span>
-            <a
-              href="https://www.aiinsider.it.com"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="hover:text-accent-green/60 transition-colors duration-300"
-            >
-              AI Insider
-            </a>
-          </div>
+        <div className={styles.character}>
+          <div className={styles.orbit} aria-hidden="true"><span /><span /></div>
+          <span className={styles.farewell}>{c.farewell}<svg viewBox="0 0 30 20" fill="none" aria-hidden="true"><path d="M2 2c0 12 10 14 23 10m-5-5 6 5-4 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
+          <SweezyCompanion pose="greeting" className={styles.mascot} sizes="(max-width: 640px) 280px, 380px" />
+          <span className={styles.passport} aria-hidden="true">SWEEZY EXPLORER<span>CH / 01</span></span>
         </div>
       </div>
-    </footer>
-  );
+
+      <div className={styles.directory}>
+        <div className={styles.brandColumn}>
+          <Link href={home} className={styles.brand}><BrandLogo variant="mark" className={styles.logo} /><span>Sweezy</span></Link>
+          <p>{c.note}</p>
+          <div className={styles.productLinks}><Link href={`${home}#product`}>{t.features}</Link><Link href={`${home}#method`}>{t.howItWorks}</Link></div>
+          <p className={styles.socialLabel}>{c.social}</p>
+          <div className={styles.socials}>
+            <FooterLink href={INSTAGRAM_URL} className={styles.social}>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" /><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg><span className={styles.srOnly}>Instagram</span>
+            </FooterLink>
+            <FooterLink href={TELEGRAM_URL} className={styles.social}>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 10 17-6-3 16-6-5-3 3v-6l8-5-10 5-3-2Z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg><span className={styles.srOnly}>Telegram</span>
+            </FooterLink>
+            <FooterLink href={FACEBOOK_COMMUNITY_URL} className={styles.social}>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V2h-3c-3 0-5 2-5 5v2H7v4h3v8" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" /></svg><span className={styles.srOnly}>Facebook</span>
+            </FooterLink>
+          </div>
+        </div>
+        <nav className={styles.navigation} aria-label={c.navigation}>
+          {columns.map(column => <div key={column.title} className={styles.column}>
+            <h3>{column.title}</h3><ul>{column.links.map(link => <li key={link.href}><FooterLink href={link.href}>{link.label}</FooterLink></li>)}</ul>
+          </div>)}
+        </nav>
+      </div>
+
+      <div className={styles.signature}>
+        <p><span className={styles.swissCross} aria-hidden="true" />{c.made}<span className={styles.credit}> / <FooterLink href="https://www.aiinsider.it.com">AI Insider <Arrow diagonal /></FooterLink></span></p>
+        <a href="#" className={styles.backTop}>{c.top}<span><Arrow /></span></a>
+      </div>
+      <div className={styles.wordmark} aria-hidden="true">Sweezy<span>✳</span></div>
+      <div className={styles.bottom}>
+        <p>© {year} Sweezy. {t.copyright}</p>
+        <nav aria-label={c.legal}><Link href="/privacy">{t.privacy}</Link><Link href="/terms">{t.terms}</Link><Link href="/cookies">{t.cookies}</Link></nav>
+      </div>
+    </div>
+  </footer>;
 }

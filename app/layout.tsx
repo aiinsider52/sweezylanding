@@ -3,6 +3,7 @@ import { Inter, Instrument_Serif } from "next/font/google";
 import { buildRootAlternates } from "../lib/alternates";
 import { LocaleProvider } from "../lib/locale-context";
 import { ThemeProvider } from "../lib/theme-context";
+import { THEME_BOOTSTRAP } from "../lib/theme";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { Telemetry } from "./components/Telemetry";
@@ -111,12 +112,12 @@ export default function RootLayout({
   const currentYear = new Date().getFullYear();
 
   return (
-    <html lang="en" className={`antialiased ${inter.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`dark antialiased ${inter.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
       <head>
         {/* Prevent flash of wrong theme: apply .dark class synchronously before paint */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('sweezy-theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+            __html: THEME_BOOTSTRAP,
           }}
         />
         <script

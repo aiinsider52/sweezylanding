@@ -4,7 +4,7 @@
 .eyebrow { font: 11px monospace; color: #b6ff00; margin-bottom: 16px; }
 .title { font-size: 40px; line-height: 1.1; letter-spacing: 0; font-weight: 700; max-width: 720px; }
 .intro { font-size: 17px; line-height: 1.6; color: #b8c0b9; max-width: 650px; margin: 20px 0; }
-.button { display: inline-flex; align-items: center; gap: 16px; background: #b6ff00; color: #101510; border-radius: 6px; padding: 14px 20px; font-weight: 700; }
+.button { display: inline-flex; align-items: center; gap: 16px; background: #b6ff00; color: var(--theme-text); border-radius: 6px; padding: 14px 20px; font-weight: 700; }
 .actions { display: flex; align-items: center; gap: 16px 24px; flex-wrap: wrap; }
 .secondary { display: inline-flex; gap: 12px; align-items: center; color: #f4f5ef; text-decoration: underline; text-underline-offset: 5px; padding: 12px 0; }
 .secondary:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }
@@ -12,27 +12,27 @@
 .button:focus-visible, .main a:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }
 .banner .companion, .hero .companion { width: 290px; height: 310px; align-self: end; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 4%); mask-composite: intersect; }
 .companion img { object-fit: cover; object-position: center top; }
-.main { background: #f2f3ee; color: #101510; padding: 52px max(20px, calc((100% - 1120px) / 2)) 64px; }
+.main { background: var(--theme-bg); color: var(--theme-text); padding: 52px max(20px, calc((100% - 1120px) / 2)) 64px; }
 .hero { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 36px; background: #0c110e; color: white; padding: 32px 32px 0; }
 .hero h1 { font-size: 44px; line-height: 1.08; font-weight: 750; letter-spacing: 0; }
 .heroText { padding-bottom: 32px; }
 .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin: 32px 0 12px; }
 .toolbar button { display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; }
 .toolbar button:focus-visible { outline: 3px solid #346b91; outline-offset: 4px; }
-.saved, .note { font-size: 14px; line-height: 1.6; color: #4c5850; }
+.saved, .note { font-size: 14px; line-height: 1.6; color: var(--theme-body); }
 .note { margin: 22px 0; border-left: 3px solid #65994c; padding-left: 18px; }
 .days { margin: 28px 0; }
-.day { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 16px; padding: 25px 0; border-top: 1px solid #b6beb4; break-inside: avoid; }
-.number { font: 22px monospace; color: #4b6653; }
+.day { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 16px; padding: 25px 0; border-top: 1px solid var(--theme-line-strong); break-inside: avoid; }
+.number { font: 22px monospace; color: var(--theme-body); }
 .day h2 { font-size: 23px; font-weight: 700; margin-bottom: 12px; letter-spacing: 0; }
 .task { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; cursor: pointer; line-height: 1.6; }
-.task input { flex: 0 0 20px; width: 20px; height: 20px; accent-color: #426f35; margin-top: 3px; }
-.task input:checked + span { color: #577051; text-decoration: line-through; }
-.sources { border-top: 1px solid #b6beb4; padding-top: 24px; }
+.task input { flex: 0 0 20px; width: 20px; height: 20px; accent-color: var(--theme-check); margin-top: 3px; }
+.task input:checked + span { color: var(--theme-body); text-decoration: line-through; }
+.sources { border-top: 1px solid var(--theme-line-strong); padding-top: 24px; }
 .sources h2 { font-size: 20px; font-weight: 700; }
 .sources ul { display: flex; gap: 14px 24px; flex-wrap: wrap; margin: 16px 0; }
 .sources a { text-decoration: underline; }
-.end { border-top: 1px solid #b6beb4; margin-top: 28px; padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.end { border-top: 1px solid var(--theme-line-strong); margin-top: 28px; padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 .end h2 { font-size: 24px; font-weight: 700; }
 .printBrand { display: none; }
 @media (max-width: 700px) {

@@ -1,8 +1,8 @@
 .page {
-  --paper: #f2f3ee;
-  --ink: #0c0f0d;
-  --muted: #626761;
-  --line: rgba(12, 15, 13, 0.14);
+  --paper: var(--theme-bg);
+  --ink: var(--theme-text);
+  --muted: var(--theme-body);
+  --line: var(--theme-line);
   --lime: #adff00;
   min-height: 100vh;
   padding: clamp(20px, 3vw, 48px);
@@ -14,10 +14,10 @@
   max-width: 1480px;
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid rgba(12, 15, 13, 0.22);
+  border: 1px solid rgba(var(--theme-ink-rgb),0.22);
   border-radius: clamp(24px, 2.4vw, 38px);
-  background: #fafbf7;
-  box-shadow: 0 24px 80px rgba(12, 15, 13, 0.08);
+  background: var(--theme-surface);
+  box-shadow: 0 24px 80px rgba(var(--theme-ink-rgb),0.08);
 }
 
 .hero {
@@ -139,14 +139,14 @@
   min-height: 520px;
   padding: clamp(28px, 3vw, 46px);
   border-right: 1px solid var(--line);
-  background: #e9ebe5;
+  background: var(--theme-inset);
 }
 
 .sidebarBlock { display: grid; gap: 13px; }
 
 .sidebarLabel {
   margin: 0;
-  color: #787d77;
+  color: var(--theme-body);
   font: 700 0.68rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: 0.17em;
 }
@@ -179,7 +179,7 @@
   padding: 5px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255,255,255,.5);
+  background: var(--theme-surface);
 }
 
 .languages button {
@@ -201,7 +201,7 @@
   padding: 20px;
   border-radius: 20px;
   color: #f5f6f1;
-  background: var(--ink);
+  background: var(--theme-inverse-bg);
 }
 
 .help span { color: rgba(255,255,255,.5); font: 700 0.66rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .15em; }
@@ -210,7 +210,7 @@
 .document {
   min-width: 0;
   padding: clamp(28px, 5vw, 76px);
-  background: #fafbf7;
+  background: var(--theme-surface);
 }
 
 .document section {
@@ -226,7 +226,7 @@
   border: 0;
   border-radius: 24px;
   color: var(--ink);
-  background: #dff0fb;
+  background: var(--theme-blue-soft);
   font-size: clamp(1.05rem, 1.5vw, 1.28rem);
   font-weight: 560;
   line-height: 1.5;
@@ -265,9 +265,9 @@
 .document ul { display: grid; gap: 10px; margin: 16px 0 0; padding-left: 1.2rem; }
 .document li::marker { color: #75a900; }
 .document strong { color: var(--ink); font-weight: 740; }
-.document a { color: #426700; font-weight: 740; text-underline-offset: 4px; }
-.document a:hover { color: #111; }
-.document section > div { margin-top: 18px; padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: #eef0ea; }
+.document a { color: var(--theme-link); font-weight: 740; text-underline-offset: 4px; }
+.document a:hover { color: var(--theme-text); }
+.document section > div { margin-top: 18px; padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: var(--theme-inset); }
 
 @keyframes legalEnter { from { opacity: 0; transform: translateY(14px); } }
 @keyframes sectionEnter { from { transform: translateY(12px); } }

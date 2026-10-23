@@ -1,8 +1,8 @@
 .page {
-  --ink: #0c0f0d;
-  --paper: #f1f2ed;
-  --paper-2: #e7e9e3;
-  --line: rgba(12, 15, 13, 0.18);
+  --ink: var(--theme-text);
+  --paper: var(--theme-bg);
+  --paper-2: var(--theme-inset);
+  --line: var(--theme-line);
   --lime: #adff00;
   --sky: #82c8ff;
   min-height: 100vh;
@@ -70,7 +70,7 @@
   max-width: 440px;
   font-size: clamp(16px, 1.35vw, 21px);
   line-height: 1.45;
-  color: rgba(12, 15, 13, .62);
+  color: var(--theme-body);
 }
 
 .heroCount {
@@ -105,7 +105,7 @@
 }
 
 .sectionHead span {
-  color: rgba(12, 15, 13, .48);
+  color: var(--theme-muted);
 }
 
 .featured {
@@ -115,7 +115,7 @@
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 26px;
-  background: #fff;
+  background: var(--theme-surface);
   color: var(--ink);
 }
 
@@ -124,7 +124,7 @@
   min-height: 430px;
   overflow: hidden;
   border-right: 1px solid var(--line);
-  background: #d9ddd5;
+  background: var(--theme-inset);
 }
 
 .featuredMedia img,
@@ -157,7 +157,7 @@
 
 .featuredCopy p {
   margin-top: 18px;
-  color: rgba(12,15,13,.62);
+  color: var(--theme-body);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -174,7 +174,7 @@
 }
 
 .storyLabel span:first-child {
-  color: #456800;
+  color: var(--theme-link);
 }
 
 .arrowButton {
@@ -206,7 +206,7 @@
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 22px;
-  background: rgba(255,255,255,.58);
+  background: var(--theme-surface);
 }
 
 .postCardWide {
@@ -220,7 +220,7 @@
   position: relative;
   min-height: 182px;
   overflow: hidden;
-  background: #d9ddd5;
+  background: var(--theme-inset);
 }
 
 .postCardWide .cardMedia { min-height: 100%; border-right: 1px solid var(--line); }
@@ -233,7 +233,7 @@
   padding: 8px 10px;
   border: 1px solid rgba(255,255,255,.35);
   border-radius: 999px;
-  background: rgba(12,15,13,.82);
+  background: rgba(var(--theme-ink-rgb),.82);
   color: #fff;
   font: 700 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .11em;
@@ -255,7 +255,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px 18px;
-  color: rgba(12,15,13,.52);
+  color: var(--theme-muted);
   font: 600 10px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -275,7 +275,7 @@
 .cardCopy p {
   margin-top: 12px;
   font-size: 14px;
-  color: rgba(12,15,13,.58);
+  color: var(--theme-body);
   line-height: 1.55;
 }
 
@@ -301,7 +301,7 @@
   min-height: 260px;
   padding: 22px;
   border-right: 1px solid var(--line);
-  background: rgba(255,255,255,.26);
+  background: var(--theme-surface);
 }
 
 .routeItem:last-child { border-right: 0; }
@@ -312,7 +312,7 @@
   line-height: 1.02;
   letter-spacing: -.04em;
 }
-.routeItem p { margin-top: 12px; color: rgba(12,15,13,.57); font-size: 14px; line-height: 1.5; }
+.routeItem p { margin-top: 12px; color: var(--theme-body); font-size: 14px; line-height: 1.5; }
 
 .cantonGrid {
   display: grid;
@@ -328,11 +328,11 @@
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 28px;
-  background: rgba(255,255,255,.32);
+  background: var(--theme-surface);
 }
 
 .cantonCard:nth-child(7n + 2),
-.cantonCard:nth-child(7n + 6) { background: var(--sky); }
+.cantonCard:nth-child(7n + 6) { background: var(--theme-blue-soft); }
 .cantonCard:nth-child(11n + 4) { background: var(--lime); }
 
 .cantonCard .cardMedia { min-height: 190px; }
@@ -356,7 +356,7 @@
   margin-top: 80px;
   padding: clamp(28px, 5vw, 64px);
   border-radius: 34px;
-  background: var(--ink);
+  background: var(--theme-inverse-bg);
   color: white;
 }
 
@@ -443,7 +443,7 @@
   justify-content: space-between;
   padding: clamp(24px, 2.8vw, 36px);
   border-radius: 26px;
-  background: var(--ink);
+  background: var(--theme-inverse-bg);
   color: white;
 }
 
@@ -498,7 +498,7 @@
 
 .answerMain,
 .answerEvidence {
-  background: rgba(255, 255, 255, .72);
+  background: var(--theme-surface);
   padding: clamp(22px, 2.5vw, 32px);
 }
 
@@ -532,11 +532,11 @@
 
 .authorityRoute ol { display: grid; gap: 1px; background: rgba(255,255,255,.14); }
 .authorityRoute li { display: grid; grid-template-columns: 32px minmax(0,1fr) auto; gap: 14px; align-items: center; padding: 13px 15px; background: #0c0f0d; }
-.authorityRoute li[data-current] { background: #adff00; color: #0c0f0d; }
+.authorityRoute li[data-current] { background: #adff00; color: var(--theme-text); }
 .authorityRoute li > span { font: 700 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .authorityRoute li strong { font-size: 15px; }
 .authorityRoute li p { margin-top: 4px; color: rgba(255,255,255,.52); font-size: 13px; line-height: 1.45; }
-.authorityRoute li[data-current] p { color: rgba(12,15,13,.62); }
+.authorityRoute li[data-current] p { color: var(--theme-body); }
 .authorityRoute li a, .authorityRoute li em { font-size: 12px; font-weight: 700; font-style: normal; white-space: nowrap; }
 
 .answerMain h2 {
@@ -565,7 +565,7 @@
 }
 
 .answerFacts dt {
-  color: rgba(12, 15, 13, .5);
+  color: var(--theme-muted);
   font: 600 9px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -582,7 +582,7 @@
   display: grid;
   align-content: start;
   gap: 22px;
-  background: var(--sky);
+  background: var(--theme-blue-soft);
 }
 
 .sourceList,
@@ -595,7 +595,7 @@
 .sourceList li,
 .changeLog li {
   padding-top: 9px;
-  border-top: 1px solid rgba(12, 15, 13, .18);
+  border-top: 1px solid rgba(var(--theme-ink-rgb),.18);
 }
 
 .sourceList a {
@@ -615,7 +615,7 @@
 
 .changeLog p {
   margin-top: 4px;
-  color: rgba(12, 15, 13, .66);
+  color: var(--theme-body);
   font-size: 12px;
   line-height: 1.45;
 }
@@ -663,22 +663,22 @@
   letter-spacing: -.035em;
 }
 .articleBody :global(p),
-.articleBody :global(li) { color: rgba(12,15,13,.72) !important; }
-.articleBody :global(a) { color: #456900 !important; text-decoration-thickness: 1px; }
+.articleBody :global(li) { color: var(--theme-body) !important; }
+.articleBody :global(a) { color: var(--theme-link) !important; text-decoration-thickness: 1px; }
 .articleBody :global(blockquote) {
   margin: 2em 0;
   padding: 20px 22px !important;
   border: 0 !important;
   border-radius: 22px;
-  background: var(--sky);
+  background: var(--theme-blue-soft);
   color: var(--ink) !important;
   font-family: var(--font-display), Georgia, serif;
   font-size: 21px;
   font-style: normal !important;
 }
-.articleBody :global(table) { background: white; }
-.articleBody :global(thead) { background: var(--ink) !important; color: white !important; }
-.articleBody :global(td) { color: rgba(12,15,13,.72) !important; }
+.articleBody :global(table) { background: var(--theme-surface); }
+.articleBody :global(thead) { background: var(--theme-inverse-bg) !important; color: white !important; }
+.articleBody :global(td) { color: var(--theme-body) !important; }
 .articleBody :global(tr),
 .articleBody :global(tbody) { border-color: var(--line) !important; }
 
@@ -733,7 +733,7 @@
   justify-content: space-between;
   padding: clamp(24px, 4vw, 40px);
   border-radius: 26px;
-  background: var(--ink);
+  background: var(--theme-inverse-bg);
   color: white;
 }
 
@@ -765,7 +765,7 @@
 
 .guideStats > div {
   padding: 13px 14px;
-  background: var(--ink);
+  background: var(--theme-inverse-bg);
 }
 
 .guideStats p:first-child {
@@ -813,13 +813,13 @@
 .guideBody :global(.text-white\/55),
 .guideBody :global(.text-white\/50),
 .guideBody :global(.text-white\/40),
-.guideBody :global(.text-white\/35) { color: rgba(12,15,13,.65) !important; }
+.guideBody :global(.text-white\/35) { color: var(--theme-body) !important; }
 .guideBody :global(.border-white\/10),
 .guideBody :global(.border-white\/\[0\.05\]) { border-color: var(--line) !important; }
 .guideBody :global(.bg-white\/\[0\.03\]),
-.guideBody :global(.bg-white\/\[0\.02\]) { background: rgba(255,255,255,.5) !important; }
+.guideBody :global(.bg-white\/\[0\.02\]) { background: var(--theme-surface) !important; }
 .guideBody :global(.text-accent-green),
-.guideBody :global(.text-accent-green\/80) { color: #466d00 !important; }
+.guideBody :global(.text-accent-green\/80) { color: var(--theme-link) !important; }
 
 @media (max-width: 800px) {
   .guideHero { grid-template-columns: 1fr; }

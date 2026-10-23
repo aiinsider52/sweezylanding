@@ -2,19 +2,21 @@
 
 import { useTheme } from "../../lib/theme-context";
 
-export function ThemeToggle() {
+export function ThemeToggle({ className = "", labels }: { className?: string; labels?: { light: string; dark: string } }) {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={isDark ? labels?.light ?? "Switch to light theme" : labels?.dark ?? "Switch to dark theme"}
       className={[
         "flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-300",
         isDark
           ? "border-white/[0.08] bg-white/[0.05] text-white/50 hover:bg-white/[0.10] hover:text-white"
           : "border-black/[0.08] bg-black/[0.04] text-gray-500 hover:bg-black/[0.08] hover:text-gray-900",
+        className,
       ].join(" ")}
     >
       {isDark ? (

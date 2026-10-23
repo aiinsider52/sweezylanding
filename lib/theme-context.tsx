@@ -1,8 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-
-type Theme = "dark" | "light";
+import { applyTheme, resolveTheme, THEME_STORAGE_KEY, type Theme } from "./theme";
 
 type ThemeContextType = {
   theme: Theme;
@@ -11,37 +10,30 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
-const STORAGE_KEY = "sweezy-theme";
-
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Default: dark. Read from localStorage only on client.
   const [theme, setTheme] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    if (stored === "light" || stored === "dark") {
-      setTheme(stored);
-    } else {
-      // Default to dark theme
-      setTheme("dark");
-    }
+    // The head script has already restored the preference before first paint.
+    const initial = resolveTheme(document.documentElement.dataset.theme ?? null);
+    applyTheme(initial);
+    setTheme(initial);
+    const sync = (event: StorageEvent) => {
+      if (event.key !== THEME_STORAGE_KEY && event.key !== null) return;
+      const next = resolveTheme(event.newValue);
+      applyTheme(next);
+      setTheme(next);
+    };
+    window.addEventListener("storage", sync);
+    return () => window.removeEventListener("storage", sync);
   }, []);
 
-  // Apply / remove the .dark class on <html> whenever theme changes
-  useEffect(() => {
-    if (!mounted) return;
-    const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    localStorage.setItem(STORAGE_KEY, theme);
-  }, [theme, mounted]);
-
-  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    applyTheme(next);
+    setTheme(next);
+    try { localStorage.setItem(THEME_STORAGE_KEY, next); } catch { /* Theme still works when storage is unavailable. */ }
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
