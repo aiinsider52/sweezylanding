@@ -148,13 +148,13 @@ export default function ZurichRegistrationPage({ params }: { params: { locale: s
             <section id="route" className="scroll-mt-24">
               <h2>Which Zurich registration route applies?</h2>
               <p>Use the route that matches where you moved from. Similar names in the booking system do not mean the procedures are interchangeable.</p>
-              <div className="mt-6 overflow-x-auto rounded-lg border border-black/15 bg-white">
+              <div className="mt-6 overflow-x-auto rounded-lg border border-[var(--theme-line)] bg-[var(--theme-surface)]">
                 <table className="min-w-[620px] w-full border-collapse text-left text-sm">
                   <thead><tr><th className="p-4">Situation</th><th className="p-4">Route</th><th className="p-4">Important detail</th></tr></thead>
                   <tbody>
-                    <tr><td className="border-t border-black/15 p-4 font-semibold">Arriving from abroad</td><td className="border-t border-black/15 p-4">Book the arrival-from-abroad appointment</td><td className="border-t border-black/15 p-4">Attend in person at Zurich South. All family members attend a family registration.</td></tr>
-                    <tr><td className="border-t border-black/15 p-4 font-semibold">Moving from another Swiss municipality</td><td className="border-t border-black/15 p-4">Check eUmzugCH or book an in-person appointment</td><td className="border-t border-black/15 p-4">Complete the previous municipality's departure requirement first.</td></tr>
-                    <tr><td className="border-t border-black/15 p-4 font-semibold">Changing address inside Zurich city</td><td className="border-t border-black/15 p-4">Report online or book an appointment</td><td className="border-t border-black/15 p-4">The city's online address-change form is only for existing Zurich residents.</td></tr>
+                    <tr><td className="border-t border-[var(--theme-line)] p-4 font-semibold">Arriving from abroad</td><td className="border-t border-[var(--theme-line)] p-4">Book the arrival-from-abroad appointment</td><td className="border-t border-[var(--theme-line)] p-4">Attend in person at Zurich South. All family members attend a family registration.</td></tr>
+                    <tr><td className="border-t border-[var(--theme-line)] p-4 font-semibold">Moving from another Swiss municipality</td><td className="border-t border-[var(--theme-line)] p-4">Check eUmzugCH or book an in-person appointment</td><td className="border-t border-[var(--theme-line)] p-4">Complete the previous municipality's departure requirement first.</td></tr>
+                    <tr><td className="border-t border-[var(--theme-line)] p-4 font-semibold">Changing address inside Zurich city</td><td className="border-t border-[var(--theme-line)] p-4">Report online or book an appointment</td><td className="border-t border-[var(--theme-line)] p-4">The city's online address-change form is only for existing Zurich residents.</td></tr>
                   </tbody>
                 </table>
               </div>

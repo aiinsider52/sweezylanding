@@ -1,0 +1,110 @@
+/* Shared surfaces: editorial pages, directories, forms and reading views. */
+:root {
+  color-scheme: light;
+  --theme-bg: #f2f3ed;
+  --theme-surface: #ffffff;
+  --theme-raised: #f8faf4;
+  --theme-inset: #e7ebe1;
+  --theme-text: #142015;
+  --theme-body: #465542;
+  --theme-muted: #53634e;
+  --theme-ink-rgb: 20,32,21;
+  --theme-line: #14201529;
+  --theme-line-strong: #14201566;
+  --theme-link: #365c1d;
+  --theme-blue-soft: #dcecf5;
+  --theme-lime-soft: #e5efd9;
+  --theme-check: #416b2b;
+  --theme-focus: #2366a1;
+  --theme-inverse-bg: #0b100c;
+  --theme-accent-ink: #142015;
+  --theme-success-bg: #e5efd9;
+  --theme-success-text: #294c1c;
+  --theme-error-bg: #fceae5;
+  --theme-error-text: #8d2c21;
+  --color-surface-950: #e7ebe1;
+  --color-surface-900: var(--theme-bg);
+  --color-surface-800: var(--theme-surface);
+  --color-surface-700: var(--theme-raised);
+  --color-surface-600: var(--theme-inset);
+  --color-surface-500: #d9e3d1;
+  --color-bg: var(--theme-bg);
+  --color-fg: var(--theme-text);
+  --color-fg-75: var(--theme-body);
+  --color-fg-55: var(--theme-body);
+  --color-fg-40: var(--theme-muted);
+  --color-fg-30: var(--theme-muted);
+  --color-fg-20: var(--theme-muted);
+  --color-border: var(--theme-line);
+  --color-border-sm: var(--theme-line);
+}
+html.dark {
+  color-scheme: dark;
+  --theme-bg: #0b100c;
+  --theme-surface: #131c16;
+  --theme-raised: #1b281e;
+  --theme-inset: #101812;
+  --theme-text: #edf2e7;
+  --theme-body: #c1cbbc;
+  --theme-muted: #a1af9b;
+  --theme-ink-rgb: 237,242,231;
+  --theme-line: #bacbb52b;
+  --theme-line-strong: #bacbb566;
+  --theme-link: #c9f595;
+  --theme-blue-soft: #172a30;
+  --theme-lime-soft: #1c2c18;
+  --theme-check: #adff00;
+  --theme-focus: #82c8ff;
+  --theme-success-bg: #1b3019;
+  --theme-success-text: #c9f595;
+  --theme-error-bg: #321e1a;
+  --theme-error-text: #ffc2af;
+  --color-surface-950: #080d09;
+  --color-surface-900: #0b100c;
+  --color-surface-800: #131c16;
+  --color-surface-700: #1b281e;
+  --color-surface-600: #223228;
+  --color-surface-500: #2b4031;
+  --color-bg: var(--theme-bg);
+  --color-fg: var(--theme-text);
+  --color-fg-75: var(--theme-body);
+  --color-fg-55: var(--theme-body);
+  --color-fg-40: var(--theme-muted);
+  --color-fg-30: var(--theme-muted);
+  --color-fg-20: var(--theme-muted);
+  --color-border: var(--theme-line);
+  --color-border-sm: var(--theme-line);
+}
+body { background: var(--theme-bg); color: var(--theme-text); }
+input, select, textarea { color-scheme: inherit; }
+input::placeholder, textarea::placeholder { color: var(--theme-muted); opacity: 1; }
+select option { background: var(--theme-surface); color: var(--theme-text); }
+:where(a,button,input,select,textarea,summary):focus-visible { outline: 3px solid var(--theme-focus); outline-offset: 4px; }
+
+/* Legacy content utilities also follow the theme. Inverse sections can supply
+   their own utility colours without recolouring photos, illustrations or PDFs. */
+.text-white { color: var(--utility-text,var(--theme-text)); }
+.text-white\/90,.text-white\/85,.text-white\/80 { color: var(--utility-text,var(--theme-text)); }
+.text-white\/75,.text-white\/70,.text-white\/65,.text-white\/60,.text-white\/55 { color: var(--utility-body,var(--theme-body)); }
+.text-white\/50,.text-white\/45,.text-white\/40,.text-white\/35,.text-white\/30,.text-white\/25,.text-white\/20,.text-white\/15 { color: var(--utility-muted,var(--theme-muted)); }
+.hover\:text-white:hover { color: var(--utility-text,var(--theme-text)); }
+.border-white\/10,.border-white\/15,.border-white\/\[0\.10\],.border-white\/\[0\.08\],.border-white\/\[0\.06\],.border-white\/\[0\.05\],.border-white\/\[0\.04\] { border-color: var(--theme-line); }
+@media print {
+  :root,html.dark {
+    color-scheme: light;
+    --theme-bg: #fff; --theme-surface: #fff; --theme-raised: #fff; --theme-inset: #f1f1ee;
+    --theme-text: #142015; --theme-body: #32402e; --theme-muted: #42523c;
+    --theme-ink-rgb: 20,32,21; --theme-line: #14201544; --theme-line-strong: #14201588;
+    --theme-link: #294b14; --theme-blue-soft: #e6eff4; --theme-lime-soft: #e5efd9; --theme-check: #416b2b;
+  }
+}
+
+.text-accent-green,.text-accent-green\/80,.text-accent-green\/70 { color:var(--utility-link,var(--theme-link)); }
+
+.hover\:text-accent-green:hover,.hover\:text-accent-emerald:hover { color:var(--utility-link,var(--theme-link)); }
+
+/* Fixed header space is part of the page surface, never a separate black strip.
+   Cinematic landing scenes opt into an overlay and draw behind the navigation. */
+body > main:not([data-header-overlay]) { border-top:104px solid transparent; }
+@media(max-width:600px){body > main:not([data-header-overlay]){border-top-width:90px}}
+@media print{body > main:not([data-header-overlay]){border-top:0!important}}

@@ -66,3 +66,6 @@
   .sources { font-size: 10px; padding-top: 12px; break-inside: avoid; }
   .sources h2 { font-size: 14px; }
 }
+
+/* Keep branded lime actions readable in both themes. */
+.button { --ink:#142015; --theme-text:#142015; --theme-body:#374b2e; --theme-muted:#405337; --theme-link:#315500; --theme-ink-rgb:20,32,21; --theme-line:#14201533; --utility-text:#142015; --utility-body:#374b2e; --utility-muted:#405337; color:#142015; }

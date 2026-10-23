@@ -152,7 +152,7 @@ export default function Support() {
           <p className="text-sm font-medium text-neon-purple mb-3 tracking-wide uppercase">
             {t("supportPage.label")}
           </p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-white via-white/90 to-white/60 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-white">
             {t("supportPage.title")}
           </h1>
           <p className="text-white/40 text-lg max-w-xl">
@@ -284,7 +284,7 @@ export default function Support() {
             </p>
             <a
               href="mailto:support@sweezy.world"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-dark-900 font-semibold text-sm transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/10"
+              className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-[#142015] font-semibold text-sm transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/10"
             >
               {t("supportPage.contactSupport")}
             </a>

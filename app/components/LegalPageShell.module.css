@@ -298,3 +298,13 @@
   .document section { animation: none; }
   .index a { transition: none; }
 }
+
+/* Keep branded lime actions readable in both themes. */
+.route span[data-active="true"],
+.index a[aria-current="page"] strong::after,
+.languages button[aria-pressed="true"] { --ink:#142015; --theme-text:#142015; --theme-body:#374b2e; --theme-muted:#405337; --theme-link:#315500; --theme-ink-rgb:20,32,21; --theme-line:#14201533; --utility-text:#142015; --utility-body:#374b2e; --utility-muted:#405337; color:#142015; }
+
+.languages { background:var(--theme-surface); }
+.help { background:#0b100c; }
+.document a { color:var(--theme-link); }
+.document a:hover { color:var(--theme-text); }

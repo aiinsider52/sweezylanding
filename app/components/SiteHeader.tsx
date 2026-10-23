@@ -41,6 +41,7 @@ export function SiteHeader() {
   const c = LABELS[locale];
   const home = `/${locale}`;
   const [open, setOpen] = useState<Panel>(null);
+  const [compact, setCompact] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const close = () => setOpen(null);
@@ -66,6 +67,22 @@ export function SiteHeader() {
 
   useEffect(() => setOpen(null), [pathname]);
   useEffect(() => {
+    let frame: number | null = null;
+    const update = () => {
+      frame = null;
+      setCompact(previous => window.scrollY > 96 ? true : window.scrollY < 24 ? false : previous);
+    };
+    const scroll = () => {
+      if (frame === null) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", scroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", scroll);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+  useEffect(() => {
     if (!open) return;
     const keydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -76,7 +93,7 @@ export function SiteHeader() {
     const outside = (event: PointerEvent) => {
       if (!headerRef.current?.contains(event.target as Node)) setOpen(null);
     };
-    const breakpoint = window.matchMedia("(max-width: 1050px)");
+    const breakpoint = window.matchMedia("(max-width: 1120px)");
     const resize = () => setOpen(null);
     document.addEventListener("keydown", keydown);
     document.addEventListener("pointerdown", outside);
@@ -102,7 +119,7 @@ export function SiteHeader() {
 
   function feature(kind: "life" | "explore") {
     return kind === "explore" ? <Link href={wishlist} onClick={close} className={styles.travelFeature}>
-      <Image src="/destinations/swiss-discovery-oeschinen-2.webp" alt="" fill sizes="(max-width: 1050px) 1px, 340px" />
+      <Image src="/destinations/swiss-discovery-oeschinen-2.webp" alt="" fill sizes="(max-width: 1120px) 1px, 340px" />
       <span className={styles.featureBadge}>{c.free}</span>
       <span className={styles.featureCopy}><strong>{c.feature}</strong><span>{c.featureAction}<Arrow /></span></span>
     </Link> : <Link href={starter} onClick={close} className={styles.starterFeature}>
@@ -112,7 +129,7 @@ export function SiteHeader() {
     </Link>;
   }
 
-  return <header id="site-header" ref={headerRef} className={styles.header} onBlur={event => {
+  return <header id="site-header" ref={headerRef} className={styles.header} data-compact={compact} onBlur={event => {
     if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget as Node)) close();
   }}>
     {open && <button type="button" className={styles.scrim} onClick={close} tabIndex={-1} aria-label={c.close} />}

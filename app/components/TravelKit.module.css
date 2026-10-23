@@ -38,3 +38,9 @@
 @media(max-width:760px){.banner{padding:18px 12px}.bannerInner{grid-template-columns:minmax(0,1fr);min-height:0}.shade{background:linear-gradient(180deg,#081711f2 0%,#081711d9 42%,#08171166 74%,#081711bf 100%)}.bannerCopy{padding:32px 24px 0}.bannerCopy h1,.bannerCopy h2{max-width:600px;font-size:clamp(39px,7.8vw,59px)}.intro{font-size:16px;line-height:1.7}.actions{margin-top:24px}.companionNote{margin-top:22px}.visual{min-height:405px;padding:32px 38px 48px}.cover{width:220px}.coverBack{width:215px;max-width:65%}.count{top:34px;right:calc(50% - 155px)}.photoLabel{font-size:8px;bottom:17px;text-align:center}.shell{width:calc(100% - 32px);padding-top:44px}.grid,.planner{grid-template-columns:minmax(0,1fr)}.planner{gap:24px}.cardImage{aspect-ratio:1.5}.cardCopy{padding:22px}}
 @media(max-width:400px){.bannerCopy{padding-inline:20px}.bannerCopy h1,.bannerCopy h2{font-size:38px}.eyebrow{font-size:9px}.actions{align-items:stretch;gap:8px}.primary{width:100%}.secondary{justify-content:flex-start;min-height:46px}.benefits{gap:6px 12px}.benefits li+li::before{margin-right:12px}.visual{min-height:380px}.cover{width:205px}.count{right:14px;width:86px;min-height:86px}.count strong{font-size:31px}.cardCopy dl{gap:12px}.planner{padding:24px}.planner h2{font-size:30px}}
 @media(prefers-reduced-motion:reduce){.cover,.cardImage img{transition:none}.cover:hover{transform:rotate(5deg)}.cardImage:hover img{transform:none}}
+
+/* Keep branded lime actions readable in both themes. */
+.primary,
+.count { --ink:#142015; --theme-text:#142015; --theme-body:#374b2e; --theme-muted:#405337; --theme-link:#315500; --theme-ink-rgb:20,32,21; --theme-line:#14201533; --utility-text:#142015; --utility-body:#374b2e; --utility-muted:#405337; color:#142015; }
+
+.card[data-selected=true] { border-color:var(--theme-check);box-shadow:0 0 0 1px var(--theme-check); }

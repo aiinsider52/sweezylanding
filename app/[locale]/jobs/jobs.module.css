@@ -53,3 +53,14 @@
 @media(max-width:900px){.hero,.sectionHead,.formShell{grid-template-columns:1fr}.hero{height:auto;min-height:0}.route{min-height:390px;border-left:0;border-top:1px solid rgba(255,255,255,.12)}.categories{grid-template-columns:repeat(2,1fr)}.category:nth-child(2){border-right:0}.category:nth-child(-n+2){border-bottom:1px solid var(--line)}.formIntro{position:static;min-height:auto}.empty{grid-template-columns:1fr}}
 @media(max-width:560px){.shell{width:min(100% - 20px,1500px);padding-top:20px}.hero{border-radius:24px}.heroCopy{padding:24px 22px}.heroCopy h1{font-size:clamp(42px,12vw,54px);line-height:.9}.heroCopy p{font-size:14px}.heroActions{display:grid;grid-template-columns:minmax(0,1fr)}.primary,.secondary{width:100%;min-width:0;gap:10px;padding:13px 14px;font-size:12px}.route{min-height:280px}.routeLabel{max-width:140px;padding:12px}.routeLabel strong{font-size:15px}.categories{grid-template-columns:1fr}.category{min-height:170px;border-right:0;border-bottom:1px solid var(--line)}.category:last-child{border-bottom:0}.category h3{margin-top:42px}.form,.formIntro{padding:24px 20px;border-radius:24px}.formIntro h1{font-size:clamp(39px,12vw,52px);letter-spacing:-.055em}.formIntro>p{font-size:16px}.radioGrid{grid-template-columns:1fr}.sectionHead{padding-top:52px}}
 @media(prefers-reduced-motion:reduce){.primary,.secondary,.submit{scroll-behavior:auto}}
+
+/* Keep branded lime actions readable in both themes. */
+.primary,
+.routeNode:nth-child(2),
+.category:nth-child(3),
+.submit { --ink:#142015; --theme-text:#142015; --theme-body:#374b2e; --theme-muted:#405337; --theme-link:#315500; --theme-ink-rgb:20,32,21; --theme-line:#14201533; --utility-text:#142015; --utility-body:#374b2e; --utility-muted:#405337; color:#142015; }
+
+.success { background:var(--theme-success-bg);color:var(--theme-success-text); }
+.error { background:var(--theme-error-bg);color:var(--theme-error-text); }
+.field input::placeholder,.field textarea::placeholder { color:var(--theme-muted);opacity:1; }
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible { outline:3px solid var(--theme-focus);outline-offset:3px; }

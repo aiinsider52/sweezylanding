@@ -811,7 +811,7 @@ export default function CantonGuidePage({
           href={APP_STORE_URL}
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-5 inline-flex rounded-xl bg-accent-green px-5 py-3 text-sm font-semibold text-dark-950 transition-opacity hover:opacity-90"
+          className="mt-5 inline-flex rounded-xl bg-accent-green px-5 py-3 text-sm font-semibold text-[#142015] transition-opacity hover:opacity-90"
         >
           {copy.download}
         </a>
@@ -967,7 +967,7 @@ export default function CantonGuidePage({
           href={APP_STORE_URL}
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-5 inline-flex rounded-xl bg-accent-green px-5 py-3 text-sm font-semibold text-dark-950 transition-opacity hover:opacity-90"
+          className="mt-5 inline-flex rounded-xl bg-accent-green px-5 py-3 text-sm font-semibold text-[#142015] transition-opacity hover:opacity-90"
         >
           {copy.download}
         </a>

@@ -9,6 +9,7 @@ import { SiteHeader } from "./components/SiteHeader";
 import { Telemetry } from "./components/Telemetry";
 import { DEFAULT_OG_IMAGE } from "../lib/social";
 import "./globals.css";
+import "./theme.css";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -81,7 +82,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0c0f0d",
+  themeColor: "#0b100c",
 };
 
 const websiteSchema = {

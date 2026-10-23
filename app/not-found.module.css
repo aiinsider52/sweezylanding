@@ -5,7 +5,7 @@
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 26px; }
 .actions a { display: flex; justify-content: space-between; align-items: center; gap: 28px; min-height: 52px; min-width: 220px; padding: 14px 24px; border: 1px solid var(--theme-line-strong); border-radius: 999px; font-weight: 700; }
 .actions a:first-child { background: #adff00; border-color: #adff00; }
-.actions a:hover { background: var(--theme-blue-soft); border-color: #82c8ff; }
+.actions a:hover { background: #82c8ff; border-color: #82c8ff; }
 .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px 32px; width: min(640px, 100%); border-top: 1px solid rgba(var(--theme-ink-rgb),0.200); margin-top: 32px; padding-top: 24px; font-size: 14px; }
 .links a:hover { text-decoration: underline; }
 .page a:focus-visible { outline: 3px solid #1981c9; outline-offset: 5px; }
@@ -18,3 +18,7 @@
   .actions a { width: 100%; }
   .links { gap: 14px 20px; }
 }
+
+/* Keep branded lime actions readable in both themes. */
+.actions a:first-child,
+.actions a:hover { --ink:#142015; --theme-text:#142015; --theme-body:#374b2e; --theme-muted:#405337; --theme-link:#315500; --theme-ink-rgb:20,32,21; --theme-line:#14201533; --utility-text:#142015; --utility-body:#374b2e; --utility-muted:#405337; color:#142015; }

@@ -73,3 +73,9 @@
   .catalogCompanionFrame .catalogCompanion { height: 210px; }
   .heroLead { font-size: 17px; }
 }
+
+/* Keep branded lime actions readable in both themes. */
+.button { --ink:#142015; --theme-text:#142015; --theme-body:#374b2e; --theme-muted:#405337; --theme-link:#315500; --theme-ink-rgb:20,32,21; --theme-line:#14201533; --utility-text:#142015; --utility-body:#374b2e; --utility-muted:#405337; color:#142015; }
+
+.filters select:focus-visible,.page a:focus-visible,.page button:focus-visible { outline-color:var(--theme-focus); }
+.card .evidence { background:var(--theme-lime-soft);color:var(--theme-link); }

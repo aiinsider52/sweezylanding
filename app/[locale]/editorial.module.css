@@ -941,3 +941,23 @@
   .cardMedia img,
   .articleVisual img { transition: none; }
 }
+
+/* Keep branded lime actions readable in both themes. */
+.arrowButton,
+.routeItem:first-child,
+.cantonCard:nth-child(11n + 4),
+.cta a,
+.authorityRoute li[data-current],
+.articleAside { --ink:#142015; --theme-text:#142015; --theme-body:#374b2e; --theme-muted:#405337; --theme-link:#315500; --theme-ink-rgb:20,32,21; --theme-line:#14201533; --utility-text:#142015; --utility-body:#374b2e; --utility-muted:#405337; color:#142015; }
+
+.articleIntro,.guideHeroCopy,.cta { --utility-text:#f3f5ed; --utility-body:#c1cbbc; --utility-muted:#a1af9b; --utility-link:#c9f595; }
+.articleIntro,.guideHeroCopy,.guideStats>div,.cta { background:var(--theme-inverse-bg); }
+.articleIntro .meta,.guideStats p:first-child { color:#a1af9b!important; }
+.articleIntro>p,.guideHeroCopy>div>p { color:#c1cbbc!important; }
+.articleBody :global(thead) { background:#1b281e!important;color:#edf2e7!important; }
+.articleBody :global(th) { color:inherit; }
+.articleBody :global(code) { background:var(--theme-inset);color:var(--theme-text); }
+.articleBody :global(pre) { overflow-x:auto;background:var(--theme-inset);color:var(--theme-text); }
+.articleBody :global(.bg-white) { background:var(--theme-surface); }
+.articleAside :global(.text-black\/65) { color:#374b2e; }
+.answerEvidence { background:var(--theme-blue-soft); }
