@@ -37,8 +37,15 @@ const PASSPORT_IMAGE_ALT: Record<Locale, string> = {
   de: "Sweezy App-Pass mit persönlichem Umzugsfortschritt, Profil und Zugang in der Schweiz",
 };
 
+const COMPANION_COPY = {
+  uk: { label: "ВАШ ПРОВІДНИК SWEEZY", title: "Почніть з одного зрозумілого кроку.", guides: "Відкрити покрокові гіди" },
+  en: { label: "YOUR SWEEZY GUIDE", title: "Start with one clear next step.", guides: "Explore step-by-step guides" },
+  de: { label: "DEIN SWEEZY-BEGLEITER", title: "Beginne mit einem klaren nächsten Schritt.", guides: "Schritt-für-Schritt-Guides öffnen" },
+} satisfies Record<Locale, Record<string, string>>;
+
 export function LandingPage({ locale }: { locale: Locale }) {
   const copy = landingCopy[locale];
+  const companionCopy = COMPANION_COPY[locale];
   const softwareSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -95,9 +102,15 @@ export function LandingPage({ locale }: { locale: Locale }) {
 
         <section className={styles.placesSection}>
           <MotionReveal className={styles.placesHeader}>
-            <p className={styles.eyebrow}>{PLACES_COPY[locale].eyebrow}</p>
-            <h2>{PLACES_COPY[locale].title}</h2>
-            <p>{PLACES_COPY[locale].body}</p>
+            <div className={styles.placesHeading}>
+              <p className={styles.eyebrow}>{PLACES_COPY[locale].eyebrow}</p>
+              <h2>{PLACES_COPY[locale].title}</h2>
+              <p className={styles.placesDescription}>{PLACES_COPY[locale].body}</p>
+            </div>
+            <div className={styles.placesCompanionFrame}>
+              <SweezyCompanion pose="reader" className={styles.placesCompanion} sizes="(max-width: 600px) 240px, (max-width: 900px) 290px, 360px" />
+              <span aria-hidden="true">SWEEZY / CH ↗</span>
+            </div>
           </MotionReveal>
           <div className={styles.placesGrid}>
             {FEATURED_PLACES.map((place, index) => (
@@ -200,6 +213,14 @@ export function LandingPage({ locale }: { locale: Locale }) {
           <MotionReveal className={styles.faqHeader}>
             <p className={styles.eyebrow}>{copy.faq.eyebrow}</p>
             <h2>{copy.faq.title}</h2>
+            <aside className={styles.faqCompanionCard}>
+              <SweezyCompanion pose="greeting" className={styles.faqCompanion} sizes="(max-width: 560px) 150px, 190px" />
+              <div>
+                <p>{companionCopy.label}</p>
+                <strong>{companionCopy.title}</strong>
+                <Link href={`/${locale}/guides`}>{companionCopy.guides} <span aria-hidden="true">↗</span></Link>
+              </div>
+            </aside>
           </MotionReveal>
           <LandingFaq items={copy.faq.items} />
         </section>

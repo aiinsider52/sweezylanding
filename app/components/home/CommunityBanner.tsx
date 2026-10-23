@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Locale } from "../../../lib/i18n";
 import { FACEBOOK_COMMUNITY_URL, TELEGRAM_URL } from "../../../lib/links";
+import { SweezyCompanion } from "../SweezyCompanion";
 import styles from "./landing.module.css";
 
 const COPY = {
@@ -35,10 +36,13 @@ export function CommunityBanner({ locale }: { locale: Locale }) {
   return (
     <section className={styles.communityBanner} aria-labelledby="community-banner-title">
       <div className={styles.communityBannerCopy}>
-        <p>{copy.eyebrow}</p>
-        <h2 id="community-banner-title">{copy.title}</h2>
-        <span>{copy.body}</span>
-        <Link href={`/${locale}/community`}>{copy.details} ↗</Link>
+        <div className={styles.communityBannerText}>
+          <p>{copy.eyebrow}</p>
+          <h2 id="community-banner-title">{copy.title}</h2>
+          <p className={styles.communityBannerBody}>{copy.body}</p>
+          <Link href={`/${locale}/community`}>{copy.details} ↗</Link>
+        </div>
+        <SweezyCompanion pose="greeting" className={styles.communityCompanion} sizes="(max-width: 560px) 190px, (max-width: 1100px) 200px, 260px" />
       </div>
       <div className={styles.communityBannerLinks}>
         <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener"><small>01 · TELEGRAM</small><strong>{copy.telegram}</strong><b>↗</b></a>

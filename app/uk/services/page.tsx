@@ -7,6 +7,7 @@ import { Breadcrumb } from "../../components/Breadcrumb";
 import { JsonLd } from "../../components/seo/JsonLd";
 import { ServiceDirectory } from "../../components/services/ServiceDirectory";
 import { StarterKitBanner } from "../../components/StarterKitBanner";
+import { SweezyCompanion } from "../../components/SweezyCompanion";
 import styles from "../../components/services/services.module.css";
 
 const title = "Українські послуги у Швейцарії — каталог Sweezy";
@@ -23,11 +24,17 @@ export default function ServicesPage() {
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: title, description, url: `${BASE_URL}/uk/services`, inLanguage: "uk", mainEntity: { "@type": "ItemList", numberOfItems: ukrainianServices.length, itemListElement: ukrainianServices.map((service, index) => ({ "@type": "ListItem", position: index + 1, name: service.name, url: `${BASE_URL}${servicePath(service)}` })) } }} />
     <div className={styles.shell}>
       <Breadcrumb items={[{ name: "Головна", url: "/uk" }, { name: "Українські послуги", url: "/uk/services" }]} />
-      <header className={styles.hero}>
+      <header className={`${styles.hero} ${styles.catalogHero}`}>
+        <div>
         <p className={styles.eyebrow}>SWEEZY · ЛОКАЛЬНІ ПОСЛУГИ</p>
         <h1>Українські послуги у Швейцарії</h1>
-        <p>Знайдіть фахівця, україномовного спеціаліста або послугу для української спільноти. Обирайте категорію й кантон: у картках є прямі контакти, джерела та пояснення, чи підтверджена українська мова.</p>
+        <p className={styles.heroLead}>Знайдіть фахівця, україномовного спеціаліста або послугу для української спільноти. Обирайте категорію й кантон: у картках є прямі контакти, джерела та пояснення, чи підтверджена українська мова.</p>
         <div className={styles.tags}><span>Цюрих · Тургау · Санкт-Галлен</span><span>Карток у каталозі: {ukrainianServices.length}</span><span>Контакти з першоджерел</span></div>
+        </div>
+        <div className={styles.catalogCompanionFrame}>
+          <SweezyCompanion pose="greeting" className={styles.catalogCompanion} sizes="(max-width: 740px) 220px, 300px" />
+          <span aria-hidden="true">SWEEZY / ЛЮДИ ПОРУЧ</span>
+        </div>
       </header>
       <section className={styles.section} aria-labelledby="service-list-title">
         <h2 id="service-list-title">Оберіть послугу поруч</h2>
