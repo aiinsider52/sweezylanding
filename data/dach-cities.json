@@ -1,0 +1,211 @@
+{
+  "berlin": {
+    "country": "germany",
+    "name": {"uk": "Берлін", "en": "Berlin", "de": "Berlin"},
+    "title": {
+      "uk": "Переїзд до Берліна: Anmeldung, документи та перші кроки",
+      "en": "Moving to Berlin: Anmeldung, documents and first steps",
+      "de": "Nach Berlin ziehen: Anmeldung, Unterlagen und erste Schritte"
+    },
+    "description": {
+      "uk": "Практичний старт у Берліні: реєстрація адреси через Bürgeramt, Wohnungsgeberbestätigung, перевірка права працювати, страхування та місцеві консультації.",
+      "en": "A practical Berlin arrival guide covering Bürgeramt registration, Wohnungsgeberbestätigung, employment permission, insurance and local advice.",
+      "de": "Praktische Orientierung für den Start in Berlin: Bürgeramt, Wohnungsgeberbestätigung, Arbeitsberechtigung, Versicherung und örtliche Beratung."
+    },
+    "summary": {
+      "uk": "У Берліні реєстрація основного житла зазвичай потрібна протягом 14 днів після заселення. Bürgeramt оформлює адресу, а питання перебування, роботи й медичного покриття розглядаються окремо. Почніть із фактичного житла, офіційного запису на прийом і перевірки документів саме для своєї ситуації.",
+      "en": "Berlin generally requires registration of a main home within 14 days of moving in. The Bürgeramt records the address; residence rights, permission to work and medical coverage are separate matters. Begin with your actual accommodation, the official appointment service and the documents relevant to your circumstances.",
+      "de": "Eine Hauptwohnung in Berlin muss grundsätzlich innerhalb von 14 Tagen nach dem Einzug angemeldet werden. Das Bürgeramt erfasst die Adresse; Aufenthaltsrecht, Arbeitsberechtigung und medizinische Absicherung bleiben eigene Fragen. Ausgangspunkt sind die tatsächliche Unterkunft, die offizielle Terminbuchung und die passenden Unterlagen für Ihre Situation."
+    },
+    "sections": [
+      {
+        "title": {
+          "uk": "Заселення та запис до Bürgeramt",
+          "en": "Move-in and the Bürgeramt appointment",
+          "de": "Einzug und Termin im Bürgeramt"
+        },
+        "body": {
+          "uk": "Після фактичного заселення в основне житло відкрийте в ServicePortal Berlin послугу Anmeldung der alleinigen Wohnung oder Hauptwohnung. Загальний строк становить 14 днів після заселення: дата підписання договору оренди не замінює дату переїзду. Для особистого оформлення потрібен прийом у Bürgeramt. Перевірте вимоги послуги, збережіть підтвердження запису та подивіться, які документи треба принести. Якщо прийому немає в межах строку, зверніться до відповідальної установи й збережіть листування; пізня дата не означає автоматичного звільнення від обов’язку. Для тимчасового проживання та вже зареєстрованих в іншому місці людей існують винятки, які слід перевіряти за конкретними обставинами. Після оформлення збережіть Meldebestätigung. За відсутності житла звертайтеся до офіційної міської інформації про прибуття, а не оформлюйте адресу, за якою не живете.",
+          "en": "After moving into your main home, open the Anmeldung der alleinigen Wohnung oder Hauptwohnung service in ServicePortal Berlin. The general deadline is 14 days from moving in, rather than from signing a rental agreement. For an in-person registration, arrange a Bürgeramt appointment. Read the service requirements, retain the booking confirmation and check the documents to bring. If no appointment is available within the deadline, contact the responsible office and keep its response; a later appointment does not automatically remove the obligation. Exceptions exist for some short stays and people already registered elsewhere, so check your actual circumstances. Keep the Meldebestätigung after registration. If you do not have accommodation, use the city’s official arrival guidance rather than registering an address where you do not live.",
+          "de": "Öffnen Sie nach dem tatsächlichen Einzug in Ihre Hauptwohnung im ServicePortal Berlin die Anmeldung der alleinigen Wohnung oder Hauptwohnung. Die allgemeine Frist beträgt 14 Tage ab Einzug, nicht ab Unterzeichnung des Mietvertrags. Für die persönliche Anmeldung benötigen Sie einen Bürgeramtstermin. Lesen Sie die Voraussetzungen, bewahren Sie die Buchungsbestätigung auf und prüfen Sie die mitzubringenden Unterlagen. Ist innerhalb der Frist kein Termin verfügbar, wenden Sie sich an die zuständige Stelle und dokumentieren Sie die Antwort; ein späterer Termin hebt die Pflicht nicht automatisch auf. Für bestimmte kurze Aufenthalte und bereits andernorts gemeldete Personen bestehen Ausnahmen. Prüfen Sie Ihre konkrete Situation und bewahren Sie nach der Anmeldung die Meldebestätigung auf. Ohne Unterkunft hilft die offizielle Ankunftsinformation weiter, keine Adresse ohne tatsächlichen Einzug."
+        }
+      },
+      {
+        "title": {
+          "uk": "Підтвердження житла та документи родини",
+          "en": "Accommodation confirmation and family documents",
+          "de": "Wohnungsgeberbestätigung und Unterlagen der Familie"
+        },
+        "body": {
+          "uk": "Підготуйте документи особи та Wohnungsgeberbestätigung — підписане підтвердження заселення від особи, яка надає житло. Берлін прямо зазначає, що договір оренди не замінює цього підтвердження. Дані мають відповідати фактичній адресі, даті переїзду та людям, яких реєструють. Для першої реєстрації можуть додатково знадобитися документи про народження чи шлюб. Якщо з дитиною приходить лише один із батьків, перевірте вимоги згоди іншого законного представника. За оформлення через представника перевірте довіреність і власний підпис на заяві. Онлайн-послуга має окремі умови громадянства, попереднього переїзду всередині Німеччини та електронної ідентифікації: сам електронний дозвіл на перебування eAT не дає доступу до цього маршруту. Не плутайте успішний запис на прийом з уже завершеною реєстрацією чи рішенням щодо права перебувати в країні.",
+          "en": "Prepare identity documents and the Wohnungsgeberbestätigung, the accommodation provider’s signed confirmation of move-in. Berlin explicitly states that a rental contract does not replace this confirmation. The details should match the actual address, move-in date and people being registered. A first registration may also require birth or marriage records. If only one parent attends with a child, check the consent requirements for the other legal guardian. Registration through a representative has its own authorisation and signature requirements. The online service is restricted by citizenship, a move within Germany and electronic-identification conditions; an electronic residence permit, eAT, alone does not qualify. An appointment booking is not a completed registration or an immigration decision. Use the document list for your particular household rather than a generic relocation list.",
+          "de": "Bereiten Sie Identitätsnachweise und die unterschriebene Wohnungsgeberbestätigung vor. Berlin weist ausdrücklich darauf hin, dass ein Mietvertrag diese Bestätigung nicht ersetzt. Angaben zu Wohnung, Einzugsdatum und meldepflichtigen Personen müssen der tatsächlichen Situation entsprechen. Bei einer ersten Anmeldung können zusätzlich Geburts- oder Heiratsurkunden erforderlich sein. Spricht nur ein Elternteil mit einem Kind vor, prüfen Sie die Zustimmung des anderen Sorgeberechtigten. Für eine Vertretung gelten eigene Anforderungen an Vollmacht und Unterschrift. Die Online-Anmeldung setzt unter anderem passende Staatsangehörigkeit, einen Umzug innerhalb Deutschlands und elektronische Identifizierung voraus; ein elektronischer Aufenthaltstitel eAT allein genügt nicht. Eine Terminbuchung ist weder die abgeschlossene Meldung noch eine aufenthaltsrechtliche Entscheidung. Nutzen Sie deshalb die Unterlagenliste für Ihre konkrete Familie statt einer allgemeinen Umzugsliste."
+        }
+      },
+      {
+        "title": {
+          "uk": "Перебування, робота та медичне покриття",
+          "en": "Residence rights, work and medical coverage",
+          "de": "Aufenthalt, Arbeit und medizinische Absicherung"
+        },
+        "body": {
+          "uk": "Anmeldung не надає автоматично дозволу на роботу чи права на перебування. Громадяни ЄС, люди з тимчасовим захистом та інші іноземці мають різні підстави й умови. Українцям потрібно перевіряти конкретний документ та запис про трудову діяльність, а не лише паспорт. З’ясуйте відповідальний міграційний маршрут до узгодження дати початку роботи. Якщо професія регульована, окремо перевірте визнання кваліфікації. Для страхування зверніться до відповідальної каси або установи підтримки та уточніть початок покриття. Реєстрація адреси, пропозиція роботи й наявність картки не замінюють підтвердження страхового статусу. У міській інформації про медичну допомогу є окремі маршрути для людей без оформленого страхування. За незрозумілої ситуації поясніть установі, які документи вже є, а які ще очікуєте; не відкладайте необхідне звернення лише через адміністративну невизначеність.",
+          "en": "Anmeldung does not automatically provide a right to work or remain in Germany. EU citizens, people with temporary protection and other newcomers have different residence conditions. Ukrainians should check the actual document and its employment entry rather than relying on the passport alone. Clarify the responsible immigration route before agreeing a work start date. A regulated profession may also require recognition of qualifications. For health coverage, ask the responsible insurer or support office when coverage starts and how to prove it. Address registration, a job offer and possession of a card are not substitutes for confirming insurance status. The city’s medical-care information also describes routes for people without completed insurance arrangements. Explain which documents you hold and which remain pending when asking the responsible service for assistance.",
+          "de": "Die Anmeldung schafft nicht automatisch ein Arbeits- oder Aufenthaltsrecht. EU-Bürger, Menschen mit vorübergehendem Schutz und andere Zugewanderte unterliegen unterschiedlichen Voraussetzungen. Ukrainische Personen sollten das konkrete Dokument und den Eintrag zur Erwerbstätigkeit prüfen, nicht allein den Reisepass. Klären Sie den passenden Aufenthaltsweg vor einem vereinbarten Arbeitsbeginn. Bei reglementierten Berufen kann zusätzlich eine Anerkennung erforderlich sein. Fragen Sie Krankenkasse oder zuständige Unterstützungsstelle nach Beginn und Nachweis des Versicherungsschutzes. Meldeadresse, Stellenangebot oder eine vorhandene Karte ersetzen diese Klärung nicht. Die medizinischen Informationen der Stadt beschreiben auch Anlaufwege für Menschen ohne abgeschlossene Versicherungsregelung. Erklären Sie der zuständigen Stelle, welche Nachweise bereits vorliegen und welche noch ausstehen. Notwendige Unterstützung sollte nicht allein wegen ungeklärter Verwaltungsfragen aufgeschoben werden."
+        }
+      },
+      {
+        "title": {
+          "uk": "Місцеві консультації та корисні контакти",
+          "en": "Local advice and useful connections",
+          "de": "Örtliche Beratung und hilfreiche Kontakte"
+        },
+        "body": {
+          "uk": "Офіційний берлінський розділ для людей з України допомагає розрізняти установи з питань прибуття, проживання, роботи та медичної допомоги. Для трудових і соціальних питань місто називає Berliner Beratungszentrum für Migration und Gute Arbeit, BEMA. Центр пропонує безкоштовну анонімну консультацію; прийом погоджують заздалегідь, а доступну мову уточнюють під час звернення. Для загальної міграційної консультації використовуйте офіційний пошук BAMF-NAvI та обирайте установу за своїм питанням і місцем проживання. На розмову підготуйте короткий опис ситуації, відповідні документи й конкретне запитання. Українські спільноти корисні для знайомств і досвіду повсякденного життя, але порада в чаті не є рішенням установи. Перевіряйте контакт і актуальні умови безпосередньо в організації; не передавайте незнайомим людям оригінали документів за обіцянку швидкого оформлення.",
+          "en": "Berlin’s official Ukraine information separates arrival, residence, work and medical-care topics so that you can find the relevant office. For employment and social-law questions, the city points to the Berliner Beratungszentrum für Migration und Gute Arbeit, BEMA. Its advice is free and anonymous; arrange the consultation in advance and confirm the available language when contacting the service. For general migration counselling, use the official BAMF-NAvI finder and select an organisation appropriate to your location and question. Prepare a short account of your circumstances, relevant documents and the question you need answered. Ukrainian community connections can help with daily experience and meeting people, but chat advice is not an administrative decision. Confirm current contacts and conditions with the organisation itself before relying on an informal recommendation.",
+          "de": "Die offiziellen Berliner Ukraine-Informationen trennen Ankunft, Aufenthalt, Arbeit und medizinische Versorgung und helfen so bei der Wahl der richtigen Stelle. Für arbeits- und sozialrechtliche Fragen verweist die Stadt auf das Berliner Beratungszentrum für Migration und Gute Arbeit, BEMA. Die Beratung ist kostenlos und anonym; vereinbaren Sie den Termin vorab und klären Sie die verfügbare Sprache direkt beim Kontakt. Für allgemeine Migrationsberatung eignet sich die offizielle Suche BAMF-NAvI. Wählen Sie die Stelle passend zu Wohnort und Anliegen. Bereiten Sie eine kurze Beschreibung Ihrer Situation, relevante Unterlagen und eine konkrete Frage vor. Ukrainische Community-Kontakte helfen beim Austausch über den Alltag, ersetzen aber keine behördliche Entscheidung. Prüfen Sie aktuelle Kontaktdaten und Voraussetzungen direkt bei der Organisation, bevor Sie sich auf informelle Empfehlungen verlassen."
+        }
+      }
+    ],
+    "sources": [
+      {"name": "ServicePortal Berlin — Hauptwohnung anmelden", "url": "https://service.berlin.de/dienstleistung/120686/"},
+      {"name": "Berlin — Ankunft für Geflüchtete aus der Ukraine", "url": "https://www.berlin.de/ukraine/ankommen/"},
+      {"name": "Berlin — Arbeiten in Berlin", "url": "https://www.berlin.de/ukraine/ankommen/arbeiten/"},
+      {"name": "Berlin — Medizinische Versorgung für geflüchtete Menschen", "url": "https://www.berlin.de/ukraine/ankommen/medizinische-versorgung/"},
+      {"name": "BAMF-NAvI — Beratungsstellen", "url": "https://bamf-navi.bamf.de/de/Themen/Beratungsstellen/"}
+    ],
+    "faq": [
+      {
+        "q": {"uk": "Чи достатньо договору оренди для Anmeldung у Берліні?", "en": "Is a rental contract enough for Berlin Anmeldung?", "de": "Reicht der Mietvertrag für die Anmeldung in Berlin?"},
+        "a": {
+          "uk": "Ні. Берлін прямо вимагає Wohnungsgeberbestätigung або передбачене рівноцінне підтвердження житла. Підготуйте також документи особи та інші потрібні для вашої родини підтвердження за переліком ServicePortal Berlin.",
+          "en": "No. Berlin requires the Wohnungsgeberbestätigung or an applicable equivalent accommodation confirmation. Prepare identity documents and any additional household records listed for your situation in ServicePortal Berlin.",
+          "de": "Nein. Berlin verlangt die Wohnungsgeberbestätigung oder einen vorgesehenen gleichwertigen Unterkunftsnachweis. Hinzu kommen Identitätsnachweise und gegebenenfalls weitere Unterlagen für Ihren Haushalt nach der Liste des ServicePortals."
+        }
+      },
+      {
+        "q": {"uk": "Чи можна всім новоприбулим оформити адресу онлайн?", "en": "Can every newcomer complete registration online?", "de": "Können alle neu Zugezogenen die Anmeldung online erledigen?"},
+        "a": {
+          "uk": "Ні. Онлайн-маршрут має окремі вимоги, зокрема до громадянства, переїзду всередині Німеччини та електронної ідентифікації. Сам eAT не підходить для цієї послуги. Якщо умови не виконані, перевірте особистий прийом у Bürgeramt.",
+          "en": "No. The online route has specific conditions concerning citizenship, a move within Germany and electronic identification. An eAT alone is not accepted for this service. If you do not qualify, check the in-person Bürgeramt procedure.",
+          "de": "Nein. Für den Onlinedienst gelten besondere Voraussetzungen zu Staatsangehörigkeit, innerdeutschem Umzug und elektronischer Identifizierung. Ein eAT allein wird hierfür nicht akzeptiert. Falls Sie die Bedingungen nicht erfüllen, prüfen Sie die persönliche Anmeldung im Bürgeramt."
+        }
+      },
+      {
+        "q": {"uk": "До кого звернутися через незрозумілий трудовий договір?", "en": "Where can I ask about an unclear employment contract?", "de": "Wer hilft bei einem unklaren Arbeitsvertrag?"},
+        "a": {
+          "uk": "Міська сторінка про роботу скеровує до BEMA для трудових і соціальних питань. Заздалегідь погодьте консультацію, уточніть мову та підготуйте договір і своє питання. Питання дозволу на перебування окремо уточнюють у відповідальній міграційній установі.",
+          "en": "The city’s work information points to BEMA for employment and social-law questions. Arrange advice in advance, confirm the consultation language and prepare the contract and your question. Residence-permission questions should also be clarified with the responsible immigration authority.",
+          "de": "Die städtische Arbeitsinformation verweist bei arbeits- und sozialrechtlichen Fragen auf BEMA. Vereinbaren Sie Beratung vorab, klären Sie die Sprache und halten Sie Vertrag sowie Frage bereit. Aufenthaltsrechtliche Berechtigungen sind zusätzlich mit der zuständigen Einwanderungsstelle zu klären."
+        }
+      }
+    ],
+    "reviewedAt": "2026-10-23"
+  },
+  "vienna": {
+    "country": "austria",
+    "name": {"uk": "Відень", "en": "Vienna", "de": "Wien"},
+    "title": {
+      "uk": "Переїзд до Відня: Meldezettel, документи та місцева підтримка",
+      "en": "Moving to Vienna: Meldezettel, documents and local support",
+      "de": "Nach Wien ziehen: Meldezettel, Unterlagen und örtliche Unterstützung"
+    },
+    "description": {
+      "uk": "Практичний гід для старту у Відні: Meldeservice, підписаний Meldezettel, перебування, робота, e-card та консультації StartWien і MALVA.",
+      "en": "A practical Vienna arrival guide covering the Meldeservice, signed Meldezettel, residence rights, work, e-card and StartWien or MALVA advice.",
+      "de": "Praktische Orientierung für den Start in Wien: Meldeservice, unterschriebener Meldezettel, Aufenthalt, Arbeit, e-card sowie StartWien und MALVA."
+    },
+    "summary": {
+      "uk": "Після фактичного заселення у Відні адресу зазвичай реєструють протягом трьох днів. Meldezettel стосується житла; право перебувати, працювати та отримувати медичне покриття перевіряють окремо. Обирайте міський сервіс за своєю ситуацією: звичайний переїзд, проживання громадянина ЄС чи переміщення з України мають різні наступні кроки.",
+      "en": "After actually moving into accommodation in Vienna, address registration is generally required within three days. The Meldezettel concerns your home; residence rights, work and health coverage are separate checks. Choose the city service that matches your circumstances, as ordinary relocation, EU residence and displacement from Ukraine involve different next steps.",
+      "de": "Nach dem tatsächlichen Einzug in eine Unterkunft in Wien ist die Wohnsitzmeldung grundsätzlich innerhalb von drei Tagen erforderlich. Der Meldezettel betrifft die Unterkunft; Aufenthalt, Arbeitsberechtigung und Krankenversicherung sind gesondert zu klären. Gewöhnlicher Zuzug, EU-Aufenthalt und Vertreibung aus der Ukraine erfordern unterschiedliche nächste Schritte."
+    },
+    "sections": [
+      {
+        "title": {
+          "uk": "Фактичне заселення та Meldeservice Wien",
+          "en": "Actual move-in and the Vienna Meldeservice",
+          "de": "Tatsächlicher Einzug und Meldeservice Wien"
+        },
+        "body": {
+          "uk": "Реєструйте житло після фактичного заселення, а не лише на підставі майбутнього договору чи поштової адреси. Загальний строк становить три дні від заселення. Перейдіть до офіційної послуги міста Anmelden eines Wohnsitzes та перевірте актуальні способи подання. Для особистого візиту користуйтеся міським записом на прийом і переконайтеся, що обрали саме Meldeservice, а не іншу адміністративну процедуру. Не кожному доступний онлайн-маршрут: електронна ідентифікація та попередня реєстрація можуть бути частиною його умов. Підтвердження запису ще не означає завершення оформлення. Якщо ваш вид розміщення нестандартний або тимчасовий, уточніть відповідний порядок в установі. Після реєстрації збережіть письмове підтвердження та перевірте правильність особистих даних і адреси, щоб надалі використовувати його для відповідних звернень без повторного виправлення помилок.",
+          "en": "Register accommodation after you actually move in, rather than using a future rental agreement or a postal address alone. The general deadline is three days from taking up accommodation. Open the city’s official Anmelden eines Wohnsitzes service and check the current submission methods. For a personal visit, use the municipal appointment service and confirm that you have selected the Meldeservice rather than a different administrative procedure. The online route is not available to everyone; electronic identification and a previous Austrian registration can be among its conditions. A booking confirmation is not a completed registration. Ask the office about unusual or temporary accommodation arrangements. Keep the written confirmation afterwards and check that your personal details and address are correct before using it for subsequent administrative requests.",
+          "de": "Melden Sie eine Unterkunft nach dem tatsächlichen Einzug an, nicht allein aufgrund eines zukünftigen Mietvertrags oder einer Postanschrift. Die allgemeine Frist beträgt drei Tage ab Unterkunftnahme. Öffnen Sie die offizielle Wiener Dienstleistung Anmelden eines Wohnsitzes und prüfen Sie die aktuellen Einreichungsmöglichkeiten. Nutzen Sie für eine persönliche Vorsprache die städtische Terminbuchung und wählen Sie den Meldeservice statt eines anderen Verwaltungsverfahrens. Der Onlineweg steht nicht allen offen; elektronische Identifizierung und eine frühere Meldung in Österreich können zu den Voraussetzungen gehören. Eine Terminbestätigung ist noch keine abgeschlossene Anmeldung. Fragen Sie bei ungewöhnlicher oder vorübergehender Unterbringung nach dem passenden Verfahren. Bewahren Sie anschliessend die schriftliche Bestätigung auf und prüfen Sie Personendaten sowie Adresse, bevor Sie den Nachweis für weitere Anliegen verwenden."
+        }
+      },
+      {
+        "title": {
+          "uk": "Meldezettel, підпис та підстава перебування",
+          "en": "Meldezettel, signatures and residence status",
+          "de": "Meldezettel, Unterschriften und Aufenthaltsgrundlage"
+        },
+        "body": {
+          "uk": "У звичайній паперовій процедурі потрібна окрема форма Meldezettel для кожної людини. Її підписує особа, яка реєструється, та Unterkunftgeber — той, хто фактично надає житло. Залежно від домовленості це може бути власник або основний орендар. Підготуйте посвідчення особи й інші підтвердження, зазначені в офіційному переліку; для родини перевірте вимоги кожного члена окремо. Документ про адресу не є дозволом на перебування. Громадяни ЄС, ЄЕЗ і Швейцарії за відповідних умов оформлюють окрему Anmeldebescheinigung; інші громадяни перевіряють власний міграційний маршрут. Для переміщених з України людей існують окремі інструкції поліційної реєстрації та оформлення Ausweis für Vertriebene. Якщо вже маєте захист в іншій країні, з’ясуйте наслідки переїзду до зміни житла й виплат. Зберігайте адресні та міграційні документи як різні підтвердження.",
+          "en": "In the ordinary paper procedure, prepare a separate Meldezettel for every person. It must be signed by the person registering and the Unterkunftgeber, the person who actually provides the accommodation. Depending on the arrangement, that can be an owner or a main tenant. Prepare identity evidence and other documents listed by the authority, checking each family member separately. An address confirmation is not a residence permit. Qualifying EU, EEA and Swiss citizens may need a separate Anmeldebescheinigung, while other nationals must check their own immigration route. Displaced people from Ukraine have specific police-registration and Ausweis für Vertriebene procedures. If protection already exists elsewhere, clarify the implications before changing accommodation and benefits. Retain address and immigration documents as distinct records, since they answer different administrative questions.",
+          "de": "Beim gewöhnlichen Papierverfahren benötigt jede Person einen eigenen Meldezettel. Diesen unterschreiben die meldepflichtige Person und der Unterkunftgeber, der die Unterkunft tatsächlich bereitstellt. Je nach Vereinbarung kann das der Eigentümer oder Hauptmieter sein. Bereiten Sie Identitätsnachweise und weitere verlangte Unterlagen vor und prüfen Sie jedes Familienmitglied einzeln. Der Adressnachweis ist keine Aufenthaltsberechtigung. Für entsprechend berechtigte EU-, EWR- und Schweizer Bürger kann eine eigene Anmeldebescheinigung erforderlich sein; andere Staatsangehörige müssen ihren Aufenthaltsweg prüfen. Für aus der Ukraine Vertriebene bestehen besondere Verfahren zur polizeilichen Erfassung und zum Ausweis für Vertriebene. Besteht bereits Schutz in einem anderen Land, klären Sie die Folgen vor der Umstellung von Unterkunft und Leistungen. Bewahren Sie Melde- und Aufenthaltsdokumente als unterschiedliche Nachweise auf."
+        }
+      },
+      {
+        "title": {
+          "uk": "Початок роботи та перевірка медичного страхування",
+          "en": "Starting work and confirming health insurance",
+          "de": "Arbeitsbeginn und Krankenversicherung klären"
+        },
+        "body": {
+          "uk": "До погодження роботи перевірте право на відповідну діяльність за своїм документом. Для громадян ЄС, ЄЕЗ і Швейцарії та звичайних заявників із третіх країн діють різні правила. Власники Ausweis für Vertriebene мають окремий доступ до найманої роботи; самого українського паспорта для такого висновку недостатньо. AMS допомагає орієнтуватися у пошуку, а для регульованої професії може знадобитися визнання кваліфікації. У роботодавця уточніть обов’язки, оплату брутто, години й письмові умови. Окремо підтвердьте страхову установу та дату початку покриття. Для багатьох найманих працівників це ÖGK, а для багатьох самозайнятих — SVS; особисті обставини мають значення. E-card є підтвердженням страхування, а не заміною його оформлення. Поки картка очікується, запитайте страховика, який документ підтверджує ваш поточний статус для звернення до лікаря.",
+          "en": "Before agreeing to work, check the permission for that activity under your actual residence document. EU, EEA and Swiss citizens and ordinary third-country applicants have different conditions. Holders of an Ausweis für Vertriebene have a specific route into employed work; a Ukrainian passport alone is not enough to establish it. AMS helps with job-search orientation, and a regulated profession may require recognition. Confirm duties, gross pay, hours and written terms with the employer. Separately establish the responsible insurer and when coverage begins. For many employees this is ÖGK, while SVS is relevant to many self-employed people; personal circumstances still matter. An e-card is evidence of insurance rather than a substitute for arranging it. While waiting for the card, ask the insurer which document confirms your current coverage for appointments.",
+          "de": "Prüfen Sie vor einer Arbeitszusage, welche Tätigkeit Ihr tatsächliches Aufenthaltsdokument erlaubt. Für EU-, EWR- und Schweizer Bürger sowie reguläre Drittstaatsangehörige gelten unterschiedliche Bedingungen. Personen mit Ausweis für Vertriebene haben einen eigenen Beschäftigungszugang; ein ukrainischer Pass allein belegt diesen nicht. Das AMS hilft bei der beruflichen Orientierung, und reglementierte Berufe können eine Anerkennung erfordern. Bestätigen Sie Aufgaben, Bruttoentgelt, Arbeitszeit und schriftliche Bedingungen mit dem Arbeitgeber. Klären Sie getrennt davon Versicherungsträger und Beginn des Schutzes. Für viele Beschäftigte ist die ÖGK zuständig, für viele Selbstständige die SVS; entscheidend bleiben die persönlichen Umstände. Die e-card weist Versicherung nach und ersetzt nicht deren Klärung. Fragen Sie während der Wartezeit auf die Karte, welches Dokument den aktuellen Versicherungsschutz bei Terminen nachweist."
+        }
+      },
+      {
+        "title": {
+          "uk": "StartWien, MALVA та підтримка відповідно до ситуації",
+          "en": "StartWien, MALVA and support that matches your situation",
+          "de": "StartWien, MALVA und Unterstützung passend zur Situation"
+        },
+        "body": {
+          "uk": "Міський портал StartWien пояснює житло, освіту, роботу, медичну систему та вивчення німецької. Його різні формати мають власні умови: індивідуальне орієнтаційне спілкування не є автоматично доступним для кожного новоприбулого. Українцям, які прибули через війну, варто починати з окремої українськомовної сторінки міста та перевіряти цільову групу конкретної пропозиції. Для переміщених осіб з України з основним місцем проживання у Відні Interface Wien пропонує MALVA — консультації щодо установ, повсякденних питань, роботи, мови та освіти. Послуга має українську серед оприлюднених мов. Перед візитом погодьте прийом і поясніть своє питання. За потреби житла перевіряйте актуальні міські контакти підтримки; наявність місць не гарантована самим зверненням. Спільноти допомагають знайомитися й обмінюватися досвідом, але офіційні умови та контакти звіряйте безпосередньо в установі.",
+          "en": "The municipal StartWien portal explains housing, education, work, healthcare and learning German. Its different formats have their own eligibility conditions; an individual orientation meeting is not automatically available to every newcomer. People displaced from Ukraine should begin with the city’s dedicated Ukrainian-language page and check the target group of each offer. For displaced Ukrainians whose main residence is in Vienna, Interface Wien’s MALVA provides advice about authorities, daily matters, work, language and education. Ukrainian is among its published consultation languages. Arrange contact before visiting and explain the question you need answered. If you need accommodation, check the current municipal support contacts rather than assuming availability from making an enquiry. Community connections help with meeting people and exchanging experience, while official conditions should be confirmed with the responsible organisation.",
+          "de": "Das städtische Portal StartWien erklärt Wohnen, Bildung, Arbeit, Gesundheit und Deutschlernen. Die verschiedenen Formate haben eigene Zugangsvoraussetzungen; ein individuelles Orientierungsgespräch steht nicht automatisch allen neu Zugezogenen offen. Aus der Ukraine geflüchtete Menschen sollten mit der eigenen ukrainischsprachigen Stadtseite beginnen und die Zielgruppe des jeweiligen Angebots prüfen. Für Vertriebene aus der Ukraine mit Hauptwohnsitz in Wien bietet Interface Wien mit MALVA Beratung zu Behörden, Alltag, Arbeit, Sprache und Bildung. Ukrainisch gehört zu den veröffentlichten Beratungssprachen. Vereinbaren Sie vor einem Besuch Kontakt und schildern Sie Ihre Frage. Bei Unterkunftsbedarf helfen aktuelle städtische Unterstützungskontakte; eine Anfrage garantiert keine verfügbaren Plätze. Community-Kontakte erleichtern Begegnungen und Erfahrungsaustausch. Offizielle Bedingungen und Kontaktdaten sollten jedoch direkt bei der zuständigen Organisation bestätigt werden."
+        }
+      }
+    ],
+    "sources": [
+      {"name": "Stadt Wien — Anmelden eines Wohnsitzes", "url": "https://www.wien.gv.at/amtswege/anmelden-wohnsitz"},
+      {"name": "Stadt Wien — Meldezettel und amtliche Hinweise", "url": "https://www.wien.gv.at/pdf/ma62/meldezettel.pdf"},
+      {"name": "StartWien — Housing in Vienna", "url": "https://start.wien.gv.at/en/wohnen-en"},
+      {"name": "StartWien — Support and programme eligibility", "url": "https://start.wien.gv.at/en/"},
+      {"name": "StartWien — Інформація для людей з України", "url": "https://start.wien.gv.at/ukraine"},
+      {"name": "StartWien — The health system in Austria", "url": "https://start.wien.gv.at/en/gesundheit-en"},
+      {"name": "Interface Wien — MALVA", "url": "https://www.interface-wien.at/malva-startbegleitung_en/"},
+      {"name": "Sozialministerium — Work and Migration", "url": "https://www.sozialministerium.gv.at/en/Topics/Labour/Labour-Market/Work-and-migration.html"}
+    ],
+    "faq": [
+      {
+        "q": {"uk": "Чи потрібно отримувати новий дозвіл на перебування разом із Meldezettel?", "en": "Does the Meldezettel also issue my residence permission?", "de": "Wird mit dem Meldezettel auch die Aufenthaltsberechtigung erteilt?"},
+        "a": {
+          "uk": "Ні. Реєстрація житла та право перебувати є різними процедурами. Перевірте підставу відповідно до громадянства й наявного документа. Anmeldebescheinigung для відповідних громадян ЄС, ЄЕЗ і Швейцарії та Ausweis für Vertriebene не є Meldezettel.",
+          "en": "No. Address registration and residence rights are different procedures. Check the route that matches your nationality and existing document. An Anmeldebescheinigung for qualifying EU, EEA or Swiss citizens and an Ausweis für Vertriebene are not the Meldezettel.",
+          "de": "Nein. Wohnsitzmeldung und Aufenthaltsrecht sind unterschiedliche Verfahren. Prüfen Sie den Weg anhand von Staatsangehörigkeit und vorhandenem Dokument. Eine Anmeldebescheinigung für berechtigte EU-, EWR- oder Schweizer Bürger und der Ausweis für Vertriebene sind nicht der Meldezettel."
+        }
+      },
+      {
+        "q": {"uk": "Хто підписує Meldezettel, якщо живу у знайомих?", "en": "Who signs the Meldezettel if I stay with friends?", "de": "Wer unterschreibt den Meldezettel, wenn ich bei Freunden wohne?"},
+        "a": {
+          "uk": "Unterkunftgeber — особа, яка фактично надає вам житло; залежно від домовленості це може бути власник чи основний орендар. Форма має відображати реальне проживання. Для тимчасової або незвичної домовленості уточніть порядок у Meldeservice перед поданням.",
+          "en": "The Unterkunftgeber is the person who actually provides the accommodation, which can be an owner or main tenant depending on the arrangement. The form must reflect a real stay. Ask the Meldeservice about temporary or unusual arrangements before submitting it.",
+          "de": "Unterkunftgeber ist die Person, die tatsächlich Unterkunft gewährt; je nach Vereinbarung etwa Eigentümer oder Hauptmieter. Das Formular muss das tatsächliche Wohnen abbilden. Klären Sie eine vorübergehende oder ungewöhnliche Unterbringung vor der Einreichung mit dem Meldeservice."
+        }
+      },
+      {
+        "q": {"uk": "Де знайти консультацію українською у Відні?", "en": "Where can I find Ukrainian-language advice in Vienna?", "de": "Wo finde ich ukrainischsprachige Beratung in Wien?"},
+        "a": {
+          "uk": "Почніть з українськомовної сторінки StartWien. Вона перелічує спеціальні консультації. MALVA від Interface Wien призначена для переміщених з України людей з основним місцем проживання у Відні та оприлюднює українську серед мов консультації. Запис і відповідність умовам уточнюйте безпосередньо.",
+          "en": "Begin with StartWien’s dedicated Ukrainian-language page. It lists targeted advice services. Interface Wien’s MALVA is for displaced people from Ukraine with their main residence in Vienna and lists Ukrainian as a consultation language. Confirm appointment arrangements and eligibility directly with the service.",
+          "de": "Beginnen Sie auf der ukrainischsprachigen StartWien-Seite mit speziellen Beratungsangeboten. MALVA von Interface Wien richtet sich an aus der Ukraine Vertriebene mit Hauptwohnsitz in Wien und führt Ukrainisch als Beratungssprache. Klären Sie Termin und Voraussetzungen direkt mit dem Angebot."
+        }
+      }
+    ],
+    "reviewedAt": "2026-10-23"
+  }
+}
