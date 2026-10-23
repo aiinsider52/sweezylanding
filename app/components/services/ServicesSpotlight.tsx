@@ -9,7 +9,7 @@ export function ServicesSpotlight() {
       <div>
         <p className={styles.eyebrow}>ЛЮДИ ТА ПОСЛУГИ ПОРУЧ</p>
         <h2 id="ukrainian-services-title">Знайдіть своїх. Вирішіть справу.</h2>
-        <p>Українські фахівці та локальні послуги у Швейцарії. Починаємо з автосервісу в Тургау: що роблять, де знаходяться та як зв'язатися.</p>
+        <p>Автосервіс, фотографія, догляд, переклади та навчання. Уже {ukrainianServices.length} карток у Тургау, Цюриху й Санкт-Галлені: прямі контакти, джерела та пояснення щодо української мови.</p>
         <Link href="/uk/services" className={styles.textLink}>Відкрити каталог послуг →</Link>
       </div>
       <ServiceCard service={ukrainianServices[0]} />

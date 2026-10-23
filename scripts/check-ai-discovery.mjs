@@ -3,7 +3,7 @@
 const argument = process.argv.find((arg) => arg.startsWith("--base="));
 const base = (argument?.slice(7) || "https://www.sweezy.world").replace(/\/$/, "");
 const origin = "https://www.sweezy.world";
-const routes = ["/uk/services", "/uk/services/classic-car-die-garage", "/uk/blog/ukrayinski-posluhy-shveytcariya", "/uk/blog/ukrayinskyy-avtoservis-thurgau"];
+const routes = ["/uk/services", "/uk/blog/ukrayinski-posluhy-shveytcariya", "/uk/blog/ukrayinskyy-avtoservis-thurgau", "/uk/blog/ukrayinski-posluhy-zurich"];
 const agents = ["OAI-SearchBot", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Googlebot", "bingbot"];
 const failures = [];
 async function read(path, userAgent = "Sweezy-Discovery-QA/1.0") {
@@ -21,6 +21,17 @@ for (const agent of agents) {
   } catch (error) { failures.push(`${agent}: ${error.message}`); }
 }
 try {
+  const directory = await read(routes[0]);
+  const schemas = Array.from(directory.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g), (match) => JSON.parse(match[1]));
+  const collection = schemas.find((entry) => entry["@type"] === "CollectionPage");
+  const items = collection?.mainEntity?.itemListElement;
+  if (!Array.isArray(items) || !items.length || collection.mainEntity.numberOfItems !== items.length) throw new Error("Directory ItemList missing or count mismatch");
+  for (const item of items) {
+    const url = new URL(item.url);
+    if (url.origin !== origin || !/^\/uk\/services\/[a-z0-9-]+$/.test(url.pathname)) throw new Error("Unexpected provider URL");
+    if (!directory.includes(`href="${url.pathname}"`)) throw new Error(`${url.pathname}: missing server-rendered profile link`);
+    routes.push(url.pathname);
+  }
   const sitemap = await read("/sitemap.xml");
   const robots = await read("/robots.txt");
   for (const token of ["OAI-SearchBot", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User", "Googlebot", "bingbot"]) {

@@ -1,4 +1,5 @@
 import { BASE_URL } from "../../lib/alternates";
+import { ukrainianServices, servicePath } from "../../data/ukrainian-services";
 
 export const dynamic = "force-static";
 
@@ -30,8 +31,9 @@ const content = `# Sweezy
 ## Ukrainian services and business
 
 - [Ukrainian services directory in Switzerland](${BASE_URL}/uk/services)
-- [Classic Car die Garage: auto service in Roggwil, Thurgau](${BASE_URL}/uk/services/classic-car-die-garage)
+${ukrainianServices.map((service) => `- [${service.name} — ${service.category}, ${service.city}](${BASE_URL}${servicePath(service)})`).join("\n")}
 - [How to find Ukrainian services in Switzerland](${BASE_URL}/uk/blog/ukrayinski-posluhy-shveytcariya)
+- [Ukrainian services in Zurich: photography, beauty and school](${BASE_URL}/uk/blog/ukrayinski-posluhy-zurich)
 - [Booking car service in Thurgau](${BASE_URL}/uk/blog/ukrayinskyy-avtoservis-thurgau)
 - [Starting a business in Switzerland as a Ukrainian](${BASE_URL}/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv)
 - [Self-employment with Status S](${BASE_URL}/uk/blog/samozaynyatist-status-s-shveytcariya)
@@ -64,6 +66,8 @@ const content = `# Sweezy
 - [XML sitemap](${BASE_URL}/sitemap.xml)
 
 ## Citation notes
+
+Service profiles distinguish a published Ukrainian language, Ukrainian origin, Ukrainian translation services and community recommendations. Ukrainian origin alone does not establish a service language. Sources and check dates are provided on each profile; contact the provider to confirm appointments and terms.
 
 Sweezy is a secondary practical guide, not a government authority. Time-sensitive pages identify official federal, cantonal or municipal sources. Important personal decisions should be confirmed with the responsible authority or a qualified professional.
 `;
