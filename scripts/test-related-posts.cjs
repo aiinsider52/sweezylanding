@@ -8,7 +8,10 @@ const output = ts.transpileModule(readFileSync("lib/editorial.ts", "utf8"), {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
 }).outputText;
 const exportsObject = {};
-runInNewContext(output, { exports: exportsObject });
+runInNewContext(output, { exports: exportsObject, require: (path) => {
+  assert.equal(path, "../data/blog-images.json");
+  return require("../data/blog-images.json");
+} });
 const select = exportsObject.selectRelatedPosts;
 const post = (slug, relatedPosts = [], locale = "en") => ({ slug, locale, frontmatter: { relatedPosts } });
 const slugs = (current, candidates) => Array.from(select(current, candidates), (item) => item.slug);

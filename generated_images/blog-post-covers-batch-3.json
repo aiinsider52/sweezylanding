@@ -1,0 +1,82 @@
+[
+  {
+    "locale": "uk",
+    "slug": "vartist-zhyttya-u-shveytcariyi",
+    "scene": "A warm everyday Swiss breakfast scene in a modest apartment kitchen: a fresh loaf of bread on a wooden board, a small ceramic butter dish, two plain mugs and a canvas bag of groceries beside an open kitchen window looking onto a leafy Swiss street. Natural daylight, sage green and cream cabinetry, welcoming ordinary life. No people, no banknotes, no receipts or prices, no writing. Wide interior photograph, distinct from a market stall.",
+    "alt": "Хліб, дві чашки та торба з продуктами на столі у світлій кухні",
+    "source": "exec-d529ce06-09e9-47ef-99bf-f9326c0b141c.png",
+    "ok": true
+  },
+  {
+    "locale": "uk",
+    "slug": "vidkryty-rakhunok-u-shveytcariyi",
+    "scene": "A tasteful close view of an ordinary Swiss bank self-service foyer from inside: a minimalist unbranded wall-mounted ATM with a completely dark blank screen, warm stone walls, a simple potted plant, daylight through glass doors showing a quiet Swiss street. Safe contemporary everyday architecture, no people, no money, no card numbers, no text or branding anywhere. Wide balanced composition with the machine on one side, not a wallet on a cafe table.",
+    "alt": "Банківське фоє з банкоматом без видимого тексту, кам’яними стінами та рослиною",
+    "source": "exec-7ac18b0b-eb41-47c8-90b8-ccb9164ee6c5.png",
+    "ok": true
+  },
+  {
+    "locale": "uk",
+    "slug": "yak-prodovzhyty-status-s-dokumenty",
+    "scene": "A beautifully lit overhead still life of a plain sage-green expanding document organizer with several cream dividers open on an oak table, an unmarked sealed envelope, a simple pen and one brass paper clip, soft window shadows. Practical paperwork preparation in a Swiss home, tactile natural materials. Absolutely no letters, words, numbers, stamps, IDs, screens or people. Clear top-down composition, unlike a closed folder on a shelf.",
+    "alt": "Розкритий органайзер із розділювачами, конверт і ручка на дерев’яному столі",
+    "source": "exec-b38281d1-7c57-40ea-923a-6e8cead37073.png",
+    "ok": true
+  },
+  {
+    "locale": "uk",
+    "slug": "yak-zareyestruvatysya-v-shveytcariyi",
+    "scene": "A welcoming Swiss town resident-service reception area, empty simple oak reception counter, sage upholstered waiting bench, softly glowing glass pendant lights and large windows onto a cobbled courtyard. Elegant civic interior with human scale and no security drama. No people, no readable signs, logos, official emblems, paperwork or monitors. Bright natural editorial architectural photography, clearly an interior unlike an exterior municipal building.",
+    "alt": "Зона прийому відвідувачів із дерев’яною стійкою, лавкою та великими вікнами",
+    "source": "exec-7b937db8-6013-4f40-ab2c-7f0cdd056ea6.png",
+    "ok": true
+  },
+  {
+    "locale": "uk",
+    "slug": "yak-zekonomyty-na-strakhovantsi-shveytcariya",
+    "scene": "A tasteful overhead still life combining everyday health and careful household choices: unbranded cream reading glasses, a simple analog wristwatch without readable numerals, a closed sage-green notebook and a small white ceramic bowl holding a green apple on pale linen. Soft morning window light, no clinic, no doctor, no medicine, no money, no written calculations or text. Sophisticated calm Swiss lifestyle editorial, distinct balanced arrangement.",
+    "alt": "Окуляри, годинник, закритий блокнот і зелене яблуко на світлій лляній тканині",
+    "source": "exec-dc73234f-73f9-43c9-8dae-521799b3e807.png",
+    "ok": true
+  },
+  {
+    "locale": "de",
+    "slug": "anmeldung-schweiz-auslaender",
+    "scene": "A quiet historic Swiss town hall courtyard viewed from a low angle: stone arcade, dark-green wooden doors and a single bicycle in warm morning sunshine, flowering planters in foreground, a small red Swiss flag on a discreet pole. Authentic human-scale civic architecture. No people, no readable signs, papers, maps or official seals. Wide composition focusing on arches and courtyard rather than an entrance close-up.",
+    "alt": "Illustration eines Schweizer Rathaus-Innenhofs mit Arkaden, Fahrrad und Blumenkübeln",
+    "source": "exec-c08c2662-5d7a-4dac-bd7d-d8d7eea3f27f.png",
+    "ok": true
+  },
+  {
+    "locale": "de",
+    "slug": "bankkonto-eroeffnen-schweiz",
+    "scene": "Elegant everyday banking still life on a quiet Swiss train: a plain closed dark-green card wallet resting beside a small espresso in a cream travel cup on the window table, lake and mountains gliding softly outside. Rich realistic materials, natural cool morning light, restrained luxury, no people, no visible cards or numbers, no readable train branding, words or screen. Wide composition with the train window dominant, distinct from a cafe terrace.",
+    "alt": "Grünes Kartenetui und Kaffeebecher auf einem Zugtisch vor einem See mit Bergen",
+    "source": "exec-85859b3f-4993-46b7-8996-c426f4051e64.png",
+    "ok": true
+  },
+  {
+    "locale": "de",
+    "slug": "krankenversicherung-expats-schweiz",
+    "scene": "A peaceful Swiss neighborhood health setting: quiet public garden path leading past a modest modern glass-and-stone health practice, two simple benches and a planted herb bed, a very discreet small green medical cross by the entrance in the distance. Natural bright overcast daylight, greenery and warm stone textures. No people, no medicines, no readable signs or logos. Wide exterior environmental photograph with the garden dominant, not a clinic doorway close-up.",
+    "alt": "Gartenweg mit Bänken vor einer kleinen Arztpraxis — redaktionelle Illustration",
+    "source": "exec-faefb3fa-c47e-431f-8e6c-c0cec6846ad6.png",
+    "ok": true
+  },
+  {
+    "locale": "de",
+    "slug": "umzug-schweiz-checkliste",
+    "scene": "A charming ordinary Swiss village apartment stair landing on moving day, one plain cardboard box with a small potted fern on top, a rolled cream blanket, simple wooden stair rail and an open dark-green front door with warm daylight coming through. Natural documentary-like lifestyle editorial, no people, no visible apartment numbers, text or labels. Vertical depth in a wide landscape frame, intimate and welcoming, no suitcase or apartment living room.",
+    "alt": "Umzugskarton mit einer Topfpflanze neben einer geöffneten grünen Wohnungstür",
+    "source": "exec-bcaeb728-f369-4c3a-8b86-b902efe886ee.png",
+    "ok": true
+  },
+  {
+    "locale": "de",
+    "slug": "wohnung-finden-schweiz",
+    "scene": "An attractive but ordinary Swiss residential building courtyard, two floors of cream plaster facades with forest-green shutters and small balconies, bicycles parked by a mature tree, open windows and potted geraniums, warm late afternoon daylight. Quiet welcoming neighborhood, realistic modest housing rather than a luxury villa. No people, no rental signs or text, no interior, no dramatic Alps backdrop. Wide architectural editorial photograph.",
+    "alt": "Schweizer Wohnhof mit grünen Fensterläden, kleinen Balkonen und abgestellten Fahrrädern",
+    "source": "exec-ffc22f4a-f6ce-4828-9d10-203b595dd896.png",
+    "ok": true
+  }
+]

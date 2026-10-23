@@ -17,7 +17,7 @@ import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import { SweezyCompanion } from "../../../components/SweezyCompanion";
 import { StarterKitBanner } from "../../../components/StarterKitBanner";
-import { getPostImage, getPostImageAlt, selectRelatedPosts, getPostDisplayTitle } from "../../../../lib/editorial";
+import { getPostImage, getPostImageAlt, getPostImageMetadata, getPostSocialImage, selectRelatedPosts, getPostDisplayTitle } from "../../../../lib/editorial";
 import { getUkrainianAuthorityRoute } from "../../../../data/authority-routes";
 import styles from "../../editorial.module.css";
 import journal from "../journal.module.css";
@@ -113,8 +113,7 @@ export async function generateMetadata({
   if (!post) return {};
   const pathWithoutLocale = `/blog/${params.slug}`;
   const canonicalUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}`;
-  const ogImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/opengraph-image`;
-  const twitterImageUrl = `${BASE_URL}/${params.locale}/blog/${params.slug}/twitter-image`;
+  const ogImageUrl = `${BASE_URL}${getPostSocialImage(params.locale, post.slug)}`;
   const imageAlt = getPostImageAlt(params.locale, post.frontmatter.title, post.slug);
 
   return {
@@ -144,7 +143,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.frontmatter.title,
       description: post.frontmatter.description,
-      images: [twitterImageUrl],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: imageAlt }],
     },
   };
 }
@@ -207,7 +206,8 @@ export default async function BlogPostPage({
   const articleCopy = ARTICLE_COPY[locale];
   const authorityRoute = getUkrainianAuthorityRoute(locale, post.slug);
   const canonicalUrl = `${BASE_URL}/${locale}/blog/${params.slug}`;
-  const ogImageUrl = `${BASE_URL}/${locale}/blog/${params.slug}/opengraph-image`;
+  const cover = getPostImageMetadata(locale, post.slug);
+  const coverUrl = `${BASE_URL}${cover.src}`;
   const breadcrumbItems = [
     { name: COPY[locale].home, url: `/${locale}` },
     { name: COPY[locale].blog, url: `/${locale}/blog` },
@@ -220,12 +220,12 @@ export default async function BlogPostPage({
     description: post.frontmatter.description,
     image: {
       "@type": "ImageObject",
-      url: ogImageUrl,
-      contentUrl: ogImageUrl,
+      url: coverUrl,
+      contentUrl: coverUrl,
       name: post.frontmatter.title,
       caption: getPostImageAlt(locale, post.frontmatter.title, post.slug),
-      width: 1200,
-      height: 630,
+      width: cover.width,
+      height: cover.height,
       representativeOfPage: true,
       creditText: "Sweezy editorial",
     },

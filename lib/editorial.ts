@@ -1,4 +1,14 @@
 import type { Locale } from "./i18n";
+import blogImages from "../data/blog-images.json";
+
+type PostImage = { src: string; alt: string; width: number; height: number };
+const POST_IMAGES: Record<string, PostImage> = blogImages;
+
+export function getPostImageMetadata(locale: Locale, slug: string): PostImage {
+  const image = POST_IMAGES[`${locale}/${slug}`];
+  if (!image) throw new Error(`Missing unique blog cover: ${locale}/${slug}`);
+  return image;
+}
 
 const CANTON_IMAGES: Record<string, string> = {
   zurich: "/images/canton-zurich.jpg",
@@ -92,8 +102,7 @@ export function getCantonImageAlt(locale: Locale, cantonName: string) {
 }
 
 export function getPostImage(locale: Locale, slug: string) {
-  const topic = getPostArtwork(slug, locale).key;
-  return `/editorial/covers/${topic === "guide" ? "relocation" : topic}.webp`;
+  return getPostImageMetadata(locale, slug).src;
 }
 
 export function getPostDisplayTitle(title: string) {
@@ -101,12 +110,9 @@ export function getPostDisplayTitle(title: string) {
 }
 
 export function getPostSocialImage(locale: Locale, slug: string) {
-  return `/${locale}/blog/${slug}/opengraph-image`;
+  return getPostImage(locale, slug).replace("/posts/", "/posts/social/").replace(/\.webp$/, ".jpg");
 }
 
-export function getPostImageAlt(locale: Locale, title: string, slug: string) {
-  const topic = getPostArtwork(slug, locale).label;
-  if (locale === "uk") return `Редакційна ілюстрація Sweezy до «${title}» — тема: ${topic}`;
-  if (locale === "de") return `Redaktionelle Sweezy-Illustration zu „${title}“ — Thema: ${topic}`;
-  return `Sweezy editorial illustration for “${title}” — ${topic}`;
+export function getPostImageAlt(locale: Locale, _title: string, slug: string) {
+  return getPostImageMetadata(locale, slug).alt;
 }
