@@ -11,7 +11,7 @@ import { ukrainianServices, servicePath } from "../data/ukrainian-services";
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
 const STATIC_PAGES = ["support", "privacy", "terms", "cookies"] as const;
-const LOCALIZED_PAGES = ["about", "community", "planning", "editorial", "authors/sweezy-team", "starter-kit"] as const;
+const LOCALIZED_PAGES = ["about", "community", "planning", "editorial", "authors/sweezy-team", "starter-kit", "swiss-bucket-list"] as const;
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 

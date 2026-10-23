@@ -56,10 +56,10 @@ with sync_playwright() as p:
             assert download.ok and download.body().startswith(b"%PDF"), locale
         page.goto(f"{args.base}/{locale}", wait_until="domcontentloaded")
         assert page.locator(f'a[href="/{locale}/starter-kit"]').count() >= 1
-        link = page.locator(f'a[href="/{locale}/starter-kit"]').first
+        link = page.locator(f'a[href="/{locale}/swiss-bucket-list"]').first
         link.scroll_into_view_if_needed()
         if locale == "uk":
-            link.locator("xpath=ancestor::section").screenshot(path=str(shots / "home-banner.png"))
+            page.locator('section#swiss-travel-kit').screenshot(path=str(shots / "home-banner.png"))
         assert not errors, errors
         context.close()
     assert "/uk/starter-kit" in browser.new_page().request.get(args.base + "/sitemap.xml").text()

@@ -40,6 +40,7 @@ ${ukrainianServices.map((service) => `- [${service.name} — ${service.category}
 - [Einzelfirma versus GmbH](${BASE_URL}/uk/blog/einzelfirma-chy-gmbh-shveytcariya)
 - [Business communities in Switzerland](${BASE_URL}/uk/blog/biznes-spilnoty-shveytcariya)
 - [Free first-week checklist and PDF](${BASE_URL}/uk/starter-kit)
+- [Eight Swiss places: interactive wish list and free travel PDF](${BASE_URL}/uk/swiss-bucket-list)
 
 ## English resources
 

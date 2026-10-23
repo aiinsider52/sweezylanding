@@ -16,7 +16,7 @@ import { CommunityBanner } from "./CommunityBanner";
 import { ShowcaseTabs } from "./ShowcaseTabs";
 import { SweezyCompanion, type CompanionPose } from "../SweezyCompanion";
 import styles from "./landing.module.css";
-import { StarterKitBanner } from "../StarterKitBanner";
+import { TravelKitBanner } from "../TravelKitBanner";
 import { ServicesSpotlight } from "../services/ServicesSpotlight";
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
@@ -86,7 +86,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
 
         <AnimatedProof items={copy.proof} />
 
-        <StarterKitBanner locale={locale} />
+        <TravelKitBanner locale={locale} />
 
         <section className={styles.knowledgeSection} aria-labelledby="knowledge-title">
           <MotionReveal className={styles.knowledgeHeader}>

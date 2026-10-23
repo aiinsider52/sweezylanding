@@ -70,6 +70,7 @@ export function SiteFooter({ year }: { year: number }) {
         { label: t("footer.contact"), href: "mailto:support@sweezy.world" },
         { label: t("footer.blog"), href: localeBlog },
         { label: locale === "uk" ? "Безкоштовний стартовий набір" : locale === "de" ? "Kostenloses Startpaket" : "Free starter kit", href: `/${locale}/starter-kit` },
+        { label: locale === "uk" ? "8 місць для вашого списку мрій" : locale === "de" ? "8 Orte für Ihre Wunschliste" : "8 places for your Swiss wish list", href: `/${locale}/swiss-bucket-list` },
         { label: locale === "uk" ? "Спільнота Sweezy" : locale === "de" ? "Sweezy Community" : "Sweezy community", href: `/${locale}/community` },
         { label: locale === "uk" ? "Редакційні стандарти" : locale === "de" ? "Redaktionelle Standards" : "Editorial standards", href: `/${locale}/editorial` },
         ...SEO_CLUSTERS[locale]
