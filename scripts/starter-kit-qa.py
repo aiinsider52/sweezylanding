@@ -1,5 +1,7 @@
 """Check starter-kit UX and optionally export the three printable PDFs."""
 import argparse
+import json
+import subprocess
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
@@ -12,7 +14,11 @@ output = root / "public" / "downloads"
 shots = Path("/tmp/sweezy-starter-kit-qa")
 shots.mkdir(exist_ok=True)
 if args.export:
-    output.mkdir(exist_ok=True)
+    from generate_pdf_guides import build
+    guides = json.loads(subprocess.check_output(["node", "scripts/export-pdf-guides.cjs"], cwd=root))
+    for guide in guides:
+        if guide["id"] == "first-week":
+            build(guide)
 
 with sync_playwright() as p:
     browser = p.chromium.launch()
@@ -43,14 +49,6 @@ with sync_playwright() as p:
                 page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
                 page.wait_for_timeout(300)
                 page.screenshot(path=str(shots / f"kit-{width}.png"))
-        if args.export:
-            page.evaluate("document.fonts.ready")
-            page.pdf(path=str(output / f"sweezy-first-week-{locale}.pdf"), format="A4", print_background=True, prefer_css_page_size=True)
-            import fitz
-            with fitz.open(output / f"sweezy-first-week-{locale}.pdf") as document:
-                assert len(document) == 1, (locale, "PDF must fit one page", len(document))
-                assert len(document[0].get_text()) > 1400, (locale, "PDF text missing")
-                document[0].get_pixmap(matrix=fitz.Matrix(1, 1)).save(str(shots / f"pdf-{locale}.png"))
         if not args.export:
             download = page.request.get(f"{args.base}/downloads/sweezy-first-week-{locale}.pdf")
             assert download.ok and download.body().startswith(b"%PDF"), locale

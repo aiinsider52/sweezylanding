@@ -48,7 +48,7 @@ export function SiteHeader() {
   const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   const life: MenuItem[] = [
     { href: `${home}/countries`, label: "DACH", description: locale === "uk" ? "Швейцарія · Німеччина · Австрія" : locale === "de" ? "Schweiz · Deutschland · Österreich" : "Switzerland · Germany · Austria" },
-    { href: `${home}/resources`, label: locale === "uk" ? "Безкоштовні PDF" : locale === "de" ? "Kostenlose PDFs" : "Free PDF checklists", description: locale === "uk" ? "Переїзд і бізнес: оберіть країну" : locale === "de" ? "Umzug und Gründung: Land wählen" : "Moving and business: choose your country" },
+    { href: `${home}/resources`, label: locale === "uk" ? "Безкоштовні PDF" : locale === "de" ? "Kostenlose PDFs" : "Free PDF guides", description: locale === "uk" ? "Переїзд і бізнес: оберіть країну" : locale === "de" ? "Umzug und Gründung: Land wählen" : "Moving and business: choose your country" },
     { href: `${home}/guides`, label: c.guides, description: c.guidesDesc },
     { href: `${home}/jobs`, label: c.jobs, description: c.jobsDesc },
     ...(locale === "uk" ? [

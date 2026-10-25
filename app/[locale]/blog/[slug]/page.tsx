@@ -326,7 +326,7 @@ export default async function BlogPostPage({
               alt={getPostImageAlt(locale, post.frontmatter.title, post.slug)}
               fill
               priority
-              sizes="(max-width: 1000px) 100vw, 600px"
+              sizes="(max-width: 1100px) 100vw, 50vw"
             />
           </div>
         </header>
@@ -462,7 +462,7 @@ export default async function BlogPostPage({
                   className={journal.relatedCard}
                 >
                   <div className={journal.relatedImage}>
-                    <Image src={getPostImage(locale, relatedPost.slug)} alt={getPostImageAlt(locale, relatedPost.frontmatter.title, relatedPost.slug)} fill sizes="(max-width: 620px) 100vw, 390px" />
+                    <Image src={getPostImage(locale, relatedPost.slug)} alt={getPostImageAlt(locale, relatedPost.frontmatter.title, relatedPost.slug)} fill sizes="(max-width: 620px) 100vw, 33vw" />
                   </div>
                   <div className={journal.relatedCopy}>
                     <span className={styles.eyebrow}>{String(index + 1).padStart(2, "0")}</span>

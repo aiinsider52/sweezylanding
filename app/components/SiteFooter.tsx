@@ -46,7 +46,7 @@ export function SiteFooter({ year }: { year: number }) {
   const home = `/${locale}`;
   const discover = [
     { label: "DACH · CH / DE / AT", href: `${home}/countries` },
-    { label: locale === "uk" ? "Безкоштовні PDF" : locale === "de" ? "Kostenlose PDFs" : "Free PDF checklists", href: `${home}/resources` },
+    { label: locale === "uk" ? "Безкоштовні PDF" : locale === "de" ? "Kostenlose PDFs" : "Free PDF guides", href: `${home}/resources` },
     { label: c.places, href: `${home}/places` },
     { label: c.planning, href: `${home}/planning` },
     { label: c.guides, href: `${home}/guides` },

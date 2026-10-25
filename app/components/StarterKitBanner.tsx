@@ -17,7 +17,7 @@ export function StarterKitBanner({ locale }: { locale: Locale }) {
           <DownloadLink asset="first-week" locale={locale} placement="starter-kit-banner" className={styles.button}>{copy.download}<span aria-hidden>↓</span></DownloadLink>
           <Link href={`/${locale}/starter-kit`} className={styles.secondary}>{copy.open}<span aria-hidden>→</span></Link>
         </div>
-        <p className={styles.downloadNote}>{locale === "uk" ? "Безкоштовно · 1 сторінка · Без реєстрації" : locale === "de" ? "Kostenlos · 1 Seite · Ohne Anmeldung" : "Free · 1 page · No signup"}</p>
+        <p className={styles.downloadNote}>{locale === "uk" ? "Безкоштовно · 5 сторінок · Без реєстрації" : locale === "de" ? "Kostenlos · 5 Seiten · Ohne Anmeldung" : "Free · 5 pages · No signup"}</p>
       </div>
       <SweezyCompanion pose="greeting" className={styles.companion} />
     </div>

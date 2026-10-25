@@ -9,7 +9,7 @@ type KitCopy = {
 export const firstWeek: Record<Locale, KitCopy> = {
   uk: {
     title: "Перші 7 днів у Швейцарії",
-    intro: "14 практичних кроків: документи, адреса, страховка та перші побутові справи. Один план, який можна взяти із собою.",
+    intro: "14 практичних кроків на сторінці та окремий PDF-мінігід із поясненнями про документи, страхування й повсякденне життя.",
     badge: "БЕЗКОШТОВНИЙ СТАРТОВИЙ НАБІР", open: "Відкрити чеклист", download: "Завантажити PDF",
     progress: "виконано", reset: "Скинути позначки", saved: "Позначки збережені лише в цьому браузері.",
     unavailable: "Браузер не дозволяє зберегти позначки. Вони діють до закриття сторінки.",
@@ -27,7 +27,7 @@ export const firstWeek: Record<Locale, KitCopy> = {
   },
   en: {
     title: "Your first 7 days in Switzerland",
-    intro: "14 practical steps for documents, registration, insurance and everyday essentials. One plan to take with you.",
+    intro: "14 practical steps on this page, plus a separate PDF mini guide explaining documents, insurance and everyday life.",
     badge: "FREE STARTER KIT", open: "Open checklist", download: "Download PDF",
     progress: "completed", reset: "Reset checklist", saved: "Ticks are saved only in this browser.",
     unavailable: "Your browser cannot save ticks. They last until you close this page.",
@@ -45,7 +45,7 @@ export const firstWeek: Record<Locale, KitCopy> = {
   },
   de: {
     title: "Ihre ersten 7 Tage in der Schweiz",
-    intro: "14 praktische Schritte für Dokumente, Anmeldung, Versicherung und Alltag. Ein Plan zum Mitnehmen.",
+    intro: "14 praktische Schritte auf dieser Seite und ein separater PDF-Ratgeber mit Erklärungen zu Dokumenten, Versicherung und Alltag.",
     badge: "KOSTENLOSES STARTPAKET", open: "Checkliste öffnen", download: "PDF herunterladen",
     progress: "erledigt", reset: "Markierungen zurücksetzen", saved: "Markierungen bleiben nur in diesem Browser gespeichert.",
     unavailable: "Ihr Browser kann die Markierungen nicht speichern. Sie gelten bis zum Schliessen der Seite.",

@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "pdf:build": "node scripts/export-pdf-guides.cjs | python3 scripts/generate_pdf_guides.py",
+    "test:pdf": "python3 scripts/pdf-guides-qa.py",
     "dev": "next dev",
     "build": "next build",
     "analytics:report": "node scripts/analytics-report.mjs",

@@ -14,11 +14,13 @@ ROOT = Path('.next/server/app')
 LOCALES = ['uk', 'en', 'de']
 COUNTRIES = ['switzerland', 'germany', 'austria']
 TOPICS = ['registration', 'work', 'business']
+cities = json.loads(Path('data/dach-cities.json').read_text())
 routes = []
 for locale in LOCALES:
     routes += [f'/{locale}/countries', f'/{locale}/resources']
     routes += [f'/{locale}/countries/{country}' for country in COUNTRIES]
     routes += [f'/{locale}/countries/{country}/{topic}' for country in ['germany', 'austria'] for topic in TOPICS]
+    routes += [f'/{locale}/countries/{item["country"]}/cities/{city}' for city,item in cities.items()]
 routes += ['/uk/services/city/zurich', '/uk/services/category/photography']
 sitemap = ET.fromstring((ROOT/'sitemap.xml.body').read_bytes())
 ns = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
@@ -72,7 +74,7 @@ with Image.open('public/social/sweezy-dach-v1.jpg') as picture: assert picture.s
 for locale in LOCALES:
     for asset in ['business-ch','starter-germany','business-germany','starter-austria','business-austria']:
         with fitz.open(f'public/downloads/sweezy-{asset}-{locale}.pdf') as pdf:
-            assert len(pdf)==2
-            assert sum(len(list(page.widgets() or [])) for page in pdf)==15
-            assert all(len(page.get_text()) > 350 for page in pdf)
-print(f'PASS: {len(routes)} DACH/resource/service pages, locale/canonical/hreflang, visible FAQ/schema, source citations, internal links and anchors, 15 new interactive PDFs and 5 image assets')
+            assert len(pdf) in [4,5]
+            assert not any(list(page.widgets() or []) for page in pdf)
+            assert all(len(page.get_text()) > 170 for page in pdf)
+print(f'PASS: {len(routes)} DACH/resource/service/city pages, locale/canonical/hreflang, visible FAQ/schema, citations, links/anchors, informational PDFs and image assets')

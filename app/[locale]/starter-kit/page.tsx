@@ -35,7 +35,7 @@ export default function StarterKit({ params }: { params: { locale: string } }) {
     <section className={styles.sources}>
       <h2>{copy.sources}</h2>
       <ul>{kitSources.map(source => <li key={source.href}><a href={source.href} target="_blank" rel="noreferrer noopener">{source.name}</a></li>)}</ul>
-      <p>Sweezy · 28.09.2026</p>
+      <p>Sweezy · 23.10.2026</p>
     </section>
     <section className={styles.end}><h2>{copy.next}</h2><a href={APP_STORE_URL} className={styles.button} target="_blank" rel="noreferrer noopener">{copy.app}<span aria-hidden>↗</span></a></section>
   </main>;

@@ -1,5 +1,6 @@
 import { BASE_URL } from "../../lib/alternates";
 import { ukrainianServices, servicePath } from "../../data/ukrainian-services";
+import { CITY_SLUGS, dachCities } from "../../lib/dach-cities";
 import { COUNTRIES, DACH_TOPICS } from "../../data/dach";
 
 export const dynamic = "force-static";
@@ -14,7 +15,8 @@ ${["uk", "en", "de"].flatMap(locale => [
   `- [Choose a DACH country (${locale})](${BASE_URL}/${locale}/countries)`,
   ...COUNTRIES.map(country => `- [${country} guide (${locale})](${BASE_URL}/${locale}/countries/${country})`),
   ...["germany", "austria"].flatMap(country => DACH_TOPICS.map(topic => `- [${country}: ${topic} (${locale})](${BASE_URL}/${locale}/countries/${country}/${topic})`)),
-  `- [Free country-specific PDF checklists (${locale})](${BASE_URL}/${locale}/resources)`,
+  ...CITY_SLUGS.map(city => `- [${city}: local newcomer guide (${locale})](${BASE_URL}/${locale}/countries/${dachCities[city].country}/cities/${city})`),
+  `- [Free country-specific informational PDF guides (${locale})](${BASE_URL}/${locale}/resources)`,
 ]).join("\n")}
 
 Country guides distinguish address registration, residence status, permission to work, qualifications and business registration. They publish the source-check date, official source links and visible FAQs. No quoted external expert review or guaranteed immigration outcome is claimed. Support resources distinguish an official online directory from an in-person advice service.
@@ -51,7 +53,7 @@ ${ukrainianServices.map((service) => `- [${service.name} — ${service.category}
 - [Self-employment with Status S](${BASE_URL}/uk/blog/samozaynyatist-status-s-shveytcariya)
 - [Einzelfirma versus GmbH](${BASE_URL}/uk/blog/einzelfirma-chy-gmbh-shveytcariya)
 - [Business communities in Switzerland](${BASE_URL}/uk/blog/biznes-spilnoty-shveytcariya)
-- [Free first-week checklist and PDF](${BASE_URL}/uk/starter-kit)
+- [Interactive first-week steps and informational PDF guide](${BASE_URL}/uk/starter-kit)
 - [Eight Swiss places: interactive wish list and free travel PDF](${BASE_URL}/uk/swiss-bucket-list)
 
 ## English resources

@@ -9,6 +9,7 @@ import { isLocale, isRedirectedBlogPost } from "../lib/blog";
 import { ukrainianServices, servicePath } from "../data/ukrainian-services";
 import { serviceHubs } from "../data/service-hubs";
 import { COUNTRIES, DACH_TOPICS, REVIEWED_AT } from "../data/dach";
+import { CITY_SLUGS, cityPath, dachCities } from "../lib/dach-cities";
 
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
@@ -162,6 +163,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${SITE_URL}/${locale}/countries`, lastModified: new Date(REVIEWED_AT) },
       { url: `${SITE_URL}/${locale}/resources`, lastModified: new Date(REVIEWED_AT) },
       ...COUNTRIES.map(country => ({ url: `${SITE_URL}/${locale}/countries/${country}`, lastModified: new Date(REVIEWED_AT) })),
+      ...CITY_SLUGS.map(city => ({ url: `${SITE_URL}${cityPath(locale,city)}`, lastModified: new Date(dachCities[city].reviewedAt) })),
       ...(["germany", "austria"] as const).flatMap(country => DACH_TOPICS.map(topic => ({ url: `${SITE_URL}/${locale}/countries/${country}/${topic}`, lastModified: new Date(REVIEWED_AT) }))),
     ]),
     ...serviceHubs.map(hub => ({ url: `${SITE_URL}/uk/services/${hub.kind}/${hub.slug}` })),

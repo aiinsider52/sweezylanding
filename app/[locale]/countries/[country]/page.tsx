@@ -6,6 +6,7 @@ import { isLocale } from "../../../../lib/blog";
 import { BASE_URL, buildLocaleAlternates } from "../../../../lib/alternates";
 import { COUNTRIES, countrySeoTitles, countryData, countryPath, isCountry, dachCopy, DACH_TOPICS, topicNames, topicHref, countrySources, REVIEWED_AT } from "../../../../data/dach";
 import { dachSupport } from "../../../../data/dach-support";
+import { CITY_SLUGS, dachCities, cityPath } from "../../../../lib/dach-cities";
 import { DOWNLOADS } from "../../../../data/downloads";
 import { CountryCards } from "../../../components/CountryCards";
 import { LeadMagnetBanner } from "../../../components/LeadMagnetBanner";
@@ -30,6 +31,7 @@ export default function CountryHub({ params }: { params: { locale: string; count
     <header className={styles.hero}><div><p className={styles.eyebrow}>SWEEZY / {item.code}</p><h1>{item.title[locale]}</h1><p>{item.description[locale]}</p></div><div className={styles.heroPhoto}><Image src={item.image} alt={item.alt[locale]} fill priority sizes="(max-width: 850px) 100vw, 590px" /></div></header>
     <section className={styles.section}><h2>{c.topics}</h2><div className={styles.topics}>{DACH_TOPICS.map((topic, index) => <article className={styles.topic} key={topic}><small>0{index + 1} / {item.code}</small><h3>{topicNames[topic][locale]}</h3><Link href={topicHref(locale, country, topic)} className={styles.link}>{c.open} →</Link></article>)}</div></section>
     <p className={styles.note}>{c.scope}</p>
+    {CITY_SLUGS.filter(city => dachCities[city].country === country).map(city => <section className={styles.section} key={city}><h2>{dachCities[city].name[locale]}</h2><p>{dachCities[city].description[locale]}</p><Link className={styles.link} href={cityPath(locale,city)}>{c.open}: {dachCities[city].name[locale]} →</Link></section>)}
     <LeadMagnetBanner locale={locale} asset={item.starter} placement={`country-${country}`} />
     {country === "switzerland" && <section className={styles.section} id="business"><h2>{DOWNLOADS["business-ch"].title[locale]}</h2><p>{c.businessNote}</p><div className={styles.sourceList}><Link href="/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv">{c.businessAction} →</Link><Link href={`/${locale}/guides`}>{locale === "uk" ? "Гіди по кантонах" : locale === "de" ? "Kantonale Ratgeber" : "Canton guides"} →</Link><Link href="/uk/services">{c.services} (UK) →</Link></div></section>}
     {resources.length > 0 && <section className={styles.section}><h2>{c.services}</h2><div className={styles.directory}>{resources.map(resource => <article className={styles.topic} key={resource.id}><small>{resource.city} / {resource.kind[locale]}</small><h3>{resource.name}</h3><p>{resource.description[locale]}</p><div className={styles.sourceList}><a href={resource.url} target="_blank" rel="noreferrer noopener" data-service={resource.id} data-service-action="website">{c.open} ↗</a>{resource.phone && <a href={`tel:${resource.phone}`} data-service={resource.id} data-service-action="phone">{resource.phone}</a>}{resource.email && <a href={`mailto:${resource.email}`} data-service={resource.id} data-service-action="email">Email ↗</a>}</div></article>)}</div></section>}

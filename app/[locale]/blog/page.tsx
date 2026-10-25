@@ -178,7 +178,7 @@ export default async function BlogIndexPage({
 
   return (
     <main lang={locale} className={styles.page}>
-      <div className={styles.shell}>
+      <div className={journal.shell}>
         <Breadcrumb items={[
           { name: locale === "uk" ? "Головна" : locale === "de" ? "Start" : "Home", url: `/${locale}` },
           { name: copy.eyebrow, url: `${BASE_URL}/${locale}/blog` },
@@ -195,35 +195,16 @@ export default async function BlogIndexPage({
             <span className={journal.noteBottom}>{copy.latest} <span aria-hidden>↓</span></span>
           </a>
         </header>
-
-        {locale === "uk" ? (
-          <section aria-labelledby="ukrainian-start-title">
-            <div className={styles.sectionHead} id="latest">
-              <h2 id="ukrainian-start-title">Почніть звідси</h2>
-              <span className={styles.eyebrow}>Офіційні джерела · практичні кроки</span>
-            </div>
-            <div className={journal.startGrid}>
-              {UK_FEATURED.map((item, index) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={journal.startItem}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
-                    <span className={styles.eyebrow}>{item.eyebrow}</span>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </Link>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        <nav className={journal.countryNav} aria-label={locale === "uk" ? "Гіди за країнами" : locale === "de" ? "Ratgeber nach Land" : "Guides by country"}>
+          <span>DACH /</span>
+          <Link href={`/${locale}/countries/switzerland`}>{locale === "uk" ? "Швейцарія" : locale === "de" ? "Schweiz" : "Switzerland"} <span>CH ↗</span></Link>
+          <Link href={`/${locale}/countries/germany`}>{locale === "uk" ? "Німеччина" : locale === "de" ? "Deutschland" : "Germany"} <span>DE ↗</span></Link>
+          <Link href={`/${locale}/countries/austria`}>{locale === "uk" ? "Австрія" : locale === "de" ? "Österreich" : "Austria"} <span>AT ↗</span></Link>
+        </nav>
 
         {leadPost ? (
           <>
-            <div className={styles.sectionHead} id={locale === "uk" ? undefined : "latest"}>
+            <div className={styles.sectionHead} id="latest">
               <h2>{copy.latest}</h2>
               <span className={styles.eyebrow}>01</span>
             </div>
@@ -234,7 +215,7 @@ export default async function BlogIndexPage({
                   alt={getPostImageAlt(locale, leadPost.frontmatter.title, leadPost.slug)}
                   fill
                   priority
-                  sizes="(max-width: 620px) 100vw, 740px"
+                  sizes="(max-width: 760px) 100vw, 55vw"
                 />
               </div>
               <div className={journal.featuredCopy}>
@@ -262,6 +243,31 @@ export default async function BlogIndexPage({
           <p className="py-12 opacity-50">{copy.empty}</p>
         )}
 
+        {locale === "uk" ? (
+          <section aria-labelledby="ukrainian-start-title">
+            <div className={styles.sectionHead}>
+              <h2 id="ukrainian-start-title">Почніть звідси</h2>
+              <span className={styles.eyebrow}>Офіційні джерела · практичні кроки</span>
+            </div>
+            <div className={journal.startGrid}>
+              {UK_FEATURED.map((item, index) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={journal.startItem}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
+                    <span className={styles.eyebrow}>{item.eyebrow}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         {remainingPosts.length ? (
           <>
             <div className={styles.sectionHead}>
@@ -282,7 +288,7 @@ export default async function BlogIndexPage({
                       src={getPostImage(locale, post.slug)}
                       alt={getPostImageAlt(locale, post.frontmatter.title, post.slug)}
                       fill
-                      sizes="(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 440px"
+                      sizes="(max-width: 620px) 100vw, (max-width: 1100px) 50vw, (min-width: 1900px) 25vw, 33vw"
                     />
                     <span className={journal.imageTopic}>{artwork.label}</span>
                   </div>

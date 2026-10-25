@@ -56,18 +56,17 @@ for locale, value in data.items():
         assert (ROOT / "public" / place["image"].lstrip("/")).exists()
         assert (ROOT / ".next/server/app" / (place["href"].lstrip("/") + ".html")).exists()
     pdf_path = "/downloads/sweezy-travel-kit-{}.pdf".format(locale)
-    assert pdf_path in page.links
+    assert any((href or "").startswith("/api/download/travel-kit?") for href in page.links)
     home = (ROOT / ".next/server/app/{}.html".format(locale)).read_text()
-    assert 'id="swiss-travel-kit"' in home and pdf_path in home and route in home
+    assert 'id="swiss-travel-kit"' in home and "/api/download/travel-kit?" in home and route in home
     assert '/{}/starter-kit'.format(locale) in page.links
     assert (ROOT / "public/downloads/sweezy-first-week-{}.pdf".format(locale)).exists()
     with Image.open(ROOT / "public/downloads/sweezy-travel-kit-cover-{}.webp".format(locale)) as preview:
         assert preview.size == (714, 1010)
     reader = PdfReader(ROOT / "public" / pdf_path.lstrip("/"))
-    assert len(reader.pages) == 3
+    assert len(reader.pages) == 10
     fields = reader.get_fields()
-    assert len(fields) == len(places) + len(copy["tasks"])
-    assert all(fields["want-" + p["slug"]]["/FT"] == "/Btn" for p in places)
+    assert not fields
     uris = [str(item.get_object().get("/A", {}).get("/URI", "")) for pdf_page in reader.pages for item in pdf_page.get("/Annots", [])]
     for place in places:
         assert "https://www.sweezy.world" + place["href"] in uris
@@ -76,9 +75,9 @@ for locale, value in data.items():
         text = " ".join(" ".join(p.get_text() for p in document).split())
         assert all(" ".join(place["title"].split()) in text for place in places)
         for pdf_page in document:
-            assert len(pdf_page.get_text()) > 400
+            assert len(pdf_page.get_text()) > 170
             for block in pdf_page.get_text("blocks"):
                 assert block[0] >= -1 and block[1] >= -1 and block[2] <= 597 and block[3] <= 844
-    print("PASS", locale, "8 places, 8 web checkboxes, 3 PDF pages, 14 PDF fields, real previews, links and metadata")
+    print("PASS", locale, "8 places, 8 web checkboxes, 10 informational PDF pages, no PDF fields, real previews, links and metadata")
 
 print("Travel kit checks passed. Browser layout, check/uncheck and persistence still need browser QA.")
