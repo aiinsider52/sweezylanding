@@ -15,7 +15,7 @@ export async function persistMetric(event: MetricEvent) {
     return;
   }
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) throw new Error("Configure persistent analytics storage for serverless hosting");
-  const configured = process.env.SWEEZY_ANALYTICS_DIR ?? ".local/analytics";
+  const configured = process.env.SWEEZY_ANALYTICS_DIR?.trim() || ".local/analytics";
   const directory = isAbsolute(configured) ? configured : join(process.cwd(), configured);
   await mkdir(directory, { recursive: true, mode: 0o700 });
   await appendFile(join(directory, `events-${row.recordedAt.slice(0, 10)}.jsonl`), JSON.stringify(row) + "\n", { mode: 0o600 });

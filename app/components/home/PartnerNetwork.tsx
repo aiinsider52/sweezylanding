@@ -4,9 +4,10 @@ import type { FormEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "../../../lib/i18n";
 import type { LandingCopy } from "../../../lib/landing-copy";
+import Link from "next/link";
+import { PARTNER_EMAIL } from "../../../data/partners";
+import { sendMetric } from "../../../lib/analytics-client";
 import styles from "./landing.module.css";
-
-const PARTNER_EMAIL = "support@sweezy.world";
 
 type PartnerNetworkProps = {
   copy: LandingCopy["partner"];
@@ -56,6 +57,7 @@ export function PartnerNetwork({ copy, locale }: PartnerNetworkProps) {
     ].join("\n");
 
     setDraftOpened(true);
+    void sendMetric("partner_contact", { action: "general", placement: "home-partner-form" });
     window.location.href = `mailto:${PARTNER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
@@ -72,7 +74,7 @@ export function PartnerNetwork({ copy, locale }: PartnerNetworkProps) {
             <button type="button" className={styles.partnerPrimary} aria-expanded={formOpen} onClick={openForm}>
               {copy.primary}<span aria-hidden>↗</span>
             </button>
-            <a href="#partner-flow" className={styles.partnerSecondary}>{copy.secondary}</a>
+            <Link href={`/${locale}/partners`} className={styles.partnerSecondary}>{copy.secondary}</Link>
           </div>
         </div>
       </div>
@@ -81,7 +83,7 @@ export function PartnerNetwork({ copy, locale }: PartnerNetworkProps) {
         <div>
           {[0, 1].map((copyIndex) => (
             <span key={copyIndex} className={styles.partnerTickerSet}>
-              <span>VERIFIED SERVICES</span><i>●</i><span>LOCAL EXPERTS</span><i>●</i><span>COMMUNITIES</span><i>●</i>
+              <span>LOCAL SERVICES</span><i>●</i><span>LOCAL EXPERTS</span><i>●</i><span>COMMUNITIES</span><i>●</i>
               <span>EMPLOYERS</span><i>●</i><span>INSTITUTIONS</span><i>●</i><span>SWEEZY NETWORK</span><i>●</i>
             </span>
           ))}

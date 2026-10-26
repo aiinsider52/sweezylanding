@@ -63,6 +63,7 @@ export function SiteFooter({ year }: { year: number }) {
     ] },
     { title: c.together, links: [
       { label: c.community, href: `${home}/community` },
+      { label: locale === "uk" ? "Для бізнесу та партнерів" : locale === "de" ? "Für Unternehmen und Partner" : "For businesses and partners", href: `${home}/partners` },
       { label: t.support, href: "/support" },
       { label: t.faqLink, href: `${home}#faq` },
       { label: c.editorial, href: `${home}/editorial` },

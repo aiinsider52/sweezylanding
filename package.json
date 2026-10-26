@@ -10,6 +10,8 @@
     "analytics:report": "node scripts/analytics-report.mjs",
     "seo:priorities": "python3 scripts/seo-priorities.py",
     "test:growth": "node scripts/test-growth-analytics.cjs",
+    "test:funnel:http": "node scripts/test-live-funnel.cjs",
+    "test:release": "python3 scripts/release-smoke.py",
     "seo:ai-benchmark": "node scripts/ai-citation-benchmark.mjs",
     "seo:ai-discovery": "node scripts/ai-discovery-benchmark.mjs",
     "seo:ai-access": "node scripts/check-ai-discovery.mjs",

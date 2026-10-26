@@ -239,18 +239,18 @@ export const landingCopy: Record<Locale, LandingCopy> = {
     partner: {
       eyebrow: "Sweezy Partner Network",
       title: "Bring trusted help closer to people who need it.",
-      body: "Add your service, expertise or public programme to Sweezy. We place useful help next to the relocation moment that creates the need.",
+      body: "Suggest your service for the directory or discuss profile preparation and advertising. We agree the scope and terms before any paid work starts.",
       primary: "Become a partner",
       secondary: "How partnership works",
       passport: "Partner passport",
-      verified: "Verified by Sweezy",
+      verified: "Details reviewed",
       types: [
         {
           label: "Business & services",
           kicker: "LOCAL SERVICE",
           title: "Meet newcomers at the point of need",
           body: "For language schools, insurers, banks, housing services, lawyers and local providers.",
-          benefits: ["Relevant discovery inside Sweezy", "Verified partner profile", "Qualified enquiries"],
+          benefits: ["Relevant service category", "Source-checked details", "Direct contact links"],
         },
         {
           label: "Experts & communities",
@@ -296,7 +296,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       title: "Useful answers. No fine print.",
       items: [
         { question: "Who is Sweezy for?", answer: "Newcomers, expats and Ukrainians building a life in Switzerland, Germany or Austria. Choose your country: procedures and available guidance differ." },
-        { question: "Is the app free?", answer: "You can start with Sweezy for free. Any paid additions are shown clearly inside the app before you choose them." },
+        { question: "Is the app free?", answer: "Yes. Sweezy is currently free to download and use. The practical PDF guides on this site are free too." },
         { question: "Which languages are available?", answer: "English, Ukrainian and German are supported across the core product experience." },
         { question: "Does guidance change by canton?", answer: "Yes. Sweezy connects national guidance with canton and municipality context whenever local rules matter." },
         { question: "Is Sweezy available on Android?", answer: "Sweezy is currently available for iPhone. Android is not available yet." },
@@ -394,18 +394,18 @@ export const landingCopy: Record<Locale, LandingCopy> = {
     partner: {
       eyebrow: "Партнерська мережа Sweezy",
       title: "Допомагайте людям відчути себе своїми у Швейцарії.",
-      body: "Додайте свій сервіс, експертизу або програму до Sweezy. Ми покажемо допомогу саме тоді, коли вона потрібна під час переїзду.",
+      body: "Запропонуйте сервіс для каталогу або обговоріть підготовку профілю та рекламу. Обсяг і умови платної роботи погоджуємо до її початку.",
       primary: "Стати партнером",
       secondary: "Як працює партнерство",
       passport: "Паспорт партнера",
-      verified: "Перевірено Sweezy",
+      verified: "Звіряємо дані",
       types: [
         {
           label: "Бізнес і сервіси",
           kicker: "ЛОКАЛЬНИЙ СЕРВІС",
           title: "Будьте поруч у момент реальної потреби",
           body: "Для мовних шкіл, страхових, банків, житлових сервісів, юристів і локальних провайдерів.",
-          benefits: ["Релевантна присутність у Sweezy", "Перевірений профіль партнера", "Цільові звернення"],
+          benefits: ["Відповідна категорія послуг", "Дані з першоджерел", "Прямі контакти"],
         },
         {
           label: "Експерти й спільноти",
@@ -451,7 +451,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       title: "Корисні відповіді. Без дрібного шрифту.",
       items: [
         { question: "Для кого Sweezy?", answer: "Для новоприбулих, експатів та українців у Швейцарії, Німеччині й Австрії. Оберіть країну: процедури та доступні матеріали відрізняються." },
-        { question: "Застосунок безкоштовний?", answer: "Почати користуватися Sweezy можна безкоштовно. Платні можливості, якщо вони потрібні, показуються до підтвердження." },
+        { question: "Застосунок безкоштовний?", answer: "Так. Зараз Sweezy можна безкоштовно завантажити та використовувати. Практичні PDF-гіди на сайті також безкоштовні." },
         { question: "Які мови доступні?", answer: "Основний досвід Sweezy доступний українською, англійською та німецькою." },
         { question: "Поради відрізняються за кантонами?", answer: "Так. Sweezy поєднує загальношвейцарські правила з контекстом кантону й громади, коли це важливо." },
         { question: "Чи є Sweezy на Android?", answer: "Зараз Sweezy доступний для iPhone. Версії для Android поки немає." },
@@ -549,18 +549,18 @@ export const landingCopy: Record<Locale, LandingCopy> = {
     partner: {
       eyebrow: "Sweezy Partner Network",
       title: "Bringen Sie verlässliche Hilfe näher zu den Menschen.",
-      body: "Ergänzen Sie Sweezy mit Ihrem Service, Ihrer Expertise oder Ihrem Programm. Wir zeigen Hilfe genau in dem Moment, in dem sie beim Umzug gebraucht wird.",
+      body: "Schlagen Sie einen Service für das Verzeichnis vor oder besprechen Sie Profilgestaltung und Werbung. Umfang und Bedingungen vereinbaren wir vor Beginn bezahlter Arbeit.",
       primary: "Partner werden",
       secondary: "So funktioniert die Partnerschaft",
       passport: "Partnerpass",
-      verified: "Von Sweezy geprüft",
+      verified: "Angaben prüfen",
       types: [
         {
           label: "Unternehmen & Services",
           kicker: "LOKALER SERVICE",
           title: "Erreichen Sie Neuzuzüger im richtigen Moment",
           body: "Für Sprachschulen, Versicherungen, Banken, Wohnservices, Kanzleien und lokale Anbieter.",
-          benefits: ["Relevante Präsenz in Sweezy", "Geprüftes Partnerprofil", "Qualifizierte Anfragen"],
+          benefits: ["Passende Servicekategorie", "Quellengeprüfte Angaben", "Direkte Kontaktlinks"],
         },
         {
           label: "Experten & Communities",
@@ -606,7 +606,7 @@ export const landingCopy: Record<Locale, LandingCopy> = {
       title: "Nützliche Antworten. Kein Kleingedrucktes.",
       items: [
         { question: "Für wen ist Sweezy?", answer: "Für Neuankommende, Expats und Menschen aus der Ukraine in der Schweiz, Deutschland und Österreich. Wähle dein Land: Verfahren und verfügbare Inhalte unterscheiden sich." },
-        { question: "Ist die App kostenlos?", answer: "Der Einstieg in Sweezy ist kostenlos. Kostenpflichtige Ergänzungen werden vor der Auswahl klar angezeigt." },
+        { question: "Ist die App kostenlos?", answer: "Ja. Sweezy kann derzeit kostenlos heruntergeladen und genutzt werden. Auch die praktischen PDF-Ratgeber auf dieser Website sind kostenlos." },
         { question: "Welche Sprachen gibt es?", answer: "Das Kernprodukt ist auf Deutsch, Englisch und Ukrainisch verfügbar." },
         { question: "Unterscheiden sich Hinweise je Kanton?", answer: "Ja. Sweezy verbindet nationale Regeln mit Kanton und Gemeinde, wenn lokale Unterschiede wichtig sind." },
         { question: "Gibt es Sweezy für Android?", answer: "Sweezy ist aktuell für iPhone verfügbar. Eine Android-Version gibt es noch nicht." },

@@ -2,7 +2,7 @@ export const ANALYTICS_VERSION = "v1";
 export const CONSENT_KEY = "sweezy-metrics-consent";
 export const SESSION_KEY = "sweezy-metrics-session";
 export const CONSENT_EVENT = "sweezy:metrics-consent";
-export const METRIC_EVENTS = ["page_view", "download_requested", "download_served", "download_received", "download_failed", "app_click", "service_contact", "community_click"] as const;
+export const METRIC_EVENTS = ["page_view", "download_requested", "download_served", "download_received", "download_failed", "app_click", "service_contact", "community_click", "partner_contact"] as const;
 export type MetricName = typeof METRIC_EVENTS[number];
 export const SOURCES = ["direct", "google", "bing", "chatgpt", "claude", "perplexity", "gemini", "copilot", "telegram", "facebook", "instagram", "other"] as const;
 export type MetricSource = typeof SOURCES[number];
@@ -51,5 +51,6 @@ export function validateMetric(value: unknown, allowServerEvent = false): Metric
   }
   if (result.event.startsWith("download_") && !result.asset) return null;
   if (result.event === "service_contact" && (!result.provider || !["phone", "email", "website", "directions"].includes(result.action ?? ""))) return null;
+  if (result.event === "partner_contact" && !["listing", "profile", "promotion", "general"].includes(result.action ?? "")) return null;
   return result;
 }

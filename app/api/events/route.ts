@@ -4,7 +4,20 @@ import { isDownloadId, DOWNLOADS } from "../../../data/downloads";
 
 export const runtime = "nodejs";
 export async function POST(request: Request) {
-  if (request.headers.get("origin") !== new URL(request.url).origin || request.headers.get("x-sweezy-consent") !== "v1") return new Response(null, { status: 403 });
+  // Next can construct request.url with its listening hostname (localhost)
+  // rather than the visitor-facing Host. Preserve same-origin validation when
+  // opening a preview by IP or running behind a proxy that preserves Host.
+  const url = new URL(request.url);
+  const host = request.headers.get("host");
+  let expectedOrigin = url.origin;
+  if (host) {
+    try {
+      const publicUrl = new URL(`${url.protocol}//${host}`);
+      if (publicUrl.host.toLowerCase() !== host.toLowerCase() || publicUrl.pathname !== "/") return new Response(null, { status: 403 });
+      expectedOrigin = publicUrl.origin;
+    } catch { return new Response(null, { status: 403 }); }
+  }
+  if (request.headers.get("origin") !== expectedOrigin || request.headers.get("x-sweezy-consent") !== "v1") return new Response(null, { status: 403 });
   if (Number(request.headers.get("content-length") ?? 0) > 4096) return new Response(null, { status: 413 });
   const reader = request.body?.getReader();
   if (!reader) return new Response(null, { status: 400 });

@@ -52,6 +52,7 @@ export function GrowthAnalytics() {
         return;
       }
       if (url.hostname === "apps.apple.com") void sendMetric("app_click", { placement: link.dataset.placement ?? "site" });
+      if (url.protocol === "mailto:" && link.dataset.partnerContact) void sendMetric("partner_contact", { action: link.dataset.partnerContact, placement: link.dataset.placement ?? "partners" });
       if (link.dataset.service && link.dataset.serviceAction) void sendMetric("service_contact", { provider: link.dataset.service, action: link.dataset.serviceAction, placement: "service-directory" });
       if (["t.me", "www.facebook.com", "www.instagram.com"].includes(url.hostname)) void sendMetric("community_click", { placement: "site" });
     };

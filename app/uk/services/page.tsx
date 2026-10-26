@@ -58,7 +58,7 @@ export default function ServicesPage() {
         <p>Шукаєте допомогу в Німеччині чи Австрії? У розділах країн є офіційні інформаційні портали та місцеві консультації.</p>
         <div className={styles.actions}><Link href="/uk/countries/germany" className={styles.textLink}>Німеччина →</Link><Link href="/uk/countries/austria" className={styles.textLink}>Австрія →</Link></div>
         <p>Надішліть назву, сайт, кантон, перелік послуг і доступні мови. Редакція перевірить дані перед додаванням.</p>
-        <div className={styles.actions}><a href="mailto:support@sweezy.world?subject=Ukrainian%20service%20for%20Sweezy" className={styles.button}>Запропонувати сервіс →</a><Link href="/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" className={styles.textLink}>Запускаєте власний бізнес?</Link></div>
+        <div className={styles.actions}><Link href="/uk/partners" className={styles.button}>Додати бізнес або обговорити співпрацю →</Link><Link href="/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" className={styles.textLink}>Запускаєте власний бізнес?</Link></div>
       </section>
     </div>
     <StarterKitBanner locale="uk" />

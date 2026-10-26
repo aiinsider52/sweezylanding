@@ -795,7 +795,7 @@ export const RICH_CANTONS: Record<string, CantonRich> = {
           label: "Медичне страхування у Швейцарії для іноземців",
         },
         {
-          href: "/uk/blog/poshuk-roboty-u-shveytcariyi",
+          href: "/uk/blog/poshuk-roboty-shveytcariya-2026",
           label: "Пошук роботи у Швейцарії",
         },
       ],
