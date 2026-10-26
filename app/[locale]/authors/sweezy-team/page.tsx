@@ -29,6 +29,12 @@ const TEAM = {
   de: { name: "Yuliia Antonyshyn", role: "Co-founder · Mitgründerin von Sweezy", description: "Yuliia ist Mitgründerin von Sweezy. Gemeinsam entwickeln wir ein Projekt, das Menschen beim Ankommen in der Schweiz, Deutschland und Österreich unterstützt.", label: "Gemeinsam entsteht Sweezy", illustration: "Redaktionelle Illustration", alt: "Redaktionelle Illustration für das Profil von Vladyslav Katash: App-Entwickler am Laptop in einem Atelier mit Alpenblick", mascot: "Das ist John", mascotRole: "Die Sweezy-Figur", founders: "Die Gründer von Sweezy" },
 } satisfies Record<Locale, Record<string,string>>;
 
+const COFOUNDER_ART_ALT: Record<Locale,string> = {
+  uk: "Авторська ілюстрація для картки Юлії Антонишин: співзасновниця за робочим столом у світлій студії з видом на Альпи",
+  en: "Editorial illustration for Yuliia Antonyshyn’s profile: a co-founder at her desk in a sunlit Alpine-view studio",
+  de: "Redaktionelle Illustration für das Profil von Yuliia Antonyshyn: Mitgründerin am Schreibtisch in einem hellen Atelier mit Alpenblick",
+};
+
 export function generateStaticParams() { return ["en", "uk", "de"].map(locale => ({ locale })); }
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
@@ -49,10 +55,10 @@ export default function TeamPage({ params }: { params: { locale: string } }) {
     <header className={styles.hero}><p className={styles.eyebrow}>{c.eyebrow}</p><h1>{c.title}</h1><p>{c.intro}</p><span className={styles.countries}>{c.countries}</span></header>
     <section className={styles.people} aria-label={team.founders}>
       <article className={styles.person} id="vladyslav">
-        <figure className={styles.portrait}><Image src="/brand/team/vladyslav-studio.webp" alt={team.alt} fill priority sizes="(max-width: 650px) 100vw, (max-width: 1100px) 45vw, 25vw" /><figcaption>{team.illustration}</figcaption></figure>
+        <figure className={styles.portrait}><Image src="/brand/team/vladyslav-studio.webp" alt={team.alt} fill priority sizes="(max-width: 650px) 100vw, (max-width: 1200px) 45vw, 25vw" /><figcaption>{team.illustration}</figcaption></figure>
         <div className={styles.personCopy}><p className={styles.eyebrow}>{c.personLabel}</p><h2 id="person-name">{c.name}</h2><p className={styles.role}>{c.role}</p><p>{c.person}</p><span className={styles.focus}>{c.focus}</span><a href="mailto:support@sweezy.world" className={styles.button}>{c.contact} ↗</a></div>
       </article>
-      <article className={styles.person} id="yuliia"><div className={`${styles.monogram} ${styles.coFounderVisual}`} aria-hidden="true"><span>YA</span><small>SWEEZY / CO-FOUNDER</small></div><div className={styles.personCopy}><p className={styles.eyebrow}>{team.label}</p><h2>{team.name}</h2><p className={styles.role}>{team.role}</p><p>{team.description}</p><a href="mailto:support@sweezy.world" className={styles.button}>{c.contact} ↗</a></div></article>
+      <article className={styles.person} id="yuliia"><figure className={`${styles.portrait} ${styles.coFounderPortrait}`}><Image src="/brand/team/yuliia-studio.webp" alt={COFOUNDER_ART_ALT[locale]} fill sizes="(max-width: 650px) 100vw, (max-width: 1200px) 45vw, 25vw" /><figcaption>{team.illustration}</figcaption></figure><div className={styles.personCopy}><p className={styles.eyebrow}>{team.label}</p><h2>{team.name}</h2><p className={styles.role}>{team.role}</p><p>{team.description}</p><a href="mailto:support@sweezy.world" className={styles.button}>{c.contact} ↗</a></div></article>
     </section>
     <section className={styles.teamNotes}>
       <div className={styles.editorial}><p className={styles.eyebrow}>SWEEZY TEAM</p><h2>{c.team}</h2><p>{c.teamBody}</p><Link className={styles.textLink} href={`/${locale}/editorial`}>{c.editorial} →</Link></div>

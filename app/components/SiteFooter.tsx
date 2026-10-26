@@ -66,6 +66,7 @@ export function SiteFooter({ year }: { year: number }) {
       { label: t.support, href: "/support" },
       { label: t.faqLink, href: `${home}#faq` },
       { label: c.editorial, href: `${home}/editorial` },
+      { label: locale === "uk" ? "Команда Sweezy" : locale === "de" ? "Das Sweezy-Team" : "The Sweezy team", href: `${home}/authors/sweezy-team` },
       { label: "support@sweezy.world", href: "mailto:support@sweezy.world" },
     ] },
   ];

@@ -169,7 +169,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
   };
 
   return (
-    <main className="min-h-screen bg-dark-900 text-white">
+    <main lang={locale} className="min-h-screen bg-dark-900 text-white">
       <JsonLd data={aboutSchema} />
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
         <Link href={`/${locale}`} className="text-sm text-white/45 transition-colors hover:text-white">
@@ -188,6 +188,11 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
           <p className="mt-4 leading-8 text-white/65">{copy.mission}</p>
           </div>
           <SweezyCompanion pose="greeting" className={styles.companion} />
+        </section>
+
+        <section className={styles.teamTeaser} aria-labelledby="about-team-title">
+          <div><p className={styles.teamEyebrow}>SWEEZY / TEAM</p><h2 id="about-team-title">{locale === "uk" ? "Люди за Sweezy" : locale === "de" ? "Die Menschen hinter Sweezy" : "The people behind Sweezy"}</h2><p>{locale === "uk" ? "Владислав Каташ та Юлія Антонишин — засновники Sweezy. Познайомтеся з командою та нашим персонажем Джоном." : locale === "de" ? "Vladyslav Katash und Yuliia Antonyshyn stehen hinter Sweezy. Lernen Sie die Gründer und unsere Figur John kennen." : "Vladyslav Katash and Yuliia Antonyshyn are the founders of Sweezy. Meet the team and our character John."}</p></div>
+          <Link href={`/${locale}/authors/sweezy-team`}>{locale === "uk" ? "Познайомитися з командою" : locale === "de" ? "Das Team kennenlernen" : "Meet the team"} →</Link>
         </section>
 
         <section className="border-t border-white/10 py-10">

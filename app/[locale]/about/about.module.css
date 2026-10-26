@@ -19,6 +19,14 @@
 
 .companion img { object-fit: cover; object-position: center top; }
 
+.teamTeaser { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 28px; margin: 12px 0 36px; border: 1px solid var(--theme-line); border-radius: 18px; background: var(--theme-lime-soft); color: var(--theme-text); }
+.teamTeaser .teamEyebrow { font: 650 10px/1.5 ui-monospace,monospace; letter-spacing: .12em; color: var(--theme-link); }
+.teamTeaser h2 { font-size: 27px; line-height: 1.2; letter-spacing: -.025em; margin: 14px 0; }
+.teamTeaser p:not(.teamEyebrow) { font-size: 15px; line-height: 1.8; color: var(--theme-body); }
+.teamTeaser a { flex-shrink: 0; max-width: 100%; padding: 14px 18px; background: #adff00; color: #142015; border-radius: 9px; font-size: 14px; line-height: 1.5; font-weight: 700; }
+.teamTeaser a:focus-visible { outline: 3px solid var(--theme-focus); outline-offset: 5px; }
+@media(max-width:800px) { .teamTeaser { flex-direction: column; align-items: flex-start; padding: 24px; } }
+
 @media (max-width: 640px) {
   .mission { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .missionCopy { padding-bottom: 16px; }
