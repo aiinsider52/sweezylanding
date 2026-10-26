@@ -8,6 +8,7 @@ import { APP_STORE_URL, FACEBOOK_COMMUNITY_URL, INSTAGRAM_URL, TELEGRAM_URL } fr
 import { SEO_CLUSTERS } from "../../data/seo-clusters";
 import { BrandLogo } from "./BrandLogo";
 import { SweezyCompanion } from "./SweezyCompanion";
+import { SWEEZY_COMPANION } from "../../data/companion";
 import styles from "./SiteFooter.module.css";
 
 const copy = {
@@ -85,7 +86,7 @@ export function SiteFooter({ year }: { year: number }) {
           <div className={styles.orbit} aria-hidden="true"><span /><span /></div>
           <span className={styles.farewell}>{c.farewell}<svg viewBox="0 0 30 20" fill="none" aria-hidden="true"><path d="M2 2c0 12 10 14 23 10m-5-5 6 5-4 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
           <SweezyCompanion pose="greeting" className={styles.mascot} sizes="(max-width: 640px) 280px, 380px" />
-          <span className={styles.passport} aria-hidden="true">SWEEZY EXPLORER<span>DE / AT / CH</span></span>
+          <span className={styles.passport}>{SWEEZY_COMPANION.name[locale]} / SWEEZY<span>DE / AT / CH</span></span>
         </div>
       </div>
 

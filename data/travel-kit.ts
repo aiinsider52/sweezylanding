@@ -1,3 +1,4 @@
+import { SWEEZY_COMPANION } from "./companion";
 import type { Locale } from "../lib/i18n";
 import { destinationImage, travelDestinations } from "./travel-destinations";
 
@@ -18,7 +19,7 @@ export const travelKitCopy = {
   uk: {
     badge: "БЕЗКОШТОВНИЙ МІНІГІД · SWEEZY", title: "Швейцарія, яку варто побачити.",
     intro: "Бірюзові озера, гори, водоспади й міста з історією. Зібрали 8 місць для вашого списку мрій — із сезонами, ідеями для поїздки та гідами.",
-    download: "Забрати PDF", open: "Обрати свої місця", free: "Безкоштовно", pages: "10 сторінок", noSignup: "Без реєстрації", destinations: "місць для вашого списку", guide: "Ваш провідник Sweezy", guideNote: "Наступна пригода починається з одного місця.",
+    download: "Забрати PDF", open: "Обрати свої місця", free: "Безкоштовно", pages: "10 сторінок", noSignup: "Без реєстрації", destinations: "місць для вашого списку", guide: SWEEZY_COMPANION.introduction.uk, guideNote: "Наступна пригода починається з одного місця.",
     listTitle: "Куди хочеться поїхати?", listBody: "Позначайте місця, які хочете побачити. Відкривайте гід, щоб перевірити дорогу й спланувати день.",
     selected: "у вашому списку", select: "Хочу побачити", reset: "Очистити список", saved: "Ваш список зберігається в цьому браузері.", unavailable: "Позначки діють до закриття сторінки: збереження в браузері недоступне.",
     season: "Орієнтир сезону", duration: "На поїздку", read: "Гід і маршрут", official: "Перевірити актуальний доступ", sources: "Першоджерела", note: "Це добірка для різних поїздок, а не маршрут на один день. Сезон і час — орієнтири; перед виїздом перевірте погоду, стан стежок, роботу транспорту та доступ до місця на офіційному сайті.",
@@ -29,7 +30,7 @@ export const travelKitCopy = {
   en: {
     badge: "FREE MINI GUIDE · SWEEZY", title: "Switzerland, worth stepping out for.",
     intro: "Turquoise lakes, mountain views, waterfalls and historic towns. Eight places for your wish list, with seasonal pointers, trip ideas and practical guides.",
-    download: "Get the PDF", open: "Pick your places", free: "Free", pages: "10 pages", noSignup: "No signup", destinations: "places for your wish list", guide: "Your Sweezy companion", guideNote: "Your next adventure starts with one place.",
+    download: "Get the PDF", open: "Pick your places", free: "Free", pages: "10 pages", noSignup: "No signup", destinations: "places for your wish list", guide: SWEEZY_COMPANION.introduction.en, guideNote: "Your next adventure starts with one place.",
     listTitle: "Where would you love to go?", listBody: "Tick the places you want to see. Open a guide to check the journey and plan your day.",
     selected: "on your wish list", select: "Want to visit", reset: "Clear my list", saved: "Your list stays in this browser.", unavailable: "Browser storage is unavailable. Your choices last until you close this page.",
     season: "Seasonal pointer", duration: "Allow for the visit", read: "Guide and route", official: "Check current access", sources: "Primary sources", note: "These are ideas for separate trips, not a one-day itinerary. Seasons and visit times are pointers. Check weather, trails, transport and destination access on the official website before leaving.",
@@ -40,7 +41,7 @@ export const travelKitCopy = {
   de: {
     badge: "KOSTENLOSER MINI-GUIDE · SWEEZY", title: "Die Schweiz, die Sie sehen möchten.",
     intro: "Türkise Seen, Bergpanoramen, Wasserfälle und historische Städte. Acht Orte für Ihre Wunschliste, mit saisonalen Hinweisen, Ausflugsideen und praktischen Guides.",
-    download: "PDF mitnehmen", open: "Lieblingsorte auswählen", free: "Kostenlos", pages: "10 Seiten", noSignup: "Ohne Anmeldung", destinations: "Orte für Ihre Wunschliste", guide: "Ihr Sweezy-Begleiter", guideNote: "Das nächste Abenteuer beginnt mit einem Ort.",
+    download: "PDF mitnehmen", open: "Lieblingsorte auswählen", free: "Kostenlos", pages: "10 Seiten", noSignup: "Ohne Anmeldung", destinations: "Orte für Ihre Wunschliste", guide: SWEEZY_COMPANION.introduction.de, guideNote: "Das nächste Abenteuer beginnt mit einem Ort.",
     listTitle: "Wohin möchten Sie als Nächstes?", listBody: "Markieren Sie Ihre Wunschziele. Im Guide finden Sie Hinweise zur Anreise und zur Planung Ihres Tages.",
     selected: "auf Ihrer Wunschliste", select: "Möchte ich besuchen", reset: "Liste leeren", saved: "Ihre Liste wird in diesem Browser gespeichert.", unavailable: "Der Browserspeicher ist nicht verfügbar. Ihre Auswahl bleibt bis zum Schliessen der Seite erhalten.",
     season: "Saisonaler Hinweis", duration: "Zeit für den Besuch", read: "Guide und Anreise", official: "Aktuellen Zugang prüfen", sources: "Primärquellen", note: "Die Orte sind Ideen für einzelne Ausflüge, keine Tagesroute. Saison und Besuchsdauer dienen zur Orientierung. Prüfen Sie vor der Abreise Wetter, Wege, Transport und Zugang auf der offiziellen Website.",

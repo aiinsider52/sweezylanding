@@ -20,6 +20,7 @@ import { TravelKitBanner } from "../TravelKitBanner";
 import { ServicesSpotlight } from "../services/ServicesSpotlight";
 import { CountryCards } from "../CountryCards";
 import { dachCopy } from "../../../data/dach";
+import { SWEEZY_COMPANION } from "../../../data/companion";
 
 const PLACES_COPY: Record<Locale, { eyebrow: string; title: string; body: string; open: string; all: string }> = {
   en: { eyebrow: "THE SWEEZY SELECTION", title: "Four places to start exploring.", body: "Rhine Falls, Rigi, Lake Oeschinen and Lavaux: four Swiss favourites with practical guides to transport, seasons and planning your visit.", open: "Plan your visit", all: "Explore all places" },
@@ -223,7 +224,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             <aside className={styles.faqCompanionCard}>
               <SweezyCompanion pose="greeting" className={styles.faqCompanion} sizes="(max-width: 560px) 150px, 190px" />
               <div>
-                <p>{companionCopy.label}</p>
+                <p>{SWEEZY_COMPANION.introduction[locale]}</p>
                 <strong>{companionCopy.title}</strong>
                 <Link href={`/${locale}/guides`}>{companionCopy.guides} <span aria-hidden="true">↗</span></Link>
               </div>

@@ -4,6 +4,7 @@ import type { Locale } from "../../lib/i18n";
 import { travelKitCopy, TRAVEL_KIT_SLUGS } from "../../data/travel-kit";
 import { DownloadLink } from "./DownloadLink";
 import { SweezyCompanion } from "./SweezyCompanion";
+import { SWEEZY_COMPANION } from "../../data/companion";
 import styles from "./TravelKit.module.css";
 
 export function TravelKitBanner({ locale, headingAs = "h2" }: { locale: Locale; headingAs?: "h1" | "h2" }) {
@@ -24,7 +25,7 @@ export function TravelKitBanner({ locale, headingAs = "h2" }: { locale: Locale; 
         <ul className={styles.benefits}><li>{copy.free}</li><li>{copy.pages}</li><li>{copy.noSignup}</li></ul>
         <div className={styles.companionNote}>
           <SweezyCompanion pose="reader" className={styles.companion} sizes="80px" />
-          <div><strong>{copy.guide}</strong><p>{copy.guideNote}</p></div>
+          <div><strong>{SWEEZY_COMPANION.introduction[locale]}</strong><p>{copy.guideNote}</p></div>
         </div>
       </div>
       <div className={styles.visual}>
