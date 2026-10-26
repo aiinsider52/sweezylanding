@@ -1,0 +1,24 @@
+/* One UI family, one scale and shared proportions in all three languages. */
+:root {
+  --font-ui: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-inter);
+  --type-page-title: clamp(2rem, 3.8vw, 3.5rem);
+  --type-feature-title: clamp(1.75rem, 3vw, 2.5rem);
+  --type-section-title: clamp(1.5rem, 2.5vw, 2.125rem);
+  --type-card-title: clamp(1.125rem, 1.65vw, 1.5rem);
+  --type-body: 1rem;
+  --type-small: .875rem;
+  --layout-gutter: clamp(16px, 2.4vw, 40px);
+  --section-space: clamp(32px, 4vw, 56px);
+  --panel-padding: clamp(20px, 2.4vw, 32px);
+  --panel-radius: 18px;
+  --grid-gap: clamp(14px, 1.6vw, 24px);
+  --panel-shadow: 0 6px 24px rgb(13 32 21 / .045);
+}
+
+html, body { font-family: var(--font-ui); }
+button, input, select, textarea { font-family: inherit; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-ui); text-wrap: balance; }
+.type-page-title { font-size: var(--type-page-title); line-height: 1.12; letter-spacing: -.04em; font-weight: 700; }
+.type-section-title { font-size: var(--type-section-title); line-height: 1.18; letter-spacing: -.03em; font-weight: 650; }
+.type-card-title { font-size: var(--type-card-title); line-height: 1.25; letter-spacing: -.02em; font-weight: 650; }

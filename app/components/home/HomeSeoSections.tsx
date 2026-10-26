@@ -238,7 +238,7 @@ export function HomeSeoSections({ locale }: { locale: Locale }) {
               <span className="h-1.5 w-1.5 rounded-full bg-accent-green animate-pulse" />
               Sweezy
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15]">
+            <h2 className="font-extrabold tracking-tight leading-[1.15] type-section-title">
               {copy.whyTitle}
             </h2>
           </div>

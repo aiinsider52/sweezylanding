@@ -152,7 +152,7 @@ export default function Support() {
           <p className="text-sm font-medium text-neon-purple mb-3 tracking-wide uppercase">
             {t("supportPage.label")}
           </p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-white">
+          <h1 className="font-extrabold tracking-tight mb-4 text-white type-page-title">
             {t("supportPage.title")}
           </h1>
           <p className="text-white/40 text-lg max-w-xl">
@@ -276,7 +276,7 @@ export default function Support() {
           className="mt-20"
         >
           <div className="rounded-2xl bg-gradient-to-br from-neon-purple/10 via-neon-blue/5 to-transparent border border-white/[0.06] p-10 text-center backdrop-blur-sm">
-            <h3 className="text-xl font-semibold mb-3">
+            <h3 className="font-semibold mb-3 type-card-title">
               {t("supportPage.stillNeedHelp")}
             </h3>
             <p className="text-white/40 text-[15px] mb-6 max-w-md mx-auto">

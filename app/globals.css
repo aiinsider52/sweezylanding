@@ -176,7 +176,7 @@ html.dark {
   }
 
   .font-display {
-    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    font-family: var(--font-ui);
   }
 
   .nav-float {
@@ -253,7 +253,7 @@ html.dark {
   }
 
   .quote-mark {
-    font-family: var(--font-display), Georgia, serif;
+    font-family: var(--font-ui);
     @apply text-6xl sm:text-7xl leading-none text-accent-green/30;
   }
 

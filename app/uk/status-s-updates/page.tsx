@@ -87,7 +87,7 @@ export default function StatusSUpdatesPage() {
 
         <header className="mt-10 border-b border-white/10 pb-12">
           <p className="text-xs font-semibold tracking-[.22em] text-accent-green">STATUS S · LIVE TRACKER</p>
-          <h1 className="mt-5 max-w-5xl text-5xl font-bold tracking-tight sm:text-7xl">
+          <h1 className="mt-5 max-w-5xl font-bold tracking-tight type-page-title">
             Статус S: що змінилося і що діє зараз
           </h1>
           <p className="mt-7 max-w-3xl text-lg leading-8 text-white/65">
@@ -101,7 +101,7 @@ export default function StatusSUpdatesPage() {
         </header>
 
         <section className="py-12" aria-labelledby="updates-heading">
-          <h2 id="updates-heading" className="text-3xl font-semibold tracking-tight">Хронологія</h2>
+          <h2 id="updates-heading" className="font-semibold tracking-tight type-section-title">Хронологія</h2>
           <div className="mt-7 space-y-4">
             {updates.map((update, index) => (
               <article key={`${update.date}-${update.title}`} className="grid gap-6 rounded-3xl border border-white/10 bg-white/[.035] p-6 md:grid-cols-[9rem_1fr] md:p-8">
@@ -111,7 +111,7 @@ export default function StatusSUpdatesPage() {
                   <span className="mt-5 block text-xs text-white/25">0{index + 1}</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold tracking-tight">{update.title}</h3>
+                  <h3 className="font-semibold tracking-tight type-card-title">{update.title}</h3>
                   <p className="mt-4 leading-7 text-white/65">{update.summary}</p>
                   <div className="mt-5 rounded-2xl bg-accent-green/10 p-4">
                     <p className="text-xs font-bold tracking-[.14em] text-accent-green">ЩО РОБИТИ</p>
@@ -129,11 +129,11 @@ export default function StatusSUpdatesPage() {
         <section className="grid gap-4 border-t border-white/10 py-12 md:grid-cols-2">
           <Link href="/uk/blog/status-s-shveytcariya-povnyy-gid" className="rounded-3xl bg-accent-green p-7 text-black transition-transform hover:-translate-y-1">
             <span className="text-xs font-bold tracking-[.16em]">ПОВНИЙ ГІД</span>
-            <h2 className="mt-8 text-3xl font-bold">Статус S: права, документи, робота й страхування</h2>
+            <h2 className="mt-8 font-bold type-section-title">Статус S: права, документи, робота й страхування</h2>
           </Link>
           <Link href="/uk/blog/status-s-pislya-bereznya-2027" className="rounded-3xl border border-white/10 bg-white/[.035] p-7 transition-transform hover:-translate-y-1">
             <span className="text-xs font-bold tracking-[.16em] text-white/45">ПІСЛЯ 2027</span>
-            <h2 className="mt-8 text-3xl font-bold">Що відомо про сценарії після березня 2027</h2>
+            <h2 className="mt-8 font-bold type-section-title">Що відомо про сценарії після березня 2027</h2>
           </Link>
         </section>
 

@@ -178,13 +178,13 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
 
         <header className="mt-10 border-b border-white/10 pb-10">
           <p className="text-xs font-semibold tracking-[0.24em] text-accent-green">{copy.eyebrow}</p>
-          <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">{copy.title}</h1>
+          <h1 className="mt-5 max-w-3xl font-bold tracking-tight type-page-title">{copy.title}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/60">{copy.intro}</p>
         </header>
 
         <section className={styles.mission}>
           <div className={styles.missionCopy}>
-          <h2 className="text-2xl font-semibold tracking-tight">{copy.missionTitle}</h2>
+          <h2 className="font-semibold tracking-tight type-section-title">{copy.missionTitle}</h2>
           <p className="mt-4 leading-8 text-white/65">{copy.mission}</p>
           </div>
           <SweezyCompanion pose="greeting" className={styles.companion} />
@@ -196,7 +196,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
         </section>
 
         <section className="border-t border-white/10 py-10">
-          <h2 className="text-2xl font-semibold tracking-tight">{copy.processTitle}</h2>
+          <h2 className="font-semibold tracking-tight type-section-title">{copy.processTitle}</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {copy.process.map((item, index) => (
               <article key={item.title} className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
@@ -209,7 +209,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
         </section>
 
         <section className="border-t border-white/10 py-10">
-          <h2 className="text-2xl font-semibold tracking-tight">{copy.sourcesTitle}</h2>
+          <h2 className="font-semibold tracking-tight type-section-title">{copy.sourcesTitle}</h2>
           <p className="mt-3 text-white/60">{copy.sourcesIntro}</p>
           <ul className="mt-5 space-y-3">
             {OFFICIAL_SOURCES.map((source) => (
@@ -229,14 +229,14 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
 
         <section className="grid gap-5 border-t border-white/10 py-10 sm:grid-cols-2">
           <div className="rounded-xl border border-white/10 p-6">
-            <h2 className="text-xl font-semibold">{copy.correctionTitle}</h2>
+            <h2 className="font-semibold type-section-title">{copy.correctionTitle}</h2>
             <p className="mt-3 leading-7 text-white/55">{copy.correction}</p>
             <Link href="/support" className="mt-4 inline-flex text-sm font-medium text-accent-green">
               Support →
             </Link>
           </div>
           <div className="rounded-xl border border-white/10 p-6">
-            <h2 className="text-xl font-semibold">{copy.disclaimerTitle}</h2>
+            <h2 className="font-semibold type-section-title">{copy.disclaimerTitle}</h2>
             <p className="mt-3 leading-7 text-white/55">{copy.disclaimer}</p>
           </div>
         </section>

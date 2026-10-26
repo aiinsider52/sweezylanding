@@ -1,6 +1,6 @@
 .page { background: var(--theme-bg); color: var(--theme-text); min-height: calc(100svh - 72px); padding: 24px 20px 48px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .art { display: block; width: min(760px, 100%); height: auto; mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent), linear-gradient(to bottom, transparent, #000 5% 92%, transparent); mask-composite: intersect; }
-.page h1 { margin: 4px 0 0; font-size: 48px; font-weight: 800; line-height: 1.12; letter-spacing: 0; }
+.page h1 { margin: 4px 0 0; font-size: var(--type-page-title); font-weight: 800; line-height: 1.12; letter-spacing: 0; }
 .page > p { margin: 18px 0 0; max-width: 680px; color: var(--theme-body); font-size: 18px; line-height: 1.5; }
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 26px; }
 .actions a { display: flex; justify-content: space-between; align-items: center; gap: 28px; min-height: 52px; min-width: 220px; padding: 14px 24px; border: 1px solid var(--theme-line-strong); border-radius: 999px; font-weight: 700; }
@@ -12,7 +12,7 @@
 @media (max-width: 600px) {
   .page { min-height: calc(100svh - 61px); padding: 32px 20px; }
   .art { margin: 12px 0 24px; }
-  .page h1 { font-size: 30px; overflow-wrap: anywhere; }
+  .page h1 { font-size: var(--type-page-title); overflow-wrap: anywhere; }
   .page > p { font-size: 16px; }
   .actions { width: 100%; flex-direction: column; }
   .actions a { width: 100%; }

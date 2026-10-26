@@ -171,9 +171,9 @@ export default async function BlogPostPage({
       },
     },
     components: {
-      h1: (props) => <h1 className="mt-8 text-4xl font-bold tracking-tight" {...props} />,
-      h2: (props) => <h2 className="mt-10 text-2xl font-semibold tracking-tight" {...props} />,
-      h3: (props) => <h3 className="mt-8 text-xl font-semibold tracking-tight" {...props} />,
+      h1: (props) => <h1 className="mt-8 font-bold tracking-tight type-page-title" {...props} />,
+      h2: (props) => <h2 className="mt-10 font-semibold tracking-tight type-section-title" {...props} />,
+      h3: (props) => <h3 className="mt-8 font-semibold tracking-tight type-card-title" {...props} />,
       p: (props) => <p className="mt-4 leading-8 text-white/70" {...props} />,
       ul: (props) => <ul className="mt-4 list-disc space-y-2 pl-6 text-white/70" {...props} />,
       ol: (props) => <ol className="mt-4 list-decimal space-y-2 pl-6 text-white/70" {...props} />,

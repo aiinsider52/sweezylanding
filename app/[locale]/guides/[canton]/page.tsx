@@ -610,7 +610,7 @@ export default function CantonGuidePage({
     <div className="space-y-10">
       {rich.arrivalPlan && (
         <nav aria-label={rich.arrivalPlan.title} className="pt-8">
-          <h2 className="text-2xl font-semibold">{rich.arrivalPlan.title}</h2>
+          <h2 className="font-semibold type-section-title">{rich.arrivalPlan.title}</h2>
           <ol className="mt-4 list-decimal space-y-4 pl-6">
             {rich.arrivalPlan.steps.map((step) => (
               <li key={step.href}>
@@ -623,7 +623,7 @@ export default function CantonGuidePage({
       )}
       {/* Registration */}
       <section id="registration" className="scroll-mt-24">
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionRegistration}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionRegistration}</h2>
         <p className="mt-4 leading-8 text-white/70">{rich.registrationLead}</p>
         <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-white/70">
           <p className="font-medium text-white/90">{rich.registrationOfficeName}</p>
@@ -648,7 +648,7 @@ export default function CantonGuidePage({
 
       {/* Permit */}
       <section id="permit" className="scroll-mt-24">
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionPermit}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionPermit}</h2>
         <p className="mt-4 leading-8 text-white/70">{rich.permitLead}</p>
         {rich.permitStatusSNote && (
           <div className="mt-4 rounded-xl border border-accent-green/20 bg-accent-green/[0.04] p-4 text-sm text-white/70">
@@ -668,7 +668,7 @@ export default function CantonGuidePage({
 
       {/* Health insurance */}
       <section id="health-insurance" className="scroll-mt-24">
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionHealth}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionHealth}</h2>
         <p className="mt-3 text-sm text-white/50">{rich.avgPremium}</p>
         <p className="text-2xl font-bold text-accent-green">{rich.healthPremium}</p>
         <p className="mt-4 leading-8 text-white/70">{rich.healthSubsidyInfo}</p>
@@ -677,7 +677,7 @@ export default function CantonGuidePage({
 
       {/* Language courses */}
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionCourses}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionCourses}</h2>
         <ul className="mt-4 space-y-3">
           {rich.courses.map((course) => (
             <li
@@ -693,7 +693,7 @@ export default function CantonGuidePage({
 
       {/* Housing */}
       <section id="housing" className="scroll-mt-24">
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionHousing}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionHousing}</h2>
         <p className="mt-3 text-sm text-white/50">{rich.avgRent}</p>
         <p className="text-xl font-bold text-white">{rich.housingAvgRent}</p>
         <p className="mt-4 leading-7 text-white/70">{rich.housingAidInfo}</p>
@@ -711,7 +711,7 @@ export default function CantonGuidePage({
 
       {/* Contacts table */}
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionContacts}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionContacts}</h2>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full border-collapse text-sm">
             <thead>
@@ -768,7 +768,7 @@ export default function CantonGuidePage({
 
       {/* FAQ */}
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionFaq}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionFaq}</h2>
         <div className="mt-4 space-y-4">
           {rich.faq.map((item) => (
             <div
@@ -784,7 +784,7 @@ export default function CantonGuidePage({
 
       {/* Other priority cantons */}
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{rich.sectionOtherCantons}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{rich.sectionOtherCantons}</h2>
         <p className="mt-2 text-sm text-white/55">{rich.sectionOtherCantonsDesc}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {PRIORITY_CANTON_SLUGS.filter((s) => s !== canton.slug).map((slug) => {
@@ -805,7 +805,7 @@ export default function CantonGuidePage({
 
       {/* Download CTA */}
       <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.05] p-6">
-        <h2 className="text-2xl font-semibold tracking-tight">Sweezy</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">Sweezy</h2>
         <p className="mt-3 text-white/65">{copy.ctaLead(name)}</p>
         <a
           href={APP_STORE_URL}
@@ -821,7 +821,7 @@ export default function CantonGuidePage({
 
   const officeContact = officeSpotlight && officeCopy ? (
         <section id="migration-office-contact" className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6">
-          <h2 className="text-2xl font-semibold tracking-tight">{officeCopy.heading}</h2>
+          <h2 className="font-semibold tracking-tight type-section-title">{officeCopy.heading}</h2>
           <p className="mt-4 leading-8 text-white/70">{officeCopy.body}</p>
           <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
             <div>
@@ -861,7 +861,7 @@ export default function CantonGuidePage({
     <div className="space-y-10">
       {officeCopy?.contactFirst ? officeContact : null}
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{copy.overview}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{copy.overview}</h2>
         <p className="mt-4 leading-8 text-white/70">
           {copy.overviewLead(
             name,
@@ -873,7 +873,7 @@ export default function CantonGuidePage({
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{copy.registration}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{copy.registration}</h2>
         <p className="mt-4 leading-8 text-white/70">
           {officeCopy?.registrationLead ?? copy.registrationLead(name, canton.capital)}
         </p>
@@ -888,7 +888,7 @@ export default function CantonGuidePage({
       {!officeCopy?.contactFirst ? officeContact : null}
 
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{copy.services}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{copy.services}</h2>
         <p className="mt-4 leading-8 text-white/70">
           {copy.servicesLead(name, canton.capital)}
         </p>
@@ -901,12 +901,12 @@ export default function CantonGuidePage({
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{copy.whySweezy}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{copy.whySweezy}</h2>
         <p className="mt-4 leading-8 text-white/70">{copy.sweezyLead(name)}</p>
         <p className="mt-4 leading-8 text-white/70">{copy.workflowLead(name)}</p>
         {locale === "en" && canton.slug === "zurich" ? (
           <div className="mt-6 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-5">
-            <h2 className="text-2xl font-semibold tracking-tight">Useful links for Zurich expats</h2>
+            <h2 className="font-semibold tracking-tight type-section-title">Useful links for Zurich expats</h2>
             <div className="mt-4 space-y-3 text-white/70">
               <p>
                 Read the in-depth{" "}
@@ -954,14 +954,14 @@ export default function CantonGuidePage({
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold tracking-tight">{locale === "uk" ? "Наступні практичні кроки" : locale === "de" ? "Nächste praktische Schritte" : "Next practical steps"}</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">{locale === "uk" ? "Наступні практичні кроки" : locale === "de" ? "Nächste praktische Schritte" : "Next practical steps"}</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           {SEO_CLUSTERS[locale].map((cluster) => <Link key={cluster.key} href={cluster.href} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-accent-green/40"><strong className="block text-white">{cluster.title}</strong><span className="mt-2 block text-sm leading-6 text-white/55">{cluster.description}</span></Link>)}
         </div>
       </section>
 
       <section className="rounded-2xl border border-accent-green/20 bg-accent-green/[0.05] p-6">
-        <h2 className="text-2xl font-semibold tracking-tight">Sweezy</h2>
+        <h2 className="font-semibold tracking-tight type-section-title">Sweezy</h2>
         <p className="mt-3 text-white/65">{copy.ctaLead(name)}</p>
         <a
           href={APP_STORE_URL}
@@ -1057,7 +1057,7 @@ export default function CantonGuidePage({
             </div>
           </section>
         ) : null}
-        <div className={styles.guideReadingLayout}><div className={styles.guideBody}>{rich ? richBody : genericBody}{regionalPlaces.length ? <section className="mt-10 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-green">{locale === "uk" ? "Місця цього кантону" : locale === "de" ? "Orte in diesem Kanton" : "Places in this canton"}</p><h2 className="mt-3 text-2xl font-semibold tracking-tight">{locale === "uk" ? `Сплануйте поїздку в кантоні ${name}` : locale === "de" ? `Ausflug im Kanton ${name} planen` : `Plan a trip in ${name}`}</h2><div className="mt-5 grid gap-3 sm:grid-cols-2">{regionalPlaces.map((place) => <Link key={place.slug} href={`/${locale}/places/${place.slug}`} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-accent-green/40"><strong className="block text-white">{place.title[locale]}</strong><span className="mt-2 block text-sm leading-6 text-white/55">{place.summary[locale]}</span><span className="mt-3 block text-sm font-medium text-accent-green">{locale === "uk" ? "Відкрити гід місця" : locale === "de" ? "Ortsguide öffnen" : "Open place guide"} →</span></Link>)}</div><Link href={`/${locale}/planning`} className="mt-5 inline-flex text-sm font-medium text-accent-green underline underline-offset-4">{locale === "uk" ? "Планувальник подорожі" : locale === "de" ? "Reiseplaner" : "Travel planner"} →</Link></section> : null}</div>
+        <div className={styles.guideReadingLayout}><div className={styles.guideBody}>{rich ? richBody : genericBody}{regionalPlaces.length ? <section className="mt-10 rounded-2xl border border-accent-green/20 bg-accent-green/[0.04] p-6"><p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-green">{locale === "uk" ? "Місця цього кантону" : locale === "de" ? "Orte in diesem Kanton" : "Places in this canton"}</p><h2 className="mt-3 font-semibold tracking-tight type-section-title">{locale === "uk" ? `Сплануйте поїздку в кантоні ${name}` : locale === "de" ? `Ausflug im Kanton ${name} planen` : `Plan a trip in ${name}`}</h2><div className="mt-5 grid gap-3 sm:grid-cols-2">{regionalPlaces.map((place) => <Link key={place.slug} href={`/${locale}/places/${place.slug}`} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-accent-green/40"><strong className="block text-white">{place.title[locale]}</strong><span className="mt-2 block text-sm leading-6 text-white/55">{place.summary[locale]}</span><span className="mt-3 block text-sm font-medium text-accent-green">{locale === "uk" ? "Відкрити гід місця" : locale === "de" ? "Ortsguide öffnen" : "Open place guide"} →</span></Link>)}</div><Link href={`/${locale}/planning`} className="mt-5 inline-flex text-sm font-medium text-accent-green underline underline-offset-4">{locale === "uk" ? "Планувальник подорожі" : locale === "de" ? "Reiseplaner" : "Travel planner"} →</Link></section> : null}</div>
         <aside className={styles.guideReadingAside}><h2>{locale === "uk" ? "У цьому гіді" : locale === "de" ? "In diesem Ratgeber" : "In this guide"}</h2><nav aria-label={locale === "uk" ? "Навігація гідом" : locale === "de" ? "Ratgeber-Navigation" : "Guide navigation"}>{rich && <><a href="#registration">{copy.registration}</a><a href="#permit">{locale === "uk" ? "Дозвіл на перебування" : locale === "de" ? "Aufenthaltsbewilligung" : "Residence permit"}</a><a href="#health-insurance">{locale === "uk" ? "Медичне страхування" : locale === "de" ? "Krankenversicherung" : "Health insurance"}</a><a href="#housing">{locale === "uk" ? "Житло" : locale === "de" ? "Wohnen" : "Housing"}</a></>}<Link href={`/${locale}/resources`}>{locale === "uk" ? "Безкоштовні PDF-мінігіди" : locale === "de" ? "Kostenlose PDF-Ratgeber" : "Free PDF mini guides"} →</Link><Link href={`/${locale}/countries`}>{locale === "uk" ? "Інші країни DACH" : locale === "de" ? "Weitere DACH-Länder" : "Other DACH countries"} →</Link></nav><p>{locale === "uk" ? "Офіційні джерела та місцеві контакти — у відповідних розділах гіда." : locale === "de" ? "Offizielle Quellen und lokale Kontakte stehen im jeweiligen Abschnitt." : "Official sources and local contacts are linked in the relevant sections."}</p></aside>
         </div>
       </article>
