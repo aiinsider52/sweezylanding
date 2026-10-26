@@ -50,7 +50,7 @@ for route in routes:
             for item in schema['mainEntity']:
                 assert item['name'] in visible and item['acceptedAnswer']['text'] in visible, route
     if '/countries/' in route and route.rsplit('/',1)[-1] in TOPICS:
-        assert len(soup.select('article > section[id^="step-"]')) == 4, route
+        assert len(soup.select('article section[id^="step-"]')) == 4, route
         article = next(item for item in schemas if item.get('@type')=='Article')
         assert len(article['citation']) >= 3 and article['inLanguage'] == route.split('/')[1], route
         assert len(soup.select('article')[0].get_text(' ',strip=True).split()) > 400, route

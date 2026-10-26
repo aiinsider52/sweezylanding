@@ -6,7 +6,7 @@ import { BASE_URL, buildLocaleAlternates } from "../../../../../lib/alternates";
 import { getDachGuide } from "../../../../../lib/dach-guides";
 import { countryData, countryPath, dachCopy, DACH_TOPICS, type DachTopic, topicNames, guideSources, REVIEWED_AT } from "../../../../../data/dach";
 import { JsonLd } from "../../../../components/seo/JsonLd";
-import { LeadMagnetBanner } from "../../../../components/LeadMagnetBanner";
+import { DachGuideArticle } from "../../../../components/DachGuideArticle";
 import styles from "../../dach.module.css";
 
 type Params = { locale: string; country: string; topic: string };
@@ -31,18 +31,9 @@ export default function CountryGuide({ params }: { params: Params }) {
       { "@type": "BreadcrumbList", itemListElement: breadcrumbs.map((b, i) => ({ "@type": "ListItem", position: i + 1, name: b.name, item: b.url })) },
     ] }} />
     <nav className={styles.breadcrumbs} aria-label="Breadcrumb">{breadcrumbs.slice(0, -1).map(b => <Link href={b.url.replace(BASE_URL, "")} key={b.url}>{b.name} /</Link>)}<span>{topicNames[topic][locale]}</span></nav>
-    <article className={styles.article}>
-      <p className={styles.eyebrow}>SWEEZY / {item.code} / {topicNames[topic][locale]}</p><h1>{guide.title}</h1>
-      <p>{guide.description}</p>
-      <p className={styles.note}>{c.author} · <Link href={`/${locale}/editorial`}>{c.reviewed}</Link>: <time dateTime={REVIEWED_AT}>{new Date(`${REVIEWED_AT}T12:00:00Z`).toLocaleDateString(locale === "uk" ? "uk-UA" : locale === "de" ? "de-DE" : "en-GB")}</time></p>
-      <div className={styles.summary}><strong>{c.answer}</strong><p>{guide.summary}</p></div>
-      <div className={styles.summary}><strong>{c.applies}</strong><p>{guide.appliesTo}</p></div>
-      <nav className={styles.toc} aria-label={c.topics}>{guide.sections.map((section, i) => <a key={section.title} href={`#step-${i + 1}`}>{section.title}</a>)}</nav>
-      {guide.sections.map((section, index) => <section key={section.title} id={`step-${index + 1}`}><h2>{section.title}</h2><p>{section.body}</p><ul>{section.checklist.map(task => <li key={task}>{task}</li>)}</ul></section>)}
-      <LeadMagnetBanner locale={locale} asset={topic === "business" ? item.business : item.starter} placement={`guide-${country}-${topic}`} />
-      <section><h2>{c.faq}</h2>{guide.faq.map(faq => <div key={faq.q} className={styles.faq}><h3>{faq.q}</h3><p>{faq.a}</p></div>)}</section>
-      <section className={styles.section}><h2>{c.sources}</h2><ul>{sources.map(source => <li key={source.url}><a className={styles.link} href={source.url} target="_blank" rel="noreferrer noopener">{source.name} ↗</a></li>)}</ul><p className={styles.note}>{c.scope}</p></section>
-      <section className={styles.section}><h2>{c.next}</h2><div className={styles.sourceList}>{DACH_TOPICS.filter(next => next !== topic).map(next => <Link key={next} href={`${countryPath(locale, country)}/${next}`}>{topicNames[next][locale]} →</Link>)}<Link href={countryPath(locale, country)}>{c.services} →</Link><Link href={`/${locale}/countries`}>{c.all} →</Link></div></section>
-    </article>
+    <DachGuideArticle locale={locale} country={country} kicker={topicNames[topic][locale]} title={guide.title} description={guide.description} summary={guide.summary} appliesTo={guide.appliesTo} reviewedAt={REVIEWED_AT}
+      sections={guide.sections.map((section, index) => ({ ...section, id: `step-${index + 1}` }))} faq={guide.faq} sources={sources}
+      download={{ asset: topic === "business" ? item.business : item.starter, placement: `guide-${country}-${topic}` }}
+      next={[...DACH_TOPICS.filter(next => next !== topic).map(next => ({ href: `${countryPath(locale, country)}/${next}`, label: topicNames[next][locale] })), { href: countryPath(locale, country), label: c.services }, { href: `/${locale}/countries`, label: c.all }]} />
   </div></main>;
 }

@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { isLocale } from "../../../../../../lib/blog";
 import { BASE_URL, buildLocaleAlternates } from "../../../../../../lib/alternates";
 import { CITY_SLUGS, cityPath, dachCities, getDachCity } from "../../../../../../lib/dach-cities";
-import { countryData, countryPath, dachCopy, DACH_TOPICS, topicNames } from "../../../../../../data/dach";
+import { countryData, countryPath, DACH_TOPICS, topicNames } from "../../../../../../data/dach";
 import { JsonLd } from "../../../../../components/seo/JsonLd";
-import { LeadMagnetBanner } from "../../../../../components/LeadMagnetBanner";
+import { DachGuideArticle } from "../../../../../components/DachGuideArticle";
 import styles from "../../../dach.module.css";
 
 type Params = { locale: string; country: string; city: string };
@@ -21,7 +21,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 export default function CityGuide({ params }: { params: Params }) {
   const city = getDachCity(params.country, params.city);
   if (!isLocale(params.locale) || !city) notFound();
-  const locale = params.locale, country = city.country, item = countryData[country], c = dachCopy[locale];
+  const locale = params.locale, country = city.country, item = countryData[country];
   const url = `${BASE_URL}${cityPath(locale, params.city)}`;
   const breadcrumbs = [{ name: "Sweezy", url: `${BASE_URL}/${locale}` }, { name: item.name[locale], url: `${BASE_URL}${countryPath(locale, country)}` }, { name: city.name[locale], url }];
   return <main className={styles.main} lang={locale}><div className={styles.shell}>
@@ -31,16 +31,10 @@ export default function CityGuide({ params }: { params: Params }) {
       { "@type": "BreadcrumbList", itemListElement: breadcrumbs.map((b, i) => ({ "@type": "ListItem", position: i+1, name: b.name, item: b.url })) },
     ] }} />
     <nav className={styles.breadcrumbs} aria-label="Breadcrumb">{breadcrumbs.slice(0,-1).map(b => <Link key={b.url} href={b.url.replace(BASE_URL, "")}>{b.name} /</Link>)}<span>{city.name[locale]}</span></nav>
-    <article className={styles.article}>
-      <p className={styles.eyebrow}>SWEEZY / {item.code} / {city.name[locale]}</p><h1>{city.title[locale]}</h1><p>{city.description[locale]}</p>
-      <p className={styles.note}>{c.author} · {c.reviewed}: <time dateTime={city.reviewedAt}>{new Date(`${city.reviewedAt}T12:00:00Z`).toLocaleDateString(locale === "uk" ? "uk-UA" : locale === "de" ? "de-DE" : "en-GB")}</time></p>
-      <div className={styles.summary}><strong>{c.answer}</strong><p>{city.summary[locale]}</p></div>
-      <nav className={styles.toc} aria-label={c.topics}>{city.sections.map((section,i) => <a key={i} href={`#city-${i+1}`}>{section.title[locale]}</a>)}</nav>
-      {city.sections.map((section,i) => <section key={i} id={`city-${i+1}`}><h2>{section.title[locale]}</h2><p>{section.body[locale]}</p></section>)}
-      <LeadMagnetBanner locale={locale} asset={item.starter} placement={`city-${params.city}`} />
-      <section><h2>{c.faq}</h2>{city.faq.map(faq => <div className={styles.faq} key={faq.q[locale]}><h3>{faq.q[locale]}</h3><p>{faq.a[locale]}</p></div>)}</section>
-      <section className={styles.section}><h2>{c.sources}</h2><ul>{city.sources.map(source => <li key={source.url}><a className={styles.link} href={source.url} target="_blank" rel="noreferrer noopener">{source.name} ↗</a></li>)}</ul><p className={styles.note}>{c.scope}</p></section>
-      <section className={styles.section}><h2>{c.next}</h2><div className={styles.sourceList}>{DACH_TOPICS.map(topic => <Link key={topic} href={`${countryPath(locale,country)}/${topic}`}>{topicNames[topic][locale]} →</Link>)}<Link href={countryPath(locale,country)}>{item.name[locale]} →</Link></div></section>
-    </article>
+    <DachGuideArticle locale={locale} country={country} kicker={city.name[locale]} title={city.title[locale]} description={city.description[locale]} summary={city.summary[locale]} reviewedAt={city.reviewedAt}
+      sections={city.sections.map((section, index) => ({ id: `city-${index + 1}`, title: section.title[locale], body: section.body[locale] }))}
+      faq={city.faq.map(faq => ({ q: faq.q[locale], a: faq.a[locale] }))} sources={city.sources}
+      download={{ asset: item.starter, placement: `city-${params.city}` }}
+      next={[...DACH_TOPICS.map(topic => ({ href: `${countryPath(locale, country)}/${topic}`, label: topicNames[topic][locale] })), { href: countryPath(locale, country), label: item.name[locale] }]} />
   </div></main>;
 }
