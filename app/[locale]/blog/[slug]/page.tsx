@@ -495,7 +495,7 @@ export default async function BlogPostPage({
             </h2>
           </div>
           <Link href={`/${locale}/guides`}>{locale === "uk" ? "Гіди" : "Guides"} →</Link>
-          <SweezyCompanion pose="reader" className={styles.ctaCompanion} />
+          <SweezyCompanion pose="article-reader" className={styles.ctaCompanion} />
         </div>
       </article>
     </main>

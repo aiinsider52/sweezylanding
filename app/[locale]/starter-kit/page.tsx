@@ -28,7 +28,7 @@ export default function StarterKit({ params }: { params: { locale: string } }) {
         <p className={styles.intro}>{copy.intro}</p>
         <DownloadLink asset="first-week" locale={locale} placement="starter-kit-page" className={styles.button}>{copy.download}<span aria-hidden>↓</span></DownloadLink>
       </div>
-      <SweezyCompanion pose="reader" className={styles.companion} priority />
+      <SweezyCompanion pose="starter" className={styles.companion} priority />
     </div>
     <p className={styles.note}>{copy.note}</p>
     <Checklist locale={locale} />

@@ -35,7 +35,7 @@ export default function ServicesPage() {
         <div className={styles.tags}><span>Швейцарія · Німеччина · Австрія</span><span>Карток у каталозі: {ukrainianServices.length}</span><span>Контакти з першоджерел</span></div>
         </div>
         <div className={styles.catalogCompanionFrame}>
-          <SweezyCompanion pose="greeting" className={styles.catalogCompanion} sizes="(max-width: 740px) 220px, 300px" />
+          <SweezyCompanion pose="services" className={styles.catalogCompanion} sizes="(max-width: 740px) 220px, 300px" />
           <span aria-hidden="true">SWEEZY / ЛЮДИ ПОРУЧ</span>
         </div>
       </header>

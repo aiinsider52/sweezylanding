@@ -10,8 +10,8 @@
 .secondary:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }
 .downloadNote { font-size: 13px; line-height: 1.5; color: #b8c0b9; margin-top: 14px; }
 .button:focus-visible, .main a:focus-visible { outline: 3px solid #82c8ff; outline-offset: 4px; }
-.banner .companion, .hero .companion { width: 290px; height: 310px; align-self: end; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 4%); mask-composite: intersect; }
-.companion img { object-fit: cover; object-position: center top; }
+.banner .companion, .hero .companion { width: 290px; height: 310px; align-self: end;   }
+.companion img { object-fit: contain; object-position: center bottom; }
 .main { background: var(--theme-bg); color: var(--theme-text); padding: 28px var(--layout-gutter) var(--section-space); }
 .hero { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 36px; background: #0c110e; color: white; padding: 32px 32px 0; }
 .hero h1 { font-size: var(--type-page-title); line-height: 1.14; font-weight: 750; letter-spacing: 0; }

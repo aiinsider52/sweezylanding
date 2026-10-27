@@ -13,11 +13,9 @@
   width: 280px;
   height: 300px;
   align-self: end;
-  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 4%);
-  mask-composite: intersect;
 }
 
-.companion img { object-fit: cover; object-position: center top; }
+.companion img { object-fit: contain; object-position: center bottom; }
 
 .teamTeaser { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 28px; margin: 12px 0 36px; border: 1px solid var(--theme-line); border-radius: 18px; background: var(--theme-lime-soft); color: var(--theme-text); }
 .teamTeaser .teamEyebrow { font: 650 10px/1.5 var(--font-ui); letter-spacing: .12em; color: var(--theme-link); }

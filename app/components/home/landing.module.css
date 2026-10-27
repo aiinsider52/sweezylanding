@@ -3288,18 +3288,18 @@
 .communityBannerText h2 { margin: 0; font-size: var(--type-section-title); line-height: 1.14; letter-spacing: -.045em; overflow-wrap: anywhere; }
 .communityBannerText .communityBannerBody { margin: 20px 0 0; color: #bec7bd; font-size: 15px; line-height: 1.7; }
 .communityBannerText > a { display: inline-block; margin-top: 22px; padding-block: 8px; color: #adff00; font-size: 14px; font-weight: 700; }
-.communityBannerCopy .communityCompanion { width: 180px; height: 210px; margin: 0 -14px -16px 0; align-self: end; mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent), linear-gradient(to bottom, transparent, #000 4% 96%, transparent); mask-composite: intersect; }
+.communityBannerCopy .communityCompanion { width: 180px; height: 210px; margin: 0 -14px -16px 0; align-self: end;   }
 .communityCompanion img { object-fit: contain; object-position: center bottom; }
 .placesHeader { grid-template-columns: minmax(0, 1fr) 240px; gap: var(--grid-gap); align-items: center; }
 .placesHeading { min-width: 0; }
 .placesHeading h2 { margin-top: 20px; font-size: var(--type-section-title); line-height: 1.14; letter-spacing: -.035em; }
 .placesDescription { max-width: 760px; margin-top: 24px; font-size: 18px; line-height: 1.7; color: #4f5a50; }
-.placesCompanionFrame { position: relative; width: 240px; height: 240px; overflow: hidden; border: 1px solid #0c0f0d22; border-radius: 20px; background: #0b100c; }
-.placesCompanionFrame .placesCompanion { width: 100%; height: 220px; mask-image: linear-gradient(to bottom, transparent, #000 5% 90%, transparent); }
+.placesCompanionFrame { position: relative; width: 240px; height: 240px; overflow: hidden; border: 1px solid #0c0f0d22; border-radius: 20px; background: var(--theme-lime-soft); }
+.placesCompanionFrame .placesCompanion { width: 100%; height: 220px;  }
 .placesCompanion img { object-fit: contain; object-position: center top; }
-.placesCompanionFrame > span:last-child { position: absolute; bottom: 15px; left: 20px; color: #c6d2bb; font: 600 10px/1.5 var(--font-ui); letter-spacing: .12em; }
+.placesCompanionFrame > span:last-child { position: absolute; bottom: 15px; left: 20px; color: var(--theme-muted); font: 600 10px/1.5 var(--font-ui); letter-spacing: .12em; }
 .faqCompanionCard { display: grid; grid-template-columns: 170px minmax(0, 1fr); align-items: end; gap: 10px; margin-top: 34px; padding: 20px 20px 0 0; border: 1px solid #ffffff18; border-radius: var(--panel-radius); overflow: hidden; background: #0c110e; color: #f4f5ef; }
-.faqCompanionCard .faqCompanion { width: 130px; height: 160px; mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent), linear-gradient(to bottom, transparent, #000 4% 96%, transparent); mask-composite: intersect; }
+.faqCompanionCard .faqCompanion { width: 130px; height: 160px;   }
 .faqCompanion img { object-fit: contain; object-position: center bottom; }
 .faqCompanionCard > div { min-width: 0; align-self: center; padding-bottom: 20px; }
 .faqCompanionCard p { color: #bbc7b2; font: 600 9px/1.7 var(--font-ui); letter-spacing: .09em; }

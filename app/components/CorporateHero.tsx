@@ -50,11 +50,11 @@ export function CorporateHero({
   companion,
 }: CorporateHeroProps) {
   const panelCompanion = companion === "planning"
-    ? "planning"
+    ? "planner"
     : companion === "blog"
-      ? "reader"
+      ? "article-reader"
       : companion === "jobs"
-        ? "done"
+        ? "jobs"
         : null;
 
   return (
@@ -69,7 +69,7 @@ export function CorporateHero({
           <p className={styles.description}>{description}</p>
         </div>
 
-        {companion === "community" ? <SweezyCompanion pose="greeting" className={styles.welcomeCompanion} priority /> : null}
+        {companion === "community" ? <SweezyCompanion pose="home-community" className={styles.welcomeCompanion} priority /> : null}
         {(primaryAction || secondaryAction) ? (
           <div className={styles.actions}>
             {primaryAction ? <Action action={primaryAction} primary /> : null}

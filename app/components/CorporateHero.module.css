@@ -233,10 +233,10 @@
 .community .description { max-width: 620px; }
 .community .welcomeCompanion { grid-column: 2; grid-row: 2; width: 210px; height: 275px; align-self: end; margin-bottom: -54px; }
 .community .welcomeCompanion { width: 330px; height: 330px; margin-left: -90px; margin-bottom: -54px; overflow: hidden; }
-.community .welcomeCompanion img { object-fit: cover; object-position: center top; transform: none; }
+.community .welcomeCompanion img { object-fit: contain; object-position: center bottom; transform: none; }
 .blog .signalPanel { padding-bottom: 56px; }
 .blog .panelCompanion { width: 100%; height: 290px; right: 0; overflow: hidden; }
-.blog .panelCompanion img { object-fit: cover; object-position: center top; }
+.blog .panelCompanion img { object-fit: contain; object-position: center bottom; }
 .community .actions { grid-column: 1; grid-row: 2; align-self: end; align-items: start; }
 @media (max-width: 1100px) {
   .planning .copy h1, .community .copy h1 { font-size: var(--type-page-title); }

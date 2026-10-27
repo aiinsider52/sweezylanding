@@ -87,7 +87,7 @@ export function SiteFooter({ year }: { year: number }) {
         <div className={styles.character}>
           <div className={styles.orbit} aria-hidden="true"><span /><span /></div>
           <span className={styles.farewell}>{c.farewell}<svg viewBox="0 0 30 20" fill="none" aria-hidden="true"><path d="M2 2c0 12 10 14 23 10m-5-5 6 5-4 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
-          <SweezyCompanion pose="greeting" className={styles.mascot} sizes="(max-width: 640px) 280px, 380px" />
+          <SweezyCompanion pose="footer" className={styles.mascot} sizes="(max-width: 640px) 280px, 380px" />
           <span className={styles.passport}>{SWEEZY_COMPANION.name[locale]} / SWEEZY<span>DE / AT / CH</span></span>
         </div>
       </div>

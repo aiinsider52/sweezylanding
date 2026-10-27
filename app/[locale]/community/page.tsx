@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
@@ -8,8 +9,11 @@ import { FACEBOOK_COMMUNITY_URL, TELEGRAM_URL } from "../../../lib/links";
 import { DEFAULT_OG_IMAGE } from "../../../lib/social";
 import { COUNTRIES, countryData, countryPath, topicHref } from "../../../data/dach";
 import { SWEEZY_COMPANION } from "../../../data/companion";
+import { DOWNLOADS, type DownloadId } from "../../../data/downloads";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { SweezyCompanion } from "../../components/SweezyCompanion";
+import { CommunityStarter } from "../../components/CommunityStarter";
+import { DownloadLink } from "../../components/DownloadLink";
 import { JsonLd } from "../../components/seo/JsonLd";
 import styles from "./community.module.css";
 
@@ -21,7 +25,8 @@ const COPY = {
     eyebrow: "SWEEZY / ЗНАЙДІТЬ СВОЇХ", title: "Свої люди.", titleEnd: "Навіть далеко від дому.",
     intro: "Нова країна — це ще й нові знайомства. Долучайтеся до українців і новоприбулих у Швейцарії: залишайтеся на зв’язку зі Sweezy та обмінюйтеся досвідом у Facebook-групі.",
     telegram: "Відкрити Telegram", facebook: "До Facebook-групи", heroNote: "Долучитися безкоштовно · Оберіть зручну платформу",
-    poster: "Місце для вашого «привіт».", posterTags: ["Знайомства", "Досвід", "Новий початок"], john: "Ваш провідник Sweezy",
+    poster: "Тут починається ваше «привіт».", john: "Ваш провідник Sweezy", greeting: "Привіт, я Джон!", scopeBadge: "ФОКУС: ШВЕЙЦАРІЯ",
+    navLabel: "На цій сторінці", jumpLinks: ["Оберіть спільноту", "Ваш перший допис", "Корисні матеріали"],
     platformsEyebrow: "ДВА СПОСОБИ БУТИ ПОРУЧ", platformsTitle: "Де вам зручніше?", platformsBody: "Можна обрати одну платформу або залишатися з нами в обох.",
     platforms: {
       telegram: { tag: "ЗАЛИШАЙТЕСЯ НА ЗВ’ЯЗКУ", title: "Sweezy у вашій кишені.", body: "Наш Telegram — прямий шлях до Sweezy, нових матеріалів та оновлень проєкту.", features: ["Матеріали проєкту", "Зручний доступ із телефона"], cta: "Відкрити Telegram" },
@@ -34,7 +39,7 @@ const COPY = {
       { title: "Послуги своєю мовою", body: "Контакти, міста й мови послуг у трьох країнах.", action: "Відкрити каталог" },
       { title: "Власна справа", body: "Куди звертатися українцю для старту бізнесу в DACH.", action: "Порівняти країни" },
     ],
-    pdfTitle: "Корисне можна взяти із собою.", pdfBody: "Безкоштовні PDF про переїзд і власну справу. Інформація по суті, яку зручно зберегти.", pdfCta: "Обрати свій PDF",
+    pdfTitle: "Корисне можна взяти із собою.", pdfBody: "Збережіть гід до переїзду, першого замовлення або наступної поїздки.", pdfCta: "Усі PDF-гіди", pdfFree: "Безкоштовно · Без реєстрації", download: "Завантажити PDF",
     scopeEyebrow: "ШВЕЙЦАРІЯ + МАТЕРІАЛИ ПРО DACH", scopeTitle: "Спільнота поруч. Орієнтири — ширше.", scopeBody: "Нинішній фокус наших Telegram і Facebook — Швейцарія. Для Німеччини й Австрії вже є окремі розділи сайту з гідами та місцевими контактами.", countriesLabel: "Матеріали за країнами",
     rulesEyebrow: "ДОБРЕ БУТИ СЕРЕД СВОЇХ", rulesTitle: "Починаємо з поваги.",
     rules: [
@@ -57,7 +62,8 @@ const COPY = {
     eyebrow: "SWEEZY / FIND YOUR PEOPLE", title: "Your people.", titleEnd: "Even far from home.",
     intro: "A new country also means new connections. Join Ukrainians and newcomers in Switzerland: keep in touch with Sweezy and exchange experiences in our Facebook group.",
     telegram: "Open Telegram", facebook: "Explore Facebook group", heroNote: "Free to join · Choose your preferred platform",
-    poster: "A place for your first hello.", posterTags: ["Connections", "Experience", "New beginnings"], john: "Your Sweezy guide",
+    poster: "Your first hello starts here.", john: "Your Sweezy guide", greeting: "Hey, I’m John!", scopeBadge: "FOCUS: SWITZERLAND",
+    navLabel: "On this page", jumpLinks: ["Choose your community", "Your first post", "Useful resources"],
     platformsEyebrow: "TWO WAYS TO STAY CONNECTED", platformsTitle: "Where do you feel at home?", platformsBody: "Choose one platform, or stay connected on both.",
     platforms: {
       telegram: { tag: "KEEP SWEEZY CLOSE", title: "Sweezy in your pocket.", body: "Our Telegram is a direct connection to Sweezy, new resources and project updates.", features: ["Project resources", "Easy access on your phone"], cta: "Open Telegram" },
@@ -70,7 +76,7 @@ const COPY = {
       { title: "Services in your language", body: "Contacts, locations and service languages across three countries.", action: "Explore directory (Ukrainian)" },
       { title: "Your own business", body: "Where Ukrainians can turn for business support across DACH.", action: "Compare countries (Ukrainian)" },
     ],
-    pdfTitle: "Take something useful with you.", pdfBody: "Free PDFs about moving and starting a business. Practical information you can save for later.", pdfCta: "Find your PDF",
+    pdfTitle: "Take something useful with you.", pdfBody: "Save a guide before your move, your first order or your next day trip.", pdfCta: "All PDF guides", pdfFree: "Free · No signup", download: "Download PDF",
     scopeEyebrow: "SWISS COMMUNITY + DACH RESOURCES", scopeTitle: "Close connections. A wider perspective.", scopeBody: "Our Telegram and Facebook spaces currently focus on Switzerland. Germany and Austria already have dedicated sections on the site with guides and local contacts.", countriesLabel: "Resources by country",
     rulesEyebrow: "A GOOD PLACE TO BELONG", rulesTitle: "It starts with respect.",
     rules: [
@@ -93,7 +99,8 @@ const COPY = {
     eyebrow: "SWEEZY / FINDE DEINE COMMUNITY", title: "Deine Leute.", titleEnd: "Auch fern von zu Hause.",
     intro: "Ein neues Land bedeutet auch neue Begegnungen. Vernetze dich mit Menschen aus der Ukraine und anderen Neuankommenden in der Schweiz: Bleib mit Sweezy verbunden und teile Erfahrungen in unserer Facebook-Gruppe.",
     telegram: "Telegram öffnen", facebook: "Zur Facebook-Gruppe", heroNote: "Kostenlos beitreten · Wähle deine Plattform",
-    poster: "Platz für dein erstes Hallo.", posterTags: ["Begegnungen", "Erfahrungen", "Neuanfang"], john: "Dein Sweezy-Begleiter",
+    poster: "Dein erstes Hallo beginnt hier.", john: "Dein Sweezy-Begleiter", greeting: "Hey, ich bin John!", scopeBadge: "FOKUS: SCHWEIZ",
+    navLabel: "Auf dieser Seite", jumpLinks: ["Community wählen", "Dein erster Beitrag", "Hilfreiche Ratgeber"],
     platformsEyebrow: "ZWEI WEGE, VERBUNDEN ZU BLEIBEN", platformsTitle: "Wo fühlst du dich wohl?", platformsBody: "Wähle eine Plattform oder bleib auf beiden mit uns verbunden.",
     platforms: {
       telegram: { tag: "SWEEZY IMMER DABEI", title: "Sweezy für unterwegs.", body: "Unser Telegram-Angebot verbindet dich direkt mit Sweezy, neuen Inhalten und Neuigkeiten zum Projekt.", features: ["Inhalte des Projekts", "Einfach auf dem Handy öffnen"], cta: "Telegram öffnen" },
@@ -106,7 +113,7 @@ const COPY = {
       { title: "Angebote in deiner Sprache", body: "Kontakte, Orte und Sprachen der Angebote in drei Ländern.", action: "Verzeichnis öffnen (Ukrainisch)" },
       { title: "Das eigene Unternehmen", body: "Anlaufstellen für Menschen aus der Ukraine bei einer Gründung im DACH-Raum.", action: "Länder vergleichen (Ukrainisch)" },
     ],
-    pdfTitle: "Nimm hilfreiches Wissen mit.", pdfBody: "Kostenlose PDFs über Umzug und Gründung. Praktische Informationen zum Speichern und Nachlesen.", pdfCta: "Dein PDF finden",
+    pdfTitle: "Nimm hilfreiches Wissen mit.", pdfBody: "Speichere einen Ratgeber vor dem Umzug, dem ersten Auftrag oder dem nächsten Ausflug.", pdfCta: "Alle PDF-Ratgeber", pdfFree: "Kostenlos · Ohne Anmeldung", download: "PDF herunterladen",
     scopeEyebrow: "SCHWEIZER COMMUNITY + DACH-RATGEBER", scopeTitle: "Nah verbunden. Weiter orientiert.", scopeBody: "Unsere Telegram- und Facebook-Angebote konzentrieren sich aktuell auf die Schweiz. Für Deutschland und Österreich gibt es bereits eigene Bereiche der Website mit Ratgebern und lokalen Kontakten.", countriesLabel: "Ratgeber nach Land",
     rulesEyebrow: "EIN GUTER ORT ZUM ANKOMMEN", rulesTitle: "Respekt macht den Anfang.",
     rules: [
@@ -129,6 +136,7 @@ const PLATFORMS: { key: Platform; name: string; href: string }[] = [
   { key: "telegram", name: "Telegram", href: TELEGRAM_URL },
   { key: "facebook", name: "Facebook", href: FACEBOOK_COMMUNITY_URL },
 ];
+const COMMUNITY_DOWNLOADS: DownloadId[] = ["first-week", "business-ch", "travel-kit"];
 
 function PlatformIcon({ platform }: { platform: Platform }) {
   return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
@@ -180,14 +188,12 @@ export default function CommunityPage({ params }: { params: { locale: string } }
           <p className={styles.heroNote}>{copy.heroNote}</p>
         </div>
         <div className={styles.poster}>
-          <span className={styles.posterLabel}>SWEEZY / COMMUNITY</span>
-          <p className={styles.posterTitle}>{copy.poster}</p>
-          <div className={styles.posterOrbit} aria-hidden="true" />
-          <SweezyCompanion pose="wave" className={styles.companion} priority sizes="(max-width: 620px) 230px, (max-width: 800px) 260px, (max-width: 1100px) 285px, 340px" />
-          <div className={styles.posterTags} aria-hidden="true">{copy.posterTags.map(tag => <span key={tag}>{tag}</span>)}</div>
-          <p className={styles.posterCaption}><strong>{SWEEZY_COMPANION.name[locale]}</strong><span>{copy.john}</span></p>
+          <div className={styles.posterTop}><span>SWEEZY / TOGETHER</span><span>{copy.scopeBadge}</span></div>
+          <div className={styles.heroArt}><div className={styles.posterOrbit} aria-hidden="true" /><SweezyCompanion pose="community" className={styles.companion} priority sizes="(max-width: 620px) 90vw, (max-width: 950px) 42vw, 480px" /><span className={styles.greeting}>{copy.greeting}</span></div>
+          <div className={styles.posterFoot}><p className={styles.posterTitle}>{copy.poster}</p><p className={styles.posterCaption}><strong>{SWEEZY_COMPANION.name[locale]}</strong><span>{copy.john}</span></p></div>
         </div>
       </header>
+      <nav className={styles.jumpNav} aria-label={copy.navLabel}>{["community-platforms", "community-starter", "community-resources"].map((id, index) => <a key={id} href={`#${id}`}><span>0{index + 1}</span>{copy.jumpLinks[index]}<span aria-hidden="true">↓</span></a>)}</nav>
       <section className={styles.section} id="community-platforms" aria-labelledby="platforms-title">
         <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>{copy.platformsEyebrow}</p><h2 id="platforms-title">{copy.platformsTitle}</h2></div><p>{copy.platformsBody}</p></div>
         <div className={styles.platforms}>
@@ -202,12 +208,16 @@ export default function CommunityPage({ params }: { params: { locale: string } }
           })}
         </div>
       </section>
-      <section className={styles.section} aria-labelledby="topics-title">
+      <div id="community-starter" className={styles.anchor}><CommunityStarter key={locale} locale={locale} /></div>
+      <section className={styles.section} id="community-resources" aria-labelledby="topics-title">
         <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>{copy.topicsEyebrow}</p><h2 id="topics-title">{copy.topicsTitle}</h2></div><p>{copy.topicsBody}</p></div>
         <div className={styles.topics}>{copy.topics.map((topic, index) => <Link href={topicLinks[index]} className={styles.topic} key={topic.title}>
           <span className={styles.topicIndex}>0{index + 1}<span aria-hidden="true">↗</span></span><h3>{topic.title}</h3><p>{topic.body}</p><span className={styles.topicAction}>{topic.action}</span>
         </Link>)}</div>
-        <Link href={`/${locale}/resources`} className={styles.pdfStrip}><span className={styles.pdfIcon} aria-hidden="true">PDF<span>↓</span></span><span className={styles.pdfCopy}><strong>{copy.pdfTitle}</strong><span>{copy.pdfBody}</span></span><span className={styles.pdfAction}>{copy.pdfCta}<span aria-hidden="true">↗</span></span></Link>
+        <div className={styles.downloadShelf}>
+          <div className={styles.downloadHeading}><div><p className={styles.eyebrow}>{copy.pdfFree}</p><h3>{copy.pdfTitle}</h3><p>{copy.pdfBody}</p></div><Link href={`/${locale}/resources`}>{copy.pdfCta} <span aria-hidden="true">↗</span></Link></div>
+          <div className={styles.downloadGrid}>{COMMUNITY_DOWNLOADS.map(asset => <article key={asset} className={styles.downloadCard}><Image src={`/downloads/sweezy-${asset}-cover-${locale}.webp`} alt="" width={714} height={1010} sizes="64px" /><div><h4>{DOWNLOADS[asset].title[locale]}</h4><p>{DOWNLOADS[asset].description[locale]}</p><DownloadLink asset={asset} locale={locale} placement="community-resources">{copy.download} <span aria-hidden="true">↓</span></DownloadLink></div></article>)}</div>
+        </div>
       </section>
       <section className={styles.scope} aria-labelledby="scope-title">
         <div><p className={styles.eyebrow}>{copy.scopeEyebrow}</p><h2 id="scope-title">{copy.scopeTitle}</h2><p className={styles.scopeBody}>{copy.scopeBody}</p></div>

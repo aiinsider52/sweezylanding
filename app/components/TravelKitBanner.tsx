@@ -24,7 +24,7 @@ export function TravelKitBanner({ locale, headingAs = "h2" }: { locale: Locale; 
         </div>
         <ul className={styles.benefits}><li>{copy.free}</li><li>{copy.pages}</li><li>{copy.noSignup}</li></ul>
         <div className={styles.companionNote}>
-          <SweezyCompanion pose="reader" className={styles.companion} sizes="80px" />
+          <SweezyCompanion pose="travel-kit" className={styles.companion} sizes="80px" />
           <div><strong>{SWEEZY_COMPANION.introduction[locale]}</strong><p>{copy.guideNote}</p></div>
         </div>
       </div>

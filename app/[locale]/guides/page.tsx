@@ -155,7 +155,7 @@ export default function GuidesIndexPage({
             <p className={styles.eyebrow}>{copy.eyebrow}</p>
             <h1 className={styles.heroTitle}>{copy.title}</h1>
           </div>
-          <SweezyCompanion pose="guide" className={styles.guideCompanion} priority />
+          <SweezyCompanion pose="guides" className={styles.guideCompanion} priority />
           <div className={styles.heroAside}>
             <div className={styles.heroCount}>
               26 <span>{copy.routes}</span>

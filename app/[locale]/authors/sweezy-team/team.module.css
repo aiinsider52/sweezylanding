@@ -24,9 +24,9 @@
 .editorial h2, .scope h2, .johnCard h2 { font-size: 24px; font-weight: 650; line-height: 1.25; letter-spacing: -.025em; margin: 12px 0; }
 .editorial p:not(.eyebrow), .scope p:not(.eyebrow), .johnCard p:not(.eyebrow) { max-width: 85ch; color: var(--theme-body); font-size: 15px; line-height: 1.75; }
 .johnCard { display: grid; grid-template-columns: 140px minmax(0,1fr); gap: 22px; align-items: center; border: 1px solid var(--theme-line); border-radius: var(--panel-radius); background: var(--theme-surface); padding: 20px; }
-.johnVisual { position: relative; height: 190px; border-radius: 12px; overflow: hidden; background: #0b100c; }
+.johnVisual { position: relative; height: 190px; border-radius: 12px; overflow: hidden; background: var(--theme-lime-soft); }
 .johnVisual .john { width: 100%; height: 100%; }
-.john img { object-fit: cover; object-position: 50% 15%; }
+.john img { object-fit: contain; object-position: center bottom; }
 .textLink { display: inline-flex; align-items: center; min-height: 40px; color: var(--theme-link); font-size: 13px; line-height: 1.6; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; margin-top: 12px; }
 .process { padding: 16px 0 28px; }
 .process > h2 { font-size: var(--type-section-title); font-weight: 650; line-height: 1.2; letter-spacing: -.03em; margin-bottom: 20px; }

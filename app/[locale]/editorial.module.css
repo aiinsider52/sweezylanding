@@ -412,11 +412,9 @@
   width: 280px;
   height: 310px;
   align-self: end;
-  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 4%);
-  mask-composite: intersect;
 }
 
-.ctaCompanion img { object-fit: cover; object-position: center top; }
+.ctaCompanion img { object-fit: contain; object-position: center bottom; }
 
 @media (max-width: 900px) {
   .cta.companionCta { grid-template-columns: minmax(0, 1fr) 210px; gap: 24px; padding: 28px 28px 0; }

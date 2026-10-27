@@ -118,7 +118,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
               <p className={styles.placesDescription}>{PLACES_COPY[locale].body}</p>
             </div>
             <div className={styles.placesCompanionFrame}>
-              <SweezyCompanion pose="reader" className={styles.placesCompanion} sizes="(max-width: 600px) 240px, (max-width: 900px) 290px, 360px" />
+              <SweezyCompanion pose="home-discover" className={styles.placesCompanion} sizes="(max-width: 600px) 240px, (max-width: 900px) 290px, 360px" />
               <span aria-hidden="true">SWEEZY / CH ↗</span>
             </div>
           </MotionReveal>
@@ -178,7 +178,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             {copy.method.steps.map((step, index) => (
               <MotionListItem key={step.title} delay={index * 0.045}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <SweezyCompanion pose={(["welcome", "route", "done"] as CompanionPose[])[index]} className={styles.methodCompanion} />
+                <SweezyCompanion pose={(["home-welcome", "home-route", "home-done"] as CompanionPose[])[index]} className={styles.methodCompanion} />
                 <div>
                   <h3>{step.title}</h3>
                   <p>{step.body}</p>
@@ -224,7 +224,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             <p className={styles.eyebrow}>{copy.faq.eyebrow}</p>
             <h2>{copy.faq.title}</h2>
             <aside className={styles.faqCompanionCard}>
-              <SweezyCompanion pose="greeting" className={styles.faqCompanion} sizes="(max-width: 560px) 150px, 190px" />
+              <SweezyCompanion pose="home-help" className={styles.faqCompanion} sizes="(max-width: 560px) 150px, 190px" />
               <div>
                 <p>{SWEEZY_COMPANION.introduction[locale]}</p>
                 <strong>{companionCopy.title}</strong>
