@@ -30,6 +30,20 @@ const LABELS = {
 type MenuItem = { href: string; label: string; description: string };
 type Panel = "life" | "explore" | "mobile" | null;
 
+// Keep the visitor on the same page when switching language. Blog slugs differ
+// per locale, the Zurich registration guide is English-only and the service
+// catalogue exists only under /uk, so those fall back to the nearest index.
+function localizedPath(pathname: string, target: Locale) {
+  const match = pathname.match(/^\/(uk|en|de)(\/.*)?$/);
+  if (!match) return `/${target}`;
+  const rest = match[2] ?? "";
+  if (match[1] === target) return pathname;
+  if (/^\/services(\/|$)/.test(rest)) return `/${target}`;
+  if (/^\/blog\/[^/]+/.test(rest)) return `/${target}/blog`;
+  if (/^\/guides\/zurich\/registration/.test(rest)) return `/${target}/guides`;
+  return `/${target}${rest}`;
+}
+
 function Arrow({ down = false }: { down?: boolean }) {
   return <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d={down ? "m6 8 4 4 4-4" : "M5 15 15 5M5 5h10v10"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
@@ -156,7 +170,7 @@ export function SiteHeader() {
       </nav>
       <div className={styles.actions}>
         <nav className={styles.languages} aria-label={c.language}>
-          {(["uk", "en", "de"] as const).map(item => <Link key={item} href={/^\/(uk|en|de)\/(countries(?:\/.*)?|resources|shop(?:\/.*)?)$/.test(pathname) ? pathname.replace(/^\/(uk|en|de)/, `/${item}`) : `/${item}`} hrefLang={item} lang={item} data-selected={item === locale} aria-label={item === "uk" ? "Українська" : item === "de" ? "Deutsch" : "English"} onClick={close}>{item === "uk" ? "UA" : item.toUpperCase()}</Link>)}
+          {(["uk", "en", "de"] as const).map(item => <Link key={item} href={localizedPath(pathname, item)} hrefLang={item} lang={item} data-selected={item === locale} aria-label={item === "uk" ? "Українська" : item === "de" ? "Deutsch" : "English"} onClick={close}>{item === "uk" ? "UA" : item.toUpperCase()}</Link>)}
         </nav>
         <ThemeToggle className={styles.themeToggle} labels={{ light: c.light, dark: c.dark }} />
         <a className={styles.app} href={APP_STORE_URL} target="_blank" rel="noreferrer noopener">{c.app}<span><Arrow /></span></a>

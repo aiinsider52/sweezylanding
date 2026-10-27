@@ -6,6 +6,7 @@ import { useState } from "react";
 import type { Locale } from "../../../lib/i18n";
 import { PRODUCT_SHOTS, productImage, productImageAlt, type ShopProduct, type ProductShot } from "../../../data/shop";
 import { SHOP_COPY } from "../../../data/shop-copy";
+import { shopStory } from "../../../data/shop-stories";
 import styles from "../../[locale]/shop/shop.module.css";
 
 export function ProductCard({ product, locale, saved = false, ready = true, onToggle }: {
@@ -13,28 +14,29 @@ export function ProductCard({ product, locale, saved = false, ready = true, onTo
 }) {
   const [shot, setShot] = useState<ProductShot>("studio");
   const c = SHOP_COPY[locale];
+  const name = product.copy[locale].name;
   const href = `/${locale}/shop/${product.slug}`;
+  // Hovering reveals the everyday scene; once a visitor picks a view, hover shows the studio shot instead.
+  const hoverShot: ProductShot = shot === "studio" ? "lifestyle" : "studio";
   return <article className={styles.card} data-product={product.slug}>
     <div className={styles.cardPhoto}>
-      <Link href={href} className={styles.imageLink}>
-        <Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 600px) 92vw, (max-width: 1100px) 46vw, 31vw" />
-        <span className={styles.photoLabel}>{c.ai}</span>
-        <span className={styles.cardExplore}>{c.details} <span aria-hidden="true">↗</span></span>
+      <Link href={href} className={styles.imageLink} aria-label={`${c.details}: ${name}`}>
+        <Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 560px) 46vw, (max-width: 900px) 46vw, (max-width: 1280px) 31vw, 23vw" />
+        <Image className={styles.hoverImage} src={productImage(product, hoverShot)} alt={productImageAlt(product, locale, hoverShot)} fill sizes="(max-width: 560px) 46vw, (max-width: 900px) 46vw, (max-width: 1280px) 31vw, 23vw" />
       </Link>
-      {product.flatPrint ? <span className={styles.flatBadge}>{c.flat}</span> : null}
-      {onToggle ? <button className={styles.saveButton} type="button" disabled={!ready} aria-pressed={saved} aria-label={`${saved ? c.remove : c.add}: ${product.copy[locale].name}`} onClick={onToggle}>{saved ? "✓" : "+"}</button> : null}
+      {product.flatPrint && product.category === "decor" ? <span className={styles.flatBadge}>{c.flat}</span> : null}
+      {onToggle ? <button className={styles.saveButton} type="button" disabled={!ready} aria-pressed={saved} aria-label={`${saved ? c.remove : c.add}: ${name}`} onClick={onToggle}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z" /></svg>
+      </button> : null}
+      <div className={styles.cardDots} role="group" aria-label={`${c.preview}: ${name}`}>
+        {PRODUCT_SHOTS.map(item => <button key={item} type="button" aria-pressed={shot === item} aria-label={`${c.shots[item]}: ${name}`} onClick={() => setShot(item)}><span /></button>)}
+      </div>
     </div>
     <div className={styles.cardCopy}>
-      <div className={styles.cardMeta}><p className={styles.cardCategory}>{c.categories[product.category]}</p><span>CH / {String(PRODUCT_SHOTS.indexOf(shot) + 1).padStart(2, "0")}</span></div>
-      <h3><Link href={href}>{product.copy[locale].name}</Link></h3>
-      <div className={styles.cardPreviews} role="group" aria-label={`${c.preview}: ${product.copy[locale].name}`}>
-        {PRODUCT_SHOTS.map((item, index) => <button key={item} type="button" aria-pressed={shot === item} aria-label={`${c.shots[item]}: ${product.copy[locale].name}`} onClick={() => setShot(item)}>
-          <Image src={productImage(product, item)} alt={productImageAlt(product, locale, item)} fill sizes="76px" />
-          <span>{String(index + 1).padStart(2, "0")}</span>
-        </button>)}
-        <Link href={href} className={styles.moreViews} aria-label={`${c.details}: ${product.copy[locale].name}`}><span aria-hidden="true">↗</span><small>{c.visualCount}</small></Link>
-      </div>
-      <div className={styles.cardBottom}><span>{c.price}</span><Link href={href} aria-label={`${c.details}: ${product.copy[locale].name}`}>{c.details}<span aria-hidden="true">↗</span></Link></div>
+      <p className={styles.cardCategory}>{c.categories[product.category]}</p>
+      <h3><Link href={href}>{name}</Link></h3>
+      <p className={styles.cardTagline}>{shopStory(product.slug, locale)?.tagline}</p>
+      <div className={styles.cardBottom}><span>{c.priceShort}</span><Link href={href} tabIndex={-1} aria-hidden="true" className={styles.cardArrow}>↗</Link></div>
     </div>
   </article>;
 }

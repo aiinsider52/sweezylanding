@@ -22,13 +22,13 @@ export function ProductGallery({ product, locale }: { product: ShopProduct; loca
     return () => { document.body.style.overflow = previous; };
   }, [zoomOpen]);
   return <div className={styles.gallery}>
-    <div className={styles.galleryHeading}><span>{c.visualCount}</span><span aria-live="polite">{String(index + 1).padStart(2, "0")} / 03</span></div>
     <div className={styles.galleryPhoto}>
       <button ref={trigger} className={styles.zoomTrigger} type="button" aria-label={`${c.zoom}: ${product.copy[locale].name}`} onClick={() => { if (dialog.current) { dialog.current.showModal(); setZoomOpen(true); } }}>
         <Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 800px) 92vw, 52vw" priority />
         <span className={styles.zoomBadge} aria-hidden="true">↗</span>
       </button>
       <span className={styles.photoLabel}>{c.ai}</span>
+      <span className={styles.galleryCounter} aria-live="polite">{String(index + 1).padStart(2, "0")} / 03</span>
       {product.flatPrint ? <span className={styles.flatBadge}>{c.flat}</span> : null}
       <div className={styles.galleryArrows}><button type="button" aria-label={c.previous} onClick={() => step(-1)}>←</button><button type="button" aria-label={c.next} onClick={() => step(1)}>→</button></div>
     </div>
