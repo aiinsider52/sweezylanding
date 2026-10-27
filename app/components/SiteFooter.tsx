@@ -52,6 +52,7 @@ export function SiteFooter({ year }: { year: number }) {
     { label: c.planning, href: `${home}/planning` },
     { label: c.guides, href: `${home}/guides` },
     { label: t.blog, href: `${home}/blog` },
+    { label: locale === "uk" ? "Магазин Sweezy" : "Sweezy Shop", href: `${home}/shop` },
     { label: c.jobs, href: `${home}/jobs` },
     { label: c.postJob, href: `${home}/jobs/post` },
   ];

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SHOP_PRODUCTS } from "../data/shop";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -161,6 +162,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticEntries, ...blogEntries,
     ...LOCALES.flatMap(locale => [
+      { url: `${SITE_URL}/${locale}/shop` },
+      ...SHOP_PRODUCTS.map(product => ({ url: `${SITE_URL}/${locale}/shop/${product.slug}` })),
       { url: `${SITE_URL}/${locale}/countries`, lastModified: new Date(REVIEWED_AT) },
       { url: `${SITE_URL}/${locale}/resources`, lastModified: new Date(REVIEWED_AT) },
       ...COUNTRIES.map(country => ({ url: `${SITE_URL}/${locale}/countries/${country}`, lastModified: new Date(REVIEWED_AT) })),

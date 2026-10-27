@@ -39,6 +39,7 @@ export function SiteHeader() {
   const segment = pathname.split("/")[1];
   const locale: Locale = segment === "uk" || segment === "de" ? segment : "en";
   const c = LABELS[locale];
+  const shopLabel = locale === "uk" ? "Магазин" : "Shop";
   const home = `/${locale}`;
   const [open, setOpen] = useState<Panel>(null);
   const [compact, setCompact] = useState(false);
@@ -151,10 +152,11 @@ export function SiteHeader() {
         <Link href={`${home}/countries`} onClick={close} className={styles.directLink} aria-current={active(`${home}/countries`) ? "page" : undefined}>DACH</Link>
         <Link href={`${home}/community`} onClick={close} className={styles.directLink} aria-current={active(`${home}/community`) ? "page" : undefined}>{c.community}</Link>
         <Link href={`${home}/blog`} onClick={close} className={styles.directLink} aria-current={active(`${home}/blog`) && pathname !== business ? "page" : undefined}>{c.blog}</Link>
+        <Link href={`${home}/shop`} onClick={close} className={`${styles.directLink} ${styles.shopLink}`} aria-current={active(`${home}/shop`) ? "page" : undefined}>{shopLabel}</Link>
       </nav>
       <div className={styles.actions}>
         <nav className={styles.languages} aria-label={c.language}>
-          {(["uk", "en", "de"] as const).map(item => <Link key={item} href={/^\/(uk|en|de)\/(countries(?:\/.*)?|resources)$/.test(pathname) ? pathname.replace(/^\/(uk|en|de)/, `/${item}`) : `/${item}`} hrefLang={item} lang={item} data-selected={item === locale} aria-label={item === "uk" ? "Українська" : item === "de" ? "Deutsch" : "English"} onClick={close}>{item === "uk" ? "UA" : item.toUpperCase()}</Link>)}
+          {(["uk", "en", "de"] as const).map(item => <Link key={item} href={/^\/(uk|en|de)\/(countries(?:\/.*)?|resources|shop(?:\/.*)?)$/.test(pathname) ? pathname.replace(/^\/(uk|en|de)/, `/${item}`) : `/${item}`} hrefLang={item} lang={item} data-selected={item === locale} aria-label={item === "uk" ? "Українська" : item === "de" ? "Deutsch" : "English"} onClick={close}>{item === "uk" ? "UA" : item.toUpperCase()}</Link>)}
         </nav>
         <ThemeToggle className={styles.themeToggle} labels={{ light: c.light, dark: c.dark }} />
         <a className={styles.app} href={APP_STORE_URL} target="_blank" rel="noreferrer noopener">{c.app}<span><Arrow /></span></a>
@@ -168,6 +170,7 @@ export function SiteHeader() {
           <section className={styles.mobileTogether}><h2>{c.all}</h2>{[
             { href: `${home}/community`, label: c.community, description: c.communityDesc },
             { href: `${home}/blog`, label: c.blog, description: c.blogDesc },
+            { href: `${home}/shop`, label: shopLabel, description: locale === "uk" ? "Речі зі швейцарським настроєм" : locale === "de" ? "Kleine Dinge mit Schweizer Motiven" : "Little things with Swiss spirit" },
           ].map(menuLink)}</section>
         </div>
         <a className={styles.mobileApp} href={APP_STORE_URL} target="_blank" rel="noreferrer noopener">{c.app}<Arrow /></a>
