@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
+    outputFileTracingExcludes: { "/**": ["./private/shop/**/*"] },
     // Keep Cyrillic fonts with Node image routes in traced deployments.
     outputFileTracingIncludes: {
       "/**/opengraph-image": ["./public/fonts/NotoSans-*.ttf", "./public/editorial/posts/social/*.jpg"],

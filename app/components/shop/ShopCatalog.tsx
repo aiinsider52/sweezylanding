@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Locale } from "../../../lib/i18n";
 import { SHOP_COPY } from "../../../data/shop-copy";
-import { SHOP_PRODUCTS, shopInquiryHref, type ShopCategory } from "../../../data/shop";
+import { SHOP_PRODUCTS, SHOP_CATEGORIES, shopInquiryHref, type ShopCategory } from "../../../data/shop";
 import { ProductCard } from "./ProductCard";
 import { useShopSelection } from "./useShopSelection";
 import styles from "../../[locale]/shop/shop.module.css";
@@ -22,7 +22,7 @@ export function ShopCatalog({ locale }: { locale: Locale }) {
       <div className={styles.sectionHead}><div><p className={styles.eyebrow}>THE SWISS EDIT / 01</p><h2 id="collection-heading">{c.collection}</h2><p>{c.collectionNote}</p></div><a href="#my-selection" className={styles.selectionLink}>{c.selectionLink}<span>{selected.length}</span></a></div>
       <div className={styles.toolbar}>
         <div className={styles.filters} role="group" aria-label={c.collection}>
-          {(["all", "bags", "cups", "decor", "accessories"] as const).map(key => <button key={key} type="button" aria-pressed={category === key} onClick={() => setCategory(key)}>{key === "all" ? c.all : c.categories[key]}<small>{key === "all" ? SHOP_PRODUCTS.length : SHOP_PRODUCTS.filter(p => p.category === key).length}</small></button>)}
+          {(["all", ...SHOP_CATEGORIES] as const).map(key => <button key={key} type="button" aria-pressed={category === key} onClick={() => setCategory(key)}>{key === "all" ? c.all : c.categories[key]}<small>{key === "all" ? SHOP_PRODUCTS.length : SHOP_PRODUCTS.filter(p => p.category === key).length}</small></button>)}
         </div>
         <label className={styles.search}><span className={styles.srOnly}>{c.search}</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.5"/><path d="m16 16 5 5" stroke="currentColor" strokeWidth="1.5"/></svg><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={c.searchPlaceholder} /></label>
       </div>

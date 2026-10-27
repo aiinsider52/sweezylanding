@@ -1,22 +1,23 @@
+import { EXTENDED_SHOP_PRODUCTS } from "./shop-products-extended";
 import type { Locale } from "../lib/i18n";
 
-export type ShopCategory = "bags" | "cups" | "decor" | "accessories";
+export type ShopCategory = "bags" | "cups" | "decor" | "accessories" | "clothing" | "home";
 type ProductCopy = { name: string; description: string; alt: string };
 export type ShopProduct = {
   slug: string;
-  code: string;
-  goodsId: string;
+  sku: string;
   category: ShopCategory;
   flatPrint: boolean;
   copy: Record<Locale, ProductCopy>;
+  appearance?: { label: Record<Locale, string>; swatches: string[] };
 };
 
 // Names describe only what is visible in the supplied listing photograph.
 // Prices, stock, dimensions, materials and shipping are deliberately unconfirmed.
-// Source URLs and image provenance are retained in generated_images/shop/sources.json.
+// Supplier links, IDs and extraction evidence are kept in private/shop (excluded from Git).
 export const SHOP_PRODUCTS: ShopProduct[] = [
   {
-    slug: "switzerland-tote", code: "Ek4UpqmoUOB", goodsId: "606751185291540", category: "bags", flatPrint: true,
+    slug: "switzerland-tote", sku: "SW-001", category: "bags", flatPrint: true,
     copy: {
       uk: { name: "Шоппер Swiss Stories", description: "Бежевий шоппер зі світлими ручками, написом Switzerland та малюнками гір, фондю, годинника й інших швейцарських символів. Декор — плоский друк.", alt: "Бежевий шоппер зі світлими ручками, написом Switzerland і малюнками швейцарських символів" },
       en: { name: "Swiss Stories tote", description: "A beige tote with light handles, Switzerland lettering and illustrations of mountains, fondue, a watch and other Swiss symbols. The decoration is a flat print.", alt: "Beige tote with light handles, Switzerland lettering and illustrated Swiss symbols" },
@@ -24,7 +25,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "switzerland-cap", code: "5SfEW0SaCJB", goodsId: "606697867284352", category: "accessories", flatPrint: false,
+    slug: "switzerland-cap", sku: "SW-002", category: "accessories", flatPrint: false,
     copy: {
       uk: { name: "Кепка Alpine Blue", description: "Темно-синя кепка з вигнутим козирком, світлим написом SWITZERLAND і зображенням гір та річки.", alt: "Темно-синя кепка з написом SWITZERLAND, білим малюнком гір та вигнутим козирком" },
       en: { name: "Alpine Blue cap", description: "A navy blue cap with a curved brim, light SWITZERLAND lettering and a mountain-and-river graphic.", alt: "Navy blue cap with SWITZERLAND lettering, white mountain graphic and curved brim" },
@@ -32,7 +33,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "switzerland-calling-mug", code: "PSkvLUOaXPB", goodsId: "606093568766590", category: "cups", flatPrint: false,
+    slug: "switzerland-calling-mug", sku: "SW-003", category: "cups", flatPrint: false,
     copy: {
       uk: { name: "Горнятко Switzerland Is Calling", description: "Біле горнятко зі світлою ручкою, сріблястим на вигляд обідком і чорним написом Switzerland is calling and I must go.", alt: "Біле горнятко з чорним написом Switzerland is calling and I must go та сріблястим обідком" },
       en: { name: "Switzerland Is Calling mug", description: "A white mug with a light handle, silver-coloured rim and black Switzerland is calling and I must go lettering.", alt: "White mug with black Switzerland is calling and I must go lettering and a silver-coloured rim" },
@@ -40,7 +41,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "interlaken-decor", code: "TEzW7ZWedvB", goodsId: "605542269464909", category: "decor", flatPrint: true,
+    slug: "interlaken-decor", sku: "SW-004", category: "decor", flatPrint: true,
     copy: {
       uk: { name: "Декор Interlaken", description: "Декоративна панель із написом Interlaken, гірським краєвидом і червоним парапланом. В оголошенні вказано плоский 2D-друк на акрилі: видимий об’єм є частиною зображення.", alt: "Декор Interlaken із горами, озером і червоним парапланом; плоский 2D-друк" },
       en: { name: "Interlaken decorative print", description: "A decorative panel with Interlaken lettering, mountains and a red paraglider. The listing states a flat 2D acrylic print: the apparent depth is part of the printed image.", alt: "Interlaken decorative panel with mountains, a lake and a red paraglider, flat 2D print" },
@@ -48,7 +49,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "swiss-lake-tote", code: "tg77NkJS3CB", goodsId: "606762728008479", category: "bags", flatPrint: true,
+    slug: "swiss-lake-tote", sku: "SW-005", category: "bags", flatPrint: true,
     copy: {
       uk: { name: "Шоппер Lakeside Switzerland", description: "Шоппер із чорними ручками та кольоровим принтом: озеро, альпійські вершини й містечко з червоними дахами. Малюнок надрукований, без об’ємної фактури.", alt: "Шоппер із чорними ручками та кольоровим друкованим краєвидом швейцарського озера, міста й гір" },
       en: { name: "Lakeside Switzerland tote", description: "A tote with black handles and a colourful printed lakeside town, red roofs and Alpine mountains. The design is printed, without raised texture.", alt: "Tote with black handles and a colourful printed Swiss lakeside town and mountain panorama" },
@@ -56,7 +57,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "love-switzerland-mug", code: "5h1BvCXtWSB", goodsId: "605602399013496", category: "cups", flatPrint: false,
+    slug: "love-switzerland-mug", sku: "SW-006", category: "cups", flatPrint: false,
     copy: {
       uk: { name: "Горнятко I Love Switzerland", description: "Чорне горнятко з чорною ручкою, червоним серцем і білим написом I love Switzerland.", alt: "Чорне горнятко з чорною ручкою, червоним серцем та білим написом I love Switzerland" },
       en: { name: "I Love Switzerland mug", description: "A black mug with a black handle, a red heart and white I love Switzerland lettering.", alt: "Black mug with a black handle, red heart and white I love Switzerland lettering" },
@@ -64,7 +65,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "alpine-chalet-decor", code: "DuAusqPgKaB", goodsId: "606908924664117", category: "decor", flatPrint: false,
+    slug: "alpine-chalet-decor", sku: "SW-007", category: "decor", flatPrint: false,
     copy: {
       uk: { name: "Декор Alpine Chalet", description: "Швейцарський сувенір із зображенням шале, квітів, корів і засніжених вершин та написом Switzerland. Матеріал, розміри й кріплення потрібно уточнити.", alt: "Сувенір Switzerland із зображенням альпійського шале, квітів, корів і засніжених гір" },
       en: { name: "Alpine Chalet decoration", description: "A Swiss souvenir featuring a chalet, flowers, cows, snowy peaks and Switzerland lettering. Material, dimensions and mounting still need confirmation.", alt: "Switzerland souvenir depicting an Alpine chalet, flowers, cows and snowy mountains" },
@@ -72,7 +73,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "zurich-decor", code: "uVsyCEehz1B", goodsId: "605654676822087", category: "decor", flatPrint: true,
+    slug: "zurich-decor", sku: "SW-008", category: "decor", flatPrint: true,
     copy: {
       uk: { name: "Декор Zurich Old Town", description: "Панель із золотистою рамкою, написом Zurich і зображенням старого міста. В оголошенні зазначено 2D FLAT: це плоске зображення, а не архітектурна мініатюра.", alt: "Панель Zurich із золотистою рамкою та зображенням старого міста; плоский 2D-друк" },
       en: { name: "Zurich Old Town decorative print", description: "A panel with a gold-coloured frame, Zurich lettering and an old-town scene. The listing says 2D FLAT: a flat image rather than an architectural miniature.", alt: "Zurich panel with a gold-coloured frame and old-town scene, flat 2D print" },
@@ -80,15 +81,17 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "swiss-mountain-travel-cup", code: "Hg3EepYOWyB", goodsId: "601105646894538", category: "cups", flatPrint: false,
+    slug: "swiss-mountain-travel-cup", sku: "SW-009", category: "cups", flatPrint: false,
     copy: {
       uk: { name: "Дорожнє горнятко Swiss Mountains", description: "Чорне дорожнє горнятко з білою кришкою, петлею COFFEE та червоним гірським принтом. Об’єм, матеріал і теплоізоляцію ще потрібно підтвердити.", alt: "Чорне дорожнє горнятко з білою кришкою, петлею COFFEE і червоним зображенням гір" },
       en: { name: "Swiss Mountains travel cup", description: "A black travel cup with a white lid, COFFEE loop and red mountain print. Capacity, material and insulation have not been confirmed.", alt: "Black travel cup with a white lid, COFFEE loop and red mountain graphic" },
       de: { name: "Swiss Mountains Reisebecher", description: "Schwarzer Reisebecher mit weißem Deckel, COFFEE-Schlaufe und rotem Bergmotiv. Volumen, Material und Isolierung sind noch nicht bestätigt.", alt: "Schwarzer Reisebecher mit weißem Deckel, COFFEE-Schlaufe und rotem Bergmotiv" },
     },
   },
+  ...EXTENDED_SHOP_PRODUCTS,
 ];
 
+export const SHOP_CATEGORIES: ShopCategory[] = ["bags", "clothing", "cups", "accessories", "home", "decor"];
 export const shopProduct = (slug: string) => SHOP_PRODUCTS.find(product => product.slug === slug);
 export const PRODUCT_SHOTS = ["studio", "lifestyle", "detail"] as const;
 export type ProductShot = typeof PRODUCT_SHOTS[number];
@@ -110,6 +113,6 @@ export function shopInquiryHref(products: ShopProduct[], locale: Locale) {
     en: ["Sweezy Shop — product enquiry", "Hello! I am interested in:", "Please confirm the full price, options, availability and delivery to my city:", "This is an information enquiry, not a placed order."],
     de: ["Sweezy Shop — Produktanfrage", "Hallo! Ich interessiere mich für:", "Bitte Endpreis, Varianten, Verfügbarkeit und Lieferung an meinen Wohnort bestätigen:", "Dies ist eine Informationsanfrage, keine Bestellung."],
   }[locale];
-  const body = `${text[1]}\n\n${products.map(p => `${p.copy[locale].name} · ${p.goodsId}\nhttps://www.sweezy.world/${locale}/shop/${p.slug}`).join("\n\n")}\n\n${text[2]}\n\n${text[3]}`;
+  const body = `${text[1]}\n\n${products.map(p => `${p.copy[locale].name} · ${p.sku}\nhttps://www.sweezy.world/${locale}/shop/${p.slug}`).join("\n\n")}\n\n${text[2]}\n\n${text[3]}`;
   return `mailto:support@sweezy.world?subject=${encodeURIComponent(text[0])}&body=${encodeURIComponent(body)}`;
 }

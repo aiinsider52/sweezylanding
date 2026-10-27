@@ -43,8 +43,9 @@ const hook = load('app/components/shop/useShopSelection.ts');
 const renderHook = () => { cursor = 0; return hook.useShopSelection(); };
 const plain = value => JSON.parse(JSON.stringify(value));
 const key = 'sweezy-shop-selection-v1';
-assert.equal(data.SHOP_PRODUCTS.length, 9);
-assert.equal(new Set(data.SHOP_PRODUCTS.map(p => p.goodsId)).size, 9);
+assert.equal(data.SHOP_PRODUCTS.length, 28);
+assert.equal(new Set(data.SHOP_PRODUCTS.map(p => p.sku)).size, data.SHOP_PRODUCTS.length);
+assert(data.SHOP_PRODUCTS.every(p => /^SW-\d{3}$/.test(p.sku) && !("goodsId" in p) && !("code" in p)), "Supplier identities stay out of the public model");
 const slug = data.SHOP_PRODUCTS[0].slug;
 assert.deepEqual(plain(hook.parseShopSelection('{bad json')), []);
 assert.deepEqual(plain(hook.parseShopSelection(JSON.stringify({ version: 9, items: [slug] }))), []);
@@ -75,7 +76,8 @@ for (const locale of ['uk', 'en', 'de']) {
   const body = draft.searchParams.get('body');
   for (const product of products) {
     assert(body.includes(product.copy[locale].name));
-    assert(body.includes(product.goodsId));
+    assert(body.includes(product.sku));
+    assert(!body.includes("temu.com"));
     assert(body.includes(`/${locale}/shop/${product.slug}`));
   }
   for (const product of data.SHOP_PRODUCTS) {
@@ -88,9 +90,9 @@ for (const locale of ['uk', 'en', 'de']) {
   }
 }
 const manifest = JSON.parse(fs.readFileSync('generated_images/shop/gallery-images.json'));
-assert.equal(Object.keys(manifest).length, 27);
-assert.equal(new Set(Object.values(manifest)).size, 27, 'Every product view uses its own generated image');
-assert.equal(fs.readdirSync('public/shop/products').filter(file => file.endsWith('.webp')).length, 27);
+assert.equal(Object.keys(manifest).length, data.SHOP_PRODUCTS.length * 3);
+assert.equal(new Set(Object.values(manifest)).size, data.SHOP_PRODUCTS.length * 3, 'Every product view uses its own generated image');
+assert.equal(fs.readdirSync('public/shop/products').filter(file => file.endsWith('.webp')).length, data.SHOP_PRODUCTS.length * 3);
 assert(!fs.existsSync('public/shop/source'), 'Listing photos are not public storefront assets');
 const gallery = load('app/components/shop/ProductGallery.tsx');
 const card = load('app/components/shop/ProductCard.tsx');
@@ -135,16 +137,16 @@ for (const locale of ['uk', 'en', 'de']) {
   state = []; cursor = 0; effects = []; mounted = false; blocked = false; storage.clear(); listeners.clear();
   const render = () => { cursor = 0; return nodes(catalog.ShopCatalog({ locale })); };
   let all = render(); effects.forEach(fn => fn()); mounted = true; all = render();
-  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 9);
+  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, data.SHOP_PRODUCTS.length);
   const categories = all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined && !n.props['aria-label']);
   categories[1].props.onClick(); all = render();
-  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 2, 'Bag filter returns two actual products');
+  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, data.SHOP_PRODUCTS.filter(p => p.category === 'bags').length, 'Bag filter returns two actual products');
   all.find(n => n.type === 'input').props.onChange({ target: { value: 'NO_MATCH_123' } }); all = render();
   assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 0, 'Search respects the active category');
   all.find(n => n.type === 'input').props.onChange({ target: { value: '' } }); all = render();
   all.find(n => n.type?.name === 'ProductCard').props.onToggle(); all = render();
   const draft = all.find(n => n.type === 'a' && n.props.href?.startsWith('mailto:'));
   assert(draft && decodeURIComponent(draft.props.href).includes(slug));
-  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 2, 'Saving a product preserves the filter');
+  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, data.SHOP_PRODUCTS.filter(p => p.category === 'bags').length, 'Saving a product preserves the filter');
 }
-console.log('Shop checks passed: 9 source products, 3 languages, storage failures, selection sync, enquiry drafts, 27 generated images, card previews, gallery navigation and zoom controls.');
+console.log('Shop checks passed: 28 products, 3 languages, storage failures, selection sync, enquiry drafts, 84 generated images, card previews, gallery navigation and zoom controls.');

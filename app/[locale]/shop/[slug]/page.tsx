@@ -40,7 +40,7 @@ export default function ProductPage({ params }: { params: { locale: string; slug
     <JsonLd data={{ "@context": "https://schema.org", "@graph": [
       { "@type": "WebPage", "@id": `${url}#webpage`, url, name: copy.name, description: copy.description, inLanguage: locale, isPartOf: { "@id": ENTITY_IDS.website }, primaryImageOfPage: imageObject(productCardImage(product), productImageAlt(product, locale), locale), mainEntity: { "@id": `${url}#product` } },
       // No Offer, price, stock, rating, manufacturer or Sweezy brand is invented.
-      { "@type": "Product", "@id": `${url}#product`, name: copy.name, description: copy.description, url, category: c.categories[product.category], image: productImages(product).map((src, index) => imageObject(src, productImageAlt(product, locale, PRODUCT_SHOTS[index]), locale)) },
+      { "@type": "Product", "@id": `${url}#product`, name: copy.name, sku: product.sku, description: copy.description, url, category: c.categories[product.category], image: productImages(product).map((src, index) => imageObject(src, productImageAlt(product, locale, PRODUCT_SHOTS[index]), locale)) },
     ] }} />
     <Breadcrumb items={[{ name: c.home, url: `/${locale}` }, { name: c.name, url: `/${locale}/shop` }, { name: copy.name, url: `/${locale}/shop/${product.slug}` }]} />
     <Link href={`/${locale}/shop#collection`} className={styles.backLink}>← {c.back}</Link>
@@ -48,10 +48,11 @@ export default function ProductPage({ params }: { params: { locale: string; slug
       <ProductGallery product={product} locale={locale} />
       <div className={styles.productInfo}>
         <p className={styles.eyebrow}>SWEEZY SHOP / {c.categories[product.category]}</p><h1>{copy.name}</h1><p className={styles.productDescription}>{copy.description}</p>
+        {product.appearance ? <section className={styles.appearance} aria-label={c.appearance}><h2>{c.appearance}</h2><div><span className={styles.swatches} aria-hidden="true">{product.appearance.swatches.map(color => <span key={color} style={{ backgroundColor: color }} />)}</span><span>{product.appearance.label[locale]}</span></div><p>{c.variantNote}</p></section> : null}
         <div className={styles.pricePanel}><strong>{c.price}</strong><p>{c.launchNote}</p></div>
         <ProductActions product={product} locale={locale} />
         <section className={styles.specs}><h2>{c.specifics}</h2><p>{c.specificsBody}</p>{product.flatPrint ? <p className={styles.flatNote}>{c.flatNote}</p> : null}</section>
-        <div className={styles.source}><a href={`https://www.temu.com/goods.html?goods_id=${product.goodsId}`} target="_blank" rel="noopener noreferrer">{c.source} ↗</a><p className={styles.finePrint}>{c.sourceNote}</p><p className={styles.sku}>{c.sku}: {product.goodsId}</p></div>
+        <p className={styles.sku}>{c.sku}: {product.sku}</p>
       </div>
     </div>
     <section className={styles.related} aria-labelledby="related-products"><div className={styles.sectionHead}><div><p className={styles.eyebrow}>THE SWISS EDIT</p><h2 id="related-products">{c.related}</h2></div><Link href={`/${locale}/shop#collection`} className={styles.inlineLink}>{c.back} ↗</Link></div><div className={styles.productGrid}>{related.map(item => <ProductCard key={item.slug} product={item} locale={locale} />)}</div></section>
