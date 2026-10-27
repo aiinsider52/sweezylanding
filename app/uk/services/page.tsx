@@ -1,3 +1,4 @@
+import { CommunityInvite } from "../../components/CommunityInvite";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BASE_URL, buildCanonicalAlternates } from "../../../lib/alternates";
@@ -55,6 +56,7 @@ export default function ServicesPage() {
         <p>Ми звіряємо опубліковані контакти та опис із джерелами й показуємо дату перевірки. Зв'язок із українською спільнотою описаний у кожній картці окремо. Наявність картки не є оцінкою якості робіт чи гарантією ціни.</p>
         <p className={styles.note}>Позначки розрізняють підтверджену українську мову, походження фахівця з України, переклад з української та рекомендацію спільноти. Для виїзних послуг зазначений регіон роботи; адресу зустрічі потрібно погодити.</p>
       </section>
+      <CommunityInvite locale="uk" placement="service-directory-community" context="services" />
       <section className={styles.section}>
         <h2>Знаєте український сервіс?</h2>
         <p>Для Німеччини й Австрії вже є окремі добірки сервісів. У розділах країн також знайдете офіційні портали й місцеві консультації.</p>

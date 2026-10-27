@@ -33,7 +33,7 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 function FooterLink({ href, className, children }: { href: string; className?: string; children: React.ReactNode }) {
   if (href.startsWith("http") || href.startsWith("mailto:")) {
     const external = href.startsWith("http");
-    return <a href={href} className={className} target={external ? "_blank" : undefined} rel={external ? "noreferrer noopener" : undefined}>{children}</a>;
+    return <a href={href} className={className} target={external ? "_blank" : undefined} rel={external ? "noreferrer noopener" : undefined} data-placement="footer">{children}</a>;
   }
   return <Link href={href} className={className}>{children}</Link>;
 }

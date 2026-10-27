@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import { CONSENT_EVENT } from "../../lib/analytics";
 import { analyticsSession, eventPayload, sendMetric } from "../../lib/analytics-client";
 import { isDownloadId, publicDownloadHref, downloadHref } from "../../data/downloads";
+import { TELEGRAM_URL, FACEBOOK_COMMUNITY_URL, INSTAGRAM_URL } from "../../lib/links";
+
+const communityDestinations = [[TELEGRAM_URL, "telegram"], [FACEBOOK_COMMUNITY_URL, "facebook"], [INSTAGRAM_URL, "instagram"]].map(([href, platform]) => ({ url: new URL(href), platform }));
 
 let lastPage = "";
 const busy = new WeakSet<HTMLAnchorElement>();
@@ -56,7 +59,8 @@ export function GrowthAnalytics() {
       if (url.hostname === "apps.apple.com") void sendMetric("app_click", { placement: link.dataset.placement ?? "site" });
       if (url.protocol === "mailto:" && link.dataset.partnerContact) void sendMetric("partner_contact", { action: link.dataset.partnerContact, placement: link.dataset.placement ?? "partners" });
       if (link.dataset.service && link.dataset.serviceAction) void sendMetric("service_contact", { provider: link.dataset.service, action: link.dataset.serviceAction, placement: "service-directory" });
-      if (["t.me", "www.facebook.com", "www.instagram.com"].includes(url.hostname)) void sendMetric("community_click", { placement: "site" });
+      const community = communityDestinations.find(item => item.url.origin === url.origin && item.url.pathname.replace(/\/+$/, "") === url.pathname.replace(/\/+$/, ""));
+      if (community) void sendMetric("community_click", { action: community.platform, placement: link.dataset.placement ?? "site" });
     };
     const storage = (event: StorageEvent) => { if (event.key === "sweezy-metrics-consent") page(); };
     window.addEventListener(CONSENT_EVENT, page); window.addEventListener("storage", storage); document.addEventListener("click", click);

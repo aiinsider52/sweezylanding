@@ -1,3 +1,4 @@
+import { CommunityInvite } from "./CommunityInvite";
 import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "../../lib/i18n";
@@ -59,6 +60,7 @@ export function DachGuideArticle({ locale, country, kicker, title, description, 
         <LeadMagnetBanner locale={locale} asset={download.asset} placement={download.placement} />
         <section className={styles.readingSupport} id="guide-faq"><div className={styles.supportHeading}><p className={styles.eyebrow}>SWEEZY / FAQ</p><h2>{c.faq}</h2></div><div className={styles.faqGrid}>{faq.map((question, index) => <div id={`faq-${index + 1}`} key={question.q} className={styles.faq}><h3>{question.q}</h3><p>{question.a}</p></div>)}</div></section>
         <section className={styles.readingSupport} id="guide-sources"><div className={styles.supportHeading}><p className={styles.eyebrow}>SWEEZY / SOURCES</p><h2>{c.sources}</h2></div><ul className={styles.evidenceGrid}>{sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer noopener"><span>{source.name}</span><span aria-hidden="true">↗</span></a></li>)}</ul><p className={styles.note}>{c.scope}</p></section>
+        <CommunityInvite locale={locale} placement="dach-guide-community" context={showBusinessContacts ? "business" : "general"} />
         <section className={styles.readingSupport}><div className={styles.supportHeading}><p className={styles.eyebrow}>SWEEZY / EXPLORE</p><h2>{c.next}</h2></div><div className={styles.nextGrid}>{next.map((link, index) => <Link key={link.href} href={link.href}><span aria-hidden="true">0{index + 1}</span><strong>{link.label}</strong><span aria-hidden="true">↗</span></Link>)}</div></section>
       </div>
     </div>

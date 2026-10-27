@@ -1,3 +1,4 @@
+import { CommunityInvite } from "../../../components/CommunityInvite";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,6 +39,7 @@ export default function CountryHub({ params }: { params: { locale: string; count
     {resources.length > 0 && <section className={styles.section}><h2>{c.services}</h2><div className={styles.directory}>{resources.map(resource => <article className={styles.topic} key={resource.id}><small>{resource.city} / {resource.kind[locale]}</small><h3>{resource.name}</h3><p>{resource.description[locale]}</p><div className={styles.sourceList}><a href={resource.url} target="_blank" rel="noreferrer noopener" data-service={resource.id} data-service-action="website">{c.open} ↗</a>{resource.phone && <a href={`tel:${resource.phone}`} data-service={resource.id} data-service-action="phone">{resource.phone}</a>}{resource.email && <a href={`mailto:${resource.email}`} data-service={resource.id} data-service-action="email">Email ↗</a>}</div></article>)}</div></section>}
     <LeadMagnetBanner locale={locale} asset={item.business} placement={`country-business-${country}`} />
     <section className={styles.section}><h2>{c.sources}</h2><p>{c.reviewed}: <time dateTime={REVIEWED_AT}>{new Date(`${REVIEWED_AT}T12:00:00Z`).toLocaleDateString(locale === "uk" ? "uk-UA" : locale === "de" ? "de-DE" : "en-GB")}</time></p><ul className={styles.sourceList}>{countrySources[country].map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer noopener">{source.name} ↗</a></li>)}</ul></section>
+    <CommunityInvite locale={locale} placement="country-community" />
     <section className={styles.section}><h2>{c.other}</h2><CountryCards locale={locale} exclude={country} /></section>
   </div></main>;
 }

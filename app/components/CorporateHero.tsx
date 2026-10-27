@@ -7,6 +7,7 @@ type HeroAction = {
   label: string;
   href: string;
   external?: boolean;
+  placement?: string;
 };
 
 type HeroSignal = {
@@ -31,7 +32,7 @@ function Action({ action, primary = false }: { action: HeroAction; primary?: boo
   const content = <>{action.label}<span aria-hidden>↗</span></>;
 
   if (action.external) {
-    return <a className={className} href={action.href} target="_blank" rel="noreferrer noopener">{content}</a>;
+    return <a className={className} href={action.href} target="_blank" rel="noreferrer noopener" data-placement={action.placement}>{content}</a>;
   }
 
   return <Link className={className} href={action.href}>{content}</Link>;

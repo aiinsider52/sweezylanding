@@ -1,123 +1,222 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../lib/alternates";
 import { isLocale } from "../../../lib/blog";
-import type { Locale } from "../../../lib/i18n";
+import { ENTITY_IDS } from "../../../lib/entities";
 import { FACEBOOK_COMMUNITY_URL, TELEGRAM_URL } from "../../../lib/links";
+import { DEFAULT_OG_IMAGE } from "../../../lib/social";
+import { COUNTRIES, countryData, countryPath, topicHref } from "../../../data/dach";
+import { SWEEZY_COMPANION } from "../../../data/companion";
 import { Breadcrumb } from "../../components/Breadcrumb";
-import { CorporateHero } from "../../components/CorporateHero";
+import { SweezyCompanion } from "../../components/SweezyCompanion";
 import { JsonLd } from "../../components/seo/JsonLd";
 import styles from "./community.module.css";
 
-const COPY: Record<Locale, {
-  title: string; metaTitle?: string; description: string; eyebrow: string; intro: string;
-  telegramTitle: string; telegramBody: string; telegramCta: string;
-  facebookTitle: string; facebookBody: string; facebookCta: string;
-  purposeTitle: string; purposes: [string, string][];
-  rulesTitle: string; rules: string[]; faq: { q: string; a: string }[];
-}> = {
-  en: {
-    title: "Sweezy Community for Newcomers in Switzerland",
-    metaTitle: "Sweezy Community: Telegram & Facebook Switzerland",
-    description: "Join the official Sweezy community on Telegram or Facebook for Switzerland relocation updates, practical questions and newcomer connections.",
-    eyebrow: "COMMUNITY · SWITZERLAND",
-    intro: "Sweezy connects product guidance with real conversation. Use our official Telegram and Facebook spaces to follow updates, exchange experience and meet people navigating life in Switzerland.",
-    telegramTitle: "Fast updates. Direct conversation.", telegramBody: "Telegram works best for timely Sweezy news, quick questions and staying close to community activity.", telegramCta: "Join Telegram",
-    facebookTitle: "Longer posts. Shared experience.", facebookBody: "Facebook group gives community members more room for practical discussions, useful posts and ongoing connections.", facebookCta: "Join Facebook group",
-    purposeTitle: "What community is for",
-    purposes: [["Practical exchange", "Discuss everyday relocation, work, documents and life in Switzerland."], ["Sweezy updates", "Follow product releases, new guides, places and community initiatives."], ["Human connection", "Find people facing similar questions and share useful experience."], ["Better guidance", "Recurring questions help Sweezy identify guides and tools people need next."]],
-    rulesTitle: "Community principles", rules: ["Respect people, privacy and different personal situations.", "Do not publish passports, permits, addresses or other sensitive documents.", "Verify legal, tax, medical and migration decisions with responsible authorities.", "No spam, scams, hate speech or misleading offers."],
-    faq: [{ q: "Is Sweezy community free to join?", a: "Yes. Telegram and Facebook community links are publicly available. Platform accounts and platform rules apply." }, { q: "Does community advice replace official guidance?", a: "No. Community experience may help orientation but does not replace responsible Swiss authorities or qualified professional advice." }, { q: "Who is Sweezy community for?", a: "It is designed for newcomers, expats and Ukrainians building life in Switzerland, plus people willing to share relevant experience." }],
-  },
+const COPY = {
   uk: {
-    title: "Спільнота Sweezy для українців у Швейцарії",
-    description: "Приєднуйтесь до спільноти Sweezy у Telegram і Facebook: практичний досвід, оновлення та зв’язок між українцями й новоприбулими у Швейцарії.",
-    eyebrow: "СПІЛЬНОТА · ШВЕЙЦАРІЯ",
-    intro: "Sweezy поєднує перевірені гіди з живим спілкуванням. Наші офіційні простори у Telegram і Facebook допомагають стежити за оновленнями, обмінюватися досвідом і знаходити людей, які також будують життя у Швейцарії.",
-    telegramTitle: "Швидкі оновлення. Живий зв’язок.", telegramBody: "Telegram підходить для новин Sweezy, коротких запитань і швидкого зв’язку зі спільнотою.", telegramCta: "Приєднатися в Telegram",
-    facebookTitle: "Більше контексту. Спільний досвід.", facebookBody: "Facebook-група дає більше простору для практичних обговорень, корисних дописів і тривалих контактів.", facebookCta: "Приєднатися у Facebook",
-    purposeTitle: "Для чого створена спільнота",
-    purposes: [["Практичний обмін", "Обговорюйте переїзд, роботу, документи та повсякденне життя у Швейцарії."], ["Оновлення Sweezy", "Дізнавайтеся про нові функції, гіди, місця та ініціативи."], ["Людський зв’язок", "Знаходьте людей зі схожими питаннями та діліться корисним досвідом."], ["Кращі матеріали", "Повторювані запитання допомагають Sweezy створювати потрібні гіди й інструменти."]],
-    rulesTitle: "Принципи спільноти", rules: ["Поважайте людей, приватність і різні життєві обставини.", "Не публікуйте паспорти, дозволи, адреси та інші чутливі документи.", "Юридичні, податкові, медичні й міграційні рішення перевіряйте в компетентних органах.", "Спам, шахрайство, мова ворожнечі та оманливі пропозиції заборонені."],
-    faq: [{ q: "Чи безкоштовна спільнота Sweezy?", a: "Так. Посилання на Telegram і Facebook відкриті. Діють правила та вимоги відповідних платформ." }, { q: "Чи замінюють поради спільноти офіційну інформацію?", a: "Ні. Особистий досвід допомагає зорієнтуватися, але не замінює відповідальні органи Швейцарії або професійну консультацію." }, { q: "Для кого створена спільнота?", a: "Для новоприбулих, експатів та українців, які будують життя у Швейцарії, а також людей, готових ділитися релевантним досвідом." }],
+    name: "Спільноти", home: "Головна",
+    metaTitle: "Спільнота Sweezy: українці у Швейцарії · Telegram і Facebook",
+    description: "Знайдіть своїх у Швейцарії: офіційні Telegram і Facebook спільноти Sweezy, обмін досвідом та корисні матеріали про переїзд, роботу й життя в DACH.",
+    eyebrow: "SWEEZY / ЗНАЙДІТЬ СВОЇХ", title: "Свої люди.", titleEnd: "Навіть далеко від дому.",
+    intro: "Нова країна — це ще й нові знайомства. Долучайтеся до українців і новоприбулих у Швейцарії: залишайтеся на зв’язку зі Sweezy та обмінюйтеся досвідом у Facebook-групі.",
+    telegram: "Відкрити Telegram", facebook: "До Facebook-групи", heroNote: "Долучитися безкоштовно · Оберіть зручну платформу",
+    poster: "Місце для вашого «привіт».", posterTags: ["Знайомства", "Досвід", "Новий початок"], john: "Ваш провідник Sweezy",
+    platformsEyebrow: "ДВА СПОСОБИ БУТИ ПОРУЧ", platformsTitle: "Де вам зручніше?", platformsBody: "Можна обрати одну платформу або залишатися з нами в обох.",
+    platforms: {
+      telegram: { tag: "ЗАЛИШАЙТЕСЯ НА ЗВ’ЯЗКУ", title: "Sweezy у вашій кишені.", body: "Наш Telegram — прямий шлях до Sweezy, нових матеріалів та оновлень проєкту.", features: ["Матеріали проєкту", "Зручний доступ із телефона"], cta: "Відкрити Telegram" },
+      facebook: { tag: "ЗНАЙОМТЕСЯ Й ДІЛІТЬСЯ", title: "Досвід, який об’єднує.", body: "Facebook-група для знайомств, практичних запитань і розгорнутих дописів про життя у Швейцарії.", features: ["Обмін досвідом", "Простір для ваших дописів"], cta: "Відкрити Facebook-групу" },
+    },
+    topicsEyebrow: "ВІД ЗНАЙОМСТВА — ДО КОНКРЕТИКИ", topicsTitle: "З чим ви зараз розбираєтесь?", topicsBody: "Спочатку — корисний матеріал. Потім — ваш досвід і запитання для спільноти.",
+    topics: [
+      { title: "Перші документи", body: "Реєстрація та перші кроки у Швейцарії.", action: "Розібратися зі стартом" },
+      { title: "Робота й можливості", body: "З чого почати пошук роботи у Швейцарії.", action: "Перейти до матеріалів" },
+      { title: "Послуги своєю мовою", body: "Контакти, міста й мови послуг у трьох країнах.", action: "Відкрити каталог" },
+      { title: "Власна справа", body: "Куди звертатися українцю для старту бізнесу в DACH.", action: "Порівняти країни" },
+    ],
+    pdfTitle: "Корисне можна взяти із собою.", pdfBody: "Безкоштовні PDF про переїзд і власну справу. Інформація по суті, яку зручно зберегти.", pdfCta: "Обрати свій PDF",
+    scopeEyebrow: "ШВЕЙЦАРІЯ + МАТЕРІАЛИ ПРО DACH", scopeTitle: "Спільнота поруч. Орієнтири — ширше.", scopeBody: "Нинішній фокус наших Telegram і Facebook — Швейцарія. Для Німеччини й Австрії вже є окремі розділи сайту з гідами та місцевими контактами.", countriesLabel: "Матеріали за країнами",
+    rulesEyebrow: "ДОБРЕ БУТИ СЕРЕД СВОЇХ", rulesTitle: "Починаємо з поваги.",
+    rules: [
+      ["Говоріть по-людськи", "Повага до інших, їхнього досвіду й обставин."],
+      ["Бережіть приватність", "Без паспортів, дозволів, домашніх адрес і чужих персональних даних."],
+      ["Діліться чесно", "Без спаму, шахрайства, мови ворожнечі та оманливих пропозицій."],
+    ],
+    faqTitle: "Перед тим як долучитися",
+    faq: [
+      { q: "Чи безкоштовно долучитися?", a: "Так, Sweezy не бере плату за приєднання до цих спільнот. Для доступу можуть знадобитися обліковий запис платформи й схвалення вступу до групи. Діють правила Telegram і Facebook." },
+      { q: "Де можна поставити запитання чи поділитися досвідом?", a: "Для дописів і обміну досвідом обирайте Facebook-групу та дотримуйтеся її правил. Telegram допомагає залишатися на зв’язку зі Sweezy. Перед публікацією сформулюйте запитання конкретно й не додавайте чутливих даних." },
+      { q: "А якщо я в Німеччині чи Австрії?", a: "Наші поточні посилання на спільноти стосуються Швейцарії. Матеріали про реєстрацію, роботу й власну справу в Німеччині та Австрії доступні у відповідних розділах Sweezy. Окремих посилань на спільноти цих країн тут поки немає." },
+      { q: "Чи можна покладатися на поради учасників?", a: "Особистий досвід допомагає зорієнтуватися. Для рішень щодо дозволів, податків, здоров’я або права звіряйте інформацію з компетентним органом чи фахівцем: обставини учасників можуть відрізнятися від ваших." },
+    ],
+  },
+  en: {
+    name: "Community", home: "Home",
+    metaTitle: "Sweezy Community: Telegram & Facebook in Switzerland",
+    description: "Find your people in Switzerland: official Sweezy Telegram and Facebook spaces, shared experience and practical resources for newcomers across DACH.",
+    eyebrow: "SWEEZY / FIND YOUR PEOPLE", title: "Your people.", titleEnd: "Even far from home.",
+    intro: "A new country also means new connections. Join Ukrainians and newcomers in Switzerland: keep in touch with Sweezy and exchange experiences in our Facebook group.",
+    telegram: "Open Telegram", facebook: "Explore Facebook group", heroNote: "Free to join · Choose your preferred platform",
+    poster: "A place for your first hello.", posterTags: ["Connections", "Experience", "New beginnings"], john: "Your Sweezy guide",
+    platformsEyebrow: "TWO WAYS TO STAY CONNECTED", platformsTitle: "Where do you feel at home?", platformsBody: "Choose one platform, or stay connected on both.",
+    platforms: {
+      telegram: { tag: "KEEP SWEEZY CLOSE", title: "Sweezy in your pocket.", body: "Our Telegram is a direct connection to Sweezy, new resources and project updates.", features: ["Project resources", "Easy access on your phone"], cta: "Open Telegram" },
+      facebook: { tag: "MEET PEOPLE & SHARE", title: "Experience brings us together.", body: "A Facebook group for connections, practical questions and longer posts about life in Switzerland.", features: ["Exchange experiences", "Space for your own posts"], cta: "Open Facebook group" },
+    },
+    topicsEyebrow: "FROM CONNECTION TO YOUR NEXT STEP", topicsTitle: "What are you figuring out?", topicsBody: "Start with a useful resource. Bring your own experience and questions to the community.",
+    topics: [
+      { title: "Your first documents", body: "Registration and first steps in Switzerland.", action: "Find your starting point" },
+      { title: "Work & opportunities", body: "Where to start your job search in Switzerland.", action: "Explore resources" },
+      { title: "Services in your language", body: "Contacts, locations and service languages across three countries.", action: "Explore directory (Ukrainian)" },
+      { title: "Your own business", body: "Where Ukrainians can turn for business support across DACH.", action: "Compare countries (Ukrainian)" },
+    ],
+    pdfTitle: "Take something useful with you.", pdfBody: "Free PDFs about moving and starting a business. Practical information you can save for later.", pdfCta: "Find your PDF",
+    scopeEyebrow: "SWISS COMMUNITY + DACH RESOURCES", scopeTitle: "Close connections. A wider perspective.", scopeBody: "Our Telegram and Facebook spaces currently focus on Switzerland. Germany and Austria already have dedicated sections on the site with guides and local contacts.", countriesLabel: "Resources by country",
+    rulesEyebrow: "A GOOD PLACE TO BELONG", rulesTitle: "It starts with respect.",
+    rules: [
+      ["Be kind", "Respect other people, their experiences and circumstances."],
+      ["Protect privacy", "No passports, permits, home addresses or other people’s personal data."],
+      ["Share honestly", "No spam, scams, hate speech or misleading offers."],
+    ],
+    faqTitle: "Before you join",
+    faq: [
+      { q: "Is it free to join?", a: "Yes. Sweezy does not charge to join these spaces. You may need a platform account and group admission approval. Telegram and Facebook rules apply." },
+      { q: "Where can I ask a question or share an experience?", a: "Choose the Facebook group for posts and exchanges, following its rules. Telegram helps you stay connected with Sweezy. Make your question specific and leave out sensitive personal information." },
+      { q: "What if I live in Germany or Austria?", a: "Our current community links focus on Switzerland. Sweezy has dedicated resources on registration, work and starting a business in Germany and Austria. Separate community links for those countries are not listed here yet." },
+      { q: "Can I rely on advice from members?", a: "Personal experience can help you find your bearings. For decisions about permits, tax, health or law, check with the responsible authority or a qualified professional: other members’ circumstances may differ from yours." },
+    ],
   },
   de: {
-    title: "Sweezy Community für Neuankömmlinge in der Schweiz",
-    description: "Sweezy Community auf Telegram und Facebook: praktische Erfahrungen, Updates und Kontakte für Neuankömmlinge und Menschen aus der Ukraine in der Schweiz.",
-    eyebrow: "COMMUNITY · SCHWEIZ",
-    intro: "Sweezy verbindet geprüfte Orientierung mit echtem Austausch. In unseren offiziellen Telegram- und Facebook-Räumen folgen Sie Updates, teilen Erfahrungen und treffen Menschen, die ihr Leben in der Schweiz aufbauen.",
-    telegramTitle: "Schnelle Updates. Direkter Austausch.", telegramBody: "Telegram eignet sich für Sweezy-News, kurze Fragen und direkten Kontakt zur Community.", telegramCta: "Telegram beitreten",
-    facebookTitle: "Mehr Kontext. Gemeinsame Erfahrung.", facebookBody: "Die Facebook-Gruppe bietet Raum für praktische Diskussionen, hilfreiche Beiträge und langfristige Kontakte.", facebookCta: "Facebook-Gruppe beitreten",
-    purposeTitle: "Wofür die Community da ist",
-    purposes: [["Praktischer Austausch", "Umzug, Arbeit, Dokumente und Alltag in der Schweiz besprechen."], ["Sweezy Updates", "Neue Funktionen, Guides, Orte und Community-Initiativen verfolgen."], ["Menschliche Kontakte", "Menschen mit ähnlichen Fragen finden und Erfahrungen teilen."], ["Bessere Orientierung", "Wiederkehrende Fragen zeigen Sweezy, welche Guides und Werkzeuge als Nächstes fehlen."]],
-    rulesTitle: "Community-Grundsätze", rules: ["Menschen, Privatsphäre und unterschiedliche Situationen respektieren.", "Keine Pässe, Bewilligungen, Adressen oder sensiblen Dokumente veröffentlichen.", "Rechtliche, steuerliche, medizinische und migrationsrechtliche Entscheidungen bei Behörden prüfen.", "Kein Spam, Betrug, Hassrede oder irreführende Angebote."],
-    faq: [{ q: "Ist die Sweezy Community kostenlos?", a: "Ja. Telegram- und Facebook-Links sind öffentlich zugänglich. Es gelten die Regeln der jeweiligen Plattform." }, { q: "Ersetzt Community-Erfahrung offizielle Auskünfte?", a: "Nein. Erfahrungen helfen bei der Orientierung, ersetzen aber keine zuständige Schweizer Behörde oder qualifizierte Beratung." }, { q: "Für wen ist die Community?", a: "Für Neuankömmlinge, Expats und Menschen aus der Ukraine, die in der Schweiz leben, sowie für Personen mit relevanter Erfahrung." }],
+    name: "Community", home: "Start",
+    metaTitle: "Sweezy Community: Telegram & Facebook in der Schweiz",
+    description: "Finde deine Community in der Schweiz: offizielle Sweezy-Angebote auf Telegram und Facebook, Erfahrungsaustausch und praktische Ratgeber für den DACH-Raum.",
+    eyebrow: "SWEEZY / FINDE DEINE COMMUNITY", title: "Deine Leute.", titleEnd: "Auch fern von zu Hause.",
+    intro: "Ein neues Land bedeutet auch neue Begegnungen. Vernetze dich mit Menschen aus der Ukraine und anderen Neuankommenden in der Schweiz: Bleib mit Sweezy verbunden und teile Erfahrungen in unserer Facebook-Gruppe.",
+    telegram: "Telegram öffnen", facebook: "Zur Facebook-Gruppe", heroNote: "Kostenlos beitreten · Wähle deine Plattform",
+    poster: "Platz für dein erstes Hallo.", posterTags: ["Begegnungen", "Erfahrungen", "Neuanfang"], john: "Dein Sweezy-Begleiter",
+    platformsEyebrow: "ZWEI WEGE, VERBUNDEN ZU BLEIBEN", platformsTitle: "Wo fühlst du dich wohl?", platformsBody: "Wähle eine Plattform oder bleib auf beiden mit uns verbunden.",
+    platforms: {
+      telegram: { tag: "SWEEZY IMMER DABEI", title: "Sweezy für unterwegs.", body: "Unser Telegram-Angebot verbindet dich direkt mit Sweezy, neuen Inhalten und Neuigkeiten zum Projekt.", features: ["Inhalte des Projekts", "Einfach auf dem Handy öffnen"], cta: "Telegram öffnen" },
+      facebook: { tag: "KENNENLERNEN & AUSTAUSCHEN", title: "Erfahrungen verbinden.", body: "Eine Facebook-Gruppe für Kontakte, praktische Fragen und ausführliche Beiträge über das Leben in der Schweiz.", features: ["Erfahrungen austauschen", "Platz für eigene Beiträge"], cta: "Facebook-Gruppe öffnen" },
+    },
+    topicsEyebrow: "VOM KENNENLERNEN ZUM NÄCHSTEN SCHRITT", topicsTitle: "Was beschäftigt dich gerade?", topicsBody: "Beginne mit einem hilfreichen Ratgeber. Teile danach deine Erfahrungen und Fragen mit der Community.",
+    topics: [
+      { title: "Die ersten Dokumente", body: "Anmeldung und erste Schritte in der Schweiz.", action: "Den Einstieg finden" },
+      { title: "Arbeit & Möglichkeiten", body: "Orientierung für die Arbeitssuche in der Schweiz.", action: "Ratgeber entdecken" },
+      { title: "Angebote in deiner Sprache", body: "Kontakte, Orte und Sprachen der Angebote in drei Ländern.", action: "Verzeichnis öffnen (Ukrainisch)" },
+      { title: "Das eigene Unternehmen", body: "Anlaufstellen für Menschen aus der Ukraine bei einer Gründung im DACH-Raum.", action: "Länder vergleichen (Ukrainisch)" },
+    ],
+    pdfTitle: "Nimm hilfreiches Wissen mit.", pdfBody: "Kostenlose PDFs über Umzug und Gründung. Praktische Informationen zum Speichern und Nachlesen.", pdfCta: "Dein PDF finden",
+    scopeEyebrow: "SCHWEIZER COMMUNITY + DACH-RATGEBER", scopeTitle: "Nah verbunden. Weiter orientiert.", scopeBody: "Unsere Telegram- und Facebook-Angebote konzentrieren sich aktuell auf die Schweiz. Für Deutschland und Österreich gibt es bereits eigene Bereiche der Website mit Ratgebern und lokalen Kontakten.", countriesLabel: "Ratgeber nach Land",
+    rulesEyebrow: "EIN GUTER ORT ZUM ANKOMMEN", rulesTitle: "Respekt macht den Anfang.",
+    rules: [
+      ["Bleib respektvoll", "Respektiere andere Menschen, ihre Erfahrungen und Lebensumstände."],
+      ["Schütze die Privatsphäre", "Keine Pässe, Bewilligungen, Wohnadressen oder fremden persönlichen Daten."],
+      ["Teile ehrlich", "Kein Spam, Betrug, keine Hassrede und keine irreführenden Angebote."],
+    ],
+    faqTitle: "Bevor du beitrittst",
+    faq: [
+      { q: "Ist der Beitritt kostenlos?", a: "Ja. Sweezy verlangt keine Gebühr für den Beitritt. Ein Plattformkonto und eine Aufnahmebestätigung der Gruppe können erforderlich sein. Es gelten die Regeln von Telegram und Facebook." },
+      { q: "Wo kann ich Fragen stellen oder Erfahrungen teilen?", a: "Für eigene Beiträge und Austausch wähle die Facebook-Gruppe und beachte ihre Regeln. Über Telegram bleibst du mit Sweezy verbunden. Formuliere Fragen konkret und veröffentliche keine sensiblen persönlichen Angaben." },
+      { q: "Was ist, wenn ich in Deutschland oder Österreich lebe?", a: "Unsere aktuellen Community-Links konzentrieren sich auf die Schweiz. Bei Sweezy findest du eigene Ratgeber zu Anmeldung, Arbeit und Gründung in Deutschland und Österreich. Separate Community-Links für diese Länder sind hier noch nicht aufgeführt." },
+      { q: "Kann ich mich auf Ratschläge von Mitgliedern verlassen?", a: "Persönliche Erfahrungen helfen bei der Orientierung. Kläre Entscheidungen zu Bewilligungen, Steuern, Gesundheit oder Recht mit der zuständigen Behörde oder einer qualifizierten Fachperson: Andere Mitglieder können andere Voraussetzungen haben." },
+    ],
   },
-};
+} as const;
 
-const HERO_UI = {
-  en: { code: "COMMUNITY / 03", panel: "Official Sweezy spaces", join: "Open community", signals: [["Telegram", "Fast updates"], ["Facebook", "Shared experience"], ["Access", "Free to join"]] },
-  uk: { code: "СПІЛЬНОТА / 03", panel: "Офіційні простори Sweezy", join: "Відкрити спільноту", signals: [["Telegram", "Швидкі оновлення"], ["Facebook", "Спільний досвід"], ["Доступ", "Безкоштовно"]] },
-  de: { code: "COMMUNITY / 03", panel: "Offizielle Sweezy-Räume", join: "Community öffnen", signals: [["Telegram", "Schnelle Updates"], ["Facebook", "Gemeinsame Erfahrung"], ["Zugang", "Kostenlos"]] },
-} satisfies Record<Locale, { code: string; panel: string; join: string; signals: [string, string][] }>;
+type Platform = "telegram" | "facebook";
+const PLATFORMS: { key: Platform; name: string; href: string }[] = [
+  { key: "telegram", name: "Telegram", href: TELEGRAM_URL },
+  { key: "facebook", name: "Facebook", href: FACEBOOK_COMMUNITY_URL },
+];
+
+function PlatformIcon({ platform }: { platform: Platform }) {
+  return <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+    {platform === "telegram"
+      ? <path d="M21.6 3.7 18.4 20c-.2 1-1 1.2-1.8.7l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.3L5.8 13.2.9 11.7c-1-.3-1-1 .2-1.5L20 2.9c.9-.3 1.7.2 1.6.8Z" />
+      : <path d="M14 22v-9h3l.5-4H14V7c0-1.2.3-2 2-2h2V1.4C17.4 1.2 16.3 1 15 1c-3 0-5 1.8-5 5.2V9H7v4h3v9h4Z" />}
+  </svg>;
+}
 
 export function generateStaticParams() { return ["en", "uk", "de"].map((locale) => ({ locale })); }
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   if (!isLocale(params.locale)) return {};
   const copy = COPY[params.locale];
-  const title = copy.metaTitle ?? copy.title;
-  return { title, description: copy.description, alternates: buildLocaleAlternates(params.locale, "/community"), openGraph: { title, description: copy.description, url: `${BASE_URL}/${params.locale}/community`, type: "website" } };
+  const image = { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Sweezy — Your next step in DACH" };
+  return {
+    title: copy.metaTitle, description: copy.description,
+    alternates: buildLocaleAlternates(params.locale, "/community"),
+    openGraph: { title: copy.metaTitle, description: copy.description, url: `${BASE_URL}/${params.locale}/community`, type: "website", images: [image] },
+    twitter: { card: "summary_large_image", title: copy.metaTitle, description: copy.description, images: [image] },
+  };
 }
 
 export default function CommunityPage({ params }: { params: { locale: string } }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
   const copy = COPY[locale];
-  const heroUi = HERO_UI[locale];
   const url = `${BASE_URL}/${locale}/community`;
+  const topicLinks = [topicHref(locale, "switzerland", "registration"), topicHref(locale, "switzerland", "work"), "/uk/services", "/uk/blog/biznes-dach-dlya-ukrayintsiv"];
   const schema = [
-    { "@context": "https://schema.org", "@type": "WebPage", name: copy.title, description: copy.description, url, inLanguage: locale, about: { "@type": "Organization", name: "Sweezy", url: BASE_URL, sameAs: [TELEGRAM_URL, FACEBOOK_COMMUNITY_URL] } },
-    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) },
+    { "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${url}#page`, name: copy.metaTitle, description: copy.description, url, inLanguage: locale, isPartOf: { "@id": ENTITY_IDS.website }, about: { "@id": ENTITY_IDS.organization }, publisher: { "@id": ENTITY_IDS.organization }, mainEntity: { "@type": "ItemList", itemListElement: PLATFORMS.map((platform, index) => ({ "@type": "ListItem", position: index + 1, name: `Sweezy · ${platform.name}`, url: platform.href })) } },
+    { "@context": "https://schema.org", "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: copy.faq.map((item, index) => ({ "@type": "Question", "@id": `${url}#question-${index + 1}`, name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) },
   ];
 
   return <main lang={locale} className={styles.page}>
-    <JsonLd data={schema}/>
-    <article className={styles.shell}>
-      <Breadcrumb items={[
-        {name:locale==="uk"?"Головна":locale==="de"?"Start":"Home",url:`/${locale}`},
-        {name:copy.eyebrow,url},
-      ]}/>
-      <CorporateHero
-        companion="community"
-        eyebrow={copy.eyebrow}
-        title={copy.title}
-        description={copy.intro}
-        sectionCode={heroUi.code}
-        panelLabel={heroUi.panel}
-        signals={heroUi.signals.map(([label,value])=>({label,value}))}
-        primaryAction={{label:copy.telegramCta,href:TELEGRAM_URL,external:true}}
-        secondaryAction={{label:copy.facebookCta,href:FACEBOOK_COMMUNITY_URL,external:true}}
-      />
-      <section className={styles.platforms} aria-label={heroUi.join}>
-        <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener" className={styles.platform}>
-          <span className={styles.eyebrow}>01 · TELEGRAM</span><h2>{copy.telegramTitle}</h2><p>{copy.telegramBody}</p><strong>{copy.telegramCta} ↗</strong>
-        </a>
-        <a href={FACEBOOK_COMMUNITY_URL} target="_blank" rel="noreferrer noopener" className={styles.platform}>
-          <span className={styles.eyebrow}>02 · FACEBOOK</span><h2>{copy.facebookTitle}</h2><p>{copy.facebookBody}</p><strong>{copy.facebookCta} ↗</strong>
-        </a>
+    <JsonLd data={schema} />
+    <div className={styles.shell}>
+      <Breadcrumb items={[{ name: copy.home, url: `/${locale}` }, { name: copy.name, url }]} />
+      <header className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}><span className={styles.marker} aria-hidden="true" />{copy.eyebrow}</p>
+          <h1>{copy.title}<span>{copy.titleEnd}</span></h1>
+          <p className={styles.intro}>{copy.intro}</p>
+          <div className={styles.heroActions}>
+            {PLATFORMS.map(platform => <a key={platform.key} className={platform.key === "telegram" ? styles.primaryAction : styles.secondaryAction} href={platform.href} target="_blank" rel="noreferrer noopener" data-placement="community-hero">
+              <PlatformIcon platform={platform.key} /><span>{copy[platform.key]}</span><span aria-hidden="true">↗</span>
+            </a>)}
+          </div>
+          <p className={styles.heroNote}>{copy.heroNote}</p>
+        </div>
+        <div className={styles.poster}>
+          <span className={styles.posterLabel}>SWEEZY / COMMUNITY</span>
+          <p className={styles.posterTitle}>{copy.poster}</p>
+          <div className={styles.posterOrbit} aria-hidden="true" />
+          <SweezyCompanion pose="wave" className={styles.companion} priority sizes="(max-width: 620px) 230px, (max-width: 800px) 260px, (max-width: 1100px) 285px, 340px" />
+          <div className={styles.posterTags} aria-hidden="true">{copy.posterTags.map(tag => <span key={tag}>{tag}</span>)}</div>
+          <p className={styles.posterCaption}><strong>{SWEEZY_COMPANION.name[locale]}</strong><span>{copy.john}</span></p>
+        </div>
+      </header>
+      <section className={styles.section} id="community-platforms" aria-labelledby="platforms-title">
+        <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>{copy.platformsEyebrow}</p><h2 id="platforms-title">{copy.platformsTitle}</h2></div><p>{copy.platformsBody}</p></div>
+        <div className={styles.platforms}>
+          {PLATFORMS.map((platform, index) => {
+            const item = copy.platforms[platform.key];
+            return <article key={platform.key} className={`${styles.platform} ${styles[platform.key]}`}>
+              <div className={styles.platformTop}><span className={styles.platformIcon}><PlatformIcon platform={platform.key} /></span><span>{platform.name}</span><small>0{index + 1} / 02</small></div>
+              <p className={styles.platformTag}>{item.tag}</p><h3>{item.title}</h3><p className={styles.platformBody}>{item.body}</p>
+              <ul className={styles.features}>{item.features.map(feature => <li key={feature}><span aria-hidden="true">↗</span>{feature}</li>)}</ul>
+              <a href={platform.href} data-placement="community-platforms" target="_blank" rel="noreferrer noopener" className={styles.platformAction}><span>{item.cta}</span><span aria-hidden="true">↗</span></a>
+            </article>;
+          })}
+        </div>
       </section>
-      <section className={styles.section}>
-        <div className={styles.sectionHead}><span className={styles.eyebrow}>SWEEZY / COMMUNITY</span><h2>{copy.purposeTitle}</h2></div>
-        <div className={styles.purposeGrid}>{copy.purposes.map(([title,body],index)=><article key={title} className={styles.purpose}><span className={styles.eyebrow}>0{index+1}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
+      <section className={styles.section} aria-labelledby="topics-title">
+        <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>{copy.topicsEyebrow}</p><h2 id="topics-title">{copy.topicsTitle}</h2></div><p>{copy.topicsBody}</p></div>
+        <div className={styles.topics}>{copy.topics.map((topic, index) => <Link href={topicLinks[index]} className={styles.topic} key={topic.title}>
+          <span className={styles.topicIndex}>0{index + 1}<span aria-hidden="true">↗</span></span><h3>{topic.title}</h3><p>{topic.body}</p><span className={styles.topicAction}>{topic.action}</span>
+        </Link>)}</div>
+        <Link href={`/${locale}/resources`} className={styles.pdfStrip}><span className={styles.pdfIcon} aria-hidden="true">PDF<span>↓</span></span><span className={styles.pdfCopy}><strong>{copy.pdfTitle}</strong><span>{copy.pdfBody}</span></span><span className={styles.pdfAction}>{copy.pdfCta}<span aria-hidden="true">↗</span></span></Link>
       </section>
-      <section className={styles.section}>
-        <div className={styles.sectionHead}><h2>{copy.rulesTitle}</h2><ol className={styles.rules}>{copy.rules.map((rule,index)=><li key={rule}><span>0{index+1}</span>{rule}</li>)}</ol></div>
+      <section className={styles.scope} aria-labelledby="scope-title">
+        <div><p className={styles.eyebrow}>{copy.scopeEyebrow}</p><h2 id="scope-title">{copy.scopeTitle}</h2><p className={styles.scopeBody}>{copy.scopeBody}</p></div>
+        <nav className={styles.countries} aria-label={copy.countriesLabel}>{COUNTRIES.map(country => <Link key={country} href={countryPath(locale, country)}><span>{countryData[country].code}</span><strong>{countryData[country].name[locale]}</strong><span aria-hidden="true">↗</span></Link>)}</nav>
       </section>
-      <section className={styles.section}>
-        <div className={styles.sectionHead}><span className={styles.eyebrow}>FAQ / 03</span><h2>FAQ</h2></div>
-        <div className={styles.faqGrid}>{copy.faq.map(item=><article key={item.q}><h3>{item.q}</h3><p>{item.a}</p></article>)}</div>
-      </section>
-    </article>
+      <div className={styles.detailsGrid}>
+        <section className={styles.principles} aria-labelledby="principles-title"><p className={styles.eyebrow}>{copy.rulesEyebrow}</p><h2 id="principles-title">{copy.rulesTitle}</h2><ol>{copy.rules.map(([title, body], index) => <li key={title}><span className={styles.ruleIndex}>0{index + 1}</span><div><h3>{title}</h3><p>{body}</p></div></li>)}</ol></section>
+        <section className={styles.faq} id="faq" aria-labelledby="faq-title"><p className={styles.eyebrow}>FAQ / SWEEZY</p><h2 id="faq-title">{copy.faqTitle}</h2><div>{copy.faq.map((item, index) => <details key={item.q} id={`question-${index + 1}`}><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></section>
+      </div>
+    </div>
   </main>;
 }

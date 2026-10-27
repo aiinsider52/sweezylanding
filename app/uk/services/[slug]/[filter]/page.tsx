@@ -1,3 +1,4 @@
+import { CommunityInvite } from "../../../../components/CommunityInvite";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,6 +25,7 @@ export default function ServiceHub({ params }: { params: { slug: string; filter:
     <section className={styles.section}><h2>Контакти та формати роботи</h2><ServiceDirectory services={services.map(servicePreview)} /></section>
     <ServiceEvidenceTable services={services} />
     <section className={styles.section}><h2>Що уточнити перед записом</h2><ul className={styles.list}>{hub.advice.map(item => <li key={item}>{item}</li>)}</ul><p>Контакти та зв’язок з українською спільнотою наведені з джерелами в кожній картці. Наявність у каталозі не є оцінкою якості чи гарантією доступності.</p><Link className={styles.textLink} href={hub.guide}>{hub.kind === "country" ? "Бізнес у DACH: куди звертатися →" : "Як знайти й обрати фахівця →"}</Link></section>
+    <CommunityInvite locale="uk" placement="service-hub-community" context="services" />
     <div className={styles.actions}><Link className={styles.button} href="/uk/services">Усі послуги →</Link><Link className={styles.textLink} href="/uk/countries">Послуги й допомога в інших країнах DACH →</Link></div>
   </div></main>;
 }

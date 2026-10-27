@@ -77,6 +77,19 @@ const tick = async () => { for (let i=0;i<6;i++) await new Promise(resolve => se
   const appLink = new FakeElement(); Object.assign(appLink, { href: "https://apps.apple.com/app/sweezy/id6759244315", dataset: {} });
   click(appLink); await tick();
   assert.equal(sent.filter(row => row.event === "app_click").length, 1);
+  const telegramLink = new FakeElement(); Object.assign(telegramLink, { href: "https://t.me/sweezyxswiss?private=never-store-this", dataset: { placement: "blog-community" } });
+  click(telegramLink); await tick();
+  const facebookLink = new FakeElement(); Object.assign(facebookLink, { href: "https://www.facebook.com/groups/1682658272463856/", dataset: { placement: "service-directory-community" } });
+  click(facebookLink); await tick();
+  assert.equal(sent.find(row => row.event === "community_click" && row.action === "telegram").placement, "blog-community");
+  assert.equal(sent.find(row => row.event === "community_click" && row.action === "facebook").placement, "service-directory-community");
+  const beforeUnrelated = sent.filter(row => row.event === "community_click").length;
+  for (const href of ["https://www.facebook.com/sharer/sharer.php?u=private", "https://t.me/other-community", "https://www.instagram.com/another-provider/", "https://t.me.evil.example/sweezyxswiss"]) {
+    const otherLink = new FakeElement(); Object.assign(otherLink, { href, dataset: {} }); click(otherLink);
+  }
+  await tick();
+  assert.equal(sent.filter(row => row.event === "community_click").length, beforeUnrelated, "Shares and unrelated profiles cannot count as our community clicks");
+  assert(!JSON.stringify(sent).includes("never-store-this"));
   const providerLink = new FakeElement(); Object.assign(providerLink, { href: "tel:+4315245015300", dataset: { service: "interface-malva", serviceAction: "phone" } });
   click(providerLink); await tick();
   assert.equal(sent.find(row => row.event === "service_contact").provider, "interface-malva");
@@ -97,6 +110,8 @@ const tick = async () => { for (let i=0;i<6;i++) await new Promise(resolve => se
   const before = sent.length;
   click(link); await tick();
   click(partnerLink); await tick();
+  click(telegramLink); await tick();
+  click(facebookLink); await tick();
   assert.equal(sent.length, before, "Opt-out stops usage metrics");
   assert.equal(session.size, 0);
   assert.equal(savedFiles, 3, "Download still works after declining");
@@ -128,11 +143,17 @@ const tick = async () => { for (let i=0;i<6;i++) await new Promise(resolve => se
   await persistMetric({ ...event, event: "download_received" });
   await persistMetric({ ...event, event: "app_click", asset: undefined, eventId: webcrypto.randomUUID() });
   await persistMetric({ ...event, event: "partner_contact", asset: undefined, action: "profile", eventId: webcrypto.randomUUID() });
+  await persistMetric({ ...event, event: "community_click", asset: undefined, action: "telegram", placement: "blog-community", eventId: webcrypto.randomUUID() });
+  await persistMetric({ ...event, event: "community_click", asset: undefined, action: "facebook", placement: "service-directory-community", eventId: webcrypto.randomUUID() });
   const report = JSON.parse(execFileSync(process.execPath, ["scripts/analytics-report.mjs", "--dir", directory], { encoding: "utf8" }));
   assert.equal(report.funnel.pdfRequests, 1);
   assert.equal(report.funnel.serverCorroboratedReceipts, 1);
   assert.equal(report.funnel.sessionsWithAppClickAfterPdf, 1);
   assert.equal(report.measuredTabSessions, 1);
+  assert.equal(report.funnel.communityClicks, 2);
+  assert.equal(report.funnel.sessionsWithCommunityClickAfterPdf, 1);
+  assert.equal(report.communityClicksByPlatform.find(row => row.platform === "telegram").clicks, 1);
+  assert.equal(report.communityPlacements.find(row => row.placement === "service-directory-community").platform, "facebook");
   assert.equal(report.funnel.partnerContactIntents, 1);
   assert.equal(report.partnerContactIntents.find(row => row.format === "profile").count, 1);
   fs.rmSync(directory, { recursive: true });

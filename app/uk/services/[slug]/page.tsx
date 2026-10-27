@@ -1,3 +1,4 @@
+import { CommunityInvite } from "../../../components/CommunityInvite";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -69,6 +70,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {service.guide && <Link href={service.guide.href} className={styles.textLink}>{service.guide.title} →</Link>}
       </section>
       <section className={styles.section} aria-labelledby="service-faq-title"><h2 id="service-faq-title">Питання перед зверненням</h2>{faq.map(({ q, a }) => <div className={styles.faq} key={q}><h3>{q}</h3><p>{a}</p></div>)}</section>
+      <CommunityInvite locale="uk" placement="service-profile-community" context="services" />
       <section className={styles.section}>
         <h2>Джерела та уточнення</h2>
         <ul className={styles.sourceList}>{service.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer noopener">{source.name} ↗</a></li>)}</ul>

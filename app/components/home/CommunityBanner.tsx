@@ -6,7 +6,7 @@ import styles from "./landing.module.css";
 
 const COPY = {
   en: {
-    eyebrow: "SWEEZY COMMUNITY · ONLINE",
+    eyebrow: "SWEEZY / TELEGRAM + FACEBOOK",
     title: "Questions move faster when people answer.",
     body: "Join Sweezy newcomers and Ukrainians in Switzerland. Follow updates, exchange practical experience and stay connected beyond the app.",
     telegram: "Join Telegram",
@@ -14,7 +14,7 @@ const COPY = {
     details: "Explore community",
   },
   uk: {
-    eyebrow: "СПІЛЬНОТА SWEEZY · ONLINE",
+    eyebrow: "SWEEZY / TELEGRAM + FACEBOOK",
     title: "Питання вирішуються швидше разом.",
     body: "Приєднуйтесь до українців і новоприбулих у Швейцарії. Стежте за оновленнями, обмінюйтеся практичним досвідом і залишайтеся на зв’язку поза застосунком.",
     telegram: "Перейти в Telegram",
@@ -22,7 +22,7 @@ const COPY = {
     details: "Про спільноту",
   },
   de: {
-    eyebrow: "SWEEZY COMMUNITY · ONLINE",
+    eyebrow: "SWEEZY / TELEGRAM + FACEBOOK",
     title: "Gemeinsam werden Fragen schneller klar.",
     body: "Vernetzen Sie sich mit Neuankömmlingen und Menschen aus der Ukraine in der Schweiz. Folgen Sie Updates und teilen Sie praktische Erfahrungen.",
     telegram: "Telegram öffnen",
@@ -45,8 +45,8 @@ export function CommunityBanner({ locale }: { locale: Locale }) {
         <SweezyCompanion pose="greeting" className={styles.communityCompanion} sizes="(max-width: 560px) 190px, (max-width: 1100px) 200px, 260px" />
       </div>
       <div className={styles.communityBannerLinks}>
-        <a href={TELEGRAM_URL} target="_blank" rel="noreferrer noopener"><small>01 · TELEGRAM</small><strong>{copy.telegram}</strong><b>↗</b></a>
-        <a href={FACEBOOK_COMMUNITY_URL} target="_blank" rel="noreferrer noopener"><small>02 · FACEBOOK</small><strong>{copy.facebook}</strong><b>↗</b></a>
+        <a href={TELEGRAM_URL} data-placement="home-community" target="_blank" rel="noreferrer noopener"><small>01 · TELEGRAM</small><strong>{copy.telegram}</strong><b>↗</b></a>
+        <a href={FACEBOOK_COMMUNITY_URL} data-placement="home-community" target="_blank" rel="noreferrer noopener"><small>02 · FACEBOOK</small><strong>{copy.facebook}</strong><b>↗</b></a>
       </div>
     </section>
   );

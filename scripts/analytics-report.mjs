@@ -37,22 +37,34 @@ const count = name => events.filter(row => row.event === name).length;
 const requests = Array.from(downloads.values()).filter(row => row.requested).length;
 const received = Array.from(downloads.values()).filter(row => row.requested && row.received).length;
 const corroborated = Array.from(downloads.values()).filter(row => row.requested && row.served && row.received).length;
-let appAfterPdf = 0, providerAfterPdf = 0;
+let appAfterPdf = 0, providerAfterPdf = 0, communityAfterPdf = 0;
 for (const session of sessions.values()) {
   const firstReceipt = session.events.findIndex(event => event.event === "download_received");
   if (firstReceipt >= 0) {
     const onward = session.events.slice(firstReceipt + 1);
     if (onward.some(event => event.event === "app_click")) appAfterPdf++;
     if (onward.some(event => event.event === "service_contact")) providerAfterPdf++;
+    if (onward.some(event => event.event === "community_click")) communityAfterPdf++;
   }
 }
 const sources = {};
 for (const session of sessions.values()) sources[session.source] = (sources[session.source] ?? 0) + 1;
+const communityEvents = events.filter(row => row.event === "community_click");
+const communityPlacements = new Map();
+for (const event of communityEvents) {
+  const platform = ["telegram", "facebook", "instagram"].includes(event.action) ? event.action : "unknown";
+  const placement = event.placement ?? "site";
+  const key = `${platform}:${placement}`;
+  if (!communityPlacements.has(key)) communityPlacements.set(key, { platform, placement, clicks: 0 });
+  communityPlacements.get(key).clicks++;
+}
 const report = {
   generatedAt: new Date().toISOString(), days, measuredTabSessions: sessions.size,
-  definitions: ["Only opted-in browser tabs are measured; these are not all visits or unique people.", "download_received means a complete PDF response reached browser JavaScript, not that a file was saved or opened.", "serverCorroboratedReceipts require matching requested, served and received events for the same tab/request.", "App, community and provider clicks do not confirm installs, messages, calls, bookings or purchases.", "partner_contact records a mail link click or prepared email draft, not a sent application, qualified lead or paying partner. No form content is collected.", "After-PDF steps use server receipt order within the same consenting tab. Sessions crossing the reporting window can have incomplete funnels.", "Source is captured when measurement starts after consent; earlier page activity is not reconstructed."],
-  funnel: { pageViews: count("page_view"), pdfRequests: requests, pdfReceivedInBrowser: received, serverCorroboratedReceipts: corroborated, pdfReceiptRate: requests ? Number((received / requests).toFixed(4)) : null, appClicks: count("app_click"), providerClicks: count("service_contact"), communityClicks: count("community_click"), partnerContactIntents: count("partner_contact"), sessionsWithAppClickAfterPdf: appAfterPdf, sessionsWithProviderClickAfterPdf: providerAfterPdf },
+  definitions: ["Only opted-in browser tabs are measured; these are not all visits or unique people.", "download_received means a complete PDF response reached browser JavaScript, not that a file was saved or opened.", "serverCorroboratedReceipts require matching requested, served and received events for the same tab/request.", "App, community and provider clicks do not confirm installs, community membership, messages, calls, bookings or purchases.", "partner_contact records a mail link click or prepared email draft, not a sent application, qualified lead or paying partner. No form content is collected.", "After-PDF steps use server receipt order within the same consenting tab. Sessions crossing the reporting window can have incomplete funnels.", "Source is captured when measurement starts after consent; earlier page activity is not reconstructed."],
+  funnel: { pageViews: count("page_view"), pdfRequests: requests, pdfReceivedInBrowser: received, serverCorroboratedReceipts: corroborated, pdfReceiptRate: requests ? Number((received / requests).toFixed(4)) : null, appClicks: count("app_click"), providerClicks: count("service_contact"), communityClicks: count("community_click"), partnerContactIntents: count("partner_contact"), sessionsWithAppClickAfterPdf: appAfterPdf, sessionsWithProviderClickAfterPdf: providerAfterPdf, sessionsWithCommunityClickAfterPdf: communityAfterPdf },
   partnerContactIntents: ["listing", "profile", "promotion", "general"].map(format => ({ format, count: events.filter(row => row.event === "partner_contact" && row.action === format).length })),
+  communityClicksByPlatform: ["telegram", "facebook", "instagram", "unknown"].map(platform => ({ platform, clicks: communityEvents.filter(row => (["telegram", "facebook", "instagram"].includes(row.action) ? row.action : "unknown") === platform).length })),
+  communityPlacements: Array.from(communityPlacements.values()).sort((a, b) => b.clicks - a.clicks),
   sources,
   pages: Array.from(pages, ([path, views]) => ({ path, views })).sort((a, b) => b.views - a.views),
   downloads: Array.from(new Set(Array.from(downloads.values(), row => row.asset)), asset => ({ asset, requested: Array.from(downloads.values()).filter(row => row.asset === asset && row.requested).length, received: Array.from(downloads.values()).filter(row => row.asset === asset && row.requested && row.received).length })),

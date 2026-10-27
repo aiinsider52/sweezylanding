@@ -149,6 +149,7 @@ export function SiteHeader() {
           </div>
         </div>)}
         <Link href={`${home}/countries`} onClick={close} className={styles.directLink} aria-current={active(`${home}/countries`) ? "page" : undefined}>DACH</Link>
+        <Link href={`${home}/community`} onClick={close} className={styles.directLink} aria-current={active(`${home}/community`) ? "page" : undefined}>{c.community}</Link>
         <Link href={`${home}/blog`} onClick={close} className={styles.directLink} aria-current={active(`${home}/blog`) && pathname !== business ? "page" : undefined}>{c.blog}</Link>
       </nav>
       <div className={styles.actions}>

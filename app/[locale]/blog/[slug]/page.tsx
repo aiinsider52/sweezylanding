@@ -1,3 +1,4 @@
+import { CommunityInvite } from "../../../components/CommunityInvite";
 import type { Metadata } from "next";
 import { ENTITY_IDS } from "../../../../lib/entities";
 import Image from "next/image";
@@ -452,6 +453,8 @@ export default async function BlogPostPage({
         </div>
 
         {/biznes|samozaynyatist|einzelfirma|gmbh/.test(post.slug) ? <LeadMagnetBanner locale={locale} asset="business-ch" placement="business-article" /> : <StarterKitBanner locale={locale} />}
+
+        <CommunityInvite locale={locale} placement="blog-community" context={/biznes|samozaynyatist|einzelfirma|gmbh/.test(post.slug) ? "business" : /posluhy|avtoservis/.test(post.slug) ? "services" : "general"} />
 
         {relatedPosts.length > 0 ? (
           <section className="mt-24 border-t border-black/15 pt-8" aria-labelledby="related-articles-title">
