@@ -8,8 +8,6 @@ export type ShopProduct = {
   goodsId: string;
   category: ShopCategory;
   flatPrint: boolean;
-  /** Flat decorative prints retain the original as their main image. */
-  styledImage: boolean;
   copy: Record<Locale, ProductCopy>;
 };
 
@@ -18,7 +16,7 @@ export type ShopProduct = {
 // Source URLs and image provenance are retained in generated_images/shop/sources.json.
 export const SHOP_PRODUCTS: ShopProduct[] = [
   {
-    slug: "switzerland-tote", code: "Ek4UpqmoUOB", goodsId: "606751185291540", category: "bags", flatPrint: true, styledImage: true,
+    slug: "switzerland-tote", code: "Ek4UpqmoUOB", goodsId: "606751185291540", category: "bags", flatPrint: true,
     copy: {
       uk: { name: "Шоппер Swiss Stories", description: "Бежевий шоппер зі світлими ручками, написом Switzerland та малюнками гір, фондю, годинника й інших швейцарських символів. Декор — плоский друк.", alt: "Бежевий шоппер зі світлими ручками, написом Switzerland і малюнками швейцарських символів" },
       en: { name: "Swiss Stories tote", description: "A beige tote with light handles, Switzerland lettering and illustrations of mountains, fondue, a watch and other Swiss symbols. The decoration is a flat print.", alt: "Beige tote with light handles, Switzerland lettering and illustrated Swiss symbols" },
@@ -26,7 +24,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "switzerland-cap", code: "5SfEW0SaCJB", goodsId: "606697867284352", category: "accessories", flatPrint: false, styledImage: true,
+    slug: "switzerland-cap", code: "5SfEW0SaCJB", goodsId: "606697867284352", category: "accessories", flatPrint: false,
     copy: {
       uk: { name: "Кепка Alpine Blue", description: "Темно-синя кепка з вигнутим козирком, світлим написом SWITZERLAND і зображенням гір та річки.", alt: "Темно-синя кепка з написом SWITZERLAND, білим малюнком гір та вигнутим козирком" },
       en: { name: "Alpine Blue cap", description: "A navy blue cap with a curved brim, light SWITZERLAND lettering and a mountain-and-river graphic.", alt: "Navy blue cap with SWITZERLAND lettering, white mountain graphic and curved brim" },
@@ -34,7 +32,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "switzerland-calling-mug", code: "PSkvLUOaXPB", goodsId: "606093568766590", category: "cups", flatPrint: false, styledImage: true,
+    slug: "switzerland-calling-mug", code: "PSkvLUOaXPB", goodsId: "606093568766590", category: "cups", flatPrint: false,
     copy: {
       uk: { name: "Горнятко Switzerland Is Calling", description: "Біле горнятко зі світлою ручкою, сріблястим на вигляд обідком і чорним написом Switzerland is calling and I must go.", alt: "Біле горнятко з чорним написом Switzerland is calling and I must go та сріблястим обідком" },
       en: { name: "Switzerland Is Calling mug", description: "A white mug with a light handle, silver-coloured rim and black Switzerland is calling and I must go lettering.", alt: "White mug with black Switzerland is calling and I must go lettering and a silver-coloured rim" },
@@ -42,15 +40,15 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "interlaken-decor", code: "TEzW7ZWedvB", goodsId: "605542269464909", category: "decor", flatPrint: true, styledImage: false,
+    slug: "interlaken-decor", code: "TEzW7ZWedvB", goodsId: "605542269464909", category: "decor", flatPrint: true,
     copy: {
-      uk: { name: "Декор Interlaken", description: "Декоративна панель із написом Interlaken, гірським краєвидом і червоним парапланом. В оголошенні вказано плоский 2D-друк на акрилі: видимий об’єм є частиною зображення.", alt: "Декор Interlaken із горами, озером і червоним парапланом; в оголошенні позначений як плоский 2D-друк" },
-      en: { name: "Interlaken decorative print", description: "A decorative panel with Interlaken lettering, mountains and a red paraglider. The listing states a flat 2D acrylic print: the apparent depth is part of the printed image.", alt: "Interlaken decorative panel with mountains, a lake and a red paraglider, labelled as a flat 2D print" },
-      de: { name: "Interlaken Dekorbild", description: "Dekorplatte mit Interlaken-Schriftzug, Bergen und rotem Gleitschirm. Laut Anzeige ein flacher 2D-Acryldruck: Die räumliche Wirkung gehört zum gedruckten Motiv.", alt: "Interlaken-Dekorbild mit Bergen, See und rotem Gleitschirm, laut Anzeige ein flacher 2D-Druck" },
+      uk: { name: "Декор Interlaken", description: "Декоративна панель із написом Interlaken, гірським краєвидом і червоним парапланом. В оголошенні вказано плоский 2D-друк на акрилі: видимий об’єм є частиною зображення.", alt: "Декор Interlaken із горами, озером і червоним парапланом; плоский 2D-друк" },
+      en: { name: "Interlaken decorative print", description: "A decorative panel with Interlaken lettering, mountains and a red paraglider. The listing states a flat 2D acrylic print: the apparent depth is part of the printed image.", alt: "Interlaken decorative panel with mountains, a lake and a red paraglider, flat 2D print" },
+      de: { name: "Interlaken Dekorbild", description: "Dekorplatte mit Interlaken-Schriftzug, Bergen und rotem Gleitschirm. Laut Anzeige ein flacher 2D-Acryldruck: Die räumliche Wirkung gehört zum gedruckten Motiv.", alt: "Interlaken-Dekorbild mit Bergen, See und rotem Gleitschirm, flacher 2D-Druck" },
     },
   },
   {
-    slug: "swiss-lake-tote", code: "tg77NkJS3CB", goodsId: "606762728008479", category: "bags", flatPrint: true, styledImage: true,
+    slug: "swiss-lake-tote", code: "tg77NkJS3CB", goodsId: "606762728008479", category: "bags", flatPrint: true,
     copy: {
       uk: { name: "Шоппер Lakeside Switzerland", description: "Шоппер із чорними ручками та кольоровим принтом: озеро, альпійські вершини й містечко з червоними дахами. Малюнок надрукований, без об’ємної фактури.", alt: "Шоппер із чорними ручками та кольоровим друкованим краєвидом швейцарського озера, міста й гір" },
       en: { name: "Lakeside Switzerland tote", description: "A tote with black handles and a colourful printed lakeside town, red roofs and Alpine mountains. The design is printed, without raised texture.", alt: "Tote with black handles and a colourful printed Swiss lakeside town and mountain panorama" },
@@ -58,7 +56,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "love-switzerland-mug", code: "5h1BvCXtWSB", goodsId: "605602399013496", category: "cups", flatPrint: false, styledImage: true,
+    slug: "love-switzerland-mug", code: "5h1BvCXtWSB", goodsId: "605602399013496", category: "cups", flatPrint: false,
     copy: {
       uk: { name: "Горнятко I Love Switzerland", description: "Чорне горнятко з чорною ручкою, червоним серцем і білим написом I love Switzerland.", alt: "Чорне горнятко з чорною ручкою, червоним серцем та білим написом I love Switzerland" },
       en: { name: "I Love Switzerland mug", description: "A black mug with a black handle, a red heart and white I love Switzerland lettering.", alt: "Black mug with a black handle, red heart and white I love Switzerland lettering" },
@@ -66,7 +64,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "alpine-chalet-decor", code: "DuAusqPgKaB", goodsId: "606908924664117", category: "decor", flatPrint: false, styledImage: true,
+    slug: "alpine-chalet-decor", code: "DuAusqPgKaB", goodsId: "606908924664117", category: "decor", flatPrint: false,
     copy: {
       uk: { name: "Декор Alpine Chalet", description: "Швейцарський сувенір із зображенням шале, квітів, корів і засніжених вершин та написом Switzerland. Матеріал, розміри й кріплення потрібно уточнити.", alt: "Сувенір Switzerland із зображенням альпійського шале, квітів, корів і засніжених гір" },
       en: { name: "Alpine Chalet decoration", description: "A Swiss souvenir featuring a chalet, flowers, cows, snowy peaks and Switzerland lettering. Material, dimensions and mounting still need confirmation.", alt: "Switzerland souvenir depicting an Alpine chalet, flowers, cows and snowy mountains" },
@@ -74,15 +72,15 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   {
-    slug: "zurich-decor", code: "uVsyCEehz1B", goodsId: "605654676822087", category: "decor", flatPrint: true, styledImage: false,
+    slug: "zurich-decor", code: "uVsyCEehz1B", goodsId: "605654676822087", category: "decor", flatPrint: true,
     copy: {
-      uk: { name: "Декор Zurich Old Town", description: "Панель із золотистою рамкою, написом Zurich і зображенням старого міста. В оголошенні зазначено 2D FLAT: це плоске зображення, а не архітектурна мініатюра.", alt: "Панель Zurich із золотистою рамкою та зображенням старого міста; в оголошенні зазначено 2D FLAT" },
-      en: { name: "Zurich Old Town decorative print", description: "A panel with a gold-coloured frame, Zurich lettering and an old-town scene. The listing says 2D FLAT: a flat image rather than an architectural miniature.", alt: "Zurich panel with a gold-coloured frame and old-town scene, labelled 2D FLAT in the listing" },
-      de: { name: "Zurich Old Town Dekorbild", description: "Platte mit goldfarbener Umrahmung, Zurich-Schriftzug und Altstadtmotiv. Die Anzeige nennt 2D FLAT: ein flaches Bild, keine Architekturminiatur.", alt: "Zurich-Platte mit goldfarbener Umrahmung und Altstadtmotiv, in der Anzeige als 2D FLAT bezeichnet" },
+      uk: { name: "Декор Zurich Old Town", description: "Панель із золотистою рамкою, написом Zurich і зображенням старого міста. В оголошенні зазначено 2D FLAT: це плоске зображення, а не архітектурна мініатюра.", alt: "Панель Zurich із золотистою рамкою та зображенням старого міста; плоский 2D-друк" },
+      en: { name: "Zurich Old Town decorative print", description: "A panel with a gold-coloured frame, Zurich lettering and an old-town scene. The listing says 2D FLAT: a flat image rather than an architectural miniature.", alt: "Zurich panel with a gold-coloured frame and old-town scene, flat 2D print" },
+      de: { name: "Zurich Old Town Dekorbild", description: "Platte mit goldfarbener Umrahmung, Zurich-Schriftzug und Altstadtmotiv. Die Anzeige nennt 2D FLAT: ein flaches Bild, keine Architekturminiatur.", alt: "Zurich-Platte mit goldfarbener Umrahmung und Altstadtmotiv, flacher 2D-Druck" },
     },
   },
   {
-    slug: "swiss-mountain-travel-cup", code: "Hg3EepYOWyB", goodsId: "601105646894538", category: "cups", flatPrint: false, styledImage: true,
+    slug: "swiss-mountain-travel-cup", code: "Hg3EepYOWyB", goodsId: "601105646894538", category: "cups", flatPrint: false,
     copy: {
       uk: { name: "Дорожнє горнятко Swiss Mountains", description: "Чорне дорожнє горнятко з білою кришкою, петлею COFFEE та червоним гірським принтом. Об’єм, матеріал і теплоізоляцію ще потрібно підтвердити.", alt: "Чорне дорожнє горнятко з білою кришкою, петлею COFFEE і червоним зображенням гір" },
       en: { name: "Swiss Mountains travel cup", description: "A black travel cup with a white lid, COFFEE loop and red mountain print. Capacity, material and insulation have not been confirmed.", alt: "Black travel cup with a white lid, COFFEE loop and red mountain graphic" },
@@ -92,11 +90,16 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
 ];
 
 export const shopProduct = (slug: string) => SHOP_PRODUCTS.find(product => product.slug === slug);
-export const originalProductImage = (product: ShopProduct) => `/shop/products/${product.slug}-original.webp`;
-export const styledProductImage = (product: ShopProduct) => `/shop/products/${product.slug}-studio.webp`;
-export const productCardImage = (product: ShopProduct) => product.styledImage ? styledProductImage(product) : originalProductImage(product);
-export function productImageAlt(product: ShopProduct, locale: Locale, styled = false) {
-  const suffix = styled ? { uk: " — стилізація ШІ за фото оголошення", en: " — AI-styled listing image", de: " — KI-Stilisierung des Anzeigenbilds" }[locale] : "";
+export const PRODUCT_SHOTS = ["studio", "lifestyle", "detail"] as const;
+export type ProductShot = typeof PRODUCT_SHOTS[number];
+export const productImage = (product: ShopProduct, shot: ProductShot = "studio") => `/shop/products/${product.slug}-${shot}.webp`;
+export const productImages = (product: ShopProduct) => PRODUCT_SHOTS.map(shot => productImage(product, shot));
+export const productCardImage = (product: ShopProduct) => productImage(product);
+export function productImageAlt(product: ShopProduct, locale: Locale, shot: ProductShot = "studio") {
+  if (shot === "detail") return { uk: `Деталі дизайну: ${product.copy.uk.name}. Авторська візуалізація ШІ`, en: `Design detail: ${product.copy.en.name}. Original AI visualisation`, de: `Designdetail: ${product.copy.de.name}. Eigene KI-Visualisierung` }[locale];
+  const suffix = shot === "lifestyle"
+    ? { uk: " — у повсякденній обстановці, візуалізація ШІ", en: " — in an everyday setting, AI visualisation", de: " — im Alltag, KI-Visualisierung" }[locale]
+    : { uk: " — предметна візуалізація ШІ", en: " — studio AI visualisation", de: " — Studio-KI-Visualisierung" }[locale];
   return `${product.copy[locale].alt}${suffix}`;
 }
 

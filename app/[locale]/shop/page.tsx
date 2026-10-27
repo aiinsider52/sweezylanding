@@ -6,7 +6,7 @@ import { isLocale } from "../../../lib/blog";
 import { BASE_URL, buildLocaleAlternates } from "../../../lib/alternates";
 import { imageObject } from "../../../lib/image-schema";
 import { ENTITY_IDS } from "../../../lib/entities";
-import { SHOP_PRODUCTS, productCardImage, productImageAlt } from "../../../data/shop";
+import { SHOP_PRODUCTS, productCardImage, productImage, productImageAlt } from "../../../data/shop";
 import { SHOP_COPY } from "../../../data/shop-copy";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { ShopCatalog } from "../../components/shop/ShopCatalog";
@@ -18,7 +18,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
   if (!isLocale(params.locale)) return {};
   const c = SHOP_COPY[params.locale];
   const p = SHOP_PRODUCTS[0];
-  const images = [{ url: productCardImage(p), width: 1200, height: 1200, alt: productImageAlt(p, params.locale, true) }];
+  const images = [{ url: productCardImage(p), width: 1200, height: 1200, alt: productImageAlt(p, params.locale) }];
   return { title: c.meta, description: c.description, alternates: buildLocaleAlternates(params.locale, "/shop"),
     openGraph: { title: c.meta, description: c.description, url: `${BASE_URL}/${params.locale}/shop`, type: "website", images },
     twitter: { card: "summary_large_image", title: c.meta, description: c.description, images },
@@ -34,13 +34,19 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
   return <main className={styles.page}>
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${url}#webpage`, url, name: c.meta, description: c.description, inLanguage: locale,
       isPartOf: { "@id": ENTITY_IDS.website }, publisher: { "@id": ENTITY_IDS.organization },
-      primaryImageOfPage: imageObject(productCardImage(heroProducts[0]), productImageAlt(heroProducts[0], locale, true), locale),
+      primaryImageOfPage: imageObject(productCardImage(heroProducts[0]), productImageAlt(heroProducts[0], locale), locale),
       mainEntity: { "@type": "ItemList", numberOfItems: SHOP_PRODUCTS.length, itemListElement: SHOP_PRODUCTS.map((product, index) => ({ "@type": "ListItem", position: index + 1, name: product.copy[locale].name, url: `${url}/${product.slug}` })) },
     }} />
     <Breadcrumb items={[{ name: c.home, url: `/${locale}` }, { name: c.name, url: `/${locale}/shop` }]} />
     <section className={styles.hero} aria-labelledby="shop-title">
       <div><p className={styles.eyebrow}>{c.eyebrow}</p><h1 id="shop-title">{c.title}<em>{c.accent}</em></h1><p className={styles.heroIntro}>{c.intro}</p><div className={styles.actions}><a className={styles.primary} href="#collection">{c.browse}<span aria-hidden="true">↗</span></a><a className={styles.textButton} href="#how-it-works">{c.how}</a></div></div>
-      <div className={styles.heroArt}>{heroProducts.map((product, index) => <Link key={product.slug} href={`/${locale}/shop/${product.slug}`}><Image src={productCardImage(product)} alt={productImageAlt(product, locale, true)} fill sizes="(max-width: 600px) 190px, 26vw" priority={index === 0}/><span className={styles.srOnly}>{c.ai}</span></Link>)}<span className={styles.heroStamp}>SWISS EDIT / 2026 · AI</span></div>
+      <div className={styles.heroArt}>
+        <div className={styles.heroVisuals}>{heroProducts.map((product, index) => <Link key={product.slug} href={`/${locale}/shop/${product.slug}`} className={styles.heroTile}>
+          <Image src={productImage(product, index === 0 ? "lifestyle" : "studio")} alt={productImageAlt(product, locale, index === 0 ? "lifestyle" : "studio")} fill sizes="(max-width: 600px) 58vw, 32vw" priority={index === 0}/>
+          <span>{product.copy[locale].name}<span aria-hidden="true">↗</span></span>
+        </Link>)}</div>
+        <div className={styles.heroStamp}><span>THE SWISS EDIT / 2026</span><span>{c.ai} · 01—03</span></div>
+      </div>
     </section>
     <div className={styles.launch}><strong>{c.launch}</strong><p>{c.launchNote}</p></div>
     <ShopCatalog locale={locale} />

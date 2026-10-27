@@ -7,7 +7,7 @@ import { COUNTRIES, countryData, countryPath } from "../../data/dach";
 import { DOWNLOAD_IDS } from "../../data/downloads";
 import { companionImage, type CompanionPose } from "../../data/companion-images";
 import { PLANNING_IMAGES } from "../../data/image-copy";
-import { SHOP_PRODUCTS, originalProductImage, productCardImage } from "../../data/shop";
+import { SHOP_PRODUCTS, productImages } from "../../data/shop";
 
 const BASE_URL = "https://www.sweezy.world";
 const LOCALES: Locale[] = ["en", "uk", "de"];
@@ -29,8 +29,8 @@ export async function GET() {
 
   for (const locale of LOCALES) {
     entries.push(
-      { page: `/${locale}/shop`, images: SHOP_PRODUCTS.map(productCardImage) },
-      ...SHOP_PRODUCTS.map(product => ({ page: `/${locale}/shop/${product.slug}`, images: [originalProductImage(product)] })),
+      { page: `/${locale}/shop`, images: SHOP_PRODUCTS.flatMap(productImages) },
+      ...SHOP_PRODUCTS.map(product => ({ page: `/${locale}/shop/${product.slug}`, images: productImages(product) })),
       ...travelDestinations.map(place => ({ page: `/${locale}/places/${place.slug}`, images: [0, 1, 2].map(index => destinationImage(place, index)) })),
       ...cantons.flatMap(canton => {
         const image = getCantonImage(canton.slug);

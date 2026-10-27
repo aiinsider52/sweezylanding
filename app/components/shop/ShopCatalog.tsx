@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { Locale } from "../../../lib/i18n";
 import { SHOP_COPY } from "../../../data/shop-copy";
-import { SHOP_PRODUCTS, productCardImage, productImageAlt, shopInquiryHref, type ShopCategory } from "../../../data/shop";
+import { SHOP_PRODUCTS, shopInquiryHref, type ShopCategory } from "../../../data/shop";
+import { ProductCard } from "./ProductCard";
 import { useShopSelection } from "./useShopSelection";
 import styles from "../../[locale]/shop/shop.module.css";
 
@@ -28,17 +28,7 @@ export function ShopCatalog({ locale }: { locale: Locale }) {
       </div>
       <p className={styles.resultCount} role="status">{c.results}: {visible.length} / {SHOP_PRODUCTS.length}</p>
       <div className={styles.productGrid}>
-        {visible.map(product => <article key={product.slug} className={styles.card}>
-          <div className={styles.cardPhoto}>
-            <Link href={`/${locale}/shop/${product.slug}`} className={styles.imageLink}>
-              <Image src={productCardImage(product)} alt={productImageAlt(product, locale, product.styledImage)} fill sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw" />
-              <span className={styles.photoLabel}>{product.styledImage ? c.ai : c.original}</span>
-            </Link>
-            {product.flatPrint ? <span className={styles.flatBadge}>{c.flat}</span> : null}
-            <button className={styles.saveButton} type="button" disabled={!ready} aria-pressed={selected.includes(product.slug)} aria-label={`${selected.includes(product.slug) ? c.remove : c.add}: ${product.copy[locale].name}`} onClick={() => toggle(product.slug)}>{selected.includes(product.slug) ? "✓" : "+"}</button>
-          </div>
-          <div className={styles.cardCopy}><p className={styles.cardCategory}>{c.categories[product.category]}</p><h3><Link href={`/${locale}/shop/${product.slug}`}>{product.copy[locale].name}</Link></h3><div className={styles.cardBottom}><span>{c.price}</span><Link href={`/${locale}/shop/${product.slug}`} aria-label={`${c.details}: ${product.copy[locale].name}`}>{c.details}<span aria-hidden="true">↗</span></Link></div></div>
-        </article>)}
+        {visible.map(product => <ProductCard key={product.slug} product={product} locale={locale} saved={selected.includes(product.slug)} ready={ready} onToggle={() => toggle(product.slug)} />)}
       </div>
       {visible.length === 0 ? <div className={styles.empty}><p>{c.empty}</p><button type="button" onClick={() => { setQuery(""); setCategory("all"); }}>{c.reset}</button></div> : null}
       <p className={styles.imageNote}>{c.imageNote}</p>

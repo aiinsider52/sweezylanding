@@ -11,6 +11,7 @@ class CustomEvent { constructor(type, options) { this.type = type; this.detail =
 const react = {
   useState(initial) { const index = cursor++; if (!(index in state)) state[index] = initial; return [state[index], next => { state[index] = typeof next === 'function' ? next(state[index]) : next; }]; },
   useEffect(fn) { if (!mounted) effects.push(fn); },
+  useRef(initial) { const index = cursor++; if (!(index in state)) state[index] = { current: initial }; return state[index]; },
 };
 const window = {
   addEventListener(type, fn) { if (!listeners.has(type)) listeners.set(type, new Set()); listeners.get(type).add(fn); },
@@ -79,46 +80,71 @@ for (const locale of ['uk', 'en', 'de']) {
   }
   for (const product of data.SHOP_PRODUCTS) {
     assert(product.copy[locale].name && product.copy[locale].description && product.copy[locale].alt);
-    assert(data.productImageAlt(product, locale, true).length <= 240);
-    assert(fs.existsSync('public' + data.originalProductImage(product)));
-    if (product.styledImage) assert(fs.existsSync('public' + data.styledProductImage(product)));
+    assert.equal(data.productImages(product).length, 3);
+    for (const shot of data.PRODUCT_SHOTS) {
+      assert(data.productImageAlt(product, locale, shot).length <= 240);
+      assert(fs.existsSync('public' + data.productImage(product, shot)));
+    }
   }
 }
-assert(data.SHOP_PRODUCTS.filter(p => ['interlaken-decor', 'zurich-decor'].includes(p.slug)).every(p => p.flatPrint && !p.styledImage), 'Keep flat-print listing photos instead of misleading relief renders');
-
+const manifest = JSON.parse(fs.readFileSync('generated_images/shop/gallery-images.json'));
+assert.equal(Object.keys(manifest).length, 27);
+assert.equal(new Set(Object.values(manifest)).size, 27, 'Every product view uses its own generated image');
+assert.equal(fs.readdirSync('public/shop/products').filter(file => file.endsWith('.webp')).length, 27);
+assert(!fs.existsSync('public/shop/source'), 'Listing photos are not public storefront assets');
 const gallery = load('app/components/shop/ProductGallery.tsx');
+const card = load('app/components/shop/ProductCard.tsx');
+const copy = load('data/shop-copy.ts').SHOP_COPY;
 function nodes(node) { if (!node || typeof node !== 'object') return []; return [node, ...[node.props?.children].flat(Infinity).flatMap(nodes)]; }
 for (const product of data.SHOP_PRODUCTS) {
   state = []; cursor = 0;
-  let tree = gallery.ProductGallery({ product, locale: 'uk' });
-  let all = nodes(tree);
-  assert.equal(all.find(n => n.type === 'Image').props.src, data.originalProductImage(product), 'Original photo is displayed first');
-  const buttons = all.filter(n => n.type === 'button');
-  assert.equal(buttons.length, product.styledImage ? 2 : 0);
-  if (product.styledImage) {
-    buttons[1].props.onClick(); cursor = 0;
-    tree = gallery.ProductGallery({ product, locale: 'uk' }); all = nodes(tree);
-    assert.equal(all.find(n => n.type === 'Image').props.src, data.styledProductImage(product));
-    assert(all.find(n => n.type === 'Image').props.alt.includes('ШІ'));
-    all.find(n => n.type === 'button').props.onClick(); cursor = 0;
-    assert.equal(nodes(gallery.ProductGallery({ product, locale: 'uk' })).find(n => n.type === 'Image').props.src, data.originalProductImage(product));
+  const render = () => { cursor = 0; return nodes(gallery.ProductGallery({ product, locale: 'uk' })); };
+  let all = render();
+  assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product));
+  assert.equal(all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined).length, 3);
+  for (const [index, shot] of data.PRODUCT_SHOTS.entries()) {
+    all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined)[index].props.onClick();
+    all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, shot));
   }
+  all.find(n => n.type === 'button' && n.props['aria-label'] === copy.uk.next).props.onClick();
+  all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, 'studio'), 'Next wraps from detail to studio');
+  all.find(n => n.type === 'button' && n.props['aria-label'] === copy.uk.previous).props.onClick();
+  all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, 'detail'), 'Previous wraps');
+  let opened = 0, closed = 0, focused = 0;
+  const dialog = all.find(n => n.type === 'dialog');
+  dialog.props.ref.current = { showModal() { opened++; }, close() { closed++; } };
+  const trigger = all.find(n => n.type === 'button' && n.props['aria-label']?.startsWith(copy.uk.zoom));
+  trigger.props.ref.current = { focus() { focused++; } };
+  trigger.props.onClick(); assert.equal(opened, 1);
+  let prevented = false;
+  dialog.props.onKeyDown({ key: 'ArrowRight', preventDefault() { prevented = true; } });
+  all = render(); assert(prevented); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product));
+  dialog.props.onClick({ target: 1, currentTarget: 2 }); assert.equal(closed, 0, 'Clicking a child does not close the dialog');
+  dialog.props.onClick({ target: 1, currentTarget: 1 }); assert.equal(closed, 1);
+  dialog.props.onClose(); assert.equal(focused, 1, 'Closing returns focus to the image trigger');
+  state = []; cursor = 0;
+  const renderCard = () => { cursor = 0; return nodes(card.ProductCard({ product, locale: 'uk' })); };
+  all = renderCard();
+  const previews = all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined);
+  assert.equal(previews.length, 3);
+  previews[1].props.onClick(); all = renderCard();
+  assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, 'lifestyle'));
 }
 const catalog = load('app/components/shop/ShopCatalog.tsx');
 for (const locale of ['uk', 'en', 'de']) {
   state = []; cursor = 0; effects = []; mounted = false; blocked = false; storage.clear(); listeners.clear();
   const render = () => { cursor = 0; return nodes(catalog.ShopCatalog({ locale })); };
   let all = render(); effects.forEach(fn => fn()); mounted = true; all = render();
-  assert.equal(all.filter(n => n.type === 'article').length, 9);
+  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 9);
   const categories = all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined && !n.props['aria-label']);
   categories[1].props.onClick(); all = render();
-  assert.equal(all.filter(n => n.type === 'article').length, 2, 'Bag filter returns two actual products');
+  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 2, 'Bag filter returns two actual products');
   all.find(n => n.type === 'input').props.onChange({ target: { value: 'NO_MATCH_123' } }); all = render();
-  assert.equal(all.filter(n => n.type === 'article').length, 0, 'Search respects the active category');
+  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 0, 'Search respects the active category');
   all.find(n => n.type === 'input').props.onChange({ target: { value: '' } }); all = render();
-  all.find(n => n.type === 'button' && n.props['aria-label'] && n.props['aria-pressed'] === false).props.onClick(); all = render();
+  all.find(n => n.type?.name === 'ProductCard').props.onToggle(); all = render();
   const draft = all.find(n => n.type === 'a' && n.props.href?.startsWith('mailto:'));
   assert(draft && decodeURIComponent(draft.props.href).includes(slug));
-  assert.equal(all.filter(n => n.type === 'article').length, 2, 'Saving a product preserves the filter');
+  assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, 2, 'Saving a product preserves the filter');
 }
-console.log('Shop checks passed: 9 source products, 3 languages, storage failures, selection sync, enquiry drafts and 9 galleries.');
+console.log('Shop checks passed: 9 source products, 3 languages, storage failures, selection sync, enquiry drafts, 27 generated images, card previews, gallery navigation and zoom controls.');
