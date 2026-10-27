@@ -1,3 +1,5 @@
+import { imageObject } from "../../../lib/image-schema";
+import { companionImage, companionImageAlt } from "../../../data/companion-images";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +11,7 @@ import { FACEBOOK_COMMUNITY_URL, TELEGRAM_URL } from "../../../lib/links";
 import { DEFAULT_OG_IMAGE } from "../../../lib/social";
 import { COUNTRIES, countryData, countryPath, topicHref } from "../../../data/dach";
 import { SWEEZY_COMPANION } from "../../../data/companion";
-import { DOWNLOADS, type DownloadId } from "../../../data/downloads";
+import { downloadCoverAlt, DOWNLOADS, type DownloadId } from "../../../data/downloads";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { SweezyCompanion } from "../../components/SweezyCompanion";
 import { CommunityStarter } from "../../components/CommunityStarter";
@@ -167,7 +169,7 @@ export default function CommunityPage({ params }: { params: { locale: string } }
   const url = `${BASE_URL}/${locale}/community`;
   const topicLinks = [topicHref(locale, "switzerland", "registration"), topicHref(locale, "switzerland", "work"), "/uk/services", "/uk/blog/biznes-dach-dlya-ukrayintsiv"];
   const schema = [
-    { "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${url}#page`, name: copy.metaTitle, description: copy.description, url, inLanguage: locale, isPartOf: { "@id": ENTITY_IDS.website }, about: { "@id": ENTITY_IDS.organization }, publisher: { "@id": ENTITY_IDS.organization }, mainEntity: { "@type": "ItemList", itemListElement: PLATFORMS.map((platform, index) => ({ "@type": "ListItem", position: index + 1, name: `Sweezy · ${platform.name}`, url: platform.href })) } },
+    { "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${url}#page`, name: copy.metaTitle, description: copy.description, url, inLanguage: locale, primaryImageOfPage: imageObject(companionImage("community"), companionImageAlt("community", locale), locale), isPartOf: { "@id": ENTITY_IDS.website }, about: { "@id": ENTITY_IDS.organization }, publisher: { "@id": ENTITY_IDS.organization }, mainEntity: { "@type": "ItemList", itemListElement: PLATFORMS.map((platform, index) => ({ "@type": "ListItem", position: index + 1, name: `Sweezy · ${platform.name}`, url: platform.href })) } },
     { "@context": "https://schema.org", "@type": "FAQPage", "@id": `${url}#faq`, mainEntity: copy.faq.map((item, index) => ({ "@type": "Question", "@id": `${url}#question-${index + 1}`, name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) },
   ];
 
@@ -189,7 +191,7 @@ export default function CommunityPage({ params }: { params: { locale: string } }
         </div>
         <div className={styles.poster}>
           <div className={styles.posterTop}><span>SWEEZY / TOGETHER</span><span>{copy.scopeBadge}</span></div>
-          <div className={styles.heroArt}><div className={styles.posterOrbit} aria-hidden="true" /><SweezyCompanion pose="community" className={styles.companion} priority sizes="(max-width: 620px) 90vw, (max-width: 950px) 42vw, 480px" /><span className={styles.greeting}>{copy.greeting}</span></div>
+          <div className={styles.heroArt}><div className={styles.posterOrbit} aria-hidden="true" /><SweezyCompanion locale={locale} pose="community" className={styles.companion} priority sizes="(max-width: 620px) 90vw, (max-width: 950px) 42vw, 480px" /><span className={styles.greeting}>{copy.greeting}</span></div>
           <div className={styles.posterFoot}><p className={styles.posterTitle}>{copy.poster}</p><p className={styles.posterCaption}><strong>{SWEEZY_COMPANION.name[locale]}</strong><span>{copy.john}</span></p></div>
         </div>
       </header>
@@ -216,7 +218,7 @@ export default function CommunityPage({ params }: { params: { locale: string } }
         </Link>)}</div>
         <div className={styles.downloadShelf}>
           <div className={styles.downloadHeading}><div><p className={styles.eyebrow}>{copy.pdfFree}</p><h3>{copy.pdfTitle}</h3><p>{copy.pdfBody}</p></div><Link href={`/${locale}/resources`}>{copy.pdfCta} <span aria-hidden="true">↗</span></Link></div>
-          <div className={styles.downloadGrid}>{COMMUNITY_DOWNLOADS.map(asset => <article key={asset} className={styles.downloadCard}><Image src={`/downloads/sweezy-${asset}-cover-${locale}.webp`} alt="" width={714} height={1010} sizes="64px" /><div><h4>{DOWNLOADS[asset].title[locale]}</h4><p>{DOWNLOADS[asset].description[locale]}</p><DownloadLink asset={asset} locale={locale} placement="community-resources">{copy.download} <span aria-hidden="true">↓</span></DownloadLink></div></article>)}</div>
+          <div className={styles.downloadGrid}>{COMMUNITY_DOWNLOADS.map(asset => <article key={asset} className={styles.downloadCard}><Image src={`/downloads/sweezy-${asset}-cover-${locale}.webp`} alt={downloadCoverAlt(asset, locale)} width={714} height={1010} sizes="64px" /><div><h4>{DOWNLOADS[asset].title[locale]}</h4><p>{DOWNLOADS[asset].description[locale]}</p><DownloadLink asset={asset} locale={locale} placement="community-resources">{copy.download} <span aria-hidden="true">↓</span></DownloadLink></div></article>)}</div>
         </div>
       </section>
       <section className={styles.scope} aria-labelledby="scope-title">

@@ -22,3 +22,10 @@ export function downloadHref(id: DownloadId, locale: Locale, placement = "resour
 export function publicDownloadHref(id: DownloadId, locale: Locale) {
   return `/downloads/${downloadFilename(id, locale)}`;
 }
+
+export function downloadCoverAlt(id: DownloadId, locale: Locale) {
+  const title = DOWNLOADS[id].title[locale];
+  if (locale === "uk") return `Обкладинка PDF-гіда Sweezy «${title}»`;
+  if (locale === "de") return `Cover des Sweezy-PDF-Ratgebers „${title}“`;
+  return `Cover of the Sweezy PDF guide “${title}”`;
+}

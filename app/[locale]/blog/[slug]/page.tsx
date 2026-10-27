@@ -291,7 +291,7 @@ export default async function BlogPostPage({
     : null;
   return (
     <main lang={locale} className={styles.page}>
-      <JsonLd data={articleJsonLd} />
+      <JsonLd data={[articleJsonLd, { "@context": "https://schema.org", "@type": "WebPage", url: canonicalUrl, inLanguage: locale, primaryImageOfPage: articleJsonLd.image }]} />
       {authorityRouteJsonLd ? <JsonLd data={authorityRouteJsonLd} /> : null}
       <article className={styles.articleShell}>
         <header className={journal.articleHero}>
@@ -495,7 +495,7 @@ export default async function BlogPostPage({
             </h2>
           </div>
           <Link href={`/${locale}/guides`}>{locale === "uk" ? "Гіди" : "Guides"} →</Link>
-          <SweezyCompanion pose="article-reader" className={styles.ctaCompanion} />
+          <SweezyCompanion locale={locale} pose="article-reader" className={styles.ctaCompanion} />
         </div>
       </article>
     </main>

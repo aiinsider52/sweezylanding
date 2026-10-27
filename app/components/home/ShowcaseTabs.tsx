@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { useId, useRef, useState } from "react";
 import type { ShowcaseMode } from "../../../lib/landing-copy";
+import type { Locale } from "../../../lib/i18n";
+import { appScreenAlt } from "../../../data/image-copy";
 import styles from "./landing.module.css";
 
-export function ShowcaseTabs({ modes }: { modes: ShowcaseMode[] }) {
+export function ShowcaseTabs({ modes, locale }: { modes: ShowcaseMode[]; locale: Locale }) {
   const [activeId, setActiveId] = useState<ShowcaseMode["id"]>(modes[0].id);
   const [activeFrame, setActiveFrame] = useState(0);
   const baseId = useId();
@@ -136,7 +138,7 @@ export function ShowcaseTabs({ modes }: { modes: ShowcaseMode[] }) {
             >
               <Image
                 src={image}
-                alt={`${active.label}: ${active.title}, screen ${index + 1} of ${active.images.length}`}
+                alt={appScreenAlt(image, locale)}
                 fill
                 priority={active.id === "path" && index === 0}
                 quality={72}

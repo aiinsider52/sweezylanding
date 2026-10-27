@@ -187,7 +187,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
           <h2 className="font-semibold tracking-tight type-section-title">{copy.missionTitle}</h2>
           <p className="mt-4 leading-8 text-white/65">{copy.mission}</p>
           </div>
-          <SweezyCompanion pose="about" className={styles.companion} />
+          <SweezyCompanion locale={locale} pose="about" className={styles.companion} />
         </section>
 
         <section className={styles.teamTeaser} aria-labelledby="about-team-title">

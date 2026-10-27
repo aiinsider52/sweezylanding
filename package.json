@@ -17,6 +17,7 @@
     "seo:ai-access": "node scripts/check-ai-discovery.mjs",
     "seo:ai-dach": "node scripts/ai-dach-benchmark.mjs",
     "test:ai-content": "python3 scripts/ai-content-qa.py",
+    "test:image-seo": "python3 scripts/image-seo-qa.py",
     "seo:ai-benchmark:csv": "node scripts/ai-citation-benchmark.mjs --csv",
     "seo:ai-benchmark:sheet": "node scripts/ai-citation-benchmark.mjs --output=reports/ai-citation-2026-09-04.csv",
     "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run",

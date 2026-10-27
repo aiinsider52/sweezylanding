@@ -1,3 +1,4 @@
+import { imageObject } from "../../../../lib/image-schema";
 import { CommunityInvite } from "../../../components/CommunityInvite";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -27,7 +28,7 @@ export default function CountryHub({ params }: { params: { locale: string; count
   const resources = country === "switzerland" ? [] : dachSupport[country];
   const url = `${BASE_URL}${countryPath(locale, country)}`;
   return <main className={styles.main} lang={locale}><div className={styles.shell}>
-    <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: item.title[locale], description: item.description[locale], url, inLanguage: locale, about: { "@type": "Country", name: item.name[locale] }, mainEntity: { "@type": "ItemList", itemListElement: DACH_TOPICS.map((topic, i) => ({ "@type": "ListItem", position: i + 1, name: topicNames[topic][locale], url: `${BASE_URL}${topicHref(locale, country, topic)}` })) } }} />
+    <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: item.title[locale], description: item.description[locale], url, inLanguage: locale, primaryImageOfPage: imageObject(item.image, item.alt[locale], locale), about: { "@type": "Country", name: item.name[locale] }, mainEntity: { "@type": "ItemList", itemListElement: DACH_TOPICS.map((topic, i) => ({ "@type": "ListItem", position: i + 1, name: topicNames[topic][locale], url: `${BASE_URL}${topicHref(locale, country, topic)}` })) } }} />
     <nav className={styles.breadcrumbs} aria-label="Breadcrumb"><Link href={`/${locale}`}>Sweezy</Link><span>/</span><Link href={`/${locale}/countries`}>DACH</Link><span>/ {item.name[locale]}</span></nav>
     <header className={styles.hero}><div><p className={styles.eyebrow}>SWEEZY / {item.code}</p><h1>{item.title[locale]}</h1><p>{item.description[locale]}</p></div><div className={styles.heroPhoto}><Image src={item.image} alt={item.alt[locale]} fill priority sizes="(max-width: 850px) 100vw, 45vw" /></div></header>
     <section className={styles.section}><h2>{c.topics}</h2><div className={styles.topics}>{DACH_TOPICS.map((topic, index) => <article className={styles.topic} key={topic}><small>0{index + 1} / {item.code}</small><h3>{topicNames[topic][locale]}</h3><Link href={topicHref(locale, country, topic)} className={styles.link}>{c.open} →</Link></article>)}</div></section>

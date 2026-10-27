@@ -1,3 +1,4 @@
+import { imageObject } from "../../../../lib/image-schema";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -79,8 +80,9 @@ export default function DestinationPage({ params }: { params: { locale: string; 
   const route = depth?.route?.map((step, index) => ({ number: String(index + 1).padStart(2, "0"), title: step.title[locale], text: step.text[locale] })) ?? editorial.route;
   const credits = (imageCredits as Record<string, Credit[]>)[place.slug] || [];
   const schema = { "@context": "https://schema.org", "@graph": [
+    { "@type": "ImageGallery", name: copy.gallery, url: `${BASE_URL}/${locale}/places/${place.slug}#destination-gallery`, image: [0, 1, 2].map(index => imageObject(destinationImage(place, index), place.alt[locale][index], locale)) },
     { "@type": "TouristAttraction", name: place.title[locale], description: place.description[locale], image: [0, 1, 2].map((index) => `${BASE_URL}${destinationImage(place, index)}`), url: `${BASE_URL}/${locale}/places/${place.slug}`, geo: { "@type": "GeoCoordinates", latitude: place.coordinates.latitude, longitude: place.coordinates.longitude }, touristType: [place.category, "nature", "culture"] },
-    { "@type": "WebPage", name: place.title[locale], description: place.summary[locale], url: `${BASE_URL}/${locale}/places/${place.slug}`, inLanguage: locale, ...(depth ? { dateModified: depth.reviewedAt } : {}), citation: citations, about: { "@type": "TouristAttraction", name: place.title[locale] } },
+    { "@type": "WebPage", name: place.title[locale], description: place.summary[locale], url: `${BASE_URL}/${locale}/places/${place.slug}`, inLanguage: locale, primaryImageOfPage: imageObject(destinationImage(place), place.alt[locale][0], locale), ...(depth ? { dateModified: depth.reviewedAt } : {}), citation: citations, about: { "@type": "TouristAttraction", name: place.title[locale] } },
     { "@type": "FAQPage", mainEntity: faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) },
   ] };
 
@@ -144,7 +146,7 @@ export default function DestinationPage({ params }: { params: { locale: string; 
         <ol className={styles.routeGrid}>{route.map((step) => <li key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
       </section>
 
-      <section><p className={styles.eyebrow}>{copy.gallery}</p><div className={styles.gallery}>{[1, 2].map((index) => <figure key={index}><Image src={destinationImage(place, index)} alt={place.alt[locale][index]} fill sizes="(max-width: 900px) 100vw, 60vw" /><figcaption>{place.alt[locale][index]}</figcaption></figure>)}</div></section>
+      <section id="destination-gallery"><p className={styles.eyebrow}>{copy.gallery}</p><div className={styles.gallery}>{[1, 2].map((index) => <figure key={index}><Image src={destinationImage(place, index)} alt={place.alt[locale][index]} fill sizes="(max-width: 900px) 100vw, 60vw" /><figcaption>{place.alt[locale][index]}</figcaption></figure>)}</div></section>
 
       <section className={styles.prepare}>
         <div className={styles.sectionLead}><p className={styles.eyebrow}>{editorial.labels.prepare}</p><h2>{editorial.labels.prepare}</h2><p>{editorial.labels.prepareIntro}</p></div>

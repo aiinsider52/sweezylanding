@@ -71,7 +71,7 @@ export function CommunityStarter({ locale }: { locale: Locale }) {
 
   return <section className={styles.starter} aria-labelledby="community-starter-title">
     <div className={styles.intro}>
-      <div className={styles.titleRow}><div><p className={styles.eyebrow}>{copy.eyebrow}</p><h2 id="community-starter-title">{copy.title}</h2></div><SweezyCompanion pose="post-writer" className={styles.writer} sizes="140px" /></div><p className={styles.body}>{copy.body}</p>
+      <div className={styles.titleRow}><div><p className={styles.eyebrow}>{copy.eyebrow}</p><h2 id="community-starter-title">{copy.title}</h2></div><SweezyCompanion locale={locale} pose="post-writer" className={styles.writer} sizes="140px" /></div><p className={styles.body}>{copy.body}</p>
       <ol className={styles.steps}>{copy.steps.map(([title, body], index) => <li key={title}><span aria-hidden="true">0{index + 1}</span><div><h3>{title}</h3><p>{body}</p></div></li>)}</ol>
     </div>
     <div className={styles.composer}>

@@ -36,6 +36,7 @@ export default function JobsPage({params}:{params:{locale:string}}){
         {name:c.eyebrow,url:`${BASE_URL}/${locale}/jobs`},
       ]}/>
       <CorporateHero
+        locale={locale}
         companion="jobs"
         eyebrow={c.eyebrow}
         title={c.title}

@@ -5,14 +5,17 @@ import { Pause, Play } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import styles from "./landing.module.css";
 import { useReducedMotionPreference } from "./useReducedMotionPreference";
+import type { Locale } from "../../../lib/i18n";
+import { appScreenAlt } from "../../../data/image-copy";
 
 type AppFrameClusterProps = {
+  locale: Locale;
   frames: readonly [string, string, string];
   alt: string;
   priority?: boolean;
 };
 
-export function AppFrameCluster({ frames, alt, priority = false }: AppFrameClusterProps) {
+export function AppFrameCluster({ frames, alt, locale, priority = false }: AppFrameClusterProps) {
   const clusterRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotionPreference();
   const [isInView, setIsInView] = useState(false);
@@ -89,7 +92,7 @@ export function AppFrameCluster({ frames, alt, priority = false }: AppFrameClust
             <div className={styles.appFrameMotionLayer}>
               <Image
                 src={frame}
-                alt={isActive ? alt : ""}
+                alt={appScreenAlt(frame, locale)}
                 fill
                 priority={priority && index === 1}
                 sizes={isActive ? "(max-width: 760px) 58vw, 310px" : "(max-width: 760px) 35vw, 230px"}

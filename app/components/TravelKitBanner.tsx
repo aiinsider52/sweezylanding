@@ -1,3 +1,4 @@
+import { downloadCoverAlt } from "../../data/downloads";
 import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "../../lib/i18n";
@@ -24,14 +25,14 @@ export function TravelKitBanner({ locale, headingAs = "h2" }: { locale: Locale; 
         </div>
         <ul className={styles.benefits}><li>{copy.free}</li><li>{copy.pages}</li><li>{copy.noSignup}</li></ul>
         <div className={styles.companionNote}>
-          <SweezyCompanion pose="travel-kit" className={styles.companion} sizes="80px" />
+          <SweezyCompanion locale={locale} pose="travel-kit" className={styles.companion} sizes="80px" />
           <div><strong>{SWEEZY_COMPANION.introduction[locale]}</strong><p>{copy.guideNote}</p></div>
         </div>
       </div>
       <div className={styles.visual}>
         <div className={styles.coverBack} aria-hidden="true" />
         <Link className={styles.cover} href={headingAs === "h1" ? "#travel-checklist" : `/${locale}/swiss-bucket-list`} aria-label={copy.open}>
-          <Image src={`/downloads/sweezy-travel-kit-cover-${locale}.webp`} alt={copy.title} width={714} height={1010} sizes="(max-width: 760px) 240px, 310px" />
+          <Image src={`/downloads/sweezy-travel-kit-cover-${locale}.webp`} alt={downloadCoverAlt("travel-kit", locale)} width={714} height={1010} sizes="(max-width: 760px) 240px, 310px" />
         </Link>
         <div className={styles.count}><strong>{String(TRAVEL_KIT_SLUGS.length).padStart(2, "0")}</strong><span>{copy.destinations}</span></div>
         <p className={styles.photoLabel}>OESCHINENSEE / SWITZERLAND</p>

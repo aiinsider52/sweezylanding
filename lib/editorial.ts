@@ -93,12 +93,12 @@ export function selectRelatedPosts<T extends { slug: string; locale: Locale; fro
 
 export function getCantonImageAlt(locale: Locale, cantonName: string) {
   if (locale === "uk") {
-    return `${cantonName}, Швейцарія — міський краєвид і практичний гід для переїзду та реєстрації`;
+    return `Міський краєвид: ${cantonName}, Швейцарія`;
   }
   if (locale === "de") {
-    return `${cantonName}, Schweiz — Stadtansicht und praktischer Guide zu Umzug und Anmeldung`;
+    return `Stadtansicht: ${cantonName}, Schweiz`;
   }
-  return `${cantonName}, Switzerland — city view and practical guide to relocation and registration`;
+  return `City view: ${cantonName}, Switzerland`;
 }
 
 export function getPostImage(locale: Locale, slug: string) {

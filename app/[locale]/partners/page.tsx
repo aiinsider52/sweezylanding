@@ -31,7 +31,7 @@ export default function Partners({ params }: { params: { locale: string } }) {
       <nav className={styles.breadcrumb} aria-label={c.home}><Link href={`/${locale}`}>{c.home}</Link><span aria-hidden="true">/</span><span aria-current="page">{c.eyebrow}</span></nav>
       <header className={styles.hero}>
         <div><p className={styles.eyebrow}>{c.eyebrow}</p><h1>{c.title}</h1><p className={styles.lead}>{c.intro}</p><div className={styles.actions}><a href="#contact" className={styles.button}>{c.cta} ↗</a><Link href="/uk/services" className={styles.textLink}>{c.browse} →</Link></div></div>
-        <div className={styles.art}><SweezyCompanion pose="partners" className={styles.mascot} sizes="(max-width: 760px) 160px, 240px" /><span>SWEEZY / CH · DE · AT</span></div>
+        <div className={styles.art}><SweezyCompanion locale={locale} pose="partners" className={styles.mascot} sizes="(max-width: 760px) 160px, 240px" /><span>SWEEZY / CH · DE · AT</span></div>
       </header>
       <p className={styles.scope}>{c.scope}</p>
       <section className={styles.section} aria-labelledby="formats-title"><h2 id="formats-title">{c.formatsTitle}</h2><div className={styles.formats}>

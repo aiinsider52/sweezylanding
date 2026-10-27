@@ -42,7 +42,7 @@ export function CommunityBanner({ locale }: { locale: Locale }) {
           <p className={styles.communityBannerBody}>{copy.body}</p>
           <Link href={`/${locale}/community`}>{copy.details} ↗</Link>
         </div>
-        <SweezyCompanion pose="home-community" className={styles.communityCompanion} sizes="(max-width: 560px) 190px, (max-width: 1100px) 200px, 260px" />
+        <SweezyCompanion locale={locale} pose="home-community" className={styles.communityCompanion} sizes="(max-width: 560px) 190px, (max-width: 1100px) 200px, 260px" />
       </div>
       <div className={styles.communityBannerLinks}>
         <a href={TELEGRAM_URL} data-placement="home-community" target="_blank" rel="noreferrer noopener"><small>01 · TELEGRAM</small><strong>{copy.telegram}</strong><b>↗</b></a>

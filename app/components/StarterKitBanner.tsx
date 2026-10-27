@@ -19,7 +19,7 @@ export function StarterKitBanner({ locale }: { locale: Locale }) {
         </div>
         <p className={styles.downloadNote}>{locale === "uk" ? "Безкоштовно · 5 сторінок · Без реєстрації" : locale === "de" ? "Kostenlos · 5 Seiten · Ohne Anmeldung" : "Free · 5 pages · No signup"}</p>
       </div>
-      <SweezyCompanion pose="download" className={styles.companion} />
+      <SweezyCompanion locale={locale} pose="download" className={styles.companion} />
     </div>
   </section>;
 }

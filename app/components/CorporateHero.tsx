@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import styles from "./CorporateHero.module.css";
 import { SweezyCompanion } from "./SweezyCompanion";
+import type { Locale } from "../../lib/i18n";
 
 type HeroAction = {
   label: string;
@@ -16,6 +17,7 @@ type HeroSignal = {
 };
 
 type CorporateHeroProps = {
+  locale: Locale;
   eyebrow: string;
   title: ReactNode;
   description: string;
@@ -39,6 +41,7 @@ function Action({ action, primary = false }: { action: HeroAction; primary?: boo
 }
 
 export function CorporateHero({
+  locale,
   eyebrow,
   title,
   description,
@@ -69,7 +72,7 @@ export function CorporateHero({
           <p className={styles.description}>{description}</p>
         </div>
 
-        {companion === "community" ? <SweezyCompanion pose="home-community" className={styles.welcomeCompanion} priority /> : null}
+        {companion === "community" ? <SweezyCompanion locale={locale} pose="home-community" className={styles.welcomeCompanion} priority /> : null}
         {(primaryAction || secondaryAction) ? (
           <div className={styles.actions}>
             {primaryAction ? <Action action={primaryAction} primary /> : null}
@@ -95,7 +98,7 @@ export function CorporateHero({
             </li>
           ))}
         </ol>
-        {panelCompanion ? <SweezyCompanion pose={panelCompanion} className={styles.panelCompanion} priority /> : null}
+        {panelCompanion ? <SweezyCompanion locale={locale} pose={panelCompanion} className={styles.panelCompanion} priority /> : null}
         <p className={styles.panelFoot}>SWEEZY / SWITZERLAND <span aria-hidden>↗</span></p>
       </aside>
     </header>
