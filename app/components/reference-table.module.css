@@ -1,0 +1,13 @@
+.section { margin:32px 0; min-width:0; }
+.section h2 { font:700 var(--type-section-title)/1.2 var(--font-ui); letter-spacing:-.025em; margin-bottom:16px; }
+.section > p { color:var(--theme-body); line-height:1.8; margin-bottom:18px; }
+.scroll { overflow-x:auto; border:1px solid var(--theme-line); border-radius:var(--panel-radius); background:var(--theme-surface); }
+.scroll:focus-visible { outline:3px solid var(--theme-focus); outline-offset:4px; }
+.scroll table { width:100%; min-width:640px; border-collapse:collapse; text-align:left; }
+.scroll caption { padding:14px 18px; text-align:left; font-size:.8125rem; color:var(--theme-muted); }
+.scroll thead { background:var(--theme-lime-soft); }
+.scroll th,.scroll td { padding:18px; border-top:1px solid var(--theme-line); vertical-align:top; font-size:.9375rem; line-height:1.7; }
+.scroll tbody th { width:23%; }
+.scroll td:nth-child(3) { width:38%; }
+.scroll a { color:var(--theme-link); text-decoration:underline; text-underline-offset:4px; }
+.section .note { margin-top:14px; font-size:.875rem; color:var(--theme-muted); }

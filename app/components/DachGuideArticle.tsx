@@ -4,6 +4,7 @@ import type { Locale } from "../../lib/i18n";
 import type { DownloadId } from "../../data/downloads";
 import { countryData, countryPath, dachCopy, type Source } from "../../data/dach";
 import { LeadMagnetBanner } from "./LeadMagnetBanner";
+import { BusinessContactTable } from "./BusinessContactTable";
 import styles from "../[locale]/countries/dach.module.css";
 
 type Section = { id: string; title: string; body: string; checklist?: string[] };
@@ -21,9 +22,10 @@ type Props = {
   sources: Source[];
   download: { asset: DownloadId; placement: string };
   next: { href: string; label: string }[];
+  showBusinessContacts?: boolean;
 };
 
-export function DachGuideArticle({ locale, country, kicker, title, description, summary, appliesTo, reviewedAt, sections, faq, sources, download, next }: Props) {
+export function DachGuideArticle({ locale, country, kicker, title, description, summary, appliesTo, reviewedAt, sections, faq, sources, download, next, showBusinessContacts }: Props) {
   const c = dachCopy[locale], item = countryData[country];
   const contents = { uk: "У цьому гіді", en: "In this guide", de: "In diesem Ratgeber" }[locale];
   const date = new Date(`${reviewedAt}T12:00:00Z`).toLocaleDateString(locale === "uk" ? "uk-UA" : locale === "de" ? "de-DE" : "en-GB");
@@ -53,8 +55,9 @@ export function DachGuideArticle({ locale, country, kicker, title, description, 
           <div className={styles.sectionHeading}><span className={styles.sectionIndex} aria-hidden="true">0{index + 1}</span><h2>{section.title}</h2></div>
           <div className={styles.sectionContent}><p>{section.body}</p>{section.checklist?.length ? <ul>{section.checklist.map(task => <li key={task}>{task}</li>)}</ul> : null}</div>
         </section>)}
+        {showBusinessContacts ? <BusinessContactTable locale={locale} country={country} /> : null}
         <LeadMagnetBanner locale={locale} asset={download.asset} placement={download.placement} />
-        <section className={styles.readingSupport} id="guide-faq"><div className={styles.supportHeading}><p className={styles.eyebrow}>SWEEZY / FAQ</p><h2>{c.faq}</h2></div><div className={styles.faqGrid}>{faq.map(question => <div key={question.q} className={styles.faq}><h3>{question.q}</h3><p>{question.a}</p></div>)}</div></section>
+        <section className={styles.readingSupport} id="guide-faq"><div className={styles.supportHeading}><p className={styles.eyebrow}>SWEEZY / FAQ</p><h2>{c.faq}</h2></div><div className={styles.faqGrid}>{faq.map((question, index) => <div id={`faq-${index + 1}`} key={question.q} className={styles.faq}><h3>{question.q}</h3><p>{question.a}</p></div>)}</div></section>
         <section className={styles.readingSupport} id="guide-sources"><div className={styles.supportHeading}><p className={styles.eyebrow}>SWEEZY / SOURCES</p><h2>{c.sources}</h2></div><ul className={styles.evidenceGrid}>{sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer noopener"><span>{source.name}</span><span aria-hidden="true">↗</span></a></li>)}</ul><p className={styles.note}>{c.scope}</p></section>
         <section className={styles.readingSupport}><div className={styles.supportHeading}><p className={styles.eyebrow}>SWEEZY / EXPLORE</p><h2>{c.next}</h2></div><div className={styles.nextGrid}>{next.map((link, index) => <Link key={link.href} href={link.href}><span aria-hidden="true">0{index + 1}</span><strong>{link.label}</strong><span aria-hidden="true">↗</span></Link>)}</div></section>
       </div>

@@ -18,6 +18,7 @@ const window = { addEventListener: (key, fn) => listeners.set(key, fn), removeEv
 const sandbox = { process, Buffer, URL, URLSearchParams, Request, Response, Headers, AbortSignal, Uint8Array, TextDecoder, Blob, Event, Element: FakeElement, crypto: webcrypto, localStorage: storage(local), sessionStorage: storage(session), window, document, location, console,
   fetch: async (url, options) => {
     if (url === "/api/events") { sent.push(JSON.parse(options.body)); return new Response(null, { status: 204 }); }
+    assert.equal(url, "/api/download/business-germany?locale=uk&placement=test-guide", "Public links retain the tracked download API");
     files.push(options?.headers ?? {});
     return new Response("%PDF-test-complete", { headers: { "content-type": "application/pdf", "content-length": responseMode === "complete" ? "18" : "999", ...(responseMode === "encoded" ? { "content-encoding": "gzip" } : {}) } });
   },

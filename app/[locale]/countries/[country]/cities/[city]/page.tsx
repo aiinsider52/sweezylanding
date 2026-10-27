@@ -1,3 +1,4 @@
+import { ENTITY_IDS } from "../../../../../../lib/entities";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -26,8 +27,8 @@ export default function CityGuide({ params }: { params: Params }) {
   const breadcrumbs = [{ name: "Sweezy", url: `${BASE_URL}/${locale}` }, { name: item.name[locale], url: `${BASE_URL}${countryPath(locale, country)}` }, { name: city.name[locale], url }];
   return <main className={styles.main} lang={locale}><div className={styles.shell}>
     <JsonLd data={{ "@context": "https://schema.org", "@graph": [
-      { "@type": "Article", headline: city.title[locale], description: city.description[locale], abstract: city.summary[locale], url, mainEntityOfPage: url, inLanguage: locale, datePublished: city.reviewedAt, dateModified: city.reviewedAt, author: { "@type": "Organization", name: "Sweezy editorial team", url: `${BASE_URL}/${locale}/authors/sweezy-team` }, publisher: { "@type": "Organization", name: "Sweezy", url: BASE_URL }, spatialCoverage: { "@type": "City", name: city.name[locale] }, citation: city.sources.map(source => source.url), isAccessibleForFree: true },
-      { "@type": "FAQPage", mainEntity: city.faq.map(faq => ({ "@type": "Question", name: faq.q[locale], acceptedAnswer: { "@type": "Answer", text: faq.a[locale] } })) },
+      { "@type": "Article", headline: city.title[locale], description: city.description[locale], abstract: city.summary[locale], url, mainEntityOfPage: url, inLanguage: locale, datePublished: city.reviewedAt, dateModified: city.reviewedAt, author: { "@type": "Organization", "@id": ENTITY_IDS.editorial, name: "Sweezy editorial team", url: `${BASE_URL}/${locale}/authors/sweezy-team` }, publisher: { "@type": "Organization", "@id": ENTITY_IDS.organization, name: "Sweezy", url: BASE_URL }, spatialCoverage: { "@type": "City", name: city.name[locale] }, citation: city.sources.map(source => source.url), isAccessibleForFree: true, isPartOf: { "@id": ENTITY_IDS.website } },
+      { "@type": "FAQPage", mainEntity: city.faq.map((faq, index) => ({ "@type": "Question", url: `${url}#faq-${index + 1}`, name: faq.q[locale], acceptedAnswer: { "@type": "Answer", text: faq.a[locale] } })) },
       { "@type": "BreadcrumbList", itemListElement: breadcrumbs.map((b, i) => ({ "@type": "ListItem", position: i+1, name: b.name, item: b.url })) },
     ] }} />
     <nav className={styles.breadcrumbs} aria-label="Breadcrumb">{breadcrumbs.slice(0,-1).map(b => <Link key={b.url} href={b.url.replace(BASE_URL, "")}>{b.name} /</Link>)}<span>{city.name[locale]}</span></nav>

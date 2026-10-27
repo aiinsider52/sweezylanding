@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-10-27T11:17:00.249990+00:00",
+  "scope": "Public HTTP baseline; no verified crawler identity, indexing or AI citation is established.",
+  "pages": [
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "x_robots_tag": null,
+      "new_business_table": false,
+      "service_evidence_table": false
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "x_robots_tag": null,
+      "new_business_table": false,
+      "service_evidence_table": false
+    },
+    {
+      "path": "/uk/services",
+      "status": 200,
+      "x_robots_tag": null,
+      "new_business_table": false,
+      "service_evidence_table": false,
+      "robots_allowed": {
+        "OAI-SearchBot": true,
+        "Claude-SearchBot": true,
+        "PerplexityBot": true,
+        "Googlebot": true,
+        "bingbot": true
+      }
+    },
+    {
+      "path": "/uk/countries/germany/business",
+      "status": 200,
+      "x_robots_tag": null,
+      "new_business_table": false,
+      "service_evidence_table": false,
+      "robots_allowed": {
+        "OAI-SearchBot": true,
+        "Claude-SearchBot": true,
+        "PerplexityBot": true,
+        "Googlebot": true,
+        "bingbot": true
+      }
+    },
+    {
+      "path": "/uk/countries/austria/business",
+      "status": 200,
+      "x_robots_tag": null,
+      "new_business_table": false,
+      "service_evidence_table": false,
+      "robots_allowed": {
+        "OAI-SearchBot": true,
+        "Claude-SearchBot": true,
+        "PerplexityBot": true,
+        "Googlebot": true,
+        "bingbot": true
+      }
+    },
+    {
+      "path": "/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv",
+      "status": 200,
+      "x_robots_tag": null,
+      "new_business_table": false,
+      "service_evidence_table": false,
+      "robots_allowed": {
+        "OAI-SearchBot": true,
+        "Claude-SearchBot": true,
+        "PerplexityBot": true,
+        "Googlebot": true,
+        "bingbot": true
+      }
+    }
+  ]
+}

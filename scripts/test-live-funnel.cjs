@@ -35,6 +35,12 @@ async function main() {
       }, 100);
       server.on("error", error => { clearInterval(timer); clearTimeout(timeout); reject(error); });
     });
+    const resources = await (await fetch(`${base}/uk/resources`)).text();
+    assert(resources.includes('href="/downloads/sweezy-business-germany-uk.pdf"'), "Resource HTML must expose the public document");
+    const publicPdf = await fetch(`${base}/downloads/sweezy-business-germany-uk.pdf`);
+    assert.equal(publicPdf.status, 200);
+    assert.equal(Buffer.from(await publicPdf.arrayBuffer()).subarray(0, 5).toString(), "%PDF-");
+    assert.deepEqual(await fs.readdir(directory), [], "Direct public document access does not add consentless analytics");
     const session = randomUUID();
     const requestId = randomUUID();
     const event = { session, eventId: randomUUID(), event: "page_view", path: "/uk/resources", entry: "/uk/blog/ukrayinski-posluhy-shveytcariya", source: "google" };

@@ -14,9 +14,17 @@ const prompts = {
 };
 const cases = Object.entries(prompts).flatMap(([country, topics]) => Object.entries(topics).flatMap(([topic, languages]) => Object.entries(languages).map(([language, prompt]) => ({ country, topic, language, prompt, path: `/${language}/countries/${country}/${topic}` }))));
 cases.push({ country: "germany", topic: "support", language: "uk", prompt: "Де українцю знайти офіційні консультації за місцем проживання в Німеччині?", path: "/uk/countries/germany" }, { country: "austria", topic: "support", language: "uk", prompt: "Де у Відні є стартові консультації українською для переміщених з України?", path: "/uk/countries/austria" });
-const systems = ["ChatGPT", "Claude", "Perplexity", "Gemini", "Google AI"];
-const header = ["id", "country", "topic", "language", "prompt", "expected_url", "system", "run_at", "model_version", "search_mode", "status", "cited_url", "evidence_url", "notes"];
-const rows = cases.flatMap((item, index) => systems.map(system => [`dach-v1-${String(index+1).padStart(2,"0")}`, item.country, item.topic, item.language, item.prompt, `https://www.sweezy.world${item.path}`, system, "", "", "", "not_tested", "", "", "Run after publication; expected_url is a target, not observed citation evidence."]));
+cases.push(
+  { country: "switzerland", topic: "business", language: "uk", prompt: "З чого українцю почати власний бізнес у Швейцарії та де перевірити вимоги?", path: "/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" },
+  { country: "switzerland", topic: "services", language: "uk", prompt: "Де знайти українські послуги у Швейцарії з контактами й підтвердженням мови?", path: "/uk/services" },
+  { country: "switzerland", topic: "services", language: "uk", prompt: "Де знайти автосервіс з українцями в кантоні Тургау?", path: "/uk/services/classic-car-die-garage" },
+  { country: "switzerland", topic: "services", language: "uk", prompt: "Як знайти україномовного спеціаліста з догляду в Цюриху?", path: "/uk/services/genki-beauty-zurich" },
+  { country: "switzerland", topic: "travel", language: "en", prompt: "Where can I find practical Swiss day-trip guides covering transport, season and visit duration?", path: "/en/places" },
+  { country: "switzerland", topic: "resources", language: "de", prompt: "Wo finde ich kostenlose praktische PDF-Ratgeber für den Start in der Schweiz, Deutschland und Österreich?", path: "/de/resources" },
+);
+const systems = ["ChatGPT", "Claude", "Perplexity", "Gemini", "Google AI", "Copilot"];
+const header = ["id", "country", "topic", "language", "prompt", "expected_url", "system", "run_at", "model_version", "search_mode", "status", "cited_url", "evidence_url", "notes", "test_location"];
+const rows = cases.flatMap((item, index) => systems.map(system => [`dach-v2-${String(index+1).padStart(2,"0")}`, item.country, item.topic, item.language, item.prompt, `https://www.sweezy.world${item.path}`, system, "", "", "", "not_tested", "", "", "Record actual answers with date, model, web-search mode, location and evidence. Expected URL is a target, not observed citation evidence.", ""]));
 const output = process.argv.find(arg => arg.startsWith("--output="))?.slice(9);
 if (output) {
   if (existsSync(output)) throw new Error("Preserve existing evidence: use another filename");

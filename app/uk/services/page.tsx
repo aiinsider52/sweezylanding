@@ -6,6 +6,7 @@ import { ukrainianServices, servicePath, servicePreview } from "../../../data/uk
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { JsonLd } from "../../components/seo/JsonLd";
 import { ServiceDirectory } from "../../components/services/ServiceDirectory";
+import { ServiceEvidenceTable } from "../../components/services/ServiceEvidenceTable";
 import { StarterKitBanner } from "../../components/StarterKitBanner";
 import { SweezyCompanion } from "../../components/SweezyCompanion";
 import { serviceHubs } from "../../../data/service-hubs";
@@ -42,6 +43,7 @@ export default function ServicesPage() {
         <ServiceDirectory services={ukrainianServices.map(servicePreview)} />
         <div className={styles.actions}>{serviceHubs.map(hub => <Link key={hub.slug} href={`/uk/services/${hub.kind}/${hub.slug}`} className={styles.textLink}>{hub.title} →</Link>)}</div>
       </section>
+      <ServiceEvidenceTable />
       <section className={styles.section}>
         <h2>Як обрати послугу й домовитися про роботу</h2>
         <ol className={styles.list}><li>Знайдіть виконавця за потрібною послугою та місцем роботи.</li><li>Уточніть мову спілкування, доступний час і можливість виконати саме ваше завдання.</li><li>Перед роботою погодьте обсяг, вартість або спосіб розрахунку та порядок додаткових витрат.</li><li>Збережіть домовленість і попросіть рахунок за виконану роботу.</li></ol>

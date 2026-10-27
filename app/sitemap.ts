@@ -9,6 +9,7 @@ import { isLocale, isRedirectedBlogPost } from "../lib/blog";
 import { ukrainianServices, servicePath } from "../data/ukrainian-services";
 import { serviceHubs } from "../data/service-hubs";
 import { COUNTRIES, DACH_TOPICS, REVIEWED_AT } from "../data/dach";
+import { BUSINESS_CONTACTS_CHECKED_AT } from "../data/business-contacts";
 import { CITY_SLUGS, cityPath, dachCities } from "../lib/dach-cities";
 
 const SITE_URL = "https://www.sweezy.world";
@@ -164,10 +165,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${SITE_URL}/${locale}/resources`, lastModified: new Date(REVIEWED_AT) },
       ...COUNTRIES.map(country => ({ url: `${SITE_URL}/${locale}/countries/${country}`, lastModified: new Date(REVIEWED_AT) })),
       ...CITY_SLUGS.map(city => ({ url: `${SITE_URL}${cityPath(locale,city)}`, lastModified: new Date(dachCities[city].reviewedAt) })),
-      ...(["germany", "austria"] as const).flatMap(country => DACH_TOPICS.map(topic => ({ url: `${SITE_URL}/${locale}/countries/${country}/${topic}`, lastModified: new Date(REVIEWED_AT) }))),
+      ...(["germany", "austria"] as const).flatMap(country => DACH_TOPICS.map(topic => ({ url: `${SITE_URL}/${locale}/countries/${country}/${topic}`, lastModified: new Date(topic === "business" ? BUSINESS_CONTACTS_CHECKED_AT : REVIEWED_AT) }))),
     ]),
     ...serviceHubs.map(hub => ({ url: `${SITE_URL}/uk/services/${hub.kind}/${hub.slug}` })),
-    { url: `${SITE_URL}/uk/services` },
+    { url: `${SITE_URL}/uk/services`, lastModified: new Date("2026-10-27") },
     ...ukrainianServices.map((service) => ({ url: `${SITE_URL}${servicePath(service)}`, lastModified: new Date(service.checkedAt) })),
   ];
 }
