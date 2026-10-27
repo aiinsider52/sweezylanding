@@ -43,6 +43,12 @@ const tick = async () => { for (let i=0;i<6;i++) await new Promise(resolve => se
 
 (async () => {
   const core = load("lib/analytics.ts"), client = load("lib/analytics-client.ts");
+  assert.equal(core.countryForPath("/uk/services/ukde-berlin"), "germany");
+  assert.equal(core.countryForPath("/uk/services/ludmila-frank-wien"), "austria");
+  assert.equal(core.countryForPath("/uk/services/classic-car-die-garage"), "switzerland");
+  assert.equal(core.countryForPath("/uk/services/country/germany"), "germany");
+  assert.equal(core.countryForPath("/uk/services"), "dach");
+  assert.equal(core.countryForPath("/uk/blog/biznes-dach-dlya-ukrayintsiv"), "dach");
   assert.equal(core.sourceForVisit("https://chatgpt.com.evil.example/path"), "other");
   assert.equal(core.sourceForVisit("https://gemini.google.com/app"), "gemini");
   assert.equal(core.sourceForVisit("https://www.perplexity.com/search/example"), "perplexity");

@@ -12,8 +12,8 @@ import { SweezyCompanion } from "../../components/SweezyCompanion";
 import { serviceHubs } from "../../../data/service-hubs";
 import styles from "../../components/services/services.module.css";
 
-const title = "Українські послуги у Швейцарії — каталог Sweezy";
-const description = "Українські та україномовні послуги в Цюриху, Тургау й Санкт-Галлені: авто, фото, догляд, масаж, переклади та школа. Контакти, джерела й фільтри.";
+const title = "Українські послуги у Швейцарії, Німеччині й Австрії — Sweezy";
+const description = "Українські та україномовні послуги у Швейцарії, Німеччині й Австрії: переклади, фотографія, навчання, авто й догляд. Країни, регіони, контакти та джерела.";
 export const metadata: Metadata = {
   title, description,
   alternates: buildCanonicalAlternates("uk", "/services"),
@@ -29,9 +29,9 @@ export default function ServicesPage() {
       <header className={`${styles.hero} ${styles.catalogHero}`}>
         <div>
         <p className={styles.eyebrow}>SWEEZY · ЛОКАЛЬНІ ПОСЛУГИ</p>
-        <h1>Українські послуги у Швейцарії</h1>
-        <p className={styles.heroLead}>Знайдіть фахівця, україномовного спеціаліста або послугу для української спільноти. Обирайте категорію й кантон: у картках є прямі контакти, джерела та пояснення, чи підтверджена українська мова.</p>
-        <div className={styles.tags}><span>Цюрих · Тургау · Санкт-Галлен</span><span>Карток у каталозі: {ukrainianServices.length}</span><span>Контакти з першоджерел</span></div>
+        <h1>Українські послуги у трьох країнах DACH</h1>
+        <p className={styles.heroLead}>Знайдіть фахівця, україномовного спеціаліста або послугу для української спільноти. Обирайте країну, категорію й регіон: у картках є прямі контакти, джерела та пояснення, чи підтверджена українська мова.</p>
+        <div className={styles.tags}><span>Швейцарія · Німеччина · Австрія</span><span>Карток у каталозі: {ukrainianServices.length}</span><span>Контакти з першоджерел</span></div>
         </div>
         <div className={styles.catalogCompanionFrame}>
           <SweezyCompanion pose="greeting" className={styles.catalogCompanion} sizes="(max-width: 740px) 220px, 300px" />
@@ -57,9 +57,9 @@ export default function ServicesPage() {
       </section>
       <section className={styles.section}>
         <h2>Знаєте український сервіс?</h2>
-        <p>Шукаєте допомогу в Німеччині чи Австрії? У розділах країн є офіційні інформаційні портали та місцеві консультації.</p>
+        <p>Для Німеччини й Австрії вже є окремі добірки сервісів. У розділах країн також знайдете офіційні портали й місцеві консультації.</p>
         <div className={styles.actions}><Link href="/uk/countries/germany" className={styles.textLink}>Німеччина →</Link><Link href="/uk/countries/austria" className={styles.textLink}>Австрія →</Link></div>
-        <p>Надішліть назву, сайт, кантон, перелік послуг і доступні мови. Редакція перевірить дані перед додаванням.</p>
+        <p>Надішліть назву, сайт, країну й регіон, перелік послуг і доступні мови. Редакція перевірить дані перед додаванням.</p>
         <div className={styles.actions}><Link href="/uk/partners" className={styles.button}>Додати бізнес або обговорити співпрацю →</Link><Link href="/uk/blog/biznes-u-shveytcariyi-dlya-ukrayintsiv" className={styles.textLink}>Запускаєте власний бізнес?</Link></div>
       </section>
     </div>

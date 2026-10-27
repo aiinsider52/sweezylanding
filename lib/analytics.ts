@@ -1,3 +1,5 @@
+import serviceCountries from "../data/service-countries.json";
+
 export const ANALYTICS_VERSION = "v1";
 export const CONSENT_KEY = "sweezy-metrics-consent";
 export const SESSION_KEY = "sweezy-metrics-session";
@@ -21,7 +23,13 @@ export function metricPath(value: unknown): string | null {
 export function countryForPath(path: string): MetricEvent["country"] {
   const country = path.match(/^\/(?:uk|en|de)\/countries\/(switzerland|germany|austria)(?:\/|$)/)?.[1];
   if (country) return country as MetricEvent["country"];
-  return /\/(?:blog|guides|places|planning|services|starter-kit|swiss-bucket-list)(?:\/|$)/.test(path) ? "switzerland" : "dach";
+  const hubCountry = path.match(/^\/(?:uk|en|de)\/services\/country\/(switzerland|germany|austria)(?:\/|$)/)?.[1];
+  if (hubCountry) return hubCountry as MetricEvent["country"];
+  const provider = path.match(/^\/uk\/services\/([a-z0-9-]+)\/?$/)?.[1];
+  if (provider && Object.hasOwn(serviceCountries, provider)) return serviceCountries[provider as keyof typeof serviceCountries] as MetricEvent["country"];
+  if (/^\/uk\/services\/(?:city\/zurich|category\/photography)(?:\/|$)/.test(path)) return "switzerland";
+  if (/\/services(?:\/|$)/.test(path) || path === "/uk/blog/biznes-dach-dlya-ukrayintsiv") return "dach";
+  return /\/(?:blog|guides|places|planning|starter-kit|swiss-bucket-list)(?:\/|$)/.test(path) ? "switzerland" : "dach";
 }
 export function sourceForVisit(referrer: string, utmSource = ""): MetricSource {
   const sources: Record<string, MetricSource> = { google: "google", bing: "bing", chatgpt: "chatgpt", claude: "claude", perplexity: "perplexity", gemini: "gemini", copilot: "copilot", telegram: "telegram", facebook: "facebook", instagram: "instagram" };

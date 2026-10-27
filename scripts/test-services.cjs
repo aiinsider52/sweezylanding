@@ -9,6 +9,19 @@ runInNewContext(ts.transpileModule(readFileSync("data/ukrainian-services.ts", "u
 }).outputText, { exports: exportsObject });
 const { ukrainianServices: services, getUkrainianService: get, filterServices: filter, serviceDirections: directions, serviceSchema: schema, servicePreview: preview } = exportsObject;
 const plain = (value) => JSON.parse(JSON.stringify(value));
+const expectedCounts = { CH: 7, DE: 5, AT: 5 };
+const countryNames = { CH: "switzerland", DE: "germany", AT: "austria" };
+assert.deepEqual(require("../data/service-countries.json"), Object.fromEntries(services.map(service => [service.slug, countryNames[service.country]])), "Analytics country map must match catalog data");
+for (const [country, count] of Object.entries(expectedCounts)) {
+  assert.equal(filter(services, "", "", country).length, count, country);
+  assert.equal(filter(services.map(preview), "", "", country).length, count);
+}
+assert.equal(filter(services, "Переклади", "Берлін", "DE").length, 2);
+assert.equal(filter(services, "Фотографія", "Відень", "AT").length, 1);
+assert.equal(filter(services, "", "Відень", "DE").length, 0);
+assert.equal(directions(get("ukrainische-samstagsschule-muenchen")), null, "Conflicting school locations must not become a definite address");
+assert.ok(decodeURIComponent(directions(get("ludmila-frank-wien"))).includes("Austria"));
+assert.ok(decodeURIComponent(directions(get("ukde-berlin"))).includes("Germany"));
 
 assert.equal(new Set(services.map((service) => service.slug)).size, services.length);
 assert.equal(filter(services, "", "").length, services.length);
@@ -48,11 +61,14 @@ for (const service of services) {
   assert.match(service.checkedAt, /^\d{4}-\d{2}-\d{2}$/);
   assert.ok(service.phone || service.email);
   if (service.phone) {
-    assert.match(service.phone, /^\+41\d{9}$/);
+    assert.match(service.phone, /^\+[1-9]\d{6,14}$/);
+    assert.ok(service.phone.startsWith({ CH: "+41", DE: "+49", AT: "+43" }[service.country]));
     assert.ok(service.phoneDisplay);
   }
   assert.equal("aggregateRating" in structured, false);
   assert.equal("priceRange" in structured, false);
+  if (structured.address) assert.equal(structured.address.addressCountry, service.country);
+  assert.equal(structured.areaServed.containedInPlace.identifier, service.country);
   assert.equal("sources" in preview(service), false, "Client filtering needs only card fields");
 }
 console.log(`Services tests passed: ${services.length} providers, combined filters, empty/reset selection, optional contacts, regional photographers, individual schemas and hours.`);
@@ -60,7 +76,7 @@ console.log(`Services tests passed: ${services.length} providers, combined filte
 if (process.argv.includes("--built")) {
   const decode = (value) => value.replace(/&(?:amp|quot|#x27|#39|lt|gt);/g, (entity) => ({ "&amp;": "&", "&quot;": '"', "&#x27;": "'", "&#39;": "'", "&lt;": "<", "&gt;": ">" }[entity]));
   const normalize = (value) => decode(value).replace(/\s+/g, " ").trim();
-  const routes = ["/uk/services", ...services.map((service) => `/uk/services/${service.slug}`), "/uk/blog/ukrayinski-posluhy-shveytcariya", "/uk/blog/ukrayinski-posluhy-zurich", "/uk/blog/ukrayinskyy-avtoservis-thurgau"];
+  const routes = ["/uk/services", ...services.map((service) => `/uk/services/${service.slug}`), ...["switzerland", "germany", "austria"].map(country => `/uk/services/country/${country}`), "/uk/blog/biznes-dach-dlya-ukrayintsiv", "/uk/blog/ukrayinski-posluhy-shveytcariya", "/uk/blog/ukrayinski-posluhy-zurich", "/uk/blog/ukrayinskyy-avtoservis-thurgau"];
   for (const route of routes) {
     const html = readFileSync(`.next/server/app${route}.html`, "utf8");
     const visible = normalize(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>|<!--.*?-->/g, "").replace(/<[^>]*>/g, " "));
@@ -93,7 +109,7 @@ if (process.argv.includes("--built")) {
       else assert.ok(!links.some((href) => href.startsWith("https://www.google.com/maps/search/")), `${route}: map invented for an area-only provider`);
     }
     if (route === "/uk/services") {
-      assert.ok(html.includes('id="service-category"') && html.includes('id="service-canton"'));
+      assert.ok(html.includes('id="service-category"') && html.includes('id="service-region"') && html.includes('id="service-country"'));
       for (const service of services) assert.ok(links.includes(`/uk/services/${service.slug}`), "All cards must be available before hydration");
     }
     console.log(`PASS built ${route}`);

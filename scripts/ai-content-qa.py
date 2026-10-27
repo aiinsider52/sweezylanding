@@ -54,9 +54,20 @@ for locale in ['uk', 'en', 'de']:
 
 catalog = page('/uk/services')
 rows = catalog.select('#service-evidence-title + p + div tbody tr')
-assert len(rows) == 7, len(rows)
+assert len(rows) == 17, len(rows)
 for row in rows:
     assert row.select_one('time[datetime]') and row.select_one('td a[href^="https://"]')
+comparison = page('/uk/blog/biznes-dach-dlya-ukrayintsiv')
+article = next(node for node in schemas(comparison) if node.get('@type') == 'BlogPosting')
+assert len(article['citation']) >= 8 and article['datePublished'] == '2026-10-27'
+assert comparison.select_one('article table') and comparison.select_one('article img[alt]')
+for country, count in [('switzerland', 7), ('germany', 5), ('austria', 5)]:
+    route = '/uk/services/country/' + country
+    hub = page(route)
+    collection = next(node for node in schemas(hub) if node.get('@type') == 'CollectionPage')
+    assert collection['mainEntity']['numberOfItems'] == count, route
+    assert len(hub.select('tbody tr')) == count, route
+    assert comparison.select_one(f'a[href="{route}"]'), route
 for slug in ['biznes-u-shveytcariyi-dlya-ukrayintsiv', 'ukrayinski-posluhy-shveytcariya', 'ukrayinski-posluhy-zurich', 'ukrayinskyy-avtoservis-thurgau']:
     soup = page('/uk/blog/' + slug)
     article = next(x for x in schemas(soup) if x.get('@type') == 'BlogPosting')
@@ -64,4 +75,4 @@ for slug in ['biznes-u-shveytcariyi-dlya-ukrayintsiv', 'ukrayinski-posluhy-shvey
     assert soup.select_one('link[rel="canonical"]')['href'] == BASE + '/uk/blog/' + slug
     for link in soup.select('a[href^="/uk/services#"]'):
         assert catalog.find(id=link['href'].split('#', 1)[1]), link['href']
-print(f'PASS: {articles} article identities; {links} direct PDF links to {len(files)} documents; 6 sourced business tables; 7 service evidence rows; 4 updated blog posts.')
+print(f'PASS: {articles} article identities; {links} direct PDF links to {len(files)} documents; 6 sourced business tables; {len(rows)} service evidence rows; 4 updated blog posts.')

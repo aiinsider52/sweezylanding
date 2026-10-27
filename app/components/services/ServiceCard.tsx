@@ -4,7 +4,7 @@ import styles from "./services.module.css";
 
 export function ServiceCard({ service }: { service: ServicePreview }) {
   return <article className={styles.card}>
-    <div className={styles.cardLabel}><span>{service.category} · {service.canton}</span><span>UA / CH</span></div>
+    <div className={styles.cardLabel}><span>{service.category} · {service.region}</span><span>UA / {service.country}</span></div>
     <h3><Link href={servicePath(service)}>{service.name}</Link></h3>
     <p>{service.summary}</p>
     <p className={styles.evidence}>{connectionLabels[service.connection]}</p>

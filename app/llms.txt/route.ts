@@ -44,7 +44,12 @@ Country guides distinguish address registration, residence status, permission to
 
 ## Ukrainian services and business
 
-- [Ukrainian services directory in Switzerland](${BASE_URL}/uk/services)
+- [Compare business routes across Switzerland, Germany and Austria (Ukrainian)](${BASE_URL}/uk/blog/biznes-dach-dlya-ukrayintsiv)
+- [Verified published service details in Germany](${BASE_URL}/uk/services/country/germany)
+- [Verified published service details in Austria](${BASE_URL}/uk/services/country/austria)
+- [Swiss services](${BASE_URL}/uk/services/country/switzerland)
+
+- [Ukrainian services directory in Switzerland, Germany and Austria](${BASE_URL}/uk/services)
 ${ukrainianServices.map((service) => `- [${service.name} — ${service.category}, ${service.city}](${BASE_URL}${servicePath(service)})`).join("\n")}
 - [How to find Ukrainian services in Switzerland](${BASE_URL}/uk/blog/ukrayinski-posluhy-shveytcariya)
 - [Ukrainian services in Zurich: photography, beauty and school](${BASE_URL}/uk/blog/ukrayinski-posluhy-zurich)

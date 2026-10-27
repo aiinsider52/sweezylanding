@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BASE_URL, buildCanonicalAlternates } from "../../../../lib/alternates";
 import { DEFAULT_OG_IMAGE } from "../../../../lib/social";
-import { connectionLabels, ukrainianServices, getUkrainianService, servicePath, serviceDirections, serviceLocation, serviceSchema } from "../../../../data/ukrainian-services";
+import { connectionLabels, ukrainianServices, getUkrainianService, servicePath, serviceDirections, serviceLocation, serviceSchema, SERVICE_COUNTRIES, SERVICE_COUNTRY_SLUGS } from "../../../../data/ukrainian-services";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
 import styles from "../../../components/services/services.module.css";
@@ -38,7 +38,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     <article className={styles.shell}>
       <Breadcrumb items={[{ name: "Головна", url: "/uk" }, { name: "Українські послуги", url: "/uk/services" }, { name: service.name, url: servicePath(service) }]} />
       <header className={styles.hero}>
-        <p className={styles.eyebrow}>{service.category} · {service.canton} · {service.city}</p>
+        <p className={styles.eyebrow}>{service.category} · {SERVICE_COUNTRIES[service.country]} · {service.region} · {service.city}</p>
         <h1>{service.name}</h1>
         <p>{service.summary}</p>
         <div className={styles.tags}><span>{connectionLabels[service.connection]}</span></div>
@@ -73,7 +73,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <h2>Джерела та уточнення</h2>
         <ul className={styles.sourceList}>{service.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer noopener">{source.name} ↗</a></li>)}</ul>
         <p className={styles.note}>Це інформаційна картка Sweezy. Ми не публікуємо непідтверджених рейтингів, цін або гарантій робіт. Змінилися дані? Напишіть на <a className={styles.textLink} href="mailto:support@sweezy.world">support@sweezy.world</a>.</p>
-        <div className={styles.actions}><Link href="/uk/services" className={styles.button}>Усі українські послуги →</Link><Link href="/uk/blog/ukrayinski-posluhy-shveytcariya" className={styles.textLink}>Як обрати виконавця</Link></div>
+        <div className={styles.actions}><Link href={`/uk/services/country/${SERVICE_COUNTRY_SLUGS[service.country]}`} className={styles.button}>{SERVICE_COUNTRIES[service.country]}: послуги →</Link><Link href="/uk/services" className={styles.textLink}>Увесь каталог DACH →</Link></div>
       </section>
     </article>
   </main>;
