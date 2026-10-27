@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { Locale } from "../../../lib/i18n";
-import { PRODUCT_SHOTS, productImage, productImageAlt, type ShopProduct, type ProductShot } from "../../../data/shop";
+import { productShots, productImage, productImageAlt, type ShopProduct, type ProductShot } from "../../../data/shop";
 import { SHOP_COPY } from "../../../data/shop-copy";
 import { shopStory } from "../../../data/shop-stories";
 import styles from "../../[locale]/shop/shop.module.css";
@@ -12,11 +12,11 @@ import styles from "../../[locale]/shop/shop.module.css";
 export function ProductCard({ product, locale, saved = false, ready = true, onToggle }: {
   product: ShopProduct; locale: Locale; saved?: boolean; ready?: boolean; onToggle?: () => void;
 }) {
-  const [shot, setShot] = useState<ProductShot>("studio");
+  const [shot, setShot] = useState<ProductShot>(product.modelView ? "model" : "studio");
   const c = SHOP_COPY[locale];
   const name = product.copy[locale].name;
   const href = `/${locale}/shop/${product.slug}`;
-  // Hovering reveals the everyday scene; once a visitor picks a view, hover shows the studio shot instead.
+  // Model-led clothing previews return to the studio view on hover.
   const hoverShot: ProductShot = shot === "studio" ? "lifestyle" : "studio";
   return <article className={styles.card} data-product={product.slug}>
     <div className={styles.cardPhoto}>
@@ -29,7 +29,7 @@ export function ProductCard({ product, locale, saved = false, ready = true, onTo
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z" /></svg>
       </button> : null}
       <div className={styles.cardDots} role="group" aria-label={`${c.preview}: ${name}`}>
-        {PRODUCT_SHOTS.map(item => <button key={item} type="button" aria-pressed={shot === item} aria-label={`${c.shots[item]}: ${name}`} onClick={() => setShot(item)}><span /></button>)}
+        {productShots(product).map(item => <button key={item} type="button" aria-pressed={shot === item} aria-label={`${c.shots[item]}: ${name}`} onClick={() => setShot(item)}><span><Image src={productImage(product, item)} alt={productImageAlt(product, locale, item)} fill sizes="32px" /></span></button>)}
       </div>
     </div>
     <div className={styles.cardCopy}>

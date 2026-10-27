@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "../../../lib/i18n";
-import { PRODUCT_SHOTS, productImage, productImageAlt, type ShopProduct } from "../../../data/shop";
+import { productShots, productImage, productImageAlt, type ShopProduct } from "../../../data/shop";
 import { SHOP_COPY } from "../../../data/shop-copy";
 import styles from "../../[locale]/shop/shop.module.css";
 
@@ -13,8 +13,9 @@ export function ProductGallery({ product, locale }: { product: ShopProduct; loca
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const c = SHOP_COPY[locale];
-  const shot = PRODUCT_SHOTS[index];
-  const step = (direction: number) => setIndex(value => (value + direction + PRODUCT_SHOTS.length) % PRODUCT_SHOTS.length);
+  const shots = productShots(product);
+  const shot = shots[index];
+  const step = (direction: number) => setIndex(value => (value + direction + shots.length) % shots.length);
   useEffect(() => {
     if (!zoomOpen) return;
     const previous = document.body.style.overflow;
@@ -28,12 +29,12 @@ export function ProductGallery({ product, locale }: { product: ShopProduct; loca
         <span className={styles.zoomBadge} aria-hidden="true">↗</span>
       </button>
       <span className={styles.photoLabel}>{c.ai}</span>
-      <span className={styles.galleryCounter} aria-live="polite">{String(index + 1).padStart(2, "0")} / 03</span>
+      <span className={styles.galleryCounter} aria-live="polite">{String(index + 1).padStart(2, "0")} / {String(shots.length).padStart(2, "0")}</span>
       {product.flatPrint ? <span className={styles.flatBadge}>{c.flat}</span> : null}
       <div className={styles.galleryArrows}><button type="button" aria-label={c.previous} onClick={() => step(-1)}>←</button><button type="button" aria-label={c.next} onClick={() => step(1)}>→</button></div>
     </div>
-    <div className={styles.galleryThumbnails} role="group" aria-label={c.gallery}>
-      {PRODUCT_SHOTS.map((item, itemIndex) => <button key={item} type="button" aria-pressed={itemIndex === index} aria-label={`${c.shots[item]}: ${product.copy[locale].name}`} onClick={() => setIndex(itemIndex)}>
+    <div className={styles.galleryThumbnails} data-views={shots.length} role="group" aria-label={c.gallery}>
+      {shots.map((item, itemIndex) => <button key={item} type="button" aria-pressed={itemIndex === index} aria-label={`${c.shots[item]}: ${product.copy[locale].name}`} onClick={() => setIndex(itemIndex)}>
         <span className={styles.thumbPhoto}><Image src={productImage(product, item)} alt={productImageAlt(product, locale, item)} fill sizes="(max-width: 800px) 28vw, 16vw" /></span>
         <span className={styles.thumbCaption}><small>{String(itemIndex + 1).padStart(2, "0")}</small>{c.shots[item]}</span>
       </button>)}
@@ -45,7 +46,7 @@ export function ProductGallery({ product, locale }: { product: ShopProduct; loca
       <div className={styles.zoomPanel}>
         <div className={styles.zoomHeader}><span>{product.copy[locale].name}</span><button type="button" autoFocus aria-label={c.closeZoom} onClick={() => dialog.current?.close()}>×</button></div>
         <div className={styles.zoomImage}><Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 800px) 94vw, 82vh" /></div>
-        <div className={styles.zoomFooter}><button type="button" aria-label={c.previous} onClick={() => step(-1)}>←</button><span>{c.shots[shot]} · {index + 1} / 3 · {c.ai}</span><button type="button" aria-label={c.next} onClick={() => step(1)}>→</button></div>
+        <div className={styles.zoomFooter}><button type="button" aria-label={c.previous} onClick={() => step(-1)}>←</button><span>{c.shots[shot]} · {index + 1} / {shots.length} · {c.ai}</span><button type="button" aria-label={c.next} onClick={() => step(1)}>→</button></div>
       </div>
     </dialog>
   </div>;

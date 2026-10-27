@@ -6,7 +6,7 @@ import { BASE_URL, buildLocaleAlternates } from "../../../../lib/alternates";
 import { imageObject } from "../../../../lib/image-schema";
 import { ENTITY_IDS } from "../../../../lib/entities";
 import Image from "next/image";
-import { SHOP_PRODUCTS, shopProduct, productCardImage, productImage, productImages, productImageAlt, PRODUCT_SHOTS } from "../../../../data/shop";
+import { SHOP_PRODUCTS, shopProduct, productCardImage, productImage, productImages, productImageAlt, productShots } from "../../../../data/shop";
 import { shopStory } from "../../../../data/shop-stories";
 import { SHOP_COPY } from "../../../../data/shop-copy";
 import { Breadcrumb } from "../../../components/Breadcrumb";
@@ -45,7 +45,7 @@ export default function ProductPage({ params }: { params: { locale: string; slug
     <JsonLd data={{ "@context": "https://schema.org", "@graph": [
       { "@type": "WebPage", "@id": `${url}#webpage`, url, name: copy.name, description: copy.description, inLanguage: locale, isPartOf: { "@id": ENTITY_IDS.website }, primaryImageOfPage: imageObject(productCardImage(product), productImageAlt(product, locale), locale), mainEntity: { "@id": `${url}#product` } },
       // No Offer, price, stock, rating, manufacturer or Sweezy brand is invented.
-      { "@type": "Product", "@id": `${url}#product`, name: copy.name, sku: product.sku, description: story ? `${story.story} ${copy.description}` : copy.description, url, category: c.categories[product.category], image: productImages(product).map((src, index) => imageObject(src, productImageAlt(product, locale, PRODUCT_SHOTS[index]), locale)) },
+      { "@type": "Product", "@id": `${url}#product`, name: copy.name, sku: product.sku, description: story ? `${story.story} ${copy.description}` : copy.description, url, category: c.categories[product.category], image: productImages(product).map((src, index) => imageObject(src, productImageAlt(product, locale, productShots(product)[index]), locale)) },
     ] }} />
     <Breadcrumb items={[{ name: c.home, url: `/${locale}` }, { name: c.name, url: `/${locale}/shop` }, { name: copy.name, url: `/${locale}/shop/${product.slug}` }]} />
     <div className={styles.productLayout}>
@@ -67,7 +67,7 @@ export default function ProductPage({ params }: { params: { locale: string; slug
     </div>
     <section className={styles.lookBand} aria-labelledby="look-title">
       <div className={styles.lookCopy}><p className={styles.eyebrow}>{c.shots.lifestyle}</p><h2 id="look-title">{c.lookTitle}</h2><p>{c.lookBody}</p>{story ? <blockquote>{story.tagline}</blockquote> : null}</div>
-      {(["lifestyle", "detail"] as const).map(shot => <figure key={shot} className={styles.lookImage}><Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 900px) 92vw, 34vw" /><figcaption>{c.shots[shot]}</figcaption></figure>)}
+      {(product.modelView ? ["model", "detail"] as const : ["lifestyle", "detail"] as const).map(shot => <figure key={shot} className={styles.lookImage}><Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 900px) 92vw, 34vw" /><figcaption>{c.shots[shot]}</figcaption></figure>)}
     </section>
     <section className={styles.related} aria-labelledby="related-products"><div className={styles.sectionHead}><div><p className={styles.eyebrow}>THE SWISS EDIT</p><h2 id="related-products">{c.related}</h2></div><Link href={`/${locale}/shop#collection`} className={styles.inlineLink}>{c.back} ↗</Link></div><div className={styles.productGrid}>{related.map(item => <ProductCard key={item.slug} product={item} locale={locale} />)}</div></section>
   </main>;

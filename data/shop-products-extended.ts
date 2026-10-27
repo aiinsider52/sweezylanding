@@ -278,6 +278,7 @@ export const EXTENDED_SHOP_PRODUCTS: ShopProduct[] = [
   },
   {
     "slug": "switzerland-calling-black-shirt",
+    "modelView": true,
     "sku": "SW-018",
     "category": "clothing",
     "flatPrint": true,
@@ -348,6 +349,7 @@ export const EXTENDED_SHOP_PRODUCTS: ShopProduct[] = [
   },
   {
     "slug": "swiss-burgundy-ringer-shirt",
+    "modelView": true,
     "sku": "SW-020",
     "category": "clothing",
     "flatPrint": true,
@@ -417,6 +419,7 @@ export const EXTENDED_SHOP_PRODUCTS: ShopProduct[] = [
   },
   {
     "slug": "swiss-sky-blue-polo",
+    "modelView": true,
     "sku": "SW-022",
     "category": "clothing",
     "flatPrint": true,
@@ -487,6 +490,7 @@ export const EXTENDED_SHOP_PRODUCTS: ShopProduct[] = [
   },
   {
     "slug": "switzerland-calling-black-hoodie",
+    "modelView": true,
     "sku": "SW-024",
     "category": "clothing",
     "flatPrint": true,
@@ -522,6 +526,7 @@ export const EXTENDED_SHOP_PRODUCTS: ShopProduct[] = [
   },
   {
     "slug": "lugano-pink-long-sleeve",
+    "modelView": true,
     "sku": "SW-025",
     "category": "clothing",
     "flatPrint": true,

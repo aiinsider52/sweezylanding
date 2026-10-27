@@ -8,6 +8,7 @@ export type ShopProduct = {
   sku: string;
   category: ShopCategory;
   flatPrint: boolean;
+  modelView?: boolean;
   copy: Record<Locale, ProductCopy>;
   appearance?: { label: Record<Locale, string>; swatches: string[] };
 };
@@ -94,11 +95,13 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
 export const SHOP_CATEGORIES: ShopCategory[] = ["bags", "clothing", "cups", "accessories", "home", "decor"];
 export const shopProduct = (slug: string) => SHOP_PRODUCTS.find(product => product.slug === slug);
 export const PRODUCT_SHOTS = ["studio", "lifestyle", "detail"] as const;
-export type ProductShot = typeof PRODUCT_SHOTS[number];
+export type ProductShot = typeof PRODUCT_SHOTS[number] | "model";
+export const productShots = (product: ShopProduct): readonly ProductShot[] => product.modelView ? [...PRODUCT_SHOTS, "model"] : PRODUCT_SHOTS;
 export const productImage = (product: ShopProduct, shot: ProductShot = "studio") => `/shop/products/${product.slug}-${shot}.webp`;
-export const productImages = (product: ShopProduct) => PRODUCT_SHOTS.map(shot => productImage(product, shot));
+export const productImages = (product: ShopProduct) => productShots(product).map(shot => productImage(product, shot));
 export const productCardImage = (product: ShopProduct) => productImage(product);
 export function productImageAlt(product: ShopProduct, locale: Locale, shot: ProductShot = "studio") {
+  if (shot === "model") return { uk: `${product.copy.uk.name} на моделі-шатенці — візуалізація ШІ`, en: `${product.copy.en.name} worn by a chestnut-haired model — AI visualisation`, de: `${product.copy.de.name} an einem Model mit kastanienbraunem Haar — KI-Visualisierung` }[locale];
   if (shot === "detail") return { uk: `Деталі дизайну: ${product.copy.uk.name}. Авторська візуалізація ШІ`, en: `Design detail: ${product.copy.en.name}. Original AI visualisation`, de: `Designdetail: ${product.copy.de.name}. Eigene KI-Visualisierung` }[locale];
   const suffix = shot === "lifestyle"
     ? { uk: " — у повсякденній обстановці, візуалізація ШІ", en: " — in an everyday setting, AI visualisation", de: " — im Alltag, KI-Visualisierung" }[locale]

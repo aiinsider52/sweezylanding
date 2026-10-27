@@ -82,36 +82,37 @@ for (const locale of ['uk', 'en', 'de']) {
   }
   for (const product of data.SHOP_PRODUCTS) {
     assert(product.copy[locale].name && product.copy[locale].description && product.copy[locale].alt);
-    assert.equal(data.productImages(product).length, 3);
-    for (const shot of data.PRODUCT_SHOTS) {
+    assert.equal(data.productImages(product).length, product.modelView ? 4 : 3);
+    for (const shot of data.productShots(product)) {
       assert(data.productImageAlt(product, locale, shot).length <= 240);
       assert(fs.existsSync('public' + data.productImage(product, shot)));
     }
   }
 }
 const manifest = JSON.parse(fs.readFileSync('generated_images/shop/gallery-images.json'));
-assert.equal(Object.keys(manifest).length, data.SHOP_PRODUCTS.length * 3);
-assert.equal(new Set(Object.values(manifest)).size, data.SHOP_PRODUCTS.length * 3, 'Every product view uses its own generated image');
-assert.equal(fs.readdirSync('public/shop/products').filter(file => file.endsWith('.webp')).length, data.SHOP_PRODUCTS.length * 3);
+assert.equal(Object.keys(manifest).length, data.SHOP_PRODUCTS.reduce((total, product) => total + data.productShots(product).length, 0));
+assert.equal(new Set(Object.values(manifest)).size, data.SHOP_PRODUCTS.reduce((total, product) => total + data.productShots(product).length, 0), 'Every product view uses its own generated image');
+assert.equal(fs.readdirSync('public/shop/products').filter(file => file.endsWith('.webp')).length, data.SHOP_PRODUCTS.reduce((total, product) => total + data.productShots(product).length, 0));
 assert(!fs.existsSync('public/shop/source'), 'Listing photos are not public storefront assets');
 const gallery = load('app/components/shop/ProductGallery.tsx');
 const card = load('app/components/shop/ProductCard.tsx');
 const copy = load('data/shop-copy.ts').SHOP_COPY;
 function nodes(node) { if (!node || typeof node !== 'object') return []; return [node, ...[node.props?.children].flat(Infinity).flatMap(nodes)]; }
 for (const product of data.SHOP_PRODUCTS) {
+  const shots = data.productShots(product);
   state = []; cursor = 0;
   const render = () => { cursor = 0; return nodes(gallery.ProductGallery({ product, locale: 'uk' })); };
   let all = render();
   assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product));
-  assert.equal(all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined).length, 3);
-  for (const [index, shot] of data.PRODUCT_SHOTS.entries()) {
+  assert.equal(all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined).length, shots.length);
+  for (const [index, shot] of shots.entries()) {
     all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined)[index].props.onClick();
     all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, shot));
   }
   all.find(n => n.type === 'button' && n.props['aria-label'] === copy.uk.next).props.onClick();
-  all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, 'studio'), 'Next wraps from detail to studio');
+  all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, 'studio'), 'Next wraps from final view to studio');
   all.find(n => n.type === 'button' && n.props['aria-label'] === copy.uk.previous).props.onClick();
-  all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, 'detail'), 'Previous wraps');
+  all = render(); assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, shots[shots.length - 1]), 'Previous wraps');
   let opened = 0, closed = 0, focused = 0;
   const dialog = all.find(n => n.type === 'dialog');
   dialog.props.ref.current = { showModal() { opened++; }, close() { closed++; } };
@@ -128,9 +129,13 @@ for (const product of data.SHOP_PRODUCTS) {
   const renderCard = () => { cursor = 0; return nodes(card.ProductCard({ product, locale: 'uk' })); };
   all = renderCard();
   const previews = all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined);
-  assert.equal(previews.length, 3);
-  previews[1].props.onClick(); all = renderCard();
-  assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, 'lifestyle'));
+  assert.equal(previews.length, shots.length);
+  assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, product.modelView ? 'model' : 'studio'));
+  for (const [index, shot] of shots.entries()) {
+    all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined)[index].props.onClick();
+    all = renderCard();
+    assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, shot));
+  }
 }
 const catalog = load('app/components/shop/ShopCatalog.tsx');
 for (const locale of ['uk', 'en', 'de']) {
@@ -149,4 +154,4 @@ for (const locale of ['uk', 'en', 'de']) {
   assert(draft && decodeURIComponent(draft.props.href).includes(slug));
   assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, data.SHOP_PRODUCTS.filter(p => p.category === 'bags').length, 'Saving a product preserves the filter');
 }
-console.log('Shop checks passed: 28 products, 3 languages, storage failures, selection sync, enquiry drafts, 84 generated images, card previews, gallery navigation and zoom controls.');
+console.log('Shop checks passed: 28 products, 3 languages, storage failures, selection sync, enquiry drafts, 89 generated images (five on-model views), card previews, gallery navigation and zoom controls.');

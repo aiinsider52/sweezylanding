@@ -15,7 +15,8 @@ function load(file){
  return exports;
 }
 if(!fs.existsSync(path.join(folder,'temu-import-2026-10-27.json')))throw Error('Private supplier import is required locally; it is deliberately not in Git.');
-const products=load(path.join(root,'data/shop.ts')).SHOP_PRODUCTS;
+const shopData=load(path.join(root,'data/shop.ts'));
+const products=shopData.SHOP_PRODUCTS;
 const originals=read('original-product-suppliers.json');
 const imports=read('temu-import-2026-10-27.json');
 const drafts=read('public-product-drafts.json');
@@ -30,7 +31,7 @@ const rows=products.map(product=>{
   supplier:{shareUrl:supplier.shareUrl,canonicalUrl:supplier.sourceUrl,goodsId:supplier.goodsId,selectedSpecId:supplier.selectedSpecId??null,selectedGalleryId:supplier.selectedGalleryId??null},
   observedAppearance:product.appearance?.label.uk??product.copy.uk.alt,appearanceEvidence:'visible_reference_image_only',referenceImage:supplier.referenceImage,
   sourceImageUrls:supplier.extraction?.discoveredImageUrls??[oldSources.find(s=>s.goodsId===supplier.goodsId)?.sourceImageUrl].filter(Boolean),
-  generatedImages:['studio','lifestyle','detail'].map(shot=>'public/shop/products/'+product.slug+'-'+shot+'.webp'),
+  generatedImages:shopData.productShots(product).map(shot=>'public/shop/products/'+product.slug+'-'+shot+'.webp'),
   verifiedAt:supplier.checkedAt,extraction:supplier.extraction,missingInformation:['complete_supplier_gallery','all_colour_variants','all_sizes','fabric_or_material','dimensions','supplier_price','availability','delivery','set_contents'],
   purchasingNotes:previous?.purchasingNotes??{purchasePrice:null,retailPrice:null,currency:null,notes:''},
  };
