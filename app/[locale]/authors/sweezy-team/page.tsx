@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { buildLocaleAlternates, BASE_URL } from "../../../../lib/alternates";
 import { isLocale } from "../../../../lib/blog";
+import { ENTITY_IDS } from "../../../../lib/entities";
 import type { Locale } from "../../../../lib/i18n";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { JsonLd } from "../../../components/seo/JsonLd";
@@ -46,10 +47,10 @@ export default function TeamPage({ params }: { params: { locale: string } }) {
   const locale = params.locale, c = COPY[locale], team = TEAM[locale], url = `${BASE_URL}/${locale}/authors/sweezy-team`;
   return <main lang={locale} className={styles.page}><div className={styles.shell}>
     <JsonLd data={{ "@context": "https://schema.org", "@graph": [
-      { "@type": "Organization", "@id": `${url}#editorial`, name: "Sweezy Team", url, parentOrganization: { "@id": `${BASE_URL}/#organization` }, knowsLanguage: ["uk", "en", "de"] },
-      { "@type": "Organization", "@id": `${BASE_URL}/#organization`, name: "Sweezy", url: BASE_URL, founder: [{ "@id": `${url}#vladyslav` }, { "@id": `${url}#yuliia` }] },
-      { "@type": "Person", "@id": `${url}#vladyslav`, name: c.name, jobTitle: c.role, description: c.person, url: `${url}#vladyslav` },
-      { "@type": "Person", "@id": `${url}#yuliia`, name: team.name, jobTitle: team.role, description: team.description, url: `${url}#yuliia` },
+      { "@type": "Organization", "@id": ENTITY_IDS.editorial, name: "Sweezy Team", url, parentOrganization: { "@id": ENTITY_IDS.organization }, knowsLanguage: ["uk", "en", "de"] },
+      { "@type": "Organization", "@id": ENTITY_IDS.organization, name: "Sweezy", url: BASE_URL, founder: [{ "@id": ENTITY_IDS.vladyslav }, { "@id": ENTITY_IDS.yuliia }] },
+      { "@type": "Person", "@id": ENTITY_IDS.vladyslav, name: c.name, jobTitle: c.role, description: c.person, url: `${url}#vladyslav` },
+      { "@type": "Person", "@id": ENTITY_IDS.yuliia, name: team.name, jobTitle: team.role, description: team.description, url: `${url}#yuliia` },
     ] }} />
     <Breadcrumb items={[{ name: c.home, url: `/${locale}` }, { name: c.back, url }]} />
     <header className={styles.hero}><p className={styles.eyebrow}>{c.eyebrow}</p><h1>{c.title}</h1><p>{c.intro}</p><span className={styles.countries}>{c.countries}</span></header>

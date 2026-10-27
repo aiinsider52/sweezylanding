@@ -171,15 +171,15 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
   return (
     <main lang={locale} className="min-h-screen bg-dark-900 text-white">
       <JsonLd data={aboutSchema} />
-      <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
+      <article className="site-shell site-content">
         <Link href={`/${locale}`} className="text-sm text-white/45 transition-colors hover:text-white">
           ← {copy.back}
         </Link>
 
-        <header className="mt-10 border-b border-white/10 pb-10">
+        <header className="site-page-header">
           <p className="text-xs font-semibold tracking-[0.24em] text-accent-green">{copy.eyebrow}</p>
-          <h1 className="mt-5 max-w-3xl font-bold tracking-tight type-page-title">{copy.title}</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-white/60">{copy.intro}</p>
+          <h1 className="mt-5 font-bold tracking-tight type-page-title">{copy.title}</h1>
+          <p className="mt-6 text-lg leading-8 text-white/60">{copy.intro}</p>
         </header>
 
         <section className={styles.mission}>

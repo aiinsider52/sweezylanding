@@ -9,6 +9,7 @@
   --type-body: 1rem;
   --type-small: .875rem;
   --layout-gutter: clamp(16px, 2.4vw, 40px);
+  --layout-width: calc(100% - var(--layout-gutter) * 2);
   --section-space: clamp(32px, 4vw, 56px);
   --panel-padding: clamp(20px, 2.4vw, 32px);
   --panel-radius: 18px;
@@ -22,3 +23,17 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-ui); text-wrap: balance; }
 .type-page-title { font-size: var(--type-page-title); line-height: 1.12; letter-spacing: -.04em; font-weight: 700; }
 .type-section-title { font-size: var(--type-section-title); line-height: 1.18; letter-spacing: -.03em; font-weight: 650; }
 .type-card-title { font-size: var(--type-card-title); line-height: 1.25; letter-spacing: -.02em; font-weight: 650; }
+
+/* Page containers share one fluid width in every language. */
+.site-shell { width:var(--layout-width);max-width:none;margin-inline:auto;min-width:0;text-align:left; }
+.site-content { padding-block:28px var(--section-space); }
+.site-page-header { display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px 40px;align-items:end;margin-top:28px;padding-bottom:28px;border-bottom:1px solid var(--theme-line); }
+.site-page-header > :first-child { grid-column:1/-1;margin:0; }
+.site-page-header > h1 { max-width:none;margin:0; }
+.site-page-header > p:last-of-type { max-width:none;margin:0;font-size:1.0625rem;line-height:1.8; }
+.site-page-header > div { grid-column:1/-1;margin-top:8px; }
+.site-help-panel { padding:var(--panel-padding);border:1px solid var(--theme-line);border-radius:var(--panel-radius);background:var(--theme-lime-soft);text-align:left; }
+.site-help-panel p { margin-inline:0;max-width:none; }
+.site-help-panel a { background:#adff00;color:#142015; }
+.site-faq-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start; }
+@media(max-width:800px) { .site-page-header { grid-template-columns:minmax(0,1fr);gap:18px; }.site-faq-grid { grid-template-columns:minmax(0,1fr); } }

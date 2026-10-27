@@ -18,7 +18,7 @@ export function ContentTopBar() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[var(--theme-line)] bg-[var(--theme-surface)] text-white backdrop-blur-xl">
-      <div className="mx-auto flex max-w-[1500px] items-center justify-between px-4 py-3 sm:px-6">
+      <div className="site-shell flex items-center justify-between py-3">
         <Link href={`/${locale}`} className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06]">
             <BrandLogo variant="mark" className="h-6 w-6 object-cover" />

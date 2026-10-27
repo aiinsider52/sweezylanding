@@ -6,6 +6,7 @@ Use --base only for a server that you own. Never submits forms or analytics.
 import argparse
 import concurrent.futures
 import json
+from pathlib import Path
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -14,6 +15,7 @@ from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--base", default="http://localhost:3032")
+parser.add_argument("--all-built", action="store_true", help="Also check every HTML page in the local production build")
 args = parser.parse_args()
 base = args.base.rstrip("/")
 base_parts = urllib.parse.urlsplit(base)
@@ -24,6 +26,11 @@ hosts = {"www.sweezy.world", "sweezy.world", base_parts.netloc}
 # Python 3.9's urllib does not follow the permanent 308 redirects used by Next.
 class RedirectHandler(urllib.request.HTTPRedirectHandler):
     http_error_308 = urllib.request.HTTPRedirectHandler.http_error_302
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        # These checks only issue GETs. Treat 308 as 301 for urllib 3.9's
+        # older redirect_request implementation, which otherwise rejects it.
+        return super().redirect_request(req, fp, 301 if code == 308 else code, msg, headers, newurl)
 
 opener = urllib.request.build_opener(RedirectHandler())
 
@@ -38,6 +45,17 @@ _, status, _, xml = fetch("/sitemap.xml")
 if status != 200:
     raise SystemExit("Sitemap unavailable")
 pages = sorted({urllib.parse.urlsplit(node.text).path for node in ET.fromstring(xml).findall("{*}url/{*}loc")})
+sitemap_count = len(pages)
+if args.all_built:
+    built = Path(".next/server/app")
+    if not built.exists():
+        parser.error("--all-built requires an existing production build")
+    page_set = set(pages)
+    for file in built.rglob("*.html"):
+        route = file.relative_to(built).with_suffix("").as_posix()
+        if not route.startswith("_"):
+            page_set.add("/" if route == "index" else "/" + route)
+    pages = sorted(page_set)
 documents, errors = {}, []
 with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
     for target, status, kind, body in pool.map(fetch, pages):
@@ -89,5 +107,5 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
     for target, status, _, _ in pool.map(fetch, sorted(assets)):
         if status != 200:
             errors.append(f"Local image {target}: HTTP {status}")
-print(json.dumps({"sitemapPages": len(pages), "otherInternalTargets": len(additional), "internalLinks": len(links), "localImages": len(assets), "errors": errors, "limit": "HTTP/HTML only; no browser screenshots, computed styles or user interactions."}, ensure_ascii=False, indent=2))
+print(json.dumps({"sitemapPages": sitemap_count, "checkedPages": len(pages), "otherInternalTargets": len(additional), "internalLinks": len(links), "localImages": len(assets), "errors": errors, "limit": "HTTP/HTML only; no browser screenshots, computed styles or user interactions."}, ensure_ascii=False, indent=2))
 raise SystemExit(bool(errors))

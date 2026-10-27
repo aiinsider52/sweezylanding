@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ENTITY_IDS } from "../../../../lib/entities";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
@@ -234,11 +235,13 @@ export default async function BlogPostPage({
     dateModified: post.frontmatter.updatedAt ?? post.frontmatter.publishedAt,
     author: {
       "@type": "Organization",
+      "@id": ENTITY_IDS.editorial,
       name: post.frontmatter.author,
       url: `${BASE_URL}/${locale}/authors/sweezy-team`,
     },
     publisher: {
       "@type": "Organization",
+      "@id": ENTITY_IDS.organization,
       name: "Sweezy",
       url: "https://www.sweezy.world",
       logo: {
@@ -251,6 +254,8 @@ export default async function BlogPostPage({
       "@id": canonicalUrl,
     },
     inLanguage: LANGUAGE_CODE_MAP[locale],
+    isPartOf: { "@id": ENTITY_IDS.website },
+    ...(post.frontmatter.summaryAnswer ? { abstract: post.frontmatter.summaryAnswer } : {}),
     isAccessibleForFree: true,
     url: canonicalUrl,
     ...(post.frontmatter.officialSources?.length

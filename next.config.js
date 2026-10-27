@@ -11,6 +11,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/cookie-policy",
+        destination: "/cookies",
+        permanent: true,
+      },
+      {
+        source: "/terms-of-service",
+        destination: "/terms",
+        permanent: true,
+      },
+      {
         source: "/en/blog/moving-to-zurich-guide",
         destination: "/en/guides/zurich",
         permanent: true,

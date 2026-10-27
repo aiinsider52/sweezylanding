@@ -80,17 +80,17 @@ export default function StatusSUpdatesPage() {
   return (
     <main lang="uk" className="min-h-screen bg-dark-900 text-white">
       <JsonLd data={schema} />
-      <article className="mx-auto max-w-6xl px-6 py-14 sm:py-20">
+      <article className="site-shell site-content">
         <Link href="/uk/blog" className="text-sm text-white/45 transition-colors hover:text-white">
           ← Усі гіди
         </Link>
 
-        <header className="mt-10 border-b border-white/10 pb-12">
+        <header className="site-page-header">
           <p className="text-xs font-semibold tracking-[.22em] text-accent-green">STATUS S · LIVE TRACKER</p>
-          <h1 className="mt-5 max-w-5xl font-bold tracking-tight type-page-title">
+          <h1 className="mt-5 font-bold tracking-tight type-page-title">
             Статус S: що змінилося і що діє зараз
           </h1>
-          <p className="mt-7 max-w-3xl text-lg leading-8 text-white/65">
+          <p className="mt-7 text-lg leading-8 text-white/65">
             Коротка відповідь: статус S чинний до 4 березня 2027 року. Рішення про період після цієї дати ще не остаточне. Нижче — тільки перевірені події, першоджерела й конкретні наступні кроки.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 text-sm">

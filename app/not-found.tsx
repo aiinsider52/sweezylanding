@@ -13,7 +13,8 @@ export default function NotFound() {
   const { locale } = useLocale();
   const c = copy[locale];
   return <main className={styles.page} lang={locale}>
-    <Image className={styles.art} src="/brand/companion/not-found.png" alt="404" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 760px" priority />
+    <Image className={styles.art} src="/brand/companion/not-found.png" alt="404" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 45vw" priority />
+    <div className={styles.copy}>
     <h1>{c.title}</h1><p>{c.body}</p>
     <div className={styles.actions}>
       <Link href={`/${locale}`}>{c.home}<span aria-hidden="true">↗</span></Link>
@@ -24,5 +25,6 @@ export default function NotFound() {
       <Link href={`/${locale}/planning`}>{c.planning}</Link>
       <Link href={`/${locale}/community`}>{c.community}</Link>
     </nav>
+    </div>
   </main>;
 }

@@ -56,9 +56,9 @@ for locale, value in data.items():
         assert (ROOT / "public" / place["image"].lstrip("/")).exists()
         assert (ROOT / ".next/server/app" / (place["href"].lstrip("/") + ".html")).exists()
     pdf_path = "/downloads/sweezy-travel-kit-{}.pdf".format(locale)
-    assert any((href or "").startswith("/api/download/travel-kit?") for href in page.links)
+    assert pdf_path in page.links
     home = (ROOT / ".next/server/app/{}.html".format(locale)).read_text()
-    assert 'id="swiss-travel-kit"' in home and "/api/download/travel-kit?" in home and route in home
+    assert 'id="swiss-travel-kit"' in home and pdf_path in home and route in home
     assert '/{}/starter-kit'.format(locale) in page.links
     assert (ROOT / "public/downloads/sweezy-first-week-{}.pdf".format(locale)).exists()
     with Image.open(ROOT / "public/downloads/sweezy-travel-kit-cover-{}.webp".format(locale)) as preview:

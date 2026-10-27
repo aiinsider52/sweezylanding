@@ -10,6 +10,7 @@ import { Telemetry } from "./components/Telemetry";
 import { GrowthAnalytics } from "./components/GrowthAnalytics";
 import { AnalyticsConsent } from "./components/AnalyticsConsent";
 import { DEFAULT_OG_IMAGE } from "../lib/social";
+import { SITE_ENTITIES } from "../lib/entities";
 import "./globals.css";
 import "./theme.css";
 import "./design-system.css";
@@ -80,26 +81,6 @@ export const viewport: Viewport = {
   themeColor: "#0b100c",
 };
 
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Sweezy",
-  url: "https://www.sweezy.world",
-  description:
-    "Sweezy helps newcomers navigate life in Switzerland, Germany and Austria with practical guides, checklists and local support.",
-  inLanguage: ["en", "uk", "de"],
-  publisher: {
-    "@type": "Organization",
-    name: "Sweezy",
-    url: "https://www.sweezy.world",
-    sameAs: [
-      "https://t.me/sweezyxswiss",
-      "https://www.facebook.com/groups/1682658272463856",
-      "https://www.instagram.com/sweezy.app/",
-    ],
-  },
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -119,7 +100,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(SITE_ENTITIES).replace(/</g, "\\u003c"),
           }}
         />
       </head>

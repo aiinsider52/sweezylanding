@@ -58,7 +58,7 @@ const tick = async () => { for (let i=0;i<6;i++) await new Promise(resolve => se
   assert.equal(sent[0].source, "chatgpt");
   assert(!JSON.stringify(sent).includes("secret"));
   const link = new FakeElement();
-  Object.assign(link, { href: location.origin + "/api/download/business-germany?locale=uk", download: "germany.pdf", dataset: { download: "business-germany", placement: "test-guide" }, setAttribute() {}, removeAttribute() {} });
+  Object.assign(link, { href: location.origin + "/downloads/sweezy-business-germany-uk.pdf", download: "germany.pdf", dataset: { download: "business-germany", locale: "uk", placement: "test-guide" }, setAttribute() {}, removeAttribute() {} });
   const click = target => domListeners.get("click")({ target, button: 0, preventDefault() {}, defaultPrevented: false });
   click(link); await tick();
   assert.equal(sent.filter(row => row.event === "download_requested").length, 1);

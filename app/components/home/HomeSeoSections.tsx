@@ -232,8 +232,8 @@ export function HomeSeoSections({ locale }: { locale: Locale }) {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(34,197,94,0.08),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(16,185,129,0.06),transparent_50%)]" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6">
-          <div className="mx-auto max-w-2xl text-center mb-14 sm:mb-16">
+        <div className="relative z-10 site-shell">
+          <div className="text-left mb-8 sm:mb-10">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent-green/20 bg-accent-green/[0.07] px-5 py-2 text-sm font-medium text-accent-green/80 mb-6">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-green animate-pulse" />
               Sweezy

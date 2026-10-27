@@ -1,4 +1,4 @@
-.shell{width:calc(100% - clamp(32px,4vw,80px));margin-inline:auto;padding:32px 0 48px}
+.shell{width:var(--layout-width);margin-inline:auto;padding:32px 0 48px}
 .intro{display:grid;grid-template-columns:minmax(0,1fr) 290px;align-items:center;gap:var(--grid-gap);padding:var(--panel-padding) 0 42px;border-bottom:1px solid var(--theme-line)}
 .eyebrow{color:var(--theme-link);font:650 10px/1.7 var(--font-ui);letter-spacing:.12em;text-transform:uppercase}
 .intro h1{max-width:1200px;margin-top:22px;font-family:var(--font-ui);font-size:var(--type-page-title);font-weight:650;line-height:1.14;letter-spacing:-.035em;text-wrap:balance;overflow-wrap:anywhere}

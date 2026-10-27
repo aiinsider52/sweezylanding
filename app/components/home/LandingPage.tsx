@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Locale } from "../../../lib/i18n";
 import { landingCopy } from "../../../lib/landing-copy";
 import { APP_STORE_URL } from "../../../lib/links";
+import { APPLICATION_IDENTITY } from "../../../lib/entities";
 import { JsonLd } from "../seo/JsonLd";
 import { destinationImage, travelDestinations } from "../../../data/travel-destinations";
 import { SEO_CLUSTERS } from "../../../data/seo-clusters";
@@ -54,6 +55,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
     "@graph": [
       {
         "@type": "SoftwareApplication",
+        ...APPLICATION_IDENTITY,
         name: "Sweezy",
         operatingSystem: "iOS",
         applicationCategory: "LifestyleApplication",

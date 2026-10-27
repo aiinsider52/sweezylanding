@@ -19,3 +19,6 @@ export function downloadFilename(id: DownloadId, locale: Locale) {
 export function downloadHref(id: DownloadId, locale: Locale, placement = "resources") {
   return `/api/download/${id}?locale=${locale}&placement=${encodeURIComponent(placement)}`;
 }
+export function publicDownloadHref(id: DownloadId, locale: Locale) {
+  return `/downloads/${downloadFilename(id, locale)}`;
+}

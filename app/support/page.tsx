@@ -2,10 +2,8 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useLocale } from "../../lib/locale-context";
-import { localeLabels, type Locale } from "../../lib/i18n";
-import { BrandLogo } from "../components/BrandLogo";
 import { JsonLd } from "../components/seo/JsonLd";
 
 /* ---------- Animations ---------- */
@@ -21,6 +19,7 @@ const fadeUp = {
 /* ---------- FAQ Accordion Item ---------- */
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
+  const answerId = useId();
   return (
     <motion.div
       variants={fadeUp}
@@ -28,6 +27,8 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
     >
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-controls={answerId}
         className="flex w-full items-center justify-between cursor-pointer px-6 py-5 text-[15px] font-medium text-white/90 hover:text-white transition-colors text-left"
       >
         {question}
@@ -51,6 +52,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
+            id={answerId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -68,7 +70,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function Support() {
-  const { locale, setLocale, t } = useLocale();
+  const { locale, t } = useLocale();
 
   const faqs = [
     { q: t("supportPage.faq1Q"), a: t("supportPage.faq1A") },
@@ -103,51 +105,14 @@ export default function Support() {
         className="pointer-events-none absolute top-0 right-0 h-[500px] w-[700px] rounded-full bg-gradient-to-bl from-neon-blue/20 via-neon-purple/10 to-transparent blur-3xl opacity-40"
       />
 
-      {/* Nav */}
-      <nav className="relative z-20 border-b border-white/[0.04] backdrop-blur-md bg-dark-900/60">
-        <div className="mx-auto max-w-4xl px-6 py-5 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent-green/10 to-accent-emerald/10 border border-white/[0.06]">
-              <BrandLogo variant="mark" className="h-5 w-5 object-contain" />
-            </div>
-            <span className="text-lg font-bold tracking-tight">Sweezy</span>
-          </Link>
-
-          <div className="flex items-center gap-4">
-            {/* Language switcher */}
-            <div className="flex items-center gap-1 rounded-full glass px-1 py-1">
-              {(Object.keys(localeLabels) as Locale[]).map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLocale(l)}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-300 ${
-                    locale === l
-                      ? "bg-gradient-to-r from-neon-purple to-neon-blue text-white shadow-lg shadow-neon-purple/25"
-                      : "text-white/40 hover:text-white/70"
-                  }`}
-                >
-                  {localeLabels[l]}
-                </button>
-              ))}
-            </div>
-
-            <Link
-              href="/"
-              className="text-sm text-white/40 hover:text-white transition-colors duration-300"
-            >
-              {t("common.backToHome")}
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      <div className="relative z-10 mx-auto max-w-4xl px-6 py-16 sm:py-24">
+      <div className="relative z-10 site-shell site-content">
+        <Link href={`/${locale}`} className="text-sm text-white/45">← {t("common.backToHome")}</Link>
         {/* Header */}
         <motion.header
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="mb-16"
+          className="site-page-header mb-8"
         >
           <p className="text-sm font-medium text-neon-purple mb-3 tracking-wide uppercase">
             {t("supportPage.label")}
@@ -155,7 +120,7 @@ export default function Support() {
           <h1 className="font-extrabold tracking-tight mb-4 text-white type-page-title">
             {t("supportPage.title")}
           </h1>
-          <p className="text-white/40 text-lg max-w-xl">
+          <p className="text-white/40 text-lg">
             {t("supportPage.subtitle")}
           </p>
         </motion.header>
@@ -165,7 +130,7 @@ export default function Support() {
           initial="hidden"
           animate="visible"
           variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="mb-20"
+          className="mb-10"
         >
           <div className="grid sm:grid-cols-2 gap-6">
             {/* Email */}
@@ -260,7 +225,7 @@ export default function Support() {
             {t("supportPage.faqTitle")}
           </motion.h2>
 
-          <div className="space-y-4">
+          <div className="site-faq-grid">
             {faqs.map((faq, i) => (
               <FaqItem key={i} question={faq.q} answer={faq.a} />
             ))}
@@ -273,13 +238,13 @@ export default function Support() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="mt-20"
+          className="mt-10"
         >
-          <div className="rounded-2xl bg-gradient-to-br from-neon-purple/10 via-neon-blue/5 to-transparent border border-white/[0.06] p-10 text-center backdrop-blur-sm">
+          <div className="site-help-panel">
             <h3 className="font-semibold mb-3 type-card-title">
               {t("supportPage.stillNeedHelp")}
             </h3>
-            <p className="text-white/40 text-[15px] mb-6 max-w-md mx-auto">
+            <p className="text-white/40 text-[15px] mb-6">
               {t("supportPage.stillNeedHelpDesc")}
             </p>
             <a

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { CONSENT_EVENT } from "../../lib/analytics";
 import { analyticsSession, eventPayload, sendMetric } from "../../lib/analytics-client";
-import { isDownloadId } from "../../data/downloads";
+import { isDownloadId, publicDownloadHref, downloadHref } from "../../data/downloads";
 
 let lastPage = "";
 const busy = new WeakSet<HTMLAnchorElement>();
@@ -23,7 +23,9 @@ export function GrowthAnalytics() {
       if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const url = new URL(link.href, location.origin);
       const asset = link.dataset.download;
-      if (asset && isDownloadId(asset) && url.origin === location.origin && url.pathname.startsWith("/api/download/")) {
+      const language = link.dataset.locale ?? url.searchParams.get("locale");
+      const locale = language === "uk" || language === "de" ? language : "en";
+      if (asset && isDownloadId(asset) && url.origin === location.origin && (url.pathname === publicDownloadHref(asset, locale) || url.pathname === `/api/download/${asset}`)) {
         event.preventDefault();
         if (busy.has(link)) return;
         busy.add(link); link.setAttribute("aria-busy", "true");
@@ -34,7 +36,7 @@ export function GrowthAnalytics() {
         const headers: Record<string, string> = payload ? { "x-sweezy-consent": "v1", "x-sweezy-session": payload.session, "x-sweezy-download": eventId, "x-sweezy-path": payload.path, "x-sweezy-entry": payload.entry, "x-sweezy-source": payload.source } : {};
         void (async () => {
           try {
-            const response = await fetch(link.href, { headers });
+            const response = await fetch(downloadHref(asset, locale, placement), { headers });
             if (!response.ok || !response.headers.get("content-type")?.startsWith("application/pdf")) throw new Error("PDF unavailable");
             const bytes = await response.arrayBuffer();
             const expected = Number(response.headers.get("content-length") ?? 0);

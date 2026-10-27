@@ -5,13 +5,13 @@
   --line: var(--theme-line);
   --lime: #adff00;
   min-height: 100vh;
-  padding: clamp(20px, 3vw, 48px);
+  padding: 24px var(--layout-gutter) var(--section-space);
   color: var(--ink);
   background: var(--paper);
 }
 
 .frame {
-  max-width: 1480px;
+  max-width: none;
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid rgba(var(--theme-ink-rgb),0.22);
@@ -214,7 +214,7 @@
 }
 
 .document section {
-  max-width: 860px;
+  max-width: none;
   padding: clamp(26px, 3vw, 42px) 0;
   border-bottom: 1px solid var(--line);
   animation: sectionEnter 500ms cubic-bezier(.2,.7,.2,1) both;
@@ -273,7 +273,7 @@
 @keyframes sectionEnter { from { transform: translateY(12px); } }
 
 @media (max-width: 820px) {
-  .page { padding: 12px; }
+  .page { padding: 24px var(--layout-gutter) var(--section-space); }
   .hero { min-height: 280px; padding: 24px; }
   .hero::before { top: -8%; right: -28%; }
   .heroMain { grid-template-columns: 1fr; margin-top: 96px; gap: 22px; }

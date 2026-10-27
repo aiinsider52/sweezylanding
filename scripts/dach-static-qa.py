@@ -58,7 +58,7 @@ for route in routes:
         parsed = urlsplit(link['href'])
         if parsed.netloc and parsed.netloc != 'www.sweezy.world': continue
         if not parsed.path.startswith('/'): continue
-        if parsed.path.startswith('/api/download/'):
+        if parsed.path.startswith('/api/download/') or parsed.path.startswith('/downloads/'):
             assert link.has_attr('download') and link.has_attr('data-download'), route
             assert (Path('public/downloads') / link['download']).exists(), (route,link['download'])
         elif parsed.path not in ['/privacy','/terms','/cookies','/support']:

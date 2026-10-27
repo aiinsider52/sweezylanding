@@ -1,5 +1,5 @@
 .page { min-height: 100vh; background: var(--theme-bg); color: var(--theme-text); }
-.shell { width: calc(100% - var(--layout-gutter) * 2); margin: auto; padding: 24px 0 48px; }
+.shell { width: var(--layout-width); margin: auto; padding: 24px 0 48px; }
 .eyebrow { font: 650 11px/1.5 var(--font-ui); letter-spacing: .08em; color: var(--theme-link); text-transform: uppercase; }
 .hero { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); align-items: end; gap: 16px 48px; padding: 28px 0; border-bottom: 1px solid var(--theme-line); }
 .hero .eyebrow { grid-column: 1 / -1; }

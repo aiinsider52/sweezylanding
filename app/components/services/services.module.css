@@ -1,5 +1,5 @@
 .page { background: var(--theme-bg); color: var(--theme-text); min-height: 100vh; }
-.shell { width: min(100% - 40px, 1240px); margin: auto; padding: 36px 0 48px; }
+.shell { width: var(--layout-width); margin: auto; padding: 36px 0 48px; }
 .eyebrow { font: 700 11px/1.5 var(--font-ui); letter-spacing: .12em; text-transform: uppercase; }
 .hero { padding: 28px 0 44px; border-bottom: 1px solid rgba(var(--theme-ink-rgb),0.188); }
 .hero h1 { font-size: var(--type-page-title); line-height: 1.14; font-weight: 750; letter-spacing: -.04em; max-width: 1080px; margin: 20px 0; overflow-wrap: anywhere; }
@@ -40,13 +40,13 @@
 .sourceList { list-style: disc; padding-left: 20px; line-height: 2; }
 .sourceList a { text-decoration: underline; text-underline-offset: 4px; }
 .spotlight { background: var(--theme-inset); color: var(--theme-text); padding: var(--panel-padding) 24px; }
-.spotlightInner { max-width: 1380px; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--grid-gap); align-items: center; }
+.spotlightInner { max-width: none; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--grid-gap); align-items: center; }
 .spotlight h2 { font-size: var(--type-section-title); line-height: 1.14; font-weight: 750; letter-spacing: -.035em; margin: 22px 0; }
 .spotlight p:not(.eyebrow) { line-height: 1.8; color: var(--theme-body); }
 .spotlight .textLink { margin-top: 20px; }
 @media (max-width: 740px) {
   .grid, .facts, .spotlightInner { grid-template-columns: minmax(0, 1fr); }
-  .shell { width: calc(100% - 32px); padding-top: 24px; }
+  .shell { width: var(--layout-width); padding-top: 24px; }
   .hero { padding-top: 12px; }
   .hero > p:not(.eyebrow) { font-size: 17px; }
   .card h3 { margin-top: 28px; }
