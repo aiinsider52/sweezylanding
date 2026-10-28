@@ -7,6 +7,7 @@ import type { Locale } from "../../../lib/i18n";
 import { productShots, productImage, productImageAlt, type ShopProduct, type ProductShot } from "../../../data/shop";
 import { SHOP_COPY } from "../../../data/shop-copy";
 import { shopStory } from "../../../data/shop-stories";
+import { shopPriceLabel } from "../../../data/shop-prices";
 import styles from "../../[locale]/shop/shop.module.css";
 
 export function ProductCard({ product, locale, saved = false, ready = true, onToggle }: {
@@ -36,7 +37,7 @@ export function ProductCard({ product, locale, saved = false, ready = true, onTo
       <p className={styles.cardCategory}>{c.categories[product.category]}</p>
       <h3><Link href={href}>{name}</Link></h3>
       <p className={styles.cardTagline}>{shopStory(product.slug, locale)?.tagline}</p>
-      <div className={styles.cardBottom}><span>{c.priceShort}</span><Link href={href} tabIndex={-1} aria-hidden="true" className={styles.cardArrow}>↗</Link></div>
+      <div className={styles.cardBottom}><span>{shopPriceLabel(product.slug, locale) ?? c.priceShort}</span><Link href={href} tabIndex={-1} aria-hidden="true" className={styles.cardArrow}>↗</Link></div>
     </div>
   </article>;
 }

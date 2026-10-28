@@ -14,7 +14,7 @@ export type ShopProduct = {
 };
 
 // Names describe only what is visible in the supplied listing photograph.
-// Prices, stock, dimensions, materials and shipping are deliberately unconfirmed.
+// Stock, dimensions, materials and shipping are deliberately unconfirmed; prices live in shop-prices.ts.
 // Supplier links, IDs and extraction evidence are kept in private/shop (excluded from Git).
 export const SHOP_PRODUCTS: ShopProduct[] = [
   {

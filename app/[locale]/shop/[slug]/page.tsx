@@ -8,6 +8,7 @@ import { ENTITY_IDS } from "../../../../lib/entities";
 import Image from "next/image";
 import { SHOP_PRODUCTS, shopProduct, productCardImage, productImage, productImages, productImageAlt, productShots } from "../../../../data/shop";
 import { shopStory } from "../../../../data/shop-stories";
+import { shopPriceLabel } from "../../../../data/shop-prices";
 import { SHOP_COPY } from "../../../../data/shop-copy";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { ProductGallery } from "../../../components/shop/ProductGallery";
@@ -57,7 +58,7 @@ export default function ProductPage({ params }: { params: { locale: string; slug
         <p className={styles.productDescription}>{story?.story ?? copy.description}</p>
         {product.appearance ? <section className={styles.appearance} aria-label={c.appearance}><span className={styles.swatches} aria-hidden="true">{product.appearance.swatches.map(color => <span key={color} style={{ backgroundColor: color }} />)}</span><div><h2>{c.appearance}</h2><p>{product.appearance.label[locale]}</p></div></section> : null}
         <div className={styles.buyBox}>
-          <div className={styles.pricePanel}><strong>{c.priceShort}</strong><p>{c.launchNote}</p></div>
+          <div className={styles.pricePanel}><strong>{shopPriceLabel(product.slug, locale) ?? c.priceShort}</strong><p>{c.launchNote}</p></div>
           <ProductActions product={product} locale={locale} />
         </div>
         {story ? <section className={styles.highlights} aria-labelledby="highlights-title"><h2 id="highlights-title">{c.highlightsTitle}</h2><ul>{story.highlights.map(item => <li key={item}>{item}</li>)}</ul></section> : null}
