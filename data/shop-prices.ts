@@ -1,6 +1,6 @@
 import type { Locale } from "../lib/i18n";
 
-// Sweezy retail prices in CHF, shown as a starting price ("from").
+// Sweezy retail prices in CHF.
 // Products without a set price stay "price on request".
 export const SHOP_PRICES: Partial<Record<string, number>> = {
   "switzerland-tote": 11.9,
@@ -11,7 +11,6 @@ export const SHOP_PRICES: Partial<Record<string, number>> = {
   "love-switzerland-mug": 25.9,
 };
 
-const FROM: Record<Locale, string> = { uk: "від", en: "from", de: "ab" };
 const NUMBER_LOCALE: Record<Locale, string> = { uk: "uk-CH", en: "en-CH", de: "de-CH" };
 
 export const shopPrice = (slug: string) => SHOP_PRICES[slug];
@@ -22,5 +21,5 @@ export function formatShopPrice(value: number, locale: Locale) {
 
 export function shopPriceLabel(slug: string, locale: Locale) {
   const value = shopPrice(slug);
-  return value === undefined ? undefined : `${FROM[locale]} ${formatShopPrice(value, locale)}`;
+  return value === undefined ? undefined : formatShopPrice(value, locale);
 }
