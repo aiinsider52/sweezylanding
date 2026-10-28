@@ -82,7 +82,7 @@ for (const locale of ['uk', 'en', 'de']) {
   }
   for (const product of data.SHOP_PRODUCTS) {
     assert(product.copy[locale].name && product.copy[locale].description && product.copy[locale].alt);
-    assert.equal(data.productImages(product).length, product.modelView ? 4 : 3);
+    assert.equal(data.productImages(product).length, product.modelView ? 6 : 5);
     for (const shot of data.productShots(product)) {
       assert(data.productImageAlt(product, locale, shot).length <= 240);
       assert(fs.existsSync('public' + data.productImage(product, shot)));
@@ -154,4 +154,4 @@ for (const locale of ['uk', 'en', 'de']) {
   assert(draft && decodeURIComponent(draft.props.href).includes(slug));
   assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, data.SHOP_PRODUCTS.filter(p => p.category === 'bags').length, 'Saving a product preserves the filter');
 }
-console.log('Shop checks passed: 28 products, 3 languages, storage failures, selection sync, enquiry drafts, 89 generated images (five on-model views), card previews, gallery navigation and zoom controls.');
+console.log('Shop checks passed: 28 products, 3 languages, storage failures, selection sync, enquiry drafts, 145 generated images, including 56 additional angles and in-use views, card previews, gallery navigation and zoom controls.');

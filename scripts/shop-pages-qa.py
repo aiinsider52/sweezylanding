@@ -39,6 +39,7 @@ for lang in ['uk', 'en', 'de']:
             shots = ['studio', 'lifestyle', 'detail']
             if file.stem in ['switzerland-calling-black-shirt', 'swiss-burgundy-ringer-shirt', 'swiss-sky-blue-polo', 'switzerland-calling-black-hoodie', 'lugano-pink-long-sleeve']:
                 shots.append('model')
+            shots.extend(['angle', 'in-use'])
             assert len(product['image']) == len(shots), route
             assert len(soup.select('[data-views] button')) == len(shots), route
             for shot, image in zip(shots, product['image']):
@@ -54,7 +55,7 @@ for lang in ['uk', 'en', 'de']:
 xml = ET.fromstring((root / 'sitemap.xml.body').read_bytes())
 urls = {node.text for node in xml.iter() if node.tag.endswith('}loc')}
 assert all('https://www.sweezy.world' + route in urls for route in pages)
-print(f'Shop page checks passed: {len(pages)} localized pages, {len(products)} product schemas, canonical/hreflang, 89 generated gallery views, zoom dialogs, enquiry links and sitemap.')
+print(f'Shop page checks passed: {len(pages)} localized pages, {len(products)} product schemas, canonical/hreflang, 145 generated gallery views, zoom dialogs, enquiry links and sitemap.')
 
 for trace in Path(".next").rglob("*.nft.json"):
     assert not any("private/shop/" in name for name in json.loads(trace.read_text()).get("files", [])), trace

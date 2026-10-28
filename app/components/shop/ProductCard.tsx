@@ -17,7 +17,7 @@ export function ProductCard({ product, locale, saved = false, ready = true, onTo
   const name = product.copy[locale].name;
   const href = `/${locale}/shop/${product.slug}`;
   // Model-led clothing previews return to the studio view on hover.
-  const hoverShot: ProductShot = shot === "studio" ? "lifestyle" : "studio";
+  const hoverShot: ProductShot = shot === "studio" ? "in-use" : "studio";
   return <article className={styles.card} data-product={product.slug}>
     <div className={styles.cardPhoto}>
       <Link href={href} className={styles.imageLink} aria-label={`${c.details}: ${name}`}>

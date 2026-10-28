@@ -67,7 +67,7 @@ export default function ProductPage({ params }: { params: { locale: string; slug
     </div>
     <section className={styles.lookBand} aria-labelledby="look-title">
       <div className={styles.lookCopy}><p className={styles.eyebrow}>{c.shots.lifestyle}</p><h2 id="look-title">{c.lookTitle}</h2><p>{c.lookBody}</p>{story ? <blockquote>{story.tagline}</blockquote> : null}</div>
-      {(product.modelView ? ["model", "detail"] as const : ["lifestyle", "detail"] as const).map(shot => <figure key={shot} className={styles.lookImage}><Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 900px) 92vw, 34vw" /><figcaption>{c.shots[shot]}</figcaption></figure>)}
+      {(["in-use", "angle"] as const).map(shot => <figure key={shot} className={styles.lookImage}><Image src={productImage(product, shot)} alt={productImageAlt(product, locale, shot)} fill sizes="(max-width: 900px) 92vw, 34vw" /><figcaption>{c.shots[shot]}</figcaption></figure>)}
     </section>
     <section className={styles.related} aria-labelledby="related-products"><div className={styles.sectionHead}><div><p className={styles.eyebrow}>THE SWISS EDIT</p><h2 id="related-products">{c.related}</h2></div><Link href={`/${locale}/shop#collection`} className={styles.inlineLink}>{c.back} ↗</Link></div><div className={styles.productGrid}>{related.map(item => <ProductCard key={item.slug} product={item} locale={locale} />)}</div></section>
   </main>;
