@@ -11,6 +11,8 @@ import { SHOP_COPY } from "../../../data/shop-copy";
 import { shopStory } from "../../../data/shop-stories";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { ShopCatalog } from "../../components/shop/ShopCatalog";
+import { checkoutConfig } from "../../../lib/shop-checkout";
+import { shopPrice } from "../../../data/shop-prices";
 import { JsonLd } from "../../components/seo/JsonLd";
 import styles from "./shop.module.css";
 
@@ -38,7 +40,7 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${url}#webpage`, url, name: c.meta, description: c.description, inLanguage: locale,
       isPartOf: { "@id": ENTITY_IDS.website }, publisher: { "@id": ENTITY_IDS.organization },
       primaryImageOfPage: imageObject(productCardImage(SHOP_PRODUCTS[0]), productImageAlt(SHOP_PRODUCTS[0], locale), locale),
-      mainEntity: { "@type": "ItemList", numberOfItems: SHOP_PRODUCTS.length, itemListElement: SHOP_PRODUCTS.map((product, index) => ({ "@type": "ListItem", position: index + 1, name: product.copy[locale].name, url: `${url}/${product.slug}` })) },
+      mainEntity: { "@type": "ItemList", numberOfItems: SHOP_PRODUCTS.length, itemListElement: SHOP_PRODUCTS.map((product, index) => { const price = shopPrice(product.slug); return { "@type": "ListItem", position: index + 1, url: `${url}/${product.slug}`, item: { "@type": "Product", name: product.copy[locale].name, sku: product.sku, url: `${url}/${product.slug}`, image: `${BASE_URL}${productCardImage(product)}`, ...(price === undefined ? {} : { offers: { "@type": "Offer", price: price.toFixed(2), priceCurrency: "CHF" } }) } }; }) },
     }} />
     <Breadcrumb items={[{ name: c.home, url: `/${locale}` }, { name: c.name, url: `/${locale}/shop` }]} />
     <section className={styles.hero} aria-labelledby="shop-title">
@@ -64,7 +66,7 @@ export default function ShopPage({ params }: { params: { locale: string } }) {
       </div>
     </section>
     <div className={styles.ticker} aria-hidden="true"><div>{[0, 1].map(copy => <span key={copy}>{c.ticker.map(word => <span key={word}>{word}<i>✦</i></span>)}</span>)}</div></div>
-    <ShopCatalog locale={locale} />
+    <ShopCatalog locale={locale} checkoutEnabled={checkoutConfig().enabled} />
     <section className={styles.featured} aria-labelledby="featured-title">
       <Link href={`/${locale}/shop/${featured.slug}`} className={styles.featuredImage}>
         <Image src={productImage(featured, "lifestyle")} alt={productImageAlt(featured, locale, "lifestyle")} fill sizes="(max-width: 900px) 92vw, 50vw" />

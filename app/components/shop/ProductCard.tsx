@@ -13,12 +13,14 @@ import styles from "../../[locale]/shop/shop.module.css";
 export function ProductCard({ product, locale, saved = false, ready = true, onToggle }: {
   product: ShopProduct; locale: Locale; saved?: boolean; ready?: boolean; onToggle?: () => void;
 }) {
-  const [shot, setShot] = useState<ProductShot>(product.modelView ? "model" : "studio");
+  const shots = productShots(product);
+  const preferredShot: ProductShot = product.campaignView ? "campaign" : product.modelView ? "model" : "studio";
+  const [shot, setShot] = useState<ProductShot>(shots.includes(preferredShot) ? preferredShot : "studio");
   const c = SHOP_COPY[locale];
   const name = product.copy[locale].name;
   const href = `/${locale}/shop/${product.slug}`;
   // Model-led clothing previews return to the studio view on hover.
-  const hoverShot: ProductShot = shot === "studio" ? "in-use" : "studio";
+  const hoverShot: ProductShot = shot === "studio" ? shots.includes("in-use") ? "in-use" : "lifestyle" : "studio";
   return <article className={styles.card} data-product={product.slug}>
     <div className={styles.cardPhoto}>
       <Link href={href} className={styles.imageLink} aria-label={`${c.details}: ${name}`}>
@@ -30,7 +32,7 @@ export function ProductCard({ product, locale, saved = false, ready = true, onTo
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z" /></svg>
       </button> : null}
       <div className={styles.cardDots} role="group" aria-label={`${c.preview}: ${name}`}>
-        {productShots(product).map(item => <button key={item} type="button" aria-pressed={shot === item} aria-label={`${c.shots[item]}: ${name}`} onClick={() => setShot(item)}><span><Image src={productImage(product, item)} alt={productImageAlt(product, locale, item)} fill sizes="32px" /></span></button>)}
+        {shots.map(item => <button key={item} type="button" aria-pressed={shot === item} aria-label={`${c.shots[item]}: ${name}`} onClick={() => setShot(item)}><span><Image src={productImage(product, item)} alt={productImageAlt(product, locale, item)} fill sizes="32px" /></span></button>)}
       </div>
     </div>
     <div className={styles.cardCopy}>

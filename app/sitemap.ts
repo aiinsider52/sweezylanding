@@ -12,6 +12,8 @@ import { serviceHubs } from "../data/service-hubs";
 import { COUNTRIES, DACH_TOPICS, REVIEWED_AT } from "../data/dach";
 import { BUSINESS_CONTACTS_CHECKED_AT } from "../data/business-contacts";
 import { CITY_SLUGS, cityPath, dachCities } from "../lib/dach-cities";
+import { RICH_CANTONS } from "../data/canton-rich-content";
+import { getDestinationDepth } from "../data/destination-depth";
 
 const SITE_URL = "https://www.sweezy.world";
 const LOCALES = ["en", "uk", "de"] as const;
@@ -68,6 +70,19 @@ async function getBlogEntries(): Promise<SitemapEntry[]> {
       } satisfies SitemapEntry;
     }),
   );
+}
+
+
+// Same review dates the pages publish as dateModified, so lastmod never claims an unreviewed change.
+function reviewedDate(page: string): string | undefined {
+  const [, locale, section, slug, extra] = page.split("/");
+  if (!slug || extra) return undefined;
+  if (section === "guides") {
+    const rich = RICH_CANTONS[slug] as Record<string, { reviewedAt?: string } | undefined> | undefined;
+    return rich?.[locale]?.reviewedAt ?? rich?.en?.reviewedAt;
+  }
+  if (section === "places") return getDestinationDepth(slug)?.reviewedAt;
+  return undefined;
 }
 
 async function getStaticEntries(): Promise<SitemapEntry[]> {
@@ -146,12 +161,10 @@ async function getStaticEntries(): Promise<SitemapEntry[]> {
     }
   }
 
-  return pages.map(
-    (page) =>
-      ({
-        url: `${SITE_URL}${page}`,
-      }) satisfies SitemapEntry,
-  );
+  return pages.map((page) => {
+    const lastModified = reviewedDate(page);
+    return { url: `${SITE_URL}${page}`, ...(lastModified ? { lastModified: new Date(lastModified) } : {}) } satisfies SitemapEntry;
+  });
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

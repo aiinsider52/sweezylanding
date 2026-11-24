@@ -43,7 +43,9 @@
   white-space: nowrap;
 }
 
-.motionReveal {
+/* Hidden only once the bootstrap script confirms JS + motion are on, so no-JS readers,
+   crawlers and reduced-motion users always get the content. */
+:global(html[data-motion="on"]) .motionReveal {
   opacity: 0;
   transform: translate3d(0, 24px, 0) scale(0.99);
   transition:
@@ -51,12 +53,12 @@
     transform 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay, 0ms);
 }
 
-.motionReveal[data-visible="true"] {
+:global(html[data-motion="on"]) .motionReveal[data-visible="true"] {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-.motionRevealLift[data-visible="true"]:hover {
+:global(html[data-motion="on"]) .motionRevealLift[data-visible="true"]:hover {
   transform: translate3d(0, -5px, 0) scale(1);
 }
 

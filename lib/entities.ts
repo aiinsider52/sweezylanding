@@ -17,10 +17,13 @@ export const SITE_ENTITIES = {
   "@graph": [
     {
       "@type": "Organization", "@id": ENTITY_IDS.organization,
-      name: "Sweezy", url: BASE_URL,
-      description: "Practical guides and local resources for newcomers in Switzerland, Germany and Austria.",
+      name: "Sweezy", alternateName: ["Sweezy App", "Sweezy World", "sweezy.world"], url: BASE_URL,
+      description: "Sweezy is a relocation app and guide publisher for newcomers in Switzerland, Germany and Austria (not related to cursor or music brands of the same name).",
+      email: "support@sweezy.world",
+      areaServed: [{ "@type": "Country", name: "Switzerland" }, { "@type": "Country", name: "Germany" }, { "@type": "Country", name: "Austria" }],
+      knowsLanguage: ["uk", "en", "de"],
       logo: { "@type": "ImageObject", url: `${BASE_URL}/brand/logo.png` },
-      sameAs: [TELEGRAM_URL, FACEBOOK_COMMUNITY_URL, INSTAGRAM_URL],
+      sameAs: [APP_STORE_URL, INSTAGRAM_URL, TELEGRAM_URL, FACEBOOK_COMMUNITY_URL],
       founder: [{ "@type": "Person", "@id": ENTITY_IDS.vladyslav, name: "Vladyslav Katash" }, { "@type": "Person", "@id": ENTITY_IDS.yuliia, name: "Yuliia Antonyshyn" }],
     },
     {

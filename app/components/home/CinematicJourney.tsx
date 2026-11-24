@@ -238,7 +238,7 @@ export function CinematicJourney({ locale, hero }: CinematicJourneyProps) {
         <div className={styles.cinematicIntro} data-hidden={introHidden ? "true" : "false"}>
           <p className={styles.eyebrow}>{hero.eyebrow}</p>
           <h1>
-            {hero.title}
+            {hero.title}{" "}
             <span>{hero.accent}</span>
           </h1>
           <p className={styles.cinematicIntroBody}>{hero.body}</p>

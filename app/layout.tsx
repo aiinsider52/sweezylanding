@@ -71,6 +71,8 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  itunes: { appId: "6759244315" },
+  applicationName: "Sweezy",
   verification: {
     google: "BENK-Jq8QxJ3rxJ5TfQL4uD2VSBxROsM_kfwbEUh5SU",
   },
@@ -98,6 +100,7 @@ export default function RootLayout({
             __html: THEME_BOOTSTRAP,
           }}
         />
+        <link rel="alternate" type="application/rss+xml" title="Sweezy Journal" href="/feed.xml" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
