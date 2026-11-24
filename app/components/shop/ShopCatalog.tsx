@@ -8,6 +8,9 @@ import { SHOP_COPY } from "../../../data/shop-copy";
 import { SHOP_PRODUCTS, SHOP_CATEGORIES, productImage, productImageAlt, shopInquiryHref, shopProduct, type ShopCategory } from "../../../data/shop";
 import { ProductCard } from "./ProductCard";
 import { useShopSelection } from "./useShopSelection";
+import { CheckoutButton } from "./CheckoutButton";
+import { CHECKOUT_COPY } from "../../../data/shop-checkout-copy";
+import { formatShopPrice, shopPrice } from "../../../data/shop-prices";
 import styles from "../../[locale]/shop/shop.module.css";
 
 // One everyday scene per category for the mood tiles.
@@ -16,14 +19,17 @@ const MOOD_COVERS: Record<ShopCategory, string> = {
   accessories: "switzerland-cap", home: "alpine-village-throw", decor: "interlaken-decor",
 };
 
-export function ShopCatalog({ locale }: { locale: Locale }) {
+export function ShopCatalog({ locale, checkoutEnabled = false }: { locale: Locale; checkoutEnabled?: boolean }) {
   const c = SHOP_COPY[locale];
+  const k = CHECKOUT_COPY[locale];
   const [category, setCategory] = useState<ShopCategory | "all">("all");
   const [query, setQuery] = useState("");
   const { selected, toggle, clear, ready, storageUnavailable } = useShopSelection();
   const term = query.trim().toLocaleLowerCase(locale);
   const visible = SHOP_PRODUCTS.filter(p => (category === "all" || p.category === category) && `${p.copy[locale].name} ${p.copy[locale].description}`.toLocaleLowerCase(locale).includes(term));
   const selection = SHOP_PRODUCTS.filter(p => selected.includes(p.slug));
+  const buyable = checkoutEnabled ? selection.filter(p => shopPrice(p.slug) !== undefined) : [];
+  const buyableTotal = buyable.reduce((sum, p) => sum + (shopPrice(p.slug) ?? 0), 0);
   const count = (key: ShopCategory) => SHOP_PRODUCTS.filter(p => p.category === key).length;
   const openMood = (key: ShopCategory) => {
     setCategory(key); setQuery("");
@@ -66,7 +72,9 @@ export function ShopCatalog({ locale }: { locale: Locale }) {
             <Link href={`/${locale}/shop/${product.slug}`}>{product.copy[locale].name}<small>{c.categories[product.category]}</small></Link>
             <button type="button" aria-label={`${c.remove}: ${product.copy[locale].name}`} onClick={() => toggle(product.slug)}>×</button>
           </li>)}</ul>
-          <div className={styles.actions}><a className={styles.primary} href={shopInquiryHref(selection, locale)}>{c.inquiry}<span aria-hidden="true">↗</span></a><button className={styles.textButton} type="button" onClick={clear}>{c.clear}</button></div><p className={styles.finePrint}>{c.mailNote}</p>
+          {buyable.length ? <div className={styles.actions}><CheckoutButton items={buyable.map(p => ({ slug: p.slug, qty: 1 }))} locale={locale} label={`${k.checkout} · ${formatShopPrice(buyableTotal, locale)}`} /></div> : null}
+          {buyable.length ? <p className={styles.finePrint}>{k.secure}{buyable.length < selection.length ? `. ${k.unpricedNote}` : ""}</p> : null}
+          <div className={styles.actions}><a className={buyable.length ? styles.secondary : styles.primary} href={shopInquiryHref(selection, locale)}>{c.inquiry}<span aria-hidden="true">↗</span></a><button className={styles.textButton} type="button" onClick={clear}>{c.clear}</button></div><p className={styles.finePrint}>{c.mailNote}</p>
         </> : <p className={styles.selectionEmpty}>{c.selectionEmpty}</p>}
         {storageUnavailable ? <p className={styles.finePrint} role="status">{c.storageNote}</p> : null}
       </div>

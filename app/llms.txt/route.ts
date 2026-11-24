@@ -2,12 +2,39 @@ import { BASE_URL } from "../../lib/alternates";
 import { ukrainianServices, servicePath } from "../../data/ukrainian-services";
 import { CITY_SLUGS, dachCities } from "../../lib/dach-cities";
 import { COUNTRIES, DACH_TOPICS } from "../../data/dach";
+import { cantons } from "../../data/cantons";
+import { SHOP_PRODUCTS } from "../../data/shop";
+import { shopPrice } from "../../data/shop-prices";
+import { APP_STORE_URL } from "../../lib/links";
 
 export const dynamic = "force-static";
 
 const content = `# Sweezy
 
 > Sweezy provides practical, source-backed guidance for newcomers and Ukrainians in Switzerland, Germany and Austria (DACH). Website languages are Ukrainian, English and German; language does not determine country. Existing canton and Swiss Status S articles apply to Switzerland only.
+
+## Sweezy app
+
+- [Sweezy for iPhone on the App Store](${APP_STORE_URL}) — free download, App Store ID 6759244315. Personal relocation plan, guides and checklists, map of real places, jobs and CV tools, local services and community. Interface in Ukrainian, English and German.
+
+## Machine-readable endpoints for agents
+
+- [Full article corpus as Markdown](${BASE_URL}/llms-full.txt)
+- [Shop catalogue JSON (SKU, CHF price, images, URLs per language)](${BASE_URL}/products.json)
+- [Journal RSS feed](${BASE_URL}/feed.xml)
+- [XML sitemap](${BASE_URL}/sitemap.xml) and [image sitemap](${BASE_URL}/image-sitemap.xml)
+- Every page is server-rendered HTML with JSON-LD (Organization, WebSite, FAQPage, BreadcrumbList, Product/Offer, GovernmentOffice where relevant). Section anchors are stable.
+
+## Sweezy Shop (Swiss-themed gifts, CHF)
+
+- [Shop overview (en)](${BASE_URL}/en/shop) · [de](${BASE_URL}/de/shop) · [uk](${BASE_URL}/uk/shop)
+${SHOP_PRODUCTS.map(product => { const price = shopPrice(product.slug); return `- [${product.copy.en.name}](${BASE_URL}/en/shop/${product.slug}) — ${price === undefined ? "price on request" : `CHF ${price.toFixed(2)}`}, SKU ${product.sku}`; }).join("\n")}
+
+Product photos are AI visualisations; buyers confirm details before dispatch. Items without a price are sold by email enquiry to support@sweezy.world.
+
+## Swiss canton guides (English)
+
+${cantons.map(canton => `- [${canton.name}: moving, registration and migration office](${BASE_URL}/en/guides/${canton.slug})`).join("\n")}
 
 ## DACH country guides
 

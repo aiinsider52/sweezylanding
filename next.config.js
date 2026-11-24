@@ -1,5 +1,25 @@
 /** @type {import('next').NextConfig} */
+const SECURITY_HEADERS = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(self \"https://checkout.stripe.com\")" },
+];
+
+// Public images keep stable names, so cache for a day and revalidate in the background for a week.
+const ASSET_CACHE = [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }];
+
 const nextConfig = {
+  images: {
+    // Optimised variants are cheap to keep; a revised source image appears within a week at most.
+    minimumCacheTTL: 604800,
+  },
+  async headers() {
+    return [
+      { source: "/:path*", headers: SECURITY_HEADERS },
+      ...["shop", "brand", "destinations", "editorial", "images", "app-frames", "cinematic", "screenshots", "fonts"].map((dir) => ({ source: `/${dir}/:path*`, headers: ASSET_CACHE })),
+    ];
+  },
   experimental: {
     outputFileTracingExcludes: { "/**": ["./private/shop/**/*"] },
     // Keep Cyrillic fonts with Node image routes in traced deployments.

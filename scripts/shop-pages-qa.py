@@ -7,10 +7,12 @@ import xml.etree.ElementTree as ET
 from urllib.parse import urlsplit, parse_qs
 
 root = Path('.next/server/app')
+gallery_manifest = json.loads(Path('generated_images/shop/gallery-images.json').read_text())
+rendered_images = []
 pages, products = [], []
 for lang in ['uk', 'en', 'de']:
     files = [root / lang / 'shop.html', *sorted((root / lang / 'shop').glob('*.html'))]
-    assert len(files) == 29, (lang, len(files))
+    assert len(files) == 36, (lang, len(files))
     for file in files:
         soup = BeautifulSoup(file.read_text(), 'html.parser')
         route = '/' + file.relative_to(root).with_suffix('').as_posix()
@@ -21,12 +23,13 @@ for lang in ['uk', 'en', 'de']:
         assert soup.select_one(f'a[href="/{lang}/shop"]'), route
         assert all(img.get('alt', '').strip() for img in soup.select('main img')), route
         image_sources = {parse_qs(urlsplit(img['src']).query).get('url', [urlsplit(img['src']).path])[0] for img in soup.select('main img[src]')}
+        rendered_images.append((route, image_sources))
         assert not any('-original.webp' in src or '/shop/source/' in src for src in image_sources), route
         assert all('original.webp' not in node.get('content', '') for node in soup.select('meta')), route
         assert not soup.select('a[href*="temu.com"]'), route
         assert not re.search(r'"(?:goodsId|shareCode|sourceUrl)"', file.read_text()), route
         if file.name == 'shop.html':
-            assert len(soup.select('article')) == 28, route
+            assert len(soup.select('article')) == 35, route
             assert not soup.select('#my-selection a[href^="mailto:"]'), 'Empty selection must not generate an enquiry'
         else:
             nodes = []
@@ -37,9 +40,15 @@ for lang in ['uk', 'en', 'de']:
             products.append(product)
             assert not any(key in product for key in ['offers', 'aggregateRating', 'review', 'brand', 'manufacturer']), route
             shots = ['studio', 'lifestyle', 'detail']
-            if file.stem in ['switzerland-calling-black-shirt', 'swiss-burgundy-ringer-shirt', 'swiss-sky-blue-polo', 'switzerland-calling-black-hoodie', 'lugano-pink-long-sleeve']:
+            original_model_products = ['switzerland-calling-black-shirt', 'swiss-burgundy-ringer-shirt', 'swiss-sky-blue-polo', 'switzerland-calling-black-hoodie', 'lugano-pink-long-sleeve']
+            new_model_products = ['swiss-edelweiss-red-crop-top', 'interlaken-grey-shirt', 'alpine-flowers-pink-long-sleeve', 'swiss-alps-red-long-sleeve']
+            if file.stem in original_model_products + new_model_products:
                 shots.append('model')
+            if file.stem in original_model_products:
+                shots.append('campaign')
             shots.extend(['angle', 'in-use'])
+            shots = [shot for shot in shots if f'{file.stem}/{shot}' in gallery_manifest]
+            assert 3 <= len(shots) <= 7, route
             assert len(product['image']) == len(shots), route
             assert len(soup.select('[data-views] button')) == len(shots), route
             for shot, image in zip(shots, product['image']):
@@ -55,7 +64,10 @@ for lang in ['uk', 'en', 'de']:
 xml = ET.fromstring((root / 'sitemap.xml.body').read_bytes())
 urls = {node.text for node in xml.iter() if node.tag.endswith('}loc')}
 assert all('https://www.sweezy.world' + route in urls for route in pages)
-print(f'Shop page checks passed: {len(pages)} localized pages, {len(products)} product schemas, canonical/hreflang, 145 generated gallery views, zoom dialogs, enquiry links and sitemap.')
+active_images = {urlsplit(image['contentUrl']).path for product in products for image in product['image']}
+for route, sources in rendered_images:
+    assert all(src in active_images for src in sources if src.startswith('/shop/products/')), (route, 'An inactive model photograph is still rendered')
+print(f'Shop page checks passed: {len(pages)} localized pages, {len(products)} product schemas, canonical/hreflang, {len(active_images)} active gallery views, no withheld model photographs, zoom dialogs, enquiry links and sitemap.')
 
 for trace in Path(".next").rglob("*.nft.json"):
     assert not any("private/shop/" in name for name in json.loads(trace.read_text()).get("files", [])), trace

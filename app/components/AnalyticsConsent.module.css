@@ -8,3 +8,12 @@
 .panel a { display: inline-block; margin-top: .8rem; font-size: .75rem; text-decoration: underline; text-underline-offset: 3px; }
 .panel button:focus-visible, .settings:focus-visible { outline: 3px solid #78a82e; outline-offset: 3px; }
 @media print { .panel, .settings { display: none; } }
+/* Phones: compact bottom sheet so the hero headline and primary CTA stay visible. */
+@media (max-width: 640px) {
+  .panel { left: .5rem; right: .5rem; bottom: .5rem; width: auto; padding: .95rem 1rem 1rem; border-radius: 1rem; }
+  .panel strong { font-size: .92rem; }
+  .panel p { font-size: .74rem; line-height: 1.5; margin: .35rem 0 .7rem; }
+  .panel button { padding: .62rem .5rem; }
+  .panel a { margin-top: .5rem; font-size: .7rem; }
+  .settings { padding: .35rem .6rem; font-size: .62rem; opacity: .85; }
+}

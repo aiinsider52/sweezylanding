@@ -43,7 +43,7 @@ const hook = load('app/components/shop/useShopSelection.ts');
 const renderHook = () => { cursor = 0; return hook.useShopSelection(); };
 const plain = value => JSON.parse(JSON.stringify(value));
 const key = 'sweezy-shop-selection-v1';
-assert.equal(data.SHOP_PRODUCTS.length, 28);
+assert.equal(data.SHOP_PRODUCTS.length, 35);
 assert.equal(new Set(data.SHOP_PRODUCTS.map(p => p.sku)).size, data.SHOP_PRODUCTS.length);
 assert(data.SHOP_PRODUCTS.every(p => /^SW-\d{3}$/.test(p.sku) && !("goodsId" in p) && !("code" in p)), "Supplier identities stay out of the public model");
 const slug = data.SHOP_PRODUCTS[0].slug;
@@ -82,7 +82,7 @@ for (const locale of ['uk', 'en', 'de']) {
   }
   for (const product of data.SHOP_PRODUCTS) {
     assert(product.copy[locale].name && product.copy[locale].description && product.copy[locale].alt);
-    assert.equal(data.productImages(product).length, product.modelView ? 6 : 5);
+    assert(data.productImages(product).length >= 3 && data.productImages(product).length <= 7, 'Each product keeps a useful gallery without withheld model photographs');
     for (const shot of data.productShots(product)) {
       assert(data.productImageAlt(product, locale, shot).length <= 240);
       assert(fs.existsSync('public' + data.productImage(product, shot)));
@@ -92,7 +92,7 @@ for (const locale of ['uk', 'en', 'de']) {
 const manifest = JSON.parse(fs.readFileSync('generated_images/shop/gallery-images.json'));
 assert.equal(Object.keys(manifest).length, data.SHOP_PRODUCTS.reduce((total, product) => total + data.productShots(product).length, 0));
 assert.equal(new Set(Object.values(manifest)).size, data.SHOP_PRODUCTS.reduce((total, product) => total + data.productShots(product).length, 0), 'Every product view uses its own generated image');
-assert.equal(fs.readdirSync('public/shop/products').filter(file => file.endsWith('.webp')).length, data.SHOP_PRODUCTS.reduce((total, product) => total + data.productShots(product).length, 0));
+assert.equal(new Set(data.SHOP_PRODUCTS.flatMap(data.productImages)).size, data.SHOP_PRODUCTS.reduce((total, product) => total + data.productShots(product).length, 0), 'Every gallery view has its own active asset URL');
 assert(!fs.existsSync('public/shop/source'), 'Listing photos are not public storefront assets');
 const gallery = load('app/components/shop/ProductGallery.tsx');
 const card = load('app/components/shop/ProductCard.tsx');
@@ -130,10 +130,11 @@ for (const product of data.SHOP_PRODUCTS) {
   all = renderCard();
   const previews = all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined);
   assert.equal(previews.length, shots.length);
-  assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, product.modelView ? 'model' : 'studio'));
+  assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, product.campaignView ? 'campaign' : product.modelView ? 'model' : 'studio'));
   for (const [index, shot] of shots.entries()) {
     all.filter(n => n.type === 'button' && n.props['aria-pressed'] !== undefined)[index].props.onClick();
     all = renderCard();
+    assert(all.filter(n => n.type === 'Image').every(n => data.productImages(product).includes(n.props.src)), 'Card hover and thumbnails must not reveal a withheld model photograph');
     assert.equal(all.find(n => n.type === 'Image').props.src, data.productImage(product, shot));
   }
 }
@@ -154,4 +155,4 @@ for (const locale of ['uk', 'en', 'de']) {
   assert(draft && decodeURIComponent(draft.props.href).includes(slug));
   assert.equal(all.filter(n => n.type?.name === 'ProductCard').length, data.SHOP_PRODUCTS.filter(p => p.category === 'bags').length, 'Saving a product preserves the filter');
 }
-console.log('Shop checks passed: 28 products, 3 languages, storage failures, selection sync, enquiry drafts, 145 generated images, including 56 additional angles and in-use views, card previews, gallery navigation and zoom controls.');
+console.log(`Shop checks passed: 35 products, 3 languages, storage failures, selection sync, enquiry drafts, ${Object.keys(manifest).length} active generated images, card previews, gallery navigation and zoom controls.`);

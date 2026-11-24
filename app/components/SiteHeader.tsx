@@ -159,7 +159,7 @@ export function SiteHeader() {
         {(["life", "explore"] as const).map(kind => <div key={kind} className={styles.navItem}>
           <button type="button" className={styles.navTrigger} aria-expanded={open === kind} aria-controls={`header-${kind}-panel`} data-active={kind === "life" ? lifeActive : exploreActive} onClick={event => toggle(kind, event.currentTarget)}>{c[kind]}<Arrow down /></button>
           <div id={`header-${kind}-panel`} className={styles.panel} hidden={open !== kind}>
-            <div className={styles.panelDirectory}><p className={styles.panelEyebrow}>SWEEZY / {kind === "life" ? "01" : "02"}</p><h2>{kind === "life" ? c.lifeTitle : c.exploreTitle}</h2><p className={styles.panelIntro}>{kind === "life" ? c.lifeIntro : c.exploreIntro}</p><div className={styles.panelLinks}>{(kind === "life" ? life : explore).map(menuLink)}</div></div>
+            <div className={styles.panelDirectory}><p className={styles.panelEyebrow}>SWEEZY / {kind === "life" ? "01" : "02"}</p><p className={styles.panelTitle}>{kind === "life" ? c.lifeTitle : c.exploreTitle}</p><p className={styles.panelIntro}>{kind === "life" ? c.lifeIntro : c.exploreIntro}</p><div className={styles.panelLinks}>{(kind === "life" ? life : explore).map(menuLink)}</div></div>
             {feature(kind)}
           </div>
         </div>)}
@@ -179,9 +179,9 @@ export function SiteHeader() {
       <nav id="site-mobile-menu" className={styles.mobile} hidden={open !== "mobile"} aria-label={c.navigation}>
         <p className={styles.mobileTitle}>{c.mobileTitle}</p>
         <div className={styles.mobileGroups}>
-          <section><h2>{c.life}</h2>{life.map(menuLink)}<Link href={starter} onClick={close} className={styles.mobileStarter}>{c.starterAction}<Arrow /></Link></section>
-          <section><h2>{c.explore}</h2>{explore.map(menuLink)}</section>
-          <section className={styles.mobileTogether}><h2>{c.all}</h2>{[
+          <section><p className={styles.groupTitle}>{c.life}</p>{life.map(menuLink)}<Link href={starter} onClick={close} className={styles.mobileStarter}>{c.starterAction}<Arrow /></Link></section>
+          <section><p className={styles.groupTitle}>{c.explore}</p>{explore.map(menuLink)}</section>
+          <section className={styles.mobileTogether}><p className={styles.groupTitle}>{c.all}</p>{[
             { href: `${home}/community`, label: c.community, description: c.communityDesc },
             { href: `${home}/blog`, label: c.blog, description: c.blogDesc },
             { href: `${home}/shop`, label: shopLabel, description: locale === "uk" ? "Речі зі швейцарським настроєм" : locale === "de" ? "Kleine Dinge mit Schweizer Motiven" : "Little things with Swiss spirit" },

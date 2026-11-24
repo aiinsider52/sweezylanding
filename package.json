@@ -25,7 +25,8 @@
     "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run",
     "indexnow:submit": "node scripts/indexnow-submit.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:shop:checkout": "node scripts/test-shop-checkout.cjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

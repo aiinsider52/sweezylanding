@@ -1,3 +1,4 @@
+import { AUTUMN_SHOP_STORIES } from "./shop-products-autumn";
 import type { Locale } from "../lib/i18n";
 
 // Editorial product stories. They describe only what is visible in the product
@@ -6,6 +7,7 @@ import type { Locale } from "../lib/i18n";
 export type ShopStory = { tagline: string; story: string; highlights: [string, string, string]; moments: [string, string, string] };
 
 export const SHOP_STORIES: Record<string, Record<Locale, ShopStory>> = {
+  ...AUTUMN_SHOP_STORIES,
   "switzerland-tote": {
     uk: { tagline: "Ціла Швейцарія на одному шоппері.", story: "Фондю, годинник, шале, корова на луках і червоний прапор — маленька мапа спогадів, яку можна носити щодня. Шоппер, з яким базар у суботу чи прогулянка до озера починаються з усмішки.", highlights: ["Ілюстрації в стилі скетчбука: гори, фондю, годинник, шале", "Напис Switzerland у центрі композиції", "Світлі ручки та спокійний бежевий фон"], moments: ["Субота на ринку", "Подарунок другові", "Прогулянка містом"] },
     en: { tagline: "All of Switzerland on a single tote.", story: "Fondue, a watch, a chalet, a cow in the meadow and the red flag: a little map of memories to carry every day. The kind of tote that makes a Saturday market or a walk to the lake start with a smile.", highlights: ["Sketchbook-style illustrations: peaks, fondue, a watch, a chalet", "Switzerland lettering at the heart of the design", "Light handles on a calm beige base"], moments: ["Saturday market", "Gift for a friend", "City stroll"] },

@@ -14,7 +14,7 @@ import { LandingFaq } from "./LandingFaq";
 import { MotionArticle, MotionListItem, MotionReveal } from "./MotionReveal";
 import { PartnerNetwork } from "./PartnerNetwork";
 import { CommunityBanner } from "./CommunityBanner";
-import { ShowcaseTabs } from "./ShowcaseTabs";
+import { AppScreens } from "./AppScreens";
 import { SweezyCompanion, type CompanionPose } from "../SweezyCompanion";
 import styles from "./landing.module.css";
 import { TravelKitBanner } from "../TravelKitBanner";
@@ -63,13 +63,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
         url: `https://www.sweezy.world/${locale}`,
         downloadUrl: APP_STORE_URL,
         inLanguage: ["en", "uk", "de"],
-        aggregateRating: { "@type": "AggregateRating", ratingValue: "4.2", ratingCount: "5", bestRating: "5" },
-        review: copy.stories.items.map((item) => ({
-          "@type": "Review",
-          author: { "@type": "Person", name: item.name },
-          reviewBody: item.quote,
-          reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-        })),
+        // Ratings and quotes come from the App Store, so they stay visible only (Google review-snippet policy).
         offers: { "@type": "Offer", price: "0", priceCurrency: "CHF" },
       },
       {
@@ -147,7 +141,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
             <h2>{copy.product.title}</h2>
             <p>{copy.product.body}</p>
           </MotionReveal>
-          <ShowcaseTabs modes={copy.product.modes} locale={locale} />
+          <AppScreens locale={locale} />
         </section>
 
         <section className={styles.valueSection}>

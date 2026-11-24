@@ -4,9 +4,9 @@ import { BASE_URL, buildLocaleAlternates } from "./alternates";
 import { DEFAULT_OG_IMAGE } from "./social";
 
 const COPY = {
-  uk: { title: "Sweezy — життя у Швейцарії, Німеччині та Австрії", description: "Переїзд і життя в DACH: реєстрація, робота, бізнес, місцеві послуги та безкоштовні чек-листи для українців і новоприбулих. Оберіть свою країну." },
-  en: { title: "Sweezy — life in Switzerland, Germany and Austria", description: "Find your next step in DACH: registration, work, business, local support and free checklists for newcomers. Choose Switzerland, Germany or Austria." },
-  de: { title: "Sweezy — Leben in der Schweiz, Deutschland und Österreich", description: "Dein nächster Schritt in DACH: Anmeldung, Arbeit, Gründung, lokale Hilfe und kostenlose Checklisten. Wähle Schweiz, Deutschland oder Österreich." },
+  uk: { title: "Sweezy — застосунок для переїзду до Швейцарії, Німеччини та Австрії", description: "Sweezy — безкоштовний iOS-застосунок і гід для українців у DACH: реєстрація, дозволи, робота, страхування, бізнес і безкоштовні чек-листи." },
+  en: { title: "Sweezy App — Moving to Switzerland, Germany & Austria", description: "Sweezy is a free iOS app and guide for newcomers: registration, permits, work, health insurance and free checklists for Switzerland, Germany and Austria." },
+  de: { title: "Sweezy App — Umzug in die Schweiz, nach Deutschland & Österreich", description: "Sweezy ist eine kostenlose iOS-App und ein Guide für Neuankömmlinge: Anmeldung, Bewilligung, Arbeit, Krankenkasse und kostenlose Checklisten." },
 };
 export function dachHomeMetadata(locale: Locale): Metadata {
   const copy = COPY[locale];

@@ -14,10 +14,16 @@ export function AnalyticsConsent() {
   const c = locale === "uk" ? { title: "Допоможете зробити Sweezy кращим?", body: "За вашою згодою вимірюємо відвідування, отримання PDF і переходи. Без рекламних трекерів. Відмова не обмежує сайт.", yes: "Дозволити аналітику", no: "Відмовитися", settings: "Налаштування аналітики", privacy: "Конфіденційність" } : locale === "de" ? { title: "Hilfst du uns, Sweezy zu verbessern?", body: "Mit deiner Zustimmung messen wir Besuche, empfangene PDFs und Link-Klicks. Ohne Werbetracker. Alle Funktionen bleiben auch ohne Zustimmung verfügbar.", yes: "Analyse erlauben", no: "Ablehnen", settings: "Analyse-Einstellungen", privacy: "Datenschutz" } : { title: "Help us make Sweezy better?", body: "With your permission, we measure visits, received PDFs and link clicks. No advertising trackers. Declining keeps every feature available.", yes: "Allow analytics", no: "Decline", settings: "Analytics settings", privacy: "Privacy" };
   useEffect(() => {
     setReady(true);
-    setOpen(consentChoice() === null);
     const update = () => setOpen(consentChoice() === null);
+    // First impression belongs to the hero and its CTA: ask after the first scroll/tap or 4 s.
+    let shown = false;
+    const reveal = () => { if (shown) return; shown = true; update(); cleanup(); };
+    const timer = window.setTimeout(reveal, 4000);
+    const events = ["scroll", "pointerdown", "keydown"] as const;
+    const cleanup = () => { window.clearTimeout(timer); events.forEach(e => window.removeEventListener(e, reveal)); };
+    events.forEach(e => window.addEventListener(e, reveal, { passive: true, once: true }));
     window.addEventListener(CONSENT_EVENT, update);
-    return () => window.removeEventListener(CONSENT_EVENT, update);
+    return () => { cleanup(); window.removeEventListener(CONSENT_EVENT, update); };
   }, []);
   if (!ready) return null;
   return <>

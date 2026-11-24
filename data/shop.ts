@@ -1,4 +1,6 @@
+import { AUTUMN_SHOP_PRODUCTS } from "./shop-products-autumn";
 import { EXTENDED_SHOP_PRODUCTS } from "./shop-products-extended";
+import { REFRESHED_SHOP_PHOTOS, SHOP_PHOTO_REVISION, WITHHELD_SHOP_PHOTOS } from "./shop-photo-revisions";
 import type { Locale } from "../lib/i18n";
 
 export type ShopCategory = "bags" | "cups" | "decor" | "accessories" | "clothing" | "home";
@@ -9,6 +11,7 @@ export type ShopProduct = {
   category: ShopCategory;
   flatPrint: boolean;
   modelView?: boolean;
+  campaignView?: boolean;
   copy: Record<Locale, ProductCopy>;
   appearance?: { label: Record<Locale, string>; swatches: string[] };
 };
@@ -90,17 +93,25 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     },
   },
   ...EXTENDED_SHOP_PRODUCTS,
+  ...AUTUMN_SHOP_PRODUCTS,
 ];
 
 export const SHOP_CATEGORIES: ShopCategory[] = ["bags", "clothing", "cups", "accessories", "home", "decor"];
 export const shopProduct = (slug: string) => SHOP_PRODUCTS.find(product => product.slug === slug);
 export const PRODUCT_SHOTS = ["studio", "lifestyle", "detail"] as const;
-export type ProductShot = typeof PRODUCT_SHOTS[number] | "model" | "angle" | "in-use";
-export const productShots = (product: ShopProduct): readonly ProductShot[] => [...PRODUCT_SHOTS, ...(product.modelView ? ["model" as const] : []), "angle", "in-use"];
-export const productImage = (product: ShopProduct, shot: ProductShot = "studio") => `/shop/products/${product.slug}-${shot}.webp`;
+export type ProductShot = typeof PRODUCT_SHOTS[number] | "model" | "angle" | "in-use" | "campaign";
+export const productShots = (product: ShopProduct): readonly ProductShot[] => {
+  const shots: ProductShot[] = [...PRODUCT_SHOTS, ...(product.modelView ? ["model" as const] : []), ...(product.campaignView ? ["campaign" as const] : []), "angle", "in-use"];
+  return shots.filter(shot => !WITHHELD_SHOP_PHOTOS.has(`${product.slug}/${shot}`));
+};
+export const productImage = (product: ShopProduct, shot: ProductShot = "studio") => {
+  const revision = REFRESHED_SHOP_PHOTOS.has(`${product.slug}/${shot}`) ? `${SHOP_PHOTO_REVISION}/` : "";
+  return `/shop/products/${revision}${product.slug}-${shot}.webp`;
+};
 export const productImages = (product: ShopProduct) => productShots(product).map(shot => productImage(product, shot));
 export const productCardImage = (product: ShopProduct) => productImage(product);
 export function productImageAlt(product: ShopProduct, locale: Locale, shot: ProductShot = "studio") {
+  if (shot === "campaign") return { uk: `${product.copy.uk.name} — образ на моделі-шатенці, візуалізація ШІ`, en: `${product.copy.en.name} — editorial look on a brunette model, AI visualisation`, de: `${product.copy.de.name} — Editorial-Look an einem brünetten Model, KI-Visualisierung` }[locale];
   if (shot === "angle") return { uk: `${product.copy.uk.name} — додатковий ракурс, візуалізація ШІ`, en: `${product.copy.en.name} — another angle, AI visualisation`, de: `${product.copy.de.name} — weitere Ansicht, KI-Visualisierung` }[locale];
   if (shot === "in-use") return { uk: `${product.copy.uk.name} — у використанні, візуалізація ШІ`, en: `${product.copy.en.name} — in use, AI visualisation`, de: `${product.copy.de.name} — in Benutzung, KI-Visualisierung` }[locale];
   if (shot === "model") return { uk: `${product.copy.uk.name} на моделі-шатенці — візуалізація ШІ`, en: `${product.copy.en.name} worn by a chestnut-haired model — AI visualisation`, de: `${product.copy.de.name} an einem Model mit kastanienbraunem Haar — KI-Visualisierung` }[locale];
